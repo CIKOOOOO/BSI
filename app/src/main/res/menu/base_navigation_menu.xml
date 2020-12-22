@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_portfolio"
+        android:icon="@drawable/selector_menu_portfolio"
+        android:title="@string/portfolio" />
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/selector_menu_profile"
+        android:title="@string/profile" />
+    <item
+        android:id="@+id/menu_products"
+        android:icon="@drawable/selector_menu_products"
+        android:title="@string/products" />
+    <item
+        android:id="@+id/menu_information"
+        android:icon="@drawable/selector_menu_information"
+        android:title="@string/information" />
+    <item
+        android:id="@+id/menu_more"
+        android:icon="@drawable/selector_menu_more"
+        android:title="@string/more" />
+</menu>

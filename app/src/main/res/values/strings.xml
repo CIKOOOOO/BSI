@@ -1,3 +1,39 @@
 <resources>
     <string name="app_name">BSI</string>
+
+
+    <!-- WORD ASSET -->
+    <string name="login">Login</string>
+    <string name="bca_id">BCA ID\n(User ID)</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Lupa BCA ID (User ID)</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="info_register">Tekan tombol Register bila kamu belum memiliki BCA ID (User ID)</string>
+    <string name="register">Register</string>
+    <string name="see_product">Lihat Produk</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="profile">Profile</string>
+    <string name="products">Products</string>
+    <string name="information">Informasi</string>
+    <string name="more">More</string>
+    <string name="product">Produk</string>
+
+    <!--END HERE-->
+
+
+    <!-- SHARED PREFERENCES ASSET -->
+    <string name="pref_file">pref_file</string>
+    <string name="pref_login_status">pref_login_status</string>
+    <string name="pref_uid">pref_uid</string>
+    <string name="pref_name">pref_name</string>
+    <string name="pref_email">pref_email</string>
+    <string name="pref_phone_number">pref_phone_number</string>
+    <string name="pref_main_address">pref_main_address</string>
+    <string name="pref_token_fcm">pref_token_fcm</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--END HERE-->
+
+
 </resources>

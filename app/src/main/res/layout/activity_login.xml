@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginActivity">
+
+    <TextView
+        android:id="@+id/tv_01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_base_welma"
+        android:gravity="center"
+        android:paddingTop="@dimen/size_for_15dp"
+        android:paddingBottom="@dimen/size_for_15dp"
+        android:text="@string/login"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_carousel"
+        app:layout_constraintTop_toBottomOf="@id/tv_01" />
+
+    <TextView
+        android:id="@+id/tv_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_marginBottom="@dimen/size_for_10dp"
+        android:text="@string/bca_id"
+        android:textColor="@android:color/black"
+        app:drawableEndCompat="@drawable/ic_baseline_info_24"
+        app:layout_constraintBottom_toTopOf="@id/view_02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_01" />
+
+    <EditText
+        android:id="@+id/et_bca_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:layout_marginBottom="@dimen/size_for_20dp"
+        android:background="@android:color/transparent"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@color/java_palette"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view_01"
+        app:layout_constraintTop_toBottomOf="@id/img_01" />
+
+    <TextView
+        android:id="@+id/tv_03"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:gravity="center"
+        android:paddingTop="@dimen/size_for_10dp"
+        android:paddingBottom="@dimen/size_for_10dp"
+        android:text="@string/password"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@id/view_03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_02" />
+
+    <View
+        android:id="@+id/view_01"
+        android:layout_width="@dimen/size_for_0.5dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/size_for_10dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@id/view_03"
+        app:layout_constraintStart_toEndOf="@id/tv_02"
+        app:layout_constraintTop_toBottomOf="@id/img_01" />
+
+    <View
+        android:id="@+id/view_02"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0.5dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/et_bca_id" />
+
+    <View
+        android:id="@+id/view_03"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0.5dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/til_password" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view_01"
+        app:layout_constraintTop_toBottomOf="@id/et_bca_id"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/java_palette" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:background="@drawable/rectangle_rounded_orange_light"
+        android:text="@string/login"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/view_03" />
+
+    <TextView
+        android:id="@+id/tv_forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:text="@string/forget_password"
+        android:textColor="@color/horizon_palette"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/btn_login"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+    <TextView
+        android:id="@+id/tv_reset_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:text="@string/reset_password"
+        android:textColor="@color/horizon_palette"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/btn_login"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+    <TextView
+        android:id="@+id/tv_info_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_30dp"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:layout_marginEnd="@dimen/size_for_30dp"
+        android:text="@string/info_register"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@id/tv_reset_password"
+        app:layout_constraintStart_toStartOf="@id/tv_forget_password"
+        app:layout_constraintTop_toBottomOf="@id/tv_reset_password" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:background="@drawable/rectangle_stroke_blue_dark"
+        android:text="@string/register"
+        android:textColor="@color/puerto_rico_palette"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tv_info_register" />
+</androidx.constraintlayout.widget.ConstraintLayout>
