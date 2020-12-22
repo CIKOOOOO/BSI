@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,5 +63,10 @@ public class Utils {
         mParsedDate = mInputDateFormat.parse(inputDate);
         mOutputDateString = mOutputDateFormat.format(mParsedDate);
         return mOutputDateString;
+    }
+
+    public static String toJSON(Object o) {
+        Gson gson = new Gson();
+        return gson.toJson(o);
     }
 }

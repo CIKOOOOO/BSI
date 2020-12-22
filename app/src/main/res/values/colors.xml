@@ -23,4 +23,14 @@
     <color name="french_pass_palette">#BEE1FE</color>
     <color name="picton_blue_palette">#4AA9F5</color>
     <color name="dark_gray_palette">#828282</color>
+    <color name="color_base_welma">#008795</color>
+    <color name="nepal_palette">#8AA9BB</color>
+    <color name="puerto_rico_palette">#48C7C4</color>
+    <color name="horizon_palette">#6089A5</color>
+    <color name="java_palette">#22BBB8</color>
+    <color name="sherpa_blue_palette">#005059</color>
+    <color name="blue_stone_palette">#01555F</color>
+    <color name="deep_cerulean_palette">#018A9A</color>
+    <color name="black_squeeze_palette">#EAF5F7</color>
+    <color name="keppel_palette">#429AA1</color>
 </resources>
