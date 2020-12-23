@@ -13,7 +13,7 @@ public class Constant {
 
     public static final String EMPTY = "";
 
-    private static final String[] PRODUCT_TITLE = {"Reksa Dana", "Obligasi", "Asuransi"};
+    public static final String[] PRODUCT_TITLE = {"Reksa Dana", "Obligasi", "Asuransi"};
     private static final String[] PRODUCT_DESCRIPTION = {"Investasi Dana Terjangkau", "Investasi Berpendapatan Tetap", "Perlindungan Jiwa, Kesehatan, dan Harta Benda"};
     private static final int[] PRODUCT_IMAGE = {R.drawable.img_asset_reksa_dana, R.drawable.img_asset_obligasi, R.drawable.img_asset_asuransi};
 

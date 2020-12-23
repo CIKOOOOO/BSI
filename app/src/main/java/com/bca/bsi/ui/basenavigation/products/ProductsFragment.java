@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.products;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.ProductTypeAdapter;
+import com.bca.bsi.ui.basenavigation.products.detail.DetailProductActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
@@ -44,7 +46,14 @@ public class ProductsFragment extends BaseFragment implements ProductTypeAdapter
     }
 
     @Override
-    public void onProductClick() {
+    public void onProductClick(int pos) {
+        Intent intent = new Intent(mActivity, DetailProductActivity.class);
+        intent.putExtra(DetailProductActivity.PRODUCT_TYPE, pos);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBtnSecondOnClick() {
 
     }
 }

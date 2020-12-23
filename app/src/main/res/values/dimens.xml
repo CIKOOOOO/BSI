@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <dimen name="size_for_minus_2dp">-2dp</dimen>
 
     <dimen name="size_for_0.5dp">0.5dp</dimen>
@@ -9,6 +9,7 @@
     <dimen name="size_for_3dp">3dp</dimen>
     <dimen name="size_for_5dp">5dp</dimen>
     <dimen name="size_for_10dp">10dp</dimen>
+    <dimen name="size_for_13dp">13dp</dimen>
     <dimen name="size_for_15dp">15dp</dimen>
     <dimen name="size_for_17dp">17dp</dimen>
     <dimen name="size_for_20dp">20dp</dimen>
@@ -33,5 +34,7 @@
     <dimen name="size_for_20sp">20sp</dimen>
     <dimen name="size_for_23sp">23sp</dimen>
     <dimen name="size_for_25sp">25sp</dimen>
+
+    <dimen name="size_for_toolbar">56dp</dimen>
 
 </resources>

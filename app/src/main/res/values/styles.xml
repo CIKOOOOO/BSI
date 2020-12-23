@@ -22,5 +22,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-
+    <style name="TextViewForButton" parent="Widget.AppCompat.TextView">
+        <item name="android:gravity">center</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_height">@dimen/size_for_50dp</item>
+        <item name="android:textSize">@dimen/size_for_15sp</item>
+    </style>
 </resources>

@@ -14,9 +14,29 @@
     <string name="portfolio">Portfolio</string>
     <string name="profile">Profile</string>
     <string name="products">Products</string>
-    <string name="information">Informasi</string>
+    <string name="information">Information</string>
     <string name="more">More</string>
     <string name="product">Produk</string>
+    <string name="pasar_perdana">Pasar Perdana</string>
+    <string name="pasar_sekunder">Pasar Sekunder</string>
+    <string name="all_product">Semua Produk</string>
+    <string name="invest_manager">Manajer Investasi</string>
+    <string name="transaction_status">Status Transaksi</string>
+    <string name="search">Pencarian</string>
+    <string name="notice">Pemberitahuan</string>
+    <string name="buy">Beli</string>
+    <string name="performance_1_month">Kinerja 1 Bln</string>
+    <string name="nab_unit">NAB/Unit</string>
+    <string name="product_not_found">Produk tidak ditemukan</string>
+    <string name="rekening_sumber_dana">Rekening Sumber Dana</string>
+    <string name="nominal_pembelian">Nominal Pembelian</string>
+    <string name="berkala">Berkala?</string>
+    <string name="rp">Rp</string>
+    <string name="additional_information">Informasi Tambahan</string>
+    <string name="prospectus">Prospectus</string>
+    <string name="fund_fact_sheet">Fund Fact Sheet</string>
+    <string name="toc">Ketentuan Pembelian</string>
+    <string name="next">Lanjut</string>
 
     <!--END HERE-->
 
