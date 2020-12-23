@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_for_15dp">
+
+        <ImageView
+            android:layout_width="@dimen/size_for_25dp"
+            android:layout_height="@dimen/size_for_25dp"
+            android:background="@drawable/ic_download_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/size_for_10dp"
+            android:text="@string/prospectus"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0.5dp"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:background="@color/gray_palette" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_for_15dp">
+
+        <ImageView
+            android:layout_width="@dimen/size_for_25dp"
+            android:layout_height="@dimen/size_for_25dp"
+            android:background="@drawable/ic_download_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/size_for_10dp"
+            android:text="@string/fund_fact_sheet"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0.5dp"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:background="@color/gray_palette" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/size_for_10dp"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:text="@string/toc"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0.5dp"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:background="@color/gray_palette" />
+</LinearLayout>

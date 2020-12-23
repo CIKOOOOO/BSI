@@ -33,4 +33,6 @@
     <color name="deep_cerulean_palette">#018A9A</color>
     <color name="black_squeeze_palette">#EAF5F7</color>
     <color name="keppel_palette">#429AA1</color>
+    <color name="jaffa_palette">#F27D30</color>
+    <color name="dove_gray_palette">#737373</color>
 </resources>

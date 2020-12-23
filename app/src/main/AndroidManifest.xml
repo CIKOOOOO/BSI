@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.basenavigation.BaseNavigationActivity"></activity>
+        <activity android:name=".ui.basenavigation.transaction.detail.DetailTransactionActivity"></activity>
+        <activity android:name=".ui.basenavigation.transaction.ConfirmationActivity" />
+        <activity android:name=".ui.basenavigation.products.detail.DetailProductActivity" />
+        <activity android:name=".ui.basenavigation.BaseNavigationActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait">

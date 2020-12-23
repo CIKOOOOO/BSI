@@ -25,7 +25,9 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     private Context context;
 
     public interface objectOnClick {
-        void onProductClick();
+        void onProductClick(int pos);
+
+        void onBtnSecondOnClick();
     }
 
     public ProductTypeAdapter(List<Object> objectList, String type, ProductTypeAdapter.objectOnClick objectOnClick) {
@@ -43,7 +45,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Holder holder, int position) {
+    public void onBindViewHolder(@NonNull final Holder holder, final int position) {
         switch (type) {
             case Type.PRODUCT:
                 Product.ProductType productType = (Product.ProductType) objectList.get(position);
@@ -53,9 +55,15 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
                         .load(productType.getImage())
                         .into(holder.imgProduct);
                 if (position == 1) {
-                    holder.btnFirst.setText("Pasar Perdana");
-                    holder.btnSecond.setText("Pasar Sekunder");
+                    holder.btnFirst.setText(context.getString(R.string.pasar_perdana));
+                    holder.btnSecond.setText(context.getString(R.string.pasar_sekunder));
                     holder.btnSecond.setVisibility(View.VISIBLE);
+                    holder.btnSecond.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            objectOnClick.onBtnSecondOnClick();
+                        }
+                    });
                 } else {
                     holder.btnSecond.setVisibility(View.GONE);
                     holder.btnFirst.setText(context.getString(R.string.see_product));
@@ -64,6 +72,13 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
             case Type.LEARNING:
                 break;
         }
+
+        holder.btnFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                objectOnClick.onProductClick(position);
+            }
+        });
     }
 
     @Override
