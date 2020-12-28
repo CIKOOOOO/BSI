@@ -51,6 +51,11 @@
     <string name="symbol_persen">%</string>
     <string name="calculator_durasi_investasi_label">DURASI INVESTASI</string>
     <string name="calculator_investasi_bulanan_label">INVESTASI BULANAN</string>
+    <string name="calculator_besar_hasil_investasi_label">BESAR HASIL INVESTASI</string>
+    <string name="calculator_besar_setoran_investasi_bulanan">BESAR SETORAN INVESTASI BULANAN</string>
+
+    <string name="tahun">tahun</string>
+    <string name="bulan">bulan</string>
 
     <!--END HERE-->
 
