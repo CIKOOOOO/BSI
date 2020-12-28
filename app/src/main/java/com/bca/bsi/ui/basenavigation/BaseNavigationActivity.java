@@ -64,6 +64,8 @@ public class BaseNavigationActivity extends BaseActivity {
                 return false;
             }
         });
+
+        changeFragment(new PortfolioFragment());
     }
 
     public void changeFragment(Fragment fragment) {

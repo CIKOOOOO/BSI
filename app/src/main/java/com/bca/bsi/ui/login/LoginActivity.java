@@ -60,6 +60,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void onSuccess() {
         finishAffinity();
+        prefConfig.setAccountNumber("5271517891");
         startActivity(new Intent(this, BaseNavigationActivity.class));
     }
 
