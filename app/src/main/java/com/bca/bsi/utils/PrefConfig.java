@@ -47,12 +47,6 @@ public class PrefConfig {
         editor.apply();
     }
 
-    public void setAccountNumber(String accountNumber) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_account_number), accountNumber);
-        editor.apply();
-    }
-
     public void setAddress(String address) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(context.getString(R.string.pref_main_address), address);
@@ -97,10 +91,6 @@ public class PrefConfig {
 
     public String getTokenFCM() {
         return sharedPreferences.getString(context.getString(R.string.pref_token_fcm), Constant.EMPTY);
-    }
-
-    public String getAccountNumber() {
-        return sharedPreferences.getString(context.getString(R.string.pref_account_number), Constant.EMPTY);
     }
 
 }

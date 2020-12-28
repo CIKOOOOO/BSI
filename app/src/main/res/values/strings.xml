@@ -30,8 +30,6 @@
     <string name="product_not_found">Produk tidak ditemukan</string>
     <string name="rekening_sumber_dana">Rekening Sumber Dana</string>
     <string name="nominal_pembelian">Nominal Pembelian</string>
-    <string name="nominal_biaya_pembelian">Nominal Biaya Pembelian</string>
-    <string name="nominal_total_pembelian">Nominal Total Pembelian</string>
     <string name="berkala">Berkala?</string>
     <string name="rp">Rp</string>
     <string name="additional_information">Informasi Tambahan</string>
@@ -39,19 +37,6 @@
     <string name="fund_fact_sheet">Fund Fact Sheet</string>
     <string name="toc">Ketentuan Pembelian</string>
     <string name="next">Lanjut</string>
-    <string name="purchasing">Pembelian</string>
-    <string name="transaction_type">Tipe Transaksi</string>
-    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
-    <string name="confirmation">Konfirmasi</string>
-    <string name="purchase">Bayar</string>
-    <string name="info_purchase">Untuk melanjutkan transaksi, mohon agar terlebih dahulu membaca bagian Pernyataan.</string>
-    <string name="finish">Selesai</string>
-    <string name="product_name">Nama Produk</string>
-    <string name="transaction_time">Waktu Transaksi</string>
-    <string name="referensi_number">No. Referensi</string>
-    <string name="product_detail">Detail Produk</string>
-    <string name="info_detail_transaction">Konfirmasi atas investasi pada Efek Reksa Dana yang diterbitkan oleh Bank Kustodian adalah bukti kepemilikan yang sah.</string>
-    <string name="info_detail_transaction1">Setiap detail transaksi otomatis tersimpan di Inbox kamu.</string>
 
     <!--END HERE-->
 
@@ -65,7 +50,6 @@
     <string name="pref_phone_number">pref_phone_number</string>
     <string name="pref_main_address">pref_main_address</string>
     <string name="pref_token_fcm">pref_token_fcm</string>
-    <string name="pref_account_number">pref_account_number</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
