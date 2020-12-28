@@ -49,6 +49,11 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
         durasiInvestasiTab.setOnClickListener(this);
         besarRoRTab.setOnClickListener(this);
 
+        besarInvestasiBulananTab.setTextColor(Color.BLACK);
+        besarHasilInvestasiTab.setTextColor(Color.WHITE);
+        durasiInvestasiTab.setTextColor(Color.WHITE);
+        besarRoRTab.setTextColor(Color.WHITE);
+
         select = findViewById(R.id.select);
         def = besarHasilInvestasiTab.getTextColors();
         titlePage.setText("Kalkulator Investasi");

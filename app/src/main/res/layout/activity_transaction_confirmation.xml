@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_back" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_next_transaction_confirmation"
+        app:layout_constraintTop_toBottomOf="@+id/include">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_name_confirmation_transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:layout_marginTop="@dimen/size_for_20dp"
+                android:text="Danareksa Gebyar Indonesia II"
+                android:textSize="@dimen/size_for_17sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_for_10dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/tv_name_confirmation_transaction">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="@string/transaction_type"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_transaction_type_confirmation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3.5"
+                        android:text="Pembelian Sekali Bayar"
+                        android:textColor="@color/java_palette"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginTop="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="@string/nominal_pembelian"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_nominal_pembelian_confirmation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3.5"
+                        android:text="Rp 100,000"
+                        android:textColor="@color/java_palette"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginTop="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="@string/nominal_biaya_pembelian"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_nominal_biaya_pembelian_confirmation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3.5"
+                        android:text="Rp 1.000 (1%)"
+                        android:textColor="@color/java_palette"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginTop="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="@string/nominal_total_pembelian"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_nominal_total_pembelian_confirmation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3.5"
+                        android:text="Rp 101.000,"
+                        android:textColor="@color/java_palette"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginTop="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="@string/rekening_sumber_dana"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_rekening_sumber_dana_confirmation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3.5"
+                        android:text="5271517891"
+                        android:textColor="@color/java_palette"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_for_20dp"
+                    android:background="@color/wild_sand_palette"
+                    android:padding="@dimen/size_for_20dp"
+                    android:text="@string/additional_information"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray_palette"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_nominal_pembelian_detail_transaction" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lorem" />
+
+                <CheckBox
+                    android:id="@+id/cb_confirmation_transaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_palette"
+                    android:background="@color/wild_sand_palette"
+                    android:buttonTint="@color/color_base_welma"
+                    android:padding="@dimen/size_for_10dp"
+                    android:text="@string/info_purchase" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/btn_next_transaction_confirmation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        android:text="@string/purchase"
+        android:textColor="@color/white_palette"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
