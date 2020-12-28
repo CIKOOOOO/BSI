@@ -9,7 +9,8 @@
     <include
         android:id="@+id/toolbar_back"
         layout="@layout/toolbar_back"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <FrameLayout
         android:id="@+id/frame_01"
