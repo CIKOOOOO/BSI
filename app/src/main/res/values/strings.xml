@@ -73,7 +73,6 @@
     <string name="tahun">tahun</string>
     <string name="bulan">bulan</string>
 
-    <string name="selamt_datang">selam lamaasdasdasdsadas</string>
 
     <!--END HERE-->
 
@@ -98,8 +97,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-
-    <string name="coba_dewi">Iniii aku yang mencoba lagiiii -Dewi</string>
 
     <!--END HERE-->
 
