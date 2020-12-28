@@ -9,4 +9,7 @@ public class Type {
     public static final String OBLIGASI_PASAR_SEKUNDER = "obligasi_pasar_sekunder";
     public static final String OBLIGASI_PASAR_PERDANA = "obligasi_pasar_perdana";
 
+    public static final String PURCHASING = "purchase";
+    public static final String SALES = "sales";
+
 }
