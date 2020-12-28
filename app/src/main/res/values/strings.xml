@@ -39,6 +39,19 @@
     <string name="fund_fact_sheet">Fund Fact Sheet</string>
     <string name="toc">Ketentuan Pembelian</string>
     <string name="next">Lanjut</string>
+    <string name="purchasing">Pembelian</string>
+    <string name="transaction_type">Tipe Transaksi</string>
+    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
+    <string name="confirmation">Konfirmasi</string>
+    <string name="purchase">Bayar</string>
+    <string name="info_purchase">Untuk melanjutkan transaksi, mohon agar terlebih dahulu membaca bagian Pernyataan.</string>
+    <string name="finish">Selesai</string>
+    <string name="product_name">Nama Produk</string>
+    <string name="transaction_time">Waktu Transaksi</string>
+    <string name="referensi_number">No. Referensi</string>
+    <string name="product_detail">Detail Produk</string>
+    <string name="info_detail_transaction">Konfirmasi atas investasi pada Efek Reksa Dana yang diterbitkan oleh Bank Kustodian adalah bukti kepemilikan yang sah.</string>
+    <string name="info_detail_transaction1">Setiap detail transaksi otomatis tersimpan di Inbox kamu.</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>
