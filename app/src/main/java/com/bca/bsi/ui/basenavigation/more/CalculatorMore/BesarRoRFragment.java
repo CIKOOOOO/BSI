@@ -10,17 +10,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.utils.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BesarRoRFragment extends Fragment {
+public class BesarRoRFragment extends BaseFragment implements View.OnClickListener {
 
     private Spinner spinnerDurasiTahunBROR;
     private Spinner spinnerDurasiBulanBROR;
+
+    private Button kalkulasi;
+    private TextView BRORLabel;
+    private TextView persenLabel;
+    private TextView hasilBROR;
+    private TextView pertahunLabel;
 
     public BesarRoRFragment() {
         // Required empty public constructor
@@ -48,13 +57,47 @@ public class BesarRoRFragment extends Fragment {
             durasiBulan.add(j);
         }
 
+        kalkulasi = view.findViewById(R.id.btn_bror_kalkulasi);
+        kalkulasi.setOnClickListener(this);
+
         spinnerDurasiTahunBROR = view.findViewById(R.id.bror_durasi_tahun);
         spinnerDurasiBulanBROR = view.findViewById(R.id.bror_durasi_bulan);
+
+        BRORLabel = view.findViewById(R.id.label_bror_ror);
+        persenLabel = view.findViewById(R.id.label_bror_persen);
+        hasilBROR = view.findViewById(R.id.tv_bror_hasil);
+        pertahunLabel = view.findViewById(R.id.label_bror_pertahun);
 
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBROR.setAdapter(adapter);
 
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBROR.setAdapter(adapterBulan);
+
+        BRORLabel.setVisibility(View.INVISIBLE);
+        persenLabel.setVisibility(View.INVISIBLE);
+        hasilBROR.setVisibility(View.INVISIBLE);
+        pertahunLabel.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_bror_kalkulasi:
+                if (kalkulasi.getText().equals("KALKULASI")) {
+                    BRORLabel.setVisibility(View.VISIBLE);
+                    persenLabel.setVisibility(View.VISIBLE);
+                    hasilBROR.setVisibility(View.VISIBLE);
+                    pertahunLabel.setVisibility(View.VISIBLE);
+                    kalkulasi.setText("RESET");
+                } else {
+                    BRORLabel.setVisibility(View.INVISIBLE);
+                    persenLabel.setVisibility(View.INVISIBLE);
+                    hasilBROR.setVisibility(View.INVISIBLE);
+                    pertahunLabel.setVisibility(View.INVISIBLE);
+                    kalkulasi.setText("KALKULASI");
+                }
+                break;
+        }
     }
 }

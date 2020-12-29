@@ -4,6 +4,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import com.bca.bsi.ui.basenavigation.more.MoreFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -14,6 +15,8 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
@@ -25,9 +28,29 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
     private TextView besarHasilInvestasiTab;
     private TextView durasiInvestasiTab;
     private TextView besarRoRTab;
+    private TextView lastTab;
     private TextView select;
     private TextView titlePage;
     private ViewPager viewPager;
+    private CalculatorPagerAdapter calculatorPagerAdapter;
+    private ImageButton backBtn;
+    private boolean RoRTabEnabled;
+
+    public boolean isRoRTabEnabled() {
+        return RoRTabEnabled;
+    }
+
+    public void setRoRTabEnabled(boolean roRTabEnabled) {
+        RoRTabEnabled = roRTabEnabled;
+    }
+
+    public void fromMoreMenu(String pageFrom){
+        if(pageFrom.equals("more")){
+            RoRTabEnabled = true;
+        }else{
+            RoRTabEnabled = false;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +63,16 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
         besarHasilInvestasiTab = findViewById(R.id.besarHasilInvestasiTab);
         durasiInvestasiTab = findViewById(R.id.durasiInvestasiTab);
         besarRoRTab = findViewById(R.id.besarRoRTab);
+        lastTab = findViewById(R.id.lastTab);
         titlePage = findViewById(R.id.tv_title_toolbar_back);
         viewPager = findViewById(R.id.viewPager);
-
+        backBtn = findViewById(R.id.img_btn_back_toolbar);
 
         besarInvestasiBulananTab.setOnClickListener(this);
         besarHasilInvestasiTab.setOnClickListener(this);
         durasiInvestasiTab.setOnClickListener(this);
         besarRoRTab.setOnClickListener(this);
+        backBtn.setOnClickListener(this);
 
         besarInvestasiBulananTab.setTextColor(Color.BLACK);
         besarHasilInvestasiTab.setTextColor(Color.WHITE);
@@ -58,10 +83,28 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
         def = besarHasilInvestasiTab.getTextColors();
         titlePage.setText("Kalkulator Investasi");
 
-        CalculatorPagerAdapter calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),4);
+        System.out.println("RORRRRRRRRRRRRRRRR"+RoRTabEnabled);
+
+        MoreFragment moreFragment = new MoreFragment();
+
+        System.out.println("FROOOOOOOOOOM MORE FRAGMENT"+moreFragment.getFromMore());
+
+        calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),4);
+
+
+        /*
+        if(moreFragment.getFromMore()){
+            calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),4);
+        }else{
+            besarRoRTab.setVisibility(View.INVISIBLE);
+            lastTab.setVisibility(View.INVISIBLE);
+            calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),3);
+        }
+
+        */
+
 
         viewPager.setAdapter(calculatorPagerAdapter);
-
     }
 
     @Override
@@ -107,6 +150,11 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
                 durasiInvestasiTab.setTextColor(Color.WHITE);
                 besarRoRTab.setTextColor(Color.BLACK);
                 viewPager.setCurrentItem(3);
+                break;
+            }
+
+            case R.id.img_btn_back_toolbar: {
+                onBackPressed();
                 break;
             }
         }

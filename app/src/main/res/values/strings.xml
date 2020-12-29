@@ -69,6 +69,8 @@
     <string name="calculator_investasi_bulanan_label">INVESTASI BULANAN</string>
     <string name="calculator_besar_hasil_investasi_label">BESAR HASIL INVESTASI</string>
     <string name="calculator_besar_setoran_investasi_bulanan">BESAR SETORAN INVESTASI BULANAN</string>
+    <string name="calculator_kalkulasi_label">KALKULASI</string>
+    <string name="calculator_reset_label">RESET</string>
 
     <string name="tahun">tahun</string>
     <string name="bulan">bulan</string>

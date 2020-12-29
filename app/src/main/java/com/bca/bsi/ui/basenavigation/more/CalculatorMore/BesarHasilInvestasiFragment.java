@@ -10,17 +10,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.utils.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BesarHasilInvestasiFragment extends Fragment {
+public class BesarHasilInvestasiFragment extends Fragment implements View.OnClickListener {
 
     private Spinner spinnerDurasiTahunBHI;
     private Spinner spinnerDurasiBulanBHI;
+    private Button kalkulasi;
+    private TextView BHILabel;
+    private TextView rpLabel;
+    private TextView hasilBHI;
 
     public BesarHasilInvestasiFragment() {
         // Required empty public constructor
@@ -49,13 +56,47 @@ public class BesarHasilInvestasiFragment extends Fragment {
             durasiBulan.add(j);
         }
 
+        kalkulasi = view.findViewById(R.id.btn_bhi_kalkulasi);
+        kalkulasi.setOnClickListener(this);
+
         spinnerDurasiTahunBHI = view.findViewById(R.id.bhi_durasi_tahun);
         spinnerDurasiBulanBHI = view.findViewById(R.id.bhi_durasi_bulan);
+
+        BHILabel = view.findViewById(R.id.label_besar_hasil_investasi);
+        rpLabel = view.findViewById(R.id.label_bhi_rp);
+        hasilBHI = view.findViewById(R.id.tv_bhi_hasil);
 
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBHI.setAdapter(adapter);
 
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBHI.setAdapter(adapterBulan);
+
+
+        BHILabel.setVisibility(View.INVISIBLE);
+        rpLabel.setVisibility(View.INVISIBLE);
+        hasilBHI.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_bhi_kalkulasi:
+                if (kalkulasi.getText().equals("KALKULASI")) {
+                    BHILabel.setVisibility(View.VISIBLE);
+                    rpLabel.setVisibility(View.VISIBLE);
+                    hasilBHI.setVisibility(View.VISIBLE);
+                    kalkulasi.setText("RESET");
+                } else {
+                    
+
+                    BHILabel.setVisibility(View.INVISIBLE);
+                    rpLabel.setVisibility(View.INVISIBLE);
+                    hasilBHI.setVisibility(View.INVISIBLE);
+                    kalkulasi.setText("KALKULASI");
+                }
+                break;
+        }
     }
 }
