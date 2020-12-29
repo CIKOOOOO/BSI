@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -31,7 +32,9 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     private TextView BIBLabel;
     private TextView rpLabel;
     private TextView hasilBIB;
-
+    private EditText ETBIBTargetHasilInvestasi;
+    private EditText ETBIBModalAwal;
+    private EditText ETBIBROR;
 
     public BesarInvestasiBulananFragment() {
 
@@ -72,7 +75,9 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         BIBLabel = view.findViewById(R.id.label_besar_setoran_investasi_bulanan);
         rpLabel = view.findViewById(R.id.label_bib_rp);
         hasilBIB = view.findViewById(R.id.tv_bib_hasil);
-
+        ETBIBModalAwal = view.findViewById(R.id.et_bib_modal_awal);
+        ETBIBTargetHasilInvestasi = view.findViewById(R.id.et_bib_target_hasil_investasi);
+        ETBIBROR = view.findViewById(R.id.et_bib_ror);
 
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBIB.setAdapter(adapter);
@@ -93,15 +98,25 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         switch (v.getId()) {
             case R.id.btn_bib_kalkulasi:
                 if(kalkulasi.getText().equals("KALKULASI")){
+
                     BIBLabel.setVisibility(View.VISIBLE);
                     rpLabel.setVisibility(View.VISIBLE);
                     hasilBIB.setVisibility(View.VISIBLE);
+
+                    hasilBIB.setText(spinnerDurasiTahunBIB.getSelectedItem().toString());
+
                     kalkulasi.setText("RESET");
                 }else {
                     BIBLabel.setVisibility(View.INVISIBLE);
                     rpLabel.setVisibility(View.INVISIBLE);
                     hasilBIB.setVisibility(View.INVISIBLE);
                     kalkulasi.setText("KALKULASI");
+
+                    ETBIBModalAwal.setText("");
+                    ETBIBROR.setText("");
+                    ETBIBTargetHasilInvestasi.setText("");
+                    spinnerDurasiTahunBIB.setSelection(0);
+                    spinnerDurasiBulanBIB.setSelection(0);
                 }
 
                 break;

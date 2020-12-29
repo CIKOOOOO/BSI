@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -28,6 +29,9 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
     private TextView BHILabel;
     private TextView rpLabel;
     private TextView hasilBHI;
+    private EditText ETBHIModalAwal;
+    private EditText ETBHIIvestasiBulanan;
+    private EditText ETBHIROR;
 
     public BesarHasilInvestasiFragment() {
         // Required empty public constructor
@@ -65,6 +69,9 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
         BHILabel = view.findViewById(R.id.label_besar_hasil_investasi);
         rpLabel = view.findViewById(R.id.label_bhi_rp);
         hasilBHI = view.findViewById(R.id.tv_bhi_hasil);
+        ETBHIIvestasiBulanan = view.findViewById(R.id.et_bhi_investasi_bulanan);
+        ETBHIModalAwal = view.findViewById(R.id.et_bhi_modal_awal);
+        ETBHIROR = view.findViewById(R.id.et_bhi_ror);
 
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBHI.setAdapter(adapter);
@@ -89,11 +96,18 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
                     hasilBHI.setVisibility(View.VISIBLE);
                     kalkulasi.setText("RESET");
                 } else {
-                    
+
 
                     BHILabel.setVisibility(View.INVISIBLE);
                     rpLabel.setVisibility(View.INVISIBLE);
                     hasilBHI.setVisibility(View.INVISIBLE);
+
+                    ETBHIIvestasiBulanan.setText("");
+                    ETBHIModalAwal.setText("");
+                    ETBHIROR.setText("");
+                    spinnerDurasiTahunBHI.setSelection(0);
+                    spinnerDurasiBulanBHI.setSelection(0);
+
                     kalkulasi.setText("KALKULASI");
                 }
                 break;

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
@@ -21,6 +22,10 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
     private Button kalkulasi;
     private TextView DILabel;
     private TextView hasilDI;
+    private EditText ETDITargetHasilInvestasi;
+    private EditText ETDIModalAwal;
+    private EditText ETDIInvestasiBulanan;
+    private EditText ETDIROR;
 
 
     public DurasiInvestasiFragment() {
@@ -44,6 +49,10 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
 
         DILabel = view.findViewById(R.id.label_durasi_investasi);
         hasilDI = view.findViewById(R.id.tv_di_hasil);
+        ETDIInvestasiBulanan = view.findViewById(R.id.et_di_investasi_bulanan);
+        ETDIModalAwal = view.findViewById(R.id.et_di_modal_awal);
+        ETDIROR = view.findViewById(R.id.et_di_ror);
+        ETDITargetHasilInvestasi = view.findViewById(R.id.et_di_target_hasil_investasi);
 
         DILabel.setVisibility(View.INVISIBLE);
         hasilDI.setVisibility(View.INVISIBLE);
@@ -62,6 +71,12 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
                 } else {
                     DILabel.setVisibility(View.INVISIBLE);
                     hasilDI.setVisibility(View.INVISIBLE);
+
+                    ETDIInvestasiBulanan.setText("");
+                    ETDIModalAwal.setText("");
+                    ETDIROR.setText("");
+                    ETDITargetHasilInvestasi.setText("");
+
                     kalkulasi.setText("KALKULASI");
                 }
                 break;

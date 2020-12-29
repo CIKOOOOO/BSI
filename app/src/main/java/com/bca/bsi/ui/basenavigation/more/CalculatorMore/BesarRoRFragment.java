@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,6 +31,9 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
     private TextView persenLabel;
     private TextView hasilBROR;
     private TextView pertahunLabel;
+    private EditText ETBRORTargetHasilInvestasi;
+    private EditText ETBRORModalAwal;
+    private EditText ETBRORInvestasiBulanan;
 
     public BesarRoRFragment() {
         // Required empty public constructor
@@ -67,6 +71,9 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
         persenLabel = view.findViewById(R.id.label_bror_persen);
         hasilBROR = view.findViewById(R.id.tv_bror_hasil);
         pertahunLabel = view.findViewById(R.id.label_bror_pertahun);
+        ETBRORInvestasiBulanan = view.findViewById(R.id.et_bror_investasi_bulanan);
+        ETBRORModalAwal = view.findViewById(R.id.et_bror_modal_awal);
+        ETBRORTargetHasilInvestasi = view.findViewById(R.id.et_bror_target_hasil_investasi);
 
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBROR.setAdapter(adapter);
@@ -95,6 +102,13 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
                     persenLabel.setVisibility(View.INVISIBLE);
                     hasilBROR.setVisibility(View.INVISIBLE);
                     pertahunLabel.setVisibility(View.INVISIBLE);
+
+                    ETBRORInvestasiBulanan.setText("");
+                    ETBRORModalAwal.setText("");
+                    ETBRORTargetHasilInvestasi.setText("");
+                    spinnerDurasiTahunBROR.setSelection(0);
+                    spinnerDurasiBulanBROR.setSelection(0);
+
                     kalkulasi.setText("KALKULASI");
                 }
                 break;
