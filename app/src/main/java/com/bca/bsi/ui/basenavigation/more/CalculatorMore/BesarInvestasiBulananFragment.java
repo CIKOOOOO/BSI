@@ -17,13 +17,14 @@ import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.utils.BaseFragment;
+import com.bca.bsi.utils.Utils;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BesarInvestasiBulananFragment extends BaseFragment implements View.OnClickListener {
+public class BesarInvestasiBulananFragment extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener {
 
     private Spinner spinnerDurasiTahunBIB;
     private Spinner spinnerDurasiBulanBIB;
@@ -35,6 +36,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     private EditText ETBIBTargetHasilInvestasi;
     private EditText ETBIBModalAwal;
     private EditText ETBIBROR;
+    private Utils utils;
 
     public BesarInvestasiBulananFragment() {
 
@@ -85,6 +87,8 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBIB.setAdapter(adapterBulan);
 
+        ETBIBModalAwal.setOnFocusChangeListener(this);
+
 
         BIBLabel.setVisibility(View.INVISIBLE);
         rpLabel.setVisibility(View.INVISIBLE);
@@ -122,5 +126,24 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                 break;
         }
 
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if(!hasFocus){
+
+
+
+            ETBIBModalAwal.setText("88888888888");
+
+            /*
+            switch (v.getId()) {
+                case R.id.et_bib_modal_awal:
+                    utils.cekFormatInputNumber(ETBIBModalAwal,ETBIBModalAwal.getText().toString());
+                    //ETBIBModalAwal.setText("88888888888");
+                    break;
+            }
+            */
+        }
     }
 }

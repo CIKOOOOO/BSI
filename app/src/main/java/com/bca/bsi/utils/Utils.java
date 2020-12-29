@@ -69,4 +69,22 @@ public class Utils {
         Gson gson = new Gson();
         return gson.toJson(o);
     }
+
+    public static void cekFormatInputNumber(EditText editText, String inputString) {
+        String outputString = "";
+
+        if(!inputString.equals("") || !inputString.isEmpty()){
+
+            if(inputString.length()>1){
+                if(inputString.charAt(1)!=0){
+                    if(Integer.parseInt(inputString)>=0){
+                        outputString = inputString;
+                    }
+                }
+            }
+        }
+
+        editText.setText(outputString);
+
+    }
 }

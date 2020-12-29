@@ -91,7 +91,6 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
 
         calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),4);
 
-
         /*
         if(moreFragment.getFromMore()){
             calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),4);
@@ -100,7 +99,6 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
             lastTab.setVisibility(View.INVISIBLE);
             calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),3);
         }
-
         */
 
 
