@@ -19,7 +19,6 @@ import com.bca.bsi.utils.Utils;
 
 public class DurasiInvestasiFragment extends BaseFragment implements View.OnClickListener {
 
-
     private Button kalkulasi;
     private TextView DILabel;
     private TextView hasilDI;
@@ -27,7 +26,6 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
     private EditText ETDIModalAwal;
     private EditText ETDIInvestasiBulanan;
     private EditText ETDIROR;
-
 
     public DurasiInvestasiFragment() {
         // Required empty public constructor

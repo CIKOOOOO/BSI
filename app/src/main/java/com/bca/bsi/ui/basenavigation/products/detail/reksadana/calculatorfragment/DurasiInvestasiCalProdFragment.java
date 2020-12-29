@@ -2,59 +2,33 @@ package com.bca.bsi.ui.basenavigation.products.detail.reksadana.calculatorfragme
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.utils.BaseFragment;
+import com.bca.bsi.utils.Utils;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DurasiInvestasiCalProdFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class DurasiInvestasiCalProdFragment extends Fragment {
+public class DurasiInvestasiCalProdFragment extends BaseFragment implements View.OnClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Button kalkulasi;
+    private TextView DILabel;
+    private TextView hasilDI;
+    private EditText ETDITargetHasilInvestasi;
+    private EditText ETDIModalAwal;
+    private EditText ETDIInvestasiBulanan;
+    private EditText ETDIROR;
 
     public DurasiInvestasiCalProdFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DurasiInvestasiCalProdFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DurasiInvestasiCalProdFragment newInstance(String param1, String param2) {
-        DurasiInvestasiCalProdFragment fragment = new DurasiInvestasiCalProdFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -62,5 +36,86 @@ public class DurasiInvestasiCalProdFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_durasi_investasi_cal_prod, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        kalkulasi = view.findViewById(R.id.btn_di_kalkulasi_calprod);
+        kalkulasi.setOnClickListener(this);
+
+        DILabel = view.findViewById(R.id.label_durasi_investasi_calprod);
+        hasilDI = view.findViewById(R.id.tv_di_hasil_calprod);
+        ETDIInvestasiBulanan = view.findViewById(R.id.et_di_investasi_bulanan_calprod);
+        ETDIModalAwal = view.findViewById(R.id.et_di_modal_awal_calprod);
+        ETDIROR = view.findViewById(R.id.et_di_ror_calprod);
+        ETDITargetHasilInvestasi = view.findViewById(R.id.et_di_target_hasil_investasi_calprod);
+
+        DILabel.setVisibility(View.INVISIBLE);
+        hasilDI.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.btn_di_kalkulasi_calprod:
+                if (kalkulasi.getText().equals("KALKULASI")) {
+                    ETDIModalAwal.setEnabled(false);
+                    ETDIInvestasiBulanan.setEnabled(false);
+                    ETDIROR.setEnabled(false);
+                    ETDITargetHasilInvestasi.setEnabled(false);
+
+                    if(ETDIModalAwal.getText().toString().equals("")){
+                        ETDIModalAwal.setText("0");
+                    }
+
+                    if(ETDIInvestasiBulanan.getText().toString().equals("")){
+                        ETDIInvestasiBulanan.setText("0");
+                    }
+
+                    if(ETDIROR.getText().toString().equals("")){
+                        ETDIROR.setText("0");
+                    }
+
+                    if(ETDITargetHasilInvestasi.getText().toString().equals("")){
+                        ETDITargetHasilInvestasi.setText("0");
+                    }
+
+                    Utils utils = new Utils();
+                    Double ETDIModalAwalDouble = Double.parseDouble(ETDIModalAwal.getText().toString());
+                    Double ETDIInvestasiBulananDouble = Double.parseDouble(ETDIInvestasiBulanan.getText().toString());
+                    Double ETDITargetHasilInvestasiDouble = Double.parseDouble(ETDITargetHasilInvestasi.getText().toString());
+                    Double ETDIRORDouble = Double.parseDouble(ETDIROR.getText().toString())/100;
+
+                    int[] hasilKalkulasiDI = utils.getDuration(ETDIModalAwalDouble,ETDIInvestasiBulananDouble,ETDITargetHasilInvestasiDouble,ETDIRORDouble);
+
+                    hasilDI.setText(hasilKalkulasiDI[1]+" tahun "+hasilKalkulasiDI[0]+" bulan");
+
+                    DILabel.setVisibility(View.VISIBLE);
+                    hasilDI.setVisibility(View.VISIBLE);
+                    kalkulasi.setText("RESET");
+                } else {
+                    ETDIModalAwal.setEnabled(true);
+                    ETDIInvestasiBulanan.setEnabled(true);
+                    ETDIROR.setEnabled(true);
+                    ETDITargetHasilInvestasi.setEnabled(true);
+
+                    DILabel.setVisibility(View.INVISIBLE);
+                    hasilDI.setVisibility(View.INVISIBLE);
+
+                    ETDIInvestasiBulanan.setText("");
+                    ETDIModalAwal.setText("");
+                    ETDIROR.setText("");
+                    ETDITargetHasilInvestasi.setText("");
+
+                    kalkulasi.setText("KALKULASI");
+                }
+                break;
+
+        }
     }
 }

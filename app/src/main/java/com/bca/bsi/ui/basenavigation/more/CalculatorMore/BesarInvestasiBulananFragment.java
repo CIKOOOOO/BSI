@@ -19,7 +19,6 @@ import com.bca.bsi.R;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,6 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     private EditText ETBIBTargetHasilInvestasi;
     private EditText ETBIBModalAwal;
     private EditText ETBIBROR;
-    private Utils utils;
 
     public BesarInvestasiBulananFragment() {
 

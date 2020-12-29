@@ -23,7 +23,6 @@ import com.bca.bsi.R;
 
 public class CalculatorMoreActivity extends BaseActivity implements View.OnClickListener {
 
-    private ColorStateList def;
     private TextView besarInvestasiBulananTab;
     private TextView besarHasilInvestasiTab;
     private TextView durasiInvestasiTab;
@@ -35,22 +34,6 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
     private CalculatorPagerAdapter calculatorPagerAdapter;
     private ImageButton backBtn;
     private boolean RoRTabEnabled;
-
-    public boolean isRoRTabEnabled() {
-        return RoRTabEnabled;
-    }
-
-    public void setRoRTabEnabled(boolean roRTabEnabled) {
-        RoRTabEnabled = roRTabEnabled;
-    }
-
-    public void fromMoreMenu(String pageFrom){
-        if(pageFrom.equals("more")){
-            RoRTabEnabled = true;
-        }else{
-            RoRTabEnabled = false;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +63,6 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
         besarRoRTab.setTextColor(Color.WHITE);
 
         select = findViewById(R.id.select);
-        def = besarHasilInvestasiTab.getTextColors();
         titlePage.setText("Kalkulator Investasi");
 
         calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),4);

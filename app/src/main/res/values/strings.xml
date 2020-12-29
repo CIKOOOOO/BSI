@@ -71,6 +71,7 @@
     <string name="calculator_besar_setoran_investasi_bulanan">BESAR SETORAN INVESTASI BULANAN</string>
     <string name="calculator_kalkulasi_label">KALKULASI</string>
     <string name="calculator_reset_label">RESET</string>
+    <string name="kalkulator_investasi">Kalkulator Investasi</string>
 
     <string name="tahun">tahun</string>
     <string name="bulan">bulan</string>
