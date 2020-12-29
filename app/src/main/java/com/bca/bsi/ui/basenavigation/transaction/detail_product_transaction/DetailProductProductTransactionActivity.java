@@ -96,6 +96,9 @@ public class DetailProductProductTransactionActivity extends BaseActivity implem
             case R.id.btn_next_detail_transaction:
                 startActivity(new Intent(DetailProductProductTransactionActivity.this, ConfirmationTransactionActivity.class));
                 break;
+            case R.id.ketentuan_pembelian:
+                //Intent intent = new Intent(this.CalculatorMo)
+                break;
         }
     }
 }

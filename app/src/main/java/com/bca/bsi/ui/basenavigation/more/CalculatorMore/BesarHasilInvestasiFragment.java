@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.more.CalculatorMore;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.utils.BaseFragment;
+import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,12 +93,53 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
         switch (v.getId()) {
             case R.id.btn_bhi_kalkulasi:
                 if (kalkulasi.getText().equals("KALKULASI")) {
-                    BHILabel.setVisibility(View.VISIBLE);
-                    rpLabel.setVisibility(View.VISIBLE);
-                    hasilBHI.setVisibility(View.VISIBLE);
-                    kalkulasi.setText("RESET");
-                } else {
 
+                        ETBHIModalAwal.setEnabled(false);
+                        ETBHIIvestasiBulanan.setEnabled(false);
+                        ETBHIROR.setEnabled(false);
+                        spinnerDurasiBulanBHI.setEnabled(false);
+                        spinnerDurasiTahunBHI.setEnabled(false);
+
+                        if(ETBHIModalAwal.getText().toString().equals("")){
+                            ETBHIModalAwal.setText("0");
+                        }
+
+                        if(ETBHIIvestasiBulanan.getText().toString().equals("")){
+                            ETBHIIvestasiBulanan.setText("0");
+                        }
+
+                        if(ETBHIROR.getText().toString().equals("")){
+                            ETBHIROR.setText("0");
+                        }
+
+                        Utils utils = new Utils();
+                        Double hasilKalkulasiBHI;
+                        Double ETBHIModalAwalDouble = Double.parseDouble(ETBHIModalAwal.getText().toString());
+                        Double ETBHIInvestasiBulananDouble = Double.parseDouble(ETBHIIvestasiBulanan.getText().toString());
+                        Double ETBHIRORDouble = Double.parseDouble(ETBHIROR.getText().toString())/100;
+                        Integer spinnerDurasiBulanBHIInt = Integer.parseInt(spinnerDurasiBulanBHI.getSelectedItem().toString()) ;
+                        Integer spinnerDurasiTahunBHIInt = Integer.parseInt(spinnerDurasiTahunBHI.getSelectedItem().toString());
+
+                        hasilKalkulasiBHI = utils.getTarget(ETBHIModalAwalDouble,ETBHIInvestasiBulananDouble,ETBHIRORDouble,spinnerDurasiBulanBHIInt,spinnerDurasiTahunBHIInt);
+                        //hasilKalkulasiBHI = spinnerDurasiBulanBHIInt;
+                        /*
+                        int hasilKalkulasiBHIInt = (int) Math.round(hasilKalkulasiBHI);
+                        hasilBHI.setText(String.valueOf(hasilKalkulasiBHIInt));
+                        */
+                        hasilBHI.setText(utils.priceFormat(hasilKalkulasiBHI));
+
+                        BHILabel.setVisibility(View.VISIBLE);
+                        rpLabel.setVisibility(View.VISIBLE);
+                        hasilBHI.setVisibility(View.VISIBLE);
+                        kalkulasi.setText("RESET");
+
+
+                } else {
+                    ETBHIModalAwal.setEnabled(true);
+                    ETBHIIvestasiBulanan.setEnabled(true);
+                    ETBHIROR.setEnabled(true);
+                    spinnerDurasiBulanBHI.setEnabled(true);
+                    spinnerDurasiTahunBHI.setEnabled(true);
 
                     BHILabel.setVisibility(View.INVISIBLE);
                     rpLabel.setVisibility(View.INVISIBLE);

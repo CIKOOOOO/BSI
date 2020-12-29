@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.utils.BaseFragment;
+import com.bca.bsi.utils.Utils;
 
 public class DurasiInvestasiFragment extends BaseFragment implements View.OnClickListener {
 
@@ -65,10 +66,46 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
 
             case R.id.btn_di_kalkulasi:
                 if (kalkulasi.getText().equals("KALKULASI")) {
+                    ETDIModalAwal.setEnabled(false);
+                    ETDIInvestasiBulanan.setEnabled(false);
+                    ETDIROR.setEnabled(false);
+                    ETDITargetHasilInvestasi.setEnabled(false);
+
+                    if(ETDIModalAwal.getText().toString().equals("")){
+                        ETDIModalAwal.setText("0");
+                    }
+
+                    if(ETDIInvestasiBulanan.getText().toString().equals("")){
+                        ETDIInvestasiBulanan.setText("0");
+                    }
+
+                    if(ETDIROR.getText().toString().equals("")){
+                        ETDIROR.setText("0");
+                    }
+
+                    if(ETDITargetHasilInvestasi.getText().toString().equals("")){
+                        ETDITargetHasilInvestasi.setText("0");
+                    }
+
+                    Utils utils = new Utils();
+                    Double ETDIModalAwalDouble = Double.parseDouble(ETDIModalAwal.getText().toString());
+                    Double ETDIInvestasiBulananDouble = Double.parseDouble(ETDIInvestasiBulanan.getText().toString());
+                    Double ETDITargetHasilInvestasiDouble = Double.parseDouble(ETDITargetHasilInvestasi.getText().toString());
+                    Double ETDIRORDouble = Double.parseDouble(ETDIROR.getText().toString())/100;
+
+                    int[] hasilKalkulasiDI = utils.getDuration(ETDIModalAwalDouble,ETDIInvestasiBulananDouble,ETDITargetHasilInvestasiDouble,ETDIRORDouble);
+
+                    hasilDI.setText(hasilKalkulasiDI[1]+" tahun "+hasilKalkulasiDI[0]+" bulan");
+
                     DILabel.setVisibility(View.VISIBLE);
                     hasilDI.setVisibility(View.VISIBLE);
                     kalkulasi.setText("RESET");
                 } else {
+                    ETDIModalAwal.setEnabled(true);
+                    ETDIInvestasiBulanan.setEnabled(true);
+                    ETDIROR.setEnabled(true);
+                    ETDITargetHasilInvestasi.setEnabled(true);
+
                     DILabel.setVisibility(View.INVISIBLE);
                     hasilDI.setVisibility(View.INVISIBLE);
 

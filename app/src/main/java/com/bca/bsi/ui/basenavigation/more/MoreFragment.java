@@ -62,14 +62,6 @@ public class MoreFragment extends BaseFragment implements View.OnClickListener {
     }
 
     public void openCalculator() {
-        /*
-        CalculatorMoreActivity calculatorMoreActivity = new CalculatorMoreActivity();
-        //calculatorMoreActivity.fromMoreMenu("more");
-        calculatorMoreActivity.setRoRTabEnabled(true);
-        System.out.println("YANGINIII DARI MORE FRAGMENT"+calculatorMoreActivity.isRoRTabEnabled());
-        setFromMore(true);
-        */
-
         Intent intent = new Intent(mActivity, CalculatorMoreActivity.class);
         startActivity(intent);
     }

@@ -83,24 +83,7 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
         def = besarHasilInvestasiTab.getTextColors();
         titlePage.setText("Kalkulator Investasi");
 
-        System.out.println("RORRRRRRRRRRRRRRRR"+RoRTabEnabled);
-
-        MoreFragment moreFragment = new MoreFragment();
-
-        System.out.println("FROOOOOOOOOOM MORE FRAGMENT"+moreFragment.getFromMore());
-
         calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),4);
-
-        /*
-        if(moreFragment.getFromMore()){
-            calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),4);
-        }else{
-            besarRoRTab.setVisibility(View.INVISIBLE);
-            lastTab.setVisibility(View.INVISIBLE);
-            calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),3);
-        }
-        */
-
 
         viewPager.setAdapter(calculatorPagerAdapter);
     }

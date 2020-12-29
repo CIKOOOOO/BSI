@@ -17,9 +17,11 @@ import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.utils.BaseFragment;
+import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.DeflaterOutputStream;
 
 public class BesarRoRFragment extends BaseFragment implements View.OnClickListener {
 
@@ -92,12 +94,58 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.btn_bror_kalkulasi:
                 if (kalkulasi.getText().equals("KALKULASI")) {
+
+                    ETBRORModalAwal.setEnabled(false);
+                    ETBRORInvestasiBulanan.setEnabled(false);
+                    ETBRORTargetHasilInvestasi.setEnabled(false);
+                    spinnerDurasiBulanBROR.setEnabled(false);
+                    spinnerDurasiTahunBROR.setEnabled(false);
+
+                    if(ETBRORModalAwal.getText().toString().equals("")){
+                        ETBRORModalAwal.setText("0");
+                    }
+
+                    if(ETBRORInvestasiBulanan.getText().toString().equals("")){
+                        ETBRORInvestasiBulanan.setText("0");
+                    }
+
+                    if(ETBRORTargetHasilInvestasi.getText().toString().equals("")){
+                        ETBRORTargetHasilInvestasi.setText("0");
+                    }
+
+                    Utils utils = new Utils();
+                    Double hasilKalkulasiRor;
+                    Double ETBRORModalAwalDouble = Double.parseDouble(ETBRORModalAwal.getText().toString());
+                    Double ETBRORInvestasiBulananDouble = Double.parseDouble(ETBRORInvestasiBulanan.getText().toString());
+                    Double ETBRORTargetHasilInvestasiDouble = Double.parseDouble(ETBRORTargetHasilInvestasi.getText().toString());
+                    Integer spinnerDurasiBulanBRORInt = Integer.parseInt(spinnerDurasiBulanBROR.getSelectedItem().toString());
+                    Integer spinnerDurasiTahunBRORInt = Integer.parseInt(spinnerDurasiTahunBROR.getSelectedItem().toString());
+
+                    hasilKalkulasiRor = utils.getRor(ETBRORModalAwalDouble,ETBRORInvestasiBulananDouble,ETBRORTargetHasilInvestasiDouble,spinnerDurasiBulanBRORInt,spinnerDurasiTahunBRORInt);
+
+                    if (hasilKalkulasiRor == -1) {
+                        hasilBROR.setText("Data yang diinput tidak sesuai");
+                    } else if (hasilKalkulasiRor == 123123) {
+                        hasilBROR.setText("Data yang diinput tidak sesuai");
+                    } else {
+                        hasilKalkulasiRor*=100;
+                        hasilKalkulasiRor = utils.roundDouble(hasilKalkulasiRor,2);
+                        hasilBROR.setText(hasilKalkulasiRor.toString());
+                        persenLabel.setVisibility(View.VISIBLE);
+                    }
+
                     BRORLabel.setVisibility(View.VISIBLE);
-                    persenLabel.setVisibility(View.VISIBLE);
                     hasilBROR.setVisibility(View.VISIBLE);
                     pertahunLabel.setVisibility(View.VISIBLE);
                     kalkulasi.setText("RESET");
                 } else {
+
+                    ETBRORModalAwal.setEnabled(true);
+                    ETBRORInvestasiBulanan.setEnabled(true);
+                    ETBRORTargetHasilInvestasi.setEnabled(true);
+                    spinnerDurasiBulanBROR.setEnabled(true);
+                    spinnerDurasiTahunBROR.setEnabled(true);
+
                     BRORLabel.setVisibility(View.INVISIBLE);
                     persenLabel.setVisibility(View.INVISIBLE);
                     hasilBROR.setVisibility(View.INVISIBLE);

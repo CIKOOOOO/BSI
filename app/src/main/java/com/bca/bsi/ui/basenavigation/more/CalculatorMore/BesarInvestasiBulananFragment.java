@@ -103,14 +103,48 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
             case R.id.btn_bib_kalkulasi:
                 if(kalkulasi.getText().equals("KALKULASI")){
 
+                    ETBIBModalAwal.setEnabled(false);
+                    ETBIBTargetHasilInvestasi.setEnabled(false);
+                    ETBIBROR.setEnabled(false);
+                    spinnerDurasiTahunBIB.setEnabled(false);
+                    spinnerDurasiBulanBIB.setEnabled(false);
+
+                    if(ETBIBModalAwal.getText().toString().equals("")){
+                        ETBIBModalAwal.setText("0");
+                    }
+
+                    if(ETBIBTargetHasilInvestasi.getText().toString().equals("")){
+                        ETBIBTargetHasilInvestasi.setText("0");
+                    }
+
+                    if(ETBIBROR.getText().toString().equals("")){
+                        ETBIBROR.setText("0");
+                    }
+
+                    Utils utils = new Utils();
+                    Double hasilKalkulasiBIB;
+                    Double ETBIBModalAwalDouble = Double.parseDouble(ETBIBModalAwal.getText().toString());
+                    Double ETBIBTargetHasilInvestasiDouble = Double.parseDouble(ETBIBTargetHasilInvestasi.getText().toString());
+                    Double ETBIBRORDouble = Double.parseDouble(ETBIBROR.getText().toString())/100;
+                    Integer spinnerDurasiTahunBIBInt = Integer.parseInt(spinnerDurasiTahunBIB.getSelectedItem().toString());
+                    Integer spinnerDurasiBulanBIBInt = Integer.parseInt(spinnerDurasiBulanBIB.getSelectedItem().toString());
+
+                    hasilKalkulasiBIB = utils.getMonthlyCost(ETBIBModalAwalDouble,ETBIBTargetHasilInvestasiDouble,ETBIBRORDouble,spinnerDurasiBulanBIBInt,spinnerDurasiTahunBIBInt);
+
                     BIBLabel.setVisibility(View.VISIBLE);
                     rpLabel.setVisibility(View.VISIBLE);
                     hasilBIB.setVisibility(View.VISIBLE);
 
-                    hasilBIB.setText(spinnerDurasiTahunBIB.getSelectedItem().toString());
+                    hasilBIB.setText(utils.priceFormat(hasilKalkulasiBIB));
 
                     kalkulasi.setText("RESET");
                 }else {
+                    ETBIBModalAwal.setEnabled(true);
+                    ETBIBTargetHasilInvestasi.setEnabled(true);
+                    ETBIBROR.setEnabled(true);
+                    spinnerDurasiTahunBIB.setEnabled(true);
+                    spinnerDurasiBulanBIB.setEnabled(true);
+
                     BIBLabel.setVisibility(View.INVISIBLE);
                     rpLabel.setVisibility(View.INVISIBLE);
                     hasilBIB.setVisibility(View.INVISIBLE);
@@ -134,7 +168,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
 
 
-            ETBIBModalAwal.setText("88888888888");
+            //ETBIBModalAwal.setText("88888888888");
 
             /*
             switch (v.getId()) {
