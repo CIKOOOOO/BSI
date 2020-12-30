@@ -31,7 +31,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/recycler_tv_title_product_type"
+                    android:id="@+id/recycler_tv_title_learning_topic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/java_palette"
@@ -40,7 +40,7 @@
                     tools:text="Reksa Dana" />
 
                 <TextView
-                    android:id="@+id/recycler_tv_description_product_type"
+                    android:id="@+id/recycler_tv_description_learning_topic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_palette"
@@ -54,7 +54,7 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/recycler_img_product_type"
+                    android:id="@+id/recycler_img_learning_topic"
                     android:layout_width="@dimen/size_for_120dp"
                     android:layout_height="@dimen/size_for_100dp"
                     tools:background="@drawable/img_asset_reksa_dana" />
