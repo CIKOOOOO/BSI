@@ -51,6 +51,10 @@ public class CalculatorProductActivity extends BaseActivity implements View.OnCl
         durasiInvestasiTabCalProd.setOnClickListener(this);
         backBtn2.setOnClickListener(this);
 
+        besarInvestasiBulananTabCalProd.setTextColor(Color.BLACK);
+        besarHasilInvestasiTabCalProd.setTextColor(Color.WHITE);
+        durasiInvestasiTabCalProd.setTextColor(Color.WHITE);
+
         calculatorProductPagerAdapter = new CalculatorProductPagerAdapter(getSupportFragmentManager(),3);
         viewPager2.setAdapter(calculatorProductPagerAdapter);
 
