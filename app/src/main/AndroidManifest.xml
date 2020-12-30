@@ -15,6 +15,8 @@
         <activity
             android:name=".ui.basenavigation.products.detail.reksadana.CalculatorProductActivity"
             android:label="@string/title_activity_calculator_product"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.pin_screen.PinActivity"></activity>
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.basenavigation.more.CalculatorMore.CalculatorMoreActivity"
