@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
-import com.bca.bsi.ui.basenavigation.transaction.detail_transaction.DetailTransactionActivity;
+import com.bca.bsi.ui.pin_screen.PinActivity;
 import com.bca.bsi.utils.BaseActivity;
 
 public class ConfirmationTransactionActivity extends BaseActivity implements View.OnClickListener {
@@ -68,7 +68,7 @@ public class ConfirmationTransactionActivity extends BaseActivity implements Vie
                 break;
             case R.id.btn_next_transaction_confirmation:
                 if (cbConfirmation.isChecked()) {
-                    startActivity(new Intent(this, DetailTransactionActivity.class));
+                    startActivity(new Intent(this, PinActivity.class));
                 }
                 break;
         }
