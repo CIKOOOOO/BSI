@@ -11,16 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ui.pin_screen.PinActivity"></activity>
         <activity
             android:name=".ui.basenavigation.more.CalculatorMore.CalculatorMoreActivity"
             android:label="@string/title_activity_calculator_more"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.basenavigation.transaction.detail_transaction.DetailTransactionActivity" />
-
         <activity
-            android:name=".ui.basenavigation.transaction.detail_product_transaction.DetailProductProductTransactionActivity"
+            android:name=".ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity"
@@ -32,7 +30,6 @@
         <activity
             android:name=".ui.basenavigation.BaseNavigationActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait">
