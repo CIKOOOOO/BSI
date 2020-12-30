@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.ui.basenavigation.more.CalculatorMore.CalculatorMoreActivity;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.CalculatorProductActivity;
 import com.bca.bsi.ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;
@@ -46,6 +48,9 @@ public class DetailProductProductTransactionActivity extends BaseActivity implem
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
         TextView tvTitleToolbar = findViewById(R.id.tv_title_toolbar_back);
         Button btnNext = findViewById(R.id.btn_next_detail_transaction);
+        TextView toc = findViewById(R.id.ketentuan_pembelian);
+
+        toc.setOnClickListener(this);
 
         tvSaldo = findViewById(R.id.tv_saldo_detail_transaction);
 
@@ -95,6 +100,10 @@ public class DetailProductProductTransactionActivity extends BaseActivity implem
                 break;
             case R.id.btn_next_detail_transaction:
                 startActivity(new Intent(DetailProductProductTransactionActivity.this, ConfirmationTransactionActivity.class));
+                break;
+            case R.id.ketentuan_pembelian:
+                Intent intent = new Intent(this, CalculatorProductActivity.class);
+                startActivity(intent);
                 break;
         }
     }

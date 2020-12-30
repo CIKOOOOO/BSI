@@ -19,6 +19,16 @@ public class MoreFragment extends BaseFragment implements View.OnClickListener {
 
     private ImageButton btnKalkulator;
 
+    private Boolean fromMore;
+
+    public Boolean getFromMore() {
+        return fromMore;
+    }
+
+    public void setFromMore(Boolean fromMore) {
+        this.fromMore = fromMore;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

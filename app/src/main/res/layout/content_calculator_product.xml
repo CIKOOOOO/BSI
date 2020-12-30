@@ -43,7 +43,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/select"
+                        android:id="@+id/selectCalProd"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -57,13 +57,7 @@
                         android:text="" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="" />
-
-                    <TextView
-                        android:id="@+id/lastTab"
+                        android:id="@+id/lastTabCalProd"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -75,40 +69,30 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/besarInvestasiBulananTab"
+                        android:id="@+id/besarInvestasiBulananTabCalProd"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Besar Investasi Bulanan"
+                        android:text="Besar Investasi\nBulanan"
                         android:gravity="center"
                         android:textSize="@dimen/size_for_12sp"/>
 
                     <TextView
-                        android:id="@+id/besarHasilInvestasiTab"
+                        android:id="@+id/besarHasilInvestasiTabCalProd"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Besar Hasil Investasi"
+                        android:text="Besar Hasil\nInvestasi"
                         android:gravity="center"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/size_for_12sp"/>
 
                     <TextView
-                        android:id="@+id/durasiInvestasiTab"
+                        android:id="@+id/durasiInvestasiTabCalProd"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Durasi\nInvestasi"
-                        android:gravity="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/size_for_12sp"/>
-
-                    <TextView
-                        android:id="@+id/besarRoRTab"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Besar RoR"
                         android:gravity="center"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/size_for_12sp"/>
@@ -119,12 +103,11 @@
     </FrameLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+        android:id="@+id/viewPagerCalProd"
         android:layout_width="@dimen/size_for_0dp"
         android:layout_height="@dimen/size_for_0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frame_01" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

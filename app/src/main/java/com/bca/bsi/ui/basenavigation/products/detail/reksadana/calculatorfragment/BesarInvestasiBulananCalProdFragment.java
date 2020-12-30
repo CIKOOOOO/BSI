@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.more.CalculatorMore;
+package com.bca.bsi.ui.basenavigation.products.detail.reksadana.calculatorfragment;
 
 import android.os.Bundle;
 
@@ -19,11 +19,10 @@ import com.bca.bsi.R;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class BesarInvestasiBulananFragment extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener {
+public class BesarInvestasiBulananCalProdFragment extends BaseFragment implements View.OnClickListener {
 
     private Spinner spinnerDurasiTahunBIB;
     private Spinner spinnerDurasiBulanBIB;
@@ -35,9 +34,12 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     private EditText ETBIBTargetHasilInvestasi;
     private EditText ETBIBModalAwal;
     private EditText ETBIBROR;
+    private TextView rorLabel;
+    private TextView rorPertahunLabel;
+    private TextView rorPersenLabel;
 
-    public BesarInvestasiBulananFragment() {
-
+    public BesarInvestasiBulananCalProdFragment() {
+        // Required empty public constructor
     }
 
 
@@ -45,7 +47,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_besar_investasi_bulanan, container, false);
+        return inflater.inflate(R.layout.fragment_besar_investasi_bulanan_cal_prod, container, false);
     }
 
     @Override
@@ -64,20 +66,24 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         }
 
 
-        kalkulasi = view.findViewById(R.id.btn_bib_kalkulasi);
+        kalkulasi = view.findViewById(R.id.btn_bib_kalkulasi_calprod);
         kalkulasi.setOnClickListener(this);
 
 
-        spinnerDurasiTahunBIB = view.findViewById(R.id.bib_durasi_tahun);
-        spinnerDurasiBulanBIB = view.findViewById(R.id.bib_durasi_bulan);
+        spinnerDurasiTahunBIB = view.findViewById(R.id.bib_durasi_tahun_calprod);
+        spinnerDurasiBulanBIB = view.findViewById(R.id.bib_durasi_bulan_calprod);
 
 
-        BIBLabel = view.findViewById(R.id.label_besar_setoran_investasi_bulanan);
-        rpLabel = view.findViewById(R.id.label_bib_rp);
-        hasilBIB = view.findViewById(R.id.tv_bib_hasil);
-        ETBIBModalAwal = view.findViewById(R.id.et_bib_modal_awal);
-        ETBIBTargetHasilInvestasi = view.findViewById(R.id.et_bib_target_hasil_investasi);
-        ETBIBROR = view.findViewById(R.id.et_bib_ror);
+        BIBLabel = view.findViewById(R.id.label_besar_setoran_investasi_bulanan_calprod);
+        rpLabel = view.findViewById(R.id.label_bib_rp_calprod);
+        hasilBIB = view.findViewById(R.id.tv_bib_hasil_calprod);
+        ETBIBModalAwal = view.findViewById(R.id.et_bib_modal_awal_calprod);
+        ETBIBTargetHasilInvestasi = view.findViewById(R.id.et_bib_target_hasil_investasi_calprod);
+        ETBIBROR = view.findViewById(R.id.et_bib_ror_calprod);
+
+        rorLabel = view.findViewById(R.id.textView16_calprod);
+        rorPersenLabel = view.findViewById(R.id.textView18_calprod);
+        rorPertahunLabel = view.findViewById(R.id.textView17_calprod);
 
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBIB.setAdapter(adapter);
@@ -85,20 +91,22 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBIB.setAdapter(adapterBulan);
 
-        ETBIBModalAwal.setOnFocusChangeListener(this);
-
 
         BIBLabel.setVisibility(View.INVISIBLE);
         rpLabel.setVisibility(View.INVISIBLE);
         hasilBIB.setVisibility(View.INVISIBLE);
+        ETBIBROR.setVisibility(View.GONE);
+        ETBIBROR.setText("2");
+        rorLabel.setVisibility(View.GONE);
+        rorPersenLabel.setVisibility(View.GONE);
+        rorPertahunLabel.setVisibility(View.GONE);
 
     }
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
-            case R.id.btn_bib_kalkulasi:
+            case R.id.btn_bib_kalkulasi_calprod:
                 if(kalkulasi.getText().equals("KALKULASI")){
 
                     ETBIBModalAwal.setEnabled(false);
@@ -158,24 +166,5 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                 break;
         }
 
-    }
-
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if(!hasFocus){
-
-
-
-            //ETBIBModalAwal.setText("88888888888");
-
-            /*
-            switch (v.getId()) {
-                case R.id.et_bib_modal_awal:
-                    utils.cekFormatInputNumber(ETBIBModalAwal,ETBIBModalAwal.getText().toString());
-                    //ETBIBModalAwal.setText("88888888888");
-                    break;
-            }
-            */
-        }
     }
 }

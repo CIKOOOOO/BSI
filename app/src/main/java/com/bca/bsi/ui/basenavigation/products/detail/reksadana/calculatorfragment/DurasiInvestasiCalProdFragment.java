@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.more.CalculatorMore;
+package com.bca.bsi.ui.basenavigation.products.detail.reksadana.calculatorfragment;
 
 import android.os.Bundle;
 
@@ -17,7 +17,8 @@ import com.bca.bsi.R;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
 
-public class DurasiInvestasiFragment extends BaseFragment implements View.OnClickListener {
+
+public class DurasiInvestasiCalProdFragment extends BaseFragment implements View.OnClickListener {
 
     private Button kalkulasi;
     private TextView DILabel;
@@ -26,8 +27,11 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
     private EditText ETDIModalAwal;
     private EditText ETDIInvestasiBulanan;
     private EditText ETDIROR;
+    private TextView rorLabel;
+    private TextView rorPertahunLabel;
+    private TextView rorPersenLabel;
 
-    public DurasiInvestasiFragment() {
+    public DurasiInvestasiCalProdFragment() {
         // Required empty public constructor
     }
 
@@ -35,7 +39,7 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_durasi_investasi, container, false);
+        return inflater.inflate(R.layout.fragment_durasi_investasi_cal_prod, container, false);
     }
 
     @Override
@@ -43,18 +47,27 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
         super.onViewCreated(view, savedInstanceState);
 
 
-        kalkulasi = view.findViewById(R.id.btn_di_kalkulasi);
+        kalkulasi = view.findViewById(R.id.btn_di_kalkulasi_calprod);
         kalkulasi.setOnClickListener(this);
 
-        DILabel = view.findViewById(R.id.label_durasi_investasi);
-        hasilDI = view.findViewById(R.id.tv_di_hasil);
-        ETDIInvestasiBulanan = view.findViewById(R.id.et_di_investasi_bulanan);
-        ETDIModalAwal = view.findViewById(R.id.et_di_modal_awal);
-        ETDIROR = view.findViewById(R.id.et_di_ror);
-        ETDITargetHasilInvestasi = view.findViewById(R.id.et_di_target_hasil_investasi);
+        DILabel = view.findViewById(R.id.label_durasi_investasi_calprod);
+        hasilDI = view.findViewById(R.id.tv_di_hasil_calprod);
+        ETDIInvestasiBulanan = view.findViewById(R.id.et_di_investasi_bulanan_calprod);
+        ETDIModalAwal = view.findViewById(R.id.et_di_modal_awal_calprod);
+        ETDIROR = view.findViewById(R.id.et_di_ror_calprod);
+        ETDITargetHasilInvestasi = view.findViewById(R.id.et_di_target_hasil_investasi_calprod);
+
+        rorLabel = view.findViewById(R.id.textView22_calprod);
+        rorPersenLabel = view.findViewById(R.id.textView27_calprod);
+        rorPertahunLabel = view.findViewById(R.id.textView23_calprod);
 
         DILabel.setVisibility(View.INVISIBLE);
         hasilDI.setVisibility(View.INVISIBLE);
+        ETDIROR.setVisibility(View.GONE);
+        ETDIROR.setText("2");
+        rorLabel.setVisibility(View.GONE);
+        rorPersenLabel.setVisibility(View.GONE);
+        rorPertahunLabel.setVisibility(View.GONE);
 
     }
 
@@ -62,7 +75,7 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.btn_di_kalkulasi:
+            case R.id.btn_di_kalkulasi_calprod:
                 if (kalkulasi.getText().equals("KALKULASI")) {
                     ETDIModalAwal.setEnabled(false);
                     ETDIInvestasiBulanan.setEnabled(false);
