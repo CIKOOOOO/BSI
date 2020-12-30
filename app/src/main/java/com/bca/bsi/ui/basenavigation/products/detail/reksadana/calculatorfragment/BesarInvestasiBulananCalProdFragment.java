@@ -34,6 +34,9 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
     private EditText ETBIBTargetHasilInvestasi;
     private EditText ETBIBModalAwal;
     private EditText ETBIBROR;
+    private TextView rorLabel;
+    private TextView rorPertahunLabel;
+    private TextView rorPersenLabel;
 
     public BesarInvestasiBulananCalProdFragment() {
         // Required empty public constructor
@@ -78,6 +81,10 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
         ETBIBTargetHasilInvestasi = view.findViewById(R.id.et_bib_target_hasil_investasi_calprod);
         ETBIBROR = view.findViewById(R.id.et_bib_ror_calprod);
 
+        rorLabel = view.findViewById(R.id.textView16_calprod);
+        rorPersenLabel = view.findViewById(R.id.textView18_calprod);
+        rorPertahunLabel = view.findViewById(R.id.textView17_calprod);
+
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBIB.setAdapter(adapter);
 
@@ -88,6 +95,11 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
         BIBLabel.setVisibility(View.INVISIBLE);
         rpLabel.setVisibility(View.INVISIBLE);
         hasilBIB.setVisibility(View.INVISIBLE);
+        ETBIBROR.setVisibility(View.GONE);
+        ETBIBROR.setText("2");
+        rorLabel.setVisibility(View.GONE);
+        rorPersenLabel.setVisibility(View.GONE);
+        rorPertahunLabel.setVisibility(View.GONE);
 
     }
 

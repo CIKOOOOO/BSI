@@ -17,6 +17,7 @@ import com.bca.bsi.R;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
 
+
 public class DurasiInvestasiCalProdFragment extends BaseFragment implements View.OnClickListener {
 
     private Button kalkulasi;
@@ -26,6 +27,9 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
     private EditText ETDIModalAwal;
     private EditText ETDIInvestasiBulanan;
     private EditText ETDIROR;
+    private TextView rorLabel;
+    private TextView rorPertahunLabel;
+    private TextView rorPersenLabel;
 
     public DurasiInvestasiCalProdFragment() {
         // Required empty public constructor
@@ -53,8 +57,17 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
         ETDIROR = view.findViewById(R.id.et_di_ror_calprod);
         ETDITargetHasilInvestasi = view.findViewById(R.id.et_di_target_hasil_investasi_calprod);
 
+        rorLabel = view.findViewById(R.id.textView22_calprod);
+        rorPersenLabel = view.findViewById(R.id.textView27_calprod);
+        rorPertahunLabel = view.findViewById(R.id.textView23_calprod);
+
         DILabel.setVisibility(View.INVISIBLE);
         hasilDI.setVisibility(View.INVISIBLE);
+        ETDIROR.setVisibility(View.GONE);
+        ETDIROR.setText("2");
+        rorLabel.setVisibility(View.GONE);
+        rorPersenLabel.setVisibility(View.GONE);
+        rorPertahunLabel.setVisibility(View.GONE);
 
     }
 

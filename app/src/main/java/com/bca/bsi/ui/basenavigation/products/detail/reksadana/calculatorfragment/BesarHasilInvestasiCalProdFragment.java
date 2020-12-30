@@ -33,6 +33,9 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
     private EditText ETBHIModalAwal;
     private EditText ETBHIIvestasiBulanan;
     private EditText ETBHIROR;
+    private TextView rorLabel;
+    private TextView rorPertahunLabel;
+    private TextView rorPersenLabel;
 
     public BesarHasilInvestasiCalProdFragment() {
         // Required empty public constructor
@@ -75,6 +78,10 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
         ETBHIModalAwal = view.findViewById(R.id.et_bhi_modal_awal_calprod);
         ETBHIROR = view.findViewById(R.id.et_bhi_ror_calprod);
 
+        rorLabel = view.findViewById(R.id.textView9_calprod);
+        rorPersenLabel = view.findViewById(R.id.textView12_calprod);
+        rorPertahunLabel = view.findViewById(R.id.textView11_calprod);
+
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBHI.setAdapter(adapter);
 
@@ -85,6 +92,12 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
         BHILabel.setVisibility(View.INVISIBLE);
         rpLabel.setVisibility(View.INVISIBLE);
         hasilBHI.setVisibility(View.INVISIBLE);
+
+        ETBHIROR.setVisibility(View.GONE);
+        ETBHIROR.setText("2");
+        rorLabel.setVisibility(View.GONE);
+        rorPersenLabel.setVisibility(View.GONE);
+        rorPertahunLabel.setVisibility(View.GONE);
 
     }
 
