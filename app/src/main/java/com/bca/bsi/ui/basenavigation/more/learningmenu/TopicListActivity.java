@@ -10,8 +10,10 @@ import com.bca.bsi.R;
 public class TopicListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    RecyclerView.Adapter programAdapter;
+    RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
