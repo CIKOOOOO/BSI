@@ -75,6 +75,12 @@
 
     <string name="tahun">tahun</string>
     <string name="bulan">bulan</string>
+    <string name="pin_code">Kode Pin</string>
+    <string name="input_pin">Masukkan 6 digit PIN kamu</string>
+    <string name="forum">Forum</string>
+    <string name="news">News</string>
+    <string name="promo">Promo</string>
+
 
 
     <!--END HERE-->

@@ -20,7 +20,7 @@ import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 import com.google.gson.Gson;
 
-public class DetailProductProductTransactionActivity extends BaseActivity implements IDetailProductTransactionCallback, View.OnClickListener {
+public class DetailProductTransactionActivity extends BaseActivity implements IDetailProductTransactionCallback, View.OnClickListener {
 
     public static final String PRODUCT_TYPE = "type";
     public static final String SALES_TYPE = "sales_type";
@@ -99,7 +99,7 @@ public class DetailProductProductTransactionActivity extends BaseActivity implem
                 onBackPressed();
                 break;
             case R.id.btn_next_detail_transaction:
-                startActivity(new Intent(DetailProductProductTransactionActivity.this, ConfirmationTransactionActivity.class));
+                startActivity(new Intent(DetailProductTransactionActivity.this, ConfirmationTransactionActivity.class));
                 break;
             case R.id.ketentuan_pembelian:
                 Intent intent = new Intent(this, CalculatorProductActivity.class);
