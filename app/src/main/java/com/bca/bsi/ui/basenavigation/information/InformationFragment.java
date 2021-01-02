@@ -21,7 +21,6 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -37,20 +36,17 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
 
         TextView tvTitleToolbar = view.findViewById(R.id.tv_title_toolbar_back_image);
         ImageButton imgToolbar = view.findViewById(R.id.img_btn_action_toolbar_back_image);
+
         tvStart = view.findViewById(R.id.tv_start_information_fragment);
         tvMid = view.findViewById(R.id.tv_mid_information_fragment);
         tvEnd = view.findViewById(R.id.tv_end_information_fragment);
 
         tvTitleToolbar.setText(view.getContext().getString(R.string.information));
 
-        tvStart.setTextColor(view.getContext().getResources().getColor(R.color.white_palette));
-        tvMid.setTextColor(view.getContext().getResources().getColor(R.color.black_palette));
-        tvEnd.setTextColor(view.getContext().getResources().getColor(R.color.black_palette));
-        tvStart.setBackground(view.getContext().getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
-        tvMid.setBackground(view.getContext().getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
-        tvEnd.setBackground(view.getContext().getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+        switchButton(1, view.getContext());
 
         imgToolbar.setOnClickListener(this);
+
         tvStart.setOnClickListener(this);
         tvMid.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
@@ -77,25 +73,25 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
     private void switchButton(int pos, Context context) {
         switch (pos) {
             case 1:
-                tvStart.setTextColor(context.getResources().getColor(R.color.white_palette));
-                tvMid.setTextColor(context.getResources().getColor(R.color.black_palette));
-                tvEnd.setTextColor(context.getResources().getColor(R.color.black_palette));
+                tvStart.setTextColor(context.getResources().getColor(R.color.black_palette));
+                tvMid.setTextColor(context.getResources().getColor(R.color.white_palette));
+                tvEnd.setTextColor(context.getResources().getColor(R.color.white_palette));
                 tvStart.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvMid.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 tvEnd.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 break;
             case 2:
-                tvMid.setTextColor(context.getResources().getColor(R.color.white_palette));
-                tvStart.setTextColor(context.getResources().getColor(R.color.black_palette));
-                tvEnd.setTextColor(context.getResources().getColor(R.color.black_palette));
+                tvMid.setTextColor(context.getResources().getColor(R.color.black_palette));
+                tvStart.setTextColor(context.getResources().getColor(R.color.white_palette));
+                tvEnd.setTextColor(context.getResources().getColor(R.color.white_palette));
                 tvMid.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvStart.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 tvEnd.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 break;
             case 3:
-                tvEnd.setTextColor(context.getResources().getColor(R.color.white_palette));
-                tvMid.setTextColor(context.getResources().getColor(R.color.black_palette));
-                tvStart.setTextColor(context.getResources().getColor(R.color.black_palette));
+                tvEnd.setTextColor(context.getResources().getColor(R.color.black_palette));
+                tvMid.setTextColor(context.getResources().getColor(R.color.white_palette));
+                tvStart.setTextColor(context.getResources().getColor(R.color.white_palette));
                 tvEnd.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvMid.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 tvStart.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
