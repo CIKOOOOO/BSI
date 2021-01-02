@@ -25,6 +25,7 @@
         android:id="@+id/recycler_img_promo_news"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_for_200dp"
+        android:background="@drawable/img_carousel"
         app:layout_constraintTop_toBottomOf="@id/recycler_tv_title_promo_news" />
 
     <TextView
@@ -32,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_for_5dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
         android:drawablePadding="@dimen/size_for_10dp"
         android:gravity="center_vertical"
         app:drawableStartCompat="@drawable/ic_baseline_access_time_24"
@@ -46,6 +48,7 @@
         android:layout_marginStart="@dimen/size_for_5dp"
         android:layout_marginTop="@dimen/size_for_10dp"
         android:textSize="@dimen/size_for_15sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recycler_tv_date_promo_news"
         tools:text="#PasangKudaKuda tanpa keluar rumah, dapat cashback hingga Rp300 ribu" />

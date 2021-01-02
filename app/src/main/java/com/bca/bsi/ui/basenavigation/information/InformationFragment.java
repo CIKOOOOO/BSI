@@ -10,8 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bca.bsi.R;
+import com.bca.bsi.ui.basenavigation.information.forum.MainForumFragment;
+import com.bca.bsi.ui.basenavigation.information.promonews.news.NewsInformationFragment;
+import com.bca.bsi.ui.basenavigation.information.promonews.promo.PromoInformationFragment;
 import com.bca.bsi.utils.BaseFragment;
 
 public class InformationFragment extends BaseFragment implements View.OnClickListener {
@@ -79,6 +84,7 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
                 tvStart.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvMid.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 tvEnd.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+                changeFragment(new PromoInformationFragment());
                 break;
             case 2:
                 tvMid.setTextColor(context.getResources().getColor(R.color.black_palette));
@@ -87,6 +93,7 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
                 tvMid.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvStart.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 tvEnd.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+                changeFragment(new NewsInformationFragment());
                 break;
             case 3:
                 tvEnd.setTextColor(context.getResources().getColor(R.color.black_palette));
@@ -95,7 +102,14 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
                 tvEnd.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvMid.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 tvStart.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+                changeFragment(new MainForumFragment());
                 break;
         }
+    }
+
+    public void changeFragment(Fragment fragment) {
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_information_fragment, fragment);
+        transaction.commit();
     }
 }

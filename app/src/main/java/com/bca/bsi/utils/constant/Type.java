@@ -12,4 +12,8 @@ public class Type {
     public static final String PURCHASING = "purchase";
     public static final String SALES = "sales";
 
+    public static final String NEWS = "news";
+    public static final String PROMO = "promo";
+
+
 }

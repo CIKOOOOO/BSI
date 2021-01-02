@@ -80,6 +80,9 @@
     <string name="forum">Forum</string>
     <string name="news">News</string>
     <string name="promo">Promo</string>
+    <string name="share_to_forum">Share to Forum</string>
+    <string name="detail_promo">Detail Promo</string>
+    <string name="detail_news">Detail Berita</string>
 
 
     <!--END HERE-->
