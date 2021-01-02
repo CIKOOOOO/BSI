@@ -76,7 +76,7 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
         switch (v.getId()) {
 
             case R.id.btn_di_kalkulasi_calprod:
-                if (kalkulasi.getText().equals("KALKULASI")) {
+                if (kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))) {
                     ETDIModalAwal.setEnabled(false);
                     ETDIInvestasiBulanan.setEnabled(false);
                     ETDIROR.setEnabled(false);
@@ -110,7 +110,7 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
 
                     DILabel.setVisibility(View.VISIBLE);
                     hasilDI.setVisibility(View.VISIBLE);
-                    kalkulasi.setText("RESET");
+                    kalkulasi.setText(getString(R.string.calculator_reset_label));
                 } else {
                     ETDIModalAwal.setEnabled(true);
                     ETDIInvestasiBulanan.setEnabled(true);
@@ -125,7 +125,7 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
                     ETDIROR.setText("");
                     ETDITargetHasilInvestasi.setText("");
 
-                    kalkulasi.setText("KALKULASI");
+                    kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
                 }
                 break;
 

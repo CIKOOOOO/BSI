@@ -107,7 +107,7 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_bib_kalkulasi_calprod:
-                if(kalkulasi.getText().equals("KALKULASI")){
+                if(kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))){
 
                     ETBIBModalAwal.setEnabled(false);
                     ETBIBTargetHasilInvestasi.setEnabled(false);
@@ -143,7 +143,7 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
 
                     hasilBIB.setText(utils.priceFormat(hasilKalkulasiBIB));
 
-                    kalkulasi.setText("RESET");
+                    kalkulasi.setText(getString(R.string.calculator_reset_label));
                 }else {
                     ETBIBModalAwal.setEnabled(true);
                     ETBIBTargetHasilInvestasi.setEnabled(true);
@@ -154,7 +154,7 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
                     BIBLabel.setVisibility(View.INVISIBLE);
                     rpLabel.setVisibility(View.INVISIBLE);
                     hasilBIB.setVisibility(View.INVISIBLE);
-                    kalkulasi.setText("KALKULASI");
+                    kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
 
                     ETBIBModalAwal.setText("");
                     ETBIBROR.setText("");

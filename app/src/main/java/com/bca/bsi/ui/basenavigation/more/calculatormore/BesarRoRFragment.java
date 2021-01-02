@@ -1,10 +1,9 @@
-package com.bca.bsi.ui.basenavigation.more.CalculatorMore;
+package com.bca.bsi.ui.basenavigation.more.calculatormore;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.DeflaterOutputStream;
 
 public class BesarRoRFragment extends BaseFragment implements View.OnClickListener {
 
@@ -93,7 +91,7 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_bror_kalkulasi:
-                if (kalkulasi.getText().equals("KALKULASI")) {
+                if (kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))) {
 
                     ETBRORModalAwal.setEnabled(false);
                     ETBRORInvestasiBulanan.setEnabled(false);
@@ -124,12 +122,12 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
                     hasilKalkulasiRor = utils.getRor(ETBRORModalAwalDouble,ETBRORInvestasiBulananDouble,ETBRORTargetHasilInvestasiDouble,spinnerDurasiBulanBRORInt,spinnerDurasiTahunBRORInt);
 
                     if (hasilKalkulasiRor == -1) {
-                        hasilBROR.setText("Data yang diinput tidak sesuai");
+                        hasilBROR.setText(getString(R.string.input_tidak_sesuai));
                     } else if (hasilKalkulasiRor == 123123) {
-                        hasilBROR.setText("Data yang diinput tidak sesuai");
+                        hasilBROR.setText(getString(R.string.proporsi_input_tidak_sesuai));
                     } else {
                         hasilKalkulasiRor*=100;
-                        hasilKalkulasiRor = utils.roundDouble(hasilKalkulasiRor,2);
+                        hasilKalkulasiRor = utils.roundDouble(hasilKalkulasiRor,4);
                         hasilBROR.setText(hasilKalkulasiRor.toString());
                         persenLabel.setVisibility(View.VISIBLE);
                     }
@@ -137,7 +135,7 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
                     BRORLabel.setVisibility(View.VISIBLE);
                     hasilBROR.setVisibility(View.VISIBLE);
                     pertahunLabel.setVisibility(View.VISIBLE);
-                    kalkulasi.setText("RESET");
+                    kalkulasi.setText(getString(R.string.calculator_reset_label));
                 } else {
 
                     ETBRORModalAwal.setEnabled(true);
@@ -157,7 +155,7 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
                     spinnerDurasiTahunBROR.setSelection(0);
                     spinnerDurasiBulanBROR.setSelection(0);
 
-                    kalkulasi.setText("KALKULASI");
+                    kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
                 }
                 break;
         }

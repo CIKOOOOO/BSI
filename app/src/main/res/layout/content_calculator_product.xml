@@ -73,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Besar Investasi\nBulanan"
+                        android:text="@string/besar_investasi_bulanan"
                         android:gravity="center"
                         android:textSize="@dimen/size_for_12sp"/>
 
@@ -82,7 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Besar Hasil\nInvestasi"
+                        android:text="@string/besar_hasil_investasi"
                         android:gravity="center"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/size_for_12sp"/>
@@ -92,7 +92,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Durasi\nInvestasi"
+                        android:text="@string/durasi_investasi"
                         android:gravity="center"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/size_for_12sp"/>

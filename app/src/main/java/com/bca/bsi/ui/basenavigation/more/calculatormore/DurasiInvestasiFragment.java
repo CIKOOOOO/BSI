@@ -1,10 +1,9 @@
-package com.bca.bsi.ui.basenavigation.more.CalculatorMore;
+package com.bca.bsi.ui.basenavigation.more.calculatormore;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +62,7 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
         switch (v.getId()) {
 
             case R.id.btn_di_kalkulasi:
-                if (kalkulasi.getText().equals("KALKULASI")) {
+                if (kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))) {
                     ETDIModalAwal.setEnabled(false);
                     ETDIInvestasiBulanan.setEnabled(false);
                     ETDIROR.setEnabled(false);
@@ -97,7 +96,7 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
 
                     DILabel.setVisibility(View.VISIBLE);
                     hasilDI.setVisibility(View.VISIBLE);
-                    kalkulasi.setText("RESET");
+                    kalkulasi.setText(getString(R.string.calculator_reset_label));
                 } else {
                     ETDIModalAwal.setEnabled(true);
                     ETDIInvestasiBulanan.setEnabled(true);
@@ -112,7 +111,7 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
                     ETDIROR.setText("");
                     ETDITargetHasilInvestasi.setText("");
 
-                    kalkulasi.setText("KALKULASI");
+                    kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
                 }
                 break;
 

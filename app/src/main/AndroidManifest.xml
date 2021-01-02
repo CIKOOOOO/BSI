@@ -11,20 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.basenavigation.more.learningmenu.TopicListActivity"></activity>
+        <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriAsuransiActivity"></activity>
+        <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriObligasiActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriReksaDanaActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.TopicListActivity" />
         <activity
             android:name=".ui.basenavigation.products.detail.reksadana.CalculatorProductActivity"
             android:label="@string/title_activity_calculator_product"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ui.pin_screen.PinActivity"></activity>
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.pin_screen.PinActivity" />
         <activity
-            android:name=".ui.basenavigation.more.CalculatorMore.CalculatorMoreActivity"
+            android:name=".ui.basenavigation.more.calculatormore.CalculatorMoreActivity"
             android:label="@string/title_activity_calculator_more"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.basenavigation.transaction.detail_transaction.DetailTransactionActivity" />
         <activity
-            android:name=".ui.basenavigation.transaction.detail_product_transaction.DetailProductProductTransactionActivity"
+            android:name=".ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity"

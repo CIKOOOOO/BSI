@@ -72,6 +72,21 @@
     <string name="calculator_kalkulasi_label">KALKULASI</string>
     <string name="calculator_reset_label">RESET</string>
     <string name="kalkulator_investasi">Kalkulator Investasi</string>
+    <string name="besar_hasil_investasi">Besar Hasil\nInvestasi</string>
+    <string name="besar_investasi_bulanan">Besar Investasi\nBulanan</string>
+    <string name="durasi_investasi">Durasi\nInvestasi</string>
+    <string name="besar_ror">Besar RoR</string>
+    
+    <string name="input_tidak_sesuai">Data yang diinput tidak sesuai</string>
+    <string name="proporsi_input_tidak_sesuai">Proporsi data input tidak sesuai</string>
+
+    <string name="reksadana_capslock">REKSA DANA</string>
+    <string name="obligasi_capslock">OBLIGASI</string>
+    <string name="asuransi_capslock">ASURANSI</string>
+
+    <string name="reksadana">Reksa Dana</string>
+    <string name="obligasi">Obligasi</string>
+    <string name="asuransi">Asuransi</string>
 
     <string name="tahun">tahun</string>
     <string name="bulan">bulan</string>
@@ -81,10 +96,16 @@
     <string name="news">News</string>
     <string name="promo">Promo</string>
 
-
     <string name="pelajari_lebih_lanjut">Pelajari lebih lanjut</string>
     <string name="ayo_ikuti_kuis">Ayo ikut kuis!</string>
     <string name="ulangi_kuis">Ulangi kuis!</string>
+    <string name="learning">LEARNING</string>
+
+    <string name="score_label">Score:</string>
+    <string name="score_max_quiz">/5</string>
+    <string name="tanggal_ambil_quiz">Tanggal ambil quiz:</string>
+
+    <string name="klik_disini">Klik Disini</string>
     <!--END HERE-->
 
 

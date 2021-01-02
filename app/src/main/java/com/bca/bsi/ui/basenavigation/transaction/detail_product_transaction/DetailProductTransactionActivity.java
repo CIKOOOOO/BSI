@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
-import com.bca.bsi.ui.basenavigation.more.CalculatorMore.CalculatorMoreActivity;
 import com.bca.bsi.ui.basenavigation.products.detail.reksadana.CalculatorProductActivity;
 import com.bca.bsi.ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/size_for_40dp"
+        android:layout_margin="@dimen/size_for_5dp"
+        android:layout_marginTop="@dimen/size_for_70dp"
+        android:layout_marginBottom="@dimen/size_for_70dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size_for_30dp"
+            android:layout_marginBottom="@dimen/size_for_30dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_materi"
+                    android:layout_width="@dimen/size_for_120dp"
+                    android:layout_height="@dimen/size_for_120dp"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginTop="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:src="@drawable/img_materi_reksadana_1" />
+
+                <TextView
+                    android:id="@+id/tv_title_materi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_materi"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginTop="@dimen/size_for_70dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:text="@string/reksadana"
+                    android:textColor="@color/java_palette"
+                    android:textSize="@dimen/size_for_20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_explanation_materi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_title_materi"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginTop="@dimen/size_for_25dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:lineSpacingExtra="@dimen/size_for_12sp"
+                    android:text="Lalalalaallallalalalalalallalalalalalallalalalalalalalalalalallalalallala"
+                    android:textColor="@color/gray_palette"
+                    android:textSize="@dimen/size_for_20dp"/>
+
+                <LinearLayout
+                    android:id="@+id/scoring_quiz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/tv_explanation_materi"
+                    android:layout_marginTop="@dimen/size_for_20dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/image_score_quiz"
+                            android:layout_width="@dimen/size_for_120dp"
+                            android:layout_height="@dimen/size_for_120dp"
+                            android:layout_marginStart="@dimen/size_for_20dp"
+                            android:src="@drawable/img_materi_reksadana_1"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/size_for_10dp"
+                                android:layout_marginStart="@dimen/size_for_20dp"
+                                android:text="@string/score_label"
+                                android:textColor="@color/deep_cerulean_palette"
+                                android:textStyle="bold"
+                                android:typeface="normal" />
+
+                            <TextView
+                                android:id="@+id/user_score"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/size_for_5dp"
+                                android:layout_marginTop="@dimen/size_for_10dp"
+                                android:text="4"
+                                android:textColor="@color/deep_cerulean_palette"
+                                android:textSize="@dimen/size_for_23sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/size_for_5dp"
+                                android:layout_marginTop="@dimen/size_for_10dp"
+                                android:text="@string/score_max_quiz"
+                                android:textColor="@color/deep_cerulean_palette"
+                                android:textSize="@dimen/size_for_17sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/size_for_30dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tanggal_ambil_quiz"
+                            android:layout_marginBottom="@dimen/size_for_12sp"
+                            android:textColor="@color/deep_cerulean_palette"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1 Januari 2020"
+                            android:textColor="@color/deep_cerulean_palette"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/size_for_15sp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/quiz_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/scoring_quiz"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/size_for_15dp"
+                    android:layout_marginEnd="@dimen/size_for_15dp"
+                    android:layout_marginTop="@dimen/size_for_20dp"
+                    android:background="@drawable/rectangle_stroke_tosca_dark"
+                    android:paddingLeft="@dimen/size_for_20dp"
+                    android:paddingRight="@dimen/size_for_20dp"
+                    android:text="Ayo ikuti kuis!"
+                    android:textColor="@color/deep_cerulean_palette"
+                    android:textAllCaps="false" />
+            </RelativeLayout>
+
+        </ScrollView>
+
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

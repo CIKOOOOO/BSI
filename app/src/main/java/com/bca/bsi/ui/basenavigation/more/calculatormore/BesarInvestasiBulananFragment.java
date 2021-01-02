@@ -1,10 +1,9 @@
-package com.bca.bsi.ui.basenavigation.more.CalculatorMore;
+package com.bca.bsi.ui.basenavigation.more.calculatormore;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,7 +98,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
         switch (v.getId()) {
             case R.id.btn_bib_kalkulasi:
-                if(kalkulasi.getText().equals("KALKULASI")){
+                if(kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))){
 
                     ETBIBModalAwal.setEnabled(false);
                     ETBIBTargetHasilInvestasi.setEnabled(false);
@@ -135,7 +134,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
                     hasilBIB.setText(utils.priceFormat(hasilKalkulasiBIB));
 
-                    kalkulasi.setText("RESET");
+                    kalkulasi.setText(getString(R.string.calculator_reset_label));
                 }else {
                     ETBIBModalAwal.setEnabled(true);
                     ETBIBTargetHasilInvestasi.setEnabled(true);
@@ -146,7 +145,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     BIBLabel.setVisibility(View.INVISIBLE);
                     rpLabel.setVisibility(View.INVISIBLE);
                     hasilBIB.setVisibility(View.INVISIBLE);
-                    kalkulasi.setText("KALKULASI");
+                    kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
 
                     ETBIBModalAwal.setText("");
                     ETBIBROR.setText("");

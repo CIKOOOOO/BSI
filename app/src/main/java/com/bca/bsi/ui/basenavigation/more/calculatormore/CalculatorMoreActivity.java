@@ -1,21 +1,13 @@
-package com.bca.bsi.ui.basenavigation.more.CalculatorMore;
+package com.bca.bsi.ui.basenavigation.more.calculatormore;
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import com.bca.bsi.ui.basenavigation.more.MoreFragment;
+import com.bca.bsi.adapter.CalculatorPagerAdapter;
 import com.bca.bsi.utils.BaseActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -33,7 +25,6 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
     private ViewPager viewPager;
     private CalculatorPagerAdapter calculatorPagerAdapter;
     private ImageButton backBtn;
-    private boolean RoRTabEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,17 +54,31 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
         besarRoRTab.setTextColor(Color.WHITE);
 
         select = findViewById(R.id.select);
-        titlePage.setText("Kalkulator Investasi");
+        titlePage.setText(getString(R.string.kalkulator_investasi));
 
         calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),4);
-
         viewPager.setAdapter(calculatorPagerAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                onChageTab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.besarInvestasiBulananTab: {
+    private void onChageTab(int position) {
+        switch (position) {
+            case 0: {
                 select.animate().x(0).setDuration(100);
                 besarInvestasiBulananTab.setTextColor(Color.BLACK);
                 besarHasilInvestasiTab.setTextColor(Color.WHITE);
@@ -83,7 +88,7 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
                 break;
             }
 
-            case R.id.besarHasilInvestasiTab: {
+            case 1: {
                 int size = besarHasilInvestasiTab.getWidth();
                 select.animate().x(size).setDuration(100);
                 besarInvestasiBulananTab.setTextColor(Color.WHITE);
@@ -94,7 +99,7 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
                 break;
             }
 
-            case R.id.durasiInvestasiTab: {
+            case 2: {
                 int size = besarHasilInvestasiTab.getWidth() * 2;
                 select.animate().x(size).setDuration(100);
                 besarInvestasiBulananTab.setTextColor(Color.WHITE);
@@ -105,7 +110,7 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
                 break;
             }
 
-            case R.id.besarRoRTab: {
+            case 3: {
                 int size = besarHasilInvestasiTab.getWidth() * 3;
                 select.animate().x(size).setDuration(100);
                 besarInvestasiBulananTab.setTextColor(Color.WHITE);
@@ -113,6 +118,31 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
                 durasiInvestasiTab.setTextColor(Color.WHITE);
                 besarRoRTab.setTextColor(Color.BLACK);
                 viewPager.setCurrentItem(3);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.besarInvestasiBulananTab: {
+                onChageTab(0);
+                break;
+            }
+
+            case R.id.besarHasilInvestasiTab: {
+                onChageTab(1);
+                break;
+            }
+
+            case R.id.durasiInvestasiTab: {
+                onChageTab(2);
+                break;
+            }
+
+            case R.id.besarRoRTab: {
+                onChageTab(3);
                 break;
             }
 

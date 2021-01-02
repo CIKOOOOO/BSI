@@ -1,6 +1,5 @@
-package com.bca.bsi.ui.basenavigation.more.CalculatorMore;
+package com.bca.bsi.ui.basenavigation.more.calculatormore;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
-import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
@@ -92,7 +90,7 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_bhi_kalkulasi:
-                if (kalkulasi.getText().equals("KALKULASI")) {
+                if (kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))) {
 
                         ETBHIModalAwal.setEnabled(false);
                         ETBHIIvestasiBulanan.setEnabled(false);
@@ -131,7 +129,7 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
                         BHILabel.setVisibility(View.VISIBLE);
                         rpLabel.setVisibility(View.VISIBLE);
                         hasilBHI.setVisibility(View.VISIBLE);
-                        kalkulasi.setText("RESET");
+                        kalkulasi.setText(getString(R.string.calculator_reset_label));
 
 
                 } else {
@@ -151,7 +149,7 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
                     spinnerDurasiTahunBHI.setSelection(0);
                     spinnerDurasiBulanBHI.setSelection(0);
 
-                    kalkulasi.setText("KALKULASI");
+                    kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
                 }
                 break;
         }
