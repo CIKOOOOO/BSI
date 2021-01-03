@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningTopicAdapter;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriAsuransiActivity;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriObligasiActivity;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriReksaDanaActivity;
 import com.bca.bsi.utils.BaseActivity;
@@ -68,7 +69,7 @@ public class TopicListActivity extends BaseActivity implements View.OnClickListe
                         startActivity(intent);
                         break;
                     case 2:
-                        intent = new Intent(getApplicationContext(), MateriReksaDanaActivity.class);
+                        intent = new Intent(getApplicationContext(), MateriAsuransiActivity.class);
                         startActivity(intent);
                         break;
                 }

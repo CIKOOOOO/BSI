@@ -1,16 +1,12 @@
 package com.bca.bsi.ui.basenavigation.more.learningmenu.materi;
 
-import android.animation.ArgbEvaluator;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.viewpager.widget.ViewPager;
@@ -32,7 +28,7 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
     private ViewPager viewPager;
     private LearningMateriAdapter adapter;
     private Button button;
-
+    private ImageView pagination;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +38,7 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
         titlePage = findViewById(R.id.tv_title_toolbar_back);
         backBtn = findViewById(R.id.img_btn_back_toolbar);
         button = findViewById(R.id.quiz_button);
+        pagination = findViewById(R.id.pagination);
 
         titlePage.setText(getString(R.string.reksadana_capslock));
         backBtn.setOnClickListener(this);
@@ -56,7 +53,7 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
                 "Profesional \n 2. Diversifikasi Investasi \n 3. Transparansi \n 4. Dana Investasi yang Terjangkau \n Risiko Reksa Dana: \n 1. Risiko Berkurangnya Unit " +
                 "Penyertaan \n 2. Risiko Perubahan Kondisi Politik dan Ekonomi \n 3. Risiko Likuiditas \n 4. Risiko Nilai Tukar \n 5. Risiko Perubahan Peraturan dan " +
                 "Ketentuan Pajak \n 6. Risiko Pembubaran dan Likuiditas \n\n Informasi Lebih Lanjut:"));
-        models.add(new LearningChapter(R.drawable.img_materi_reksadana_4,"Kuis Interaktif","Mari ikuti kuis untuk mengasah pemahaman Anda terkait Reksa Dana"));
+        models.add(new LearningChapter(R.drawable.img_materi_kuis,"Kuis Interaktif","Mari ikuti kuis untuk mengasah pemahaman Anda terkait Reksa Dana"));
 
         adapter = new LearningMateriAdapter(models,this);
 
@@ -93,7 +90,23 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
 
             @Override
             public void onPageSelected(int position) {
-                if(position == models.size()-2) {
+
+                switch (position){
+                    case 0:
+                        pagination.setImageResource(R.drawable.asset_pagination_1_4);
+                        break;
+                    case 1:
+                        pagination.setImageResource(R.drawable.asset_pagination_2_4);
+                        break;
+                    case 2:
+                        pagination.setImageResource(R.drawable.asset_pagination_3_4);
+                        break;
+                    case 3:
+                        pagination.setImageResource(R.drawable.asset_pagination_4_4);
+                        break;
+                }
+
+                //if(position == models.size()-2) {
                     /*
                     button.setOnClickListener(new View.OnClickListener() {
                                                   @Override
@@ -106,7 +119,7 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
                                                   }
                                               });
                     */
-                }else if(position == models.size() - 1) {
+                //}else if(position == models.size() - 1) {
                     /*
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -119,7 +132,10 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
                         }
                     });
                     */
-                }
+                //}
+
+
+
             }
 
             @Override

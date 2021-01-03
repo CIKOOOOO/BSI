@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
@@ -55,7 +56,7 @@
                     android:lineSpacingExtra="@dimen/size_for_12sp"
                     android:text="Lalalalaallallalalalalalallalalalalalallalalalalalalalalalalallalalallala"
                     android:textColor="@color/gray_palette"
-                    android:textSize="@dimen/size_for_20dp"/>
+                    android:textSize="@dimen/size_for_15dp"/>
 
                 <LinearLayout
                     android:id="@+id/scoring_quiz"
@@ -74,7 +75,7 @@
                             android:layout_width="@dimen/size_for_120dp"
                             android:layout_height="@dimen/size_for_120dp"
                             android:layout_marginStart="@dimen/size_for_20dp"
-                            android:src="@drawable/img_materi_reksadana_1"/>
+                            android:src="@drawable/img_score_4_stars"/>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -158,6 +159,7 @@
 
         </ScrollView>
 
-
     </androidx.cardview.widget.CardView>
+
+
 </LinearLayout>
