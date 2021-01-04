@@ -61,27 +61,6 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
         viewPager.setAdapter(adapter);
         viewPager.setPadding(50,0,50, 0);
 
-        if(button != null){
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(button.getText().toString().equalsIgnoreCase(getString(R.string.klik_disini))){
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_VIEW);
-                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                        intent.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Reksadana"));
-                        startActivity(intent);
-                    }else if(button.getText().toString().equalsIgnoreCase(getString(R.string.ayo_ikuti_kuis))){
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_VIEW);
-                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                        intent.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Obligasi"));
-                        startActivity(intent);
-                    }
-                }
-            });
-        }
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -141,6 +120,34 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Reksadana"));
+                startActivity(intent);
+                */
+                    /*
+                    if(button.getText().toString().equalsIgnoreCase(getString(R.string.klik_disini))){
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                        intent.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Reksadana"));
+                        startActivity(intent);
+                    }else if(button.getText().toString().equalsIgnoreCase(getString(R.string.ayo_ikuti_kuis))){
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                        intent.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Obligasi"));
+                        startActivity(intent);
+                    }
+                    */
             }
         });
     }

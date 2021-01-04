@@ -121,7 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="@string/tahun"
         app:layout_constraintStart_toEndOf="@+id/bror_durasi_tahun"
         app:layout_constraintTop_toTopOf="@+id/bror_durasi_tahun" />
@@ -140,7 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="@string/bulan"
         app:layout_constraintStart_toEndOf="@+id/bror_durasi_bulan"
         app:layout_constraintTop_toTopOf="@+id/bror_durasi_bulan" />

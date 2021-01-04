@@ -78,6 +78,7 @@
     <string name="besar_ror">Besar RoR</string>
     
     <string name="input_tidak_sesuai">Data yang diinput tidak sesuai</string>
+    <string name="ror_bernilai_negatif">RoR bernilai negatif. Proporsi data input tidak sesuai</string>
     <string name="proporsi_input_tidak_sesuai">Proporsi data input tidak sesuai</string>
 
     <string name="reksadana_capslock">REKSA DANA</string>

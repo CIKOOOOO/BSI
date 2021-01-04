@@ -74,7 +74,7 @@ public class LearningMateriAdapter extends PagerAdapter {
             button.setAllCaps(true);
             scoring.setVisibility(View.GONE);
         } else {
-            button.setVisibility(View.GONE);
+            button.setVisibility(View.INVISIBLE);
             scoring.setVisibility(View.GONE);
         }
 

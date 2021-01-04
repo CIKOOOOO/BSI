@@ -122,7 +122,7 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
                     hasilKalkulasiRor = utils.getRor(ETBRORModalAwalDouble,ETBRORInvestasiBulananDouble,ETBRORTargetHasilInvestasiDouble,spinnerDurasiBulanBRORInt,spinnerDurasiTahunBRORInt);
 
                     if (hasilKalkulasiRor == -1) {
-                        hasilBROR.setText(getString(R.string.input_tidak_sesuai));
+                        hasilBROR.setText(getString(R.string.ror_bernilai_negatif));
                     } else if (hasilKalkulasiRor == 123123) {
                         hasilBROR.setText(getString(R.string.proporsi_input_tidak_sesuai));
                     } else {

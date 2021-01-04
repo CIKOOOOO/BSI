@@ -92,44 +92,44 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
             case R.id.btn_bhi_kalkulasi:
                 if (kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))) {
 
-                        ETBHIModalAwal.setEnabled(false);
-                        ETBHIIvestasiBulanan.setEnabled(false);
-                        ETBHIROR.setEnabled(false);
-                        spinnerDurasiBulanBHI.setEnabled(false);
-                        spinnerDurasiTahunBHI.setEnabled(false);
+                    ETBHIModalAwal.setEnabled(false);
+                    ETBHIIvestasiBulanan.setEnabled(false);
+                    ETBHIROR.setEnabled(false);
+                    spinnerDurasiBulanBHI.setEnabled(false);
+                    spinnerDurasiTahunBHI.setEnabled(false);
 
-                        if(ETBHIModalAwal.getText().toString().equals("")){
-                            ETBHIModalAwal.setText("0");
-                        }
+                    if(ETBHIModalAwal.getText().toString().equals("")){
+                        ETBHIModalAwal.setText("0");
+                    }
 
-                        if(ETBHIIvestasiBulanan.getText().toString().equals("")){
-                            ETBHIIvestasiBulanan.setText("0");
-                        }
+                    if(ETBHIIvestasiBulanan.getText().toString().equals("")){
+                        ETBHIIvestasiBulanan.setText("0");
+                    }
 
-                        if(ETBHIROR.getText().toString().equals("")){
-                            ETBHIROR.setText("0");
-                        }
+                    if(ETBHIROR.getText().toString().equals("")){
+                        ETBHIROR.setText("0");
+                    }
 
-                        Utils utils = new Utils();
-                        Double hasilKalkulasiBHI;
-                        Double ETBHIModalAwalDouble = Double.parseDouble(ETBHIModalAwal.getText().toString());
-                        Double ETBHIInvestasiBulananDouble = Double.parseDouble(ETBHIIvestasiBulanan.getText().toString());
-                        Double ETBHIRORDouble = Double.parseDouble(ETBHIROR.getText().toString())/100;
-                        Integer spinnerDurasiBulanBHIInt = Integer.parseInt(spinnerDurasiBulanBHI.getSelectedItem().toString()) ;
-                        Integer spinnerDurasiTahunBHIInt = Integer.parseInt(spinnerDurasiTahunBHI.getSelectedItem().toString());
+                    Utils utils = new Utils();
+                    Double hasilKalkulasiBHI;
+                    Double ETBHIModalAwalDouble = Double.parseDouble(ETBHIModalAwal.getText().toString());
+                    Double ETBHIInvestasiBulananDouble = Double.parseDouble(ETBHIIvestasiBulanan.getText().toString());
+                    Double ETBHIRORDouble = Double.parseDouble(ETBHIROR.getText().toString())/100;
+                    Integer spinnerDurasiBulanBHIInt = Integer.parseInt(spinnerDurasiBulanBHI.getSelectedItem().toString()) ;
+                    Integer spinnerDurasiTahunBHIInt = Integer.parseInt(spinnerDurasiTahunBHI.getSelectedItem().toString());
 
-                        hasilKalkulasiBHI = utils.getTarget(ETBHIModalAwalDouble,ETBHIInvestasiBulananDouble,ETBHIRORDouble,spinnerDurasiBulanBHIInt,spinnerDurasiTahunBHIInt);
-                        //hasilKalkulasiBHI = spinnerDurasiBulanBHIInt;
-                        /*
-                        int hasilKalkulasiBHIInt = (int) Math.round(hasilKalkulasiBHI);
-                        hasilBHI.setText(String.valueOf(hasilKalkulasiBHIInt));
-                        */
-                        hasilBHI.setText(utils.priceFormat(hasilKalkulasiBHI));
+                    hasilKalkulasiBHI = utils.getTarget(ETBHIModalAwalDouble,ETBHIInvestasiBulananDouble,ETBHIRORDouble,spinnerDurasiBulanBHIInt,spinnerDurasiTahunBHIInt);
+                    //hasilKalkulasiBHI = spinnerDurasiBulanBHIInt;
+                    /*
+                    int hasilKalkulasiBHIInt = (int) Math.round(hasilKalkulasiBHI);
+                    hasilBHI.setText(String.valueOf(hasilKalkulasiBHIInt));
+                    */
+                    hasilBHI.setText(utils.priceFormat(hasilKalkulasiBHI));
 
-                        BHILabel.setVisibility(View.VISIBLE);
-                        rpLabel.setVisibility(View.VISIBLE);
-                        hasilBHI.setVisibility(View.VISIBLE);
-                        kalkulasi.setText(getString(R.string.calculator_reset_label));
+                    BHILabel.setVisibility(View.VISIBLE);
+                    rpLabel.setVisibility(View.VISIBLE);
+                    hasilBHI.setVisibility(View.VISIBLE);
+                    kalkulasi.setText(getString(R.string.calculator_reset_label));
 
 
                 } else {
