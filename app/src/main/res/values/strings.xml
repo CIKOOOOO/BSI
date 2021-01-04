@@ -53,6 +53,8 @@
     <string name="info_detail_transaction">Konfirmasi atas investasi pada Efek Reksa Dana yang diterbitkan oleh Bank Kustodian adalah bukti kepemilikan yang sah.</string>
     <string name="info_detail_transaction1">Setiap detail transaksi otomatis tersimpan di Inbox kamu.</string>
     <string name="bca_id_password_empty">BCA ID atau password kosong</string>
+    <string name="internet_down">Pastikan koneksi internet stabil</string>
+    <string name="close">Tutup</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>

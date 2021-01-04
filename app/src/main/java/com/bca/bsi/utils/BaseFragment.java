@@ -1,6 +1,7 @@
 package com.bca.bsi.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,6 +13,7 @@ public class BaseFragment extends Fragment {
 
     public PrefConfig prefConfig;
     public Activity mActivity;
+    public Context mContext;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.mContext = view.getContext();
         prefConfig = new PrefConfig(view.getContext());
     }
 

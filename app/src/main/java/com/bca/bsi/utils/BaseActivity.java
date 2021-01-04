@@ -1,5 +1,8 @@
 package com.bca.bsi.utils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +13,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bca.bsi.R;
+import com.bca.bsi.utils.dialog.CustomDialog;
 import com.google.android.material.snackbar.Snackbar;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements CustomDialog.onClick {
 
     public PrefConfig prefConfig;
 
     private View view;
+    private CustomDialog customDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,5 +43,28 @@ public class BaseActivity extends AppCompatActivity {
                 .setTextColor(getResources().getColor(R.color.white_palette))
                 .setDuration(3000);
         snackbar.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isNetworkAvailable()) {
+            customDialog = new CustomDialog(getString(R.string.internet_down), getString(R.string.close), this);
+            customDialog.show(getSupportFragmentManager(), "");
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public void onDismissButton() {
+        if (customDialog != null && customDialog.getTag() != null) {
+            customDialog.dismiss();
+        }
     }
 }
