@@ -68,6 +68,6 @@ public class PromoInformationFragment extends BaseFragment implements IPromoInfo
         Intent intent = new Intent(mActivity, DetailPromoNewsActivity.class);
         intent.putExtra(DetailPromoNewsActivity.TYPE, Type.PROMO);
         intent.putExtra(DetailPromoNewsActivity.DATA, data);
-        mActivity.startActivity(intent);
+//        mActivity.startActivity(intent);
     }
 }
