@@ -21,12 +21,12 @@
 
         <ImageView
             android:id="@+id/img_view_close_custom_dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/size_for_70dp"
+            android:layout_height="@dimen/size_for_70dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/size_for_20dp"
             android:layout_marginBottom="@dimen/size_for_10dp"
-            android:background="@drawable/ic_close_red" />
+            tools:background="@drawable/ic_close_red" />
 
         <TextView
             android:id="@+id/tv_info_custom_dialog"

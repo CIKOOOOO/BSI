@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bca.bsi.R;
 import com.bca.bsi.utils.dialog.CustomDialog;
@@ -49,7 +50,8 @@ public class BaseActivity extends AppCompatActivity implements CustomDialog.onCl
     protected void onResume() {
         super.onResume();
         if (!isNetworkAvailable()) {
-            customDialog = new CustomDialog(getString(R.string.internet_down), getString(R.string.close), this);
+            customDialog = new CustomDialog(getString(R.string.internet_down), getString(R.string.close)
+                    , ContextCompat.getDrawable(this, R.drawable.ic_close_red), this);
             customDialog.show(getSupportFragmentManager(), "");
         }
     }
