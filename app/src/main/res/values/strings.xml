@@ -52,6 +52,7 @@
     <string name="product_detail">Detail Produk</string>
     <string name="info_detail_transaction">Konfirmasi atas investasi pada Efek Reksa Dana yang diterbitkan oleh Bank Kustodian adalah bukti kepemilikan yang sah.</string>
     <string name="info_detail_transaction1">Setiap detail transaksi otomatis tersimpan di Inbox kamu.</string>
+    <string name="bca_id_password_empty">BCA ID atau password kosong</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>
@@ -92,14 +93,19 @@
 
     <!-- SHARED PREFERENCES ASSET -->
     <string name="pref_file">pref_file</string>
-    <string name="pref_login_status">pref_login_status</string>
-    <string name="pref_uid">pref_uid</string>
+    <string name="pref_bca_id">pref_bca_id</string>
     <string name="pref_name">pref_name</string>
     <string name="pref_email">pref_email</string>
-    <string name="pref_phone_number">pref_phone_number</string>
-    <string name="pref_main_address">pref_main_address</string>
+    <string name="pref_profile_risiko">pref_profile_risiko</string>
     <string name="pref_token_fcm">pref_token_fcm</string>
     <string name="pref_account_number">pref_account_number</string>
+    <string name="pref_token_access">pref_token_access</string>
+
+    <!--FORUM USER-->
+    <string name="pref_profile_id">pref_profile_id</string>
+    <string name="pref_username">pref_username</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_calculator_more">CalculatorMoreActivity</string>
