@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
-import com.bca.bsi.ui.basenavigation.transaction.detail.DetailTransactionActivity;
+import com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
@@ -88,9 +88,10 @@ public class ReksadanaProductFragment extends BaseFragment implements IReksaDana
 
     @Override
     public void onReksaDanaClick(Product.ReksaDana reksaDana) {
-        Intent intent = new Intent(mActivity, DetailTransactionActivity.class);
-        intent.putExtra(DetailTransactionActivity.TYPE, Type.REKSA_DANA);
-        intent.putExtra(DetailTransactionActivity.DATA, Utils.toJSON(reksaDana));
+        Intent intent = new Intent(mActivity, DetailProductTransactionActivity.class);
+        intent.putExtra(DetailProductTransactionActivity.PRODUCT_TYPE, Type.REKSA_DANA);
+        intent.putExtra(DetailProductTransactionActivity.SALES_TYPE, Type.PURCHASING);
+        intent.putExtra(DetailProductTransactionActivity.DATA, Utils.toJSON(reksaDana));
         startActivity(intent);
     }
 }

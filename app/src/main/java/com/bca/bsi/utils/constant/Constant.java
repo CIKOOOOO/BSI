@@ -12,6 +12,7 @@ public class Constant {
     public static final long MAX_USAGE_DURATION_APPS = 600000;
 
     public static final String EMPTY = "";
+    public static final String DATE_FORMAT_1 = "dd/MM/yyyy";
 
     public static final String[] PRODUCT_TITLE = {"Reksa Dana", "Obligasi", "Asuransi"};
     private static final String[] PRODUCT_DESCRIPTION = {"Investasi Dana Terjangkau", "Investasi Berpendapatan Tetap", "Perlindungan Jiwa, Kesehatan, dan Harta Benda"};

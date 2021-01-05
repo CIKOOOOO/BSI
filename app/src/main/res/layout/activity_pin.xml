@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rectangle_gradient_background"
+    tools:context=".ui.pin_screen.PinActivity">
+
+    <include
+        android:id="@+id/include5"
+        layout="@layout/toolbar_back" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="@dimen/size_for_30dp"
+        android:layout_height="@dimen/size_for_30dp"
+        android:layout_marginTop="@dimen/size_for_40dp"
+        android:background="@drawable/ic_padlock_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include5" />
+
+    <com.mukesh.OtpView
+        android:id="@+id/otp_view_pin_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:textColor="@android:color/white"
+        app:OtpItemCount="6"
+        app:OtpViewType="line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+</androidx.constraintlayout.widget.ConstraintLayout>
