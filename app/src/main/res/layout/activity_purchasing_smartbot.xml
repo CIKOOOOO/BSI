@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity">
+
+    <include
+        android:id="@+id/toolbar_back"
+        layout="@layout/toolbar_back" />
+
+    <TextView
+        android:id="@+id/tv_title_detail_produk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:text="Detail Produk Rekomendasi SmartBot"
+        android:textColor="@color/black_palette"
+        android:textSize="@dimen/size_for_20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_back" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_product_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_detail_produk" />
+
+    <TextView
+        android:id="@+id/tv_nominal_pembelian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:text="Nominal Pembelian"
+        android:textColor="@color/black_palette"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/recycler_product_main"
+        app:layout_constraintTop_toBottomOf="@id/recycler_product_main" />
+
+    <EditText
+        android:id="@+id/et_nominal_pembelian_robo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_5dp"
+        app:layout_constraintEnd_toEndOf="@id/recycler_product_main"
+        app:layout_constraintStart_toStartOf="@id/recycler_product_main"
+        app:layout_constraintTop_toBottomOf="@id/tv_nominal_pembelian" />
+
+    <TextView
+        android:id="@+id/tv_min_pembelian_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:text="Minimum Pembelian : Rp."
+        android:textColor="@color/black_palette"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/et_nominal_pembelian_robo"
+        app:layout_constraintTop_toBottomOf="@+id/et_nominal_pembelian_robo" />
+
+    <TextView
+        android:id="@+id/tv_min_pembelian_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:text="10.000"
+        android:textColor="@color/black_palette"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/tv_min_pembelian_title"
+        app:layout_constraintTop_toBottomOf="@+id/et_nominal_pembelian_robo" />
+
+    <TextView
+        android:id="@+id/tv_lanjut"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_50dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:background="@drawable/rectangle_yellow"
+        android:gravity="center"
+        android:text="LANJUT"
+        android:textColor="@color/black_palette"
+        android:textFontWeight="600"
+        android:textSize="@dimen/size_for_17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

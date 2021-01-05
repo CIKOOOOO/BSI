@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_palette">
+
+    <TextView
+        android:id="@+id/tv_percent_produk"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="@dimen/size_for_17dp"
+        android:background="@drawable/rectangle_stroke_sherpa_blue"
+        android:gravity="center"
+        android:text="70%"
+        android:textColor="@color/black_palette"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_jenis_reksadana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_10dp"
+        android:layout_marginTop="@dimen/size_for_5dp"
+        android:background="@drawable/rectangle_rounded_sherpa_blue"
+        android:paddingHorizontal="@dimen/size_for_10dp"
+        android:paddingVertical="@dimen/size_for_3dp"
+        android:text="Reksadana Saham"
+        android:textColor="@color/white_palette"
+        android:textSize="@dimen/size_for_12sp"
+        app:layout_constraintStart_toEndOf="@id/tv_percent_produk"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_produk_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ashmore Dana Ekuitas Nusantara"
+        android:textColor="@color/black_palette"
+        android:textSize="@dimen/size_for_15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tv_jenis_reksadana"
+        app:layout_constraintTop_toBottomOf="@id/tv_jenis_reksadana" />
+
+    <ImageView
+        android:id="@+id/calendar_logo"
+        android:layout_width="@dimen/size_for_15dp"
+        android:layout_height="@dimen/size_for_15dp"
+        android:layout_marginTop="@dimen/size_for_2dp"
+        android:src="@drawable/img_calendar_logo"
+        app:layout_constraintStart_toStartOf="@id/tv_produk_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_produk_name" />
+
+    <TextView
+        android:id="@+id/tv_produk_last_date"
+        android:textColor="@color/black_palette"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_5dp"
+        android:text="12/12/2020"
+        android:textSize="@dimen/size_for_12sp"
+        app:layout_constraintStart_toEndOf="@id/calendar_logo"
+        app:layout_constraintTop_toTopOf="@id/calendar_logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_10dp"
+        android:background="@drawable/line_gray"
+        app:layout_constraintTop_toBottomOf="@id/tv_percent_produk" />
+
+    <TextView
+        android:id="@+id/tv_kinerja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kinerja 1 BLN : "
+        android:textSize="13sp"
+        app:layout_constraintTop_toBottomOf="@id/calendar_logo"
+        app:layout_constraintStart_toStartOf="@id/tv_produk_name"
+        android:layout_marginTop="@dimen/size_for_2dp"
+        android:textColor="@color/black_palette"/>
+
+    <TextView
+        android:id="@+id/tv_nab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NAB/UNIT : "
+        android:textSize="13sp"
+        app:layout_constraintTop_toBottomOf="@id/calendar_logo"
+        app:layout_constraintStart_toEndOf="@id/tv_kinerja"
+        android:layout_marginStart="@dimen/size_for_70dp"
+        android:layout_marginTop="@dimen/size_for_2dp"
+        android:textColor="@color/black_palette"/>
+
+    <TextView
+        android:id="@+id/tv_kinerja_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+14,13%"
+        android:textSize="13sp"
+        app:layout_constraintTop_toBottomOf="@id/calendar_logo"
+        app:layout_constraintStart_toEndOf="@id/tv_kinerja"
+        android:layout_marginTop="@dimen/size_for_2dp"
+        android:textColor="@color/green_base_palette"/>
+
+    <TextView
+        android:id="@+id/tv_nab_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp. 1.200"
+        android:textSize="13sp"
+        app:layout_constraintTop_toBottomOf="@id/calendar_logo"
+        app:layout_constraintStart_toEndOf="@id/tv_nab"
+        android:layout_marginTop="@dimen/size_for_2dp"
+        android:textColor="@color/blue_stone_palette"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
