@@ -3,11 +3,15 @@
     android:shape="rectangle">
 
     <stroke
-        android:width="@dimen/size_for_2dp"
+        android:width="@dimen/size_for_1.2dp"
         android:color="@color/deep_cerulean_palette" />
 
     <corners android:radius="@dimen/size_for_10dp" />
 
     <solid android:color="@android:color/white" />
+
+    <size
+        android:width="@dimen/size_for_30dp"
+        android:height="@dimen/size_for_30dp"/>
 
 </shape>

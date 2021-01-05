@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +53,85 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
         ETDIModalAwal = view.findViewById(R.id.et_di_modal_awal);
         ETDIROR = view.findViewById(R.id.et_di_ror);
         ETDITargetHasilInvestasi = view.findViewById(R.id.et_di_target_hasil_investasi);
+
+        ETDITargetHasilInvestasi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(ETDITargetHasilInvestasi.getText().length()==1 && ETDITargetHasilInvestasi.getText().toString().equals("0")){
+                    ETDITargetHasilInvestasi.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETDIModalAwal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(ETDIModalAwal.getText().length()==1 && ETDIModalAwal.getText().toString().equals("0")){
+                    ETDIModalAwal.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETDIInvestasiBulanan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(ETDIInvestasiBulanan.getText().length()==1 && ETDIInvestasiBulanan.getText().toString().equals("0")){
+                    ETDIInvestasiBulanan.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETDIROR.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                char zero = '0';
+                if(ETDIROR.getText().length()>1 && ETDIROR.getText().charAt(0)==zero){
+                    if(ETDIROR.getText().length()==2 && !ETDIROR.getText().toString().equals("0.")){
+                        ETDIROR.setText("");
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         DILabel.setVisibility(View.INVISIBLE);
         hasilDI.setVisibility(View.INVISIBLE);

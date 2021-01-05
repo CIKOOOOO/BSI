@@ -3,6 +3,7 @@ package com.bca.bsi.ui.basenavigation.more.learningmenu.materi;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,12 +15,19 @@ import androidx.viewpager.widget.ViewPager;
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningMateriAdapter;
 import com.bca.bsi.model.LearningChapter;
+import com.bca.bsi.ui.basenavigation.more.calculatormore.CalculatorMoreActivity;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.CustomViewPager;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.constant.SwipeDirection;
+import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MateriReksaDanaActivity extends BaseActivity implements View.OnClickListener {
+import static com.bca.bsi.utils.dummydata.DummyData.getLearningChapterRDList;
+
+public class MateriReksaDanaActivity extends BaseActivity implements View.OnClickListener, LearningMateriAdapter.onItemClick {
 
     private ImageButton backBtn;
     private TextView titlePage;
@@ -30,6 +38,9 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
     private Button button;
     private ImageView pagination;
 
+    private int currentPage;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +48,7 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
 
         titlePage = findViewById(R.id.tv_title_toolbar_back);
         backBtn = findViewById(R.id.img_btn_back_toolbar);
-        button = findViewById(R.id.quiz_button);
+        //button = findViewById(R.id.quiz_button);
         pagination = findViewById(R.id.pagination);
 
         titlePage.setText(getString(R.string.reksadana_capslock));
@@ -55,7 +66,8 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
                 "Ketentuan Pajak \n 6. Risiko Pembubaran dan Likuiditas \n\n Informasi Lebih Lanjut:"));
         models.add(new LearningChapter(R.drawable.img_materi_kuis,"Kuis Interaktif","Mari ikuti kuis untuk mengasah pemahaman Anda terkait Reksa Dana"));
 
-        adapter = new LearningMateriAdapter(models,this);
+
+        adapter = new LearningMateriAdapter(models,this, this);
 
         viewPager = findViewById(R.id.viewPagerRDMateri);
         viewPager.setAdapter(adapter);
@@ -69,7 +81,7 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
 
             @Override
             public void onPageSelected(int position) {
-
+               currentPage = position;
                 switch (position){
                     case 0:
                         pagination.setImageResource(R.drawable.asset_pagination_1_4);
@@ -84,70 +96,11 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
                         pagination.setImageResource(R.drawable.asset_pagination_4_4);
                         break;
                 }
-
-                //if(position == models.size()-2) {
-                    /*
-                    button.setOnClickListener(new View.OnClickListener() {
-                                                  @Override
-                                                  public void onClick(View v) {
-                                                      Intent intent = new Intent();
-                                                      intent.setAction(Intent.ACTION_VIEW);
-                                                      intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                                                      intent.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Reksadana"));
-                                                      startActivity(intent);
-                                                  }
-                                              });
-                    */
-                //}else if(position == models.size() - 1) {
-                    /*
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent();
-                            intent.setAction(Intent.ACTION_VIEW);
-                            intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                            intent.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Obligasi"));
-                            startActivity(intent);
-                        }
-                    });
-                    */
-                //}
-
-
-
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
 
-            }
-        });
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Reksadana"));
-                startActivity(intent);
-                */
-                    /*
-                    if(button.getText().toString().equalsIgnoreCase(getString(R.string.klik_disini))){
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_VIEW);
-                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                        intent.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Reksadana"));
-                        startActivity(intent);
-                    }else if(button.getText().toString().equalsIgnoreCase(getString(R.string.ayo_ikuti_kuis))){
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_VIEW);
-                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                        intent.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Obligasi"));
-                        startActivity(intent);
-                    }
-                    */
             }
         });
     }
@@ -157,6 +110,26 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
         switch (v.getId()){
             case R.id.img_btn_back_toolbar:
                 onBackPressed();
+                break;
+        }
+    }
+
+    @Override
+    public void onClick() {
+        Log.e("asd", currentPage+"my current page ");
+        switch (currentPage){
+            case 2 :
+                Log.e("asd","hit");
+                Intent intentBrowse = new Intent();
+                intentBrowse.setAction(Intent.ACTION_VIEW);
+                intentBrowse.addCategory(Intent.CATEGORY_BROWSABLE);
+                intentBrowse.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Reksadana"));
+                startActivity(intentBrowse);
+                break;
+
+            case 3:
+                Intent intent = new Intent(this, KuisReksaDanaActivity.class);
+                startActivity(intent);
                 break;
         }
     }

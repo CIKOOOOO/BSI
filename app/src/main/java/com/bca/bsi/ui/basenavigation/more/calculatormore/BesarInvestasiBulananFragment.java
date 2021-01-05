@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,7 @@ import com.bca.bsi.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BesarInvestasiBulananFragment extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener {
+public class BesarInvestasiBulananFragment extends BaseFragment implements View.OnClickListener {
 
     private Spinner spinnerDurasiTahunBIB;
     private Spinner spinnerDurasiBulanBIB;
@@ -84,12 +86,72 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBIB.setAdapter(adapterBulan);
 
-        ETBIBModalAwal.setOnFocusChangeListener(this);
+        //ETBIBModalAwal.setOnFocusChangeListener(this);
+        ETBIBModalAwal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(ETBIBModalAwal.getText().length()==1 && ETBIBModalAwal.getText().toString().equals("0")){
+                    ETBIBModalAwal.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETBIBTargetHasilInvestasi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(ETBIBTargetHasilInvestasi.getText().length()==1 && ETBIBTargetHasilInvestasi.getText().toString().equals("0")){
+                    ETBIBTargetHasilInvestasi.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETBIBROR.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                char zero = '0';
+                if(ETBIBROR.getText().length()>1 && ETBIBROR.getText().charAt(0)==zero){
+                    if(ETBIBROR.getText().length()==2 && !ETBIBROR.getText().toString().equals("0.")){
+                        ETBIBROR.setText("");
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         BIBLabel.setVisibility(View.INVISIBLE);
         rpLabel.setVisibility(View.INVISIBLE);
         hasilBIB.setVisibility(View.INVISIBLE);
+
+
 
     }
 
@@ -159,10 +221,11 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
     }
 
+    /*
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if(!hasFocus){
-
+    */
 
 
             //ETBIBModalAwal.setText("88888888888");
@@ -175,6 +238,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     break;
             }
             */
-        }
-    }
+      //  }
+  //  }
+
 }

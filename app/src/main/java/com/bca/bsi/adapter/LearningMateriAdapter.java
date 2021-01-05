@@ -1,9 +1,8 @@
 package com.bca.bsi.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bca.bsi.R;
@@ -27,9 +25,15 @@ public class LearningMateriAdapter extends PagerAdapter {
     private List<LearningChapter> models;
     private LayoutInflater layoutInflater;
     private Context context;
+    private onItemClick onItemClick;
 
-    public LearningMateriAdapter(List<LearningChapter> models, Context context) {
+    public interface onItemClick{
+        void onClick();
+    }
+
+    public LearningMateriAdapter(List<LearningChapter> models, Context context, onItemClick onItemClick) {
         this.models = models;
+        this.onItemClick = onItemClick;
         this.context = context;
     }
 
@@ -60,6 +64,7 @@ public class LearningMateriAdapter extends PagerAdapter {
         button = view.findViewById(R.id.quiz_button);
         scoring = view.findViewById(R.id.scoring_quiz);
 
+
         if(position == models.size() - 1) {
             button.setVisibility(View.VISIBLE);
             scoring.setVisibility(View.VISIBLE);
@@ -78,17 +83,25 @@ public class LearningMateriAdapter extends PagerAdapter {
             scoring.setVisibility(View.GONE);
         }
 
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                onItemClick.onClick();
+                Log.e("asd","button adapter click");
+
                 if(position == models.size() - 2) {
                     //button.setTextColor(Color.WHITE);
                 }else if (position == models.size() - 1) {
+                    /*
                     button.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_stroke_tosca_dark_filled));
                     button.setTextColor(Color.WHITE);
+                    */
                 }
             }
         });
+
 
         imageView.setImageResource(models.get(position).getImage());
         title.setText(models.get(position).getTitle());

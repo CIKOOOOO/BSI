@@ -76,9 +76,10 @@
     <string name="besar_investasi_bulanan">Besar Investasi\nBulanan</string>
     <string name="durasi_investasi">Durasi\nInvestasi</string>
     <string name="besar_ror">Besar RoR</string>
-    
+
     <string name="input_tidak_sesuai">Data yang diinput tidak sesuai</string>
-    <string name="ror_bernilai_negatif">RoR bernilai negatif. Proporsi data input tidak sesuai</string>
+    <string name="ror_bernilai_negatif">RoR bernilai negatif</string>
+    <string name="ror_bernilai_lebih_dari_1000_persen">RoR bernilai lebih dari 1000%</string>
     <string name="proporsi_input_tidak_sesuai">Proporsi data input tidak sesuai</string>
 
     <string name="reksadana_capslock">REKSA DANA</string>
@@ -107,6 +108,10 @@
     <string name="tanggal_ambil_quiz">Tanggal ambil quiz:</string>
 
     <string name="klik_disini">Klik Disini</string>
+
+    <string name="kuis_capslock">KUIS</string>
+    <string name="lihat_penjelasan">Lihat Penjelasan</string>
+    <string name="soal_berikutnya">Soal Berikutnya</string>
     <!--END HERE-->
 
 

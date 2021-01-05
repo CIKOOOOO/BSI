@@ -1,5 +1,7 @@
 package com.bca.bsi.utils.dummydata;
 
+import com.bca.bsi.R;
+import com.bca.bsi.model.LearningChapter;
 import com.bca.bsi.model.Product;
 
 import java.util.ArrayList;
@@ -13,6 +15,13 @@ public class DummyData {
     private static final double[] kinerja = {14.13, 14.89, 10.13};
     private static final double[] nab = {1462.81, 1575.39, 1672.98};
 
+    private static final int[] learningChapterRDImage = {R.drawable.img_materi_reksadana_1,R.drawable.img_materi_reksadana_2,R.drawable.img_materi_reksadana_3,R.drawable.img_materi_kuis};
+    private static final String[] learningChapterRDTitle = {"Reksa Dana", "Jenis Produk Reksa Dana", "Manfaat & Risiko Reksa Dana", "Kuis Interaktif"};
+    private static final String[] learningChapterRDExplanation = {"Merupakan wadah yang dipergunakan untuk menghitung dana dari masyarakat pemodal " +
+            "untuk selanjutnya diinvestasikan dalam portofolio Efek oleh Manajer Investasi", "Sangat Konservatif: \n \u25CF Reksa Dana Pasar Uang \n\n Konservatif: " +
+            "\n \u25CF Reksa Dana Pendapatan Tetap \n \u25CF Reksa Dana Terproteksi \n Moderat: \n \u25CF Reksa Dana Campuran \n Agresif: \n \u25CF Reksa Dana Saham"};
+
+
     public static List<Product.ReksaDana> getReksaDanaDummyList() {
         List<Product.ReksaDana> reksaDanaList = new ArrayList<>();
         for (int i = 0; i < title.length; i++) {
@@ -20,6 +29,15 @@ public class DummyData {
             reksaDanaList.add(reksaDana);
         }
         return reksaDanaList;
+    }
+
+    public static List<LearningChapter> getLearningChapterRDList() {
+        List<LearningChapter> rdChapterList = new ArrayList<>();
+        for (int i = 0; i < learningChapterRDTitle.length; i++) {
+            LearningChapter rdChapter = new LearningChapter(learningChapterRDImage[i],learningChapterRDTitle[i],learningChapterRDExplanation[i]);
+            rdChapterList.add(rdChapter);
+        }
+        return rdChapterList;
     }
 
 }

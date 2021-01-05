@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +83,63 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBROR.setAdapter(adapterBulan);
 
+        ETBRORTargetHasilInvestasi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(ETBRORTargetHasilInvestasi.getText().length()==1 && ETBRORTargetHasilInvestasi.getText().toString().equals("0")){
+                    ETBRORTargetHasilInvestasi.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETBRORModalAwal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(ETBRORModalAwal.getText().length()==1 && ETBRORModalAwal.getText().toString().equals("0")){
+                    ETBRORModalAwal.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETBRORInvestasiBulanan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(ETBRORInvestasiBulanan.getText().length()==1 && ETBRORInvestasiBulanan.getText().toString().equals("0")){
+                    ETBRORInvestasiBulanan.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         BRORLabel.setVisibility(View.INVISIBLE);
         persenLabel.setVisibility(View.INVISIBLE);
         hasilBROR.setVisibility(View.INVISIBLE);
@@ -124,7 +183,7 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
                     if (hasilKalkulasiRor == -1) {
                         hasilBROR.setText(getString(R.string.ror_bernilai_negatif));
                     } else if (hasilKalkulasiRor == 123123) {
-                        hasilBROR.setText(getString(R.string.proporsi_input_tidak_sesuai));
+                        hasilBROR.setText(getString(R.string.ror_bernilai_lebih_dari_1000_persen));
                     } else {
                         hasilKalkulasiRor*=100;
                         hasilKalkulasiRor = utils.roundDouble(hasilKalkulasiRor,4);

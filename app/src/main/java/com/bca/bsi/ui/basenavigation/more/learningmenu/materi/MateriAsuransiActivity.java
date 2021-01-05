@@ -3,8 +3,11 @@ package com.bca.bsi.ui.basenavigation.more.learningmenu.materi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,12 +17,14 @@ import android.widget.TextView;
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningMateriAdapter;
 import com.bca.bsi.model.LearningChapter;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.KuisAsuransiActivity;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity;
 import com.bca.bsi.utils.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MateriAsuransiActivity extends BaseActivity implements View.OnClickListener {
+public class MateriAsuransiActivity extends BaseActivity implements View.OnClickListener, LearningMateriAdapter.onItemClick {
 
     private ImageButton backBtn;
     private TextView titlePage;
@@ -29,6 +34,8 @@ public class MateriAsuransiActivity extends BaseActivity implements View.OnClick
     private LearningMateriAdapter adapter;
     private Button button;
     private ImageView pagination;
+
+    private int currentPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +65,7 @@ public class MateriAsuransiActivity extends BaseActivity implements View.OnClick
                 " terjadi. \n\nc. Menjadi salah satu wujud perencanaan keuangan jangka panjang untuk memenuhi kebutuhan finansial hidup di masa yang akan datang.\n\n Informasi Lebih Lanjut:"));
         models.add(new LearningChapter(R.drawable.img_materi_kuis,"Kuis Interaktif","Mari ikuti kuis untuk mengasah pemahaman Anda terkait Asuransi"));
 
-        adapter = new LearningMateriAdapter(models,this);
+        adapter = new LearningMateriAdapter(models,this, this);
 
         viewPager = findViewById(R.id.viewPagerAsuransiMateri);
         viewPager.setAdapter(adapter);
@@ -72,6 +79,7 @@ public class MateriAsuransiActivity extends BaseActivity implements View.OnClick
 
             @Override
             public void onPageSelected(int position) {
+                currentPage = position;
                 switch (position){
                     case 0:
                         pagination.setImageResource(R.drawable.asset_pagination_1_4);
@@ -100,6 +108,25 @@ public class MateriAsuransiActivity extends BaseActivity implements View.OnClick
         switch (v.getId()){
             case R.id.img_btn_back_toolbar:
                 onBackPressed();
+                break;
+        }
+    }
+
+    @Override
+    public void onClick() {
+        switch (currentPage){
+            case 2 :
+                Log.e("asd","hit");
+                Intent intentBrowse = new Intent();
+                intentBrowse.setAction(Intent.ACTION_VIEW);
+                intentBrowse.addCategory(Intent.CATEGORY_BROWSABLE);
+                intentBrowse.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Bancassurance"));
+                startActivity(intentBrowse);
+                break;
+
+            case 3:
+                Intent intent = new Intent(this, KuisAsuransiActivity.class);
+                startActivity(intent);
                 break;
         }
     }

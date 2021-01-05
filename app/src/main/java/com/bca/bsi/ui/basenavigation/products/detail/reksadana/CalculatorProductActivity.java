@@ -3,6 +3,7 @@ package com.bca.bsi.ui.basenavigation.products.detail.reksadana;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import com.bca.bsi.adapter.CalculatorProductPagerAdapter;
 import com.bca.bsi.utils.BaseActivity;
 import androidx.viewpager.widget.ViewPager;
 

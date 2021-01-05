@@ -139,7 +139,6 @@
 
                 </LinearLayout>
 
-
                 <Button
                     android:id="@+id/quiz_button"
                     android:layout_width="match_parent"
@@ -155,6 +154,7 @@
                     android:text="Ayo ikuti kuis!"
                     android:textColor="@color/deep_cerulean_palette"
                     android:textAllCaps="false" />
+
             </RelativeLayout>
 
         </ScrollView>

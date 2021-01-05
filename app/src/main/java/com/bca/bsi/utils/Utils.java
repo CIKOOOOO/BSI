@@ -78,24 +78,6 @@ public class Utils {
         return gson.toJson(o);
     }
 
-    public static void cekFormatInputNumber(EditText editText, String inputString) {
-        String outputString = "";
-
-        if(!inputString.equals("") || !inputString.isEmpty()){
-
-            if(inputString.length()>1){
-                if(inputString.charAt(1)!=0){
-                    if(Integer.parseInt(inputString)>=0){
-                        outputString = inputString;
-                    }
-                }
-            }
-        }
-
-        editText.setText(outputString);
-
-    }
-
 
     //================================ Hitung Target ====================================
     public double getTarget(double initialCost, double monthlyCost, double ror, int durationMonth, int durationYear){
