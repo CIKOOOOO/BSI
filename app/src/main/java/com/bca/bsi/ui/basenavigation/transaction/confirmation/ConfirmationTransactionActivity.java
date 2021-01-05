@@ -14,8 +14,6 @@ import com.bca.bsi.ui.pin_screen.PinActivity;
 import com.bca.bsi.utils.BaseActivity;
 
 public class ConfirmationTransactionActivity extends BaseActivity implements View.OnClickListener {
-
-
     private TextView tvTransactionType, tvNominalPembelian, tvNominalBiayaPembelian, tvTotalPembelian, tvRekeningSumberDana;
     private CheckBox cbConfirmation;
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/white_palette"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/recycler_et_new_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:background="@drawable/rectangle_rounded_stroke_white_welma"
+        android:gravity="top|start"
+        android:hint="@string/hint_share_something"
+        android:minLines="3"
+        android:padding="@dimen/size_for_10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/recycler_img_btn_gallery_new_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_5dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:background="@drawable/rectangle_rounded_orange_light_5dp"
+        android:padding="@dimen/size_for_10dp"
+        android:src="@drawable/ic_gallery_black"
+        app:layout_constraintStart_toStartOf="@id/recycler_et_new_post"
+        app:layout_constraintTop_toBottomOf="@id/recycler_et_new_post" />
+
+    <TextView
+        android:id="@+id/recycler_tv_post_new_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_rounded_orange_light_5dp"
+        android:paddingStart="@dimen/size_for_20dp"
+        android:paddingTop="@dimen/size_for_10dp"
+        android:paddingEnd="@dimen/size_for_20dp"
+        android:paddingBottom="@dimen/size_for_10dp"
+        android:text="@string/post"
+        android:textAllCaps="false"
+        android:textColor="@color/black_palette"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/recycler_et_new_post"
+        app:layout_constraintTop_toTopOf="@id/recycler_img_btn_gallery_new_post" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0.5dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_marginBottom="@dimen/size_for_2dp"
+        android:background="@color/gray_palette"
+        android:elevation="@dimen/size_for_2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_post_new_post" />
+</androidx.constraintlayout.widget.ConstraintLayout>

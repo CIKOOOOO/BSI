@@ -55,6 +55,11 @@
     <string name="bca_id_password_empty">BCA ID atau password kosong</string>
     <string name="internet_down">Pastikan koneksi internet stabil</string>
     <string name="close">Tutup</string>
+    <string name="view_more">Lihat Selengkapnya</string>
+    <string name="my_transaction">Transaksiku</string>
+    <string name="copy_transaction">Salin Transaksi</string>
+    <string name="hint_share_something">Share something insightful...</string>
+    <string name="post">Post</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>

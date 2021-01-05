@@ -19,6 +19,7 @@ public class Constant {
     private static final String[] PRODUCT_DESCRIPTION = {"Investasi Dana Terjangkau", "Investasi Berpendapatan Tetap", "Perlindungan Jiwa, Kesehatan, dan Harta Benda"};
     private static final int[] PRODUCT_IMAGE = {R.drawable.img_asset_reksa_dana, R.drawable.img_asset_obligasi, R.drawable.img_asset_asuransi};
 
+    public static final String[] FORUM_MENU = {"Trending", "Strategy", "Share Trade", "News", "Timeline"};
 
     public static List<Object> getProductTypeList() {
         List<Object> productTypeList = new ArrayList<>();

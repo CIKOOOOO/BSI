@@ -24,7 +24,6 @@ public class SplashActivity extends BaseActivity implements ISplashCallback {
     }
 
     private void initVar() {
-
         viewModel = new ViewModelProvider(this).get(SplashViewModel.class);
         viewModel.setCallback(this);
 
