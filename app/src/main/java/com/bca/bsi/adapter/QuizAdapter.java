@@ -32,6 +32,8 @@ public class QuizAdapter extends PagerAdapter {
         void onClick();
     }
 
+    
+
     @Override
     public int getCount() {
         return 6;
@@ -57,6 +59,7 @@ public class QuizAdapter extends PagerAdapter {
 
         final TextView noSoal;
         final TextView pertanyaan;
+        final Button next;
         final LinearLayout pilganA;
         final TextView pilganAOpsi;
         TextView pilganAText;
@@ -67,7 +70,7 @@ public class QuizAdapter extends PagerAdapter {
         final TextView pilganCOpsi;
         TextView pilganCText;
         final Button penjelasan;
-        final Button next;
+
 
         noSoal = view.findViewById(R.id.question_number);
         pertanyaan = view.findViewById(R.id.pertanyaan);

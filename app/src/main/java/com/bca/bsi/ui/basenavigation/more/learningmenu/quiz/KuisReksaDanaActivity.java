@@ -75,6 +75,11 @@ public class KuisReksaDanaActivity extends BaseActivity implements View.OnClickL
                         break;
                     case 5:
                         pagination.setImageResource(R.drawable.asset_pagination_6_6);
+                        //viewPager.setCurrentItem(currentPage);
+                        //adapter.notifyDataSetChanged();
+                        adapter.startUpdate(viewPager);
+                        adapter.instantiateItem(viewPager,currentPage);
+                        //adapter.instantiateItem(viewPager,currentPage);
                         break;
                 }
             }
