@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.core.widget.NestedScrollView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,6 +32,7 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
     private TextView rorLabel;
     private TextView rorPertahunLabel;
     private TextView rorPersenLabel;
+    private NestedScrollView nestedScrollView;
 
     public DurasiInvestasiCalProdFragment() {
         // Required empty public constructor
@@ -63,6 +64,8 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
         rorPersenLabel = view.findViewById(R.id.textView27_calprod);
         rorPertahunLabel = view.findViewById(R.id.textView23_calprod);
 
+        nestedScrollView = view.findViewById(R.id.nested_scroll_view);
+
         ETDITargetHasilInvestasi.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -71,7 +74,8 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETDITargetHasilInvestasi.getText().length()==1 && ETDITargetHasilInvestasi.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETDITargetHasilInvestasi.getText().length()==2 && ETDITargetHasilInvestasi.getText().charAt(0)==zero){
                     ETDITargetHasilInvestasi.setText("");
                 }
             }
@@ -90,7 +94,8 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETDIModalAwal.getText().length()==1 && ETDIModalAwal.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETDIModalAwal.getText().length()==2 && ETDIModalAwal.getText().charAt(0)==zero){
                     ETDIModalAwal.setText("");
                 }
             }
@@ -109,7 +114,8 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETDIInvestasiBulanan.getText().length()==1 && ETDIInvestasiBulanan.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETDIInvestasiBulanan.getText().length()==2 && ETDIInvestasiBulanan.getText().charAt(0)==zero){
                     ETDIInvestasiBulanan.setText("");
                 }
             }
@@ -120,10 +126,9 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
             }
         });
 
-        DILabel.setVisibility(View.INVISIBLE);
-        hasilDI.setVisibility(View.INVISIBLE);
+        DILabel.setVisibility(View.GONE);
+        hasilDI.setVisibility(View.GONE);
         ETDIROR.setVisibility(View.GONE);
-        ETDIROR.setText("2");
         rorLabel.setVisibility(View.GONE);
         rorPersenLabel.setVisibility(View.GONE);
         rorPertahunLabel.setVisibility(View.GONE);
@@ -157,6 +162,8 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
                         ETDITargetHasilInvestasi.setText("0");
                     }
 
+                    ETDIROR.setText("2");
+
                     Utils utils = new Utils();
                     Double ETDIModalAwalDouble = Double.parseDouble(ETDIModalAwal.getText().toString());
                     Double ETDIInvestasiBulananDouble = Double.parseDouble(ETDIInvestasiBulanan.getText().toString());
@@ -165,19 +172,31 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
 
                     int[] hasilKalkulasiDI = utils.getDuration(ETDIModalAwalDouble,ETDIInvestasiBulananDouble,ETDITargetHasilInvestasiDouble,ETDIRORDouble);
 
+                    ETDITargetHasilInvestasi.setText(utils.formatUang(ETDITargetHasilInvestasiDouble));
+                    ETDIModalAwal.setText(utils.formatUang(ETDIModalAwalDouble));
+                    ETDIInvestasiBulanan.setText(utils.formatUang(ETDIInvestasiBulananDouble));
+
                     hasilDI.setText(hasilKalkulasiDI[1]+" tahun "+hasilKalkulasiDI[0]+" bulan");
 
                     DILabel.setVisibility(View.VISIBLE);
                     hasilDI.setVisibility(View.VISIBLE);
                     kalkulasi.setText(getString(R.string.calculator_reset_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
+
                 } else {
                     ETDIModalAwal.setEnabled(true);
                     ETDIInvestasiBulanan.setEnabled(true);
                     ETDIROR.setEnabled(true);
                     ETDITargetHasilInvestasi.setEnabled(true);
 
-                    DILabel.setVisibility(View.INVISIBLE);
-                    hasilDI.setVisibility(View.INVISIBLE);
+                    DILabel.setVisibility(View.GONE);
+                    hasilDI.setVisibility(View.GONE);
 
                     ETDIInvestasiBulanan.setText("");
                     ETDIModalAwal.setText("");
@@ -185,6 +204,13 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
                     ETDITargetHasilInvestasi.setText("");
 
                     kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
                 }
                 break;
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -39,6 +40,7 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
     private TextView rorLabel;
     private TextView rorPertahunLabel;
     private TextView rorPersenLabel;
+    private NestedScrollView nestedScrollView;
 
     public BesarInvestasiBulananCalProdFragment() {
         // Required empty public constructor
@@ -87,6 +89,8 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
         rorPersenLabel = view.findViewById(R.id.textView18_calprod);
         rorPertahunLabel = view.findViewById(R.id.textView17_calprod);
 
+        nestedScrollView = view.findViewById(R.id.nested_scroll_view);
+
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBIB.setAdapter(adapter);
 
@@ -101,7 +105,8 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETBIBModalAwal.getText().length()==1 && ETBIBModalAwal.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETBIBModalAwal.getText().length()==2 && ETBIBModalAwal.getText().charAt(0)==zero){
                     ETBIBModalAwal.setText("");
                 }
             }
@@ -120,7 +125,8 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETBIBTargetHasilInvestasi.getText().length()==1 && ETBIBTargetHasilInvestasi.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETBIBTargetHasilInvestasi.getText().length()==2 && ETBIBTargetHasilInvestasi.getText().charAt(0)==zero){
                     ETBIBTargetHasilInvestasi.setText("");
                 }
             }
@@ -132,11 +138,10 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
         });
 
 
-        BIBLabel.setVisibility(View.INVISIBLE);
-        rpLabel.setVisibility(View.INVISIBLE);
-        hasilBIB.setVisibility(View.INVISIBLE);
+        BIBLabel.setVisibility(View.GONE);
+        rpLabel.setVisibility(View.GONE);
+        hasilBIB.setVisibility(View.GONE);
         ETBIBROR.setVisibility(View.GONE);
-        ETBIBROR.setText("2");
         rorLabel.setVisibility(View.GONE);
         rorPersenLabel.setVisibility(View.GONE);
         rorPertahunLabel.setVisibility(View.GONE);
@@ -167,6 +172,8 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
                         ETBIBROR.setText("0");
                     }
 
+                    ETBIBROR.setText("2");
+
                     Utils utils = new Utils();
                     Double hasilKalkulasiBIB;
                     Double ETBIBModalAwalDouble = Double.parseDouble(ETBIBModalAwal.getText().toString());
@@ -181,9 +188,20 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
                     rpLabel.setVisibility(View.VISIBLE);
                     hasilBIB.setVisibility(View.VISIBLE);
 
-                    hasilBIB.setText(utils.priceFormat(hasilKalkulasiBIB));
+                    ETBIBTargetHasilInvestasi.setText(utils.formatUang(ETBIBTargetHasilInvestasiDouble));
+                    ETBIBModalAwal.setText(utils.formatUang(ETBIBModalAwalDouble));
+
+                    hasilBIB.setText(utils.formatUang(hasilKalkulasiBIB));
 
                     kalkulasi.setText(getString(R.string.calculator_reset_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
+
                 }else {
                     ETBIBModalAwal.setEnabled(true);
                     ETBIBTargetHasilInvestasi.setEnabled(true);
@@ -191,9 +209,9 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
                     spinnerDurasiTahunBIB.setEnabled(true);
                     spinnerDurasiBulanBIB.setEnabled(true);
 
-                    BIBLabel.setVisibility(View.INVISIBLE);
-                    rpLabel.setVisibility(View.INVISIBLE);
-                    hasilBIB.setVisibility(View.INVISIBLE);
+                    BIBLabel.setVisibility(View.GONE);
+                    rpLabel.setVisibility(View.GONE);
+                    hasilBIB.setVisibility(View.GONE);
                     kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
 
                     ETBIBModalAwal.setText("");
@@ -201,6 +219,14 @@ public class BesarInvestasiBulananCalProdFragment extends BaseFragment implement
                     ETBIBTargetHasilInvestasi.setText("");
                     spinnerDurasiTahunBIB.setSelection(0);
                     spinnerDurasiBulanBIB.setSelection(0);
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
+
                 }
 
                 break;

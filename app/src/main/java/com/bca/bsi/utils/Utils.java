@@ -78,6 +78,20 @@ public class Utils {
         return gson.toJson(o);
     }
 
+    public static String formatDecimal(String currentFormat){
+        String output = "";
+        output = currentFormat.replaceAll("[.]",",");
+        return output;
+    }
+
+    public static String formatUang(double totalPrice) {
+        String currentFormat;
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        currentFormat = formatter.format(totalPrice);
+        currentFormat = currentFormat.replaceAll("[,]",".");
+        return currentFormat;
+    }
+
 
     //================================ Hitung Target ====================================
     public double getTarget(double initialCost, double monthlyCost, double ror, int durationMonth, int durationYear){

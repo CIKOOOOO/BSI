@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,6 +37,7 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
     private EditText ETBRORTargetHasilInvestasi;
     private EditText ETBRORModalAwal;
     private EditText ETBRORInvestasiBulanan;
+    private NestedScrollView nestedScrollView;
 
     public BesarRoRFragment() {
         // Required empty public constructor
@@ -77,6 +79,8 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
         ETBRORModalAwal = view.findViewById(R.id.et_bror_modal_awal);
         ETBRORTargetHasilInvestasi = view.findViewById(R.id.et_bror_target_hasil_investasi);
 
+        nestedScrollView = view.findViewById(R.id.nested_scroll_view);
+
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBROR.setAdapter(adapter);
 
@@ -91,7 +95,8 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETBRORTargetHasilInvestasi.getText().length()==1 && ETBRORTargetHasilInvestasi.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETBRORTargetHasilInvestasi.getText().length()==2 && ETBRORTargetHasilInvestasi.getText().charAt(0)==zero){
                     ETBRORTargetHasilInvestasi.setText("");
                 }
             }
@@ -110,7 +115,8 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETBRORModalAwal.getText().length()==1 && ETBRORModalAwal.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETBRORModalAwal.getText().length()==2 && ETBRORModalAwal.getText().charAt(0)==zero){
                     ETBRORModalAwal.setText("");
                 }
             }
@@ -129,7 +135,8 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETBRORInvestasiBulanan.getText().length()==1 && ETBRORInvestasiBulanan.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETBRORInvestasiBulanan.getText().length()==2 && ETBRORInvestasiBulanan.getText().charAt(0)==zero){
                     ETBRORInvestasiBulanan.setText("");
                 }
             }
@@ -140,10 +147,10 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
             }
         });
 
-        BRORLabel.setVisibility(View.INVISIBLE);
-        persenLabel.setVisibility(View.INVISIBLE);
-        hasilBROR.setVisibility(View.INVISIBLE);
-        pertahunLabel.setVisibility(View.INVISIBLE);
+        BRORLabel.setVisibility(View.GONE);
+        persenLabel.setVisibility(View.GONE);
+        hasilBROR.setVisibility(View.GONE);
+        pertahunLabel.setVisibility(View.GONE);
     }
 
     @Override
@@ -187,14 +194,26 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
                     } else {
                         hasilKalkulasiRor*=100;
                         hasilKalkulasiRor = utils.roundDouble(hasilKalkulasiRor,4);
-                        hasilBROR.setText(hasilKalkulasiRor.toString());
+                        hasilBROR.setText(hasilKalkulasiRor.toString().replaceAll("[.]",","));
                         persenLabel.setVisibility(View.VISIBLE);
                     }
+
+                    ETBRORTargetHasilInvestasi.setText(utils.formatUang(ETBRORTargetHasilInvestasiDouble));
+                    ETBRORModalAwal.setText(utils.formatUang(ETBRORModalAwalDouble));
+                    ETBRORInvestasiBulanan.setText(utils.formatUang(ETBRORInvestasiBulananDouble));
 
                     BRORLabel.setVisibility(View.VISIBLE);
                     hasilBROR.setVisibility(View.VISIBLE);
                     pertahunLabel.setVisibility(View.VISIBLE);
                     kalkulasi.setText(getString(R.string.calculator_reset_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
+
                 } else {
 
                     ETBRORModalAwal.setEnabled(true);
@@ -203,10 +222,10 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
                     spinnerDurasiBulanBROR.setEnabled(true);
                     spinnerDurasiTahunBROR.setEnabled(true);
 
-                    BRORLabel.setVisibility(View.INVISIBLE);
-                    persenLabel.setVisibility(View.INVISIBLE);
-                    hasilBROR.setVisibility(View.INVISIBLE);
-                    pertahunLabel.setVisibility(View.INVISIBLE);
+                    BRORLabel.setVisibility(View.GONE);
+                    persenLabel.setVisibility(View.GONE);
+                    hasilBROR.setVisibility(View.GONE);
+                    pertahunLabel.setVisibility(View.GONE);
 
                     ETBRORInvestasiBulanan.setText("");
                     ETBRORModalAwal.setText("");
@@ -215,6 +234,13 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
                     spinnerDurasiBulanBROR.setSelection(0);
 
                     kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
                 }
                 break;
         }

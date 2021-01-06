@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,6 +28,7 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
     private EditText ETDIModalAwal;
     private EditText ETDIInvestasiBulanan;
     private EditText ETDIROR;
+    private NestedScrollView nestedScrollView;
 
     public DurasiInvestasiFragment() {
         // Required empty public constructor
@@ -54,6 +56,8 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
         ETDIROR = view.findViewById(R.id.et_di_ror);
         ETDITargetHasilInvestasi = view.findViewById(R.id.et_di_target_hasil_investasi);
 
+        nestedScrollView = view.findViewById(R.id.nested_scroll_view);
+
         ETDITargetHasilInvestasi.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -62,7 +66,8 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETDITargetHasilInvestasi.getText().length()==1 && ETDITargetHasilInvestasi.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETDITargetHasilInvestasi.getText().length()==2 && ETDITargetHasilInvestasi.getText().charAt(0)==zero){
                     ETDITargetHasilInvestasi.setText("");
                 }
             }
@@ -81,7 +86,8 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETDIModalAwal.getText().length()==1 && ETDIModalAwal.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETDIModalAwal.getText().length()==2 && ETDIModalAwal.getText().charAt(0)==zero){
                     ETDIModalAwal.setText("");
                 }
             }
@@ -100,7 +106,8 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETDIInvestasiBulanan.getText().length()==1 && ETDIInvestasiBulanan.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETDIInvestasiBulanan.getText().length()==2 && ETDIInvestasiBulanan.getText().charAt(0)==zero){
                     ETDIInvestasiBulanan.setText("");
                 }
             }
@@ -133,8 +140,8 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
             }
         });
 
-        DILabel.setVisibility(View.INVISIBLE);
-        hasilDI.setVisibility(View.INVISIBLE);
+        DILabel.setVisibility(View.GONE);
+        hasilDI.setVisibility(View.GONE);
 
     }
 
@@ -173,19 +180,31 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
 
                     int[] hasilKalkulasiDI = utils.getDuration(ETDIModalAwalDouble,ETDIInvestasiBulananDouble,ETDITargetHasilInvestasiDouble,ETDIRORDouble);
 
+                    ETDITargetHasilInvestasi.setText(utils.formatUang(ETDITargetHasilInvestasiDouble));
+                    ETDIModalAwal.setText(utils.formatUang(ETDIModalAwalDouble));
+                    ETDIInvestasiBulanan.setText(utils.formatUang(ETDIInvestasiBulananDouble));
+                    ETDIROR.setText(utils.formatDecimal(ETDIROR.getText().toString()));
+
                     hasilDI.setText(hasilKalkulasiDI[1]+" tahun "+hasilKalkulasiDI[0]+" bulan");
 
                     DILabel.setVisibility(View.VISIBLE);
                     hasilDI.setVisibility(View.VISIBLE);
                     kalkulasi.setText(getString(R.string.calculator_reset_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
                 } else {
                     ETDIModalAwal.setEnabled(true);
                     ETDIInvestasiBulanan.setEnabled(true);
                     ETDIROR.setEnabled(true);
                     ETDITargetHasilInvestasi.setEnabled(true);
 
-                    DILabel.setVisibility(View.INVISIBLE);
-                    hasilDI.setVisibility(View.INVISIBLE);
+                    DILabel.setVisibility(View.GONE);
+                    hasilDI.setVisibility(View.GONE);
 
                     ETDIInvestasiBulanan.setText("");
                     ETDIModalAwal.setText("");
@@ -193,6 +212,13 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
                     ETDITargetHasilInvestasi.setText("");
 
                     kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
                 }
                 break;
 

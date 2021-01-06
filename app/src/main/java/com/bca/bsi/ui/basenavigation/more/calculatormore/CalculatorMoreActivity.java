@@ -58,6 +58,8 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
 
         calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),4);
         viewPager.setAdapter(calculatorPagerAdapter);
+        viewPager.setOffscreenPageLimit(4);
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

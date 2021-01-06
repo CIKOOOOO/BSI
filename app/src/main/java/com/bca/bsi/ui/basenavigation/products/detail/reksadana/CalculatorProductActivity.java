@@ -49,6 +49,8 @@ public class CalculatorProductActivity extends BaseActivity implements View.OnCl
 
         calculatorProductPagerAdapter = new CalculatorProductPagerAdapter(getSupportFragmentManager(),3);
         viewPager2.setAdapter(calculatorProductPagerAdapter);
+        viewPager2.setOffscreenPageLimit(3);
+
         viewPager2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

@@ -76,6 +76,7 @@
     <string name="besar_investasi_bulanan">Besar Investasi\nBulanan</string>
     <string name="durasi_investasi">Durasi\nInvestasi</string>
     <string name="besar_ror">Besar RoR</string>
+    <string name="calculator_disclaimer">Disclaimer:\nPerhitungan yang dihasilkan oleh kalkulator merupakan simulasi. Nilai sesungguhya dapat berbeda.</string>
 
     <string name="input_tidak_sesuai">Data yang diinput tidak sesuai</string>
     <string name="ror_bernilai_negatif">RoR bernilai negatif</string>
@@ -112,6 +113,11 @@
     <string name="kuis_capslock">KUIS</string>
     <string name="lihat_penjelasan">Lihat Penjelasan</string>
     <string name="soal_berikutnya">Soal Berikutnya</string>
+    <string name="symbol_centang">✓︎</string>
+    <string name="symbol_cross">✕</string>
+    <string name="selesai">Selesai</string>
+    <string name="ayo_belajar_lagi">Ayo Belajar Lagi</string>
+    <string name="mulai_investasi">Mulai Investasi</string>
     <!--END HERE-->
 
 

@@ -1,110 +1,51 @@
 package com.bca.bsi.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class JawabanKuis {
-    private String jawabanUserSoal1 = "-";
-    private String jawabanUserSoal2 = "-";
-    private String jawabanUserSoal3 = "-";
-    private String jawabanUserSoal4 = "-";
-    private String jawabanUserSoal5 = "-";
 
-    private String kunciJawabanSoal1;
-    private String kunciJawabanSoal2;
-    private String kunciJawabanSoal3;
-    private String kunciJawabanSoal4;
-    private String kunciJawabanSoal5;
+    private List<String> kunJawList = new ArrayList<>(5);
+    private List<String> jawabanUser = new ArrayList<>(5);
+    private List<String> penilaianKuis = Arrays.asList("Wah pengetahuan Anda tentang investasi masih perlu ditingkatkan, Mari kita belajar lagi",
+            "Pengetahuan Anda sudah cukup mengenai investasi, Ayo tingkatkan lagi","Wah hebat, kamu sudah menguasai materi ini. Ayo investasi sekarang");
 
-    /*
-    public JawabanKuis(String jawabanUserSoal1, String jawabanUserSoal2, String jawabanUserSoal3, String jawabanUserSoal4, String jawabanUserSoal5, String kunciJawabanSoal1, String kunciJawabanSoal2, String kunciJawabanSoal3, String kunciJawabanSoal4, String kunciJawabanSoal5) {
-        this.jawabanUserSoal1 = jawabanUserSoal1;
-        this.jawabanUserSoal2 = jawabanUserSoal2;
-        this.jawabanUserSoal3 = jawabanUserSoal3;
-        this.jawabanUserSoal4 = jawabanUserSoal4;
-        this.jawabanUserSoal5 = jawabanUserSoal5;
-        this.kunciJawabanSoal1 = kunciJawabanSoal1;
-        this.kunciJawabanSoal2 = kunciJawabanSoal2;
-        this.kunciJawabanSoal3 = kunciJawabanSoal3;
-        this.kunciJawabanSoal4 = kunciJawabanSoal4;
-        this.kunciJawabanSoal5 = kunciJawabanSoal5;
-    }
-    */
-
-    public String getJawabanUserSoal1() {
-        return jawabanUserSoal1;
+    public String getKunJawList(int index) {
+        return kunJawList.get(index);
     }
 
-    public String getJawabanUserSoal2() {
-        return jawabanUserSoal2;
+    public String getJawabanUser(int index) {
+        return jawabanUser.get(index);
     }
 
-    public String getJawabanUserSoal3() {
-        return jawabanUserSoal3;
+    public void setKunJawList(List<String> kunJawList) {
+        this.kunJawList = kunJawList;
     }
 
-    public String getJawabanUserSoal4() {
-        return jawabanUserSoal4;
+    public void setKunJaw(List<String> kunJaw) {
+        for(int i=0;i<5;i++){
+            this.kunJawList.add(kunJaw.get(i));
+        }
     }
 
-    public String getJawabanUserSoal5() {
-        return jawabanUserSoal5;
+    public List<String> getJawabanUserList() {
+        return jawabanUser;
     }
 
-    public String getKunciJawabanSoal1() {
-        return kunciJawabanSoal1;
+    public void setJawabanUser(List<String> jawabanUser) {
+        this.jawabanUser = jawabanUser;
     }
 
-    public String getKunciJawabanSoal2() {
-        return kunciJawabanSoal2;
+    public void storeKunciJawaban(){
+
     }
 
-    public String getKunciJawabanSoal3() {
-        return kunciJawabanSoal3;
+    public void storeJawabanUser(String ans){
+        this.jawabanUser.add(ans);
     }
 
-    public String getKunciJawabanSoal4() {
-        return kunciJawabanSoal4;
-    }
-
-    public String getKunciJawabanSoal5() {
-        return kunciJawabanSoal5;
-    }
-
-    public void setJawabanUserSoal1(String jawabanUserSoal1) {
-        this.jawabanUserSoal1 = jawabanUserSoal1;
-    }
-
-    public void setJawabanUserSoal2(String jawabanUserSoal2) {
-        this.jawabanUserSoal2 = jawabanUserSoal2;
-    }
-
-    public void setJawabanUserSoal3(String jawabanUserSoal3) {
-        this.jawabanUserSoal3 = jawabanUserSoal3;
-    }
-
-    public void setJawabanUserSoal4(String jawabanUserSoal4) {
-        this.jawabanUserSoal4 = jawabanUserSoal4;
-    }
-
-    public void setJawabanUserSoal5(String jawabanUserSoal5) {
-        this.jawabanUserSoal5 = jawabanUserSoal5;
-    }
-
-    public void setKunciJawabanSoal1(String kunciJawabanSoal1) {
-        this.kunciJawabanSoal1 = kunciJawabanSoal1;
-    }
-
-    public void setKunciJawabanSoal2(String kunciJawabanSoal2) {
-        this.kunciJawabanSoal2 = kunciJawabanSoal2;
-    }
-
-    public void setKunciJawabanSoal3(String kunciJawabanSoal3) {
-        this.kunciJawabanSoal3 = kunciJawabanSoal3;
-    }
-
-    public void setKunciJawabanSoal4(String kunciJawabanSoal4) {
-        this.kunciJawabanSoal4 = kunciJawabanSoal4;
-    }
-
-    public void setKunciJawabanSoal5(String kunciJawabanSoal5) {
-        this.kunciJawabanSoal5 = kunciJawabanSoal5;
+    public String getPenilaianKuis(int index) {
+        return penilaianKuis.get(index);
     }
 }

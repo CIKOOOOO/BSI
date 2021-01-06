@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -38,6 +39,7 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
     private TextView rorLabel;
     private TextView rorPertahunLabel;
     private TextView rorPersenLabel;
+    private NestedScrollView nestedScrollView;
 
     public BesarHasilInvestasiCalProdFragment() {
         // Required empty public constructor
@@ -84,6 +86,8 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
         rorPersenLabel = view.findViewById(R.id.textView12_calprod);
         rorPertahunLabel = view.findViewById(R.id.textView11_calprod);
 
+        nestedScrollView = view.findViewById(R.id.nested_scroll_view);
+
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBHI.setAdapter(adapter);
 
@@ -98,7 +102,8 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETBHIModalAwal.getText().length()==1 && ETBHIModalAwal.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETBHIModalAwal.getText().length()==2 && ETBHIModalAwal.getText().charAt(0)==zero){
                     ETBHIModalAwal.setText("");
                 }
             }
@@ -117,7 +122,8 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ETBHIIvestasiBulanan.getText().length()==1 && ETBHIIvestasiBulanan.getText().toString().equals("0")){
+                char zero = '0';
+                if(ETBHIIvestasiBulanan.getText().length()==2 && ETBHIIvestasiBulanan.getText().charAt(0)==zero){
                     ETBHIIvestasiBulanan.setText("");
                 }
             }
@@ -129,12 +135,11 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
         });
 
 
-        BHILabel.setVisibility(View.INVISIBLE);
-        rpLabel.setVisibility(View.INVISIBLE);
-        hasilBHI.setVisibility(View.INVISIBLE);
+        BHILabel.setVisibility(View.GONE);
+        rpLabel.setVisibility(View.GONE);
+        hasilBHI.setVisibility(View.GONE);
 
         ETBHIROR.setVisibility(View.GONE);
-        ETBHIROR.setText("2");
         rorLabel.setVisibility(View.GONE);
         rorPersenLabel.setVisibility(View.GONE);
         rorPertahunLabel.setVisibility(View.GONE);
@@ -165,6 +170,8 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
                         ETBHIROR.setText("0");
                     }
 
+                    ETBHIROR.setText("2");
+
                     Utils utils = new Utils();
                     Double hasilKalkulasiBHI;
                     Double ETBHIModalAwalDouble = Double.parseDouble(ETBHIModalAwal.getText().toString());
@@ -179,12 +186,22 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
                         int hasilKalkulasiBHIInt = (int) Math.round(hasilKalkulasiBHI);
                         hasilBHI.setText(String.valueOf(hasilKalkulasiBHIInt));
                         */
-                    hasilBHI.setText(utils.priceFormat(hasilKalkulasiBHI));
+                    ETBHIModalAwal.setText(utils.formatUang(ETBHIModalAwalDouble));
+                    ETBHIIvestasiBulanan.setText(utils.formatUang(ETBHIInvestasiBulananDouble));
+
+                    hasilBHI.setText(utils.formatUang(hasilKalkulasiBHI));
 
                     BHILabel.setVisibility(View.VISIBLE);
                     rpLabel.setVisibility(View.VISIBLE);
                     hasilBHI.setVisibility(View.VISIBLE);
                     kalkulasi.setText(getString(R.string.calculator_reset_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
 
 
                 } else {
@@ -194,9 +211,9 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
                     spinnerDurasiBulanBHI.setEnabled(true);
                     spinnerDurasiTahunBHI.setEnabled(true);
 
-                    BHILabel.setVisibility(View.INVISIBLE);
-                    rpLabel.setVisibility(View.INVISIBLE);
-                    hasilBHI.setVisibility(View.INVISIBLE);
+                    BHILabel.setVisibility(View.GONE);
+                    rpLabel.setVisibility(View.GONE);
+                    hasilBHI.setVisibility(View.GONE);
 
                     ETBHIIvestasiBulanan.setText("");
                     ETBHIModalAwal.setText("");
@@ -205,6 +222,13 @@ public class BesarHasilInvestasiCalProdFragment extends BaseFragment implements 
                     spinnerDurasiBulanBHI.setSelection(0);
 
                     kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
                 }
                 break;
         }
