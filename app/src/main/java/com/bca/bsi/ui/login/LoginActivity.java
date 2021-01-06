@@ -48,19 +48,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 String bcaId = etBCAID.getText().toString().trim();
                 String pass = tilPassword.getEditText().getText().toString().trim();
 
-                if (bcaId.isEmpty() || pass.isEmpty()) {
-                    showSnackBar(getString(R.string.bca_id_password_empty));
-                } else {
-                    customLoading = new CustomLoading();
-                    if (!customLoading.isVisible()) {
-                        customLoading.show(getSupportFragmentManager(), "");
-                        if (prefConfig.getTokenAccess().isEmpty()) {
-                            viewModel.getAccessToken(bcaId, pass);
-                        } else {
+//                if (bcaId.isEmpty() || pass.isEmpty()) {
+//                    showSnackBar(getString(R.string.bca_id_password_empty));
+//                } else {
+//                    customLoading = new CustomLoading();
+//                    if (!customLoading.isVisible()) {
+//                        customLoading.show(getSupportFragmentManager(), "");
+//                        if (prefConfig.getTokenAccess().isEmpty()) {
+//                            viewModel.getAccessToken(bcaId, pass);
+//                        } else {
                             viewModel.loginWith(prefConfig.getTokenAccess(), bcaId, pass);
-                        }
-                    }
-                }
+//                        }
+//                    }
+//                }
                 break;
         }
     }

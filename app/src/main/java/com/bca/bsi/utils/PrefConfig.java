@@ -72,6 +72,10 @@ public class PrefConfig {
         return sharedPreferences.getString(context.getString(R.string.pref_bca_id), Constant.EMPTY);
     }
 
+    public String getProfileRisiko() {
+        return sharedPreferences.getString(context.getString(R.string.pref_profile_risiko), Constant.EMPTY);
+    }
+
     public String getName() {
         return sharedPreferences.getString(context.getString(R.string.pref_name), Constant.EMPTY);
     }

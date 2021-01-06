@@ -2,6 +2,8 @@ package com.bca.bsi.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class OutputResponse {
 
     @SerializedName("error_schema")
@@ -49,7 +51,14 @@ public class OutputResponse {
         @SerializedName("welma_user")
         private User.WelmaUser welmaUser;
 
+        @SerializedName("ListProducts")
+        private List<Product.ReksaDana> reksaDanaList;
+
         public OutputSchema() {
+        }
+
+        public List<Product.ReksaDana> getReksaDanaList() {
+            return reksaDanaList;
         }
 
         public User.ForumUser getForumUser() {

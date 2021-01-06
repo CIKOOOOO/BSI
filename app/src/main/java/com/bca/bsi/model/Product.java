@@ -1,5 +1,7 @@
 package com.bca.bsi.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Product {
 
     public static class ProductType {
@@ -27,10 +29,29 @@ public class Product {
 
     public static class ReksaDana {
 
-        private String name, type, date;
-        private double kinerja, nab;
+        @SerializedName("reksadana_id")
+        private String reksadanaID;
 
-        public ReksaDana(String name, String type, String date, double kinerja, double nab) {
+        @SerializedName("reksadana_name")
+        private String name;
+
+        @SerializedName("category")
+        private String type;
+
+        @SerializedName("update_date")
+        private String date;
+
+        @SerializedName("Kinerja_1_bulan")
+        private String kinerja;
+
+        @SerializedName("NAB_per_unit")
+        private String nab;
+
+        public ReksaDana() {
+        }
+
+        public ReksaDana(String reksadanaID, String name, String type, String date, String kinerja, String nab) {
+            this.reksadanaID = reksadanaID;
             this.name = name;
             this.type = type;
             this.date = date;
@@ -50,11 +71,15 @@ public class Product {
             return date;
         }
 
-        public double getKinerja() {
+        public String getReksadanaID() {
+            return reksadanaID;
+        }
+
+        public String getKinerja() {
             return kinerja;
         }
 
-        public double getNab() {
+        public String getNab() {
             return nab;
         }
     }

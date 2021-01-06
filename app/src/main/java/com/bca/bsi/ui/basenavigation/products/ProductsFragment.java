@@ -18,7 +18,7 @@ import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 
-public class ProductsFragment extends BaseFragment implements ProductTypeAdapter.objectOnClick {
+public class ProductsFragment extends BaseFragment implements ProductTypeAdapter.objectOnClick{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

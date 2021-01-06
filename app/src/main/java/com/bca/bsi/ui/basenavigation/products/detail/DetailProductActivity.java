@@ -8,14 +8,18 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Product;
 import com.bca.bsi.ui.basenavigation.products.detail.reksadana.ReksadanaProductFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 
-public class DetailProductActivity extends BaseActivity implements View.OnClickListener {
+import java.util.List;
+
+public class DetailProductActivity extends BaseActivity implements View.OnClickListener{
 
     public static final String PRODUCT_TYPE = "product_type";
 

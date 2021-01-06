@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.products.detail.reksadana;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public class ReksadanaProductAdapter extends RecyclerView.Adapter<ReksadanaProdu
 
     public interface onItemClick {
         void onReksaDanaClick(Product.ReksaDana reksaDana);
+
+        void onDetail(Product.ReksaDana reksaDana);
     }
 
     public ReksadanaProductAdapter(ReksadanaProductAdapter.onItemClick onItemClick) {
@@ -53,11 +56,12 @@ public class ReksadanaProductAdapter extends RecyclerView.Adapter<ReksadanaProdu
             holder.tvTitle.setText(reksaDana.getName());
             holder.tvType.setText(reksaDana.getType());
             holder.tvDate.setText(reksaDana.getDate());
-            holder.tvKinerja.setText("+" + reksaDana.getKinerja() + "%");
-            holder.tvNab.setText("Rp " + reksaDana.getNab());
+            holder.tvKinerja.setText(reksaDana.getKinerja());
+            holder.tvNab.setText(reksaDana.getNab());
             holder.tvBuy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.e("asd", "buy");
                     onItemClick.onReksaDanaClick(reksaDana);
                 }
             });
@@ -65,6 +69,13 @@ public class ReksadanaProductAdapter extends RecyclerView.Adapter<ReksadanaProdu
                 @Override
                 public void onClick(View v) {
 
+                }
+            });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("asd", "detail");
+                    onItemClick.onDetail(reksaDana);
                 }
             });
         } else {
