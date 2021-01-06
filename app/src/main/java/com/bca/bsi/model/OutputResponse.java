@@ -54,6 +54,9 @@ public class OutputResponse {
         @SerializedName("ListProducts")
         private List<Product.ReksaDana> reksaDanaList;
 
+        @SerializedName("Detail_Reksadana")
+        private Product.DetailReksaDana detailReksaDana;
+
         public OutputSchema() {
         }
 
@@ -67,6 +70,10 @@ public class OutputResponse {
 
         public User.WelmaUser getWelmaUser() {
             return welmaUser;
+        }
+
+        public Product.DetailReksaDana getDetailReksaDana() {
+            return detailReksaDana;
         }
     }
 }

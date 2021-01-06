@@ -27,18 +27,18 @@ public class DetailReksaDanaViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadDetailReksaDana(String reksaDanaID){
+    public void loadDetailReksaDana(String reksaDanaID) {
         Call<OutputResponse> call = apiInterface.getDetailReksaDana(reksaDanaID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                if(response.body() != null){
+                if (response.body() != null) {
                     OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                     OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
-                    if(errorSchema.getErrorCode() != 200){
+                    if (errorSchema.getErrorCode() != 200) {
                         callback.onFailed(errorSchema.getErrorMessage());
-                    }else{
-                        
+                    } else {
+                        callback.onLoadReksaDanaDetail(outputSchema.getDetailReksaDana());
                     }
                 }
             }

@@ -96,6 +96,19 @@
     <string name="detail_news">Detail Berita</string>
     <string name="share_news">Share News</string>
     <string name="share">Share</string>
+    <string name="kustodian_bank">Bank Kustodian</string>
+    <string name="reksa_dana_type">Jenis Reksa Dana</string>
+    <string name="release_date">Tanggal Peluncuran</string>
+    <string name="first_purchasing_minimum">Minimum Pembelian Pertama</string>
+    <string name="next_purchasing_minimum">Minimum Pembelian Selanjutnya</string>
+    <string name="selling_minimum">Minimum Penjualan Kembali</string>
+    <string name="minimum_saldo_unit">Minimum Saldo Unit</string>
+    <string name="purchasing_cost">Biaya Pembelian</string>
+    <string name="selling_cost">Biaya Penjualan Kembali</string>
+    <string name="cost_invest_management">Biaya Manajer Investasi</string>
+    <string name="kustodian_cost">Biaya Bank Kustodian</string>
+    <string name="agent_cost">Biaya Agen Penjual</string>
+    <string name="kalkulator_perencanaan">Kalkulator Perencanaan</string>
 
 
     <!--END HERE-->
