@@ -1,10 +1,8 @@
 package com.bca.bsi.ui.basenavigation.more.learningmenu.quiz;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
-import com.bca.bsi.adapter.LearningMateriAdapter;
 import com.bca.bsi.adapter.QuizAdapter;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.ReksadanaProductFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.SwipeDirection;
 
@@ -43,10 +41,13 @@ public class KuisReksaDanaActivity extends BaseActivity implements View.OnClickL
 
         adapter = new QuizAdapter(this,this);
 
-        viewPager = findViewById(R.id.viewPagerRDKuis);
+        viewPager = findViewById(R.id.viewPagerKuis);
         viewPager.setAdapter(adapter);
         viewPager.setPadding(50,0,50, 0);
         viewPager.setAllowedSwipeDirection(SwipeDirection.left);
+
+        Intent intent = getIntent();
+        adapter.setKuis(intent.getStringExtra("topic"));
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -75,11 +76,8 @@ public class KuisReksaDanaActivity extends BaseActivity implements View.OnClickL
                         break;
                     case 5:
                         pagination.setImageResource(R.drawable.asset_pagination_6_6);
-                        //viewPager.setCurrentItem(currentPage);
-                        //adapter.notifyDataSetChanged();
-                        adapter.startUpdate(viewPager);
-                        adapter.instantiateItem(viewPager,currentPage);
-                        //adapter.instantiateItem(viewPager,currentPage);
+                        adapter.setNilai();
+                        adapter.notifyDataSetChanged();
                         break;
                 }
             }
@@ -102,6 +100,17 @@ public class KuisReksaDanaActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void onClick() {
-        viewPager.setCurrentItem(currentPage+1);
+        if(currentPage<5){
+            viewPager.setCurrentItem(currentPage+1);
+        }else{
+            Intent intent = new Intent(this, ReksadanaProductFragment.class);
+            startActivity(intent);
+        }
+
+    }
+
+    @Override
+    public void openPage() {
+        onBackPressed();
     }
 }

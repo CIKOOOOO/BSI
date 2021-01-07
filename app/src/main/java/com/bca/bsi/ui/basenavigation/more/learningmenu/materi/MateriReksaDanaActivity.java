@@ -129,6 +129,7 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
 
             case 3:
                 Intent intent = new Intent(this, KuisReksaDanaActivity.class);
+                intent.putExtra("topic","reksadana");
                 startActivity(intent);
                 break;
         }

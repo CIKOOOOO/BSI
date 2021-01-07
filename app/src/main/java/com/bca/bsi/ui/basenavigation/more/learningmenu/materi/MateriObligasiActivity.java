@@ -119,6 +119,7 @@ public class MateriObligasiActivity extends BaseActivity implements View.OnClick
 
             case 3:
                 Intent intent = new Intent(this, KuisObligasiActivity.class);
+                intent.putExtra("topic","obligasi");
                 startActivity(intent);
                 break;
         }

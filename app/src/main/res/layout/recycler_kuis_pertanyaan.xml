@@ -49,6 +49,21 @@
                     android:textSize="@dimen/size_for_17dp"
                     android:textColor="@color/black_palette"/>
 
+                <TextView
+                    android:id="@+id/penjelasan_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pertanyaan"
+                    android:layout_marginStart="@dimen/size_for_30dp"
+                    android:layout_marginTop="@dimen/size_for_30dp"
+                    android:layout_marginEnd="@dimen/size_for_30dp"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:text="Menurut Anda apa itu Reksa Dana?"
+                    android:textSize="@dimen/size_for_17dp"
+                    android:textColor="@color/deep_cerulean_palette"
+                    android:visibility="invisible"/>
+
                 <LinearLayout
                     android:id="@+id/pilgan_a"
                     android:layout_width="match_parent"
@@ -58,7 +73,7 @@
                     android:layout_marginEnd="@dimen/size_for_20dp"
                     android:layout_below="@id/pertanyaan"
                     android:layout_marginTop="@dimen/size_for_30dp"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:padding="@dimen/size_for_5dp">
 
                     <TextView
@@ -92,7 +107,7 @@
                     android:layout_marginStart="@dimen/size_for_20dp"
                     android:layout_marginEnd="@dimen/size_for_20dp"
                     android:layout_below="@id/pilgan_a"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:padding="@dimen/size_for_5dp">
 
                     <TextView
@@ -126,7 +141,7 @@
                     android:layout_marginStart="@dimen/size_for_20dp"
                     android:layout_marginEnd="@dimen/size_for_20dp"
                     android:layout_below="@id/pilgan_b"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:padding="@dimen/size_for_5dp">
 
                     <TextView

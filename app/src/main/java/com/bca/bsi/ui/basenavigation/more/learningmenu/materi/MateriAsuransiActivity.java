@@ -126,6 +126,7 @@ public class MateriAsuransiActivity extends BaseActivity implements View.OnClick
 
             case 3:
                 Intent intent = new Intent(this, KuisAsuransiActivity.class);
+                intent.putExtra("topic","asuransi");
                 startActivity(intent);
                 break;
         }

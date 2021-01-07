@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.CustomViewPager
-        android:id="@+id/viewPagerRDKuis"
+        android:id="@+id/viewPagerKuis"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerInParent="true"
