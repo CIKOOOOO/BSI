@@ -52,6 +52,16 @@
     <string name="product_detail">Detail Produk</string>
     <string name="info_detail_transaction">Konfirmasi atas investasi pada Efek Reksa Dana yang diterbitkan oleh Bank Kustodian adalah bukti kepemilikan yang sah.</string>
     <string name="info_detail_transaction1">Setiap detail transaksi otomatis tersimpan di Inbox kamu.</string>
+    <string name="bca_id_password_empty">BCA ID atau password kosong</string>
+    <string name="internet_down">Pastikan koneksi internet stabil</string>
+    <string name="close">Tutup</string>
+    <string name="view_more">Lihat Selengkapnya</string>
+    <string name="my_transaction">Transaksiku</string>
+    <string name="copy_transaction">Salin Transaksi</string>
+    <string name="hint_share_something">Share something insightful...</string>
+    <string name="post">Post</string>
+    <string name="kinerja_produk">Kinerja Produk (%)</string>
+    <string name="product_information">Informasi Produk</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>
@@ -82,7 +92,23 @@
     <string name="promo">Promo</string>
     <string name="share_to_forum">Share to Forum</string>
     <string name="detail_promo">Detail Promo</string>
+    <string name="detail_product">Detail Produk</string>
     <string name="detail_news">Detail Berita</string>
+    <string name="share_news">Share News</string>
+    <string name="share">Share</string>
+    <string name="kustodian_bank">Bank Kustodian</string>
+    <string name="reksa_dana_type">Jenis Reksa Dana</string>
+    <string name="release_date">Tanggal Peluncuran</string>
+    <string name="first_purchasing_minimum">Minimum Pembelian Pertama</string>
+    <string name="next_purchasing_minimum">Minimum Pembelian Selanjutnya</string>
+    <string name="selling_minimum">Minimum Penjualan Kembali</string>
+    <string name="minimum_saldo_unit">Minimum Saldo Unit</string>
+    <string name="purchasing_cost">Biaya Pembelian</string>
+    <string name="selling_cost">Biaya Penjualan Kembali</string>
+    <string name="cost_invest_management">Biaya Manajer Investasi</string>
+    <string name="kustodian_cost">Biaya Bank Kustodian</string>
+    <string name="agent_cost">Biaya Agen Penjual</string>
+    <string name="kalkulator_perencanaan">Kalkulator Perencanaan</string>
 
 
     <!--END HERE-->
@@ -90,14 +116,19 @@
 
     <!-- SHARED PREFERENCES ASSET -->
     <string name="pref_file">pref_file</string>
-    <string name="pref_login_status">pref_login_status</string>
-    <string name="pref_uid">pref_uid</string>
+    <string name="pref_bca_id">pref_bca_id</string>
     <string name="pref_name">pref_name</string>
     <string name="pref_email">pref_email</string>
-    <string name="pref_phone_number">pref_phone_number</string>
-    <string name="pref_main_address">pref_main_address</string>
+    <string name="pref_profile_risiko">pref_profile_risiko</string>
     <string name="pref_token_fcm">pref_token_fcm</string>
     <string name="pref_account_number">pref_account_number</string>
+    <string name="pref_token_access">pref_token_access</string>
+
+    <!--FORUM USER-->
+    <string name="pref_profile_id">pref_profile_id</string>
+    <string name="pref_username">pref_username</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_calculator_more">CalculatorMoreActivity</string>

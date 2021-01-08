@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IReksaDanaProductCallback {
     void resultOf(List<Product.ReksaDana> reksaDanaList);
+
+    void onFailed(String msg);
 }

@@ -2,6 +2,7 @@ package com.bca.bsi.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,8 +10,10 @@ import android.widget.EditText;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.User;
 import com.bca.bsi.ui.basenavigation.BaseNavigationActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.CustomLoading;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener, ILoginCallback {
@@ -18,6 +21,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private EditText etBCAID;
     private TextInputLayout tilPassword;
     private LoginViewModel viewModel;
+    private CustomLoading customLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +49,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 String bcaId = etBCAID.getText().toString().trim();
                 String pass = tilPassword.getEditText().getText().toString().trim();
 
-//                if (bcaId.isEmpty() || pass.isEmpty()) {
-//                    Toast.makeText(this, "BCA ID atau password kosong", Toast.LENGTH_SHORT).show();
-//                } else {
-                viewModel.loginWith(bcaId, pass);
-//                }
+                if (bcaId.isEmpty() || pass.isEmpty()) {
+                    showSnackBar(getString(R.string.bca_id_password_empty));
+                } else {
+                    customLoading = new CustomLoading();
+                    if (!customLoading.isVisible()) {
+                        customLoading.show(getSupportFragmentManager(), "");
+//                        if (prefConfig.getTokenAccess().isEmpty()) {
+//                            viewModel.getAccessToken(bcaId, pass);
+//                        } else {
+                            viewModel.loginWith(prefConfig.getTokenAccess(), bcaId, pass);
+//                        }
+                    }
+                }
                 break;
         }
     }
@@ -58,9 +70,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      * Condition when user success login
      * */
     @Override
-    public void onSuccess() {
+    public void onSuccess(User.ForumUser forumUser, User.WelmaUser welmaUser) {
+        if (customLoading != null && customLoading.getTag() != null) {
+            customLoading.dismiss();
+        }
         finishAffinity();
-        prefConfig.setAccountNumber("5271517891");
+        prefConfig.setUser(forumUser, welmaUser);
         startActivity(new Intent(this, BaseNavigationActivity.class));
     }
 
@@ -68,7 +83,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      * Condition when user failed login
      * */
     @Override
-    public void onFailed() {
-
+    public void onFailed(String msg) {
+        if (customLoading != null && customLoading.getTag() != null) {
+            customLoading.dismiss();
+        }
+        showSnackBar(msg);
     }
 }

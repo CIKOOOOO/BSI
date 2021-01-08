@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity;
 import com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
@@ -30,11 +32,9 @@ public class ReksadanaProductFragment extends BaseFragment implements IReksaDana
     private ReksadanaProductViewModel viewModel;
     private ReksadanaProductAdapter adapter;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -60,7 +60,7 @@ public class ReksadanaProductFragment extends BaseFragment implements IReksaDana
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
 
-        viewModel.getReksaDanaList();
+        viewModel.getReksaDanaList(prefConfig.getProfileRisiko());
 
         etSearchProduct.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,11 +87,23 @@ public class ReksadanaProductFragment extends BaseFragment implements IReksaDana
     }
 
     @Override
+    public void onFailed(String msg) {
+        showSnackBar(msg);
+    }
+
+    @Override
     public void onReksaDanaClick(Product.ReksaDana reksaDana) {
         Intent intent = new Intent(mActivity, DetailProductTransactionActivity.class);
         intent.putExtra(DetailProductTransactionActivity.PRODUCT_TYPE, Type.REKSA_DANA);
         intent.putExtra(DetailProductTransactionActivity.SALES_TYPE, Type.PURCHASING);
         intent.putExtra(DetailProductTransactionActivity.DATA, Utils.toJSON(reksaDana));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDetail(Product.ReksaDana reksaDana) {
+        Intent intent = new Intent(mActivity, DetailReksaDanaActivity.class);
+        intent.putExtra(DetailReksaDanaActivity.REKSA_DANA_ID, reksaDana.getReksadanaID());
         startActivity(intent);
     }
 }

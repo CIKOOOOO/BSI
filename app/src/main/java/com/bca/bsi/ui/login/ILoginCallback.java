@@ -1,7 +1,9 @@
 package com.bca.bsi.ui.login;
 
-public interface ILoginCallback {
-    void onSuccess();
+import com.bca.bsi.model.User;
 
-    void onFailed();
+public interface ILoginCallback {
+    void onSuccess(User.ForumUser forumUser, User.WelmaUser welmaUser);
+
+    void onFailed(String msg);
 }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_share_trade"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangle_rounded_stroke_ziggurat">
+
+    <TextView
+        android:id="@+id/tv_transaction_type_share_trade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_10dp"
+        android:layout_marginEnd="@dimen/size_for_10dp"
+        android:rotation="270"
+        android:text="@string/buy"
+        android:textColor="@color/black_palette"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/size_for_0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_rounded_stroke_white_welma"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_transaction_type_share_trade"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_content_share_trade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:text="Saya baru saja membeli"
+            android:textColor="@color/black_palette"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_for_15dp"
+            android:layout_marginTop="@dimen/size_for_5dp"
+            android:text="@string/my_transaction"
+            android:textColor="@color/black_palette"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_content_share_trade" />
+
+        <TextView
+            android:id="@+id/tv_name_product_share_trade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_for_30dp"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:text="SRIL"
+            android:textColor="@color/black_palette"
+            android:textSize="@dimen/size_for_25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+        <TextView
+            android:id="@+id/tv_price_product_share_trade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:text="Rp 2.310"
+            android:textColor="@color/black_palette"
+            android:textSize="@dimen/size_for_25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_name_product_share_trade" />
+
+        <TextView
+            android:id="@+id/tv_name_manager_invest_share_trade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:layout_marginBottom="@dimen/size_for_10dp"
+            android:text="S-i Rejeki Isman Tbk."
+            android:textColor="@color/black_palette"
+            android:textSize="@dimen/size_for_12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textView35"
+            app:layout_constraintTop_toBottomOf="@id/tv_name_product_share_trade" />
+
+        <TextView
+            android:id="@+id/tv_copy_transaction_share_trade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:text="@string/copy_transaction"
+            android:textColor="@color/dodger_blue_palette"
+            android:textSize="@dimen/size_for_12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_name_manager_invest_share_trade" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,12 +12,14 @@ public class Constant {
     public static final long MAX_USAGE_DURATION_APPS = 600000;
 
     public static final String EMPTY = "";
+    public static final String BASE_URL = "http://10.43.2.206:1403/";
     public static final String DATE_FORMAT_1 = "dd/MM/yyyy";
 
     public static final String[] PRODUCT_TITLE = {"Reksa Dana", "Obligasi", "Asuransi"};
     private static final String[] PRODUCT_DESCRIPTION = {"Investasi Dana Terjangkau", "Investasi Berpendapatan Tetap", "Perlindungan Jiwa, Kesehatan, dan Harta Benda"};
     private static final int[] PRODUCT_IMAGE = {R.drawable.img_asset_reksa_dana, R.drawable.img_asset_obligasi, R.drawable.img_asset_asuransi};
 
+    public static final String[] FORUM_MENU = {"Trending", "Strategy", "Share Trade", "News", "Timeline"};
 
     public static List<Object> getProductTypeList() {
         List<Object> productTypeList = new ArrayList<>();

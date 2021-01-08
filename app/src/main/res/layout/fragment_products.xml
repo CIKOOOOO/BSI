@@ -23,6 +23,7 @@
             android:id="@+id/rv_product_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_for_20dp"
             android:nestedScrollingEnabled="false"
             android:overScrollMode="never" />
     </LinearLayout>
