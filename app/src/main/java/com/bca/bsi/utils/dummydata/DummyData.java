@@ -1,6 +1,8 @@
 package com.bca.bsi.utils.dummydata;
 
 import com.bca.bsi.model.Product;
+import com.bca.bsi.model.ProductChoice;
+import com.bca.bsi.model.ProductRekomen;
 import com.bca.bsi.model.PromoNews;
 
 import java.util.ArrayList;
@@ -18,6 +20,11 @@ public class DummyData {
     private static final double[] kinerja = {14.13, 14.89, 10.13};
     private static final double[] nab = {1462.81, 1575.39, 1672.98};
 
+    private static final String[] kinerjaString = {"+14.13%", "+14.89%", "+10.13%"};
+    private static final String[] nabString = {"1462.81", "1575.39", "1672.98"};
+    private static final String[] percentage = {"70%","20%","10%"};
+    private static final boolean[] isChoosen = {false,false,false};
+
     public static List<Product.ReksaDana> getReksaDanaDummyList() {
         List<Product.ReksaDana> reksaDanaList = new ArrayList<>();
         for (int i = 0; i < title.length; i++) {
@@ -34,6 +41,24 @@ public class DummyData {
             promoNewsList.add(promoNews);
         }
         return promoNewsList;
+    }
+
+    public static List<ProductRekomen> getProductRekomenList() {
+        List<ProductRekomen> productRekomenList = new ArrayList<>();
+        for(int i=0;i<title.length;i++){
+            ProductRekomen produk = new ProductRekomen(title[i],date[i],percentage[i],kinerjaString[i],nabString[i],type[i]);
+            productRekomenList.add(produk);
+        }
+        return productRekomenList;
+    }
+
+    public static List<ProductChoice> getProductChoiceList() {
+        List<ProductChoice> productChoices = new ArrayList<>();
+        for(int i=0;i<title.length;i++){
+            ProductChoice produk = new ProductChoice(title[i],type[i],date[i],nabString[i],kinerjaString[i],isChoosen[i]);
+            productChoices.add(produk);
+        }
+        return productChoices;
     }
 
 }

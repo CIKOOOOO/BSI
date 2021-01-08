@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_palette"
+        android:alpha="0.3"/>
+
+    <ImageView
+        android:layout_width="166dp"
+        android:layout_height="171dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/img_welbot"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/textbubble"
+        android:layout_width="344dp"
+        android:layout_height="361dp"
+        android:src="@drawable/bg_bubble"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.556" />
+
+    <TextView
+        android:id="@+id/popup_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rekomendasi SmartBot"
+        android:textColor="@color/white_palette"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/textbubble"
+        app:layout_constraintEnd_toEndOf="@id/textbubble"
+        app:layout_constraintTop_toTopOf="@id/textbubble"
+        android:layout_marginTop="@dimen/size_for_60dp"/>
+
+    <TextView
+        android:id="@+id/tv_robobantu1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/robo_bantu1"
+        android:textColor="@color/french_pass_palette"
+        app:layout_constraintTop_toBottomOf="@id/popup_title"
+        app:layout_constraintStart_toStartOf="@id/textbubble"
+        android:layout_marginStart="@dimen/size_for_30dp"
+        android:layout_marginTop="@dimen/size_for_30dp"
+        android:textSize="@dimen/size_for_17sp"/>
+    <TextView
+        android:id="@+id/tv_robobantu2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/robo_bantu2"
+        android:textColor="@color/french_pass_palette"
+        app:layout_constraintTop_toBottomOf="@id/tv_robobantu1"
+        app:layout_constraintStart_toStartOf="@id/tv_robobantu1"
+        android:layout_marginTop="@dimen/size_for_2dp"
+        android:textSize="@dimen/size_for_17sp"/>
+    <TextView
+        android:id="@+id/tv_robobantu3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/robo_bantu3"
+        android:textColor="@color/french_pass_palette"
+        app:layout_constraintTop_toBottomOf="@id/tv_robobantu2"
+        app:layout_constraintStart_toStartOf="@id/tv_robobantu2"
+        android:layout_marginTop="@dimen/size_for_2dp"
+        android:textSize="@dimen/size_for_17sp"/>
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_clear2"
+        app:layout_constraintEnd_toEndOf="@id/textbubble"
+        app:layout_constraintTop_toTopOf="@id/textbubble"
+        android:layout_marginEnd="@dimen/size_for_15dp"
+        android:layout_marginTop="@dimen/size_for_15dp"/>
+
+    <TextView
+        android:id="@+id/tv_hitungsekarang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HITUNG SEKARANG"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@id/textbubble"
+        app:layout_constraintEnd_toEndOf="@id/textbubble"
+        app:layout_constraintBottom_toBottomOf="@id/textbubble"
+        android:layout_marginBottom="90dp"
+        android:background="@drawable/rectangle_rounded_white"
+        android:paddingHorizontal="@dimen/size_for_40dp"
+        android:paddingVertical="@dimen/size_for_5dp"
+        android:textStyle="bold"
+        android:textColor="@color/keppel_palette"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,13 +17,20 @@ import java.util.List;
 public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Holder> {
 
     private static final int JUMLAH_PORTFOLIO = 3;
-    List<Portfolio> portfolioList = new ArrayList<>();
+    private List<Portfolio> portfolioList = new ArrayList<>();
+    private onItemClick onItemClick;
+
+    public PortfolioAdapter(PortfolioAdapter.onItemClick onItemClick) {
+        this.onItemClick = onItemClick;
+    }
 
     public void setPortfolioList(List<Portfolio> portfolioList) {
         this.portfolioList = portfolioList;
     }
 
-    public PortfolioAdapter() {
+    public interface onItemClick {
+        void onItemClick(Portfolio portfolio);
+        void toReksadanaList();
     }
 
     @NonNull
@@ -48,12 +55,24 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Hold
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         if (position == 2) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClick.toReksadanaList();
+                }
+            });
 
         } else {
-            Portfolio portfolio = portfolioList.get(position);
+            final Portfolio portfolio = portfolioList.get(position);
             holder.tvReturn.setText(portfolio.getExpReturn());
             holder.tvRisk.setText(portfolio.getRisk());
             holder.tvBundleName.setText(portfolio.getBundleName());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClick.onItemClick(portfolio);
+                }
+            });
         }
     }
 
@@ -63,7 +82,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Hold
     }
 
     static class Holder extends RecyclerView.ViewHolder {
-        private TextView tvReturn, tvRisk, tvBundleName;
+        private TextView tvTitleProduct, tvReturn, tvRisk, tvBundleName;
 
         public Holder(@NonNull View itemView) {
             super(itemView);

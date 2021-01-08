@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_palette">
+
+    <TextView
+        android:id="@+id/recycler_tv_title_product_reksadana_c"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:textColor="@color/java_palette"
+        android:textSize="@dimen/size_for_17sp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        app:layout_constraintEnd_toStartOf="@id/cb_produk_c"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Ashmore Dana Ekuitas Nusantara" />
+
+
+    <CheckBox
+        android:id="@+id/cb_produk_c"
+        android:scaleX="1.6"
+        android:scaleY="1.6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/sherpa_blue_palette"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/recycler_tv_title_product_reksadana_c" />
+
+    <TextView
+        android:id="@+id/recycler_tv_type_product_reksadana_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:textColor="@color/gray_palette"
+        android:textSize="@dimen/size_for_15sp"
+        app:layout_constraintStart_toStartOf="@id/recycler_tv_title_product_reksadana_c"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_title_product_reksadana_c"
+        tools:text="Saham" />
+
+    <TextView
+        android:id="@+id/recycler_tv_date_product_reksadana_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_15dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:gravity="center"
+        android:paddingStart="@dimen/size_for_5dp"
+        android:paddingEnd="@dimen/size_for_5dp"
+        android:textColor="@color/gray_palette"
+        app:drawableStartCompat="@drawable/ic_baseline_date_range_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_type_product_reksadana_c"
+        tools:text="16/12/20" />
+
+    <TextView
+        android:id="@+id/tv_01_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:text="@string/performance_1_month"
+        android:textAllCaps="true"
+        android:textSize="@dimen/size_for_12sp"
+        app:layout_constraintStart_toStartOf="@id/recycler_tv_title_product_reksadana_c"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_date_product_reksadana_c" />
+
+    <TextView
+        android:id="@+id/tv_02_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:text="@string/nab_unit"
+        android:textAllCaps="true"
+        android:textSize="@dimen/size_for_12sp"
+        app:layout_constraintStart_toEndOf="@id/tv_01_c"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_date_product_reksadana_c" />
+
+    <TextView
+        android:id="@+id/recycler_tv_kinerja_product_reksadana_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green_base_palette"
+        app:layout_constraintStart_toStartOf="@id/recycler_tv_title_product_reksadana_c"
+        app:layout_constraintTop_toBottomOf="@id/tv_01_c"
+        tools:text="+14,89%" />
+
+    <TextView
+        android:id="@+id/recycler_tv_nab_product_reksadana_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/java_palette"
+        app:layout_constraintStart_toStartOf="@id/tv_02_c"
+        app:layout_constraintTop_toBottomOf="@id/tv_01_c"
+        tools:text="Rp 1462,81" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:background="@color/gray_palette"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_nab_product_reksadana_c" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

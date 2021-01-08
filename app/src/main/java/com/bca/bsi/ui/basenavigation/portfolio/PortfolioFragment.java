@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.portfolio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +15,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.PortfolioAdapter;
 import com.bca.bsi.model.Portfolio;
+import com.bca.bsi.ui.basenavigation.portfolio.produkmenu.ProdukChoiceActivity;
 import com.bca.bsi.utils.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PortfolioFragment extends BaseFragment {
+public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.onItemClick {
     private PortfolioAdapter adapter;
     private ProgressBar progressBar;
 
+    private onBundleClick onBundleClick;
+
+    @Override
+    public void onItemClick(Portfolio portfolio) {
+        onBundleClick.onItemClick(portfolio);
+    }
+
+    @Override
+    public void toReksadanaList() {
+        Intent intent = new Intent(mActivity, ProdukChoiceActivity.class);
+        mActivity.startActivity(intent);
+    }
+
+    public interface onBundleClick{
+        void onItemClick(Portfolio portfolio);
+    }
+
+    public void setOnBundleClick(PortfolioFragment.onBundleClick onBundleClick) {
+        this.onBundleClick = onBundleClick;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
     }
 
@@ -43,7 +65,7 @@ public class PortfolioFragment extends BaseFragment {
         //recycler robo
         RecyclerView recyclerView = view.findViewById(R.id.recycler_robo_main);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.HORIZONTAL, false));
-        adapter = new PortfolioAdapter();
+        adapter = new PortfolioAdapter(this);
         recyclerView.setAdapter(adapter);
         adapter.setPortfolioList(getPortfolioList());
 
@@ -59,8 +81,8 @@ public class PortfolioFragment extends BaseFragment {
 
     private List<Portfolio> getPortfolioList() {
         List<Portfolio> portfolioList = new ArrayList<>();
-        portfolioList.add(new Portfolio("1%", "2%","Bundle 1"));
-        portfolioList.add(new Portfolio("3%", "4%","Bundle 2"));
+        portfolioList.add(new Portfolio("1%", "0.02","Bundle 1"));
+        portfolioList.add(new Portfolio("3%", "0.04","Bundle 2"));
         return portfolioList;
     }
 }

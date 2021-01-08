@@ -35,4 +35,6 @@
     <color name="keppel_palette">#429AA1</color>
     <color name="jaffa_palette">#F27D30</color>
     <color name="dove_gray_palette">#737373</color>
+    <color name="green_return">#48ab2d</color>
+    <color name="blue_risk">#00555f</color>
 </resources>

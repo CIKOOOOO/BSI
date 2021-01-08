@@ -11,12 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity"></activity>
-        <activity android:name=".ui.basenavigation.transaction.detail.DetailTransactionActivity" />
-        <activity android:name=".ui.basenavigation.transaction.ConfirmationActivity" />
-        <activity android:name=".ui.basenavigation.products.detail.DetailProductActivity" />
-        <activity android:name=".ui.basenavigation.BaseNavigationActivity" />
-        <activity android:name=".ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity"></activity>
+        <activity android:name=".ui.basenavigation.portfolio.produkmenu.ProdukChoiceActivity"></activity>
+        <activity android:name=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity" />
+        <activity android:name=".ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity" />
         <activity
             android:name=".ui.basenavigation.products.detail.reksadana.CalculatorProductActivity"
             android:label="@string/title_activity_calculator_product"

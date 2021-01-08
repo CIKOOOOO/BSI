@@ -84,7 +84,16 @@
     <string name="detail_promo">Detail Promo</string>
     <string name="detail_news">Detail Berita</string>
 
-
+    <string name="disclaimer_purchasing_robo">
+        Simulasi perhitungan berlaku untuk hari ini
+        \nsesuai dengan data historis reksa dana.
+        \nPemilihan produk reksa dana merupakan
+        \nbagian dari kebijakan pengguna dan di luar
+        \ntanggung jawab penyedia aplikasi Welma BCA
+    </string>
+    <string name="robo_bantu1">SmartBot dapat membantu kamu</string>
+    <string name="robo_bantu2">menghitung persentase porsi investasi</string>
+    <string name="robo_bantu3">pada produk reksa dana.</string>
     <!--END HERE-->
 
 
