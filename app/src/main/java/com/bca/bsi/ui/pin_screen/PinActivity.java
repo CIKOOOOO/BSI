@@ -7,14 +7,22 @@ import android.widget.TextView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Transaction;
+import com.bca.bsi.ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity;
 import com.bca.bsi.ui.basenavigation.transaction.detail_transaction.DetailTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.Utils;
 import com.mukesh.OnOtpCompletionListener;
 import com.mukesh.OtpView;
 
 public class PinActivity extends BaseActivity implements IPinCallback {
 
+    public static final String TRANSACTION_TYPE = "transaction_type";
+    public static final String PARCEL_DATA = "parcel_data";
+
     private PinViewModel viewModel;
+
+    private String data, type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +42,42 @@ public class PinActivity extends BaseActivity implements IPinCallback {
         tvTitleToolbar.setText(getString(R.string.pin_code));
         tvChildToolbar.setText(getString(R.string.input_pin));
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(TRANSACTION_TYPE) && intent.hasExtra(PARCEL_DATA)) {
+            this.type = intent.getStringExtra(TRANSACTION_TYPE);
+            this.data = intent.getStringExtra(PARCEL_DATA);
+        }
+
         otpView.setOtpCompletionListener(new OnOtpCompletionListener() {
             @Override
             public void onOtpCompleted(String otp) {
-                viewModel.checkingPin(otp);
+                viewModel.checkingPin(type, otp, data);
             }
         });
     }
 
     @Override
-    public void onSuccessPin() {
+    public void onSuccessPin(Object o) {
+        switch (type) {
+            case ConfirmationTransactionActivity.FROM_CONFIRMATION_ACTIVITY:
+                Transaction.TransactionResult transactionResult = (Transaction.TransactionResult) o;
+
+                Intent intent = new Intent(this, DetailTransactionActivity.class);
+                intent.putExtra(DetailTransactionActivity.PARCEL_DATA, Utils.toJSON(transactionResult));
+                startActivity(intent);
+                break;
+        }
+
         startActivity(new Intent(PinActivity.this, DetailTransactionActivity.class));
     }
 
     @Override
     public void onWrongPin() {
 
+    }
+
+    @Override
+    public void onFailed(String msg) {
+        showSnackBar(msg);
     }
 }

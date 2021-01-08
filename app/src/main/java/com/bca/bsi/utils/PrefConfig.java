@@ -68,7 +68,7 @@ public class PrefConfig {
         editor.apply();
     }
 
-    public String getUID() {
+    public String getBCAID() {
         return sharedPreferences.getString(context.getString(R.string.pref_bca_id), Constant.EMPTY);
     }
 

@@ -78,9 +78,11 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_kinerja_produk_detail_reksa_dana"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_for_10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_06" />
 
             <TextView

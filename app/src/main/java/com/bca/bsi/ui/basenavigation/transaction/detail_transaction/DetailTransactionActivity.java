@@ -1,14 +1,19 @@
 package com.bca.bsi.ui.basenavigation.transaction.detail_transaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Transaction;
 import com.bca.bsi.utils.BaseActivity;
+import com.google.gson.Gson;
 
 public class DetailTransactionActivity extends BaseActivity implements View.OnClickListener {
+
+    public static final String PARCEL_DATA = "parcel_data";
 
     private TextView tvProductName, tvTransactionType, tvNominalPembelian, tvNominalBiayaPembelian, tvNominalTotalPembelian, tvRekeningSumberDana, tvTransactionTime, tvReferenceNumber;
 
@@ -34,6 +39,22 @@ public class DetailTransactionActivity extends BaseActivity implements View.OnCl
         tvReferenceNumber = findViewById(R.id.tv_referensi_number_detail_transaction);
 
         tvTitle.setText(getString(R.string.product_detail));
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(PARCEL_DATA)) {
+            String data = intent.getStringExtra(PARCEL_DATA);
+            Gson gson = new Gson();
+            Transaction.TransactionResult transactionResult = gson.fromJson(data, Transaction.TransactionResult.class);
+
+            tvProductName.setText(transactionResult.getProductName());
+            tvTransactionType.setText(transactionResult.getPaymentType());
+            tvNominalPembelian.setText(transactionResult.getNominalPembelian());
+            tvNominalBiayaPembelian.setText(transactionResult.getNominalBiayaPembelian());
+            tvNominalTotalPembelian.setText(transactionResult.getNominalTotalPembelian());
+            tvRekeningSumberDana.setText(transactionResult.getRekeningSumberDana());
+            tvTransactionTime.setText(transactionResult.getTransactionTime());
+            tvReferenceNumber.setText(transactionResult.getReferenceNumber());
+        }
 
         btnFinish.setOnClickListener(this);
     }

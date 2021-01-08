@@ -57,6 +57,12 @@ public class OutputResponse {
         @SerializedName("Detail_Reksadana")
         private Product.DetailReksaDana detailReksaDana;
 
+        @SerializedName("bca_user")
+        private User.BCAUser bcaUser;
+
+        @SerializedName("transaction")
+        private Transaction.TransactionResult transactionResult;
+
         public OutputSchema() {
         }
 
@@ -74,6 +80,14 @@ public class OutputResponse {
 
         public Product.DetailReksaDana getDetailReksaDana() {
             return detailReksaDana;
+        }
+
+        public User.BCAUser getBcaUser() {
+            return bcaUser;
+        }
+
+        public Transaction.TransactionResult getTransactionResult() {
+            return transactionResult;
         }
     }
 }

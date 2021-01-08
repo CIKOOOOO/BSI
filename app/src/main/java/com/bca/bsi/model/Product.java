@@ -223,5 +223,21 @@ public class Product {
         }
     }
 
+    public static class Performance {
+        private String period;
+        private double value;
 
+        public Performance(String period, double value) {
+            this.period = period;
+            this.value = value;
+        }
+
+        public String getPeriod() {
+            return period;
+        }
+
+        public double getValue() {
+            return value;
+        }
+    }
 }

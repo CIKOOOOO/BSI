@@ -5,18 +5,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.dummydata.DummyData;
 
 public class DetailReksaDanaActivity extends BaseActivity implements View.OnClickListener, IDetailReksaDanaCallback {
 
     public static final String REKSA_DANA_ID = "reksa_dana_id";
 
     private DetailReksaDanaViewModel viewModel;
+    private ReksaDanaPerformanceAdapter danaPerformanceAdapter;
     private TextView tvProductName, tvDate, tvNAB, tvManagerInvest, tvKustodianBank, tvTypeReksaDana, tvReleaseDate, tvFirstMinimumPurchasing, tvNextMinimumPurchasing, tvSellingMinimum, tvMinimumSaldoUnit, tvPurcashingCost, tvSellingCost, tvInvestManagementCost, tvCustodianCost, tvAgentCost, tvKalkulatorPerencanaan;
 
     @Override
@@ -30,6 +35,7 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
         TextView tvTitle = findViewById(R.id.tv_title_toolbar_back);
         TextView tvChild = findViewById(R.id.tv_child_toolbar_back);
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
+        RecyclerView recycler_performance = findViewById(R.id.recycler_kinerja_produk_detail_reksa_dana);
 
         tvProductName = findViewById(R.id.tv_name_detail_reksa_dana);
         tvDate = findViewById(R.id.tv_date_detail_reksa_dana);
@@ -49,8 +55,13 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
         tvAgentCost = findViewById(R.id.tv_cost_agent_detail_reksa_dana);
         tvKalkulatorPerencanaan = findViewById(R.id.tv_kalkulator_perencanaan_detail_reksa_dana);
 
+        danaPerformanceAdapter = new ReksaDanaPerformanceAdapter();
+
         viewModel = new ViewModelProvider(this).get(DetailReksaDanaViewModel.class);
         viewModel.setCallback(this);
+
+        recycler_performance.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        recycler_performance.setAdapter(danaPerformanceAdapter);
 
         tvTitle.setText(getString(R.string.detail_product));
         tvChild.setVisibility(View.GONE);
@@ -62,7 +73,11 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
         }
 
         imgBack.setOnClickListener(this);
+        tvKalkulatorPerencanaan.setOnClickListener(this);
 
+
+        danaPerformanceAdapter.setPerformanceList(DummyData.getPerformanceList());
+        danaPerformanceAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -71,11 +86,38 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
             case R.id.img_btn_back_toolbar:
                 onBackPressed();
                 break;
+            case R.id.tv_kalkulator_perencanaan_detail_reksa_dana:
+                Toast.makeText(this, "kalkulator perencanaan", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
     @Override
     public void onLoadReksaDanaDetail(Product.DetailReksaDana detailReksaDana) {
+        tvProductName.setText(detailReksaDana.getName());
+        tvDate.setText(detailReksaDana.getUpdateDate());
+
+        String nab = detailReksaDana.getNabSatuBulan() + "\n NAB/Unit";
+        tvNAB.setText(nab);
+
+        tvManagerInvest.setText(detailReksaDana.getManagerInvestasiID());
+        tvTypeReksaDana.setText(detailReksaDana.getProductCategory());
+        tvReleaseDate.setText(detailReksaDana.getReleaseDate());
+        tvFirstMinimumPurchasing.setText(detailReksaDana.getMinimumPembelianPertama());
+        tvNextMinimumPurchasing.setText(detailReksaDana.getMinimumPembelianBerikut());
+        tvSellingMinimum.setText(detailReksaDana.getMininumPenjualan());
+        tvMinimumSaldoUnit.setText(detailReksaDana.getMinimumSaldoUnit());
+        tvPurcashingCost.setText(detailReksaDana.getBiayaPembelian());
+        tvSellingCost.setText(detailReksaDana.getBiayaPenjualan());
+        tvInvestManagementCost.setText(detailReksaDana.getBiayaManajerInvestasi());
+        tvCustodianCost.setText(detailReksaDana.getBiayaBankKustodian());
+        tvAgentCost.setText(detailReksaDana.getBiayaAgen());
+
+        // here
+        tvKustodianBank.setText(detailReksaDana.getBankKustodianID());
+
+//        danaPerformanceAdapter.setPerformanceList(DummyData.getPerformanceList());
+//        danaPerformanceAdapter.notifyDataSetChanged();
 
     }
 

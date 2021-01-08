@@ -41,62 +41,67 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void loginWith(String token, String bcaID, String password) {
 
-        callback.onSuccess(null, null);
+//        callback.onSuccess(null, null);
 
-//        Map<String, String> stringStringMap = new HashMap<>();
-//        stringStringMap.put("bca_id", bcaID);
-//        stringStringMap.put("password", password);
-//        Call<OutputResponse> call = apiInterface.loginWith(token, stringStringMap);
-//        call.enqueue(new Callback<OutputResponse>() {
-//            @Override
-//            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-//                if (response.body() != null) {
-//                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
-//                    if (errorSchema.getErrorCode() == 403) {
-//                        callback.onFailed(errorSchema.getErrorMessage());
-//                    } else {
-//                        User.ForumUser forumUser = response.body().getOutputSchema().getForumUser();
-//                        User.WelmaUser welmaUser = response.body().getOutputSchema().getWelmaUser();
-//                        callback.onSuccess(forumUser, welmaUser);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<OutputResponse> call, Throwable t) {
-//                callback.onFailed("Terdapat kesalahan jaringan");
-//            }
-//        });
+        Map<String, Object> stringStringMap = new HashMap<>();
+        stringStringMap.put("bca_id", bcaID);
+        stringStringMap.put("password", password);
+
+        Call<OutputResponse> call = apiInterface.loginWith(token, stringStringMap);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd","onresponse");
+                if (response.body() != null) {
+                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
+                    if (errorSchema.getErrorCode() == 200) {
+                        User.ForumUser forumUser = response.body().getOutputSchema().getForumUser();
+                        User.WelmaUser welmaUser = response.body().getOutputSchema().getWelmaUser();
+                        callback.onSuccess(forumUser, welmaUser);
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("Terdapat kesalahan jaringan");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                Log.e("asd","onfail");
+                callback.onFailed("Terdapat kesalahan jaringan");
+            }
+        });
     }
 
     public void getAccessToken(String bcaID, String password) {
         callback.onSuccess(null, null);
-//        JSONObject jsonObject = new JSONObject();
-//        try {
-//            jsonObject.put("grant_type", "client_credentials");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        AndroidNetworking.post("https://sso-apigw-int.dti.co.id/auth/realms/3scale-dev/protocol/openid-connect/token")
-//                .addHeaders("Authorization", "Basic MmNkMzc5MTc6Zjg2MzIzZjUyMmQzZmQyNzM2ODhiNmQ0NzgyMDJkNDI=")
-//                .addJSONObjectBody(jsonObject)
-//                .setPriority(Priority.HIGH)
-//                .build()
-//                .getAsJSONObject(new JSONObjectRequestListener() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            String accessToken = response.getString("access_token");
-//                            loginWith(accessToken, bcaID, password);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(ANError anError) {
-//                        callback.onFailed("Terdapat kesalahan jaringan");
-//                    }
-//                });
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("grant_type", "client_credentials");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        AndroidNetworking.post("https://sso-apigw-int.dti.co.id/auth/realms/3scale-dev/protocol/openid-connect/token")
+                .addHeaders("Authorization", "Basic MmNkMzc5MTc6Zjg2MzIzZjUyMmQzZmQyNzM2ODhiNmQ0NzgyMDJkNDI=")
+                .addJSONObjectBody(jsonObject)
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String accessToken = response.getString("access_token");
+                            loginWith(accessToken, bcaID, password);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        callback.onFailed("Terdapat kesalahan jaringan");
+                    }
+                });
     }
 }

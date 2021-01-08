@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/size_for_10dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/recycler_tv_period_performance_reksa_dana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1 Bulan"
+        android:textSize="@dimen/size_for_12sp" />
+
+    <TextView
+        android:id="@+id/recycler_tv_value_performance_reksa_dana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_5dp"
+        android:text="8,40"
+        android:textSize="@dimen/size_for_15sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

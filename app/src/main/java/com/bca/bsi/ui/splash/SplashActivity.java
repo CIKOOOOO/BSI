@@ -3,7 +3,7 @@ package com.bca.bsi.ui.splash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Toast;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -44,6 +44,7 @@ public class SplashActivity extends BaseActivity implements ISplashCallback {
 
     @Override
     public void onGettingToken(String token) {
+        Log.e("asd", token);
         prefConfig.setTokenAccess(token);
     }
 

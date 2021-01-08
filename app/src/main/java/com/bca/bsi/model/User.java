@@ -85,4 +85,17 @@ public class User {
             return profileRisiko;
         }
     }
+
+    public static class BCAUser{
+
+        @SuppressWarnings("saldo")
+        private String saldo;
+
+        public BCAUser() {
+        }
+
+        public String getSaldo() {
+            return saldo;
+        }
+    }
 }

@@ -14,8 +14,8 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_height="@dimen/size_for_0dp"
+        app:layout_constraintBottom_toTopOf="@+id/include9"
         app:layout_constraintTop_toBottomOf="@id/include1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -202,6 +202,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <include
+        android:id="@+id/include9"
         layout="@layout/custom_notice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

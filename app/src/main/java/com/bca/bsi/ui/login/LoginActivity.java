@@ -2,6 +2,7 @@ package com.bca.bsi.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,19 +49,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 String bcaId = etBCAID.getText().toString().trim();
                 String pass = tilPassword.getEditText().getText().toString().trim();
 
-//                if (bcaId.isEmpty() || pass.isEmpty()) {
-//                    showSnackBar(getString(R.string.bca_id_password_empty));
-//                } else {
-//                    customLoading = new CustomLoading();
-//                    if (!customLoading.isVisible()) {
-//                        customLoading.show(getSupportFragmentManager(), "");
+                if (bcaId.isEmpty() || pass.isEmpty()) {
+                    showSnackBar(getString(R.string.bca_id_password_empty));
+                } else {
+                    customLoading = new CustomLoading();
+                    if (!customLoading.isVisible()) {
+                        customLoading.show(getSupportFragmentManager(), "");
 //                        if (prefConfig.getTokenAccess().isEmpty()) {
 //                            viewModel.getAccessToken(bcaId, pass);
 //                        } else {
                             viewModel.loginWith(prefConfig.getTokenAccess(), bcaId, pass);
 //                        }
-//                    }
-//                }
+                    }
+                }
                 break;
         }
     }
@@ -74,7 +75,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             customLoading.dismiss();
         }
         finishAffinity();
-//        prefConfig.setUser(forumUser, welmaUser);
+        prefConfig.setUser(forumUser, welmaUser);
         startActivity(new Intent(this, BaseNavigationActivity.class));
     }
 
