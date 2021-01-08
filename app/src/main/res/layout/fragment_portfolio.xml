@@ -1,188 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.basenavigation.portfolio.PortfolioFragment">
 
-    <ImageView
-        android:id="@+id/welma_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_for_40dp"
-        android:layout_marginTop="@dimen/size_for_20dp"
-        android:src="@drawable/ic_welma_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/inbox_logo"
-        android:layout_width="20dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="55dp"
-
-        android:src="@drawable/ic_inbox_logo2"
-        app:layout_constraintStart_toEndOf="@id/welma_logo"
-        app:layout_constraintTop_toTopOf="@id/welma_logo" />
-
-    <TextView
-        android:id="@+id/saldo_investasi"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginStart="@dimen/size_for_20dp"
-        android:layout_marginTop="@dimen/size_for_30dp"
-        android:layout_marginEnd="@dimen/size_for_20dp"
-        android:background="@drawable/rectangle_rounded_white_border"
-        android:paddingLeft="@dimen/size_for_20dp"
-        android:paddingTop="@dimen/size_for_10dp"
-        android:text="SALDO INVESTASI"
-        android:textColor="@color/white_palette"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welma_logo" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/nilai_saldo_investasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_for_20dp"
-        android:layout_marginEnd="@dimen/size_for_20dp"
-        android:paddingLeft="@dimen/size_for_20dp"
-        android:paddingTop="@dimen/size_for_10dp"
-        android:text="Rp. 100.000"
-        android:textColor="@color/white_palette"
-        android:textSize="@dimen/size_for_25dp"
-        app:layout_constraintStart_toStartOf="@id/saldo_investasi"
-        app:layout_constraintTop_toTopOf="@id/saldo_investasi" />
+        <ImageView
+            android:id="@+id/welma_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_for_40dp"
+            android:layout_marginTop="@dimen/size_for_20dp"
+            android:src="@drawable/ic_welma_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/percent_reksadana"
-        android:layout_width="@dimen/size_for_50dp"
-        android:layout_height="@dimen/size_for_50dp"
-        android:layout_marginTop="@dimen/size_for_70dp"
-        android:indeterminate="false"
-        android:progressDrawable="@drawable/circular_progress_bar"
-        android:background="@drawable/circular_shape"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:max="100"
-        app:layout_constraintStart_toStartOf="@id/saldo_investasi"
-        app:layout_constraintTop_toBottomOf="@id/saldo_investasi" />
+        <ImageView
+            android:id="@+id/inbox_logo"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="55dp"
 
-    <TextView
-        android:id="@+id/tv_percent_reksadana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="50 %"
-        android:textColor="@color/white_palette"
-        app:layout_constraintStart_toStartOf="@id/percent_reksadana"
-        app:layout_constraintBottom_toBottomOf="@id/percent_reksadana"
-        app:layout_constraintEnd_toEndOf="@id/percent_reksadana"
-        app:layout_constraintTop_toTopOf="@id/percent_reksadana"/>
-    <TextView
-        android:id="@+id/title_reksadana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_for_30dp"
-        android:text="Reksa Dana"
-        android:textColor="@color/white_palette"
-        android:textSize="@dimen/size_for_15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/percent_reksadana"
-        app:layout_constraintTop_toTopOf="@id/percent_reksadana" />
+            android:src="@drawable/ic_inbox_logo2"
+            app:layout_constraintStart_toEndOf="@id/welma_logo"
+            app:layout_constraintTop_toTopOf="@id/welma_logo" />
 
-    <TextView
-        android:id="@+id/description_reksadana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_for_3dp"
-        android:text="-"
-        android:textColor="@color/white_palette"
-        app:layout_constraintStart_toStartOf="@id/title_reksadana"
-        app:layout_constraintTop_toBottomOf="@id/title_reksadana" />
+        <TextView
+            android:id="@+id/saldo_investasi"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_marginTop="@dimen/size_for_30dp"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:background="@drawable/rectangle_rounded_white_border"
+            android:paddingLeft="@dimen/size_for_20dp"
+            android:paddingTop="@dimen/size_for_10dp"
+            android:text="SALDO INVESTASI"
+            android:textColor="@color/white_palette"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welma_logo" />
 
-    <TextView
-        android:id="@+id/seperator_line"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/size_for_120dp"
-        android:layout_marginTop="@dimen/size_for_20dp"
-        android:background="@drawable/line_lightblue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description_reksadana" />
+        <TextView
+            android:id="@+id/nilai_saldo_investasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_for_20dp"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:paddingLeft="@dimen/size_for_20dp"
+            android:paddingTop="@dimen/size_for_10dp"
+            android:text="Rp. 100.000"
+            android:textColor="@color/white_palette"
+            android:textSize="@dimen/size_for_25dp"
+            app:layout_constraintStart_toStartOf="@id/saldo_investasi"
+            app:layout_constraintTop_toTopOf="@id/saldo_investasi" />
 
-    <ProgressBar
-        android:id="@+id/percent_obligasi"
-        android:layout_width="@dimen/size_for_50dp"
-        android:layout_height="@dimen/size_for_50dp"
-        android:layout_marginTop="@dimen/size_for_40dp"
-        android:indeterminate="false"
-        android:progressDrawable="@drawable/circular_progress_bar"
-        android:background="@drawable/circular_shape"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:max="100"
-        app:layout_constraintStart_toStartOf="@id/percent_reksadana"
-        app:layout_constraintTop_toBottomOf="@id/percent_reksadana" />
-    />
-    <TextView
-        android:id="@+id/tv_percent_obligasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="20 %"
-        android:textColor="@color/white_palette"
-        app:layout_constraintStart_toStartOf="@id/percent_obligasi"
-        app:layout_constraintBottom_toBottomOf="@id/percent_obligasi"
-        app:layout_constraintEnd_toEndOf="@id/percent_obligasi"
-        app:layout_constraintTop_toTopOf="@id/percent_obligasi"/>
-    <TextView
-        android:id="@+id/title_obligasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_for_30dp"
-        android:text="Obligasi"
-        android:textColor="@color/white_palette"
-        android:textSize="@dimen/size_for_15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/percent_obligasi"
-        app:layout_constraintTop_toTopOf="@id/percent_obligasi" />
+        <ProgressBar
+            android:id="@+id/percent_reksadana"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/size_for_50dp"
+            android:layout_height="@dimen/size_for_50dp"
+            android:layout_marginTop="@dimen/size_for_70dp"
+            android:background="@drawable/circular_shape"
+            android:indeterminate="false"
+            android:max="100"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            app:layout_constraintStart_toStartOf="@id/saldo_investasi"
+            app:layout_constraintTop_toBottomOf="@id/saldo_investasi" />
 
-    <TextView
-        android:id="@+id/description_obligasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_for_3dp"
-        android:text="Pendaftaran data investormu saat ini sedang\ndi proses. Silahkan menunggu maksimal hari\nkerja berikutnya "
-        android:textColor="@color/french_pass_palette"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/title_obligasi"
-        app:layout_constraintTop_toBottomOf="@id/title_obligasi" />
+        <TextView
+            android:id="@+id/tv_percent_reksadana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50 %"
+            android:textColor="@color/white_palette"
+            app:layout_constraintBottom_toBottomOf="@id/percent_reksadana"
+            app:layout_constraintEnd_toEndOf="@id/percent_reksadana"
+            app:layout_constraintStart_toStartOf="@id/percent_reksadana"
+            app:layout_constraintTop_toTopOf="@id/percent_reksadana" />
 
-    <ImageView
-        android:id="@+id/arrow_reksadana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-        app:layout_constraintEnd_toEndOf="@id/saldo_investasi"
-        app:layout_constraintTop_toTopOf="@id/percent_reksadana"
-        app:layout_constraintBottom_toBottomOf="@id/percent_reksadana"/>
-    <TextView
-        android:id="@+id/title_rekomendasi_smartbot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/percent_reksadana"
-        app:layout_constraintTop_toBottomOf="@id/seperator_line"
-        android:text="Rekomendasi dari SmartBot"
-        android:textSize="@dimen/size_for_20sp"
-        android:textColor="@color/white_palette"
-        android:layout_marginTop="@dimen/size_for_10dp"
+        <TextView
+            android:id="@+id/title_reksadana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_for_30dp"
+            android:text="Reksa Dana"
+            android:textColor="@color/white_palette"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/percent_reksadana"
+            app:layout_constraintTop_toTopOf="@id/percent_reksadana" />
+
+        <TextView
+            android:id="@+id/description_reksadana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_for_3dp"
+            android:text="-"
+            android:textColor="@color/white_palette"
+            app:layout_constraintStart_toStartOf="@id/title_reksadana"
+            app:layout_constraintTop_toBottomOf="@id/title_reksadana" />
+
+        <TextView
+            android:id="@+id/seperator_line"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_for_120dp"
+            android:layout_marginTop="@dimen/size_for_20dp"
+            android:background="@drawable/line_lightblue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_reksadana" />
+
+        <ProgressBar
+            android:id="@+id/percent_obligasi"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/size_for_50dp"
+            android:layout_height="@dimen/size_for_50dp"
+            android:layout_marginTop="@dimen/size_for_40dp"
+            android:background="@drawable/circular_shape"
+            android:indeterminate="false"
+            android:max="100"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            app:layout_constraintStart_toStartOf="@id/percent_reksadana"
+            app:layout_constraintTop_toBottomOf="@id/percent_reksadana" />
         />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_robo_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/title_rekomendasi_smartbot"
-        android:layout_marginTop="@dimen/size_for_20dp"
-        />
+        <TextView
+            android:id="@+id/tv_percent_obligasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20 %"
+            android:textColor="@color/white_palette"
+            app:layout_constraintBottom_toBottomOf="@id/percent_obligasi"
+            app:layout_constraintEnd_toEndOf="@id/percent_obligasi"
+            app:layout_constraintStart_toStartOf="@id/percent_obligasi"
+            app:layout_constraintTop_toTopOf="@id/percent_obligasi" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/title_obligasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_for_30dp"
+            android:text="Obligasi"
+            android:textColor="@color/white_palette"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/percent_obligasi"
+            app:layout_constraintTop_toTopOf="@id/percent_obligasi" />
+
+        <TextView
+            android:id="@+id/description_obligasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_for_3dp"
+            android:text="Pendaftaran data investormu saat ini sedang\ndi proses. Silahkan menunggu maksimal hari\nkerja berikutnya "
+            android:textColor="@color/french_pass_palette"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/title_obligasi"
+            app:layout_constraintTop_toBottomOf="@id/title_obligasi" />
+
+        <ImageView
+            android:id="@+id/arrow_reksadana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintBottom_toBottomOf="@id/percent_reksadana"
+            app:layout_constraintEnd_toEndOf="@id/saldo_investasi"
+            app:layout_constraintTop_toTopOf="@id/percent_reksadana" />
+
+        <TextView
+            android:id="@+id/title_rekomendasi_smartbot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:text="Rekomendasi dari SmartBot"
+            android:textColor="@color/white_palette"
+            android:textSize="@dimen/size_for_20sp"
+            app:layout_constraintStart_toStartOf="@id/percent_reksadana"
+            app:layout_constraintTop_toBottomOf="@id/seperator_line" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_robo_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_for_20dp"
+            app:layout_constraintTop_toBottomOf="@id/title_rekomendasi_smartbot" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

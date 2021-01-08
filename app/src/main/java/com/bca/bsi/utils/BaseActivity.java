@@ -49,11 +49,11 @@ public class BaseActivity extends AppCompatActivity implements CustomDialog.onCl
     @Override
     protected void onResume() {
         super.onResume();
-        if (!isNetworkAvailable()) {
-            customDialog = new CustomDialog(getString(R.string.internet_down), getString(R.string.close)
-                    , ContextCompat.getDrawable(this, R.drawable.ic_close_red), this);
-            customDialog.show(getSupportFragmentManager(), "");
-        }
+//        if (!isNetworkAvailable()) {
+//            customDialog = new CustomDialog(getString(R.string.internet_down), getString(R.string.close)
+//                    , ContextCompat.getDrawable(this, R.drawable.ic_close_red), this);
+//            customDialog.show(getSupportFragmentManager(), "");
+//        }
     }
 
     private boolean isNetworkAvailable() {

@@ -25,7 +25,6 @@
         <activity android:name=".ui.basenavigation.more.learningmenu.TopicListActivity" />
         <activity android:name=".ui.basenavigation.portfolio.produkmenu.ProdukChoiceActivity"></activity>
         <activity android:name=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity" />
-        <activity android:name=".ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity" />
         <activity
             android:name=".ui.basenavigation.products.detail.reksadana.CalculatorProductActivity"
             android:label="@string/title_activity_calculator_product"
