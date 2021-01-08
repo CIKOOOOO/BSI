@@ -40,4 +40,6 @@
     <color name="turbo_palette">#FEE100</color>
     <color name="light_tosca_palette">#CCE7EA</color>
     <color name="light_grey">#EBEEF3</color>
+    <color name="green_return">#48ab2d</color>
+    <color name="blue_risk">#00555f</color>
 </resources>
