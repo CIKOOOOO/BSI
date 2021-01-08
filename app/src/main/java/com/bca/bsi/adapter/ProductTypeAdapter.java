@@ -98,6 +98,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
             btnFirst = itemView.findViewById(R.id.recyler_btn_first_product_type);
             btnSecond = itemView.findViewById(R.id.recycler_btn_second_product_type);
             imgProduct = itemView.findViewById(R.id.recycler_img_product_type);
+
         }
     }
 

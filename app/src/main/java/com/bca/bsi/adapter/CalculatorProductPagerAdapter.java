@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.products.detail.reksadana;
+package com.bca.bsi.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

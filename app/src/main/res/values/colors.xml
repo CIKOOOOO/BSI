@@ -38,4 +38,6 @@
     <color name="ziggurat_palette">#B3DCE0</color>
     <color name="kournikova_palette">#FFF080</color>
     <color name="turbo_palette">#FEE100</color>
+    <color name="light_tosca_palette">#CCE7EA</color>
+    <color name="light_grey">#EBEEF3</color>
 </resources>

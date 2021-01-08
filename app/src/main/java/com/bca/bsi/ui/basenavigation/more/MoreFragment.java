@@ -12,12 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bca.bsi.R;
-import com.bca.bsi.ui.basenavigation.more.CalculatorMore.CalculatorMoreActivity;
+import com.bca.bsi.ui.basenavigation.more.calculatormore.CalculatorMoreActivity;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.TopicListActivity;
 import com.bca.bsi.utils.BaseFragment;
 
 public class MoreFragment extends BaseFragment implements View.OnClickListener {
 
     private ImageButton btnKalkulator;
+    private ImageButton btnLearning;
 
     private Boolean fromMore;
 
@@ -48,8 +50,10 @@ public class MoreFragment extends BaseFragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         btnKalkulator = view.findViewById(R.id.imageButtonKalkulator);
+        btnLearning = view.findViewById(R.id.imageButtonLearning);
 
         btnKalkulator.setOnClickListener(this);
+        btnLearning.setOnClickListener(this);
     }
 
     @Override
@@ -58,11 +62,20 @@ public class MoreFragment extends BaseFragment implements View.OnClickListener {
             case R.id.imageButtonKalkulator:
                 openCalculator();
                 break;
+
+            case R.id.imageButtonLearning:
+                openLearning();
+                break;
         }
     }
 
     public void openCalculator() {
         Intent intent = new Intent(mActivity, CalculatorMoreActivity.class);
+        startActivity(intent);
+    }
+
+    public void openLearning() {
+        Intent intent = new Intent(mActivity, TopicListActivity.class);
         startActivity(intent);
     }
 }

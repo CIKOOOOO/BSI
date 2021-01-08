@@ -78,22 +78,18 @@ public class Utils {
         return gson.toJson(o);
     }
 
-    public static void cekFormatInputNumber(EditText editText, String inputString) {
-        String outputString = "";
+    public static String formatDecimal(String currentFormat){
+        String output = "";
+        output = currentFormat.replaceAll("[.]",",");
+        return output;
+    }
 
-        if(!inputString.equals("") || !inputString.isEmpty()){
-
-            if(inputString.length()>1){
-                if(inputString.charAt(1)!=0){
-                    if(Integer.parseInt(inputString)>=0){
-                        outputString = inputString;
-                    }
-                }
-            }
-        }
-
-        editText.setText(outputString);
-
+    public static String formatUang(double totalPrice) {
+        String currentFormat;
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        currentFormat = formatter.format(totalPrice);
+        currentFormat = currentFormat.replaceAll("[,]",".");
+        return currentFormat;
     }
 
 
@@ -150,26 +146,38 @@ public class Utils {
         // In this step, ror must be positive
         // First we attempt to use Newton Method
         int maxiter = 1000; double x=1; int iter = 1;
+//		double maxRor = 0.22118855031; //monthly ror
+        double maxRorYear = 10; // berarti *100%
+        double maxRor = Math.pow(1+maxRorYear, 1.0/12.0)-1;
+        System.out.println(maxRor);
 
         while(iter<maxiter){
             x -= 1.0*phi(x)/diffPhi(x);
             if(nearZero(phi(x)) && x>0){
-                return Math.pow(1+x,12)-1;
+                System.out.println("from newton");
+                if (x>maxRor){
+                    System.out.println("IRR larger than "+maxRorYear*100+" %");
+                    return 123123; // code for IRR > 10
+                } else {
+                    return Math.pow(1+x,12)-1;
+                }
             }
             iter++;
         }
 
+
         // if fails, attempt using bisection
         // Assuming eps < IRR < 10
         double a,b,c,tol;
-        a=eps; b=10; 	// boundary
+        a=eps; b=maxRor; 	// boundary
         tol = eps;		// tolerance for (b-a)/2
         iter = 1;
 
         while(iter<maxiter){
             iter++;
             c = a+(b-a)/2.0;
-            if(Math.abs(phi(c))<0 || (b-a)/2.0<tol){
+            if(nearZero(phi(c))){ // you can add tolerance for range of (a,b)
+                System.out.println("from bisection");
                 return Math.pow(1+c,12)-1;
             }
             if(phi(c)*phi(a)>0){
@@ -179,7 +187,8 @@ public class Utils {
             }
         }
         // conclude that IRR > 10
-        System.out.println("IRR larger than 1000%");
+        System.out.println("from bisection");
+        System.out.println("IRR larger than "+maxRorYear*100+" %");
         return 123123; // code for IRR > 10
 
 

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/size_for_40dp"
+        android:layout_margin="@dimen/size_for_5dp"
+        android:layout_marginTop="@dimen/size_for_70dp"
+        android:layout_marginBottom="@dimen/size_for_70dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size_for_30dp"
+            android:layout_marginBottom="@dimen/size_for_30dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/question_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circle_stroke_tosca_dark"
+                    android:gravity="center"
+                    android:textSize="@dimen/size_for_15dp"
+                    android:text="5"
+                    android:textColor="@color/deep_cerulean_palette"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/size_for_20dp"/>
+
+                <TextView
+                    android:id="@+id/pertanyaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/question_number"
+                    android:layout_marginStart="@dimen/size_for_30dp"
+                    android:layout_marginTop="@dimen/size_for_40dp"
+                    android:layout_marginEnd="@dimen/size_for_30dp"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:text="Menurut Anda apa itu Reksa Dana?"
+                    android:textSize="@dimen/size_for_17dp"
+                    android:textColor="@color/black_palette"/>
+
+                <TextView
+                    android:id="@+id/penjelasan_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pertanyaan"
+                    android:layout_marginStart="@dimen/size_for_30dp"
+                    android:layout_marginTop="@dimen/size_for_30dp"
+                    android:layout_marginEnd="@dimen/size_for_30dp"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:text="Menurut Anda apa itu Reksa Dana?"
+                    android:textSize="@dimen/size_for_17dp"
+                    android:textColor="@color/deep_cerulean_palette"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/pilgan_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:layout_below="@id/pertanyaan"
+                    android:layout_marginTop="@dimen/size_for_30dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/size_for_5dp">
+
+                    <TextView
+                        android:id="@+id/pilgan_a_opsi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A"
+                        android:textColor="@color/deep_cerulean_palette"
+                        android:background="@drawable/square_stroke_tosca_dark"
+                        android:textSize="@dimen/size_for_15dp"
+                        android:gravity="center"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/pilgan_a_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_for_15dp"
+                        android:lineSpacingExtra="@dimen/size_for_2dp"
+                        android:text="Wadah yang dipergunakan untuk menghimpun dana dari masyarakat pemodal untuk selanjutnya diinvestasikan dalam portoflio Efek oleh Manajer Investasi"
+                        android:textSize="@dimen/size_for_15dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/deep_cerulean_palette"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pilgan_b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:layout_below="@id/pilgan_a"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/size_for_5dp">
+
+                    <TextView
+                        android:id="@+id/pilgan_b_opsi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B"
+                        android:textColor="@color/deep_cerulean_palette"
+                        android:background="@drawable/square_stroke_tosca_dark"
+                        android:textSize="@dimen/size_for_15dp"
+                        android:gravity="center"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/pilgan_b_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_for_15dp"
+                        android:lineSpacingExtra="@dimen/size_for_2dp"
+                        android:text="Merupakan produk investasi yang liquiditasnya sangat tinggi"
+                        android:textSize="@dimen/size_for_15dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/deep_cerulean_palette"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pilgan_c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:layout_below="@id/pilgan_b"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/size_for_5dp">
+
+                    <TextView
+                        android:id="@+id/pilgan_c_opsi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="C"
+                        android:textColor="@color/deep_cerulean_palette"
+                        android:background="@drawable/square_stroke_tosca_dark"
+                        android:textSize="@dimen/size_for_15dp"
+                        android:gravity="center"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/pilgan_c_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_for_15dp"
+                        android:lineSpacingExtra="@dimen/size_for_2dp"
+                        android:text="Merupakan produk protektif yang dananya tidak bisa diambil dalam beberapa bulan"
+                        android:textSize="@dimen/size_for_15dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/deep_cerulean_palette"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_ke_penjelasan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pilgan_c"
+                    android:layout_marginStart="@dimen/size_for_30dp"
+                    android:layout_marginEnd="@dimen/size_for_30dp"
+                    android:layout_marginTop="@dimen/size_for_40dp"
+                    android:background="@drawable/rectangle_stroke_tosca_dark"
+                    android:text="@string/lihat_penjelasan"
+                    android:textColor="@color/deep_cerulean_palette"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btn_soal_berikutnya"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_ke_penjelasan"
+                    android:layout_marginStart="@dimen/size_for_30dp"
+                    android:layout_marginEnd="@dimen/size_for_30dp"
+                    android:layout_marginTop="@dimen/size_for_10dp"
+                    android:background="@drawable/rectangle_stroke_tosca_dark_filled"
+                    android:text="@string/soal_berikutnya"
+                    android:textColor="@color/white_palette"
+                    android:textAllCaps="false" />
+
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

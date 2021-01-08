@@ -1,11 +1,14 @@
-package com.bca.bsi.ui.basenavigation.more.CalculatorMore;
+package com.bca.bsi.ui.basenavigation.more.calculatormore;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.core.widget.NestedScrollView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +26,7 @@ import com.bca.bsi.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BesarInvestasiBulananFragment extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener {
+public class BesarInvestasiBulananFragment extends BaseFragment implements View.OnClickListener {
 
     private Spinner spinnerDurasiTahunBIB;
     private Spinner spinnerDurasiBulanBIB;
@@ -35,6 +38,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     private EditText ETBIBTargetHasilInvestasi;
     private EditText ETBIBModalAwal;
     private EditText ETBIBROR;
+    private NestedScrollView nestedScrollView;
 
     public BesarInvestasiBulananFragment() {
 
@@ -79,19 +83,79 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         ETBIBTargetHasilInvestasi = view.findViewById(R.id.et_bib_target_hasil_investasi);
         ETBIBROR = view.findViewById(R.id.et_bib_ror);
 
+        nestedScrollView = view.findViewById(R.id.nested_scroll_view);
+
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBIB.setAdapter(adapter);
 
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBIB.setAdapter(adapterBulan);
 
-        ETBIBModalAwal.setOnFocusChangeListener(this);
+        ETBIBModalAwal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
-        BIBLabel.setVisibility(View.INVISIBLE);
-        rpLabel.setVisibility(View.INVISIBLE);
-        hasilBIB.setVisibility(View.INVISIBLE);
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                char zero = '0';
+                if(ETBIBModalAwal.getText().length()==2 && ETBIBModalAwal.getText().charAt(0)==zero){
+                    ETBIBModalAwal.setText("");
+                }
+            }
 
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETBIBTargetHasilInvestasi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                char zero = '0';
+                if(ETBIBTargetHasilInvestasi.getText().length()==2 && ETBIBTargetHasilInvestasi.getText().charAt(0)==zero){
+                    ETBIBTargetHasilInvestasi.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETBIBROR.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                char zero = '0';
+                if(ETBIBROR.getText().length()>1 && ETBIBROR.getText().charAt(0)==zero){
+                    if(ETBIBROR.getText().length()==2 && !ETBIBROR.getText().toString().equals("0.")){
+                        ETBIBROR.setText("");
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        BIBLabel.setVisibility(View.GONE);
+        rpLabel.setVisibility(View.GONE);
+        hasilBIB.setVisibility(View.GONE);
     }
 
     @Override
@@ -99,7 +163,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
         switch (v.getId()) {
             case R.id.btn_bib_kalkulasi:
-                if(kalkulasi.getText().equals("KALKULASI")){
+                if(kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))){
 
                     ETBIBModalAwal.setEnabled(false);
                     ETBIBTargetHasilInvestasi.setEnabled(false);
@@ -107,7 +171,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     spinnerDurasiTahunBIB.setEnabled(false);
                     spinnerDurasiBulanBIB.setEnabled(false);
 
-                    if(ETBIBModalAwal.getText().toString().equals("")){
+                    if(ETBIBModalAwal.getText().toString().isEmpty()){
                         ETBIBModalAwal.setText("0");
                     }
 
@@ -133,9 +197,21 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     rpLabel.setVisibility(View.VISIBLE);
                     hasilBIB.setVisibility(View.VISIBLE);
 
-                    hasilBIB.setText(utils.priceFormat(hasilKalkulasiBIB));
+                    ETBIBTargetHasilInvestasi.setText(utils.formatUang(ETBIBTargetHasilInvestasiDouble));
+                    ETBIBModalAwal.setText(utils.formatUang(ETBIBModalAwalDouble));
+                    ETBIBROR.setText(utils.formatDecimal(ETBIBROR.getText().toString()));
 
-                    kalkulasi.setText("RESET");
+                    hasilBIB.setText(utils.formatUang(hasilKalkulasiBIB));
+
+                    kalkulasi.setText(getString(R.string.calculator_reset_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
+
                 }else {
                     ETBIBModalAwal.setEnabled(true);
                     ETBIBTargetHasilInvestasi.setEnabled(true);
@@ -143,16 +219,23 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     spinnerDurasiTahunBIB.setEnabled(true);
                     spinnerDurasiBulanBIB.setEnabled(true);
 
-                    BIBLabel.setVisibility(View.INVISIBLE);
-                    rpLabel.setVisibility(View.INVISIBLE);
-                    hasilBIB.setVisibility(View.INVISIBLE);
-                    kalkulasi.setText("KALKULASI");
+                    BIBLabel.setVisibility(View.GONE);
+                    rpLabel.setVisibility(View.GONE);
+                    hasilBIB.setVisibility(View.GONE);
+                    kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
 
                     ETBIBModalAwal.setText("");
                     ETBIBROR.setText("");
                     ETBIBTargetHasilInvestasi.setText("");
                     spinnerDurasiTahunBIB.setSelection(0);
                     spinnerDurasiBulanBIB.setSelection(0);
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
                 }
 
                 break;
@@ -160,22 +243,4 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
     }
 
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if(!hasFocus){
-
-
-
-            //ETBIBModalAwal.setText("88888888888");
-
-            /*
-            switch (v.getId()) {
-                case R.id.et_bib_modal_awal:
-                    utils.cekFormatInputNumber(ETBIBModalAwal,ETBIBModalAwal.getText().toString());
-                    //ETBIBModalAwal.setText("88888888888");
-                    break;
-            }
-            */
-        }
-    }
 }

@@ -15,13 +15,21 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity"></activity>
         <activity android:name=".ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.NilaiKuisActivity"></activity>
+        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.KuisAsuransiActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.KuisObligasiActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriAsuransiActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriObligasiActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriReksaDanaActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.TopicListActivity" />
         <activity
             android:name=".ui.basenavigation.products.detail.reksadana.CalculatorProductActivity"
             android:label="@string/title_activity_calculator_product"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.pin_screen.PinActivity" />
         <activity
-            android:name=".ui.basenavigation.more.CalculatorMore.CalculatorMoreActivity"
+            android:name=".ui.basenavigation.more.calculatormore.CalculatorMoreActivity"
             android:label="@string/title_activity_calculator_more"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.basenavigation.transaction.detail_transaction.DetailTransactionActivity" />

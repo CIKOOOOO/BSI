@@ -4,8 +4,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.core.widget.NestedScrollView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
     private TextView rorLabel;
     private TextView rorPertahunLabel;
     private TextView rorPersenLabel;
+    private NestedScrollView nestedScrollView;
 
     public DurasiInvestasiCalProdFragment() {
         // Required empty public constructor
@@ -61,10 +64,71 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
         rorPersenLabel = view.findViewById(R.id.textView27_calprod);
         rorPertahunLabel = view.findViewById(R.id.textView23_calprod);
 
-        DILabel.setVisibility(View.INVISIBLE);
-        hasilDI.setVisibility(View.INVISIBLE);
+        nestedScrollView = view.findViewById(R.id.nested_scroll_view);
+
+        ETDITargetHasilInvestasi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                char zero = '0';
+                if(ETDITargetHasilInvestasi.getText().length()==2 && ETDITargetHasilInvestasi.getText().charAt(0)==zero){
+                    ETDITargetHasilInvestasi.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETDIModalAwal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                char zero = '0';
+                if(ETDIModalAwal.getText().length()==2 && ETDIModalAwal.getText().charAt(0)==zero){
+                    ETDIModalAwal.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ETDIInvestasiBulanan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                char zero = '0';
+                if(ETDIInvestasiBulanan.getText().length()==2 && ETDIInvestasiBulanan.getText().charAt(0)==zero){
+                    ETDIInvestasiBulanan.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        DILabel.setVisibility(View.GONE);
+        hasilDI.setVisibility(View.GONE);
         ETDIROR.setVisibility(View.GONE);
-        ETDIROR.setText("2");
         rorLabel.setVisibility(View.GONE);
         rorPersenLabel.setVisibility(View.GONE);
         rorPertahunLabel.setVisibility(View.GONE);
@@ -76,7 +140,7 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
         switch (v.getId()) {
 
             case R.id.btn_di_kalkulasi_calprod:
-                if (kalkulasi.getText().equals("KALKULASI")) {
+                if (kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))) {
                     ETDIModalAwal.setEnabled(false);
                     ETDIInvestasiBulanan.setEnabled(false);
                     ETDIROR.setEnabled(false);
@@ -98,6 +162,8 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
                         ETDITargetHasilInvestasi.setText("0");
                     }
 
+                    ETDIROR.setText("2");
+
                     Utils utils = new Utils();
                     Double ETDIModalAwalDouble = Double.parseDouble(ETDIModalAwal.getText().toString());
                     Double ETDIInvestasiBulananDouble = Double.parseDouble(ETDIInvestasiBulanan.getText().toString());
@@ -106,26 +172,45 @@ public class DurasiInvestasiCalProdFragment extends BaseFragment implements View
 
                     int[] hasilKalkulasiDI = utils.getDuration(ETDIModalAwalDouble,ETDIInvestasiBulananDouble,ETDITargetHasilInvestasiDouble,ETDIRORDouble);
 
+                    ETDITargetHasilInvestasi.setText(utils.formatUang(ETDITargetHasilInvestasiDouble));
+                    ETDIModalAwal.setText(utils.formatUang(ETDIModalAwalDouble));
+                    ETDIInvestasiBulanan.setText(utils.formatUang(ETDIInvestasiBulananDouble));
+
                     hasilDI.setText(hasilKalkulasiDI[1]+" tahun "+hasilKalkulasiDI[0]+" bulan");
 
                     DILabel.setVisibility(View.VISIBLE);
                     hasilDI.setVisibility(View.VISIBLE);
-                    kalkulasi.setText("RESET");
+                    kalkulasi.setText(getString(R.string.calculator_reset_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
+
                 } else {
                     ETDIModalAwal.setEnabled(true);
                     ETDIInvestasiBulanan.setEnabled(true);
                     ETDIROR.setEnabled(true);
                     ETDITargetHasilInvestasi.setEnabled(true);
 
-                    DILabel.setVisibility(View.INVISIBLE);
-                    hasilDI.setVisibility(View.INVISIBLE);
+                    DILabel.setVisibility(View.GONE);
+                    hasilDI.setVisibility(View.GONE);
 
                     ETDIInvestasiBulanan.setText("");
                     ETDIModalAwal.setText("");
                     ETDIROR.setText("");
                     ETDITargetHasilInvestasi.setText("");
 
-                    kalkulasi.setText("KALKULASI");
+                    kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
+
+                    nestedScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nestedScrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
                 }
                 break;
 

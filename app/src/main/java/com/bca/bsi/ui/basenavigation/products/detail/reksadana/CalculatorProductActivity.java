@@ -1,18 +1,10 @@
 package com.bca.bsi.ui.basenavigation.products.detail.reksadana;
 
-import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import com.bca.bsi.ui.basenavigation.more.CalculatorMore.CalculatorMoreActivity;
-import com.bca.bsi.ui.basenavigation.more.CalculatorMore.CalculatorPagerAdapter;
+import com.bca.bsi.adapter.CalculatorProductPagerAdapter;
 import com.bca.bsi.utils.BaseActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
@@ -37,7 +29,7 @@ public class CalculatorProductActivity extends BaseActivity implements View.OnCl
         setContentView(R.layout.activity_calculator_product);
 
         TextView titlePage = findViewById(R.id.tv_title_toolbar_back);
-        titlePage.setText("Kalkulator Investasi");
+        titlePage.setText(getString(R.string.kalkulator_investasi));
 
         besarInvestasiBulananTabCalProd = findViewById(R.id.besarInvestasiBulananTabCalProd);
         besarHasilInvestasiTabCalProd = findViewById(R.id.besarHasilInvestasiTabCalProd);
@@ -57,13 +49,30 @@ public class CalculatorProductActivity extends BaseActivity implements View.OnCl
 
         calculatorProductPagerAdapter = new CalculatorProductPagerAdapter(getSupportFragmentManager(),3);
         viewPager2.setAdapter(calculatorProductPagerAdapter);
+        viewPager2.setOffscreenPageLimit(3);
+
+        viewPager2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                onChageTab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.besarInvestasiBulananTabCalProd: {
+    private void onChageTab(int position) {
+        switch (position){
+            case 0: {
                 selectCalProd.animate().x(0).setDuration(100);
                 besarInvestasiBulananTabCalProd.setTextColor(Color.BLACK);
                 besarHasilInvestasiTabCalProd.setTextColor(Color.WHITE);
@@ -71,7 +80,7 @@ public class CalculatorProductActivity extends BaseActivity implements View.OnCl
                 viewPager2.setCurrentItem(0);
                 break;
             }
-            case R.id.besarHasilInvestasiTabCalProd: {
+            case 1: {
                 int size = besarHasilInvestasiTabCalProd.getWidth();
                 selectCalProd.animate().x(size).setDuration(100);
                 besarInvestasiBulananTabCalProd.setTextColor(Color.WHITE);
@@ -80,13 +89,32 @@ public class CalculatorProductActivity extends BaseActivity implements View.OnCl
                 viewPager2.setCurrentItem(1);
                 break;
             }
-            case R.id.durasiInvestasiTabCalProd: {
+            case 2: {
                 int size = besarHasilInvestasiTabCalProd.getWidth() * 2;
                 selectCalProd.animate().x(size).setDuration(100);
                 besarInvestasiBulananTabCalProd.setTextColor(Color.WHITE);
                 besarHasilInvestasiTabCalProd.setTextColor(Color.WHITE);
                 durasiInvestasiTabCalProd.setTextColor(Color.BLACK);
                 viewPager2.setCurrentItem(2);
+                break;
+            }
+        }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.besarInvestasiBulananTabCalProd: {
+                onChageTab(0);
+                break;
+            }
+            case R.id.besarHasilInvestasiTabCalProd: {
+                onChageTab(1);
+                break;
+            }
+            case R.id.durasiInvestasiTabCalProd: {
+                onChageTab(2);
                 break;
             }
 
