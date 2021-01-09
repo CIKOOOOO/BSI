@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.basenavigation.more.calculatormore.BesarInvestasiBulananFragment">
+    tools:context=".ui.basenavigation.more.calculatormore.besarinvastasibulanan.BesarInvestasiBulananFragment">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
@@ -87,7 +87,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/tv_ror"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -98,13 +98,13 @@
             app:layout_constraintTop_toBottomOf="@+id/et_bib_modal_awal" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/tv_ror_pertahun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/ket_pertahun"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_ror" />
 
         <EditText
             android:id="@+id/et_bib_ror"
@@ -117,10 +117,10 @@
             android:inputType="numberDecimal"
             android:textAlignment="viewEnd"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_ror_pertahun" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/tv_ror_persen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

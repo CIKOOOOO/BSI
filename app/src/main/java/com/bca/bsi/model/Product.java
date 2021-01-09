@@ -143,6 +143,9 @@ public class Product {
         @SerializedName("update_date")
         private String updateDate;
 
+        @SerializedName("")
+        private double rorReksaDana;
+
         public DetailReksaDana() {
         }
 
@@ -220,6 +223,10 @@ public class Product {
 
         public String getUpdateDate() {
             return updateDate;
+        }
+
+        public double getRorReksaDana() {
+            return rorReksaDana;
         }
     }
 

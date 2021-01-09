@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.ui.basenavigation.calculator.CalculatorActivity;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.CalculatorProductActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
 
@@ -23,6 +25,7 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
     private DetailReksaDanaViewModel viewModel;
     private ReksaDanaPerformanceAdapter danaPerformanceAdapter;
     private TextView tvProductName, tvDate, tvNAB, tvManagerInvest, tvKustodianBank, tvTypeReksaDana, tvReleaseDate, tvFirstMinimumPurchasing, tvNextMinimumPurchasing, tvSellingMinimum, tvMinimumSaldoUnit, tvPurcashingCost, tvSellingCost, tvInvestManagementCost, tvCustodianCost, tvAgentCost, tvKalkulatorPerencanaan;
+    private Product.DetailReksaDana detailReksaDana;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +90,22 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
                 onBackPressed();
                 break;
             case R.id.tv_kalkulator_perencanaan_detail_reksa_dana:
-                Toast.makeText(this, "kalkulator perencanaan", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "kalkulator perencanaan", Toast.LENGTH_SHORT).show();
+                /*
+                Intent intent = new Intent(this, CalculatorProductActivity.class);
+                intent.putExtra(CalculatorProductActivity.ROR_KEY,this.detailReksaDana.getRorReksaDana());
+                startActivity(intent);
+                */
+                Intent intent = new Intent(this, CalculatorActivity.class);
+                intent.putExtra("numberOfTabs",3);
+                startActivity(intent);
                 break;
         }
     }
 
     @Override
     public void onLoadReksaDanaDetail(Product.DetailReksaDana detailReksaDana) {
+        this.detailReksaDana = detailReksaDana;
         tvProductName.setText(detailReksaDana.getName());
         tvDate.setText(detailReksaDana.getUpdateDate());
 

@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.products.detail.reksadana;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -22,11 +23,25 @@ public class CalculatorProductActivity extends BaseActivity implements View.OnCl
     private TextView besarHasilInvestasiTabCalProd;
     private TextView durasiInvestasiTabCalProd;
     private TextView selectCalProd;
+    public static final String ROR_KEY = "rorKey";
+    private double ror;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator_product);
+
+        Intent intent = getIntent();
+        if(intent==null){
+            onBackPressed();
+        }else{
+            if(intent.hasExtra(ROR_KEY)){
+                this.ror = intent.getDoubleExtra(ROR_KEY,-1);
+                if(this.ror == -1){
+                    onBackPressed();
+                }
+            }
+        }
 
         TextView titlePage = findViewById(R.id.tv_title_toolbar_back);
         titlePage.setText(getString(R.string.kalkulator_investasi));

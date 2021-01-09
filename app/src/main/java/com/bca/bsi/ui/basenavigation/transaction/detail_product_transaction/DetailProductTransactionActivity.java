@@ -128,8 +128,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                 }
                 break;
             case R.id.ketentuan_pembelian:
-                Intent intent = new Intent(this, CalculatorProductActivity.class);
-                startActivity(intent);
+
                 break;
         }
     }

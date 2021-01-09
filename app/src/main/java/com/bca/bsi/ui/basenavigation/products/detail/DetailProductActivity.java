@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.ui.basenavigation.BaseNavigationActivity;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.TopicListActivity;
 import com.bca.bsi.ui.basenavigation.products.detail.reksadana.ReksadanaProductFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.Constant;
@@ -47,6 +49,7 @@ public class DetailProductActivity extends BaseActivity implements View.OnClickL
             if (pos == -1) {
                 onBackPressed();
             }
+
             switch (pos) {
                 case 0:
                     tvTitleToolbar.setText(this.getString(R.string.product));
@@ -107,5 +110,12 @@ public class DetailProductActivity extends BaseActivity implements View.OnClickL
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_detail_product, fragment);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, BaseNavigationActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

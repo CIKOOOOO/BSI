@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.basenavigation.more.calculatormore.besarror.BesarRoRFragment">
+    tools:context=".ui.basenavigation.more.calculatormore.besarhasilinvestasi.BesarHasilInvestasiFragment">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
@@ -19,30 +20,32 @@
             android:layout_marginBottom="@dimen/size_for_20dp">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/tv_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
-                android:text="@string/calculator_besar_ror_desc"
+                android:text="@string/calculator_besar_hasil_investasi_desc"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView28"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_target_hasil_investasi"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 android:text="@string/calculator_target_hasil_investasi_label"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
 
             <EditText
-                android:id="@+id/et_bror_target_hasil_investasi"
+                android:id="@+id/et_target_hasil_investasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -54,21 +57,23 @@
                 android:textAlignment="viewEnd"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView28" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_target_hasil_investasi" />
 
             <TextView
-                android:id="@+id/textView29"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_modal_awal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 android:text="@string/calculator_modal_awal_label"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_bror_target_hasil_investasi" />
+                app:layout_constraintTop_toBottomOf="@+id/et_target_hasil_investasi" />
 
             <EditText
-                android:id="@+id/et_bror_modal_awal"
+                android:id="@+id/et_modal_awal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -80,21 +85,23 @@
                 android:textAlignment="viewEnd"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView29" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_modal_awal" />
 
             <TextView
-                android:id="@+id/textView30"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_investasi_bulanan"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 android:text="@string/calculator_investasi_bulanan_label"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_bror_modal_awal" />
+                app:layout_constraintTop_toBottomOf="@+id/et_modal_awal" />
 
             <EditText
-                android:id="@+id/et_bror_investasi_bulanan"
+                android:id="@+id/et_investasi_bulanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -106,96 +113,139 @@
                 android:textAlignment="viewEnd"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView30" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_investasi_bulanan" />
 
             <TextView
-                android:id="@+id/textView31"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_ror"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/calculator_durasi_investasi_label"
+                android:layout_marginEnd="20dp"
+                android:text="@string/calculator_rate_of_return_label"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_bror_investasi_bulanan" />
+                app:layout_constraintTop_toBottomOf="@+id/et_investasi_bulanan" />
 
-            <Spinner
-                android:id="@+id/bror_durasi_tahun"
+            <TextView
+                android:id="@+id/tv_ror_pertahun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/ket_pertahun"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_ror" />
+
+            <EditText
+                android:id="@+id/et_ror"
                 android:layout_width="@dimen/size_for_120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="0"
+                android:inputType="numberDecimal"
+                android:textAlignment="viewEnd"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_ror_pertahun" />
 
             <TextView
-                android:id="@+id/textView32"
+                android:id="@+id/tv_ror_persen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/symbol_persen"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/et_ror"
+                app:layout_constraintStart_toEndOf="@+id/et_ror" />
+
+            <TextView
+                android:id="@+id/tv_durasi_investasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/calculator_durasi_investasi_label"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_ror" />
+
+            <Spinner
+                android:id="@+id/spinner_durasi_tahun"
+                android:layout_width="@dimen/size_for_100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_durasi_investasi" />
+
+            <TextView
+                android:id="@+id/tv_durasi_tahun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/tahun"
-                app:layout_constraintStart_toEndOf="@+id/bror_durasi_tahun"
-                app:layout_constraintTop_toTopOf="@+id/bror_durasi_tahun" />
+                app:layout_constraintStart_toEndOf="@+id/spinner_durasi_tahun"
+                app:layout_constraintTop_toTopOf="@+id/spinner_durasi_tahun" />
 
             <Spinner
-                android:id="@+id/bror_durasi_bulan"
-                android:layout_width="@dimen/size_for_120dp"
+                android:id="@+id/spinner_durasi_bulan"
+                android:layout_width="@dimen/size_for_100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                app:layout_constraintStart_toEndOf="@+id/textView32"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                app:layout_constraintStart_toEndOf="@+id/tv_durasi_tahun"
+                app:layout_constraintTop_toBottomOf="@+id/tv_durasi_investasi" />
 
             <TextView
-                android:id="@+id/textView33"
+                android:id="@+id/tv_durasi_bulan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/bulan"
-                app:layout_constraintStart_toEndOf="@+id/bror_durasi_bulan"
-                app:layout_constraintTop_toTopOf="@+id/bror_durasi_bulan" />
+                app:layout_constraintStart_toEndOf="@+id/spinner_durasi_bulan"
+                app:layout_constraintTop_toTopOf="@+id/spinner_durasi_bulan" />
 
             <TextView
-                android:id="@+id/label_bror_ror"
+                android:id="@+id/main_tv_hasil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="40dp"
-                android:text="@string/calculator_rate_of_return_label"
+                android:text="@string/calculator_besar_hasil_investasi_label"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView32" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_durasi_tahun" />
 
             <TextView
-                android:id="@+id/label_bror_pertahun"
-                android:layout_width="wrap_content"
+                android:id="@+id/child_tv_hasil"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:text="@string/ket_pertahun"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/label_bror_ror" />
+                app:layout_constraintTop_toBottomOf="@+id/main_tv_hasil" />
 
             <TextView
-                android:id="@+id/tv_bror_hasil"
+                android:id="@+id/tv_hasil_kalkulasi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:text="Hasil Perhitungan"
+                android:text="@string/rp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/label_bror_pertahun" />
-
-            <TextView
-                android:id="@+id/label_bror_persen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/symbol_persen"
-                app:layout_constraintStart_toEndOf="@+id/tv_bror_hasil"
-                app:layout_constraintTop_toBottomOf="@+id/label_bror_pertahun" />
+                app:layout_constraintTop_toBottomOf="@+id/child_tv_hasil" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -209,15 +259,14 @@
         android:text="@string/calculator_disclaimer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btn_bror_kalkulasi"
+        app:layout_constraintBottom_toTopOf="@+id/btn_kalkulasi"
         android:paddingLeft="@dimen/size_for_20dp"
         android:paddingRight="@dimen/size_for_20dp"
         android:paddingTop="@dimen/size_for_10dp"
         android:paddingBottom="@dimen/size_for_10dp"
         android:background="@color/light_grey"/>
-
     <Button
-        android:id="@+id/btn_bror_kalkulasi"
+        android:id="@+id/btn_kalkulasi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_orange_light"
@@ -226,4 +275,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

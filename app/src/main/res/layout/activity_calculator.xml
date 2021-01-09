@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    tools:context=".ui.basenavigation.calculator.CalculatorActivity">
 
     <include
         android:id="@+id/toolbar_back"
@@ -74,6 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/besarInvestasiBulananTab"
                         android:layout_width="match_parent"
@@ -112,8 +113,8 @@
                         android:gravity="center"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/size_for_12sp"/>
-
                 </LinearLayout>
+
             </FrameLayout>
         </LinearLayout>
     </FrameLayout>

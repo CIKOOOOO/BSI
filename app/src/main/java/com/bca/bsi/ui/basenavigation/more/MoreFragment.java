@@ -12,14 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bca.bsi.R;
+import com.bca.bsi.adapter.CalculatorAdapter;
+import com.bca.bsi.ui.basenavigation.calculator.CalculatorActivity;
 import com.bca.bsi.ui.basenavigation.more.calculatormore.CalculatorMoreActivity;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.TopicListActivity;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.CalculatorProductActivity;
 import com.bca.bsi.utils.BaseFragment;
 
 public class MoreFragment extends BaseFragment implements View.OnClickListener {
 
     private ImageButton btnKalkulator;
     private ImageButton btnLearning;
+    private ImageButton btnCabang;
 
     private Boolean fromMore;
 
@@ -51,9 +55,12 @@ public class MoreFragment extends BaseFragment implements View.OnClickListener {
 
         btnKalkulator = view.findViewById(R.id.imageButtonKalkulator);
         btnLearning = view.findViewById(R.id.imageButtonLearning);
+        btnCabang = view.findViewById(R.id.imageButtonCabang);
 
         btnKalkulator.setOnClickListener(this);
         btnLearning.setOnClickListener(this);
+        btnCabang.setOnClickListener(this);
+
     }
 
     @Override
@@ -66,16 +73,32 @@ public class MoreFragment extends BaseFragment implements View.OnClickListener {
             case R.id.imageButtonLearning:
                 openLearning();
                 break;
+
+            case R.id.imageButtonCabang:
+                openCalculatorProdukTemp();
+                break;
         }
     }
 
     public void openCalculator() {
         Intent intent = new Intent(mActivity, CalculatorMoreActivity.class);
+        //Intent intent = new Intent(mActivity, CalculatorActivity.class);
+        intent.putExtra("numberOfTabs",4);
+        intent.putExtra("rorValue","0");
         startActivity(intent);
     }
 
     public void openLearning() {
         Intent intent = new Intent(mActivity, TopicListActivity.class);
+        startActivity(intent);
+    }
+
+    public void openCalculatorProdukTemp(){
+        //Intent intent = new Intent(mActivity, CalculatorActivity.class);
+        //Intent intent = new Intent(mActivity, CalculatorProductActivity.class);
+        Intent intent = new Intent(mActivity, CalculatorMoreActivity.class);
+        intent.putExtra("numberOfTabs",3);
+        intent.putExtra("rorValue","2");
         startActivity(intent);
     }
 }

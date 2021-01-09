@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.basenavigation.more.calculatormore.DurasiInvestasiFragment">
+    tools:context=".ui.basenavigation.more.calculatormore.durasiinvestasi.DurasiInvestasiFragment">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
@@ -115,7 +115,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/tv_ror"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -126,13 +126,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/et_di_investasi_bulanan" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/tv_ror_pertahun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:text="@string/ket_pertahun"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_ror" />
 
             <EditText
                 android:id="@+id/et_di_ror"
@@ -145,10 +145,10 @@
                 android:inputType="numberDecimal"
                 android:textAlignment="textEnd"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_ror_pertahun" />
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/tv_ror_persen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

@@ -13,9 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity"></activity>
+        <activity android:name=".ui.basenavigation.calculator.CalculatorActivity"></activity>
+        <activity android:name=".ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity" />
         <activity android:name=".ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity" />
-        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.NilaiKuisActivity"></activity>
+        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.NilaiKuisActivity" />
         <activity android:name=".ui.basenavigation.more.learningmenu.quiz.KuisAsuransiActivity" />
         <activity android:name=".ui.basenavigation.more.learningmenu.quiz.KuisObligasiActivity" />
         <activity android:name=".ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity" />
@@ -23,7 +24,7 @@
         <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriObligasiActivity" />
         <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriReksaDanaActivity" />
         <activity android:name=".ui.basenavigation.more.learningmenu.TopicListActivity" />
-        <activity android:name=".ui.basenavigation.portfolio.produkmenu.ProdukChoiceActivity"></activity>
+        <activity android:name=".ui.basenavigation.portfolio.produkmenu.ProdukChoiceActivity" />
         <activity android:name=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity" />
         <activity
             android:name=".ui.basenavigation.products.detail.reksadana.CalculatorProductActivity"

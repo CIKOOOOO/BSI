@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.CalculatorProductActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
 

@@ -1,11 +1,10 @@
-package com.bca.bsi.ui.basenavigation.more.calculatormore;
+package com.bca.bsi.ui.basenavigation.more.calculatormore.besarhasilinvestasi;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,15 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.bca.bsi.R;
-import com.bca.bsi.utils.Utils;
-
+import com.bca.bsi.utils.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BesarHasilInvestasiFragment extends Fragment implements View.OnClickListener {
+public class BesarHasilInvestasiFragment extends BaseFragment implements View.OnClickListener, IBesarHasilInvestasiCallback {
 
+    private BesarHasilInvestasiViewModel viewModel;
     private Spinner spinnerDurasiTahunBHI;
     private Spinner spinnerDurasiBulanBHI;
     private Button kalkulasi;
@@ -36,11 +34,16 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
     private EditText ETBHIIvestasiBulanan;
     private EditText ETBHIROR;
     private NestedScrollView nestedScrollView;
+    private int numbOfTabs;
+    private String rorValue;
+    private TextView tvRoR;
+    private TextView tvRoRPertahun;
+    private TextView tvRoRPersen;
 
-    public BesarHasilInvestasiFragment() {
-        // Required empty public constructor
+    public BesarHasilInvestasiFragment(int numbOfTabs, String rorValue) {
+        this.numbOfTabs = numbOfTabs;
+        this.rorValue = rorValue;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +56,39 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        kalkulasi = view.findViewById(R.id.btn_kalkulasi);
+        spinnerDurasiTahunBHI = view.findViewById(R.id.spinner_durasi_tahun);
+        spinnerDurasiBulanBHI = view.findViewById(R.id.spinner_durasi_bulan);
+        BHILabel = view.findViewById(R.id.main_tv_hasil);
+        rpLabel = view.findViewById(R.id.tv_hasil_kalkulasi);
+        hasilBHI = view.findViewById(R.id.tv_hasil);
+        ETBHIIvestasiBulanan = view.findViewById(R.id.et_modal_awal);
+        ETBHIModalAwal = view.findViewById(R.id.et_target_hasil_investasi);
+        ETBHIROR = view.findViewById(R.id.et_ror);
+        nestedScrollView = view.findViewById(R.id.nested_scroll_view);
+        tvRoR = view.findViewById(R.id.tv_ror);
+        tvRoRPertahun = view.findViewById(R.id.tv_ror_pertahun);
+        tvRoRPersen = view.findViewById(R.id.tv_ror_persen);
+
+        viewModel = new ViewModelProvider(this).get(BesarHasilInvestasiViewModel.class);
+        viewModel.setCallback(this);
+        kalkulasi.setOnClickListener(this);
+
+        switch (numbOfTabs){
+            case 3:
+                ETBHIROR.setVisibility(View.GONE);
+                tvRoR.setVisibility(View.GONE);
+                tvRoRPertahun.setVisibility(View.GONE);
+                tvRoRPersen.setVisibility(View.GONE);
+                break;
+            case 4:
+                ETBHIROR.setVisibility(View.VISIBLE);
+                tvRoR.setVisibility(View.VISIBLE);
+                tvRoRPertahun.setVisibility(View.VISIBLE);
+                tvRoRPersen.setVisibility(View.VISIBLE);
+                break;
+        }
+
         List<Integer> durasiTahun = new ArrayList<Integer>();
         List<Integer> durasiBulan = new ArrayList<Integer>();
 
@@ -64,26 +100,12 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
             durasiBulan.add(j);
         }
 
-        kalkulasi = view.findViewById(R.id.btn_bhi_kalkulasi);
-        kalkulasi.setOnClickListener(this);
-
-        spinnerDurasiTahunBHI = view.findViewById(R.id.bhi_durasi_tahun);
-        spinnerDurasiBulanBHI = view.findViewById(R.id.bhi_durasi_bulan);
-
-        BHILabel = view.findViewById(R.id.label_besar_hasil_investasi);
-        rpLabel = view.findViewById(R.id.label_bhi_rp);
-        hasilBHI = view.findViewById(R.id.tv_bhi_hasil);
-        ETBHIIvestasiBulanan = view.findViewById(R.id.et_bhi_investasi_bulanan);
-        ETBHIModalAwal = view.findViewById(R.id.et_bhi_modal_awal);
-        ETBHIROR = view.findViewById(R.id.et_bhi_ror);
-
-        nestedScrollView = view.findViewById(R.id.nested_scroll_view);
-
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiTahun);
         spinnerDurasiTahunBHI.setAdapter(adapter);
 
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBHI.setAdapter(adapterBulan);
+
 
         ETBHIModalAwal.addTextChangedListener(new TextWatcher() {
             @Override
@@ -147,17 +169,15 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
             }
         });
 
-
         BHILabel.setVisibility(View.GONE);
         rpLabel.setVisibility(View.GONE);
         hasilBHI.setVisibility(View.GONE);
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_bhi_kalkulasi:
+            case R.id.btn_kalkulasi:
                 if (kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))) {
 
                     ETBHIModalAwal.setEnabled(false);
@@ -178,25 +198,17 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
                         ETBHIROR.setText("0");
                     }
 
-                    Utils utils = new Utils();
-                    Double hasilKalkulasiBHI;
-                    Double ETBHIModalAwalDouble = Double.parseDouble(ETBHIModalAwal.getText().toString());
-                    Double ETBHIInvestasiBulananDouble = Double.parseDouble(ETBHIIvestasiBulanan.getText().toString());
-                    Double ETBHIRORDouble = Double.parseDouble(ETBHIROR.getText().toString())/100;
-                    Integer spinnerDurasiBulanBHIInt = Integer.parseInt(spinnerDurasiBulanBHI.getSelectedItem().toString()) ;
-                    Integer spinnerDurasiTahunBHIInt = Integer.parseInt(spinnerDurasiTahunBHI.getSelectedItem().toString());
+                    switch (numbOfTabs){
+                        case 3:
+                            viewModel.kalkulasi(ETBHIModalAwal.getText().toString(),ETBHIIvestasiBulanan.getText().toString(),
+                                    rorValue,spinnerDurasiBulanBHI.getSelectedItem().toString(),spinnerDurasiTahunBHI.getSelectedItem().toString());
 
-                    hasilKalkulasiBHI = utils.getTarget(ETBHIModalAwalDouble,ETBHIInvestasiBulananDouble,ETBHIRORDouble,spinnerDurasiBulanBHIInt,spinnerDurasiTahunBHIInt);
-                    //hasilKalkulasiBHI = spinnerDurasiBulanBHIInt;
-                    /*
-                    int hasilKalkulasiBHIInt = (int) Math.round(hasilKalkulasiBHI);
-                    hasilBHI.setText(String.valueOf(hasilKalkulasiBHIInt));
-                    */
-                    ETBHIModalAwal.setText(utils.formatUang(ETBHIModalAwalDouble));
-                    ETBHIIvestasiBulanan.setText(utils.formatUang(ETBHIInvestasiBulananDouble));
-                    ETBHIROR.setText(utils.formatDecimal(ETBHIROR.getText().toString()));
-
-                    hasilBHI.setText(utils.formatUang(hasilKalkulasiBHI));
+                            break;
+                        case 4:
+                            viewModel.kalkulasi(ETBHIModalAwal.getText().toString(),ETBHIIvestasiBulanan.getText().toString(),ETBHIROR.getText().toString(),
+                                    spinnerDurasiBulanBHI.getSelectedItem().toString(),spinnerDurasiTahunBHI.getSelectedItem().toString());
+                            break;
+                    }
 
                     BHILabel.setVisibility(View.VISIBLE);
                     rpLabel.setVisibility(View.VISIBLE);
@@ -238,5 +250,13 @@ public class BesarHasilInvestasiFragment extends Fragment implements View.OnClic
                 }
                 break;
         }
+    }
+
+    @Override
+    public void kalkulasiOutput(String hasilKalkulasi, String formatModalAwal, String formatInvestBulanan, String formatRoR) {
+        ETBHIModalAwal.setText(formatModalAwal);
+        ETBHIIvestasiBulanan.setText(formatInvestBulanan);
+        ETBHIROR.setText(formatRoR);
+        hasilBHI.setText(hasilKalkulasi);
     }
 }

@@ -1,10 +1,11 @@
-package com.bca.bsi.ui.basenavigation.more.calculatormore;
+package com.bca.bsi.ui.basenavigation.more.calculatormore.durasiinvestasi;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,10 +18,10 @@ import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.utils.BaseFragment;
-import com.bca.bsi.utils.Utils;
 
-public class DurasiInvestasiFragment extends BaseFragment implements View.OnClickListener {
+public class DurasiInvestasiFragment extends BaseFragment implements View.OnClickListener, IDurasiInvestasiCallback {
 
+    private DurasiInvestasiViewModel viewModel;
     private Button kalkulasi;
     private TextView DILabel;
     private TextView hasilDI;
@@ -29,9 +30,15 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
     private EditText ETDIInvestasiBulanan;
     private EditText ETDIROR;
     private NestedScrollView nestedScrollView;
+    private int numbOfTabs;
+    private String rorValue;
+    private TextView tvRoR;
+    private TextView tvRoRPertahun;
+    private TextView tvRoRPersen;
 
-    public DurasiInvestasiFragment() {
-        // Required empty public constructor
+    public DurasiInvestasiFragment(int numbOfTabs, String rorValue) {
+        this.numbOfTabs = numbOfTabs;
+        this.rorValue = rorValue;
     }
 
     @Override
@@ -45,18 +52,36 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        kalkulasi = view.findViewById(R.id.btn_di_kalkulasi);
-        kalkulasi.setOnClickListener(this);
-
         DILabel = view.findViewById(R.id.label_durasi_investasi);
         hasilDI = view.findViewById(R.id.tv_di_hasil);
         ETDIInvestasiBulanan = view.findViewById(R.id.et_di_investasi_bulanan);
         ETDIModalAwal = view.findViewById(R.id.et_di_modal_awal);
         ETDIROR = view.findViewById(R.id.et_di_ror);
         ETDITargetHasilInvestasi = view.findViewById(R.id.et_di_target_hasil_investasi);
-
+        kalkulasi = view.findViewById(R.id.btn_di_kalkulasi);
         nestedScrollView = view.findViewById(R.id.nested_scroll_view);
+        tvRoR = view.findViewById(R.id.tv_ror);
+        tvRoRPertahun = view.findViewById(R.id.tv_ror_pertahun);
+        tvRoRPersen = view.findViewById(R.id.tv_ror_persen);
+
+        viewModel = new ViewModelProvider(this).get(DurasiInvestasiViewModel.class);
+        viewModel.setCallback(this);
+        kalkulasi.setOnClickListener(this);
+
+        switch (numbOfTabs){
+            case 3:
+                ETDIROR.setVisibility(View.GONE);
+                tvRoR.setVisibility(View.GONE);
+                tvRoRPertahun.setVisibility(View.GONE);
+                tvRoRPersen.setVisibility(View.GONE);
+                break;
+            case 4:
+                ETDIROR.setVisibility(View.VISIBLE);
+                tvRoR.setVisibility(View.VISIBLE);
+                tvRoRPertahun.setVisibility(View.VISIBLE);
+                tvRoRPersen.setVisibility(View.VISIBLE);
+                break;
+        }
 
         ETDITargetHasilInvestasi.addTextChangedListener(new TextWatcher() {
             @Override
@@ -172,20 +197,16 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
                         ETDITargetHasilInvestasi.setText("0");
                     }
 
-                    Utils utils = new Utils();
-                    Double ETDIModalAwalDouble = Double.parseDouble(ETDIModalAwal.getText().toString());
-                    Double ETDIInvestasiBulananDouble = Double.parseDouble(ETDIInvestasiBulanan.getText().toString());
-                    Double ETDITargetHasilInvestasiDouble = Double.parseDouble(ETDITargetHasilInvestasi.getText().toString());
-                    Double ETDIRORDouble = Double.parseDouble(ETDIROR.getText().toString())/100;
-
-                    int[] hasilKalkulasiDI = utils.getDuration(ETDIModalAwalDouble,ETDIInvestasiBulananDouble,ETDITargetHasilInvestasiDouble,ETDIRORDouble);
-
-                    ETDITargetHasilInvestasi.setText(utils.formatUang(ETDITargetHasilInvestasiDouble));
-                    ETDIModalAwal.setText(utils.formatUang(ETDIModalAwalDouble));
-                    ETDIInvestasiBulanan.setText(utils.formatUang(ETDIInvestasiBulananDouble));
-                    ETDIROR.setText(utils.formatDecimal(ETDIROR.getText().toString()));
-
-                    hasilDI.setText(hasilKalkulasiDI[1]+" tahun "+hasilKalkulasiDI[0]+" bulan");
+                    switch (numbOfTabs){
+                        case 3:
+                            viewModel.kalkulasi(ETDIModalAwal.getText().toString(),ETDIInvestasiBulanan.getText().toString(),
+                                    ETDITargetHasilInvestasi.getText().toString(),rorValue);
+                            break;
+                        case 4:
+                            viewModel.kalkulasi(ETDIModalAwal.getText().toString(),ETDIInvestasiBulanan.getText().toString(),
+                                    ETDITargetHasilInvestasi.getText().toString(),ETDIROR.getText().toString());
+                            break;
+                    }
 
                     DILabel.setVisibility(View.VISIBLE);
                     hasilDI.setVisibility(View.VISIBLE);
@@ -223,5 +244,14 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
                 break;
 
         }
+    }
+
+    @Override
+    public void kalkulasiOutput(String hasilKalkulasi, String formatTargetHasil, String formatModalAwal, String formatInvestBulanan, String formatRoR) {
+        ETDITargetHasilInvestasi.setText(formatTargetHasil);
+        ETDIModalAwal.setText(formatModalAwal);
+        ETDIInvestasiBulanan.setText(formatInvestBulanan);
+        ETDIROR.setText(formatRoR);
+        hasilDI.setText(hasilKalkulasi);
     }
 }

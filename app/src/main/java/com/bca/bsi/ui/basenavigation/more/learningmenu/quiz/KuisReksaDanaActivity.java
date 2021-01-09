@@ -11,9 +11,12 @@ import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.QuizAdapter;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.TopicListActivity;
+import com.bca.bsi.ui.basenavigation.products.detail.DetailProductActivity;
 import com.bca.bsi.ui.basenavigation.products.detail.reksadana.ReksadanaProductFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.SwipeDirection;
+import com.bca.bsi.utils.constant.Type;
 
 public class KuisReksaDanaActivity extends BaseActivity implements View.OnClickListener, QuizAdapter.onItemClick {
 
@@ -103,7 +106,9 @@ public class KuisReksaDanaActivity extends BaseActivity implements View.OnClickL
         if(currentPage<5){
             viewPager.setCurrentItem(currentPage+1);
         }else{
-            Intent intent = new Intent(this, ReksadanaProductFragment.class);
+            System.out.println("udah masuk siniii");
+            Intent intent = new Intent(this, DetailProductActivity.class);
+            intent.putExtra(DetailProductActivity.PRODUCT_TYPE,0);
             startActivity(intent);
         }
 
@@ -111,6 +116,8 @@ public class KuisReksaDanaActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void openPage() {
-        onBackPressed();
+        Intent intent = new Intent(this, TopicListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
