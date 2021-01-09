@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,8 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
-import com.bca.bsi.ui.basenavigation.more.calculatormore.CalculatorMoreActivity;
-import com.bca.bsi.ui.basenavigation.products.detail.reksadana.CalculatorProductActivity;
+import com.bca.bsi.ui.basenavigation.more.calculator.CalculatorMoreActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
 

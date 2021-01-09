@@ -16,7 +16,6 @@ import com.bca.bsi.model.Product;
 import com.bca.bsi.model.Transaction;
 import com.bca.bsi.model.User;
 
-import com.bca.bsi.ui.basenavigation.products.detail.reksadana.CalculatorProductActivity;
 import com.bca.bsi.ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;

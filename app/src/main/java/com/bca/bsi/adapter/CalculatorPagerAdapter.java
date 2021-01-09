@@ -4,10 +4,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.bca.bsi.ui.basenavigation.more.calculatormore.besarhasilinvestasi.BesarHasilInvestasiFragment;
-import com.bca.bsi.ui.basenavigation.more.calculatormore.besarinvastasibulanan.BesarInvestasiBulananFragment;
-import com.bca.bsi.ui.basenavigation.more.calculatormore.besarror.BesarRoRFragment;
-import com.bca.bsi.ui.basenavigation.more.calculatormore.durasiinvestasi.DurasiInvestasiFragment;
+import com.bca.bsi.ui.basenavigation.more.calculator.besarhasilinvestasi.BesarHasilInvestasiFragment;
+import com.bca.bsi.ui.basenavigation.more.calculator.besarinvastasibulanan.BesarInvestasiBulananFragment;
+import com.bca.bsi.ui.basenavigation.more.calculator.besarror.BesarRoRFragment;
+import com.bca.bsi.ui.basenavigation.more.calculator.durasiinvestasi.DurasiInvestasiFragment;
 
 public class CalculatorPagerAdapter extends FragmentPagerAdapter {
 

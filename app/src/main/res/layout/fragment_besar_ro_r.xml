@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.basenavigation.more.calculatormore.besarror.BesarRoRFragment">
+    tools:context=".ui.basenavigation.more.calculator.besarror.BesarRoRFragment">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"

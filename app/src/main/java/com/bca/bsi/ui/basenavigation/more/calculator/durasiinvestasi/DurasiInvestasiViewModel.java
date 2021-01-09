@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.more.calculatormore.durasiinvestasi;
+package com.bca.bsi.ui.basenavigation.more.calculator.durasiinvestasi;
 
 import android.app.Application;
 

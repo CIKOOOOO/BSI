@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.more.calculatormore.besarhasilinvestasi;
+package com.bca.bsi.ui.basenavigation.more.calculator.besarhasilinvestasi;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;

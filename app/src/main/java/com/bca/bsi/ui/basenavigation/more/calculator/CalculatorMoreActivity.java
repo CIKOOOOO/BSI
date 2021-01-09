@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.more.calculatormore;
+package com.bca.bsi.ui.basenavigation.more.calculator;
 
 import android.content.Intent;
 import android.graphics.Color;

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bca.bsi.R;
-import com.bca.bsi.ui.basenavigation.more.calculatormore.CalculatorMoreActivity;
+import com.bca.bsi.ui.basenavigation.more.calculator.CalculatorMoreActivity;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.TopicListActivity;
 import com.bca.bsi.utils.BaseFragment;
 

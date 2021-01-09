@@ -15,17 +15,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningMateriAdapter;
 import com.bca.bsi.model.LearningChapter;
-import com.bca.bsi.ui.basenavigation.more.calculatormore.CalculatorMoreActivity;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.CustomViewPager;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity;
 import com.bca.bsi.utils.BaseActivity;
-import com.bca.bsi.utils.constant.SwipeDirection;
-import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.bca.bsi.utils.dummydata.DummyData.getLearningChapterRDList;
 
 public class MateriReksaDanaActivity extends BaseActivity implements View.OnClickListener, LearningMateriAdapter.onItemClick {
 

@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.more.calculatormore.besarinvastasibulanan;
+package com.bca.bsi.ui.basenavigation.more.calculator.besarinvastasibulanan;
 
 import android.app.Application;
 
