@@ -12,11 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bca.bsi.R;
-import com.bca.bsi.adapter.CalculatorAdapter;
-import com.bca.bsi.ui.basenavigation.calculator.CalculatorActivity;
 import com.bca.bsi.ui.basenavigation.more.calculatormore.CalculatorMoreActivity;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.TopicListActivity;
-import com.bca.bsi.ui.basenavigation.products.detail.reksadana.CalculatorProductActivity;
 import com.bca.bsi.utils.BaseFragment;
 
 public class MoreFragment extends BaseFragment implements View.OnClickListener {

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
-import com.bca.bsi.ui.basenavigation.calculator.CalculatorActivity;
+import com.bca.bsi.ui.basenavigation.more.calculatormore.CalculatorMoreActivity;
 import com.bca.bsi.ui.basenavigation.products.detail.reksadana.CalculatorProductActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
@@ -96,8 +96,9 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
                 intent.putExtra(CalculatorProductActivity.ROR_KEY,this.detailReksaDana.getRorReksaDana());
                 startActivity(intent);
                 */
-                Intent intent = new Intent(this, CalculatorActivity.class);
+                Intent intent = new Intent(this, CalculatorMoreActivity.class);
                 intent.putExtra("numberOfTabs",3);
+                intent.putExtra("rorValue",this.detailReksaDana.getRorReksaDana());
                 startActivity(intent);
                 break;
         }
