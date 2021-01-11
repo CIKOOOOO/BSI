@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.information;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bca.bsi.R;
 import com.bca.bsi.ui.basenavigation.information.forum.MainForumFragment;
+import com.bca.bsi.ui.basenavigation.information.forum.profile.ForumProfileActivity;
 import com.bca.bsi.ui.basenavigation.information.promonews.news.NewsInformationFragment;
 import com.bca.bsi.ui.basenavigation.information.promonews.promo.PromoInformationFragment;
 import com.bca.bsi.utils.BaseFragment;
@@ -61,7 +63,7 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_btn_action_toolbar_back_image:
-
+                startActivity(new Intent(mActivity, ForumProfileActivity.class));
                 break;
             case R.id.tv_start_information_fragment:
                 switchButton(1, view.getContext());

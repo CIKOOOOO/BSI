@@ -18,4 +18,6 @@ public class Type {
     public static final String PEMBELIAN_BERKALA = "pembelian_berkala";
     public static final String PEMBELIAN_SEKALI_BAYAR = "pembelian_sekali_bayar";
 
+    public static final String PURCHASING_WITH_SMARTBOT = "purchasing_with_smartbot";
+
 }

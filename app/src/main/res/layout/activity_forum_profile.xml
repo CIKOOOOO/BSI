@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.basenavigation.information.forum.profile.ForumProfileActivity">
+
+    <include
+        android:id="@+id/include10"
+        layout="@layout/toolbar_back_with_image" />
+
+    <ImageView
+        android:id="@+id/img_view_header_forum_profile"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/rounded_image_view_profile_forum"
+        android:layout_width="@dimen/size_for_100dp"
+        android:layout_height="@dimen/size_for_100dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:background="@drawable/img_carousel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include10" />
+
+    <TextView
+        android:id="@+id/tv_name_forum_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:text="Clarissa Aristania"
+        android:textAllCaps="true"
+        android:textColor="@color/color_base_welma"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rounded_image_view_profile_forum" />
+
+    <ImageButton
+        android:id="@+id/img_btn_edit_name_forum_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_10dp"
+        android:background="@drawable/rectangle_rounded_welma"
+        android:paddingStart="@dimen/size_for_5dp"
+        android:paddingTop="@dimen/size_for_2dp"
+        android:paddingEnd="@dimen/size_for_5dp"
+        android:paddingBottom="@dimen/size_for_2dp"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toBottomOf="@id/tv_name_forum_profile"
+        app:layout_constraintStart_toEndOf="@id/tv_name_forum_profile"
+        app:layout_constraintTop_toTopOf="@id/tv_name_forum_profile" />
+
+    <TextView
+        android:text="@string/follower"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_forum_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

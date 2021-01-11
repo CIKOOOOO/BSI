@@ -8,6 +8,10 @@ import androidx.lifecycle.AndroidViewModel;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
+import com.bca.bsi.model.Product;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +31,9 @@ public class DetailReksaDanaViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadDetailReksaDana(String reksaDanaID) {
+    public void loadDetailReksaDana(int reksaDanaID) {
+        List<Product.Performance> performanceList = new ArrayList<>();
+
         Call<OutputResponse> call = apiInterface.getDetailReksaDana(reksaDanaID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
@@ -35,10 +41,34 @@ public class DetailReksaDanaViewModel extends AndroidViewModel {
                 if (response.body() != null) {
                     OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                     OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
-                    if (errorSchema.getErrorCode() != 200) {
+                    if (!errorSchema.getErrorCode().equals("200")) {
                         callback.onFailed(errorSchema.getErrorMessage());
                     } else {
-                        callback.onLoadReksaDanaDetail(outputSchema.getDetailReksaDana());
+                        if (outputSchema.getDetailReksaDana().getKinerja1Bulan() != null) {
+                            performanceList.add(new Product.Performance("1 Bulan", Double.parseDouble(outputSchema.getDetailReksaDana().getKinerja1Bulan())));
+                        }
+
+                        if (outputSchema.getDetailReksaDana().getKinerja6Bulan() != null) {
+                            performanceList.add(new Product.Performance("6 Bulan", Double.parseDouble(outputSchema.getDetailReksaDana().getKinerja6Bulan())));
+                        }
+
+                        if (outputSchema.getDetailReksaDana().getYearToDate() != null) {
+                            performanceList.add(new Product.Performance("YTD", Double.parseDouble(outputSchema.getDetailReksaDana().getYearToDate())));
+                        }
+
+                        if (outputSchema.getDetailReksaDana().getKinerja1Tahun() != null) {
+                            performanceList.add(new Product.Performance("1 Tahun", Double.parseDouble(outputSchema.getDetailReksaDana().getKinerja1Tahun())));
+                        }
+
+                        if (outputSchema.getDetailReksaDana().getKinerja3Tahun() != null) {
+                            performanceList.add(new Product.Performance("3 Tahun", Double.parseDouble(outputSchema.getDetailReksaDana().getKinerja3Tahun())));
+                        }
+
+                        if (outputSchema.getDetailReksaDana().getKinerja5Tahun() != null) {
+                            performanceList.add(new Product.Performance("5 Tahun", Double.parseDouble(outputSchema.getDetailReksaDana().getKinerja5Tahun())));
+                        }
+
+                        callback.onLoadReksaDanaDetail(outputSchema.getDetailReksaDana(), performanceList);
                     }
                 }
             }

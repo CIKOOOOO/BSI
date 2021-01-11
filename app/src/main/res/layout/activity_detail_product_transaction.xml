@@ -22,6 +22,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_product_name_detail_product_transaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tv_name_detail_transaction"
                 android:layout_width="0dp"
@@ -67,7 +73,7 @@
                 android:layout_height="@dimen/size_for_0.5dp"
                 android:layout_marginTop="@dimen/size_for_10dp"
                 android:background="@color/gray_palette"
-                app:layout_constraintTop_toBottomOf="@id/ll_01" />
+                app:layout_constraintTop_toBottomOf="@id/recycler_product_name_detail_product_transaction" />
 
             <TextView
                 android:id="@+id/tv_01"
@@ -88,7 +94,7 @@
                 android:background="@color/gray_palette"
                 app:layout_constraintBottom_toBottomOf="@id/tv_saldo_detail_transaction"
                 app:layout_constraintStart_toEndOf="@id/tv_01"
-                app:layout_constraintTop_toBottomOf="@id/ll_01" />
+                app:layout_constraintTop_toBottomOf="@id/recycler_product_name_detail_product_transaction" />
 
             <TextView
                 android:id="@+id/tv_nomor_rekening_detail_transaction"

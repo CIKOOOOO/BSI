@@ -3,6 +3,7 @@ package com.bca.bsi.ui.basenavigation.products.detail.reksadana.detailreksadana;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,8 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
-import com.bca.bsi.utils.dummydata.DummyData;
+import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
+import com.bca.bsi.utils.constant.Type;
+
+import java.text.ParseException;
+import java.util.List;
 
 public class DetailReksaDanaActivity extends BaseActivity implements View.OnClickListener, IDetailReksaDanaCallback {
 
@@ -23,6 +30,8 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
     private DetailReksaDanaViewModel viewModel;
     private ReksaDanaPerformanceAdapter danaPerformanceAdapter;
     private TextView tvProductName, tvDate, tvNAB, tvManagerInvest, tvKustodianBank, tvTypeReksaDana, tvReleaseDate, tvFirstMinimumPurchasing, tvNextMinimumPurchasing, tvSellingMinimum, tvMinimumSaldoUnit, tvPurcashingCost, tvSellingCost, tvInvestManagementCost, tvCustodianCost, tvAgentCost, tvKalkulatorPerencanaan;
+
+    private Product.DetailReksaDana detailReksaDana;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,7 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
         TextView tvChild = findViewById(R.id.tv_child_toolbar_back);
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
         RecyclerView recycler_performance = findViewById(R.id.recycler_kinerja_produk_detail_reksa_dana);
+        Button btnBuy = findViewById(R.id.btn_buy_reksa_dana_detail);
 
         tvProductName = findViewById(R.id.tv_name_detail_reksa_dana);
         tvDate = findViewById(R.id.tv_date_detail_reksa_dana);
@@ -69,15 +79,13 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(REKSA_DANA_ID)) {
             String reksaDanaID = intent.getStringExtra(REKSA_DANA_ID);
-            viewModel.loadDetailReksaDana(reksaDanaID);
+            if (reksaDanaID != null)
+                viewModel.loadDetailReksaDana(Integer.parseInt(reksaDanaID));
         }
 
         imgBack.setOnClickListener(this);
         tvKalkulatorPerencanaan.setOnClickListener(this);
-
-
-        danaPerformanceAdapter.setPerformanceList(DummyData.getPerformanceList());
-        danaPerformanceAdapter.notifyDataSetChanged();
+        btnBuy.setOnClickListener(this);
     }
 
     @Override
@@ -89,35 +97,56 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
             case R.id.tv_kalkulator_perencanaan_detail_reksa_dana:
                 Toast.makeText(this, "kalkulator perencanaan", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.btn_buy_reksa_dana_detail:
+                if (this.detailReksaDana != null) {
+                    Intent intent = new Intent(this, DetailProductTransactionActivity.class);
+                    intent.putExtra(DetailProductTransactionActivity.PRODUCT_TYPE, Type.REKSA_DANA);
+                    intent.putExtra(DetailProductTransactionActivity.SALES_TYPE, Type.PURCHASING);
+                    intent.putExtra(DetailProductTransactionActivity.DATA, Utils.toJSON(this.detailReksaDana));
+                    startActivity(intent);
+                }
+                break;
         }
     }
 
     @Override
-    public void onLoadReksaDanaDetail(Product.DetailReksaDana detailReksaDana) {
+    public void onLoadReksaDanaDetail(Product.DetailReksaDana detailReksaDana, List<Product.Performance> performanceList) {
+        this.detailReksaDana = detailReksaDana;
+
         tvProductName.setText(detailReksaDana.getName());
-        tvDate.setText(detailReksaDana.getUpdateDate());
 
         String nab = detailReksaDana.getNabSatuBulan() + "\n NAB/Unit";
-        tvNAB.setText(nab);
+        String purchasingCost = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : detailReksaDana.getBiayaPembelian();
+        String biayaAgenPenjual = detailReksaDana.getBiayaAgen() == null ? "Rp N/A" : "Rp " + Utils.priceFormat(Double.parseDouble(detailReksaDana.getBiayaAgen()));
 
-        tvManagerInvest.setText(detailReksaDana.getManagerInvestasiID());
+        tvPurcashingCost.setText(purchasingCost + "%");
+        tvNAB.setText(nab);
+        tvAgentCost.setText(biayaAgenPenjual);
+
+        try {
+            String updateDate = Utils.formatDateFromDateString(Constant.DATE_FORMAT_FROM_DB, Constant.DATE_FORMAT_2, detailReksaDana.getUpdateDate());
+            String releaseDate = Utils.formatDateFromDateString(Constant.DATE_FORMAT_FROM_DB, Constant.DATE_FORMAT_1, detailReksaDana.getReleaseDate());
+            tvReleaseDate.setText(releaseDate);
+            tvDate.setText(updateDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         tvTypeReksaDana.setText(detailReksaDana.getProductCategory());
-        tvReleaseDate.setText(detailReksaDana.getReleaseDate());
-        tvFirstMinimumPurchasing.setText(detailReksaDana.getMinimumPembelianPertama());
-        tvNextMinimumPurchasing.setText(detailReksaDana.getMinimumPembelianBerikut());
-        tvSellingMinimum.setText(detailReksaDana.getMininumPenjualan());
+        tvFirstMinimumPurchasing.setText("Rp " + Utils.priceFormat(Double.parseDouble(detailReksaDana.getMinimumPembelianPertama())));
+        tvNextMinimumPurchasing.setText("Rp " + Utils.priceFormat(Double.parseDouble(detailReksaDana.getMinimumPembelianBerikut())));
+        tvSellingMinimum.setText("Rp " + Utils.priceFormat(Double.parseDouble(detailReksaDana.getMininumPenjualan())));
         tvMinimumSaldoUnit.setText(detailReksaDana.getMinimumSaldoUnit());
-        tvPurcashingCost.setText(detailReksaDana.getBiayaPembelian());
         tvSellingCost.setText(detailReksaDana.getBiayaPenjualan());
         tvInvestManagementCost.setText(detailReksaDana.getBiayaManajerInvestasi());
         tvCustodianCost.setText(detailReksaDana.getBiayaBankKustodian());
-        tvAgentCost.setText(detailReksaDana.getBiayaAgen());
+        tvKustodianBank.setText(detailReksaDana.getBankKustodian());
 
-        // here
-        tvKustodianBank.setText(detailReksaDana.getBankKustodianID());
+        //here
+        tvManagerInvest.setText(detailReksaDana.getManagerInvestasiID());
 
-//        danaPerformanceAdapter.setPerformanceList(DummyData.getPerformanceList());
-//        danaPerformanceAdapter.notifyDataSetChanged();
+        danaPerformanceAdapter.setPerformanceList(performanceList);
+        danaPerformanceAdapter.notifyDataSetChanged();
 
     }
 

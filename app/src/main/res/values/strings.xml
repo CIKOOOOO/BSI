@@ -157,6 +157,10 @@
     <string name="robo_bantu1">SmartBot dapat membantu kamu</string>
     <string name="robo_bantu2">menghitung persentase porsi investasi</string>
     <string name="robo_bantu3">pada produk reksa dana.</string>
+
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
+
     <!--END HERE-->
 
 

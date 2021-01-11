@@ -43,7 +43,7 @@ public class DetailProductTransactionViewModel extends AndroidViewModel {
                 if (response.body() != null) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
-                    if (errorSchema.getErrorCode() == 200) {
+                    if (errorSchema.getErrorCode().equals("200")) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.loadSaldo(outputSchema.getBcaUser(), outputSchema.getDetailReksaDana());
                     } else {

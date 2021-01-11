@@ -26,7 +26,7 @@ public class OutputResponse {
     public static class ErrorSchema {
 
         @SerializedName("error_code")
-        private int errorCode;
+        private String errorCode;
 
         @SerializedName("error_message")
         private String errorMessage;
@@ -34,7 +34,7 @@ public class OutputResponse {
         public ErrorSchema() {
         }
 
-        public int getErrorCode() {
+        public String getErrorCode() {
             return errorCode;
         }
 
@@ -51,10 +51,10 @@ public class OutputResponse {
         @SerializedName("welma_user")
         private User.WelmaUser welmaUser;
 
-        @SerializedName("ListProducts")
+        @SerializedName("list_products")
         private List<Product.ReksaDana> reksaDanaList;
 
-        @SerializedName("Detail_Reksadana")
+        @SerializedName("detail_reksadana")
         private Product.DetailReksaDana detailReksaDana;
 
         @SerializedName("bca_user")
