@@ -34,7 +34,7 @@ public class BesarRoRViewModel extends AndroidViewModel {
         if (hasil == -1) {
             hasilStr = getApplication().getApplicationContext().getResources().getString(R.string.ror_bernilai_negatif);
         } else if(hasil == 123123){
-            hasilStr = getApplication().getApplicationContext().getResources().getString(R.string.ror_bernilai_lebih_dari_1000_persen);
+            hasilStr = getApplication().getApplicationContext().getResources().getString(R.string.ror_bernilai_lebih_dari_50_persen);
         } else {
             hasil*=100;
             hasil = utils.roundDouble(hasil,4);

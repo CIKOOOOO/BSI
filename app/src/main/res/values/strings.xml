@@ -90,8 +90,11 @@
 
     <string name="input_tidak_sesuai">Data yang diinput tidak sesuai</string>
     <string name="ror_bernilai_negatif">RoR bernilai negatif</string>
-    <string name="ror_bernilai_lebih_dari_1000_persen">RoR bernilai lebih dari 1000%</string>
+    <string name="ror_bernilai_lebih_dari_50_persen">RoR bernilai lebih dari 50%</string>
     <string name="proporsi_input_tidak_sesuai">Proporsi data input tidak sesuai</string>
+    <string name="ror_bernilai">RoR bernilai</string>
+    <string name="negatif">negatif</string>
+    <string name="estimated">(estimated)</string>
 
     <string name="reksadana_capslock">REKSA DANA</string>
     <string name="obligasi_capslock">OBLIGASI</string>
@@ -135,9 +138,17 @@
 
     <string name="score_label">Score:</string>
     <string name="score_max_quiz">/5</string>
-    <string name="tanggal_ambil_quiz">Tanggal ambil quiz:</string>
+    <string name="tanggal_ambil_kuis">Tanggal ambil kuis:</string>
 
     <string name="klik_disini">Klik Disini</string>
+    
+    <string name="kuis_interaktif">Kuis Interaktif</string>
+    <string name="kuis_belum_ambil_reksadana">Mari ikuti kuis untuk mengasah pemahaman Anda mengenai Reksa Dana</string>
+    <string name="kuis_sudah_ambil_reksadana">Asah kembali pengetahuanmu mengenai Reksa Dana dengan menjawab ulang pertanyaan kuis</string>
+    <string name="kuis_belum_ambil_obligasi">Mari ikuti kuis untuk mengasah pemahaman Anda mengenai Obligasi</string>
+    <string name="kuis_sudah_ambil_obligasi">Asah kembali pengetahuanmu mengenai Obligasi dengan menjawab ulang pertanyaan kuis</string>
+    <string name="kuis_belum_ambil_asuransi">Mari ikuti kuis untuk mengasah pemahaman Anda mengenai Asuransi</string>
+    <string name="kuis_sudah_ambil_asuransi">Asah kembali pengetahuanmu mengenai Asuransi dengan menjawab ulang pertanyaan kuis</string>
 
     <string name="kuis_capslock">KUIS</string>
     <string name="lihat_penjelasan">Lihat Penjelasan</string>

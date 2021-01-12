@@ -147,7 +147,7 @@ public class Utils {
         // First we attempt to use Newton Method
         int maxiter = 1000; double x=1; int iter = 1;
 //		double maxRor = 0.22118855031; //monthly ror
-        double maxRorYear = 10; // berarti *100%
+        double maxRorYear = 0.5; // berarti *50%
         double maxRor = Math.pow(1+maxRorYear, 1.0/12.0)-1;
         System.out.println(maxRor);
 

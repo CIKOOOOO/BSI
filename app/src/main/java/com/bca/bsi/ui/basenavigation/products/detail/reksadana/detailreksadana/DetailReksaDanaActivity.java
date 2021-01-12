@@ -88,15 +88,12 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
                 onBackPressed();
                 break;
             case R.id.tv_kalkulator_perencanaan_detail_reksa_dana:
-                //Toast.makeText(this, "kalkulator perencanaan", Toast.LENGTH_SHORT).show();
-                /*
-                Intent intent = new Intent(this, CalculatorProductActivity.class);
-                intent.putExtra(CalculatorProductActivity.ROR_KEY,this.detailReksaDana.getRorReksaDana());
-                startActivity(intent);
-                */
                 Intent intent = new Intent(this, CalculatorMoreActivity.class);
                 intent.putExtra("numberOfTabs",3);
-                intent.putExtra("rorValue",this.detailReksaDana.getRorReksaDana());
+                //intent.putExtra("rorValue",String.valueOf(this.detailReksaDana.getRorReksaDana()));
+                intent.putExtra("rorValue","2");
+                //intent.putExtra("namaProduk",this.detailReksaDana.getName());
+                intent.putExtra("namaProduk","Nama Produk");
                 startActivity(intent);
                 break;
         }

@@ -96,6 +96,7 @@ public class MoreFragment extends BaseFragment implements View.OnClickListener {
         Intent intent = new Intent(mActivity, CalculatorMoreActivity.class);
         intent.putExtra("numberOfTabs",3);
         intent.putExtra("rorValue","2");
+        intent.putExtra("namaProduk","Nama Produk");
         startActivity(intent);
     }
 }

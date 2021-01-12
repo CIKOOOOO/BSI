@@ -1,9 +1,14 @@
 package com.bca.bsi.ui.basenavigation.more.calculator.besarror;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -225,15 +230,25 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void kalkulasiOutput(String hasilKalkulasi, String formatTargetHasil, String formatModalAwal, String formatInvestasiBulanan) {
-        if (!hasilKalkulasi.equals(getString(R.string.ror_bernilai_negatif))) {
-            if(!hasilKalkulasi.equals(getString(R.string.ror_bernilai_lebih_dari_1000_persen))){
-                persenLabel.setVisibility(View.VISIBLE);
-            }
-        } else {
+        ColorStateList defaultColor = pertahunLabel.getTextColors();
+        if (hasilKalkulasi.equals(getString(R.string.ror_bernilai_negatif))) {
+            hasilBROR.setTextColor(defaultColor);
+            hasilBROR.setText(getString(R.string.ror_bernilai));
+            persenLabel.setVisibility(View.VISIBLE);
+            persenLabel.setTextColor(Color.RED);
+            persenLabel.setText(getString(R.string.negatif));
+        }else if(hasilKalkulasi.equals(getString(R.string.ror_bernilai_lebih_dari_50_persen))){
+            hasilBROR.setTextColor(defaultColor);
             persenLabel.setVisibility(View.INVISIBLE);
+            hasilBROR.setText(hasilKalkulasi);
+        }else {
+            hasilBROR.setTextColor(ContextCompat.getColor(getView().getContext(),R.color.deep_cerulean_palette));
+            persenLabel.setTextColor(defaultColor);
+            persenLabel.setText(getString(R.string.symbol_persen)+" "+getString(R.string.estimated));
+            persenLabel.setVisibility(View.VISIBLE);
+            hasilBROR.setText("+"+hasilKalkulasi);
         }
 
-        hasilBROR.setText(hasilKalkulasi);
         ETBRORTargetHasilInvestasi.setText(formatTargetHasil);
         ETBRORModalAwal.setText(formatModalAwal);
         ETBRORInvestasiBulanan.setText(formatInvestasiBulanan);

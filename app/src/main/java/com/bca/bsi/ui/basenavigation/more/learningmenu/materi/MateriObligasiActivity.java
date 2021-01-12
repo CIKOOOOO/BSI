@@ -19,6 +19,7 @@ import com.bca.bsi.model.LearningChapter;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.KuisObligasiActivity;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,16 +49,7 @@ public class MateriObligasiActivity extends BaseActivity implements View.OnClick
         titlePage.setText(getString(R.string.obligasi_capslock));
         backBtn.setOnClickListener(this);
 
-        models = new ArrayList<>();
-        models.add(new LearningChapter(R.drawable.img_materi_obligasi_1,"Obligasi","Obligasi pemerintah adalah surat berharga dalam mata uang" +
-                "Rupiah maupun valuta asing yang dijamin pembayaran Kupon/Imbalan dan pokoknya oleh Negara Republik Indonesia"));
-        models.add(new LearningChapter(R.drawable.img_materi_obligasi_2,"Jenis Produk Obligasi","Konservatif: \n \u25CF ORI/SR/SBR/ST" +
-                "\n Moderat: \n \u25CF Obligasi FR/PBS \n \u25CF Obligasi Negara Valas (Indon) \n \u25CF Obligasi Negara Valas Syariah (Indois)"));
-        models.add(new LearningChapter(R.drawable.img_materi_obligasi_3,"Manfaat & Risiko Reksa Dana","Manfaat Obligasi \n1. Aman \n2. Kupon/Imbalan Kompetitif " +
-                "\n3. Mudah & Likuid"+ Html.fromHtml("<sup>*</sup>") +"\n4. Potensi Keuntungan (Capital Gain)"+ Html.fromHtml("<sup>*</sup>") +"" +
-                "\nRisiko Obligasi: \n1. Risiko Gagal Bayar \n2. Risiko Pasar \n3. Risiko Likuiditas\n\n"+Html.fromHtml("<sup>*</sup>")+Html.fromHtml("<font size=\"16\">) Khusus untuk obligasi pemerintah yang dapat diperdagangkan di Pasar Sekunder</font>")+
-                "\n\n Informasi Lebih Lanjut:"));
-        models.add(new LearningChapter(R.drawable.img_materi_kuis,"Kuis Interaktif","Mari ikuti kuis untuk mengasah pemahaman Anda terkait Obligasi"));
+        models = DummyData.setMateriObligasi();
 
         adapter = new LearningMateriAdapter(models,this, this);
 

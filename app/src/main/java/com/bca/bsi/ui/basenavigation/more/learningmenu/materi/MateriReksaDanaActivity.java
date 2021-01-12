@@ -17,6 +17,7 @@ import com.bca.bsi.adapter.LearningMateriAdapter;
 import com.bca.bsi.model.LearningChapter;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,18 +49,7 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
         titlePage.setText(getString(R.string.reksadana_capslock));
         backBtn.setOnClickListener(this);
 
-        models = new ArrayList<>();
-        models.add(new LearningChapter(R.drawable.img_materi_reksadana_1,"Reksa Dana","Merupakan wadah yang dipergunakan untuk menghitung" +
-                "dana dari masyarakat pemodal untuk selanjutnya diinvestasikan dalam portofolio Efek oleh Manajer Investasi"));
-        models.add(new LearningChapter(R.drawable.img_materi_reksadana_2,"Jenis Produk Reksa Dana","Sangat Konservatif: \n \u25CF Reksa Dana Pasar Uang" +
-                "\n Konservatif: \n \u25CF Reksa Dana Pendapatan Tetap \n \u25CF Reksa Dana Terproteksi \n Moderat: \n \u25CF Reksa Dana Campuran \n Agresif: \n \u25CF " +
-                "Reksa Dana Saham"));
-        models.add(new LearningChapter(R.drawable.img_materi_reksadana_3,"Manfaat & Risiko Reksa Dana","Manfaat Reksa Dana: \n 1. Pengelolaan yang " +
-                "Profesional \n 2. Diversifikasi Investasi \n 3. Transparansi \n 4. Dana Investasi yang Terjangkau \n Risiko Reksa Dana: \n 1. Risiko Berkurangnya Unit " +
-                "Penyertaan \n 2. Risiko Perubahan Kondisi Politik dan Ekonomi \n 3. Risiko Likuiditas \n 4. Risiko Nilai Tukar \n 5. Risiko Perubahan Peraturan dan " +
-                "Ketentuan Pajak \n 6. Risiko Pembubaran dan Likuiditas \n\n Informasi Lebih Lanjut:"));
-        models.add(new LearningChapter(R.drawable.img_materi_kuis,"Kuis Interaktif","Mari ikuti kuis untuk mengasah pemahaman Anda terkait Reksa Dana"));
-
+        models = DummyData.setMateriReksaDana();
 
         adapter = new LearningMateriAdapter(models,this, this);
 

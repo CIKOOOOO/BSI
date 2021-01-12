@@ -64,11 +64,19 @@ public class LearningMateriAdapter extends PagerAdapter {
         button = view.findViewById(R.id.quiz_button);
         scoring = view.findViewById(R.id.scoring_quiz);
 
+        imageView.setImageResource(models.get(position).getImage());
+        title.setText(models.get(position).getTitle());
+        explanation.setText(models.get(position).getExplanation());
+
 
         if(position == models.size() - 1) {
             button.setVisibility(View.VISIBLE);
             scoring.setVisibility(View.VISIBLE);
-            button.setText(R.string.ayo_ikuti_kuis);
+            if(explanation.getText().equals(context.getString(R.string.kuis_belum_ambil_asuransi)) || explanation.getText().equals(context.getString(R.string.kuis_belum_ambil_reksadana)) || explanation.getText().equals(context.getString(R.string.kuis_belum_ambil_obligasi))) {
+                button.setText(context.getString(R.string.ayo_ikuti_kuis));
+            }else {
+                button.setText(context.getString(R.string.ulangi_kuis));
+            }
             button.setTextColor(ContextCompat.getColor(context, R.color.deep_cerulean_palette));
             button.setAllCaps(false);
         }else if (position == models.size() - 2){
@@ -101,11 +109,6 @@ public class LearningMateriAdapter extends PagerAdapter {
                 }
             }
         });
-
-
-        imageView.setImageResource(models.get(position).getImage());
-        title.setText(models.get(position).getTitle());
-        explanation.setText(models.get(position).getExplanation());
 
         container.addView(view,0);
 

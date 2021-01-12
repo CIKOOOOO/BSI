@@ -71,12 +71,13 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
             case 3:
                 lastTab.setVisibility(View.GONE);
                 besarRoRTab.setVisibility(View.GONE);
-                titleChildPage.setText("3");
+                titleChildPage.setVisibility(View.VISIBLE);
+                titleChildPage.setText(intent.getStringExtra("namaProduk"));
                 break;
             case 4:
                 lastTab.setVisibility(View.VISIBLE);
                 besarRoRTab.setVisibility(View.VISIBLE);
-                titleChildPage.setText("4");
+                titleChildPage.setVisibility(View.GONE);
                 break;
         }
 

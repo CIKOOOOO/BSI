@@ -12,11 +12,16 @@ import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.QuizAdapter;
+import com.bca.bsi.model.KuisData;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.TopicListActivity;
 import com.bca.bsi.ui.basenavigation.products.detail.DetailProductActivity;
 import com.bca.bsi.ui.basenavigation.products.detail.reksadana.ReksadanaProductFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.SwipeDirection;
+import com.bca.bsi.utils.dummydata.DummyData;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class KuisObligasiActivity extends BaseActivity implements View.OnClickListener, QuizAdapter.onItemClick {
 
@@ -27,6 +32,7 @@ public class KuisObligasiActivity extends BaseActivity implements View.OnClickLi
     private QuizAdapter adapter;
     private ImageView pagination;
     private int currentPage;
+    private KuisData kuisData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +48,15 @@ public class KuisObligasiActivity extends BaseActivity implements View.OnClickLi
         titleChild.setText(getString(R.string.obligasi));
         backBtn.setOnClickListener(this);
 
-        adapter = new QuizAdapter(this,this);
+        kuisData = DummyData.setKuisDataDummy();
+
+        adapter = new QuizAdapter(kuisData, this,this);
 
         viewPager = findViewById(R.id.viewPagerKuis);
         viewPager.setAdapter(adapter);
         viewPager.setPadding(50,0,50, 0);
         viewPager.setAllowedSwipeDirection(SwipeDirection.left);
-
-        Intent intent = getIntent();
-        adapter.setKuis(intent.getStringExtra("topic"));
+        viewPager.setOffscreenPageLimit(6);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

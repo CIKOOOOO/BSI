@@ -167,11 +167,94 @@
                         android:textColor="@color/deep_cerulean_palette"/>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/scoring_quiz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/pilgan_c"
+                    android:layout_marginTop="@dimen/size_for_20dp"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/image_score_quiz"
+                        android:layout_width="@dimen/size_for_120dp"
+                        android:layout_height="@dimen/size_for_120dp"
+                        android:layout_marginStart="@dimen/size_for_20dp"
+                        android:src="@drawable/img_score_4_stars"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_for_10dp"
+                            android:layout_marginStart="@dimen/size_for_20dp"
+                            android:text="@string/score_label"
+                            android:textColor="@color/deep_cerulean_palette"
+                            android:textStyle="bold"
+                            android:typeface="normal" />
+
+                        <TextView
+                            android:id="@+id/user_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_for_5dp"
+                            android:layout_marginTop="@dimen/size_for_10dp"
+                            android:text="4"
+                            android:textColor="@color/deep_cerulean_palette"
+                            android:textSize="@dimen/size_for_23sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_for_5dp"
+                            android:layout_marginTop="@dimen/size_for_10dp"
+                            android:text="@string/score_max_quiz"
+                            android:textColor="@color/deep_cerulean_palette"
+                            android:textSize="@dimen/size_for_17sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/size_for_30dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tanggal_ambil_kuis"
+                            android:layout_marginBottom="@dimen/size_for_12sp"
+                            android:textColor="@color/deep_cerulean_palette"/>
+
+                        <TextView
+                            android:id="@+id/date_attempt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1 Januari 2020"
+                            android:textColor="@color/deep_cerulean_palette"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/size_for_15sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
                 <Button
                     android:id="@+id/btn_ke_penjelasan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/pilgan_c"
+                    android:layout_below="@id/scoring_quiz"
                     android:layout_marginStart="@dimen/size_for_30dp"
                     android:layout_marginEnd="@dimen/size_for_30dp"
                     android:layout_marginTop="@dimen/size_for_40dp"
