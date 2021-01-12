@@ -47,6 +47,7 @@ public class PrefConfig {
         editor.putString(context.getString(R.string.pref_profile_risiko), Constant.EMPTY);
         editor.putString(context.getString(R.string.pref_email), Constant.EMPTY);
         editor.putString(context.getString(R.string.pref_account_number), Constant.EMPTY);
+        editor.putString(context.getString(R.string.pref_username), Constant.EMPTY);
         editor.apply();
     }
 
@@ -55,6 +56,7 @@ public class PrefConfig {
         editor.putString(context.getString(R.string.pref_name), name);
         editor.apply();
     }
+
 
     public void setAccountNumber(String accountNumber) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -98,6 +100,10 @@ public class PrefConfig {
 
     public String getTokenAccess() {
         return sharedPreferences.getString(context.getString(R.string.pref_token_access), Constant.EMPTY);
+    }
+
+    public String getUsername() {
+        return sharedPreferences.getString(context.getString(R.string.pref_username), Constant.EMPTY);
     }
 
 }

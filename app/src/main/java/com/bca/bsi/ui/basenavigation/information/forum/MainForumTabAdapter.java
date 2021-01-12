@@ -8,11 +8,11 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumFragment;
 
 
-public class DynamicTabAdapter extends FragmentStatePagerAdapter {
+public class MainForumTabAdapter extends FragmentStatePagerAdapter {
 
     private int numOfTabs;
 
-    public DynamicTabAdapter(@NonNull FragmentManager fm, int numOfTabs) {
+    public MainForumTabAdapter(@NonNull FragmentManager fm, int numOfTabs) {
         super(fm, numOfTabs);
         this.numOfTabs = numOfTabs;
     }

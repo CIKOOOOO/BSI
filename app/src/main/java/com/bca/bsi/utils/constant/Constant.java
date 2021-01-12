@@ -12,7 +12,7 @@ public class Constant {
     public static final long MAX_USAGE_DURATION_APPS = 600000;
 
     public static final String EMPTY = "";
-    public static final String BASE_URL = "http://192.168.137.1:8001/";
+    public static final String BASE_URL = "http://192.168.137.1:8000/";
     public static final String DATE_FORMAT_1 = "dd MMMM yyyy";
     public static final String DATE_FORMAT_2 = "dd/MM/yyyy";
     public static final String DATE_FORMAT_FROM_DB = "dd-MMM-yy";
@@ -22,6 +22,7 @@ public class Constant {
     private static final int[] PRODUCT_IMAGE = {R.drawable.img_asset_reksa_dana, R.drawable.img_asset_obligasi, R.drawable.img_asset_asuransi};
 
     public static final String[] FORUM_MENU = {"Trending", "Strategy", "Share Trade", "News", "Timeline"};
+    public static final String[] FORUM_PROFILE_MENU = {"Posting", "Bookmark"};
 
     public static List<Object> getProductTypeList() {
         List<Object> productTypeList = new ArrayList<>();

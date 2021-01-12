@@ -37,7 +37,7 @@ public class MainForumFragment extends BaseFragment {
     private void setupTab(View view) {
         TabLayout tabLayout = view.findViewById(R.id.tl_main_forum);
         final ViewPager viewPager = view.findViewById(R.id.vp_main_forum);
-        DynamicTabAdapter adapter = new DynamicTabAdapter(getChildFragmentManager(), Constant.FORUM_MENU.length);
+        MainForumTabAdapter adapter = new MainForumTabAdapter(getChildFragmentManager(), Constant.FORUM_MENU.length);
 
         for (String name : Constant.FORUM_MENU) {
             tabLayout.addTab(tabLayout.newTab().setText(name));

@@ -18,6 +18,7 @@ import com.bca.bsi.model.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,37 +42,35 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void loginWith(String token, String bcaID, String password) {
 
-        callback.onSuccess(null, null);
+//        callback.onSuccess(null, null);
 
-//        Map<String, Object> stringStringMap = new HashMap<>();
-//        stringStringMap.put("bca_id", bcaID);
-//        stringStringMap.put("password", password);
-//
-//        Call<OutputResponse> call = apiInterface.loginWith(token, stringStringMap);
-//        call.enqueue(new Callback<OutputResponse>() {
-//            @Override
-//            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-//                Log.e("asd","onresponse");
-//                if (response.body() != null) {
-//                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
-//                    if (errorSchema.getErrorCode() == 200) {
-//                        User.ForumUser forumUser = response.body().getOutputSchema().getForumUser();
-//                        User.WelmaUser welmaUser = response.body().getOutputSchema().getWelmaUser();
-//                        callback.onSuccess(forumUser, welmaUser);
-//                    } else {
-//                        callback.onFailed(errorSchema.getErrorMessage());
-//                    }
-//                } else {
-//                    callback.onFailed("Terdapat kesalahan jaringan");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<OutputResponse> call, Throwable t) {
-//                Log.e("asd","onfail");
-//                callback.onFailed("Terdapat kesalahan jaringan");
-//            }
-//        });
+        Map<String, Object> stringStringMap = new HashMap<>();
+        stringStringMap.put("bca_id", bcaID);
+        stringStringMap.put("password", password);
+
+        Call<OutputResponse> call = apiInterface.loginWith(token, stringStringMap);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                if (response.body() != null) {
+                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
+                    if (errorSchema.getErrorCode().equals("200")) {
+                        User.ForumUser forumUser = response.body().getOutputSchema().getForumUser();
+                        User.WelmaUser welmaUser = response.body().getOutputSchema().getWelmaUser();
+                        callback.onSuccess(forumUser, welmaUser);
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("Terdapat kesalahan jaringan");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("Terdapat kesalahan jaringan");
+            }
+        });
     }
 
     public void getAccessToken(String bcaID, String password) {

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/size_for_10dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/recycler_img_profile_people"
+        android:layout_width="@dimen/size_for_50dp"
+        android:layout_height="@dimen/size_for_50dp"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:background="@drawable/ic_no_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_mutate_background="true"
+        app:riv_corner_radius="@dimen/size_for_10dp" />
+
+    <TextView
+        android:id="@+id/recycler_tv_name_people"
+        android:layout_width="@dimen/size_for_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginEnd="@dimen/size_for_10dp"
+        android:textColor="@color/color_base_welma"
+        android:textSize="@dimen/size_for_17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/recycler_img_profile_people"
+        app:layout_constraintEnd_toStartOf="@id/recycler_tv_type_people"
+        app:layout_constraintStart_toEndOf="@id/recycler_img_profile_people"
+        app:layout_constraintTop_toTopOf="@id/recycler_img_profile_people"
+        tools:text="Andrew Abednego Gunawan" />
+
+    <TextView
+        android:id="@+id/recycler_tv_type_people"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:background="@drawable/rectangle_rounded_welma_5dp"
+        android:paddingStart="@dimen/size_for_15dp"
+        android:paddingTop="@dimen/size_for_2dp"
+        android:paddingEnd="@dimen/size_for_15dp"
+        android:paddingBottom="@dimen/size_for_2dp"
+        android:text="Unfollow"
+        android:textColor="@color/white_palette"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/recycler_img_profile_people"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/recycler_img_profile_people" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0.5dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:background="@color/gray_palette"
+        app:layout_constraintTop_toBottomOf="@id/recycler_img_profile_people" />
+</androidx.constraintlayout.widget.ConstraintLayout>

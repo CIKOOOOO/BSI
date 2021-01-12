@@ -29,6 +29,7 @@ public class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         this.mContext = view.getContext();
         prefConfig = new PrefConfig(view.getContext());
+        Utils.setupUI(view, mActivity);
     }
 
     @Override

@@ -16,7 +16,7 @@ import retrofit2.http.Path;
 public interface ApiInterface {
 
     //    @Headers("client-id: OV4B2FXHY1Y7W0WMSUUB")
-//    @Headers("Content-Type:application/json;")
+    @Headers({"Content-Type:application/json;","client-id:x","hashcode:x"})
     @POST("mobile/login")
     Call<OutputResponse> loginWith(@Header("token") String token, @Body Map<String, Object> data);
 

@@ -41,14 +41,15 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView tvTitleToolbar = view.findViewById(R.id.tv_title_toolbar_back_image);
-        ImageButton imgToolbar = view.findViewById(R.id.img_btn_action_toolbar_back_image);
+        TextView tvTitleToolbar = view.findViewById(R.id.tv_title_toolbar_image);
+        ImageButton imgToolbar = view.findViewById(R.id.img_btn_action_toolbar_image);
 
         tvStart = view.findViewById(R.id.tv_start_information_fragment);
         tvMid = view.findViewById(R.id.tv_mid_information_fragment);
         tvEnd = view.findViewById(R.id.tv_end_information_fragment);
 
         tvTitleToolbar.setText(view.getContext().getString(R.string.information));
+        imgToolbar.setBackground(view.getContext().getDrawable(R.drawable.ic_people_rounded_white));
 
         switchButton(1, view.getContext());
 
@@ -62,7 +63,7 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.img_btn_action_toolbar_back_image:
+            case R.id.img_btn_action_toolbar_image:
                 startActivity(new Intent(mActivity, ForumProfileActivity.class));
                 break;
             case R.id.tv_start_information_fragment:

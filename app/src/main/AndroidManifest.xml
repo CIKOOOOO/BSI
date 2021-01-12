@@ -13,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.basenavigation.information.forum.profile.ForumProfileActivity"></activity>
+        <activity android:name=".ui.basenavigation.information.forum.profile.inbox.InboxActivity"></activity>
+        <activity
+            android:name=".ui.basenavigation.information.forum.profile.connection.ConnectionActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ui.basenavigation.information.forum.profile.ForumProfileActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity" />
         <activity android:name=".ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity" />
         <activity android:name=".ui.basenavigation.more.learningmenu.quiz.NilaiKuisActivity" />

@@ -114,6 +114,7 @@
     <string name="detail_news">Detail Berita</string>
     <string name="share_news">Share News</string>
     <string name="share">Share</string>
+    <string name="update">Update</string>
     <string name="kustodian_bank">Bank Kustodian</string>
     <string name="reksa_dana_type">Jenis Reksa Dana</string>
     <string name="release_date">Tanggal Peluncuran</string>
@@ -127,6 +128,8 @@
     <string name="kustodian_cost">Biaya Bank Kustodian</string>
     <string name="agent_cost">Biaya Agen Penjual</string>
     <string name="kalkulator_perencanaan">Kalkulator Perencanaan</string>
+    <string name="connection">Connections</string>
+    <string name="inbox">Inbox</string>
 
     <string name="pelajari_lebih_lanjut">Pelajari lebih lanjut</string>
     <string name="ayo_ikuti_kuis">Ayo ikut kuis!</string>
@@ -160,6 +163,8 @@
 
     <string name="follower">Follower</string>
     <string name="following">Following</string>
+    <string name="choose_header">Pilih Latar Header</string>
+    <string name="choose_profile_photo">Pilih Photo Profile</string>
 
     <!--END HERE-->
 
