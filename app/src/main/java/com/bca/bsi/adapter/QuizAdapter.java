@@ -31,6 +31,7 @@ public class QuizAdapter extends PagerAdapter {
     ImageView userStar;
     TextView userScore;
     TextView dateAttempt;
+    //cobs nambah untuk commit
 
     private LayoutInflater layoutInflater;
     private Context context;
