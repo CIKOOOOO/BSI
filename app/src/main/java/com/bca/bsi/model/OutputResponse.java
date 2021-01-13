@@ -63,6 +63,9 @@ public class OutputResponse {
         @SerializedName("transaction")
         private Transaction.TransactionResult transactionResult;
 
+        @SerializedName("kuis_data")
+        private KuisData kuisData;
+
         public OutputSchema() {
         }
 
@@ -89,5 +92,7 @@ public class OutputResponse {
         public Transaction.TransactionResult getTransactionResult() {
             return transactionResult;
         }
+
+        public KuisData getKuisData() { return kuisData; }
     }
 }

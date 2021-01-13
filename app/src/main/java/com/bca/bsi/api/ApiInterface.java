@@ -32,4 +32,7 @@ public interface ApiInterface {
 
     @POST("")
     Call<OutputResponse> sendTransactionData(@Body Map<String, Object> stringObjectMap);
+
+    @GET("")
+    Call<OutputResponse> getKuisData(@Header("category_id") String categoryId);
 }

@@ -92,8 +92,8 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
                 intent.putExtra("numberOfTabs",3);
                 //intent.putExtra("rorValue",String.valueOf(this.detailReksaDana.getRorReksaDana()));
                 intent.putExtra("rorValue","2");
-                //intent.putExtra("namaProduk",this.detailReksaDana.getName());
-                intent.putExtra("namaProduk","Nama Produk");
+                intent.putExtra("namaProduk",this.detailReksaDana.getName());
+                //intent.putExtra("namaProduk","Nama Produk");
                 startActivity(intent);
                 break;
         }
