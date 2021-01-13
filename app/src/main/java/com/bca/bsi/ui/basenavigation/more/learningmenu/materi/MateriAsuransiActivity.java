@@ -16,7 +16,6 @@ import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningMateriAdapter;
 import com.bca.bsi.model.LearningChapter;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.QuizActivity;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.asuransi.KuisAsuransiActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
 
@@ -113,12 +112,6 @@ public class MateriAsuransiActivity extends BaseActivity implements View.OnClick
                 intent.putExtra("topic","3");
                 startActivity(intent);
                 break;
-                /*
-                Intent intent = new Intent(this, KuisAsuransiActivity.class);
-                intent.putExtra("topic","asuransi");
-                startActivity(intent);
-                break;
-                */
         }
     }
 }

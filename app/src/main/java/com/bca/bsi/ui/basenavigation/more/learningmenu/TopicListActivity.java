@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningTopicAdapter;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriActivity;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriAsuransiActivity;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriObligasiActivity;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriReksaDanaActivity;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.QuizActivity;
 import com.bca.bsi.utils.BaseActivity;
 
 public class TopicListActivity extends BaseActivity implements View.OnClickListener{
@@ -61,15 +63,23 @@ public class TopicListActivity extends BaseActivity implements View.OnClickListe
                 Intent intent;
                 switch (position) {
                     case 0:
+                        /*
                         intent = new Intent(getApplicationContext(), MateriReksaDanaActivity.class);
                         startActivity(intent);
                         break;
+                        */
+                        intent = new Intent(getApplicationContext(), MateriActivity.class);
+                        intent.putExtra("topic","1");
+                        startActivity(intent);
+                        break;
                     case 1:
-                        intent = new Intent(getApplicationContext(), MateriObligasiActivity.class);
+                        intent = new Intent(getApplicationContext(), MateriActivity.class);
+                        intent.putExtra("topic","2");
                         startActivity(intent);
                         break;
                     case 2:
-                        intent = new Intent(getApplicationContext(), MateriAsuransiActivity.class);
+                        intent = new Intent(getApplicationContext(), MateriActivity.class);
+                        intent.putExtra("topic","3");
                         startActivity(intent);
                         break;
                 }

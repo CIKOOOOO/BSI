@@ -15,7 +15,6 @@ import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningMateriAdapter;
 import com.bca.bsi.model.LearningChapter;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.QuizActivity;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.obligasi.KuisObligasiActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
 

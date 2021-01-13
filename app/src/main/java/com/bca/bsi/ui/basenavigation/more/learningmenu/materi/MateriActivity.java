@@ -1,5 +1,8 @@
 package com.bca.bsi.ui.basenavigation.more.learningmenu.materi;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,9 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
-
-import androidx.viewpager.widget.ViewPager;
 
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningMateriAdapter;
@@ -21,7 +23,7 @@ import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.List;
 
-public class MateriReksaDanaActivity extends BaseActivity implements View.OnClickListener, LearningMateriAdapter.onItemClick {
+public class MateriActivity extends BaseActivity implements View.OnClickListener, LearningMateriAdapter.onItemClick {
 
     private ImageButton backBtn;
     private TextView titlePage;
@@ -31,28 +33,58 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
     private LearningMateriAdapter adapter;
     private Button button;
     private ImageView pagination;
+    private String topic;
 
     private int currentPage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_materi_reksa_dana);
+        setContentView(R.layout.activity_materi);
 
         titlePage = findViewById(R.id.tv_title_toolbar_back);
         backBtn = findViewById(R.id.img_btn_back_toolbar);
-        //button = findViewById(R.id.quiz_button);
         pagination = findViewById(R.id.pagination);
 
-        titlePage.setText(getString(R.string.reksadana_capslock));
+        //AMBIL EXTRA DARI INTENT
+        Intent intent = getIntent();
+        topic = intent.getStringExtra("topic");
+
+        //BIKIN SWITCH CASE DI SINI
+        switch (topic){
+            case "1":
+                titlePage.setText(getString(R.string.reksadana_capslock));
+                break;
+
+            case "2":
+                titlePage.setText(getString(R.string.obligasi_capslock));
+                break;
+
+            case "3":
+                titlePage.setText(getString(R.string.asuransi_capslock));
+                break;
+        }
+
         backBtn.setOnClickListener(this);
 
-        models = DummyData.setMateriReksaDana();
+        //BIKIN SWITCH CASE DI SINI
+        switch (topic){
+            case "1":
+                models = DummyData.setMateriReksaDana();
+                break;
+
+            case "2":
+                models = DummyData.setMateriObligasi();
+                break;
+
+            case "3":
+                models = DummyData.setMateriAsuransi();
+                break;
+        }
 
         adapter = new LearningMateriAdapter(models,this, this);
 
-        viewPager = findViewById(R.id.viewPagerRDMateri);
+        viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(adapter);
         viewPager.setPadding(50,0,50, 0);
 
@@ -64,7 +96,7 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
 
             @Override
             public void onPageSelected(int position) {
-               currentPage = position;
+                currentPage = position;
                 switch (position){
                     case 0:
                         pagination.setImageResource(R.drawable.asset_pagination_1_4);
@@ -99,20 +131,34 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void onClick() {
-        Log.e("asd", currentPage+"my current page ");
         switch (currentPage){
             case 2 :
                 Log.e("asd","hit");
                 Intent intentBrowse = new Intent();
                 intentBrowse.setAction(Intent.ACTION_VIEW);
                 intentBrowse.addCategory(Intent.CATEGORY_BROWSABLE);
-                intentBrowse.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Reksadana"));
+
+                //SET SWITCH CASE
+                switch (topic){
+                    case "1":
+                        intentBrowse.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Reksadana"));
+                        break;
+
+                    case "2":
+                        intentBrowse.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Obligasi"));
+                        break;
+
+                    case "3":
+                        intentBrowse.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Bancassurance"));
+                        break;
+                }
+
                 startActivity(intentBrowse);
                 break;
 
             case 3:
                 Intent intent = new Intent(this, QuizActivity.class);
-                intent.putExtra("topic","1");
+                intent.putExtra("topic",topic);
                 startActivity(intent);
                 break;
         }

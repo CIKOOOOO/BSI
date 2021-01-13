@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rectangle_gradient_background"
-    tools:context=".ui.basenavigation.more.learningmenu.quiz.asuransi.KuisAsuransiActivity">
+    tools:context=".ui.basenavigation.more.learningmenu.materi.MateriActivity">
 
     <include
         android:id="@+id/toolbar_back"
@@ -14,8 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.CustomViewPager
-        android:id="@+id/viewPagerKuis"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerInParent="true"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/asset_pagination_1_6"
+        android:src="@drawable/asset_pagination_1_4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
