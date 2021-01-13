@@ -19,7 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.bca.bsi.R;
 import com.bca.bsi.ui.basenavigation.information.forum.MainForumTabAdapter;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.connection.ConnectionActivity;
-import com.bca.bsi.ui.basenavigation.information.forum.profile.inbox.InboxActivity;
+import com.bca.bsi.ui.basenavigation.information.forum.inbox.InboxActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.Constant;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -96,7 +96,9 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
                 onBackPressed();
                 break;
             case R.id.img_btn_action_toolbar_back_with_image:
-                startActivity(new Intent(this, InboxActivity.class));
+                Intent intents = new Intent(this, InboxActivity.class);
+
+                startActivity(intents);
                 break;
             case R.id.img_btn_edit_name_forum_profile:
                 if (etName.isEnabled()) {

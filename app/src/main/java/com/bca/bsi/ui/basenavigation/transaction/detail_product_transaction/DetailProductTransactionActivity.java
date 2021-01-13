@@ -98,7 +98,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
 
                 productNameDetailTransactionAdapter.setProductTransactions(productTransactionList);
 
-                viewModel.loadDetailTransaksi(prefConfig.getAccountNumber(), this.reksaDana.getReksadanaID());
+                viewModel.loadDetailTransaksi(prefConfig.getBCAID(), this.reksaDana.getReksadanaID());
             } else if (productType.equals(Type.PURCHASING_WITH_SMARTBOT)) {
                 // Here to retrieve data from smartbot
                 // Data : berapa persen pembagian setiap produk + list of product

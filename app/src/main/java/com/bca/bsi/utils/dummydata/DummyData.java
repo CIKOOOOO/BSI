@@ -43,6 +43,10 @@ public class DummyData {
     private static final String[] inboxDate = {"22/12/2021 10:00", "23/12/2021 10:00", "24/12/2021 10:00"};
     private static final String[] inboxContent = {"Merupakan wadah yang dipergunakan untuk menghitung dana dari masyarakat pemodal", "Merupakan wadah yang dipergunakan untuk menghitung dana dari masyarakat pemodal ", "Merupakan wadah yang dipergunakan untuk menghitung dana dari masyarakat pemodal "};
 
+    private static final String[] reportID = {"1", "2", "3", "4"};
+    private static final String[] reportContent = {"Spam", "Hate Speech", "Advertisement", "Unrelevant"};
+
+
     public static List<Product.ReksaDana> getReksaDanaDummyList() {
         List<Product.ReksaDana> reksaDanaList = new ArrayList<>();
         for (int i = 0; i < title.length; i++) {
@@ -104,5 +108,14 @@ public class DummyData {
             productChoices.add(inbox);
         }
         return productChoices;
+    }
+
+    public static List<Forum.Report> getReportList() {
+        List<Forum.Report> reportList = new ArrayList<>();
+        for (int i = 0; i < reportID.length; i++) {
+            Forum.Report report = new Forum.Report(reportID[i], reportContent[i], false);
+            reportList.add(report);
+        }
+        return reportList;
     }
 }

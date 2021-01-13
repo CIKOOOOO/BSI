@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.basenavigation.information.forum.profile.inbox.InboxActivity"></activity>
+        <activity android:name=".ui.basenavigation.information.forum.comment.CommentActivity"></activity>
+        <activity android:name=".ui.basenavigation.information.forum.otherprofile.OtherProfileActivity" />
+        <activity android:name=".ui.basenavigation.information.forum.inbox.InboxActivity" />
         <activity
             android:name=".ui.basenavigation.information.forum.profile.connection.ConnectionActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />

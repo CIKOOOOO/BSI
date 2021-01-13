@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recycler_tv_report"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/size_for_20dp"
+    android:layout_marginTop="@dimen/size_for_10dp"
+    android:layout_marginEnd="@dimen/size_for_20dp"
+    android:background="@drawable/rectangle_rounded_stroke_ziggurat"
+    android:paddingTop="@dimen/size_for_15dp"
+    android:paddingBottom="@dimen/size_for_15dp"
+    tools:text="Spam"
+    android:textAlignment="center"
+    android:textColor="@color/color_base_welma"
+    android:textSize="@dimen/size_for_17sp" />
