@@ -4,6 +4,7 @@ import android.text.Html;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.KuisData;
+import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.LearningChapter;
 import com.bca.bsi.model.Product;
 import com.bca.bsi.model.ProductChoice;
@@ -29,7 +30,7 @@ public class DummyData {
     private static final String[] period = {"1 Bulan", "6 Bulan", "YTD", "1 Tahun", "3 Tahun", "5 Tahun"};
     private static final double[] performance = {5.2, 35.6, 2.6, -0.08, -3.24, 27.57};
 
-    private static final int[] learningChapterRDImage = {R.drawable.img_materi_reksadana_1,R.drawable.img_materi_reksadana_2,R.drawable.img_materi_reksadana_3,R.drawable.img_materi_kuis};
+    private static final int[] learningChapterRDImage = {R.drawable.img_materi_reksadana_1, R.drawable.img_materi_reksadana_2, R.drawable.img_materi_reksadana_3, R.drawable.img_materi_kuis};
     private static final String[] learningChapterRDTitle = {"Reksa Dana", "Jenis Produk Reksa Dana", "Manfaat & Risiko Reksa Dana", "Kuis Interaktif"};
     private static final String[] learningChapterRDExplanation = {"Merupakan wadah yang dipergunakan untuk menghitung dana dari masyarakat pemodal " +
             "untuk selanjutnya diinvestasikan dalam portofolio Efek oleh Manajer Investasi", "Sangat Konservatif: \n \u25CF Reksa Dana Pasar Uang \n\n Konservatif: " +
@@ -38,8 +39,12 @@ public class DummyData {
 
     private static final String[] kinerjaString = {"+14.13%", "+14.89%", "+10.13%"};
     private static final String[] nabString = {"1462.81", "1575.39", "1672.98"};
-    private static final String[] percentage = {"70%","20%","10%"};
-    private static final boolean[] isChoosen = {false,false,false};
+    private static final String[] percentage = {"70%", "20%", "10%"};
+    private static final boolean[] isChoosen = {false, false, false};
+
+    private static final String[] inboxUsername = {"User123", "Andrew Abednego Gunawan", "Andrew001"};
+    private static final String[] inboxDate = {"22/12/2021 10:00", "23/12/2021 10:00", "24/12/2021 10:00"};
+    private static final String[] inboxContent = {"Merupakan wadah yang dipergunakan untuk menghitung dana dari masyarakat pemodal", "Merupakan wadah yang dipergunakan untuk menghitung dana dari masyarakat pemodal ", "Merupakan wadah yang dipergunakan untuk menghitung dana dari masyarakat pemodal "};
 
     public static List<Product.ReksaDana> getReksaDanaDummyList() {
         List<Product.ReksaDana> reksaDanaList = new ArrayList<>();
@@ -71,7 +76,7 @@ public class DummyData {
     public static List<LearningChapter> getLearningChapterRDList() {
         List<LearningChapter> rdChapterList = new ArrayList<>();
         for (int i = 0; i < learningChapterRDTitle.length; i++) {
-            LearningChapter rdChapter = new LearningChapter(learningChapterRDImage[i],learningChapterRDTitle[i],learningChapterRDExplanation[i]);
+            LearningChapter rdChapter = new LearningChapter(learningChapterRDImage[i], learningChapterRDTitle[i], learningChapterRDExplanation[i]);
             rdChapterList.add(rdChapter);
         }
         return rdChapterList;
@@ -79,8 +84,8 @@ public class DummyData {
 
     public static List<ProductRekomen> getProductRekomenList() {
         List<ProductRekomen> productRekomenList = new ArrayList<>();
-        for(int i=0;i<title.length;i++){
-            ProductRekomen produk = new ProductRekomen(title[i],date[i],percentage[i],kinerjaString[i],nabString[i],type[i]);
+        for (int i = 0; i < title.length; i++) {
+            ProductRekomen produk = new ProductRekomen(title[i], date[i], percentage[i], kinerjaString[i], nabString[i], type[i]);
             productRekomenList.add(produk);
         }
         return productRekomenList;
@@ -88,8 +93,8 @@ public class DummyData {
 
     public static List<ProductChoice> getProductChoiceList() {
         List<ProductChoice> productChoices = new ArrayList<>();
-        for(int i=0;i<title.length;i++){
-            ProductChoice produk = new ProductChoice(title[i],type[i],date[i],nabString[i],kinerjaString[i],isChoosen[i]);
+        for (int i = 0; i < title.length; i++) {
+            ProductChoice produk = new ProductChoice(title[i], type[i], date[i], nabString[i], kinerjaString[i], isChoosen[i]);
             productChoices.add(produk);
         }
         return productChoices;
@@ -208,5 +213,13 @@ public class DummyData {
 
         return  kuisData;
     }
-
+	
+    public static List<Forum.Inbox> getInboxList() {
+        List<Forum.Inbox> productChoices = new ArrayList<>();
+        for (int i = 0; i < inboxUsername.length; i++) {
+            Forum.Inbox inbox = new Forum.Inbox(inboxUsername[i], inboxDate[i], inboxContent[i]);
+            productChoices.add(inbox);
+        }
+        return productChoices;
+    }
 }

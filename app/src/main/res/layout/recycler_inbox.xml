@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/size_for_10dp"
+    android:layout_marginEnd="@dimen/size_for_10dp"
+    android:layout_marginBottom="@dimen/size_for_10dp"
+    android:background="@drawable/rectangle_rounded_blue_lagoon">
+
+    <TextView
+        android:id="@+id/recycler_tv_username_inbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:text="User789"
+        android:textColor="@color/white_palette"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/recycler_tv_date_inbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_marginEnd="@dimen/size_for_10dp"
+        android:drawableEnd="@drawable/ic_arrow_white"
+        android:gravity="center"
+        android:text="22/12/2020 10:03"
+        android:textColor="@color/white_palette"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/recycler_tv_content_inbox"
+        android:layout_width="@dimen/size_for_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:layout_marginBottom="@dimen/size_for_10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/lorem"
+        android:textColor="@color/white_palette"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_username_inbox" />
+</androidx.constraintlayout.widget.ConstraintLayout>

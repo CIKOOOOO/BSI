@@ -11,7 +11,6 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.bca.bsi.R;
 import com.bca.bsi.utils.dialog.CustomDialog;
@@ -35,6 +34,8 @@ public class BaseActivity extends AppCompatActivity implements CustomDialog.onCl
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.sherpa_blue_palette));
         }
+
+        Utils.setupUI(view, this);
     }
 
     public void showSnackBar(String msg) {

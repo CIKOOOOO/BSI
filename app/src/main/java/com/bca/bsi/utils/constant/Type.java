@@ -18,4 +18,13 @@ public class Type {
     public static final String PEMBELIAN_BERKALA = "pembelian_berkala";
     public static final String PEMBELIAN_SEKALI_BAYAR = "pembelian_sekali_bayar";
 
+    public static final String PURCHASING_WITH_SMARTBOT = "purchasing_with_smartbot";
+
+    public static final String FOLLOWING = "following";
+    public static final String FOLLOWERS = "followers";
+
+    public static final String TRENDING = "trending";
+    public static final String STRATEGI = "strategi";
+    public static final String SHARE_TRADE = "share_trade";
+    public static final String TIMELINE = "timeline";
 }

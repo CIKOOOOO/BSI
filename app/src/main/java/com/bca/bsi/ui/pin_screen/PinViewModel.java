@@ -56,7 +56,7 @@ public class PinViewModel extends AndroidViewModel {
                     public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
                         if (response.body() != null) {
                             OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
-                            if (errorSchema.getErrorCode() == 200) {
+                            if (errorSchema.getErrorCode().equals("200")) {
                                 OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                                 Transaction.TransactionResult transactionResult = response.body().getOutputSchema().getTransactionResult();
                                 callback.onSuccessPin(transactionResult);

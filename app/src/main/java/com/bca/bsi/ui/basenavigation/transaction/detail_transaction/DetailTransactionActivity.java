@@ -26,7 +26,7 @@ public class DetailTransactionActivity extends BaseActivity implements View.OnCl
 
     private void initVar() {
 
-        TextView tvTitle = findViewById(R.id.tv_title_toolbar_back_image);
+        TextView tvTitle = findViewById(R.id.tv_title_toolbar_image);
         Button btnFinish = findViewById(R.id.btn_finish_detail_transaction);
 
         tvProductName = findViewById(R.id.tv_name_detail_transaction);

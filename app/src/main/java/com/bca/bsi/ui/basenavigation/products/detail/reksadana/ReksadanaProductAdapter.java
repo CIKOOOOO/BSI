@@ -32,8 +32,8 @@ public class ReksadanaProductAdapter extends RecyclerView.Adapter<ReksadanaProdu
     }
 
     public ReksadanaProductAdapter(ReksadanaProductAdapter.onItemClick onItemClick) {
-        this.onItemClick = onItemClick;
         reksaDanaList = new ArrayList<>();
+        this.onItemClick = onItemClick;
     }
 
     public void setReksaDanaList(List<Product.ReksaDana> reksaDanaList) {

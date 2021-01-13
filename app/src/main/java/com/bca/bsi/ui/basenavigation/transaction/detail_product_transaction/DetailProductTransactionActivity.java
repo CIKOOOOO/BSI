@@ -10,17 +10,21 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
 import com.bca.bsi.model.Transaction;
 import com.bca.bsi.model.User;
-
 import com.bca.bsi.ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailProductTransactionActivity extends BaseActivity implements IDetailProductTransactionCallback, View.OnClickListener {
 
@@ -34,6 +38,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
     private EditText etNominalPembelian;
     private Product.DetailReksaDana detailReksaDana;
     private CheckBox cbPaymentType;
+    private ProductNameDetailTransactionAdapter productNameDetailTransactionAdapter;
 
     private String productType, salesType;
 
@@ -45,12 +50,12 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
     }
 
     private void initVar() {
-
         TextView tvAccountNumber = findViewById(R.id.tv_nomor_rekening_detail_transaction);
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
         TextView tvTitleToolbar = findViewById(R.id.tv_title_toolbar_back);
         Button btnNext = findViewById(R.id.btn_next_detail_transaction);
         TextView toc = findViewById(R.id.ketentuan_pembelian);
+        RecyclerView recycler_product_name = findViewById(R.id.recycler_product_name_detail_product_transaction);
 
         cbPaymentType = findViewById(R.id.cb_berkala_detail_transaction);
 
@@ -63,6 +68,11 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
         tvProductName = findViewById(R.id.tv_name_detail_transaction);
 
         Gson gson = new Gson();
+
+        productNameDetailTransactionAdapter = new ProductNameDetailTransactionAdapter();
+
+        recycler_product_name.setLayoutManager(new LinearLayoutManager(this));
+        recycler_product_name.setAdapter(productNameDetailTransactionAdapter);
 
         viewModel = new ViewModelProvider(this).get(DetailProductTransactionViewModel.class);
         viewModel.setCallback(this);
@@ -80,7 +90,17 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
 
             if (productType.equals(Type.REKSA_DANA)) {
                 this.reksaDana = gson.fromJson(product, Product.ReksaDana.class);
+                Product.ProductTransaction productTransaction = new Product.ProductTransaction(this.reksaDana.getName(), this.reksaDana.getDate(), this.reksaDana.getNab());
+
+                List<Product.ProductTransaction> productTransactionList = new ArrayList<>();
+                productTransactionList.add(productTransaction);
+
+                productNameDetailTransactionAdapter.setProductTransactions(productTransactionList);
+
                 viewModel.loadDetailTransaksi(prefConfig.getAccountNumber(), this.reksaDana.getReksadanaID());
+            } else if (productType.equals(Type.PURCHASING_WITH_SMARTBOT)) {
+                // Here to retrieve data from smartbot
+                // Data : berapa persen pembagian setiap produk + list of product
             }
 
             if (salesType.equals(Type.PURCHASING)) {
@@ -141,7 +161,6 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
         tvProductName.setText(detailReksaDana.getName());
         tvPrice.setText("Rp. " + detailReksaDana.getNabSatuBulan() + "\nNAB/Unit");
         tvDate.setText(detailReksaDana.getUpdateDate());
-
     }
 
     @Override

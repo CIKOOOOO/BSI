@@ -17,16 +17,16 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
     //    @Headers("client-id: OV4B2FXHY1Y7W0WMSUUB")
-//    @Headers("Content-Type:application/json;")
+    @Headers({"Content-Type:application/json;","client-id:x","hashcode:x"})
     @POST("mobile/login")
     Call<OutputResponse> loginWith(@Header("token") String token, @Body Map<String, Object> data);
 
-    @Headers({"Accept: application/json", "content-type: application/json"})
+//    @Headers({"Accept: application/json", "content-type: application/json"})
     @GET("Reksadana")
-    Call<OutputResponse> getReksaDanaData(@Header("profile_risiko") String profile_risiko);
+    Call<OutputResponse> getReksaDanaData(@Header("profile_risiko") int profile_risiko);
 
     @GET("Reksadana/{reksaDanaID}")
-    Call<OutputResponse> getDetailReksaDana(@Path("reksaDanaID") String reksaDanaID);
+    Call<OutputResponse> getDetailReksaDana(@Path("reksaDanaID") int reksaDanaID);
 
     @POST("")
     Call<OutputResponse> getDetailTransaksi(@Body Map<String, Object> stringObjectMap);

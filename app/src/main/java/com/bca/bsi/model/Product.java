@@ -98,8 +98,8 @@ public class Product {
         @SerializedName("product_category_id")
         private String productCategoryID;
 
-        @SerializedName("bank_kustodian_id")
-        private String bankKustodianID;
+        @SerializedName("bank_kustodian")
+        private String bankKustodian;
 
         @SerializedName("release_date")
         private String releaseDate;
@@ -134,18 +134,33 @@ public class Product {
         @SerializedName("product_category")
         private String productCategory;
 
-        @SerializedName("kinerja_1_bulan")
-        private String kinerjaSatuBulan;
-
-        @SerializedName("NAB_1_unit")
+        @SerializedName("nab_per_unit")
         private String nabSatuBulan;
 
         @SerializedName("update_date")
         private String updateDate;
 
-        @SerializedName("")
-        private double rorReksaDana;
+        @SerializedName("kinerja_3_tahun")
+        private String kinerja3Tahun;
 
+        @SerializedName("kinerja_6_Bulan")
+        private String kinerja6Bulan;
+
+        @SerializedName("kinerja_5_tahun")
+        private String kinerja5Tahun;
+
+        @SerializedName("kinerja_1_tahun")
+        private String kinerja1Tahun;
+
+        @SerializedName("kinerja_1_bulan")
+        private String kinerja1Bulan;
+
+        @SerializedName("ytd")
+        private String yearToDate;
+
+        @SerializedName("RoR")
+        private String ror;
+		
         public DetailReksaDana() {
         }
 
@@ -165,8 +180,8 @@ public class Product {
             return productCategoryID;
         }
 
-        public String getBankKustodianID() {
-            return bankKustodianID;
+        public String getBankKustodian() {
+            return bankKustodian;
         }
 
         public String getReleaseDate() {
@@ -213,10 +228,6 @@ public class Product {
             return productCategory;
         }
 
-        public String getKinerjaSatuBulan() {
-            return kinerjaSatuBulan;
-        }
-
         public String getNabSatuBulan() {
             return nabSatuBulan;
         }
@@ -225,8 +236,32 @@ public class Product {
             return updateDate;
         }
 
-        public double getRorReksaDana() {
-            return rorReksaDana;
+        public String getKinerja3Tahun() {
+            return kinerja3Tahun;
+        }
+
+        public String getKinerja6Bulan() {
+            return kinerja6Bulan;
+        }
+
+        public String getKinerja5Tahun() {
+            return kinerja5Tahun;
+        }
+
+        public String getKinerja1Tahun() {
+            return kinerja1Tahun;
+        }
+
+        public String getKinerja1Bulan() {
+            return kinerja1Bulan;
+        }
+
+        public String getYearToDate() {
+            return yearToDate;
+        }
+
+        public String getRor() {
+            return ror;
         }
     }
 
@@ -245,6 +280,30 @@ public class Product {
 
         public double getValue() {
             return value;
+        }
+    }
+
+    public static class ProductTransaction{
+        private String name;
+        private String date;
+        private String price;
+
+        public ProductTransaction(String name, String date, String price) {
+            this.name = name;
+            this.date = date;
+            this.price = price;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public String getPrice() {
+            return price;
         }
     }
 }
