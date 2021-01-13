@@ -37,7 +37,7 @@ public class QuizViewModel extends AndroidViewModel {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
 
-                    if(errorSchema.getErrorCode().equals("eoeeeeerorrohfernfijerbfuire")){
+                    if(errorSchema.getErrorCode()==0){
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         KuisData kuisData = outputSchema.getKuisData();
                         if(kuisData != null){
