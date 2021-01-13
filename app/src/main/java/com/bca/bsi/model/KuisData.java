@@ -137,6 +137,38 @@ public class KuisData {
         }
     }
 
+    public static class UserScore {
+        public String categoryId;
+        public String bcaId;
+        public String dateAttempt;
+        public String score;
+
+        public UserScore(String categoryId, String bcaId, String dateAttempt, String score) {
+            this.categoryId = categoryId;
+            this.bcaId = bcaId;
+            this.dateAttempt = dateAttempt;
+            this.score = score;
+        }
+
+        public UserScore(){}
+
+        public String getCategoryId() {
+            return categoryId;
+        }
+
+        public String getBcaId() {
+            return bcaId;
+        }
+
+        public String getDateAttempt() {
+            return dateAttempt;
+        }
+
+        public String getScore() {
+            return score;
+        }
+    }
+
 }
 
 

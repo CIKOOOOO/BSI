@@ -17,12 +17,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageButton
         android:id="@+id/imageButtonCabang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/size_for_120dp"
+        android:layout_height="@dimen/size_for_120dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitXY"
         android:src="@drawable/btn_cabang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -31,28 +33,33 @@
 
     <ImageButton
         android:id="@+id/imageButtonLearning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/size_for_120dp"
+        android:layout_height="@dimen/size_for_120dp"
         android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitXY"
         android:src="@drawable/btn_learning"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonCabang"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageButtonCabang" />
 
     <ImageButton
         android:id="@+id/imageButtonFAQ"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/size_for_120dp"
+        android:layout_height="@dimen/size_for_120dp"
         android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitXY"
         android:src="@drawable/btn_faq"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonCabang"
         app:layout_constraintTop_toTopOf="@+id/imageButtonCabang" />
 
     <ImageButton
         android:id="@+id/imageButtonHaloBCA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/size_for_120dp"
+        android:layout_height="@dimen/size_for_120dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitXY"
         android:src="@drawable/btn_contact_halo_bca"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonFAQ"
         app:layout_constraintHorizontal_bias="0.5"
@@ -61,20 +68,24 @@
 
     <ImageButton
         android:id="@+id/imageButtonLeaveContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/size_for_120dp"
+        android:layout_height="@dimen/size_for_120dp"
         android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitXY"
         android:src="@drawable/btn_leave_contact"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonHaloBCA"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageButtonHaloBCA" />
 
     <ImageButton
         android:id="@+id/imageButtonKalkulator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/size_for_120dp"
+        android:layout_height="@dimen/size_for_120dp"
         android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitXY"
         android:src="@drawable/btn_kalkulator_investasi"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonHaloBCA"
         app:layout_constraintTop_toTopOf="@+id/imageButtonHaloBCA" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

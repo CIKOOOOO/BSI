@@ -12,10 +12,6 @@ import android.widget.TextView;
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningTopicAdapter;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriActivity;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriAsuransiActivity;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriObligasiActivity;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.MateriReksaDanaActivity;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.QuizActivity;
 import com.bca.bsi.utils.BaseActivity;
 
 public class TopicListActivity extends BaseActivity implements View.OnClickListener{
