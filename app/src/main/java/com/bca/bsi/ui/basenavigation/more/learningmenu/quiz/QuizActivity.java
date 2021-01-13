@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.more.learningmenu.quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -15,15 +16,10 @@ import com.bca.bsi.adapter.QuizAdapter;
 import com.bca.bsi.model.KuisData;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.TopicListActivity;
 import com.bca.bsi.ui.basenavigation.products.detail.DetailProductActivity;
-import com.bca.bsi.ui.basenavigation.products.detail.reksadana.ReksadanaProductFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.SwipeDirection;
-import com.bca.bsi.utils.dummydata.DummyData;
 
-import java.util.Arrays;
-import java.util.List;
-
-public class KuisObligasiActivity extends BaseActivity implements View.OnClickListener, QuizAdapter.onItemClick {
+public class QuizActivity extends BaseActivity implements View.OnClickListener, QuizAdapter.onItemClick, IQuizCallback {
 
     private ImageButton backBtn;
     private TextView titlePage;
@@ -32,12 +28,16 @@ public class KuisObligasiActivity extends BaseActivity implements View.OnClickLi
     private QuizAdapter adapter;
     private ImageView pagination;
     private int currentPage;
-    private KuisData kuisData;
+    private QuizViewModel viewModel;
+    private String topic;
+    //private KuisData kuisData;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kuis_obligasi);
+        setContentView(R.layout.activity_quiz);
 
         titlePage = findViewById(R.id.tv_title_toolbar_back);
         backBtn = findViewById(R.id.img_btn_back_toolbar);
@@ -45,15 +45,35 @@ public class KuisObligasiActivity extends BaseActivity implements View.OnClickLi
         pagination = findViewById(R.id.pagination);
 
         titlePage.setText(getString(R.string.kuis_capslock));
-        titleChild.setText(getString(R.string.obligasi));
+
+        //AMBIL EXTRA DARI INTENT
+        Intent intent = getIntent();
+        topic = intent.getStringExtra("topic");
+
+        //BIKIN SWITCH CASE UNTUK INIIII
+        switch (topic){
+            case "1":
+                titleChild.setText(getString(R.string.reksadana));
+                break;
+
+            case "2":
+                titleChild.setText(getString(R.string.obligasi));
+                break;
+
+            case "3":
+                titleChild.setText(getString(R.string.asuransi));
+                break;
+        }
+
         backBtn.setOnClickListener(this);
 
-        kuisData = DummyData.setKuisDataDummy();
+        viewModel = new ViewModelProvider(this).get(QuizViewModel.class);
+        viewModel.setCallback(this);
 
-        adapter = new QuizAdapter(kuisData, this,this);
+        //BIKIN SWITCH CASE
+        viewModel.getData(topic);
 
         viewPager = findViewById(R.id.viewPagerKuis);
-        viewPager.setAdapter(adapter);
         viewPager.setPadding(50,0,50, 0);
         viewPager.setAllowedSwipeDirection(SwipeDirection.left);
         viewPager.setOffscreenPageLimit(6);
@@ -107,14 +127,16 @@ public class KuisObligasiActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-
     @Override
     public void onClick() {
         if(currentPage<5){
             viewPager.setCurrentItem(currentPage+1);
         }else{
+            System.out.println("udah masuk siniii");
             Intent intent = new Intent(this, DetailProductActivity.class);
-            intent.putExtra(DetailProductActivity.PRODUCT_TYPE,1);
+            //BIKIN SWITCH CASE PRODUCT TYPE
+            int productType = 0;
+            intent.putExtra(DetailProductActivity.PRODUCT_TYPE,productType);
             startActivity(intent);
         }
     }
@@ -124,5 +146,16 @@ public class KuisObligasiActivity extends BaseActivity implements View.OnClickLi
         Intent intent = new Intent(this, TopicListActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public void onRetriveData(KuisData kuisData) {
+        adapter = new QuizAdapter(kuisData,this,this);
+        viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onFailed(String msg) {
+        System.out.println("ERROR: "+msg);
     }
 }

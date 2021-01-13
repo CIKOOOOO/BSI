@@ -12,7 +12,8 @@ public class Constant {
     public static final long MAX_USAGE_DURATION_APPS = 600000;
 
     public static final String EMPTY = "";
-    public static final String BASE_URL = "http://192.168.137.1:8000/";
+    //public static final String BASE_URL = "http://192.168.137.1:8000/";
+    public static final String BASE_URL = "http://10.43.2.207:1403/";
     public static final String DATE_FORMAT_1 = "dd MMMM yyyy";
     public static final String DATE_FORMAT_2 = "dd/MM/yyyy";
     public static final String DATE_FORMAT_FROM_DB = "dd-MMM-yy";

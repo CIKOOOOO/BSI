@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-		
-        <activity android:name=".ui.basenavigation.information.forum.profile.inbox.InboxActivity"></activity>
+        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.QuizActivity"></activity>
+        <activity android:name=".ui.basenavigation.information.forum.profile.inbox.InboxActivity" />
         <activity
             android:name=".ui.basenavigation.information.forum.profile.connection.ConnectionActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -24,10 +24,9 @@
         <activity android:name=".ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity" />
         <activity android:name=".ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity" />
         <activity android:name=".ui.basenavigation.more.learningmenu.quiz.NilaiKuisActivity" />
-
-        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.KuisAsuransiActivity" />
-        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.KuisObligasiActivity" />
-        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.asuransi.KuisAsuransiActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.obligasi.KuisObligasiActivity" />
+        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.reksadana.KuisReksaDanaActivity" />
         <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriAsuransiActivity" />
         <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriObligasiActivity" />
         <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriReksaDanaActivity" />

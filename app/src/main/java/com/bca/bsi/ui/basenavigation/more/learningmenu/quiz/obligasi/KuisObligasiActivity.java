@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.more.learningmenu.quiz;
+package com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.obligasi;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -14,12 +14,17 @@ import com.bca.bsi.R;
 import com.bca.bsi.adapter.QuizAdapter;
 import com.bca.bsi.model.KuisData;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.TopicListActivity;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.CustomViewPager;
 import com.bca.bsi.ui.basenavigation.products.detail.DetailProductActivity;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.ReksadanaProductFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.SwipeDirection;
 import com.bca.bsi.utils.dummydata.DummyData;
 
-public class KuisAsuransiActivity extends BaseActivity implements View.OnClickListener, QuizAdapter.onItemClick {
+import java.util.Arrays;
+import java.util.List;
+
+public class KuisObligasiActivity extends BaseActivity implements View.OnClickListener, QuizAdapter.onItemClick {
 
     private ImageButton backBtn;
     private TextView titlePage;
@@ -30,11 +35,10 @@ public class KuisAsuransiActivity extends BaseActivity implements View.OnClickLi
     private int currentPage;
     private KuisData kuisData;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kuis_asuransi);
+        setContentView(R.layout.activity_kuis_obligasi);
 
         titlePage = findViewById(R.id.tv_title_toolbar_back);
         backBtn = findViewById(R.id.img_btn_back_toolbar);
@@ -42,12 +46,12 @@ public class KuisAsuransiActivity extends BaseActivity implements View.OnClickLi
         pagination = findViewById(R.id.pagination);
 
         titlePage.setText(getString(R.string.kuis_capslock));
-        titleChild.setText(getString(R.string.asuransi));
+        titleChild.setText(getString(R.string.obligasi));
         backBtn.setOnClickListener(this);
 
         kuisData = DummyData.setKuisDataDummy();
 
-        adapter = new QuizAdapter(kuisData,this,this);
+        adapter = new QuizAdapter(kuisData, this,this);
 
         viewPager = findViewById(R.id.viewPagerKuis);
         viewPager.setAdapter(adapter);
@@ -93,7 +97,6 @@ public class KuisAsuransiActivity extends BaseActivity implements View.OnClickLi
 
             }
         });
-
     }
 
     @Override
@@ -105,13 +108,14 @@ public class KuisAsuransiActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
+
     @Override
     public void onClick() {
         if(currentPage<5){
             viewPager.setCurrentItem(currentPage+1);
         }else{
             Intent intent = new Intent(this, DetailProductActivity.class);
-            intent.putExtra(DetailProductActivity.PRODUCT_TYPE,2);
+            intent.putExtra(DetailProductActivity.PRODUCT_TYPE,1);
             startActivity(intent);
         }
     }

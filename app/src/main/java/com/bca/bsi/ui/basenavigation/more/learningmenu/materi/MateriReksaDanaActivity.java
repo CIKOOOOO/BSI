@@ -15,11 +15,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningMateriAdapter;
 import com.bca.bsi.model.LearningChapter;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.QuizActivity;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.reksadana.KuisReksaDanaActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MateriReksaDanaActivity extends BaseActivity implements View.OnClickListener, LearningMateriAdapter.onItemClick {
@@ -112,8 +112,8 @@ public class MateriReksaDanaActivity extends BaseActivity implements View.OnClic
                 break;
 
             case 3:
-                Intent intent = new Intent(this, KuisReksaDanaActivity.class);
-                intent.putExtra("topic","reksadana");
+                Intent intent = new Intent(this, QuizActivity.class);
+                intent.putExtra("topic","1");
                 startActivity(intent);
                 break;
         }

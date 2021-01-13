@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.ui.basenavigation.more.calculator.CalculatorMoreActivity;
 import com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;
@@ -29,8 +30,6 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
     private DetailReksaDanaViewModel viewModel;
     private ReksaDanaPerformanceAdapter danaPerformanceAdapter;
     private TextView tvProductName, tvDate, tvNAB, tvManagerInvest, tvKustodianBank, tvTypeReksaDana, tvReleaseDate, tvFirstMinimumPurchasing, tvNextMinimumPurchasing, tvSellingMinimum, tvMinimumSaldoUnit, tvPurcashingCost, tvSellingCost, tvInvestManagementCost, tvCustodianCost, tvAgentCost, tvKalkulatorPerencanaan;
-    private Product.DetailReksaDana detailReksaDana;
-
     private Product.DetailReksaDana detailReksaDana;
 
     @Override
@@ -95,13 +94,13 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
                 onBackPressed();
                 break;
             case R.id.tv_kalkulator_perencanaan_detail_reksa_dana:
-                Intent intent = new Intent(this, CalculatorMoreActivity.class);
-                intent.putExtra("numberOfTabs",3);
+                Intent intent2 = new Intent(this, CalculatorMoreActivity.class);
+                intent2.putExtra("numberOfTabs",3);
                 //intent.putExtra("rorValue",String.valueOf(this.detailReksaDana.getRorReksaDana()));
-                intent.putExtra("rorValue","2");
-                intent.putExtra("namaProduk",this.detailReksaDana.getName());
+                intent2.putExtra("rorValue","2");
+                intent2.putExtra("namaProduk",this.detailReksaDana.getName());
                 //intent.putExtra("namaProduk","Nama Produk");
-                startActivity(intent);
+                startActivity(intent2);
                 break;
             case R.id.btn_buy_reksa_dana_detail:
                 if (this.detailReksaDana != null) {

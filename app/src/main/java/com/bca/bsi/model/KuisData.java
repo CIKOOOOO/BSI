@@ -1,11 +1,19 @@
 package com.bca.bsi.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class KuisData {
 
+    public KuisData() {
+    }
+
+    @SerializedName("category_id")
     private String categoryId;
+
+    @SerializedName("quizList")
     private List<Quiz> quiz;
     private List<String> penilaianKuis = Arrays.asList("Wah pengetahuan Anda tentang investasi masih perlu ditingkatkan, Mari kita belajar lagi",
             "Pengetahuan Anda sudah cukup mengenai investasi, Ayo tingkatkan lagi","Wah hebat, kamu sudah menguasai materi ini. Ayo investasi sekarang");
@@ -40,11 +48,22 @@ public class KuisData {
     }
 
     public static class Quiz {
+        @SerializedName("question_id")
         private String questionId;
+
+        @SerializedName("question_text")
         private String questionText;
+
+        @SerializedName("data_jawabanList")
         private List<DataJawaban> dataJawaban;
+
+        @SerializedName("kunci_jawaban")
         private DataJawaban kunciJawaban;
+
+        @SerializedName("correct_explanation")
         private String correctExplanation;
+
+        @SerializedName("false_explanation")
         private String falseExplanation;
 
         public Quiz(String questionId, String questionText, List<DataJawaban> dataJawaban, DataJawaban kunciJawaban, String correctExplanation, String falseExplanation) {
@@ -55,6 +74,8 @@ public class KuisData {
             this.correctExplanation = correctExplanation;
             this.falseExplanation = falseExplanation;
         }
+
+        public Quiz() {}
 
         public String getQuestionId() {
             return questionId;
@@ -86,8 +107,13 @@ public class KuisData {
     }
 
     public static class DataJawaban {
+        @SerializedName("answer_id")
         private String answerId;
+
+        @SerializedName("answer_option")
         private String answerOption;
+
+        @SerializedName("answer_text")
         private String answerText;
 
         public DataJawaban(String answerId, String answerOption, String answerText) {
@@ -95,6 +121,8 @@ public class KuisData {
             this.answerOption = answerOption;
             this.answerText = answerText;
         }
+
+        public DataJawaban(){}
 
         public String getAnswerId() {
             return answerId;

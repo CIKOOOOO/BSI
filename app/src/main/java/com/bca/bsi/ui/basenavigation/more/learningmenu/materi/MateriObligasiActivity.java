@@ -5,8 +5,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,12 +14,11 @@ import android.widget.TextView;
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningMateriAdapter;
 import com.bca.bsi.model.LearningChapter;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.KuisObligasiActivity;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.QuizActivity;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.obligasi.KuisObligasiActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MateriObligasiActivity extends BaseActivity implements View.OnClickListener, LearningMateriAdapter.onItemClick {
@@ -110,8 +107,8 @@ public class MateriObligasiActivity extends BaseActivity implements View.OnClick
                 break;
 
             case 3:
-                Intent intent = new Intent(this, KuisObligasiActivity.class);
-                intent.putExtra("topic","obligasi");
+                Intent intent = new Intent(this, QuizActivity.class);
+                intent.putExtra("topic","2");
                 startActivity(intent);
                 break;
         }
