@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_filter_bg"
+    tools:context=".ui.basenavigation.portfolio.filter.FilterSortActivity">
+
+    <include
+        android:id="@+id/toolbar_filter"
+        layout="@layout/toolbar_filter" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_filter"
+        app:layout_constraintBottom_toTopOf="@id/tv_terapkan">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/kategori_produk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:layout_marginVertical="@dimen/size_for_10dp"
+                android:text="Kategori Produk"
+                android:textColor="@color/gray_filter_text"
+                android:textSize="@dimen/size_for_20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/recycler_filter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/size_for_10dp"
+                android:id="@+id/recycler_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/kategori_produk"/>
+
+            <TextView
+                android:id="@+id/urutan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:layout_marginTop="@dimen/size_for_10dp"
+                android:text="Urutan"
+                android:textColor="@color/gray_filter_text"
+                android:textSize="@dimen/size_for_20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/recycler_filter"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/size_for_10dp"
+                android:id="@+id/recycler_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/urutan"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <TextView
+        android:id="@+id/tv_terapkan"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_50dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:background="@drawable/rectangle_yellow"
+        android:gravity="center"
+        android:text="TERAPKAN"
+        android:textColor="@color/black_palette"
+        android:textFontWeight="600"
+        android:textSize="@dimen/size_for_17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,7 @@ public class RoboRekomenAdapter extends RecyclerView.Adapter<RoboRekomenAdapter.
         holder.tvNab.setText(productRekomen.getNab());
         holder.tvKinerja.setText(productRekomen.getKinerja());
         holder.tvReksaName.setText(productRekomen.getProductName());
-        holder.tvPercent.setText(productRekomen.getPercentage());
+        holder.tvPercent.setText(productRekomen.getPercentage()+"%");
         holder.tvLastDate.setText(productRekomen.getLastDate());
     }
 

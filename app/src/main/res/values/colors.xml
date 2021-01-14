@@ -42,4 +42,6 @@
     <color name="light_grey">#EBEEF3</color>
     <color name="green_return">#48ab2d</color>
     <color name="blue_risk">#00555f</color>
+    <color name="gray_filter_bg">#ececf4</color>
+    <color name="gray_filter_text">#737577</color>
 </resources>

@@ -154,6 +154,15 @@
         \nbagian dari kebijakan pengguna dan di luar
         \ntanggung jawab penyedia aplikasi Welma BCA
     </string>
+    <string name="tentang_robo">
+        1. Kalkulasi SmartBot menggunakan data historis yang akan diperbaharui setiap tanggal 1 di awal bulan
+        \n
+        \n2. Nilai Return bundle merupakan nilai kinerja gabungan dari produk-produk reksa dana yang ada pada bundle
+        \n
+        \n3. Nilai Resiko bundle merupakan gabungan resiko hasil diversifikasi produk-produk dalam bundle
+        \n
+        \n4. Nilai Resiko yang semakin mendekati nol menandakan bundle / portfolio yang lebih stabil
+    </string>
     <string name="robo_bantu1">SmartBot dapat membantu kamu</string>
     <string name="robo_bantu2">menghitung persentase porsi investasi</string>
     <string name="robo_bantu3">pada produk reksa dana.</string>

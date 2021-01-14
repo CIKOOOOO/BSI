@@ -1,10 +1,13 @@
 package com.bca.bsi.ui.basenavigation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -16,20 +19,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.RoboRekomenAdapter;
 import com.bca.bsi.model.Portfolio;
+import com.bca.bsi.model.ProductRekomens;
 import com.bca.bsi.ui.basenavigation.information.InformationFragment;
 import com.bca.bsi.ui.basenavigation.more.MoreFragment;
 import com.bca.bsi.ui.basenavigation.portfolio.PortfolioFragment;
+import com.bca.bsi.ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity;
 import com.bca.bsi.ui.basenavigation.products.ProductsFragment;
 import com.bca.bsi.ui.basenavigation.profile.ProfileFragment;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.dummydata.DummyData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+import java.util.Calendar;
 
 public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick {
 
     private BottomSheetBehavior<ConstraintLayout> bottomSheetBehavior;
     RoboRekomenAdapter roboRekomenAdapter;
+    private ConstraintLayout roboAboutLayout, tipsOfTheWeekLayout;
+    private TextView okeMengerti,bottomLanjut;
+    private ImageButton clearPopupTOTW;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +60,51 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
 
         recycler_robo_rekomen.setLayoutManager(new LinearLayoutManager(this));
         recycler_robo_rekomen.setAdapter(roboRekomenAdapter);
+
+        // lanjut bottom sheet
+        bottomLanjut = findViewById(R.id.tv_lanjut);
+        bottomLanjut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProductRekomens productRekomens = new ProductRekomens(DummyData.getProductRekomenList());
+                String minPembelian = "10000";
+
+                Intent intent = new Intent(v.getContext(), PurchasingSmartbotActivity.class);
+                intent.putExtra("data", Utils.toJSON(productRekomens));
+                intent.putExtra("minPembelian",minPembelian);
+                startActivity(intent);
+
+
+            }
+        });
+
+        //Popup tips of the week
+        tipsOfTheWeekLayout = findViewById(R.id.popup_tips_of_the_week);
+        Calendar calendar = Calendar.getInstance();
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        System.out.println(dayOfWeek);
+        if(dayOfWeek == 3){ // Day-2 = Monday
+            tipsOfTheWeekLayout.setVisibility(View.VISIBLE);
+        }
+        // Clear button tips of the week
+        clearPopupTOTW = findViewById(R.id.ib_clear3);
+        clearPopupTOTW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tipsOfTheWeekLayout.setVisibility(View.GONE);
+            }
+        });
+
+        // Popup tentang robo
+        roboAboutLayout = findViewById(R.id.popup_tentang_robo);
+        // Oke Mengerti Popup
+        okeMengerti = findViewById(R.id.tv_oke);
+        okeMengerti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roboAboutLayout.setVisibility(View.GONE);
+            }
+        });
 
         bottomSheetBehavior = BottomSheetBehavior.from(clBSRoboRekomen);
 
@@ -123,5 +179,10 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     public void onItemClick(Portfolio portfolio) {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
+    }
+
+    @Override
+    public void onInfoClick() {
+        roboAboutLayout.setVisibility(View.VISIBLE);
     }
 }

@@ -1,11 +1,13 @@
 package com.bca.bsi.utils.dummydata;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.FilterJenisReksa;
 import com.bca.bsi.model.LearningChapter;
 import com.bca.bsi.model.Product;
 import com.bca.bsi.model.ProductChoice;
 import com.bca.bsi.model.ProductRekomen;
 import com.bca.bsi.model.PromoNews;
+import com.bca.bsi.model.SortJenisReksa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +37,20 @@ public class DummyData {
 
     private static final String[] kinerjaString = {"+14.13%", "+14.89%", "+10.13%"};
     private static final String[] nabString = {"1462.81", "1575.39", "1672.98"};
-    private static final String[] percentage = {"70%","20%","10%"};
+    private static final String[] percentage = {"70","20","10"};
+    private static final String[] percentage2 = {"10","20","30"};
     private static final boolean[] isChoosen = {false,false,false};
+
+    private static final String[] filterJenisReksaName = {"Pasar Uang","Pendapatan Tetap","Campuran","Saham","Terproteksi"};
+    private static final boolean[] isChoosenFilter = {false,false,false,false,false};
+    private static final boolean[] isChoosenFilterDefault = {true,true,true,true,true};
+
+    private static final String[] sortJenisReksaName = {"Nama Produk","Nama Produk","Kinerja","Kinerja"};
+    private static final String[] sortTypeStart = {"A","Z","Tinggi","Rendah"};
+    private static final String[] sortTypeEnd = {"Z","A","Rendah","Tinggi"};
+    private static final boolean[] isChoosenSort = {true,false,false,false};
+    private static final boolean[] isChoosenSortDefault = {false,false,false,false};
+
 
     public static List<Product.ReksaDana> getReksaDanaDummyList() {
         List<Product.ReksaDana> reksaDanaList = new ArrayList<>();
@@ -83,6 +97,15 @@ public class DummyData {
         return productRekomenList;
     }
 
+    public static List<ProductRekomen> getProductRekomenListPurchase() {
+        List<ProductRekomen> productRekomenList = new ArrayList<>();
+        for(int i=0;i<title.length;i++){
+            ProductRekomen produk = new ProductRekomen(title[i],date[i],percentage2[i],kinerjaString[i],nabString[i],type[i]);
+            productRekomenList.add(produk);
+        }
+        return productRekomenList;
+    }
+
     public static List<ProductChoice> getProductChoiceList() {
         List<ProductChoice> productChoices = new ArrayList<>();
         for(int i=0;i<title.length;i++){
@@ -92,4 +115,39 @@ public class DummyData {
         return productChoices;
     }
 
+    public static List<FilterJenisReksa> getFilterJenisReksaList(){
+        List<FilterJenisReksa> res = new ArrayList<>();
+        for(int i=0;i<5;i++){
+            FilterJenisReksa filterJenisReksa = new FilterJenisReksa(filterJenisReksaName[i],isChoosenFilter[i]);
+            res.add(filterJenisReksa);
+        }
+        return res;
+    }
+
+    public static List<FilterJenisReksa> getFilterJenisReksaListDefault(){
+        List<FilterJenisReksa> res = new ArrayList<>();
+        for(int i=0;i<5;i++){
+            FilterJenisReksa filterJenisReksa = new FilterJenisReksa(filterJenisReksaName[i],isChoosenFilterDefault[i]);
+            res.add(filterJenisReksa);
+        }
+        return res;
+    }
+
+    public static List<SortJenisReksa> getSortJenisReksaList(){
+        List<SortJenisReksa> res = new ArrayList<>();
+        for(int i=0;i<4;i++){
+            SortJenisReksa sortJenisReksa = new SortJenisReksa(sortJenisReksaName[i],sortTypeStart[i],sortTypeEnd[i],isChoosenSort[i]);
+            res.add(sortJenisReksa);
+        }
+        return res;
+    }
+
+    public static List<SortJenisReksa> getSortJenisReksaListFalse(){
+        List<SortJenisReksa> res = new ArrayList<>();
+        for(int i=0;i<4;i++){
+            SortJenisReksa sortJenisReksa = new SortJenisReksa(sortJenisReksaName[i],sortTypeStart[i],sortTypeEnd[i],isChoosenSortDefault[i]);
+            res.add(sortJenisReksa);
+        }
+        return res;
+    }
 }

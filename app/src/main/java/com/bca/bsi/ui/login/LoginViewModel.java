@@ -1,7 +1,6 @@
 package com.bca.bsi.ui.login;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -12,18 +11,12 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
-import com.bca.bsi.model.OutputResponse;
-import com.bca.bsi.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginViewModel extends AndroidViewModel {
 
@@ -43,10 +36,10 @@ public class LoginViewModel extends AndroidViewModel {
 
         callback.onSuccess(null, null);
 
-//        Map<String, Object> stringStringMap = new HashMap<>();
-//        stringStringMap.put("bca_id", bcaID);
-//        stringStringMap.put("password", password);
-//
+        Map<String, Object> stringStringMap = new HashMap<>();
+        stringStringMap.put("bca_id", bcaID);
+        stringStringMap.put("password", password);
+
 //        Call<OutputResponse> call = apiInterface.loginWith(token, stringStringMap);
 //        call.enqueue(new Callback<OutputResponse>() {
 //            @Override

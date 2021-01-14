@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black_palette"
-        android:alpha="0.3"/>
+        android:alpha="0.5"/>
 
     <ImageView
         android:layout_width="166dp"
@@ -77,6 +77,7 @@
         android:textSize="@dimen/size_for_17sp"/>
 
     <ImageButton
+        android:id="@+id/ib_clear2"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@drawable/ic_clear2"
