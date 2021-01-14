@@ -199,7 +199,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_durasi_tahun" />
 
         <TextView
-            android:id="@+id/tv_hasil_kalkulasi"
+            android:id="@+id/tv_hasil_kalkulasi_rp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -215,7 +215,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:text="Hasil Perhitungan"
-            app:layout_constraintStart_toEndOf="@+id/tv_hasil_kalkulasi"
+            app:layout_constraintStart_toEndOf="@+id/tv_hasil_kalkulasi_rp"
             app:layout_constraintTop_toBottomOf="@+id/main_tv_hasil"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -95,6 +95,7 @@
     <string name="ror_bernilai">RoR bernilai</string>
     <string name="negatif">negatif</string>
     <string name="estimated">(estimated)</string>
+    <string name="ror_tidak_boleh_bernilai_nol">RoR tidak boleh bernilai nol</string>
 
     <string name="reksadana_capslock">REKSA DANA</string>
     <string name="obligasi_capslock">OBLIGASI</string>

@@ -60,7 +60,7 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
         spinnerDurasiTahunBHI = view.findViewById(R.id.spinner_durasi_tahun);
         spinnerDurasiBulanBHI = view.findViewById(R.id.spinner_durasi_bulan);
         BHILabel = view.findViewById(R.id.main_tv_hasil);
-        rpLabel = view.findViewById(R.id.tv_hasil_kalkulasi);
+        rpLabel = view.findViewById(R.id.tv_hasil_kalkulasi_rp);
         hasilBHI = view.findViewById(R.id.tv_hasil);
         ETBHIIvestasiBulanan = view.findViewById(R.id.et_modal_awal);
         ETBHIModalAwal = view.findViewById(R.id.et_target_hasil_investasi);
@@ -212,7 +212,7 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
 
                     BHILabel.setVisibility(View.VISIBLE);
                     rpLabel.setVisibility(View.VISIBLE);
-                    hasilBHI.setVisibility(View.VISIBLE);
+                    //hasilBHI.setVisibility(View.VISIBLE);
                     kalkulasi.setText(getString(R.string.calculator_reset_label));
 
                     nestedScrollView.post(new Runnable() {
@@ -230,6 +230,7 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
                     spinnerDurasiTahunBHI.setEnabled(true);
 
                     BHILabel.setVisibility(View.GONE);
+                    rpLabel.setText(getString(R.string.rp));
                     rpLabel.setVisibility(View.GONE);
                     hasilBHI.setVisibility(View.GONE);
 
@@ -257,6 +258,12 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
         ETBHIModalAwal.setText(formatModalAwal);
         ETBHIIvestasiBulanan.setText(formatInvestBulanan);
         ETBHIROR.setText(formatRoR);
-        hasilBHI.setText(hasilKalkulasi);
+        if(hasilKalkulasi.equals("NaN") || hasilKalkulasi.equals("-NaN") ){
+            rpLabel.setText(getString(R.string.ror_tidak_boleh_bernilai_nol));
+            hasilBHI.setVisibility(View.INVISIBLE);
+        }else{
+            rpLabel.setVisibility(View.VISIBLE);
+            hasilBHI.setText(hasilKalkulasi);
+        }
     }
 }
