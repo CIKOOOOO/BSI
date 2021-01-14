@@ -52,14 +52,11 @@ public class LoginViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-<<<<<<< Updated upstream
-=======
                 try {
                     Log.e("asd", response.code() + " - " + response.errorBody().string());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
->>>>>>> Stashed changes
                 if (response.body() != null) {
                     OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                     if (errorSchema.getErrorCode().equals("200")) {
@@ -76,17 +73,10 @@ public class LoginViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
-<<<<<<< Updated upstream
-                callback.onFailed("Terdapat kesalahan jaringan");
-            }
-        });
-
-=======
                 Log.e("asd", t.getMessage()+"on fail");
                 callback.onFailed("Terdapat kesalahan jaringan");
             }
         });
->>>>>>> Stashed changes
     }
 
     public void getAccessToken(String bcaID, String password) {
