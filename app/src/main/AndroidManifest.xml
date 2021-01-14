@@ -15,7 +15,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriActivity"></activity>
         <activity android:name=".ui.basenavigation.more.learningmenu.quiz.QuizActivity" />
-        <activity android:name=".ui.basenavigation.information.forum.profile.inbox.InboxActivity" />
         <activity android:name=".ui.basenavigation.information.forum.comment.CommentActivity"></activity>
         <activity android:name=".ui.basenavigation.information.forum.otherprofile.OtherProfileActivity" />
         <activity android:name=".ui.basenavigation.information.forum.inbox.InboxActivity" />
@@ -25,18 +24,53 @@
         <activity
             android:name=".ui.basenavigation.information.forum.profile.ForumProfileActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity" />
-        <activity android:name=".ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity" />
-        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.NilaiKuisActivity" />
-        <activity android:name=".ui.basenavigation.more.learningmenu.TopicListActivity" />
-        <activity android:name=".ui.basenavigation.portfolio.produkmenu.ProdukChoiceActivity" />
-        <activity android:name=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity" />
-        <activity android:name=".ui.pin_screen.PinActivity" />
+        <activity android:name=".ui.basenavigation.portfolio.information.InformasiHistoryActivity"></activity>
+        <activity android:name=".ui.basenavigation.portfolio.filter.FilterSortActivity" />
+        <activity
+            android:name=".ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.more.learningmenu.quiz.NilaiKuisActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.more.learningmenu.quiz.KuisAsuransiActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.more.learningmenu.quiz.KuisObligasiActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.more.learningmenu.quiz.KuisReksaDanaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.more.learningmenu.TopicListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.portfolio.produkmenu.ProdukChoiceActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.basenavigation.products.detail.reksadana.CalculatorProductActivity"
+            android:label="@string/title_activity_calculator_product"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.pin_screen.PinActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.basenavigation.more.calculator.CalculatorMoreActivity"
             android:label="@string/title_activity_calculator_more"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.basenavigation.transaction.detail_transaction.DetailTransactionActivity" />
+        <activity
+            android:name=".ui.basenavigation.transaction.detail_transaction.DetailTransactionActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity"
             android:screenOrientation="portrait" />

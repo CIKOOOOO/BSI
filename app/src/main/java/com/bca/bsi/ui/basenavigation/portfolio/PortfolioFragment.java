@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,8 @@ import java.util.List;
 public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.onItemClick {
     private PortfolioAdapter adapter;
     private ProgressBar progressBar;
+    private ImageButton infoButton;
+
 
     private onBundleClick onBundleClick;
 
@@ -40,11 +43,13 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
 
     public interface onBundleClick{
         void onItemClick(Portfolio portfolio);
+        void onInfoClick();
     }
 
     public void setOnBundleClick(PortfolioFragment.onBundleClick onBundleClick) {
         this.onBundleClick = onBundleClick;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,17 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         adapter = new PortfolioAdapter(this);
         recyclerView.setAdapter(adapter);
         adapter.setPortfolioList(getPortfolioList());
+
+
+        //info robo
+        infoButton = view.findViewById(R.id.ib_tentang_smartbot);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBundleClick.onInfoClick();
+            }
+        });
+
 
 
         // setting progressbar percentage

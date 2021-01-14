@@ -4,7 +4,7 @@
     android:id="@+id/bs_robo_rekomen"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rectangle_rounded_white"
+    android:background="@drawable/rectangle_top_rounded_white"
     app:behavior_hideable="true"
     app:behavior_peekHeight="@dimen/size_for_0dp"
     app:layout_behavior="@string/bottom_sheet_behavior">

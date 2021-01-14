@@ -3,6 +3,10 @@ package com.bca.bsi.model;
 public class ProductRekomen {
     private String productName, lastDate, percentage, kinerja, nab, jenisReksadana;
 
+    public void setPercentage(String percentage) {
+        this.percentage = percentage;
+    }
+
     public ProductRekomen(String productName, String lastDate, String percentage, String kinerja, String nab, String jenisReksadana) {
         this.productName = productName;
         this.lastDate = lastDate;

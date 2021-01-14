@@ -6,13 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity">
 
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:alpha="0.5"
         android:background="@color/black_palette"
-        android:alpha="0.3"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/img_robo_popup"
         android:layout_width="97dp"
         android:layout_height="101dp"
         android:layout_marginEnd="16dp"
@@ -20,55 +25,74 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/textbubble"
-        android:layout_width="401dp"
-        android:layout_height="600dp"
-        android:src="@drawable/bg_bubble2"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0dp"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_40dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:background="@drawable/bg_bubble2"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/img_robo_popup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.336" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/popup_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tentang SmartBot"
-        android:textColor="@color/white_palette"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/textbubble"
-        app:layout_constraintEnd_toEndOf="@id/textbubble"
-        app:layout_constraintTop_toTopOf="@id/textbubble"
-        android:layout_marginTop="@dimen/size_for_20dp"/>
+        <TextView
+            android:id="@+id/tv_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/size_for_20dp"
+            android:text="Tentang SmartBot"
+            android:textColor="@color/white_palette"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-   <ImageView
-       android:layout_width="300dp"
-       android:layout_height="500dp"
-       android:src="@drawable/text_tentang_robo"
-       app:layout_constraintTop_toTopOf="@id/textbubble"
-       app:layout_constraintStart_toStartOf="@id/textbubble"
-       app:layout_constraintEnd_toEndOf="@id/textbubble"
-       android:layout_marginTop="@dimen/size_for_30dp"/>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_01"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_for_0dp"
+            android:layout_marginTop="@dimen/size_for_20dp"
+            android:layout_marginBottom="@dimen/size_for_20dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_oke"
+            app:layout_constraintTop_toBottomOf="@id/tv_01">
+
+            <TextView
+                android:id="@+id/tv_content_popup_tentang_robo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:layout_marginEnd="@dimen/size_for_20dp"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@string/tentang_robo"
+                android:textColor="@color/white_palette"
+                android:textSize="@dimen/size_for_17sp" />
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/tv_oke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_for_40dp"
+            android:background="@drawable/rectangle_rounded_white"
+            android:paddingHorizontal="@dimen/size_for_40dp"
+            android:paddingVertical="@dimen/size_for_5dp"
+            android:text="Oke, mengerti"
+            android:textColor="@color/keppel_palette"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
 
 
-    <TextView
-        android:id="@+id/tv_hitungsekarang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Oke, mengerti"
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="@id/textbubble"
-        app:layout_constraintEnd_toEndOf="@id/textbubble"
-        app:layout_constraintBottom_toBottomOf="@id/textbubble"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/rectangle_rounded_white"
-        android:paddingHorizontal="@dimen/size_for_40dp"
-        android:paddingVertical="@dimen/size_for_5dp"
-        android:textStyle="bold"
-        android:textColor="@color/keppel_palette"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

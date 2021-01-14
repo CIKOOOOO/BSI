@@ -45,4 +45,6 @@
     <color name="blue_lagoon_palette">#01717D</color>
     <color name="powder_blue_palette">#BFE7EB</color>
     <color name="white_ice_palette">#DBF6F9</color>
+    <color name="gray_filter_bg">#ececf4</color>
+    <color name="gray_filter_text">#737577</color>
 </resources>

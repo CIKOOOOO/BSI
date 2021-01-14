@@ -1,7 +1,6 @@
 package com.bca.bsi.ui.login;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -12,8 +11,6 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
-import com.bca.bsi.model.OutputResponse;
-import com.bca.bsi.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,10 +18,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginViewModel extends AndroidViewModel {
 

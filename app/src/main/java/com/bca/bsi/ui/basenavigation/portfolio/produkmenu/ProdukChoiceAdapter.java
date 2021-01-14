@@ -38,8 +38,17 @@ public class ProdukChoiceAdapter extends RecyclerView.Adapter<ProdukChoiceAdapte
         holder.tvNab.setText(productChoice.getNab());
         holder.tvKinerja.setText(productChoice.getKinerja());
         holder.tvReksaName.setText(productChoice.getTitle());
-        holder.cbChoosen.setActivated(productChoice.isChoosen());
+        holder.cbChoosen.setChecked(productChoice.isChoosen());
         holder.tvLastDate.setText(productChoice.getLastDate());
+
+//        holder.tvReksaName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(position==1){
+//                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+//                }
+//            }
+//        });
     }
 
     @Override
