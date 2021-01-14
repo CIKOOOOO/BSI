@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_palette">
+
+    <TextView
+        android:id="@+id/tv_reksadana_name_i"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:text="Bahana Pendapatan Tetap Makara Prima"
+        android:textColor="@color/java_palette"
+        android:textSize="@dimen/size_for_17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tv_unit_i"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/icon_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:background="@drawable/ic_baseline_more_vert_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unit"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@id/icon_more"
+        app:layout_constraintTop_toTopOf="@id/icon_more" />
+
+    <TextView
+        android:id="@+id/tv_unit_i"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_for_5dp"
+        android:text="12345678"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@id/unit"
+        app:layout_constraintTop_toTopOf="@id/icon_more" />
+
+    <TextView
+        android:id="@+id/tv_cost_i"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="99.999,74"
+        android:textColor="@color/java_palette"
+        android:textSize="@dimen/size_for_15sp"
+        app:layout_constraintEnd_toStartOf="@id/icon_more"
+        app:layout_constraintTop_toBottomOf="@id/unit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp. "
+        android:textColor="@color/java_palette"
+        android:textSize="@dimen/size_for_15sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_cost_i"
+        app:layout_constraintTop_toTopOf="@id/tv_cost_i" />
+
+    <TextView
+        android:id="@+id/tv_jenis_reksadana_i"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_5dp"
+        android:text="Pendapatan Tetap"
+        android:textSize="@dimen/size_for_15sp"
+        app:layout_constraintStart_toStartOf="@id/tv_reksadana_name_i"
+        app:layout_constraintTop_toBottomOf="@id/tv_reksadana_name_i" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_date_range_24"
+        android:scaleY="0.6"
+        android:scaleX="0.6"
+        app:layout_constraintTop_toBottomOf="@id/tv_jenis_reksadana_i"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="@dimen/size_for_5dp"
+        android:id="@+id/calendar_logo_i"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10/12/2020"
+        app:layout_constraintStart_toEndOf="@id/calendar_logo_i"
+        app:layout_constraintTop_toTopOf="@id/calendar_logo_i"
+        android:id="@+id/date_i"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        app:layout_constraintTop_toBottomOf="@id/calendar_logo_i"
+        android:background="@drawable/line_gray2"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

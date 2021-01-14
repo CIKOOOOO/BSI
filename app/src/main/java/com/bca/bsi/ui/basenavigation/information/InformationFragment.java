@@ -15,15 +15,27 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.MainForumFragment;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.ForumProfileActivity;
 import com.bca.bsi.ui.basenavigation.information.promonews.news.NewsInformationFragment;
 import com.bca.bsi.ui.basenavigation.information.promonews.promo.PromoInformationFragment;
 import com.bca.bsi.utils.BaseFragment;
 
-public class InformationFragment extends BaseFragment implements View.OnClickListener {
+import java.util.List;
+
+public class InformationFragment extends BaseFragment implements View.OnClickListener, MainForumFragment.onReport {
 
     private TextView tvStart, tvMid, tvEnd;
+    private onReport onReport;
+
+    public interface onReport {
+        void onClick(List<Forum.Report> reportList);
+    }
+
+    public void setOnReport(onReport onReport) {
+        this.onReport = onReport;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,7 +117,7 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
                 tvEnd.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvMid.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 tvStart.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
-                changeFragment(new MainForumFragment());
+                changeFragmentToForum();
                 break;
         }
     }
@@ -114,5 +126,18 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_information_fragment, fragment);
         transaction.commit();
+    }
+
+    private void changeFragmentToForum() {
+        MainForumFragment mainForumFragment = new MainForumFragment();
+        mainForumFragment.setOnReport(this);
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_information_fragment, mainForumFragment);
+        transaction.commit();
+    }
+
+    @Override
+    public void onClick(List<Forum.Report> reportList) {
+        onReport.onClick(reportList);
     }
 }

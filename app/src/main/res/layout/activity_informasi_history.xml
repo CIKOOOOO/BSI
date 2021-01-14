@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_filter_bg"
+    tools:context=".ui.basenavigation.portfolio.information.InformasiHistoryActivity">
+
+    <include layout="@layout/toolbar_back"
+        android:id="@+id/toolbar_back_informasi_history"/>
+
+    <FrameLayout
+        android:id="@+id/frame_01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_base_welma"
+        android:paddingTop="@dimen/size_for_5dp"
+        android:paddingBottom="@dimen/size_for_5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_back_informasi_history">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:background="@drawable/rectangle_rounded_sherpa_blue"
+            android:orientation="horizontal"
+            android:id="@+id/toolbar_mode"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tv_start_informasi_history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_rounded_sherpa_blue"
+                android:paddingTop="@dimen/size_for_10dp"
+                android:paddingBottom="@dimen/size_for_10dp"
+                android:text="Informasi"
+                android:textAlignment="center"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tv_end_informasi_history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_rounded_sherpa_blue"
+                android:paddingTop="@dimen/size_for_10dp"
+                android:paddingBottom="@dimen/size_for_10dp"
+                android:text="Histori"
+                android:textAlignment="center"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <include layout="@layout/search"
+        android:id="@+id/search_bar_informasi_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/frame_01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_bar_informasi_history"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/kategori_produk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:layout_marginVertical="@dimen/size_for_10dp"
+                android:text="RUPIAH (IDR)"
+                android:textColor="@color/gray_filter_text"
+                android:textSize="@dimen/size_for_20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/recycler_informasi_history"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/size_for_10dp"
+                android:id="@+id/recycler_informasi_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/kategori_produk"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/custom_notice"
+        android:id="@+id/pemberitahuan_informasi_history"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

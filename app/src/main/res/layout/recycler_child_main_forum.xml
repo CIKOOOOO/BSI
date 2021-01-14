@@ -144,6 +144,7 @@
         app:layout_constraintTop_toBottomOf="@id/fl_01" />
 
     <ImageView
+        android:id="@+id/recycler_img_share_child_main_forum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_for_2dp"

@@ -1,20 +1,42 @@
 package com.bca.bsi.ui.basenavigation.information.forum;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Forum;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.constant.Constant;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainForumFragment extends BaseFragment {
+import java.util.List;
+
+public class MainForumFragment extends BaseFragment implements IMainForumCallback {
+
+    private onReport onReport;
+    private MainForumViewModel viewModel;
+
+    @Override
+    public void onLoadReportData(List<Forum.Report> reportList) {
+        onReport.onClick(reportList);
+    }
+
+    public interface onReport {
+        void onClick(List<Forum.Report> reportList);
+    }
+
+    public void setOnReport(onReport onReport) {
+        this.onReport = onReport;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +53,18 @@ public class MainForumFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        viewModel = new ViewModelProvider(this).get(MainForumViewModel.class);
+        viewModel.setCallback(this);
+
         setupTab(view);
+        Button btnTest = view.findViewById(R.id.btn);
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.loadReportData();
+            }
+        });
     }
 
     private void setupTab(View view) {

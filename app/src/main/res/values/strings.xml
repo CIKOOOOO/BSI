@@ -62,6 +62,10 @@
     <string name="post">Post</string>
     <string name="kinerja_produk">Kinerja Produk (%)</string>
     <string name="product_information">Informasi Produk</string>
+    <string name="comment">Comment</string>
+    <string name="report">Report</string>
+    <string name="report_now">Laporkan</string>
+    <string name="reason_to_report">Alasan Pelaporan</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>
@@ -168,6 +172,15 @@
         \nPemilihan produk reksa dana merupakan
         \nbagian dari kebijakan pengguna dan di luar
         \ntanggung jawab penyedia aplikasi Welma BCA
+    </string>
+    <string name="tentang_robo">
+        1. Kalkulasi SmartBot menggunakan data historis yang akan diperbaharui setiap tanggal 1 di awal bulan
+        \n
+        \n2. Nilai Return bundle merupakan nilai kinerja gabungan dari produk-produk reksa dana yang ada pada bundle
+        \n
+        \n3. Nilai Resiko bundle merupakan gabungan resiko hasil diversifikasi produk-produk dalam bundle
+        \n
+        \n4. Nilai Resiko yang semakin mendekati nol menandakan bundle / portfolio yang lebih stabil
     </string>
     <string name="robo_bantu1">SmartBot dapat membantu kamu</string>
     <string name="robo_bantu2">menghitung persentase porsi investasi</string>

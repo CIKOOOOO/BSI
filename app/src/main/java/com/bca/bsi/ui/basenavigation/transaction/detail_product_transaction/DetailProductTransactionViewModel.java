@@ -30,10 +30,10 @@ public class DetailProductTransactionViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadDetailTransaksi(String accountNumber, String reksaDanaID) {
+    public void loadDetailTransaksi(String bcaID, String reksaDanaID) {
 
         Map<String, Object> objectMap = new HashMap<>();
-        objectMap.put("account_number", accountNumber);
+        objectMap.put("account_number", bcaID);
         objectMap.put("reksadana_id", reksaDanaID);
 
         Call<OutputResponse> call = apiInterface.getDetailTransaksi(objectMap);
