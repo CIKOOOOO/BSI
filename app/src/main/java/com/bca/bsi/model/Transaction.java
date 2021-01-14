@@ -25,10 +25,12 @@ public class Transaction {
         private String paymentType;
 
         @SerializedName("nominal_biaya_pembelian")
-        private double nominalBiayaPembelian;
+        private String nominalBiayaPembelian;
 
         @SerializedName("reksa_dana_unit")
         private String reksaDanaUnit;
+
+        private String nab;
 
         public Purchasing() {
         }
@@ -81,11 +83,11 @@ public class Transaction {
             this.paymentType = paymentType;
         }
 
-        public double getNominalBiayaPembelian() {
+        public String getNominalBiayaPembelian() {
             return nominalBiayaPembelian;
         }
 
-        public void setNominalBiayaPembelian(double nominalBiayaPembelian) {
+        public void setNominalBiayaPembelian(String nominalBiayaPembelian) {
             this.nominalBiayaPembelian = nominalBiayaPembelian;
         }
 
@@ -95,6 +97,14 @@ public class Transaction {
 
         public void setReksaDanaUnit(String reksaDanaUnit) {
             this.reksaDanaUnit = reksaDanaUnit;
+        }
+
+        public String getNab() {
+            return nab;
+        }
+
+        public void setNab(String nab) {
+            this.nab = nab;
         }
     }
 
@@ -106,14 +116,14 @@ public class Transaction {
         @SerializedName("tipe_pembayaran")
         private String paymentType;
 
-        @SerializedName("nominal_pembelian")
-        private String nominalPembelian;
+        @SerializedName("nominal_transaksi")
+        private String nominalTransaksi;
 
-        @SerializedName("nominal_biaya_pembelian")
-        private String nominalBiayaPembelian;
+        @SerializedName("nominal_biaya_transaksi")
+        private String nominalBiayaTransaksi;
 
-        @SerializedName("nominal_total_pembelian")
-        private String nominalTotalPembelian;
+        @SerializedName("nominal_total_transaksi")
+        private String nominalTotalTransaksi;
 
         @SerializedName("rekening_sumber_dana")
         private String rekeningSumberDana;
@@ -135,16 +145,16 @@ public class Transaction {
             return paymentType;
         }
 
-        public String getNominalPembelian() {
-            return nominalPembelian;
+        public String getNominalTransaksi() {
+            return nominalTransaksi;
         }
 
-        public String getNominalBiayaPembelian() {
-            return nominalBiayaPembelian;
+        public String getNominalBiayaTransaksi() {
+            return nominalBiayaTransaksi;
         }
 
-        public String getNominalTotalPembelian() {
-            return nominalTotalPembelian;
+        public String getNominalTotalTransaksi() {
+            return nominalTotalTransaksi;
         }
 
         public String getRekeningSumberDana() {

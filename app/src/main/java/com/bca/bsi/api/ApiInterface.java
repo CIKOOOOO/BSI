@@ -12,26 +12,26 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface ApiInterface {
 
-    //    @Headers("client-id: OV4B2FXHY1Y7W0WMSUUB")
-    @Headers({"Content-Type:application/json;","client-id:x","hashcode:x"})
+    @Headers({"Content-Type:application/json;", "client-id:x", "hashcode:x"})
     @POST("mobile/login")
     Call<OutputResponse> loginWith(@Header("token") String token, @Body Map<String, Object> data);
 
-//    @Headers({"Accept: application/json", "content-type: application/json"})
-    @GET("Reksadana")
+    //    @Headers({"Accept: application/json", "content-type: application/json"})
+    @GET("products/Reksadana")
     Call<OutputResponse> getReksaDanaData(@Header("profile_risiko") int profile_risiko);
 
-    @GET("Reksadana/{reksaDanaID}")
+    @GET("products/Reksadana/{reksaDanaID}")
     Call<OutputResponse> getDetailReksaDana(@Path("reksaDanaID") int reksaDanaID);
 
-    @POST("")
-    Call<OutputResponse> getDetailTransaksi(@Body Map<String, Object> stringObjectMap);
+    @Headers({"client_id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x", "Content-Type:application/json;"})
+    @GET("ceksaldo")
+    Call<OutputResponse> getDetailTransaksi(@Header("reksadana_id") String reksadanaID, @Header("no_rekening") String accountNumber);
 
-    @POST("")
+    @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
+    @POST("transaction")
     Call<OutputResponse> sendTransactionData(@Body Map<String, Object> stringObjectMap);
 
     @GET("quiz")

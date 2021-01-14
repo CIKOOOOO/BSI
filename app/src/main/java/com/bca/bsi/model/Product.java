@@ -92,7 +92,7 @@ public class Product {
         @SerializedName("reksadana_id")
         private String reksadanaID;
 
-        @SerializedName("manager_investasi_id")
+        @SerializedName("manager_investasi")
         private String managerInvestasiID;
 
         @SerializedName("product_category_id")
@@ -135,7 +135,7 @@ public class Product {
         private String productCategory;
 
         @SerializedName("nab_per_unit")
-        private String nabSatuBulan;
+        private String nabPerUnit;
 
         @SerializedName("update_date")
         private String updateDate;
@@ -228,8 +228,8 @@ public class Product {
             return productCategory;
         }
 
-        public String getNabSatuBulan() {
-            return nabSatuBulan;
+        public String getNabPerUnit() {
+            return nabPerUnit;
         }
 
         public String getUpdateDate() {

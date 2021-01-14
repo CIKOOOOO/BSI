@@ -48,15 +48,16 @@ public class ProductNameConfirmationAdapter extends RecyclerView.Adapter<Product
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         Product.DetailReksaDana detailReksaDana = detailReksaDanas.get(position);
-        double percentage = percentageList.get(position);
-        double nominalPembelian = this.nominalPembelian * percentage;
-        double biayaPembelian = Double.parseDouble(detailReksaDana.getBiayaPembelian()) * nominalPembelian;
+        double nominalPembelian = this.nominalPembelian * percentageList.get(position);
+        String biayaProdukPembelian = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : String.valueOf(Double.parseDouble(detailReksaDana.getBiayaPembelian()) / 100);
+
+        double biayaPembelian = (Double.parseDouble(biayaProdukPembelian) / 100) * nominalPembelian;
         double totalPembelian = nominalPembelian + biayaPembelian;
 
         holder.tvName.setText(detailReksaDana.getName());
-        holder.tvNominalPembelian.setText("Rp " + nominalPembelian);
-        holder.tvNominalBiayaPembelian.setText("Rp " + biayaPembelian);
-        holder.tvNominalTotalPembelian.setText("Rp " + totalPembelian);
+        holder.tvNominalPembelian.setText("Rp " + String.format("%,.2f", nominalPembelian));
+        holder.tvNominalBiayaPembelian.setText("Rp " + String.format("%,.2f", biayaPembelian));
+        holder.tvNominalTotalPembelian.setText("Rp " + String.format("%,.2f", totalPembelian));
     }
 
     @Override
@@ -75,5 +76,4 @@ public class ProductNameConfirmationAdapter extends RecyclerView.Adapter<Product
             tvNominalTotalPembelian = itemView.findViewById(R.id.recycler_tv_nominal_total_pembelian_confirmation);
         }
     }
-
 }

@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -9,14 +10,13 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailProductTransactionViewModel extends AndroidViewModel {
+
+    private static final String TAG = DetailProductTransactionViewModel.class.getSimpleName();
 
     private IDetailProductTransactionCallback callback;
     private ApiInterface apiInterface;
@@ -30,22 +30,18 @@ public class DetailProductTransactionViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadDetailTransaksi(String bcaID, String reksaDanaID) {
-
-        Map<String, Object> objectMap = new HashMap<>();
-        objectMap.put("account_number", bcaID);
-        objectMap.put("reksadana_id", reksaDanaID);
-
-        Call<OutputResponse> call = apiInterface.getDetailTransaksi(objectMap);
+    public void loadDetailTransaksi(String nomorRekening, String reksaDanaID) {
+        Call<OutputResponse> call = apiInterface.getDetailTransaksi(reksaDanaID, nomorRekening);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e(TAG, "on response : " + response.code());
                 if (response.body() != null) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if (errorSchema.getErrorCode().equals("200")) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
-                        callback.loadSaldo(outputSchema.getBcaUser(), outputSchema.getDetailReksaDana());
+                        callback.loadSaldo(outputSchema.getRekeningUser(), outputSchema.getDetailReksaDana());
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

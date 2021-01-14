@@ -49,5 +49,6 @@
         android:layout_height="@dimen/size_for_0.5dp"
         android:layout_marginTop="@dimen/size_for_10dp"
         android:background="@color/gray_palette"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/ll_01" />
 </androidx.constraintlayout.widget.ConstraintLayout>

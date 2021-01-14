@@ -92,6 +92,10 @@ public class Utils {
         return currentFormat;
     }
 
+    public static String formatUang2(double totalPrice) {
+        return String.format("%,.2f", totalPrice);
+    }
+
 
     //================================ Hitung Target ====================================
     public double getTarget(double initialCost, double monthlyCost, double ror, int durationMonth, int durationYear){

@@ -96,7 +96,7 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
             case R.id.tv_kalkulator_perencanaan_detail_reksa_dana:
                 Intent intent2 = new Intent(this, CalculatorMoreActivity.class);
                 intent2.putExtra("numberOfTabs",3);
-                //intent.putExtra("rorValue",String.valueOf(this.detailReksaDana.getRorReksaDana()));
+//                intent2.putExtra("rorValue",String.valueOf(this.detailReksaDana.getKinerja1Tahun()));
                 intent2.putExtra("rorValue","2");
                 intent2.putExtra("namaProduk",this.detailReksaDana.getName());
                 //intent.putExtra("namaProduk","Nama Produk");
@@ -119,7 +119,7 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
         this.detailReksaDana = detailReksaDana;
         tvProductName.setText(detailReksaDana.getName());
 
-        String nab = detailReksaDana.getNabSatuBulan() + "\n NAB/Unit";
+        String nab = detailReksaDana.getNabPerUnit() + "\n NAB/Unit";
         String purchasingCost = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : detailReksaDana.getBiayaPembelian();
         String biayaAgenPenjual = detailReksaDana.getBiayaAgen() == null ? "Rp N/A" : "Rp " + Utils.priceFormat(Double.parseDouble(detailReksaDana.getBiayaAgen()));
 

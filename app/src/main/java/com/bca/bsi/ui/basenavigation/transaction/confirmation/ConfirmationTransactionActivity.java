@@ -31,7 +31,7 @@ public class ConfirmationTransactionActivity extends BaseActivity implements Vie
     public static final String FROM_CONFIRMATION_ACTIVITY = "from_conformation_activity";
     public static final String CONFIRMATION_TYPE = "confirmation_type";
 
-    private TextView tvTransactionType, tvNominalPembelian, tvNominalBiayaPembelian, tvTotalPembelian, tvRekeningSumberDana, tvProductName;
+    private TextView tvPaymentType, tvNominalPembelian, tvNominalBiayaPembelian, tvTotalPembelian, tvRekeningSumberDana, tvProductName;
     private CheckBox cbConfirmation;
     private Product.DetailReksaDana detailReksaDana;
     private Transaction.Purchasing purchasing;
@@ -52,13 +52,9 @@ public class ConfirmationTransactionActivity extends BaseActivity implements Vie
         final Button btnNext = findViewById(R.id.btn_next_transaction_confirmation);
         RecyclerView recycler_product = findViewById(R.id.recycler_product_confirmation_transaction);
 
-        tvTransactionType = findViewById(R.id.tv_transaction_type_confirmation);
-//        tvNominalPembelian = findViewById(R.id.tv_nominal_pembelian_confirmation);
-//        tvNominalBiayaPembelian = findViewById(R.id.tv_nominal_biaya_pembelian_confirmation);
-//        tvTotalPembelian = findViewById(R.id.tv_nominal_total_pembelian_confirmation);
+        tvPaymentType = findViewById(R.id.tv_transaction_type_confirmation);
         tvRekeningSumberDana = findViewById(R.id.tv_rekening_sumber_dana_confirmation);
         cbConfirmation = findViewById(R.id.cb_confirmation_transaction);
-//        tvProductName = findViewById(R.id.tv_name_confirmation_transaction);
 
         ((TextView) findViewById(R.id.tv_title_toolbar_back)).setText(getString(R.string.confirmation));
         ((TextView) findViewById(R.id.tv_child_toolbar_back)).setVisibility(View.GONE);
@@ -84,15 +80,18 @@ public class ConfirmationTransactionActivity extends BaseActivity implements Vie
 
             } else {
                 this.detailReksaDana = gson.fromJson(reksadana, Product.DetailReksaDana.class);
-                tvProductName.setText(this.detailReksaDana.getName());
-                tvTransactionType.setText(this.purchasing.getTransactionType());
-                tvNominalPembelian.setText("Rp " + this.purchasing.getAmount());
-                tvNominalBiayaPembelian.setText("Rp " + this.purchasing.getNominalBiayaPembelian() + " (" + this.detailReksaDana.getBiayaPembelian() + "%)");
-                tvTotalPembelian.setText("Rp " + (Double.parseDouble(this.purchasing.getAmount()) + this.purchasing.getNominalBiayaPembelian()));
+                String paymentType = this.purchasing.getPaymentType().equals(Type.PEMBELIAN_BERKALA) ? "Pembelian Berkala" : "Pembelian Sekali Bayar";
+                tvPaymentType.setText(paymentType);
                 tvRekeningSumberDana.setText(prefConfig.getAccountNumber());
                 detailReksaDanaList.add(this.detailReksaDana);
+
+                List<Double> percentageList = new ArrayList<>();
+                percentageList.add(1.0);
+
                 productNameConfirmationAdapter.setDetailReksaDanas(detailReksaDanaList);
+                productNameConfirmationAdapter.setPercentageList(percentageList);
                 productNameConfirmationAdapter.setNominalPembelian(Double.parseDouble(this.purchasing.getAmount()));
+                productNameConfirmationAdapter.notifyDataSetChanged();
             }
         }
 

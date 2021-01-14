@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.pin_screen;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -37,6 +38,7 @@ public class PinViewModel extends AndroidViewModel {
         Gson gson = new Gson();
         switch (type) {
             case ConfirmationTransactionActivity.FROM_CONFIRMATION_ACTIVITY:
+                Log.e("asd", "masuk switch case");
                 Transaction.Purchasing purchasing = gson.fromJson(data, Transaction.Purchasing.class);
 
                 Map<String, Object> stringObjectMap = new HashMap<>();
@@ -46,19 +48,23 @@ public class PinViewModel extends AndroidViewModel {
                 stringObjectMap.put("reksa_dana_id", purchasing.getReksaDanaID());
                 stringObjectMap.put("transaction_type", purchasing.getTransactionType());
                 stringObjectMap.put("tipe_pembayaran", purchasing.getPaymentType());
-                stringObjectMap.put("nominal_biaya_pembelian", purchasing.getNominalBiayaPembelian());
+                stringObjectMap.put("nominal_biaya_transaksi", purchasing.getNominalBiayaPembelian());
                 stringObjectMap.put("reksa_dana_unit", purchasing.getReksaDanaUnit());
+                stringObjectMap.put("nab", purchasing.getNab());
                 stringObjectMap.put("pin", pin);
+
+                Log.e("asd", stringObjectMap.toString());
 
                 Call<OutputResponse> call = apiInterface.sendTransactionData(stringObjectMap);
                 call.enqueue(new Callback<OutputResponse>() {
                     @Override
                     public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                        Log.e("asd", "on response " + response.code());
                         if (response.body() != null) {
                             OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                             if (errorSchema.getErrorCode().equals("200")) {
                                 OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
-                                Transaction.TransactionResult transactionResult = response.body().getOutputSchema().getTransactionResult();
+                                Transaction.TransactionResult transactionResult = outputSchema.getTransactionResult();
                                 callback.onSuccessPin(transactionResult);
                             } else {
                                 callback.onFailed(errorSchema.getErrorMessage());
@@ -70,6 +76,7 @@ public class PinViewModel extends AndroidViewModel {
 
                     @Override
                     public void onFailure(Call<OutputResponse> call, Throwable t) {
+                        Log.e("asd", "on failed " + t.getMessage());
                         callback.onFailed("Mohon cek kembali jaringan Anda");
                     }
                 });

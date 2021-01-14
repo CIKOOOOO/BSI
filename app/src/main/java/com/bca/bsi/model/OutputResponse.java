@@ -57,8 +57,8 @@ public class OutputResponse {
         @SerializedName("detail_reksadana")
         private Product.DetailReksaDana detailReksaDana;
 
-        @SerializedName("bca_user")
-        private User.BCAUser bcaUser;
+        @SerializedName("rekening")
+        private User.BCAUser.Rekening rekeningUser;
 
         @SerializedName("transaction")
         private Transaction.TransactionResult transactionResult;
@@ -85,8 +85,8 @@ public class OutputResponse {
             return detailReksaDana;
         }
 
-        public User.BCAUser getBcaUser() {
-            return bcaUser;
+        public User.BCAUser.Rekening getRekeningUser() {
+            return rekeningUser;
         }
 
         public Transaction.TransactionResult getTransactionResult() {

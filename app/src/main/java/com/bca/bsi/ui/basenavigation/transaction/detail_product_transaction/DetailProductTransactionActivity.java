@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,9 +21,11 @@ import com.bca.bsi.model.User;
 import com.bca.bsi.ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 import com.google.gson.Gson;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +36,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
     public static final String DATA = "data";
 
     private Product.ReksaDana reksaDana;
-    private TextView tvSaldo, tvProductName, tvPrice, tvDate;
+    private TextView tvSaldo;
     private DetailProductTransactionViewModel viewModel;
     private EditText etNominalPembelian;
     private Product.DetailReksaDana detailReksaDana;
@@ -63,9 +66,6 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
 
         tvSaldo = findViewById(R.id.tv_saldo_detail_transaction);
         etNominalPembelian = findViewById(R.id.et_nominal_pembelian_detail_transaction);
-        tvPrice = findViewById(R.id.tv_price_detail_transaction);
-        tvDate = findViewById(R.id.tv_date_detail_transaction);
-        tvProductName = findViewById(R.id.tv_name_detail_transaction);
 
         Gson gson = new Gson();
 
@@ -97,7 +97,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
 
                 productNameDetailTransactionAdapter.setProductTransactions(productTransactionList);
 
-                viewModel.loadDetailTransaksi(prefConfig.getBCAID(), this.reksaDana.getReksadanaID());
+                viewModel.loadDetailTransaksi(prefConfig.getAccountNumber(), this.reksaDana.getReksadanaID());
             } else if (productType.equals(Type.PURCHASING_WITH_SMARTBOT)) {
                 // Here to retrieve data from smartbot
                 // Data : berapa persen pembagian setiap produk + list of product
@@ -125,24 +125,29 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                     showSnackBar("Mohon isi nominal pembelian");
                 } else if (this.detailReksaDana == null) {
                     onResume();
-                } else if (Double.parseDouble(this.detailReksaDana.getMinimumPembelianPertama()) < Double.parseDouble(nominal)) {
+                } else if (Double.parseDouble(this.detailReksaDana.getMinimumPembelianPertama()) > Double.parseDouble(nominal)) {
                     showSnackBar("Jumlah nominal pembelian lebih kecil daripada minimum pembelian pertama");
                 } else {
                     String type = cbPaymentType.isChecked() ? Type.PEMBELIAN_BERKALA : Type.PEMBELIAN_SEKALI_BAYAR;
-                    double biayaPembelian = Double.parseDouble(this.detailReksaDana.getBiayaPembelian()) * Double.parseDouble(nominal);
-                    double reksaDanaUnit = Double.parseDouble(nominal) / Double.parseDouble(this.detailReksaDana.getNabSatuBulan());
+                    String biayaProdukPembelian = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : String.valueOf(Double.parseDouble(detailReksaDana.getBiayaPembelian()));
+                    double biayaPembelian = (Double.parseDouble(biayaProdukPembelian) / 100) * Double.parseDouble(nominal);
+                    double reksaDanaUnit = Double.parseDouble(nominal) / Double.parseDouble(this.detailReksaDana.getNabPerUnit());
+
+                    Log.e("asd", biayaPembelian+"biaya"+String.format("%.2f", biayaPembelian));
 
                     Transaction.Purchasing purchasing = new Transaction.Purchasing();
-                    purchasing.setPaymentType(Type.PURCHASING);
+                    purchasing.setTransactionType(Type.PURCHASING);
                     purchasing.setAmount(nominal);
                     purchasing.setPaymentType(type);
-                    purchasing.setNominalBiayaPembelian(biayaPembelian);
+                    purchasing.setNominalBiayaPembelian(String.format("%.2f", biayaPembelian));
                     purchasing.setReksaDanaID(this.detailReksaDana.getReksadanaID());
                     purchasing.setReksaDanaUnit(String.valueOf(reksaDanaUnit));
+                    purchasing.setNab(String.valueOf(this.detailReksaDana.getNabPerUnit()));
 
                     Intent intent = new Intent(this, ConfirmationTransactionActivity.class);
                     intent.putExtra(ConfirmationTransactionActivity.DATA_TRANSACTION, Utils.toJSON(purchasing));
                     intent.putExtra(ConfirmationTransactionActivity.DATA_REKSA_DANA, Utils.toJSON(this.detailReksaDana));
+                    intent.putExtra(ConfirmationTransactionActivity.CONFIRMATION_TYPE, "");
                     startActivity(intent);
                 }
                 break;
@@ -153,14 +158,25 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
     }
 
     @Override
-    public void loadSaldo(User.BCAUser bcaUser, Product.DetailReksaDana detailReksaDana) {
+    public void loadSaldo(User.BCAUser.Rekening bcaUser, Product.DetailReksaDana detailReksaDana) {
         this.detailReksaDana = detailReksaDana;
 
-        tvSaldo.setText(bcaUser.getSaldo());
+        Log.e("asd", detailReksaDana.getNabPerUnit());
 
-        tvProductName.setText(detailReksaDana.getName());
-        tvPrice.setText("Rp. " + detailReksaDana.getNabSatuBulan() + "\nNAB/Unit");
-        tvDate.setText(detailReksaDana.getUpdateDate());
+        String updateDate = null;
+        try {
+            updateDate = Utils.formatDateFromDateString(Constant.DATE_FORMAT_FROM_DB, Constant.DATE_FORMAT_2, this.detailReksaDana.getUpdateDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        List<Product.ProductTransaction> productTransactions = new ArrayList<>();
+        productTransactions.add(new Product.ProductTransaction(detailReksaDana.getName(), updateDate, detailReksaDana.getNabPerUnit()));
+
+        tvSaldo.setText("Rp " + Utils.priceFormat(Double.parseDouble(bcaUser.getSaldo())));
+
+        productNameDetailTransactionAdapter.setProductTransactions(productTransactions);
+        productNameDetailTransactionAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -88,14 +88,24 @@ public class User {
 
     public static class BCAUser{
 
-        @SuppressWarnings("saldo")
-        private String saldo;
+        public static class Rekening{
 
-        public BCAUser() {
-        }
+            @SerializedName("saldo")
+            private String saldo;
 
-        public String getSaldo() {
-            return saldo;
+            @SerializedName("status_pembelian_pertama")
+            private String statusPembelianPertama;
+
+            public Rekening() {
+            }
+
+            public String getSaldo() {
+                return saldo;
+            }
+
+            public String getStatusPembelianPertama() {
+                return statusPembelianPertama;
+            }
         }
     }
 }

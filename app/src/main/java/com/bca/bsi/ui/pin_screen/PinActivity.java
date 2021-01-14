@@ -2,6 +2,7 @@ package com.bca.bsi.ui.pin_screen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -11,6 +12,7 @@ import com.bca.bsi.model.Transaction;
 import com.bca.bsi.ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity;
 import com.bca.bsi.ui.basenavigation.transaction.detail_transaction.DetailTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.CustomLoading;
 import com.bca.bsi.utils.Utils;
 import com.mukesh.OnOtpCompletionListener;
 import com.mukesh.OtpView;
@@ -21,6 +23,7 @@ public class PinActivity extends BaseActivity implements IPinCallback {
     public static final String PARCEL_DATA = "parcel_data";
 
     private PinViewModel viewModel;
+    private CustomLoading customLoading;
 
     private String data, type;
 
@@ -35,6 +38,8 @@ public class PinActivity extends BaseActivity implements IPinCallback {
         TextView tvTitleToolbar = findViewById(R.id.tv_title_toolbar_back);
         TextView tvChildToolbar = findViewById(R.id.tv_child_toolbar_back);
         OtpView otpView = findViewById(R.id.otp_view_pin_activity);
+
+        customLoading = new CustomLoading();
 
         viewModel = new ViewModelProvider(this).get(PinViewModel.class);
         viewModel.setCallback(this);
@@ -51,6 +56,8 @@ public class PinActivity extends BaseActivity implements IPinCallback {
         otpView.setOtpCompletionListener(new OnOtpCompletionListener() {
             @Override
             public void onOtpCompleted(String otp) {
+                Log.e("asd", otp);
+                customLoading.show(getSupportFragmentManager(), "");
                 viewModel.checkingPin(type, otp, data);
             }
         });
@@ -58,6 +65,10 @@ public class PinActivity extends BaseActivity implements IPinCallback {
 
     @Override
     public void onSuccessPin(Object o) {
+        if (customLoading != null && customLoading.getTag() != null) {
+            customLoading.dismiss();
+        }
+
         switch (type) {
             case ConfirmationTransactionActivity.FROM_CONFIRMATION_ACTIVITY:
                 Transaction.TransactionResult transactionResult = (Transaction.TransactionResult) o;
@@ -68,16 +79,23 @@ public class PinActivity extends BaseActivity implements IPinCallback {
                 break;
         }
 
-        startActivity(new Intent(PinActivity.this, DetailTransactionActivity.class));
+//        startActivity(new Intent(PinActivity.this, DetailTransactionActivity.class));
     }
 
     @Override
     public void onWrongPin() {
+        if (customLoading != null && customLoading.getTag() != null) {
+            customLoading.dismiss();
+        }
 
     }
 
     @Override
     public void onFailed(String msg) {
+        if (customLoading != null && customLoading.getTag() != null) {
+            customLoading.dismiss();
+        }
+
         showSnackBar(msg);
     }
 }
