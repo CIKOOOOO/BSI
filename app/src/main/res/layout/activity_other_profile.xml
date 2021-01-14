@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.basenavigation.information.forum.otherprofile.OtherProfileActivity">
+
+    <include
+        android:id="@+id/include11"
+        layout="@layout/toolbar_back_with_image" />
+
+    <ImageView
+        android:id="@+id/img_view_header_forum_profile"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0dp"
+        android:background="@drawable/img_background_example"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/tv_name_other_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include11" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/rounded_image_view_other_profile_forum"
+        android:layout_width="@dimen/size_for_100dp"
+        android:layout_height="@dimen/size_for_100dp"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_40dp"
+        android:src="@drawable/ic_photo_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include11"
+        app:riv_corner_radius="@dimen/size_for_10dp"
+        app:riv_mutate_background="true" />
+
+    <TextView
+        android:id="@+id/tv_name_other_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:paddingBottom="@dimen/size_for_20dp"
+        android:text="Clarissa Aristania"
+        android:textAllCaps="true"
+        android:textColor="@color/color_base_welma"
+        android:textSize="@dimen/size_for_20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/rounded_image_view_other_profile_forum"
+        app:layout_constraintTop_toBottomOf="@id/rounded_image_view_other_profile_forum" />
+
+    <TextView
+        android:id="@+id/tv_follow_other_profile"
+        android:layout_width="@dimen/size_for_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:background="@drawable/rectangle_rounded_welma_5dp"
+        android:paddingStart="@dimen/size_for_15dp"
+        android:paddingTop="@dimen/size_for_2dp"
+        android:paddingEnd="@dimen/size_for_15dp"
+        android:paddingBottom="@dimen/size_for_2dp"
+        android:text="Unfollow"
+        android:textAlignment="center"
+        android:textColor="@color/white_palette"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/ll_forum_profile"
+        app:layout_constraintStart_toStartOf="@id/ll_forum_profile"
+        app:layout_constraintTop_toTopOf="@id/rounded_image_view_other_profile_forum" />
+
+    <LinearLayout
+        android:id="@+id/ll_forum_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_follow_other_profile">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/follower"
+                android:textColor="@color/color_base_welma"
+                app:layout_constraintStart_toStartOf="@id/et_name_forum_profile"
+                app:layout_constraintTop_toBottomOf="@id/et_name_forum_profile" />
+
+            <TextView
+                android:id="@+id/tv_follower_other_forum_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="7"
+                android:textColor="@color/color_base_welma"
+                android:textSize="@dimen/size_for_20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/following"
+                android:textColor="@color/color_base_welma"
+                app:layout_constraintStart_toStartOf="@id/et_name_forum_profile"
+                app:layout_constraintTop_toBottomOf="@id/et_name_forum_profile" />
+
+            <TextView
+                android:id="@+id/tv_following_other_forum_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="6"
+                android:textColor="@color/color_base_welma"
+                android:textSize="@dimen/size_for_20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_other_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/img_view_header_forum_profile" />
+</androidx.constraintlayout.widget.ConstraintLayout>

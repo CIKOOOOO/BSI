@@ -43,4 +43,6 @@
     <color name="green_return">#48ab2d</color>
     <color name="blue_risk">#00555f</color>
     <color name="blue_lagoon_palette">#01717D</color>
+    <color name="powder_blue_palette">#BFE7EB</color>
+    <color name="white_ice_palette">#DBF6F9</color>
 </resources>

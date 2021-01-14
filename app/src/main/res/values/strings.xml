@@ -62,6 +62,10 @@
     <string name="post">Post</string>
     <string name="kinerja_produk">Kinerja Produk (%)</string>
     <string name="product_information">Informasi Produk</string>
+    <string name="comment">Comment</string>
+    <string name="report">Report</string>
+    <string name="report_now">Laporkan</string>
+    <string name="reason_to_report">Alasan Pelaporan</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>

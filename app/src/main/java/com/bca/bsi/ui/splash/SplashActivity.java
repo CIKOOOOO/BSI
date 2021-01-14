@@ -32,12 +32,7 @@ public class SplashActivity extends BaseActivity implements ISplashCallback {
 
         viewModel.getAccessToken();
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-            }
-        };
+        Runnable runnable = () -> startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 
         new Handler().postDelayed(runnable, Constant.SPLASH_DURATION);
     }

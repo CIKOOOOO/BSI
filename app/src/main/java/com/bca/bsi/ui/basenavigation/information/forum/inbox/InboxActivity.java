@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.information.forum.profile.inbox;
+package com.bca.bsi.ui.basenavigation.information.forum.inbox;
 
 import android.os.Bundle;
 import android.view.View;

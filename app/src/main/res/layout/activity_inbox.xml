@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rectangle_gradient_background"
-    tools:context=".ui.basenavigation.information.forum.profile.inbox.InboxActivity">
+    tools:context=".ui.basenavigation.information.forum.inbox.InboxActivity">
 
     <include layout="@layout/toolbar_back" />
 
