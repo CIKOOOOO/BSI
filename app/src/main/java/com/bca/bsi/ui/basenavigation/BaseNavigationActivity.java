@@ -37,8 +37,8 @@ import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.dummydata.DummyData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import java.util.Calendar;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick, InformationFragment.onReport, ReportAdapter.onReportClick, View.OnClickListener, IBaseNavigatonCallback {
@@ -51,7 +51,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     private BaseNavigationViewModel viewModel;
     private Forum.Report report;
     private ConstraintLayout roboAboutLayout, tipsOfTheWeekLayout;
-    private TextView okeMengerti,bottomLanjut;
+    private TextView okeMengerti, bottomLanjut;
     private ImageButton clearPopupTOTW;
 
     @Override
@@ -109,7 +109,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
 
                 Intent intent = new Intent(v.getContext(), PurchasingSmartbotActivity.class);
                 intent.putExtra("data", Utils.toJSON(productRekomens));
-                intent.putExtra("minPembelian",minPembelian);
+                intent.putExtra("minPembelian", minPembelian);
                 startActivity(intent);
 
 
@@ -121,7 +121,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         System.out.println(dayOfWeek);
-        if(dayOfWeek == 3){ // Day-2 = Monday
+        if (dayOfWeek == 3) { // Day-2 = Monday
             tipsOfTheWeekLayout.setVisibility(View.VISIBLE);
         }
         // Clear button tips of the week
@@ -143,8 +143,6 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
                 roboAboutLayout.setVisibility(View.GONE);
             }
         });
-
-        bottomSheetBehavior = BottomSheetBehavior.from(clBSRoboRekomen);
 
         bottomNavigationView.setItemIconTintList(null);
 
@@ -279,7 +277,9 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
                 }
                 break;
         }
-    public void onInfoClick() {
+    }
+
+    public void onInfoClick () {
         roboAboutLayout.setVisibility(View.VISIBLE);
     }
 }

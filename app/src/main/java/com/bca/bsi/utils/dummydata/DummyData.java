@@ -51,9 +51,7 @@ public class DummyData {
     private static final String[] reportID = {"1", "2", "3", "4"};
     private static final String[] reportContent = {"Spam", "Hate Speech", "Advertisement", "Unrelevant"};
 
-    private static final String[] percentage = {"70","20","10"};
     private static final String[] percentage2 = {"10","20","30"};
-    private static final boolean[] isChoosen = {false,false,false};
 
     private static final String[] filterJenisReksaName = {"Pasar Uang","Pendapatan Tetap","Campuran","Saham","Terproteksi"};
     private static final boolean[] isChoosenFilter = {false,false,false,false,false};
@@ -259,6 +257,8 @@ public class DummyData {
             reportList.add(report);
         }
         return reportList;
+    }
+
     public static List<FilterJenisReksa> getFilterJenisReksaList(){
         List<FilterJenisReksa> res = new ArrayList<>();
         for(int i=0;i<5;i++){
