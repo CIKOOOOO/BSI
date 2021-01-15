@@ -10,6 +10,8 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,7 +37,11 @@ public class DetailProductTransactionViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e(TAG, "on response : " + response.code());
+//                try {
+//                    Log.e(TAG, "on response : " + response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 if (response.body() != null) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();

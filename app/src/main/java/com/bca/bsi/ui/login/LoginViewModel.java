@@ -52,11 +52,11 @@ public class LoginViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                try {
-                    Log.e("asd", response.code() + " - " + response.errorBody().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Log.e("asd", response.code() + " - " + response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 if (response.body() != null) {
                     OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                     if (errorSchema.getErrorCode().equals("200")) {

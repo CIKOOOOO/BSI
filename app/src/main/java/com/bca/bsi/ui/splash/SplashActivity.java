@@ -27,7 +27,7 @@ public class SplashActivity extends BaseActivity implements ISplashCallback {
         viewModel = new ViewModelProvider(this).get(SplashViewModel.class);
         viewModel.setCallback(this);
 
-        prefConfig.removeTokenAccess();
+        prefConfig.removeTokenGateway();
         prefConfig.logOut();
 
         viewModel.getAccessToken();
@@ -40,7 +40,7 @@ public class SplashActivity extends BaseActivity implements ISplashCallback {
     @Override
     public void onGettingToken(String token) {
         Log.e("asd", token);
-        prefConfig.setTokenAccess(token);
+        prefConfig.setTokenGateway(token);
     }
 
     @Override

@@ -57,7 +57,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 //                        if (prefConfig.getTokenAccess().isEmpty()) {
 //                            viewModel.getAccessToken(bcaId, pass);
 //                        } else {
-                            viewModel.loginWith(prefConfig.getTokenAccess(), bcaId, pass);
+                            viewModel.loginWith(prefConfig.getTokenGateway(), bcaId, pass);
 //                        }
                     }
                 }

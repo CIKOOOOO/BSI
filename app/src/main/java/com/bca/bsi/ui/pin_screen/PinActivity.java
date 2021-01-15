@@ -58,7 +58,7 @@ public class PinActivity extends BaseActivity implements IPinCallback {
             public void onOtpCompleted(String otp) {
                 Log.e("asd", otp);
                 customLoading.show(getSupportFragmentManager(), "");
-                viewModel.checkingPin(type, otp, data);
+                viewModel.checkingPin(type, otp, prefConfig.getBCAID(), data);
             }
         });
     }

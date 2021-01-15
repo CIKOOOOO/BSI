@@ -15,7 +15,7 @@ import retrofit2.http.Path;
 
 public interface ApiInterface {
 
-    @Headers({"Content-Type:application/json;", "client-id:x", "hashcode:x"})
+    @Headers({"Content-Type:application/json;", "hashcode:x"})
     @POST("mobile/login")
     Call<OutputResponse> loginWith(@Header("token") String token, @Body Map<String, Object> data);
 
@@ -26,13 +26,14 @@ public interface ApiInterface {
     @GET("products/Reksadana/{reksaDanaID}")
     Call<OutputResponse> getDetailReksaDana(@Path("reksaDanaID") int reksaDanaID);
 
-    @Headers({"client_id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x", "Content-Type:application/json;"})
+    @Headers({"Content-Type:application/json", "client_id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("ceksaldo")
     Call<OutputResponse> getDetailTransaksi(@Header("reksadana_id") String reksadanaID, @Header("no_rekening") String accountNumber);
 
-    @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
-    @POST("transaction")
-    Call<OutputResponse> sendTransactionData(@Body Map<String, Object> stringObjectMap);
+    @Headers({"Content-Type:application/json", "hashcode: x"})
+    @POST("PIN_Validation")
+    Call<OutputResponse> sendTransactionData(@Header("BCA_ID") String bcaID, @Header("PIN") String pin
+            , @Body Map<String, Object> stringObjectMap);
 
     @GET("quiz")
     Call<OutputResponse> getKuisData(@Header("category_id") int categoryId);

@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.transaction.confirmation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,17 @@ import java.util.List;
 
 public class ProductNameConfirmationAdapter extends RecyclerView.Adapter<ProductNameConfirmationAdapter.Holder> {
 
+    public static final String SMART_BOT = "smart_bot";
+
     private List<Product.DetailReksaDana> detailReksaDanas;
     private List<Double> percentageList;
     private double nominalPembelian;
+    private String type;
 
     public ProductNameConfirmationAdapter() {
         this.detailReksaDanas = new ArrayList<>();
         this.percentageList = new ArrayList<>();
+        type = "";
         nominalPembelian = -1;
     }
 
@@ -48,10 +53,23 @@ public class ProductNameConfirmationAdapter extends RecyclerView.Adapter<Product
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         Product.DetailReksaDana detailReksaDana = detailReksaDanas.get(position);
-        double nominalPembelian = this.nominalPembelian * percentageList.get(position);
-        String biayaProdukPembelian = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : String.valueOf(Double.parseDouble(detailReksaDana.getBiayaPembelian()) / 100);
 
-        double biayaPembelian = (Double.parseDouble(biayaProdukPembelian) / 100) * nominalPembelian;
+        double nominalPembelian;
+        double biayaPembelian;
+
+        String biayaProdukPembelian;
+
+        if (getItemViewType(position) == 1) {
+            biayaProdukPembelian = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : String.valueOf(Double.parseDouble(detailReksaDana.getBiayaPembelian()) / 100);
+            nominalPembelian = this.nominalPembelian * percentageList.get(position);
+            biayaPembelian = (Double.parseDouble(biayaProdukPembelian) / 100) * nominalPembelian;
+        } else {
+            Log.e("asd", detailReksaDana.getBiayaPembelian() + "");
+            biayaProdukPembelian = detailReksaDana.getBiayaPembelian();
+            nominalPembelian = this.nominalPembelian;
+            biayaPembelian = Double.parseDouble(biayaProdukPembelian) / 100 * this.nominalPembelian;
+        }
+
         double totalPembelian = nominalPembelian + biayaPembelian;
 
         holder.tvName.setText(detailReksaDana.getName());
@@ -63,6 +81,11 @@ public class ProductNameConfirmationAdapter extends RecyclerView.Adapter<Product
     @Override
     public int getItemCount() {
         return detailReksaDanas.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return type.equals(SMART_BOT) ? 1 : 0;
     }
 
     static class Holder extends RecyclerView.ViewHolder {

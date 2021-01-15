@@ -42,6 +42,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
     private Product.DetailReksaDana detailReksaDana;
     private CheckBox cbPaymentType;
     private ProductNameDetailTransactionAdapter productNameDetailTransactionAdapter;
+    private User.BCAUser.Rekening rekening;
 
     private String productType, salesType;
 
@@ -90,12 +91,18 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
 
             if (productType.equals(Type.REKSA_DANA)) {
                 this.reksaDana = gson.fromJson(product, Product.ReksaDana.class);
-                Product.ProductTransaction productTransaction = new Product.ProductTransaction(this.reksaDana.getName(), this.reksaDana.getDate(), this.reksaDana.getNab());
+                try {
+                    String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, this.reksaDana.getDate());
 
-                List<Product.ProductTransaction> productTransactionList = new ArrayList<>();
-                productTransactionList.add(productTransaction);
+                    Product.ProductTransaction productTransaction = new Product.ProductTransaction(this.reksaDana.getName(), date, this.reksaDana.getNab());
 
-                productNameDetailTransactionAdapter.setProductTransactions(productTransactionList);
+                    List<Product.ProductTransaction> productTransactionList = new ArrayList<>();
+                    productTransactionList.add(productTransaction);
+
+                    productNameDetailTransactionAdapter.setProductTransactions(productTransactionList);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 viewModel.loadDetailTransaksi(prefConfig.getAccountNumber(), this.reksaDana.getReksadanaID());
             } else if (productType.equals(Type.PURCHASING_WITH_SMARTBOT)) {
@@ -125,15 +132,19 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                     showSnackBar("Mohon isi nominal pembelian");
                 } else if (this.detailReksaDana == null) {
                     onResume();
-                } else if (Double.parseDouble(this.detailReksaDana.getMinimumPembelianPertama()) > Double.parseDouble(nominal)) {
+                } else if (this.rekening == null) {
+                    onResume();
+                } else if (this.rekening.getStatusPembelianPertama().equals("TRUE") && Double.parseDouble(this.detailReksaDana.getMinimumPembelianPertama()) > Double.parseDouble(nominal)) {
                     showSnackBar("Jumlah nominal pembelian lebih kecil daripada minimum pembelian pertama");
+                } else if (this.rekening.getStatusPembelianPertama().equals("FALSE") && Double.parseDouble(this.detailReksaDana.getMinimumPembelianBerikut()) > Double.parseDouble(nominal)) {
+                    showSnackBar("Jumlah nominal pembelian lebih kecil daripada minimum pembelian");
                 } else {
-                    String type = cbPaymentType.isChecked() ? Type.PEMBELIAN_BERKALA : Type.PEMBELIAN_SEKALI_BAYAR;
+                    String type = cbPaymentType.isChecked() ? "Pembelian Berkala" : "Pembelian Sekali Bayar";
                     String biayaProdukPembelian = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : String.valueOf(Double.parseDouble(detailReksaDana.getBiayaPembelian()));
                     double biayaPembelian = (Double.parseDouble(biayaProdukPembelian) / 100) * Double.parseDouble(nominal);
                     double reksaDanaUnit = Double.parseDouble(nominal) / Double.parseDouble(this.detailReksaDana.getNabPerUnit());
 
-                    Log.e("asd", biayaPembelian+"biaya"+String.format("%.2f", biayaPembelian));
+                    Log.e("asd", biayaPembelian + "biaya" + String.format("%.2f", biayaPembelian));
 
                     Transaction.Purchasing purchasing = new Transaction.Purchasing();
                     purchasing.setTransactionType(Type.PURCHASING);
@@ -160,6 +171,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
     @Override
     public void loadSaldo(User.BCAUser.Rekening bcaUser, Product.DetailReksaDana detailReksaDana) {
         this.detailReksaDana = detailReksaDana;
+        this.rekening = bcaUser;
 
         Log.e("asd", detailReksaDana.getNabPerUnit());
 

@@ -43,6 +43,8 @@ public class DetailTransactionActivity extends BaseActivity implements View.OnCl
 
         tvTitle.setText(getString(R.string.product_detail));
 
+        findViewById(R.id.img_btn_action_toolbar_image).setVisibility(View.GONE);
+
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(PARCEL_DATA)) {
             String data = intent.getStringExtra(PARCEL_DATA);

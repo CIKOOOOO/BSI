@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,9 +56,14 @@ public class ReksadanaProductAdapter extends RecyclerView.Adapter<ReksadanaProdu
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         if (getItemViewType(position) != EMPTY) {
             final Product.ReksaDana reksaDana = reksaDanaList.get(position);
+            try {
+                String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, reksaDana.getDate());
+                holder.tvDate.setText(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             holder.tvTitle.setText(reksaDana.getName());
             holder.tvType.setText(reksaDana.getType());
-            holder.tvDate.setText(reksaDana.getDate());
             holder.tvKinerja.setText(reksaDana.getKinerja());
             holder.tvNab.setText(reksaDana.getNab());
             holder.tvBuy.setOnClickListener(new View.OnClickListener() {

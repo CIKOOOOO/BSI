@@ -16,21 +16,27 @@ public class PrefConfig {
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.pref_file), Context.MODE_PRIVATE);
     }
 
-    public void setTokenAccess(String tokenAccess) {
+    public void setTokenGateway(String tokenAccess) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_token_access), tokenAccess);
+        editor.putString(context.getString(R.string.pref_token_gateway), tokenAccess);
         editor.apply();
     }
 
-    public void removeTokenAccess() {
+    public void setTokenUser(String tokenAccess) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_token_access), Constant.EMPTY);
+        editor.putString(context.getString(R.string.pref_token_user), tokenAccess);
+        editor.apply();
+    }
+
+    public void removeTokenGateway() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getString(R.string.pref_token_gateway), Constant.EMPTY);
         editor.apply();
     }
 
     public void setUser(User.ForumUser user, User.WelmaUser welmaUser) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_bca_id), user.getBcaID());
+        editor.putString(context.getString(R.string.pref_bca_id), welmaUser.getBcaID());
         editor.putString(context.getString(R.string.pref_name), welmaUser.getName());
         editor.putString(context.getString(R.string.pref_profile_risiko), welmaUser.getProfileRisiko());
         editor.putString(context.getString(R.string.pref_account_number), welmaUser.getAccountNumber());
@@ -48,6 +54,7 @@ public class PrefConfig {
         editor.putString(context.getString(R.string.pref_email), Constant.EMPTY);
         editor.putString(context.getString(R.string.pref_account_number), Constant.EMPTY);
         editor.putString(context.getString(R.string.pref_username), Constant.EMPTY);
+        editor.putString(context.getString(R.string.pref_token_user), Constant.EMPTY);
         editor.apply();
     }
 
@@ -98,8 +105,12 @@ public class PrefConfig {
         return sharedPreferences.getString(context.getString(R.string.pref_account_number), Constant.EMPTY);
     }
 
-    public String getTokenAccess() {
-        return sharedPreferences.getString(context.getString(R.string.pref_token_access), Constant.EMPTY);
+    public String getTokenGateway() {
+        return sharedPreferences.getString(context.getString(R.string.pref_token_gateway), Constant.EMPTY);
+    }
+
+    public String getTokenUser() {
+        return sharedPreferences.getString(context.getString(R.string.pref_token_user), Constant.EMPTY);
     }
 
     public String getUsername() {

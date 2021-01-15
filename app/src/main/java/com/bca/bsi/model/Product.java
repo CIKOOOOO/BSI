@@ -41,10 +41,10 @@ public class Product {
         @SerializedName("update_date")
         private String date;
 
-        @SerializedName("Kinerja_1_bulan")
+        @SerializedName("kinerja_1_bulan")
         private String kinerja;
 
-        @SerializedName("NAB_per_unit")
+        @SerializedName("nab_per_unit")
         private String nab;
 
         public ReksaDana() {

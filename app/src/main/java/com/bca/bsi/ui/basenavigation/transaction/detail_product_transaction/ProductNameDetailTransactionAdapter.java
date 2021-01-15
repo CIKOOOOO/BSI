@@ -39,7 +39,7 @@ public class ProductNameDetailTransactionAdapter extends RecyclerView.Adapter<Pr
         if (productTransaction != null) {
             holder.tvName.setText(productTransaction.getName());
             holder.tvDate.setText(productTransaction.getDate());
-            holder.tvPrice.setText("Rp. " + productTransaction.getPrice() + "\nNAB/Unit");
+            holder.tvPrice.setText(productTransaction.getPrice() + "\nNAB/Unit");
         }
     }
 

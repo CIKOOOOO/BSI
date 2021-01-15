@@ -201,7 +201,8 @@
     <string name="pref_profile_risiko">pref_profile_risiko</string>
     <string name="pref_token_fcm">pref_token_fcm</string>
     <string name="pref_account_number">pref_account_number</string>
-    <string name="pref_token_access">pref_token_access</string>
+    <string name="pref_token_gateway">pref_token_gateway</string>
+    <string name="pref_token_user">pref_token_user</string>
 
     <!--FORUM USER-->
     <string name="pref_profile_id">pref_profile_id</string>

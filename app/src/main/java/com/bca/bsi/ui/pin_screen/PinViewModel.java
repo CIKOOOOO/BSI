@@ -34,11 +34,11 @@ public class PinViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void checkingPin(String type, String pin, String data) {
+    public void checkingPin(String type, String pin, String bcaID, String data) {
         Gson gson = new Gson();
         switch (type) {
             case ConfirmationTransactionActivity.FROM_CONFIRMATION_ACTIVITY:
-                Log.e("asd", "masuk switch case");
+//                Log.e("asd", "masuk switch case");
                 Transaction.Purchasing purchasing = gson.fromJson(data, Transaction.Purchasing.class);
 
                 Map<String, Object> stringObjectMap = new HashMap<>();
@@ -51,15 +51,14 @@ public class PinViewModel extends AndroidViewModel {
                 stringObjectMap.put("nominal_biaya_transaksi", purchasing.getNominalBiayaPembelian());
                 stringObjectMap.put("reksa_dana_unit", purchasing.getReksaDanaUnit());
                 stringObjectMap.put("nab", purchasing.getNab());
-                stringObjectMap.put("pin", pin);
 
-                Log.e("asd", stringObjectMap.toString());
+//                Log.e("asd", stringObjectMap.toString());
 
-                Call<OutputResponse> call = apiInterface.sendTransactionData(stringObjectMap);
+                Call<OutputResponse> call = apiInterface.sendTransactionData(bcaID, pin, stringObjectMap);
                 call.enqueue(new Callback<OutputResponse>() {
                     @Override
                     public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                        Log.e("asd", "on response " + response.code());
+//                        Log.e("asd", "on response " + response.code());
                         if (response.body() != null) {
                             OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                             if (errorSchema.getErrorCode().equals("200")) {
@@ -76,7 +75,7 @@ public class PinViewModel extends AndroidViewModel {
 
                     @Override
                     public void onFailure(Call<OutputResponse> call, Throwable t) {
-                        Log.e("asd", "on failed " + t.getMessage());
+//                        Log.e("asd", "on failed " + t.getMessage());
                         callback.onFailed("Mohon cek kembali jaringan Anda");
                     }
                 });
