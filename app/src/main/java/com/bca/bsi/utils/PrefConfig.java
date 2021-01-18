@@ -16,21 +16,9 @@ public class PrefConfig {
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.pref_file), Context.MODE_PRIVATE);
     }
 
-    public void setTokenGateway(String tokenAccess) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_token_gateway), tokenAccess);
-        editor.apply();
-    }
-
     public void setTokenUser(String tokenAccess) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(context.getString(R.string.pref_token_user), tokenAccess);
-        editor.apply();
-    }
-
-    public void removeTokenGateway() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_token_gateway), Constant.EMPTY);
         editor.apply();
     }
 
@@ -104,17 +92,16 @@ public class PrefConfig {
     public String getAccountNumber() {
         return sharedPreferences.getString(context.getString(R.string.pref_account_number), Constant.EMPTY);
     }
-
-    public String getTokenGateway() {
-        return sharedPreferences.getString(context.getString(R.string.pref_token_gateway), Constant.EMPTY);
-    }
-
     public String getTokenUser() {
         return sharedPreferences.getString(context.getString(R.string.pref_token_user), Constant.EMPTY);
     }
 
     public String getUsername() {
         return sharedPreferences.getString(context.getString(R.string.pref_username), Constant.EMPTY);
+    }
+
+    public String getProfileID() {
+        return sharedPreferences.getString(context.getString(R.string.pref_profile_id), Constant.EMPTY);
     }
 
 }

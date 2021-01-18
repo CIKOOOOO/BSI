@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white_palette">
@@ -11,15 +12,15 @@
         android:layout_height="@dimen/size_for_50dp"
         android:layout_marginStart="@dimen/size_for_20dp"
         android:layout_marginTop="@dimen/size_for_10dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/img_asset_reksa_dana"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_border_color="@color/java_palette"
         app:riv_border_width="@dimen/size_for_2dp"
         app:riv_corner_radius="@dimen/size_for_10dp"
         app:riv_mutate_background="true"
-        app:riv_oval="false" />
+        app:riv_oval="false"
+        tools:src="@drawable/img_asset_reksa_dana" />
 
     <TextView
         android:id="@+id/recycler_tv_name_child_main_forum"
@@ -27,21 +28,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_for_10dp"
         android:layout_marginTop="@dimen/size_for_5dp"
-        android:text="Me"
         android:textColor="@color/java_palette"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/recycler_img_profile_child_main_forum"
-        app:layout_constraintTop_toTopOf="@id/recycler_img_profile_child_main_forum" />
+        app:layout_constraintTop_toTopOf="@id/recycler_img_profile_child_main_forum"
+        tools:text="Me" />
 
     <TextView
         android:id="@+id/recycler_tv_date_child_main_forum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="15 Desember 2020 16:21"
         android:textColor="@color/black_palette"
         android:textSize="@dimen/size_for_12sp"
         app:layout_constraintStart_toStartOf="@id/recycler_tv_name_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/recycler_tv_name_child_main_forum" />
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_name_child_main_forum"
+        tools:text="15 Desember 2020 16:21" />
 
     <TextView
         android:id="@+id/recycler_tv_type_child_main_forum"
@@ -54,6 +55,7 @@
         android:paddingBottom="@dimen/size_for_3dp"
         android:text="strategy"
         android:textSize="@dimen/size_for_12sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/recycler_img_btn_more_child_main_forum"
         app:layout_constraintEnd_toStartOf="@id/recycler_img_btn_more_child_main_forum"
         app:layout_constraintTop_toTopOf="@id/recycler_img_btn_more_child_main_forum" />
@@ -78,11 +80,12 @@
         android:lineSpacingMultiplier="1.2"
         android:maxLength="160"
         android:maxLines="5"
-        android:text="Status Order Saham: Wajib Dipahami Oleh Seluruh Investor\n\nInvestor perlu memahami status order dalam mengajukan order transaksi jual beli saham. Terdapat 6 Status Order, yaitu:\n\n🎯Open (hanya muncul ketika pasar dibuka)\nLihat selengkapnya"
+        android:scrollHorizontally="true"
         android:textSize="@dimen/size_for_15sp"
         app:layout_constraintEnd_toStartOf="@id/recycler_img_btn_more_child_main_forum"
         app:layout_constraintStart_toStartOf="@id/recycler_img_profile_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/recycler_img_profile_child_main_forum" />
+        app:layout_constraintTop_toBottomOf="@id/recycler_img_profile_child_main_forum"
+        tools:text="Status Order Saham: Wajib Dipahami Oleh Seluruh Investor\n\nInvestor perlu memahami status order dalam mengajukan order transaksi jual beli saham. Terdapat 6 Status Order, yaitu:\n\n🎯Open (hanya muncul ketika pasar dibuka)\nLihat selengkapnya" />
 
     <TextView
         android:id="@+id/recycler_tv_view_more_child_main_forum"
@@ -115,7 +118,9 @@
             app:layout_constraintHeight_max="@dimen/size_for_150dp"
             app:layout_constraintHeight_min="@dimen/size_for_0dp" />
 
-        <include layout="@layout/custom_share_trade" />
+        <include
+            layout="@layout/custom_share_trade"
+            android:visibility="gone" />
     </FrameLayout>
 
     <TextView
@@ -124,11 +129,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_for_15dp"
         android:drawablePadding="@dimen/size_for_5dp"
-        android:text="32"
         android:textColor="@color/black_palette"
-        app:drawableStartCompat="@drawable/ic_like"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/recycler_img_profile_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/fl_01" />
+        app:layout_constraintTop_toBottomOf="@id/fl_01"
+        tools:text="32" />
 
     <TextView
         android:id="@+id/recycler_tv_comment_child_main_forum"
@@ -137,11 +142,12 @@
         android:layout_marginStart="@dimen/size_for_20dp"
         android:layout_marginTop="@dimen/size_for_15dp"
         android:drawablePadding="@dimen/size_for_5dp"
-        android:text="32"
         android:textColor="@color/black_palette"
+        android:textStyle="bold"
         app:drawableStartCompat="@drawable/ic_comment"
         app:layout_constraintStart_toEndOf="@id/recycler_tv_like_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/fl_01" />
+        app:layout_constraintTop_toBottomOf="@id/fl_01"
+        tools:text="32" />
 
     <ImageView
         android:id="@+id/recycler_img_share_child_main_forum"
@@ -159,11 +165,12 @@
         android:layout_marginStart="@dimen/size_for_20dp"
         android:layout_marginTop="@dimen/size_for_15dp"
         android:drawablePadding="@dimen/size_for_5dp"
-        android:text="32"
         android:textColor="@color/black_palette"
+        android:textStyle="bold"
         app:drawableEndCompat="@drawable/ic_share"
         app:layout_constraintEnd_toEndOf="@id/recycler_img_btn_more_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/fl_01" />
+        app:layout_constraintTop_toBottomOf="@id/fl_01"
+        tools:text="32" />
 
     <View
         android:layout_width="match_parent"

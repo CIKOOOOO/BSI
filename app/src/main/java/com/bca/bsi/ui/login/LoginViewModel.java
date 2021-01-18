@@ -1,7 +1,6 @@
 package com.bca.bsi.ui.login;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -12,19 +11,14 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
-import com.bca.bsi.model.OutputResponse;
-import com.bca.bsi.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginViewModel extends AndroidViewModel {
 
@@ -42,41 +36,41 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void loginWith(String token, String bcaID, String password) {
 
-//        callback.onSuccess(null, null);
+        callback.onSuccess(null, null);
 
-        Map<String, Object> stringStringMap = new HashMap<>();
-        stringStringMap.put("bca_id", bcaID);
-        stringStringMap.put("password", password);
-
-        Call<OutputResponse> call = apiInterface.loginWith(token, stringStringMap);
-        call.enqueue(new Callback<OutputResponse>() {
-            @Override
-            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-//                try {
-//                    Log.e("asd", response.code() + " - " + response.errorBody().string());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
+//        Map<String, Object> stringStringMap = new HashMap<>();
+//        stringStringMap.put("bca_id", bcaID);
+//        stringStringMap.put("password", getEncryptedPassword(password));
+//
+//        Call<OutputResponse> call = apiInterface.loginWith(token, stringStringMap);
+//        call.enqueue(new Callback<OutputResponse>() {
+//            @Override
+//            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+////                try {
+////                    Log.e("asd", response.code() + " - " + response.errorBody().string());
+////                } catch (IOException e) {
+////                    e.printStackTrace();
+////                }
+//                if (response.body() != null) {
+//                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
+//                    if (errorSchema.getErrorCode().equals("200")) {
+//                        User.ForumUser forumUser = response.body().getOutputSchema().getForumUser();
+//                        User.WelmaUser welmaUser = response.body().getOutputSchema().getWelmaUser();
+//                        callback.onSuccess(forumUser, welmaUser);
+//                    } else {
+//                        callback.onFailed(errorSchema.getErrorMessage());
+//                    }
+//                } else {
+//                    callback.onFailed("Terdapat kesalahan jaringan");
 //                }
-                if (response.body() != null) {
-                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
-                    if (errorSchema.getErrorCode().equals("200")) {
-                        User.ForumUser forumUser = response.body().getOutputSchema().getForumUser();
-                        User.WelmaUser welmaUser = response.body().getOutputSchema().getWelmaUser();
-                        callback.onSuccess(forumUser, welmaUser);
-                    } else {
-                        callback.onFailed(errorSchema.getErrorMessage());
-                    }
-                } else {
-                    callback.onFailed("Terdapat kesalahan jaringan");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OutputResponse> call, Throwable t) {
-                Log.e("asd", t.getMessage()+"on fail");
-                callback.onFailed("Terdapat kesalahan jaringan");
-            }
-        });
+//            }
+//
+//            @Override
+//            public void onFailure(Call<OutputResponse> call, Throwable t) {
+//                Log.e("asd", t.getMessage()+"on fail");
+//                callback.onFailed("Terdapat kesalahan jaringan");
+//            }
+//        });
     }
 
     public void getAccessToken(String bcaID, String password) {
@@ -108,5 +102,29 @@ public class LoginViewModel extends AndroidViewModel {
                         callback.onFailed("Terdapat kesalahan jaringan");
                     }
                 });
+    }
+
+    private String getEncryptedPassword(String pass) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance("MD5");
+            digest.update(pass.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return pass;
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

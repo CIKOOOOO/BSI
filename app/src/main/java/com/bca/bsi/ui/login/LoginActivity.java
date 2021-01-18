@@ -15,6 +15,11 @@ import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.CustomLoading;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+
 public class LoginActivity extends BaseActivity implements View.OnClickListener, ILoginCallback {
 
     private EditText etBCAID;
@@ -57,7 +62,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 //                        if (prefConfig.getTokenAccess().isEmpty()) {
 //                            viewModel.getAccessToken(bcaId, pass);
 //                        } else {
-                            viewModel.loginWith(prefConfig.getTokenGateway(), bcaId, pass);
+                        viewModel.loginWith(prefConfig.getTokenUser(), bcaId, pass);
 //                        }
                     }
                 }
@@ -74,7 +79,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             customLoading.dismiss();
         }
         finishAffinity();
-        prefConfig.setUser(forumUser, welmaUser);
+//        prefConfig.setUser(forumUser, welmaUser);
         startActivity(new Intent(this, BaseNavigationActivity.class));
     }
 

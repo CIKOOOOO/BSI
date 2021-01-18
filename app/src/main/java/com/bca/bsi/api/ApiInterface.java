@@ -17,7 +17,7 @@ public interface ApiInterface {
 
     @Headers({"Content-Type:application/json;", "hashcode:x"})
     @POST("mobile/login")
-    Call<OutputResponse> loginWith(@Header("token") String token, @Body Map<String, Object> data);
+    Call<OutputResponse> loginWith(@Header("token_user") String token, @Body Map<String, Object> data);
 
     //    @Headers({"Accept: application/json", "content-type: application/json"})
     @GET("products/Reksadana")

@@ -58,13 +58,6 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
         viewModel.setCallback(this);
 
         setupTab(view);
-        Button btnTest = view.findViewById(R.id.btn);
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewModel.loadReportData();
-            }
-        });
     }
 
     private void setupTab(View view) {

@@ -66,6 +66,9 @@
     <string name="report">Report</string>
     <string name="report_now">Laporkan</string>
     <string name="reason_to_report">Alasan Pelaporan</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>
@@ -201,7 +204,6 @@
     <string name="pref_profile_risiko">pref_profile_risiko</string>
     <string name="pref_token_fcm">pref_token_fcm</string>
     <string name="pref_account_number">pref_account_number</string>
-    <string name="pref_token_gateway">pref_token_gateway</string>
     <string name="pref_token_user">pref_token_user</string>
 
     <!--FORUM USER-->
