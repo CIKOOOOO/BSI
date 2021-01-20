@@ -47,4 +47,6 @@
     <color name="white_ice_palette">#DBF6F9</color>
     <color name="gray_filter_bg">#ececf4</color>
     <color name="gray_filter_text">#737577</color>
+    <color name="aqua_squeeze_palette">#E2F2F3</color>
+    <color name="fountain_blue_palette">#66B8C2</color>
 </resources>

@@ -1,6 +1,7 @@
 package com.bca.bsi.utils.constant;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Privacy;
 import com.bca.bsi.model.Product;
 
 import java.util.ArrayList;
@@ -26,6 +27,10 @@ public class Constant {
     public static final String[] FORUM_MENU = {"Trending", "Strategy", "Share Trade", "News", "Timeline"};
     public static final String[] FORUM_PROFILE_MENU = {"Posting", "Bookmark"};
 
+    private static final String[] SHARE_TO_NAME = {"Public", "Followers", "Direct"};
+    private static final int[] SHARE_IMAGE = {R.drawable.img_public, R.drawable.img_followers, R.drawable.img_direct_message};
+    private static final int[] SHARE_IMAGE_CLICK = {R.drawable.img_public_click, R.drawable.img_followers_click, R.drawable.img_direct_message_click};
+
     public static List<Object> getProductTypeList() {
         List<Object> productTypeList = new ArrayList<>();
         for (int i = 0; i < PRODUCT_TITLE.length; i++) {
@@ -33,5 +38,14 @@ public class Constant {
             productTypeList.add(productType);
         }
         return productTypeList;
+    }
+
+    public static List<Privacy> getListPrivacy() {
+        List<Privacy> privacies = new ArrayList<>();
+        for (int i = 0; i < SHARE_IMAGE.length; i++) {
+            Privacy privacy = new Privacy(SHARE_TO_NAME[i], SHARE_IMAGE[i], SHARE_IMAGE_CLICK[i], false);
+            privacies.add(privacy);
+        }
+        return privacies;
     }
 }

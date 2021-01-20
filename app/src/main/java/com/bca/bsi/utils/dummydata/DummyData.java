@@ -38,7 +38,6 @@ public class DummyData {
             "untuk selanjutnya diinvestasikan dalam portofolio Efek oleh Manajer Investasi", "Sangat Konservatif: \n \u25CF Reksa Dana Pasar Uang \n\n Konservatif: " +
             "\n \u25CF Reksa Dana Pendapatan Tetap \n \u25CF Reksa Dana Terproteksi \n Moderat: \n \u25CF Reksa Dana Campuran \n Agresif: \n \u25CF Reksa Dana Saham"};
 
-
     private static final String[] kinerjaString = {"+14.13%", "+14.89%", "+10.13%"};
     private static final String[] nabString = {"1462.81", "1575.39", "1672.98"};
     private static final String[] percentage = {"70%", "20%", "10%"};
@@ -74,6 +73,9 @@ public class DummyData {
     private static final String[] postID = {"1", "2", "3"};
     private static final String[] postProfileID = {"YCHRIS", "2", "3"};
     private static final String[] postContent = {"Secara historis, pengunjung suku kanibal sering kali terlihat sangat aman dan memang diperlakukan dengan baik. Seperti mafia, orang seperti itu biasanya hanya membunuh sendiri. Pada akhir abad ke-16 misalnya, penulis Prancis AndreThevet mengamati kanibalisme Brasil secara pribadi dan pulang tanpa cedera. Thevet menyaksikan baik kanibalisme perang yang kejam dan agresif dan apa yang sekarang dikenal sebagai kanibalisme konsensual atau penguburan. Orang-orang Tapuia, memakan kerabat mereka sendiri yang telah meninggal untuk mengampuni mereka dari penghinaan membusuk di bumi. Sekitar waktu yang sama, orang Prancis lainnya tinggal bersama Tupinamba di Brasil. Namun terlepas dari reputasi mereka sebagai beberapa kanibal paling kejam yang dikenal saat itu, ia juga hidup untuk menceritakan kisah para pelancongnya.", "Mungkin yang paling aneh dari semuanya adalah kisah Joseph Kabris, seorang pelaut Prancis yang datang untuk tinggal di antara suku kanibal di Nuku Hiva dari tahun 1796-1804. Setelahbeberapa ketakutan awal tentang dimakan, Kabris sebenarnya menjalani kehidupan barunya dengan semangat yang sedemikian rupa sehingga dia benar-benar menjadi pribumi. Dia ditato dengan gaya kesukuan, menikah dengan dua istri yang berbeda, dan bertempur dalam pertempuran dengan tuan rumah barunya. Pada waktunya dia seharusnya melupakan bahasa Prancis dan bahkan namanya sendiri. Kabris mengklaim selain saat kelaparan atau perang, penduduk pulau ini sangat lembut. Orang asing diperlakukan dengan sangat hormat dan dapat melakukan perjalanan melalui darat  dengan keamanan penuh.", "Memang, perang dan kelaparan di Nuku Hiva adalah masalah lain. Tentara angkat Kabris menceritakan tentang bagaimana, setelah pertempuran para tahanan dimakan. Mata, otak dan pipi dianggap sebagai makanan lezat,tengkorak dibelah, otak dan darah diminum, kemudian dikerok bersih. Kabris juga berbicara tentang bagaimana, selama kelaparan yang disebabkan oleh kekeringan penduduk pulau akan bertengkar di antara mereka sendiri, paling tidak perselisihan, dan memotong leher untuk menyediakan makanan. Di masa Kabris, penduduk pulau tampaknya tidak mempraktikkan kanibalisme pemakaman. Namun, seperti halnya suku Tapuia, kanibalisme internal ini jauh lebih umum daripada yang mungkin disarankan oleh banyak penulis perjalanan Barat. "};
+
+    private static final String[] categoryID = {"1", "2", "3"};
+    private static final String[] categoryName = {"Category 1", "Category 2", "Category 3"};
 
     public static List<Product.ReksaDana> getReksaDanaDummyList() {
         List<Product.ReksaDana> reksaDanaList = new ArrayList<>();
@@ -313,5 +315,14 @@ public class DummyData {
             postList.add(post);
         }
         return postList;
+    }
+
+    public static List<Forum.Category> getCategoryList() {
+        List<Forum.Category> categoryList = new ArrayList<>();
+        for (int i = 0; i < categoryID.length; i++) {
+            Forum.Category category = new Forum.Category(categoryID[i], categoryName[i], false);
+            categoryList.add(category);
+        }
+        return categoryList;
     }
 }

@@ -1,11 +1,10 @@
 package com.bca.bsi.ui.basenavigation.information.forum;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,13 +13,15 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.constant.Constant;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
-public class MainForumFragment extends BaseFragment implements IMainForumCallback {
+public class MainForumFragment extends BaseFragment implements IMainForumCallback, View.OnClickListener {
 
     private onReport onReport;
     private MainForumViewModel viewModel;
@@ -28,6 +29,17 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
     @Override
     public void onLoadReportData(List<Forum.Report> reportList) {
         onReport.onClick(reportList);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab_main_forum:
+                Intent intent = new Intent(mActivity, PostActivity.class);
+                intent.putExtra(PostActivity.DATA, PostActivity.NEW_STANDARD_POST);
+                startActivity(intent);
+                break;
+        }
     }
 
     public interface onReport {
@@ -54,10 +66,14 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.fab_main_forum);
+
         viewModel = new ViewModelProvider(this).get(MainForumViewModel.class);
         viewModel.setCallback(this);
 
         setupTab(view);
+
+        floatingActionButton.setOnClickListener(this);
     }
 
     private void setupTab(View view) {

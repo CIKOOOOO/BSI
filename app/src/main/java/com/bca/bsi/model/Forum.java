@@ -2,7 +2,7 @@ package com.bca.bsi.model;
 
 public class Forum {
 
-    public static class Post{
+    public static class Post {
         private String postID;
         private String imageProfile;
         private String name;
@@ -143,7 +143,7 @@ public class Forum {
         }
     }
 
-    public static class Report{
+    public static class Report {
         private String reportID;
         private String value;
         private boolean choose;
@@ -168,6 +168,37 @@ public class Forum {
 
         public boolean isChoose() {
             return choose;
+        }
+    }
+
+    public static class Category {
+        private String categoryID;
+        private String categoryName;
+        private boolean choose;
+
+        public Category() {
+        }
+
+        public Category(String categoryID, String categoryName, boolean choose) {
+            this.categoryID = categoryID;
+            this.categoryName = categoryName;
+            this.choose = choose;
+        }
+
+        public String getCategoryID() {
+            return categoryID;
+        }
+
+        public String getCategoryName() {
+            return categoryName;
+        }
+
+        public boolean isChoose() {
+            return choose;
+        }
+
+        public void setChoose(boolean choose) {
+            this.choose = choose;
         }
     }
 }

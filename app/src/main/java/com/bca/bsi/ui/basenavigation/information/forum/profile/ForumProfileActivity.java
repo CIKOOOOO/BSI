@@ -18,9 +18,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bca.bsi.R;
 import com.bca.bsi.ui.basenavigation.information.forum.MainForumTabAdapter;
-import com.bca.bsi.ui.basenavigation.information.forum.profile.connection.ConnectionActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.inbox.InboxActivity;
+import com.bca.bsi.ui.basenavigation.information.forum.profile.connection.ConnectionActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.constant.Constant;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
@@ -112,6 +113,7 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
                 chooseImageAdapter.setType(ChooseImageAdapter.GRID_IMAGE);
                 tvTitleBottomSheet.setText(getString(R.string.choose_profile_photo));
                 recycler_choose_image.setLayoutManager(new GridLayoutManager(this, 2));
+                recycler_choose_image.addItemDecoration(new GridSpacingItemDecoration(2, 20, true));
 
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 recycler_choose_image.setAdapter(chooseImageAdapter);

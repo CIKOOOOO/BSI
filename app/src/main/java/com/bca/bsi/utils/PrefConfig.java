@@ -28,6 +28,7 @@ public class PrefConfig {
         editor.putString(context.getString(R.string.pref_name), welmaUser.getName());
         editor.putString(context.getString(R.string.pref_profile_risiko), welmaUser.getProfileRisiko());
         editor.putString(context.getString(R.string.pref_account_number), welmaUser.getAccountNumber());
+        editor.putString(context.getString(R.string.pref_img_profile), user.getImageProfile());
         editor.putString(context.getString(R.string.pref_email), welmaUser.getEmail());
         editor.putString(context.getString(R.string.pref_profile_id), user.getProfileID());
         editor.putString(context.getString(R.string.pref_username), user.getUsername());
@@ -104,4 +105,7 @@ public class PrefConfig {
         return sharedPreferences.getString(context.getString(R.string.pref_profile_id), Constant.EMPTY);
     }
 
+    public String getImageProfile() {
+        return sharedPreferences.getString(context.getString(R.string.pref_img_profile), Constant.EMPTY);
+    }
 }

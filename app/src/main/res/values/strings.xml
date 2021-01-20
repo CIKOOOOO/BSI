@@ -69,6 +69,7 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
+    <string name="write_something">Write something...</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>
@@ -140,11 +141,15 @@
     <string name="kalkulator_perencanaan">Kalkulator Perencanaan</string>
     <string name="connection">Connections</string>
     <string name="inbox">Inbox</string>
+    <string name="disclaimer_post">Segala informasi yang saya share di luar tanggung jawab BCA sebagai penyedia aplikasi Welma</string>
 
     <string name="pelajari_lebih_lanjut">Pelajari lebih lanjut</string>
     <string name="ayo_ikuti_kuis">Ayo ikut kuis!</string>
     <string name="ulangi_kuis">Ulangi kuis!</string>
     <string name="learning">LEARNING</string>
+    <string name="share_to">Shares to</string>
+    <string name="add_image">add image</string>
+    <string name="permission_failed">Gagal menjalankan fitur! Dibutuhkan Permission</string>
 
     <string name="score_label">Score:</string>
     <string name="score_max_quiz">/5</string>
@@ -191,7 +196,9 @@
     <string name="follower">Follower</string>
     <string name="following">Following</string>
     <string name="choose_header">Pilih Latar Header</string>
+    <string name="choose_category">Pilih Kategori</string>
     <string name="choose_profile_photo">Pilih Photo Profile</string>
+    <string name="make_post">Buat Post</string>
 
     <!--END HERE-->
 
@@ -209,6 +216,7 @@
     <!--FORUM USER-->
     <string name="pref_profile_id">pref_profile_id</string>
     <string name="pref_username">pref_username</string>
+    <string name="pref_img_profile">pref_img_profile</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

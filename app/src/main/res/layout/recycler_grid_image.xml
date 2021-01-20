@@ -3,13 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/size_for_20dp"
-    android:layout_marginTop="@dimen/size_for_10dp"
-    android:layout_marginEnd="@dimen/size_for_20dp">
+    android:layout_marginTop="@dimen/size_for_10dp">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/recycler_rounded_img_grid"
-        android:layout_width="@dimen/size_for_150dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/size_for_150dp"
         android:background="@drawable/ic_no_img"
         app:riv_corner_radius="@dimen/size_for_10dp"
