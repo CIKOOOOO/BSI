@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Portfolio;
+import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,8 +93,8 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
             holder.tvJenisReksa_INF.setText(information.getJenis());
             holder.tvDate_INF.setText(information.getDate());
             holder.tvUnit_INF.setText(String.valueOf(information.getUnit()));
-            holder.tvCost_INF.setText(String.valueOf(information.getCost()));
-            holder.tvRaise_INF.setText("Rp. " + information.getRaise());
+            holder.tvCost_INF.setText(Utils.formatUang3(information.getCost()));
+            holder.tvRaise_INF.setText("Rp. " + Utils.formatUang3(information.getRaise()));
             if (information.getRaise() < 0) {
                 holder.tvRaise_INF.setTextColor(Color.parseColor("#d12f24"));
             } else {
@@ -111,7 +112,7 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
 
     @Override
     public int getItemCount() {
-        return type.equals(HISTORY) ? informationList.size() : informationList.size();
+        return type.equals(HISTORY) ? historyList.size() : informationList.size();
     }
 
     @Override

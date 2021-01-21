@@ -66,6 +66,7 @@ public class PinViewModel extends AndroidViewModel {
                                 Transaction.TransactionResult transactionResult = outputSchema.getTransactionResult();
                                 callback.onSuccessPin(transactionResult);
                             } else {
+                                Log.e("asd", errorSchema.getErrorMessage());
                                 callback.onFailed(errorSchema.getErrorMessage());
                             }
                         } else {

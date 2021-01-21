@@ -25,6 +25,7 @@
     <string name="search">Pencarian</string>
     <string name="notice">Pemberitahuan</string>
     <string name="buy">Beli</string>
+    <string name="sell">Jual</string>
     <string name="performance_1_month">Kinerja 1 Bln</string>
     <string name="nab_unit">NAB/Unit</string>
     <string name="product_not_found">Produk tidak ditemukan</string>
@@ -95,7 +96,7 @@
     <string name="durasi_investasi">Durasi\nInvestasi</string>
     <string name="besar_ror">Besar RoR</string>
     <string name="calculator_disclaimer">Disclaimer:\nPerhitungan yang dihasilkan oleh kalkulator merupakan simulasi dan bersifat estimasi. Nilai sesungguhya dapat berbeda.</string>
-    <string name="durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol">LALALLALALALALALALALALALAL Durasi tidak boleh kosong dan RoR tidak boleh bernilai nol</string>
+    <string name="durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol">Durasi tidak boleh kosong dan RoR tidak boleh bernilai nol</string>
     <string name="ror_tidak_boleh_bernilai_nol">RoR tidak boleh bernilai nol</string>
     <string name="durasi_tidak_boleh_kosong">Durasi tidak boleh kosong</string>
 
@@ -206,6 +207,9 @@
     <string name="choose_category">Pilih Kategori</string>
     <string name="choose_profile_photo">Pilih Photo Profile</string>
     <string name="make_post">Buat Post</string>
+    <string name="up">Naik</string>
+    <string name="down">Turun</string>
+    <string name="stay">Tetap</string>
 
     <!--END HERE-->
 

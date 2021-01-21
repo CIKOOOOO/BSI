@@ -29,6 +29,7 @@ public class BesarInvestasiBulananViewModel extends AndroidViewModel {
         Utils utils = new Utils();
         Double hasil = utils.getMonthlyCost(modalAwal,targetHasil,ror,durasiBulan,durasiTahun);
 
-        callback.kalkulasiOutput(utils.formatUang(targetHasil),utils.formatUang(modalAwal),utils.formatDecimal(rorStr),utils.formatUang(hasil));
+        //callback.kalkulasiOutput(utils.formatUang(targetHasil),utils.formatUang(modalAwal),utils.formatDecimal(rorStr),utils.formatUang(hasil));
+        callback.kalkulasiOutput(utils.formatUang(targetHasil),utils.formatUang(modalAwal),rorStr,utils.formatUang(hasil));
     }
 }

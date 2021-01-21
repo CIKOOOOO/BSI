@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.products.detail.reksadana.detailreksadana;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -96,8 +97,9 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
             case R.id.tv_kalkulator_perencanaan_detail_reksa_dana:
                 Intent intent2 = new Intent(this, CalculatorMoreActivity.class);
                 intent2.putExtra("numberOfTabs",3);
-//                intent2.putExtra("rorValue",String.valueOf(this.detailReksaDana.getKinerja1Tahun()));
-                intent2.putExtra("rorValue","2");
+                intent2.putExtra("rorValue",this.detailReksaDana.getKinerja1Tahun());
+                Log.e("asdf", this.detailReksaDana.getKinerja1Tahun());
+//                intent2.putExtra("rorValue","2");
                 intent2.putExtra("namaProduk",this.detailReksaDana.getName());
                 //intent.putExtra("namaProduk","Nama Produk");
                 startActivity(intent2);

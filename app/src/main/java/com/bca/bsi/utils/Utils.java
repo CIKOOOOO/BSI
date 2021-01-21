@@ -78,9 +78,9 @@ public class Utils {
         return gson.toJson(o);
     }
 
-    public static String formatDecimal(String currentFormat){
+    public static String formatDecimal(String currentFormat) {
         String output = "";
-        output = currentFormat.replaceAll("[.]",",");
+        output = currentFormat.replaceAll("[.]", ",");
         return output;
     }
 
@@ -88,7 +88,7 @@ public class Utils {
         String currentFormat;
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         currentFormat = formatter.format(totalPrice);
-        currentFormat = currentFormat.replaceAll("[,]",".");
+        currentFormat = currentFormat.replaceAll("[,]", ".");
         return currentFormat;
     }
 
@@ -96,74 +96,90 @@ public class Utils {
         return String.format("%,.2f", totalPrice);
     }
 
+    public static String formatUang3(double uang) {
+        String duit = formatUang2(uang);
+        String temp = duit.replace(",", "@");
+        temp = temp.replace(".", ",");
+        temp = temp.replace("@", ".");
+        return temp;
+    }
+
 
     //================================ Hitung Target ====================================
-    public double getTarget(double initialCost, double monthlyCost, double ror, int durationMonth, int durationYear){
-        int n = 12*durationYear + durationMonth;
+    public double getTarget(double initialCost, double monthlyCost, double ror, int durationMonth, int durationYear) {
+        int n = 12 * durationYear + durationMonth;
 
         // making sure it convert to double type
-        double r = Math.pow(1+ror,1/12.0)-1;
-        double u = Math.pow(1+r,n);
-        return (monthlyCost/r)*(u-1) + initialCost*u;
+        double r = Math.pow(1 + ror, 1 / 12.0) - 1;
+        double u = Math.pow(1 + r, n);
+        return (monthlyCost / r) * (u - 1) + initialCost * u;
     }
 
     //============================== Hitung Annualitas =================================
-    public double getMonthlyCost(double initialCost, double target, double ror, int durationMonth, int durationYear){
-        int n = 12*durationYear + durationMonth;
-        double r = Math.pow(1+ror,1/12.0)-1;
-        double u = Math.pow(1+r,n);
-        return 1.0*((target-(initialCost*u))*r)/(u-1.0);
+    public double getMonthlyCost(double initialCost, double target, double ror, int durationMonth, int durationYear) {
+        int n = 12 * durationYear + durationMonth;
+        double r = Math.pow(1 + ror, 1 / 12.0) - 1;
+        double u = Math.pow(1 + r, n);
+        return 1.0 * ((target - (initialCost * u)) * r) / (u - 1.0);
     }
 
     //============================== Hitung duration =================================
     // result is [y year,m month]
-    public int[] getDuration(double initialCost, double monthlyCost, double target, double ror){
-        double T = target; double M = initialCost; double A = monthlyCost;
-        double r = Math.pow(1+ror,1/12.0)-1;
+    public int[] getDuration(double initialCost, double monthlyCost, double target, double ror) {
+        double T = target;
+        double M = initialCost;
+        double A = monthlyCost;
+        double r = Math.pow(1 + ror, 1 / 12.0) - 1;
 
-        double nom = Math.log(1.0*(T+(A/r))/(M+(A/r)));
-        double denom = Math.log(1+r);
-        int n = (int) Math.round(nom/denom);
+        double nom = Math.log(1.0 * (T + (A / r)) / (M + (A / r)));
+        double denom = Math.log(1 + r);
+        int n = (int) Math.round(nom / denom);
 
-        int month = n%12;
-        int year = n/12;
-        int[] res = {month,year};
+        int month = n % 12;
+        int year = n / 12;
+        int[] res = {month, year};
         return res;
     }
 
     //============================== Hitung ror =======================================
-    private double M,A,T;
+    private double M, A, T;
     private int n;
-    private double eps=0.000001;
-    public double getRor(double initialCost, double monthlyCost, double target, int durationMonth, int durationYear){
-        this.M = initialCost; this.A=monthlyCost; this.T=target; this.n=12*durationYear+durationMonth;
+    private double eps = 0.000001;
+
+    public double getRor(double initialCost, double monthlyCost, double target, int durationMonth, int durationYear) {
+        this.M = initialCost;
+        this.A = monthlyCost;
+        this.T = target;
+        this.n = 12 * durationYear + durationMonth;
 
         // check return
         double ret = getInvestmentReturn();
-        if(nearZero(ret)){
+        if (nearZero(ret)) {
             return 0;
-        } else if(ret<0){
+        } else if (ret < 0) {
             System.out.println("Negative return detected");
             return -1; //code for negative IRR
         }
 
         // In this step, ror must be positive
         // First we attempt to use Newton Method
-        int maxiter = 1000; double x=1; int iter = 1;
+        int maxiter = 1000;
+        double x = 1;
+        int iter = 1;
 //		double maxRor = 0.22118855031; //monthly ror
         double maxRorYear = 0.5; // berarti *50%
-        double maxRor = Math.pow(1+maxRorYear, 1.0/12.0)-1;
+        double maxRor = Math.pow(1 + maxRorYear, 1.0 / 12.0) - 1;
         System.out.println(maxRor);
 
-        while(iter<maxiter){
-            x -= 1.0*phi(x)/diffPhi(x);
-            if(nearZero(phi(x)) && x>0){
+        while (iter < maxiter) {
+            x -= 1.0 * phi(x) / diffPhi(x);
+            if (nearZero(phi(x)) && x > 0) {
                 System.out.println("from newton");
-                if (x>maxRor){
-                    System.out.println("IRR larger than "+maxRorYear*100+" %");
+                if (x > maxRor) {
+                    System.out.println("IRR larger than " + maxRorYear * 100 + " %");
                     return 123123; // code for IRR > 10
                 } else {
-                    return Math.pow(1+x,12)-1;
+                    return Math.pow(1 + x, 12) - 1;
                 }
             }
             iter++;
@@ -172,19 +188,20 @@ public class Utils {
 
         // if fails, attempt using bisection
         // Assuming eps < IRR < 10
-        double a,b,c,tol;
-        a=eps; b=maxRor; 	// boundary
-        tol = eps;		// tolerance for (b-a)/2
+        double a, b, c, tol;
+        a = eps;
+        b = maxRor;    // boundary
+        tol = eps;        // tolerance for (b-a)/2
         iter = 1;
 
-        while(iter<maxiter){
+        while (iter < maxiter) {
             iter++;
-            c = a+(b-a)/2.0;
-            if(nearZero(phi(c))){ // you can add tolerance for range of (a,b)
+            c = a + (b - a) / 2.0;
+            if (nearZero(phi(c))) { // you can add tolerance for range of (a,b)
                 System.out.println("from bisection");
-                return Math.pow(1+c,12)-1;
+                return Math.pow(1 + c, 12) - 1;
             }
-            if(phi(c)*phi(a)>0){
+            if (phi(c) * phi(a) > 0) {
                 a = c;
             } else {
                 b = c;
@@ -192,21 +209,25 @@ public class Utils {
         }
         // conclude that IRR > 10
         System.out.println("from bisection");
-        System.out.println("IRR larger than "+maxRorYear*100+" %");
+        System.out.println("IRR larger than " + maxRorYear * 100 + " %");
         return 123123; // code for IRR > 10
 
 
     }
-    private double phi(double r){
-        return A*(Math.pow(1.0+r,n)-1.0)+M*r*Math.pow(1.0+r,n)-r*T;
+
+    private double phi(double r) {
+        return A * (Math.pow(1.0 + r, n) - 1.0) + M * r * Math.pow(1.0 + r, n) - r * T;
     }
-    private double diffPhi(double r){
-        return (A*n*Math.pow(1.0+r,n-1)) + (M*Math.pow(1.0+r,n)) + (n*M*r*Math.pow(1.0+r,n-1)) - T;
+
+    private double diffPhi(double r) {
+        return (A * n * Math.pow(1.0 + r, n - 1)) + (M * Math.pow(1.0 + r, n)) + (n * M * r * Math.pow(1.0 + r, n - 1)) - T;
     }
-    private double getInvestmentReturn(){
-        return T-n*A-M;
+
+    private double getInvestmentReturn() {
+        return T - n * A - M;
     }
-    private boolean nearZero(double val){
-        return Math.abs(val)<eps;
+
+    private boolean nearZero(double val) {
+        return Math.abs(val) < eps;
     }
 }

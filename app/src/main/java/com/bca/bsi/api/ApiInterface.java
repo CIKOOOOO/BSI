@@ -32,7 +32,7 @@ public interface ApiInterface {
     @GET("ceksaldo")
     Call<OutputResponse> getDetailTransaksi(@Header("reksadana_id") String reksadanaID, @Header("no_rekening") String accountNumber);
 
-    @Headers({"Content-Type:application/json", "hashcode: x"})
+    @Headers({"Content-Type:application/json", "client_id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
     @POST("PIN_Validation")
     Call<OutputResponse> sendTransactionData(@Header("BCA_ID") String bcaID, @Header("PIN") String pin
             , @Body Map<String, Object> stringObjectMap);
@@ -40,11 +40,11 @@ public interface ApiInterface {
     @GET("quiz")
     Call<OutputResponse> getKuisData(@Header("category_id") int categoryId);
 
-    @Headers({"Content-Type:application/json","client_id: OV4B2FXHY1Y7W0WMSUUB","hashcode:x"})
+    @Headers({"Content-Type:application/json", "client_id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("smartbot/recommendation")
     Call<OutputResponse> getRoboRekomen(@Header("profil_resiko") String profil_resiko, @Header("no_rekening") String no_rekening);
 
-    @Headers({"Content-Type:application/json","client_id: OV4B2FXHY1Y7W0WMSUUB","hashcode:x"})
+    @Headers({"Content-Type:application/json", "client_id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("smartbot/custom")
     Call<OutputResponse> getRoboHitungCustom(@Header("no_rekening") String no_rekening, @Query("reksa-dana-id") String reksa_id,
                                              @Query("proportion") String proportion);
@@ -55,11 +55,11 @@ public interface ApiInterface {
     @PUT("quiz/score")
     Call<OutputResponse> putUserScore(@Header("category_id") int categoryId, @Header("bca_id") String bcaId, @Header("score") int score);
 
-    @Headers({"Content-Type:application/json","client_id: OV4B2FXHY1Y7W0WMSUUB","hashcode:x"})
+    @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("portfolio")
-    Call<OutputResponse> getInformationPortfolioData(@Header("token") String token, @Header("no_rekening") String nomor_rekening);
+    Call<OutputResponse> getInformationPortfolioData(@Header("token") String token, @Header("no-rekening") String nomor_rekening);
 
-    @Headers({"Content-Type:application/json","client_id: OV4B2FXHY1Y7W0WMSUUB","hashcode:x"})
+    @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("transaction")
-    Call<OutputResponse> getHistoryTransaction(@Header("token") String token, @Header("no_rekening") String nomor_rekening);
+    Call<OutputResponse> getHistoryTransaction(@Header("token") String token, @Header("no-rekening") String nomor_rekening);
 }

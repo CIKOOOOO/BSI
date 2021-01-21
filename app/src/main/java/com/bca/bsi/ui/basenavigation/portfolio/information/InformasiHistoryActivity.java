@@ -122,7 +122,7 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
     public void onShareNews(Portfolio.Information information) {
         Intent intent = new Intent(this, PostActivity.class);
         intent.putExtra(PostActivity.DATA, Utils.toJSON(information));
-        intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_TRADE);
+        intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_TRADE_INFORMATION);
         startActivity(intent);
     }
 
@@ -130,7 +130,7 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
     public void onShareNews(Portfolio.History history) {
         Intent intent = new Intent(this, PostActivity.class);
         intent.putExtra(PostActivity.DATA, Utils.toJSON(history));
-        intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_TRADE);
+        intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_TRADE_HISTORY);
         startActivity(intent);
     }
 }

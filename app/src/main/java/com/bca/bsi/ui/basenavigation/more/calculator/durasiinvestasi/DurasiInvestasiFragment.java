@@ -253,8 +253,11 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
         ETDIInvestasiBulanan.setText(formatInvestBulanan);
         ETDIROR.setText(formatRoR);
         hasilDI.setText(hasilKalkulasi);
-        if(Double.parseDouble(ETDIROR.getText().toString()) <= 0) {
-            hasilDI.setText(getString(R.string.ror_tidak_boleh_bernilai_nol));
+
+        if(numbOfTabs==4){
+            if(Double.parseDouble(ETDIROR.getText().toString()) <= 0) {
+                hasilDI.setText(getString(R.string.ror_tidak_boleh_bernilai_nol));
+            }
         }
 
     }
