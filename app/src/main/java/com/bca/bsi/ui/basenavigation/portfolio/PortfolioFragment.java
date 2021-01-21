@@ -33,7 +33,6 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
 
     private PortfolioViewModel portfolioViewModel;
 
-
     private onBundleClick onBundleClick;
 
     @Override

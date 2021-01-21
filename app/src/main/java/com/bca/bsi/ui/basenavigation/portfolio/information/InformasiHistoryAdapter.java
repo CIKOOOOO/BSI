@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
-import com.bca.bsi.model.ProductIH;
+import com.bca.bsi.model.Portfolio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,20 +20,35 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
     public static final String HISTORY = "history";
     public static final String INFORMATION = "information";
 
+    private List<Portfolio.Information> informationList;
+    private List<Portfolio.History> historyList;
+    private onClickShare onClickShare;
+
     private String type;
+
+    public interface onClickShare {
+        void onShareNews(Portfolio.Information information);
+
+        void onShareNews(Portfolio.History history);
+    }
 
     public void setType(String type) {
         this.type = type;
     }
 
-    List<ProductIH> products = new ArrayList<>();
-
-    public void setProducts(List<ProductIH> products) {
-        this.products = products;
+    public InformasiHistoryAdapter(onClickShare onClickShare) {
+        type = "";
+        this.onClickShare = onClickShare;
+        this.informationList = new ArrayList<>();
+        this.historyList = new ArrayList<>();
     }
 
-    public InformasiHistoryAdapter() {
-        type = "";
+    public void setInformationList(List<Portfolio.Information> informationList) {
+        this.informationList = informationList;
+    }
+
+    public void setHistoryList(List<Portfolio.History> historyList) {
+        this.historyList = historyList;
     }
 
     @NonNull
@@ -51,34 +66,52 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        final ProductIH product = products.get(position);
+//        final ProductIH product = products.get(position);
         // disini hrsnya ada if INF / HIS
-        if (type.equals(HISTORY)) {
+        if (getItemViewType(position) == 1) {
             // Bind untuk history
-            holder.tvReksaName_HIS.setText(product.getName());
-            holder.tvJenisReksa_HIS.setText(product.getJenis());
-            holder.tvDate_HIS.setText(product.getDate());
-            holder.tvUnit_HIS.setText(product.getUnit());
-            holder.tvCost_HIS.setText(product.getCost());
+
+            Portfolio.History history = historyList.get(position);
+
+            holder.tvReksaName_HIS.setText(history.getReksadanaName());
+            holder.tvJenisReksa_HIS.setText(history.getTransactionType());
+            holder.tvDate_HIS.setText(history.getDate());
+            holder.tvUnit_HIS.setText(history.getReksaDanaUnit());
+            holder.tvCost_HIS.setText(history.getAmount());
+
+            holder.tvShare_HIS.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickShare.onShareNews(history);
+                }
+            });
         } else {
             // Bind untuk information
-            holder.tvReksaName_INF.setText(product.getName());
-            holder.tvJenisReksa_INF.setText(product.getJenis());
-            holder.tvDate_INF.setText(product.getDate());
-            holder.tvUnit_INF.setText(product.getUnit());
-            holder.tvCost_INF.setText(product.getCost());
-            holder.tvRaise_INF.setText("Rp. "+product.getRaise());
-            if(product.getRaise().substring(0,1).equals("-")){
+            Portfolio.Information information = informationList.get(position);
+            holder.tvReksaName_INF.setText(information.getName());
+            holder.tvJenisReksa_INF.setText(information.getJenis());
+            holder.tvDate_INF.setText(information.getDate());
+            holder.tvUnit_INF.setText(String.valueOf(information.getUnit()));
+            holder.tvCost_INF.setText(String.valueOf(information.getCost()));
+            holder.tvRaise_INF.setText("Rp. " + information.getRaise());
+            if (information.getRaise() < 0) {
                 holder.tvRaise_INF.setTextColor(Color.parseColor("#d12f24"));
             } else {
                 holder.tvRaise_INF.setTextColor(Color.parseColor("#6bd35b"));
             }
+
+            holder.tvShare_INF.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickShare.onShareNews(information);
+                }
+            });
         }
     }
 
     @Override
     public int getItemCount() {
-        return products.size();
+        return type.equals(HISTORY) ? informationList.size() : informationList.size();
     }
 
     @Override
@@ -87,8 +120,8 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
     }
 
     static class Holder extends RecyclerView.ViewHolder {
-        private TextView tvReksaName_INF, tvJenisReksa_INF, tvDate_INF, tvUnit_INF, tvCost_INF, tvRaise_INF;
-        private TextView tvReksaName_HIS, tvJenisReksa_HIS, tvDate_HIS, tvUnit_HIS, tvCost_HIS;
+        private TextView tvReksaName_INF, tvJenisReksa_INF, tvDate_INF, tvUnit_INF, tvCost_INF, tvRaise_INF, tvShare_INF;
+        private TextView tvReksaName_HIS, tvJenisReksa_HIS, tvDate_HIS, tvUnit_HIS, tvCost_HIS, tvShare_HIS;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
@@ -99,6 +132,7 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
             tvUnit_INF = itemView.findViewById(R.id.tv_unit_i);
             tvCost_INF = itemView.findViewById(R.id.tv_cost_i);
             tvRaise_INF = itemView.findViewById(R.id.tv_raise);
+            tvShare_INF = itemView.findViewById(R.id.tv_share_i);
 
             // di recycler history
             tvReksaName_HIS = itemView.findViewById(R.id.tv_reksadana_name_h);
@@ -106,6 +140,7 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
             tvDate_HIS = itemView.findViewById(R.id.date_h);
             tvUnit_HIS = itemView.findViewById(R.id.tv_unit_h);
             tvCost_HIS = itemView.findViewById(R.id.tv_cost_h);
+            tvShare_HIS = itemView.findViewById(R.id.tv_share_h);
         }
     }
 }

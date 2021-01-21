@@ -78,7 +78,6 @@ public class DummyData {
     private static final String[] categoryID = {"1", "2", "3"};
     private static final String[] categoryName = {"Category 1", "Category 2", "Category 3"};
 
-
     private static  final String[] ihReksaName = {"Bahana Pendapatan Tetap Makara Prima","Ashmore lalala","Batavia itu Jakarta"};
     private static  final String[] infJenisReksa = {"Pendapatan Tetap","Saham","Terproteksi"};
     private static  final String[] ihDate = {"10/12/2020","11/11/2021","02/02/2020"};

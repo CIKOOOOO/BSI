@@ -41,8 +41,8 @@ public class BaseFragment extends Fragment {
         View view = mActivity.findViewById(android.R.id.content);
         Snackbar snackbar = Snackbar
                 .make(view, msg, Snackbar.LENGTH_LONG)
-                .setBackgroundTint(getResources().getColor(R.color.black_palette))
-                .setTextColor(getResources().getColor(R.color.white_palette))
+                .setBackgroundTint(view.getContext().getResources().getColor(R.color.black_palette))
+                .setTextColor(view.getContext().getResources().getColor(R.color.white_palette))
                 .setDuration(3000);
         snackbar.show();
     }
