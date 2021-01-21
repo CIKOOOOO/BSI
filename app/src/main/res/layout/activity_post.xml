@@ -42,10 +42,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_for_15dp"
-                    tools:text="Clarissa Aristania"
                     android:textColor="@color/color_base_welma"
                     app:layout_constraintStart_toEndOf="@id/rounded_image_view_profile_post"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Clarissa Aristania" />
 
                 <TextView
                     android:id="@+id/tv_date_post_activity"
@@ -63,12 +63,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/size_for_10dp"
-                    tools:text="0/1000"
                     android:textColor="@color/black_palette"
                     android:textSize="@dimen/size_for_12sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_date_post_activity" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_date_post_activity"
+                    tools:text="0/1000" />
 
                 <View
                     android:layout_width="match_parent"
@@ -83,6 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_for_10dp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_character_counter_post">
 

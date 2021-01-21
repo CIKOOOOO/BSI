@@ -2,17 +2,18 @@ package com.bca.bsi.ui.basenavigation.information.forum.post;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.PromoNews;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Hold
 
     private List<Bitmap> bitmapList;
     private onItemClick onItemClick;
+    private PromoNews promoNews;
 
     public interface onItemClick {
         void onOpenGallery();
@@ -40,6 +42,10 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Hold
         this.type = type;
         this.onItemClick = onItemClick;
         bitmapList = new ArrayList<>();
+    }
+
+    public void setPromoNews(PromoNews promoNews) {
+        this.promoNews = promoNews;
     }
 
     public void setBitmapList(List<Bitmap> bitmapList) {
@@ -60,7 +66,7 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Hold
         else if (viewType == IMAGE_LIST)
             layout = R.layout.recycler_chosen_image;
         else
-            layout = R.layout.recycler_add_image;
+            layout = R.layout.recycler_news_post;
 
         View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         mContext = parent.getContext();
@@ -78,7 +84,6 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Hold
             });
         } else if (getItemViewType(position) == IMAGE_LIST) {
             if (bitmapList.size() != 5 && bitmapList.size() == position) {
-                Log.e("asd","aaa"+position);
                 holder.imgClose.setVisibility(View.GONE);
                 Glide.with(mContext)
                         .load(R.drawable.ic_baseline_add_welma)
@@ -104,7 +109,8 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Hold
                 });
             }
         } else {
-
+            holder.tvDateNews.setText(promoNews.getDate());
+            holder.tvTitleNews.setText(promoNews.getTitle());
         }
     }
 
@@ -131,12 +137,14 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Hold
     static class Holder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private ImageButton imgClose;
+        private TextView tvTitleNews, tvDateNews;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.recycler_img_chosen);
             imgClose = itemView.findViewById(R.id.recycler_img_btn_close_img_chosen);
+            tvTitleNews = itemView.findViewById(R.id.recycler_tv_title_news_post);
+            tvDateNews = itemView.findViewById(R.id.recycler_tv_date_news_post);
         }
     }
-
 }

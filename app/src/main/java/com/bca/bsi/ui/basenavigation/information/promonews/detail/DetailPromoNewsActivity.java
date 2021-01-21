@@ -3,19 +3,17 @@ package com.bca.bsi.ui.basenavigation.information.promonews.detail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.gson.Gson;
 
 public class DetailPromoNewsActivity extends BaseActivity implements View.OnClickListener {
@@ -91,7 +89,8 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.tv_share_to_forum_detail_promo_news:
                 Intent intent = new Intent(this, PostActivity.class);
-
+                intent.putExtra(PostActivity.DATA, Utils.toJSON(this.promoNews));
+                intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_NEWS);
                 startActivity(intent);
 //                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
@@ -106,6 +105,6 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
 //        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
 //            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 //        } else
-            super.onBackPressed();
+        super.onBackPressed();
     }
 }

@@ -36,7 +36,7 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
         switch (v.getId()) {
             case R.id.fab_main_forum:
                 Intent intent = new Intent(mActivity, PostActivity.class);
-                intent.putExtra(PostActivity.DATA, PostActivity.NEW_STANDARD_POST);
+                intent.putExtra(PostActivity.POST_TYPE, PostActivity.NEW_STANDARD_POST);
                 startActivity(intent);
                 break;
         }

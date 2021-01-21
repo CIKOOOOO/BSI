@@ -34,11 +34,13 @@ import com.bca.bsi.R;
 import com.bca.bsi.adapter.PrivacyAdapter;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.Privacy;
+import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -52,6 +54,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
     public static final String SHARE_NEWS = "share_news";
 
     public static final String DATA = "data";
+    public static final String POST_TYPE = "post_type";
 
     private static final int REQUEST_GALLERY_THUMBNAIL = 101;
     private static final int GALLERY_THUMBNAIL = 202;
@@ -66,6 +69,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
     private PostViewModel viewModel;
     private EditText etContent;
     private TextView tvCharacterCounter;
+    private PromoNews promoNews;
 
     private String type;
 
@@ -131,15 +135,31 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                     .into(imgProfile);
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(DATA)) {
-            type = intent.getStringExtra(DATA);
+        Gson gson = new Gson();
+        if (intent != null && intent.hasExtra(POST_TYPE)) {
+            type = intent.getStringExtra(POST_TYPE);
             if (type != null) {
-                if (type.equals(NEW_STANDARD_POST)) {
-                    tvTitleToolbar.setText(getString(R.string.make_post));
-                    postImageAdapter = new PostImageAdapter(PostImageAdapter.CHOOSE_IMAGE, this);
-                    recyclerImageNews.setLayoutManager(new LinearLayoutManager(this));
-                    recyclerImageNews.setAdapter(postImageAdapter);
+                String titleToolbar = "";
+                switch (type) {
+                    case NEW_STANDARD_POST:
+                        titleToolbar = getString(R.string.make_post);
+                        postImageAdapter = new PostImageAdapter(PostImageAdapter.CHOOSE_IMAGE, this);
+                        recyclerImageNews.setLayoutManager(new LinearLayoutManager(this));
+                        recyclerImageNews.setAdapter(postImageAdapter);
+                        break;
+                    case SHARE_NEWS:
+                        titleToolbar = getString(R.string.make_post);
+                        if (intent.hasExtra(DATA)) {
+                            String data = intent.getStringExtra(DATA);
+                            this.promoNews = gson.fromJson(data, PromoNews.class);
+                            postImageAdapter = new PostImageAdapter(PostImageAdapter.NEWS, this);
+                            recyclerImageNews.setLayoutManager(new LinearLayoutManager(this));
+                            postImageAdapter.setPromoNews(this.promoNews);
+                            recyclerImageNews.setAdapter(postImageAdapter);
+                        }
+                        break;
                 }
+                tvTitleToolbar.setText(titleToolbar);
             } else {
                 onBackPressed();
             }

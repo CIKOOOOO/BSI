@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/size_for_10dp"
+    android:layout_marginEnd="@dimen/size_for_10dp"
+    android:elevation="@dimen/size_for_5dp">
+
+    <TextView
+        android:id="@+id/recycler_tv_title_news_post"
+        android:layout_width="@dimen/size_for_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:text="Welma Raih Top Innovation Award 2020"
+        android:textColor="@color/color_base_welma"
+        android:textSize="@dimen/size_for_17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/recycler_tv_date_news_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_marginBottom="@dimen/size_for_10dp"
+        android:text="14 Dec 2020"
+        android:textSize="@dimen/size_for_12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_title_news_post" />
+</androidx.constraintlayout.widget.ConstraintLayout>
