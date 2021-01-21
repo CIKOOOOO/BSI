@@ -16,7 +16,9 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.KuisData;
 import com.bca.bsi.model.LearningChapter;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.materi.IMateriQuizCallback;
 
 import java.util.List;
 
@@ -26,15 +28,17 @@ public class LearningMateriAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
     private Context context;
     private onItemClick onItemClick;
+    private KuisData.UserScore userScore;
 
     public interface onItemClick{
         void onClick();
     }
 
-    public LearningMateriAdapter(List<LearningChapter> models, Context context, onItemClick onItemClick) {
+    public LearningMateriAdapter(List<LearningChapter> models, Context context, onItemClick onItemClick, KuisData.UserScore userScore) {
         this.models = models;
         this.onItemClick = onItemClick;
         this.context = context;
+        this.userScore = userScore;
     }
 
     @Override
@@ -57,26 +61,75 @@ public class LearningMateriAdapter extends PagerAdapter {
         TextView title, explanation;
         final Button button;
         LinearLayout scoring;
+        ImageView scoreStar;
+        TextView dateAttempt;
+        TextView userScoreInt;
 
         imageView = view.findViewById(R.id.image_materi);
         title = view.findViewById(R.id.tv_title_materi);
         explanation = view.findViewById(R.id.tv_explanation_materi);
         button = view.findViewById(R.id.quiz_button);
         scoring = view.findViewById(R.id.scoring_quiz);
+        scoreStar = view.findViewById(R.id.image_score_quiz);
+        dateAttempt = view.findViewById(R.id.date_attempt);
+        userScoreInt = view.findViewById(R.id.user_score);
 
         imageView.setImageResource(models.get(position).getImage());
         title.setText(models.get(position).getTitle());
+        //title.setText(userScore.getScore());
         explanation.setText(models.get(position).getExplanation());
-
 
         if(position == models.size() - 1) {
             button.setVisibility(View.VISIBLE);
-            scoring.setVisibility(View.VISIBLE);
+
+            if(userScore != null){
+                scoring.setVisibility(View.VISIBLE);
+                switch (userScore.getScore()){
+                    case "0":
+                        scoreStar.setImageResource(R.drawable.score_star_0);
+                        break;
+
+                    case "1":
+                        scoreStar.setImageResource(R.drawable.score_star_1);
+                        break;
+
+                    case "2":
+                        scoreStar.setImageResource(R.drawable.score_star_2);
+                        break;
+
+                    case "3":
+                        scoreStar.setImageResource(R.drawable.score_star_3);
+                        break;
+
+                    case "4":
+                        scoreStar.setImageResource(R.drawable.score_star_4);
+                        break;
+
+                    case "5":
+                        scoreStar.setImageResource(R.drawable.score_star_5);
+                        break;
+                }
+
+                //System.out.println("INIIII UDAH MASUK SINI. DATE " +userScore.getDateAttempt() );
+                String[] dateFormated = userScore.getDateAttempt().split(" ");
+                dateAttempt.setText(dateFormated[0]);
+                userScoreInt.setText(userScore.getScore());
+                button.setText(context.getString(R.string.ulangi_kuis));
+            }else{
+                scoring.setVisibility(View.GONE);
+                button.setText(context.getString(R.string.ayo_ikuti_kuis));
+            }
+
+            /*
             if(explanation.getText().equals(context.getString(R.string.kuis_belum_ambil_asuransi)) || explanation.getText().equals(context.getString(R.string.kuis_belum_ambil_reksadana)) || explanation.getText().equals(context.getString(R.string.kuis_belum_ambil_obligasi))) {
+                scoring.setVisibility(View.GONE);
                 button.setText(context.getString(R.string.ayo_ikuti_kuis));
             }else {
+                scoring.setVisibility(View.VISIBLE);
                 button.setText(context.getString(R.string.ulangi_kuis));
             }
+            */
+
             button.setTextColor(ContextCompat.getColor(context, R.color.deep_cerulean_palette));
             button.setAllCaps(false);
         }else if (position == models.size() - 2){
@@ -90,7 +143,6 @@ public class LearningMateriAdapter extends PagerAdapter {
             button.setVisibility(View.INVISIBLE);
             scoring.setVisibility(View.GONE);
         }
-
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

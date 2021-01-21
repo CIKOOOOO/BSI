@@ -94,7 +94,10 @@
     <string name="besar_investasi_bulanan">Besar Investasi\nBulanan</string>
     <string name="durasi_investasi">Durasi\nInvestasi</string>
     <string name="besar_ror">Besar RoR</string>
-    <string name="calculator_disclaimer">Disclaimer:\nPerhitungan yang dihasilkan oleh kalkulator merupakan simulasi. Nilai sesungguhya dapat berbeda.</string>
+    <string name="calculator_disclaimer">Disclaimer:\nPerhitungan yang dihasilkan oleh kalkulator merupakan simulasi dan bersifat estimasi. Nilai sesungguhya dapat berbeda.</string>
+    <string name="durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol">LALALLALALALALALALALALALAL Durasi tidak boleh kosong dan RoR tidak boleh bernilai nol</string>
+    <string name="ror_tidak_boleh_bernilai_nol">RoR tidak boleh bernilai nol</string>
+    <string name="durasi_tidak_boleh_kosong">Durasi tidak boleh kosong</string>
 
     <string name="input_tidak_sesuai">Data yang diinput tidak sesuai</string>
     <string name="ror_bernilai_negatif">RoR bernilai negatif</string>

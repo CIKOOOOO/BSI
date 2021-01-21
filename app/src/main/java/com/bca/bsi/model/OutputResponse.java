@@ -69,6 +69,8 @@ public class OutputResponse {
         @SerializedName("bundles")
         private List<Portfolio> bundles;
 
+        @SerializedName("user_score")
+        private KuisData.UserScore userScore;
 
         public OutputSchema() {
         }
@@ -103,5 +105,6 @@ public class OutputResponse {
 
         public KuisData getKuisData() { return kuisData; }
 
+        public KuisData.UserScore getUserScore() { return userScore; };
     }
 }

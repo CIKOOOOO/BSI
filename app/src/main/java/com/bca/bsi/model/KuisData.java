@@ -138,9 +138,17 @@ public class KuisData {
     }
 
     public static class UserScore {
+
+        @SerializedName("category_id")
         public String categoryId;
+
+        @SerializedName("bca_id")
         public String bcaId;
+
+        @SerializedName("date")
         public String dateAttempt;
+
+        @SerializedName("score")
         public String score;
 
         public UserScore(String categoryId, String bcaId, String dateAttempt, String score) {

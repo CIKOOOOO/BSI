@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -47,4 +48,9 @@ public interface ApiInterface {
     Call<OutputResponse> getRoboHitungCustom(@Header("no_rekening") String no_rekening, @Query("reksa-dana-id") String reksa_id,
                                              @Query("proportion") String proportion);
 
+    @GET("quiz/score")
+    Call<OutputResponse> getUserScore(@Header("category_id") int categoryId, @Header("bca_id") String bcaId);
+
+    @PUT("quiz/score")
+    Call<OutputResponse> putUserScore(@Header("category_id") int categoryId, @Header("bca_id") String bcaId, @Header("score") int score);
 }

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
@@ -128,8 +129,12 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
-    public void onClick() {
-        if(currentPage<5){
+    public void onClick(KuisData.UserScore userScore) {
+        if(currentPage == 4){
+            viewModel.putUserScore(userScore.getBcaId(),userScore.getCategoryId(),Integer.parseInt(userScore.getScore()));
+            viewModel.getScore(userScore.getBcaId(),userScore.getCategoryId());
+            viewPager.setCurrentItem(currentPage+1);
+        }else if(currentPage<5){
             viewPager.setCurrentItem(currentPage+1);
         }else{
             System.out.println("udah masuk siniii");
@@ -157,5 +162,15 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onFailed(String msg) {
         System.out.println("ERROR: "+msg);
+    }
+
+    @Override
+    public void onRetrieveDataGetUserScore(KuisData.UserScore userScore) {
+
+    }
+
+    @Override
+    public void onFailedScoreGetUserScore(String msg) {
+        System.out.println("ERROR GETSCORE DARI QUIZVIEWMODEL: "+msg);
     }
 }

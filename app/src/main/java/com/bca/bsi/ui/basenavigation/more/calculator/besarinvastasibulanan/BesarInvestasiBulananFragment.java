@@ -216,7 +216,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
                     BIBLabel.setVisibility(View.VISIBLE);
                     rpLabel.setVisibility(View.VISIBLE);
-                    hasilBIB.setVisibility(View.VISIBLE);
+                    //hasilBIB.setVisibility(View.VISIBLE);
 
                     kalkulasi.setText(getString(R.string.calculator_reset_label));
 
@@ -235,6 +235,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     spinnerDurasiBulanBIB.setEnabled(true);
 
                     BIBLabel.setVisibility(View.GONE);
+                    rpLabel.setText(getString(R.string.rp));
                     rpLabel.setVisibility(View.GONE);
                     hasilBIB.setVisibility(View.GONE);
                     kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
@@ -263,6 +264,24 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         ETBIBTargetHasilInvestasi.setText(formatTargetHasilInvest);
         ETBIBModalAwal.setText(formatModalAwal);
         ETBIBROR.setText(formatRoR);
+
+        /*
+        if(formatHasil.equals("NaN") || formatHasil.equals("-NaN") ){
+            rpLabel.setText(getString(R.string.ror_tidak_boleh_bernilai_nol));
+            hasilBIB.setVisibility(View.INVISIBLE);
+        }else{
+            rpLabel.setVisibility(View.VISIBLE);
+            hasilBIB.setText(formatHasil);
+            */
+
         hasilBIB.setText(formatHasil);
+        if(spinnerDurasiBulanBIB.getSelectedItemPosition()==0 && spinnerDurasiTahunBIB.getSelectedItemPosition()==0
+        || Double.parseDouble(ETBIBROR.getText().toString()) <= 0){
+            rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
+            hasilBIB.setVisibility(View.INVISIBLE);
+        }else {
+            rpLabel.setText(getString(R.string.rp));
+            hasilBIB.setVisibility(View.VISIBLE);
+        }
     }
 }
