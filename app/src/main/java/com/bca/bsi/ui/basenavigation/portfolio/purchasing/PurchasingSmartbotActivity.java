@@ -10,27 +10,29 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.model.ProductRekomen;
-import com.bca.bsi.model.ProductRekomens;
 import com.bca.bsi.utils.BaseActivity;
-import com.bca.bsi.utils.dummydata.DummyData;
 import com.google.gson.Gson;
 
 import java.util.List;
 
-public class PurchasingSmartbotActivity extends BaseActivity {
+public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback {
 
     ImageButton rekomenRoboButton;
     ConstraintLayout roboHitungPopupLayout;
-    ImageButton clearButton,backToolbarButton;
-    TextView toolbarTitle, toolbarSubtitle, minPembelian;
+    ImageButton clearButton, backToolbarButton;
+    TextView toolbarTitle, toolbarSubtitle, minPembelian, tvReturn, tvRisk;
     PurchasingSmartbotAdapter adapter;
     RecyclerView recyclerView;
     EditText etNominal;
+    Portfolio portfolio;
+    PurchasingSmartbotViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class PurchasingSmartbotActivity extends BaseActivity {
         clearButton = findViewById(R.id.ib_clear2);
         minPembelian = findViewById(R.id.tv_min_pembelian_value_p);
         etNominal = findViewById(R.id.et_nominal_pembelian_robo);
+        tvReturn = findViewById(R.id.tv_return_val);
+        tvRisk = findViewById(R.id.tv_risk_val);
 
         // Atur nominal gbs depannya 0
         etNominal.addTextChangedListener(new TextWatcher() {
@@ -56,7 +60,7 @@ public class PurchasingSmartbotActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 char zero = '0';
-                if(etNominal.getText().length()==2 && etNominal.getText().charAt(0)==zero){
+                if (etNominal.getText().length() == 2 && etNominal.getText().charAt(0) == zero) {
                     etNominal.setText("");
                 }
             }
@@ -70,17 +74,23 @@ public class PurchasingSmartbotActivity extends BaseActivity {
         // Terima data dari bottom sheet Bundle atau Custom
         Intent intent = getIntent();
         List<ProductRekomen> productRekomenList;
-        if(intent!=null && intent.hasExtra("data")){ //ini kalau dari bundle
+        if (intent != null && intent.hasExtra("data")) {
+            //ini kalau dari bundle
             String hasil = intent.getStringExtra("data");
             Gson gson = new Gson();
-            ProductRekomens productRekomens = gson.fromJson(hasil, ProductRekomens.class);
-            productRekomenList = productRekomens.getProductRekomenList();
-            minPembelian.setText(intent.getStringExtra("minPembelian"));
-        } else { // ini kalau custom
-            productRekomenList = DummyData.getProductRekomenListPurchase();
-            minPembelian.setText("0");
+            portfolio = gson.fromJson(hasil, Portfolio.class);
+            minPembelian.setText(portfolio.getMinPurchase());
+            tvReturn.setText(portfolio.getExpReturn() + "%");
+            tvRisk.setText(portfolio.getRisk());
+            adapter.setProductRekomenList(portfolio.getProductRekomenList());
+        } else {
+            // ini kalau custom
+            String hasil = intent.getStringExtra("data2");
+            //TODO hit API dari sini
+            viewModel = new ViewModelProvider(this).get(PurchasingSmartbotViewModel.class);
+            viewModel.setCallback(this);
+            viewModel.loadBundle(prefConfig.getAccountNumber(), hasil);
         }
-
 
         //Toolbar variables
         backToolbarButton = findViewById(R.id.img_btn_back_toolbar);
@@ -89,7 +99,6 @@ public class PurchasingSmartbotActivity extends BaseActivity {
 
         // inisialisasi adapter dan recycler
         adapter = new PurchasingSmartbotAdapter();
-        adapter.setProductRekomenList(productRekomenList);
         recyclerView = findViewById(R.id.recycler_product_main_p);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -124,4 +133,19 @@ public class PurchasingSmartbotActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onLoadData(List<Portfolio> bundles) {
+        Portfolio portfolio = bundles.get(0);
+        adapter.setProductRekomenList(portfolio.getProductRekomenList());
+        adapter.notifyDataSetChanged();
+
+        minPembelian.setText(portfolio.getMinPurchase());
+        tvReturn.setText(portfolio.getExpReturn() + "%");
+        tvRisk.setText(portfolio.getRisk());
+    }
+
+    @Override
+    public void onFail(String msg) {
+        showSnackBar(msg);
+    }
 }

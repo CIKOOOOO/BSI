@@ -103,7 +103,7 @@
         android:text="10/12/2020"
         app:layout_constraintStart_toEndOf="@id/calendar_logo_i"
         app:layout_constraintTop_toTopOf="@id/calendar_logo_i"
-        android:id="@+id/date_i"/>
+        android:id="@+id/date_h"/>
 
     <TextView
         android:id="@+id/tv_share_h"

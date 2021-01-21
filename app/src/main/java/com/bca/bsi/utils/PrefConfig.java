@@ -22,6 +22,18 @@ public class PrefConfig {
         editor.apply();
     }
 
+    public void setTipsOfTheWeek(boolean tipsActivated) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(context.getString(R.string.pref_tips_of_the_week), tipsActivated);
+        editor.apply();
+    }
+
+    public void removeTokenAccess() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getString(R.string.pref_token_access), Constant.EMPTY);
+        editor.apply();
+    }
+
     public void setUser(User.ForumUser user, User.WelmaUser welmaUser) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(context.getString(R.string.pref_bca_id), welmaUser.getBcaID());
@@ -108,4 +120,8 @@ public class PrefConfig {
     public String getImageProfile() {
         return sharedPreferences.getString(context.getString(R.string.pref_img_profile), Constant.EMPTY);
     }
+    public Boolean getTipsActivated() {
+        return sharedPreferences.getBoolean(context.getString(R.string.pref_tips_of_the_week),true);
+    }
+
 }

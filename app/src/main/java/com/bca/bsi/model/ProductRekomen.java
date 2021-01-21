@@ -1,7 +1,28 @@
 package com.bca.bsi.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ProductRekomen {
-    private String productName, lastDate, percentage, kinerja, nab, jenisReksadana;
+    @SerializedName("id_reksa_dana")
+    private String reksaId;
+
+    @SerializedName("nama_reksa_dana")
+    private String productName;
+
+    @SerializedName("update_date")
+    private String lastDate;
+
+    @SerializedName("persentase")
+    private String percentage;
+
+    @SerializedName("kinerja_terakhir")
+    private String kinerja;
+
+    @SerializedName("nab")
+    private String nab;
+
+    @SerializedName("jenis_reksa_dana")
+    private String jenisReksadana;
 
     public void setPercentage(String percentage) {
         this.percentage = percentage;
@@ -38,5 +59,13 @@ public class ProductRekomen {
 
     public String getJenisReksadana() {
         return jenisReksadana;
+    }
+
+    public String getReksaId() {
+        return reksaId;
+    }
+
+    public void setReksaId(String reksaId) {
+        this.reksaId = reksaId;
     }
 }

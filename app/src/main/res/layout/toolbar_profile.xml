@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar_back"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_for_toolbar"
+    android:background="@color/color_base_welma">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/toolbar_profile_title"
+            android:textColor="@color/white_palette"
+            android:textStyle="bold"
+            android:textSize="@dimen/size_for_17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="PROFILE" />
+
+        <ImageButton
+            android:id="@+id/img_btn_setting"
+            android:layout_width="@dimen/size_for_40dp"
+            android:layout_height="@dimen/size_for_40dp"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:background="@drawable/ic_setting"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.Toolbar>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_filter_bg"
+    tools:context=".ui.basenavigation.profile.SettingsActivity">
+
+    <include
+        android:id="@+id/toolbar_back"
+        layout="@layout/toolbar_back" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_back">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/personal_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:layout_marginTop="15dp"
+                android:text="PERSONAL INFO"
+                android:textColor="@color/gray_filter_text"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ganti_pin"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/size_for_15dp"
+                android:background="@color/white_palette"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="Ganti PIN"
+                android:textColor="@color/java_palette"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/personal_info" />
+
+            <TextView
+                android:id="@+id/ganti_password"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/size_for_2dp"
+                android:background="@color/white_palette"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="Ganti Password"
+                android:textColor="@color/java_palette"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/ganti_pin" />
+
+            <TextView
+                android:id="@+id/preference"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:layout_marginTop="15dp"
+                android:text="PREFERENCE"
+                android:textColor="@color/gray_filter_text"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ganti_password"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tips"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/size_for_15dp"
+                android:background="@color/white_palette"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="Tips of The Week"
+                android:textColor="@color/java_palette"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/preference" />
+
+            <TextView
+                android:id="@+id/information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:layout_marginTop="15dp"
+                android:text="INFORMATION"
+                android:textColor="@color/gray_filter_text"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tips"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <TextView
+                android:id="@+id/ketentuan_welma"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/size_for_15dp"
+                android:background="@color/white_palette"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="Ketentuan Welma"
+                android:textColor="@color/java_palette"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/information" />
+
+            <TextView
+                android:id="@+id/ketentuan_bcaid"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/size_for_2dp"
+                android:background="@color/white_palette"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="Ketentuan BCA ID"
+                android:textColor="@color/java_palette"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/ketentuan_welma" />
+            <TextView
+                android:id="@+id/tv_logout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/size_for_20dp"
+                android:background="@color/white_palette"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="Logout"
+                android:textColor="@color/java_palette"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/ketentuan_bcaid" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/version"
+                app:layout_constraintTop_toBottomOf="@id/tv_logout"
+                android:background="@color/white_palette"
+                android:text="Versi saat ini 1.0.10"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:paddingTop="@dimen/size_for_20dp"
+                />
+            <ImageView
+                android:id="@+id/img_bcaver"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/img_bca_logo"
+                app:layout_constraintTop_toTopOf="@id/version"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/size_for_50dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BCA terdaftar dan diawasi Oleh OJK"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/img_bcaver"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="5dp"/>
+
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_arrow_next_light"
+                app:layout_constraintTop_toTopOf="@id/ganti_pin"
+                app:layout_constraintBottom_toBottomOf="@id/ganti_pin"
+                app:layout_constraintEnd_toEndOf="@id/ganti_pin"
+                android:layout_marginEnd="20dp"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_arrow_next_light"
+                app:layout_constraintTop_toTopOf="@id/ganti_password"
+                app:layout_constraintBottom_toBottomOf="@id/ganti_password"
+                app:layout_constraintEnd_toEndOf="@id/ganti_pin"
+                android:layout_marginEnd="20dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_arrow_next_light"
+                app:layout_constraintTop_toTopOf="@id/tv_logout"
+                app:layout_constraintBottom_toBottomOf="@id/tv_logout"
+                app:layout_constraintEnd_toEndOf="@id/ganti_pin"
+                android:layout_marginEnd="20dp"/>
+
+            <Switch
+                android:id="@+id/sw_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="@id/tips"
+                app:layout_constraintEnd_toEndOf="@id/tips"
+                app:layout_constraintTop_toTopOf="@id/tips" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

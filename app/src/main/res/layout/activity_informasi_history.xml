@@ -68,6 +68,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:id="@+id/nested_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_bar_informasi_history"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -92,12 +93,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="@dimen/size_for_10dp"
                 android:id="@+id/recycler_informasi_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/size_for_70dp"
+                android:layout_marginTop="@dimen/size_for_10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/kategori_produk"/>
+                app:layout_constraintTop_toBottomOf="@id/kategori_produk" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

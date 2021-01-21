@@ -193,6 +193,10 @@
     <string name="robo_bantu2">menghitung persentase porsi investasi</string>
     <string name="robo_bantu3">pada produk reksa dana.</string>
 
+    <string name="profile_rekening">
+        Kamu belum punya rekening yang terhubung dengan produk reksa dana. Silahkan Hubungi Halo BCA 1500888 untuk melakukan pendaftaran data investor.
+    </string>
+
     <string name="follower">Follower</string>
     <string name="following">Following</string>
     <string name="choose_header">Pilih Latar Header</string>
@@ -212,6 +216,7 @@
     <string name="pref_token_fcm">pref_token_fcm</string>
     <string name="pref_account_number">pref_account_number</string>
     <string name="pref_token_user">pref_token_user</string>
+    <string name="pref_tips_of_the_week">pref_tips_of_the_week</string>
 
     <!--FORUM USER-->
     <string name="pref_profile_id">pref_profile_id</string>

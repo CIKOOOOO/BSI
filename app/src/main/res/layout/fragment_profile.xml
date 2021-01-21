@@ -1,14 +1,339 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.basenavigation.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="profile" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <include
+            android:id="@+id/toolbar_profile"
+            layout="@layout/toolbar_profile" />
+
+        <TextView
+            android:id="@+id/tv_profil_nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size_for_40dp"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:text="STEFANUS MICHAEL SONJAYA"
+            android:textColor="@color/white_palette"
+            android:textSize="@dimen/size_for_23sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_profile" />
+
+        <TextView
+            android:id="@+id/bg1"
+            android:layout_width="@dimen/size_for_0dp"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="@dimen/size_for_40dp"
+            android:layout_marginTop="@dimen/size_for_30dp"
+            android:background="@drawable/rectangle_rounded_blue_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_profil_nama" />
+
+        <TextView
+            android:id="@+id/bg2"
+            android:layout_width="@dimen/size_for_0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:background="@drawable/rectangle_rounded_blue_profile"
+            app:layout_constraintEnd_toEndOf="@id/bg1"
+            app:layout_constraintStart_toStartOf="@id/bg1"
+            app:layout_constraintTop_toBottomOf="@id/bg1" />
+
+        <TextView
+            android:id="@+id/bg3"
+            android:layout_width="@dimen/size_for_0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:background="@drawable/rectangle_rounded_blue_profile"
+            app:layout_constraintEnd_toEndOf="@id/bg2"
+            app:layout_constraintStart_toStartOf="@id/bg2"
+            app:layout_constraintTop_toBottomOf="@id/bg2" />
+
+        <!--    ISI BG1-->
+
+        <ImageView
+            android:id="@+id/icon_profil_risiko"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_profil_resiko"
+            app:layout_constraintBottom_toBottomOf="@id/bg1"
+            app:layout_constraintStart_toStartOf="@id/bg1"
+            app:layout_constraintTop_toTopOf="@id/bg1" />
+
+        <TextView
+            android:id="@+id/text_profil_risiko"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Profil Risiko"
+            android:textColor="@color/white_palette"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/bg1"
+            app:layout_constraintStart_toEndOf="@id/icon_profil_risiko"
+            app:layout_constraintTop_toTopOf="@id/bg1" />
+
+        <TextView
+            android:id="@+id/tv_profil_risiko"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="Agresif"
+            android:textColor="@color/white_palette"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/bg1"
+            app:layout_constraintStart_toEndOf="@id/text_profil_risiko"
+            app:layout_constraintTop_toTopOf="@id/bg1" />
+
+        <!--    ISI BG2-->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_bca_id"
+            app:layout_constraintBottom_toBottomOf="@id/bg2"
+            app:layout_constraintStart_toStartOf="@id/icon_profil_risiko"
+            app:layout_constraintTop_toTopOf="@id/bg2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BCA ID"
+            android:textColor="@color/white_palette"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/bg2"
+            app:layout_constraintStart_toStartOf="@id/text_profil_risiko"
+            app:layout_constraintTop_toTopOf="@id/bg2" />
+
+        <TextView
+            android:id="@+id/tv_bca_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ST****S"
+            android:textColor="@color/white_palette"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/bg2"
+            app:layout_constraintStart_toStartOf="@id/tv_profil_risiko"
+            app:layout_constraintTop_toTopOf="@id/bg2" />
+
+        <!--    ISI BG3-->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_email"
+            app:layout_constraintBottom_toBottomOf="@id/bg3"
+            app:layout_constraintStart_toStartOf="@id/icon_profil_risiko"
+            app:layout_constraintTop_toTopOf="@id/bg3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="@color/white_palette"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/bg3"
+            app:layout_constraintStart_toStartOf="@id/text_profil_risiko"
+            app:layout_constraintTop_toTopOf="@id/bg3" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S**...@GMAIL.COM"
+            android:textColor="@color/white_palette"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/bg3"
+            app:layout_constraintStart_toStartOf="@id/tv_profil_risiko"
+            app:layout_constraintTop_toTopOf="@id/bg3" />
+
+        <!--    SBN ONLINE BOX-->
+        <!--    UPPER-->
+        <TextView
+            android:id="@+id/text_sbn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/size_for_20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rectangle_upper_rounded_blue_profile"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/size_for_20dp"
+            android:text="SBN Online"
+            android:textColor="@color/white_palette"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bg3" />
+
+        <TextView
+            android:id="@+id/tv_terdaftar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:text="Belum Terdaftar"
+            android:textColor="@color/french_pass_palette"
+            app:layout_constraintBottom_toBottomOf="@id/text_sbn"
+            app:layout_constraintEnd_toEndOf="@id/text_sbn"
+            app:layout_constraintTop_toTopOf="@id/text_sbn" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/circle_blue"
+            app:layout_constraintBottom_toBottomOf="@id/text_sbn"
+            app:layout_constraintEnd_toStartOf="@id/tv_terdaftar"
+            app:layout_constraintTop_toTopOf="@id/text_sbn" />
+
+        <!--    LOWER-->
+        <TextView
+            android:id="@+id/bg4"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="0.5dp"
+            android:background="@drawable/rectangle_lower_rounded_blue_profile"
+            app:layout_constraintEnd_toEndOf="@id/text_sbn"
+            app:layout_constraintStart_toStartOf="@id/text_sbn"
+            app:layout_constraintTop_toBottomOf="@id/text_sbn" />
+
+        <TextView
+            android:id="@+id/text_SID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:text="SID"
+            android:textColor="@color/white_palette"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/bg4"
+            app:layout_constraintTop_toTopOf="@id/bg4" />
+
+        <TextView
+            android:id="@+id/tv_SID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="IDD1804RL156230"
+            android:textColor="@color/white_palette"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/text_SID"
+            app:layout_constraintTop_toBottomOf="@id/text_SID" />
+
+        <TextView
+            android:id="@+id/tv_daftar"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:background="@drawable/rectangle_stroke_white"
+            android:paddingVertical="15dp"
+            android:paddingLeft="@dimen/size_for_15dp"
+            android:text="DAFTAR"
+            android:textColor="@color/white_palette"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/bg4"
+            app:layout_constraintEnd_toEndOf="@id/bg4"
+            app:layout_constraintTop_toTopOf="@id/bg4" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_arrow_daftar"
+            app:layout_constraintBottom_toBottomOf="@id/tv_daftar"
+            app:layout_constraintEnd_toEndOf="@id/tv_daftar"
+            app:layout_constraintTop_toTopOf="@id/tv_daftar" />
+
+        <!--        REKENING-->
+        <!--UPPER-->
+        <TextView
+            android:id="@+id/text_rekening"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/size_for_20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rectangle_upper_rounded_blue_profile"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/size_for_20dp"
+            android:text="Rekening"
+            android:textColor="@color/white_palette"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bg4" />
+
+        <TextView
+            android:id="@+id/tv_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:text="UPDATE"
+            android:textColor="@color/french_pass_palette"
+            app:layout_constraintBottom_toBottomOf="@id/text_rekening"
+            app:layout_constraintEnd_toEndOf="@id/text_rekening"
+            app:layout_constraintTop_toTopOf="@id/text_rekening" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/ic_update_profile"
+            app:layout_constraintBottom_toBottomOf="@id/text_rekening"
+            app:layout_constraintEnd_toStartOf="@id/tv_update"
+            app:layout_constraintTop_toTopOf="@id/text_rekening" />
+
+        <!--        LOWER-->
+        <TextView
+            android:id="@+id/bg5"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="0.5dp"
+            android:background="@drawable/rectangle_lower_rounded_blue_profile2"
+            app:layout_constraintEnd_toEndOf="@id/text_sbn"
+            app:layout_constraintStart_toStartOf="@id/text_rekening"
+            app:layout_constraintTop_toBottomOf="@id/text_rekening" />
+
+        <TextView
+            android:id="@+id/text_rekening_reksadana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:text="Rekening Reksa Dana"
+            android:textColor="@color/white_palette"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/bg5"
+            app:layout_constraintTop_toTopOf="@id/bg5" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:paddingHorizontal="@dimen/size_for_15dp"
+            android:paddingVertical="@dimen/size_for_20dp"
+            android:lineSpacingExtra="5dp"
+            android:layout_marginHorizontal="@dimen/size_for_20dp"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:background="@drawable/rectangle_rounded_blue_profile2"
+            android:text="@string/profile_rekening"
+            android:textColor="@color/white_palette"
+            app:layout_constraintEnd_toEndOf="@id/bg5"
+            app:layout_constraintStart_toStartOf="@id/bg5"
+            app:layout_constraintTop_toBottomOf="@id/text_rekening_reksadana"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -49,4 +49,8 @@
     <color name="gray_filter_text">#737577</color>
     <color name="aqua_squeeze_palette">#E2F2F3</color>
     <color name="fountain_blue_palette">#66B8C2</color>
+    <color name="darkblue_profile_box">#065760</color>
+    <color name="blue_profile_box">#04646c</color>
+    <color name="blue_dot_in_profile">#3d8f98</color>
+    <color name="blue_profile_box2">#04646c</color>
 </resources>

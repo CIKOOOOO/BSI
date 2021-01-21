@@ -7,25 +7,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.PortfolioAdapter;
 import com.bca.bsi.model.Portfolio;
+import com.bca.bsi.ui.basenavigation.portfolio.information.InformasiHistoryActivity;
 import com.bca.bsi.ui.basenavigation.portfolio.produkmenu.ProdukChoiceActivity;
 import com.bca.bsi.utils.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.onItemClick {
+public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.onItemClick, IPortfolioCallback {
     private PortfolioAdapter adapter;
     private ProgressBar progressBar;
     private ImageButton infoButton;
+    private TextView reksaSelector, tvPercentReksadana;
+
+    private PortfolioViewModel portfolioViewModel;
 
 
     private onBundleClick onBundleClick;
@@ -39,6 +45,17 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
     public void toReksadanaList() {
         Intent intent = new Intent(mActivity, ProdukChoiceActivity.class);
         mActivity.startActivity(intent);
+    }
+
+    @Override
+    public void onLoadData(List<Portfolio> bundles) {
+        adapter.setPortfolioList(bundles);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFail(String msg) {
+        showSnackBar(msg);
     }
 
     public interface onBundleClick{
@@ -72,7 +89,11 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.HORIZONTAL, false));
         adapter = new PortfolioAdapter(this);
         recyclerView.setAdapter(adapter);
-        adapter.setPortfolioList(getPortfolioList());
+//        adapter.setPortfolioList(getPortfolioList());
+
+        portfolioViewModel = new ViewModelProvider(this).get(PortfolioViewModel.class);
+        portfolioViewModel.setCallback(this);
+        portfolioViewModel.loadBundle(prefConfig.getProfileRisiko(),prefConfig.getAccountNumber());
 
 
         //info robo
@@ -84,14 +105,25 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
             }
         });
 
-
+        // reksa selected
+        reksaSelector = view.findViewById(R.id.tv_reksa_selector);
+        reksaSelector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), InformasiHistoryActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         // setting progressbar percentage
+        tvPercentReksadana = view.findViewById(R.id.tv_percent_reksadana);
+        int percentReksaValue = 100;
+        tvPercentReksadana.setText(percentReksaValue+"%");
         ProgressBar progressBar_reksa = view.findViewById(R.id.percent_reksadana);
-        progressBar_reksa.setProgress(50);
+        progressBar_reksa.setProgress(percentReksaValue);
 
         ProgressBar progressBar_obligasi = view.findViewById(R.id.percent_obligasi);
-        progressBar_obligasi.setProgress(20);
+        progressBar_obligasi.setProgress(0);
 
     }
 

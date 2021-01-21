@@ -66,7 +66,15 @@ public class OutputResponse {
         @SerializedName("kuis_data")
         private KuisData kuisData;
 
+        @SerializedName("bundles")
+        private List<Portfolio> bundles;
+
+
         public OutputSchema() {
+        }
+
+        public List<Portfolio> getBundles() {
+            return bundles;
         }
 
         public List<Product.ReksaDana> getReksaDanaList() {
@@ -94,5 +102,6 @@ public class OutputResponse {
         }
 
         public KuisData getKuisData() { return kuisData; }
+
     }
 }
