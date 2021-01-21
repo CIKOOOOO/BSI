@@ -50,6 +50,12 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         tvReturn = findViewById(R.id.tv_return_val);
         tvRisk = findViewById(R.id.tv_risk_val);
 
+        // inisialisasi adapter dan recycler
+        adapter = new PurchasingSmartbotAdapter();
+        recyclerView = findViewById(R.id.recycler_product_main_p);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
         // Atur nominal gbs depannya 0
         etNominal.addTextChangedListener(new TextWatcher() {
             @Override
@@ -96,12 +102,6 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         backToolbarButton = findViewById(R.id.img_btn_back_toolbar);
         toolbarTitle = findViewById(R.id.tv_title_toolbar_back);
         toolbarSubtitle = findViewById(R.id.tv_child_toolbar_back);
-
-        // inisialisasi adapter dan recycler
-        adapter = new PurchasingSmartbotAdapter();
-        recyclerView = findViewById(R.id.recycler_product_main_p);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
 
         //Toolbar
         toolbarTitle.setText("PEMBELIAN");

@@ -1,23 +1,30 @@
 package com.bca.bsi.ui.basenavigation.portfolio.information;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Portfolio;
+import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.utils.BaseActivity;
-import com.bca.bsi.utils.dummydata.DummyData;
+import com.bca.bsi.utils.Utils;
 
-public class InformasiHistoryActivity extends BaseActivity implements View.OnClickListener {
+import java.util.List;
+
+public class InformasiHistoryActivity extends BaseActivity implements View.OnClickListener, IInformationHistoryCallback, InformasiHistoryAdapter.onClickShare {
 
     private InformasiHistoryAdapter informasiHistoryAdapter;
     private TextView toolbarTitle, toolbarSubtitle;
     private ImageButton toolbarBackButton;
+    private InformationHistoryViewModel viewModel;
 
     TextView tvInfromasi, tvHistory;
 
@@ -26,10 +33,9 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informasi_history);
         initVar();
-
     }
 
-    private void initVar(){
+    private void initVar() {
         // TOOLBAR
         toolbarTitle = findViewById(R.id.tv_title_toolbar_back);
         toolbarSubtitle = findViewById(R.id.tv_child_toolbar_back);
@@ -48,13 +54,15 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
         tvInfromasi = findViewById(R.id.tv_start_informasi_history);
         tvHistory = findViewById(R.id.tv_end_informasi_history);
 
-        informasiHistoryAdapter = new InformasiHistoryAdapter();
+        informasiHistoryAdapter = new InformasiHistoryAdapter(this);
+        viewModel = new ViewModelProvider(this).get(InformationHistoryViewModel.class);
+        viewModel.setCallback(this);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_informasi_history);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(informasiHistoryAdapter);
 
-        switchButton(1,this);
+        switchButton(1, this);
         tvInfromasi.setOnClickListener(this);
         tvHistory.setOnClickListener(this);
     }
@@ -66,7 +74,7 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
                 tvHistory.setTextColor(context.getResources().getColor(R.color.white_palette));
                 tvInfromasi.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvHistory.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
-                informasiHistoryAdapter.setProducts(DummyData.getProductsInformation());
+                viewModel.loadData(1, prefConfig.getTokenUser(), prefConfig.getAccountNumber());
                 informasiHistoryAdapter.setType(InformasiHistoryAdapter.INFORMATION);
                 break;
             case 2:
@@ -74,12 +82,11 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
                 tvInfromasi.setTextColor(context.getResources().getColor(R.color.white_palette));
                 tvHistory.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvInfromasi.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
-                informasiHistoryAdapter.setProducts(DummyData.getProductsHistory());
+//                informasiHistoryAdapter.setProducts(DummyData.getProductsHistory());
+                viewModel.loadData(2, prefConfig.getTokenUser(), prefConfig.getAccountNumber());
                 informasiHistoryAdapter.setType(InformasiHistoryAdapter.HISTORY);
                 break;
         }
-
-        informasiHistoryAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -92,5 +99,38 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
                 switchButton(2, v.getContext());
                 break;
         }
+    }
+
+    @Override
+    public void onLoadPortfolioData(List<Portfolio.Information> informationList) {
+        informasiHistoryAdapter.setInformationList(informationList);
+        informasiHistoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoadHistoryTransaction(List<Portfolio.History> historyList) {
+        informasiHistoryAdapter.setHistoryList(historyList);
+        informasiHistoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailed(String msg) {
+        showSnackBar(msg);
+    }
+
+    @Override
+    public void onShareNews(Portfolio.Information information) {
+        Intent intent = new Intent(this, PostActivity.class);
+        intent.putExtra(PostActivity.DATA, Utils.toJSON(information));
+        intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_TRADE);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onShareNews(Portfolio.History history) {
+        Intent intent = new Intent(this, PostActivity.class);
+        intent.putExtra(PostActivity.DATA, Utils.toJSON(history));
+        intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_TRADE);
+        startActivity(intent);
     }
 }

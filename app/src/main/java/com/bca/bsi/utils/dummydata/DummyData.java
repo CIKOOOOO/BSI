@@ -77,17 +77,6 @@ public class DummyData {
 
     private static final String[] categoryID = {"1", "2", "3"};
     private static final String[] categoryName = {"Category 1", "Category 2", "Category 3"};
-    private static final String[] percentage2 = {"10","20","30"};
-
-    private static final String[] filterJenisReksaName = {"Pasar Uang","Pendapatan Tetap","Campuran","Saham","Terproteksi"};
-    private static final boolean[] isChoosenFilter = {false,false,false,false,false};
-    private static final boolean[] isChoosenFilterDefault = {true,true,true,true,true};
-
-    private static final String[] sortJenisReksaName = {"Nama Produk","Nama Produk","Kinerja","Kinerja"};
-    private static final String[] sortTypeStart = {"A","Z","Tinggi","Rendah"};
-    private static final String[] sortTypeEnd = {"Z","A","Rendah","Tinggi"};
-    private static final boolean[] isChoosenSort = {true,false,false,false};
-    private static final boolean[] isChoosenSortDefault = {false,false,false,false};
 
     private static  final String[] ihReksaName = {"Bahana Pendapatan Tetap Makara Prima","Ashmore lalala","Batavia itu Jakarta"};
     private static  final String[] infJenisReksa = {"Pendapatan Tetap","Saham","Terproteksi"};

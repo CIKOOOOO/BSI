@@ -52,4 +52,89 @@ public class Portfolio {
     public List<ProductRekomen> getProductRekomenList() {
         return productRekomenList;
     }
+
+    public static class Information {
+
+        @SerializedName("nama_reksa_dana")
+        private String name;
+
+        @SerializedName("kategori")
+        private String jenis;
+
+        @SerializedName("reksa_dana_unit")
+        private Double unit;
+
+        @SerializedName("total")
+        private Double cost;
+
+        @SerializedName("closing_date")
+        private String date;
+
+        @SerializedName("profit")
+        private Double raise;
+
+        public Information() {
+        }
+
+        public Double getRaise() {
+            return raise;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getJenis() {
+            return jenis;
+        }
+
+        public Double getUnit() {
+            return unit;
+        }
+
+        public Double getCost() {
+            return cost;
+        }
+
+        public String getDate() {
+            return date;
+        }
+    }
+
+    public static class History {
+
+        @SerializedName("transaction_type")
+        private String transactionType;
+        @SerializedName("nama_reksa_dana")
+        private String reksadanaName;
+        @SerializedName("date")
+        private String date;
+        @SerializedName("amount")
+        private String amount;
+        @SerializedName("reksa_dana_unit")
+        private String reksaDanaUnit;
+
+        public History() {
+        }
+
+        public String getTransactionType() {
+            return transactionType;
+        }
+
+        public String getReksadanaName() {
+            return reksadanaName;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public String getAmount() {
+            return amount;
+        }
+
+        public String getReksaDanaUnit() {
+            return reksaDanaUnit;
+        }
+    }
 }

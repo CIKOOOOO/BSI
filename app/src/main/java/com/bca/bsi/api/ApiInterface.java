@@ -13,6 +13,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -53,4 +54,12 @@ public interface ApiInterface {
 
     @PUT("quiz/score")
     Call<OutputResponse> putUserScore(@Header("category_id") int categoryId, @Header("bca_id") String bcaId, @Header("score") int score);
+
+    @Headers({"Content-Type:application/json","client_id: OV4B2FXHY1Y7W0WMSUUB","hashcode:x"})
+    @GET("portfolio")
+    Call<OutputResponse> getInformationPortfolioData(@Header("token") String token, @Header("no_rekening") String nomor_rekening);
+
+    @Headers({"Content-Type:application/json","client_id: OV4B2FXHY1Y7W0WMSUUB","hashcode:x"})
+    @GET("transaction")
+    Call<OutputResponse> getHistoryTransaction(@Header("token") String token, @Header("no_rekening") String nomor_rekening);
 }

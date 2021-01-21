@@ -43,7 +43,7 @@ public class OutputResponse {
         }
     }
 
-    public static class OutputSchema{
+    public static class OutputSchema {
 
         @SerializedName("forum_user")
         private User.ForumUser forumUser;
@@ -71,6 +71,12 @@ public class OutputResponse {
 
         @SerializedName("user_score")
         private KuisData.UserScore userScore;
+
+        @SerializedName("portfolio")
+        private List<Portfolio.Information> informationList;
+
+        @SerializedName("transaction_history")
+        private List<Portfolio.History> historyList;
 
         public OutputSchema() {
         }
@@ -103,8 +109,20 @@ public class OutputResponse {
             return transactionResult;
         }
 
-        public KuisData getKuisData() { return kuisData; }
+        public KuisData getKuisData() {
+            return kuisData;
+        }
 
-        public KuisData.UserScore getUserScore() { return userScore; };
+        public KuisData.UserScore getUserScore() {
+            return userScore;
+        }
+
+        public List<Portfolio.Information> getInformationList() {
+            return informationList;
+        }
+
+        public List<Portfolio.History> getHistoryList() {
+            return historyList;
+        }
     }
 }

@@ -52,6 +52,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
     public static final String NEW_STANDARD_POST = "new_standard_post";
     public static final String EDIT_POST = "edit_post";
     public static final String SHARE_NEWS = "share_news";
+    public static final String SHARE_TRADE = "share_trade";
 
     public static final String DATA = "data";
     public static final String POST_TYPE = "post_type";
@@ -157,6 +158,9 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                             postImageAdapter.setPromoNews(this.promoNews);
                             recyclerImageNews.setAdapter(postImageAdapter);
                         }
+                        break;
+                    case SHARE_TRADE:
+                        clShareTrade.setVisibility(View.VISIBLE);
                         break;
                 }
                 tvTitleToolbar.setText(titleToolbar);
