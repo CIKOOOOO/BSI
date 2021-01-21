@@ -30,7 +30,7 @@ public class PrefConfig {
 
     public void removeTokenAccess() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_token_access), Constant.EMPTY);
+        editor.putString(context.getString(R.string.pref_token_user), Constant.EMPTY);
         editor.apply();
     }
 
