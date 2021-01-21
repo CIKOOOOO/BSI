@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.more.learningmenu.materi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -16,14 +17,16 @@ import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningMateriAdapter;
+import com.bca.bsi.model.KuisData;
 import com.bca.bsi.model.LearningChapter;
+import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.IQuizCallback;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.QuizActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.List;
 
-public class MateriActivity extends BaseActivity implements View.OnClickListener, LearningMateriAdapter.onItemClick {
+public class MateriActivity extends BaseActivity implements View.OnClickListener, LearningMateriAdapter.onItemClick, IMateriQuizCallback {
 
     private ImageButton backBtn;
     private TextView titlePage;
@@ -34,6 +37,7 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
     private Button button;
     private ImageView pagination;
     private String topic;
+    private MateriQuizViewModel viewModel;
 
     private int currentPage;
 
@@ -50,43 +54,39 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
         Intent intent = getIntent();
         topic = intent.getStringExtra("topic");
 
-        //BIKIN SWITCH CASE DI SINI
-        switch (topic){
-            case "1":
-                titlePage.setText(getString(R.string.reksadana_capslock));
-                break;
-
-            case "2":
-                titlePage.setText(getString(R.string.obligasi_capslock));
-                break;
-
-            case "3":
-                titlePage.setText(getString(R.string.asuransi_capslock));
-                break;
-        }
-
         backBtn.setOnClickListener(this);
 
         //BIKIN SWITCH CASE DI SINI
         switch (topic){
             case "1":
+                titlePage.setText(getString(R.string.reksadana_capslock));
                 models = DummyData.setMateriReksaDana();
+                System.out.println("INI MODEEEEEEEEEEL LEARNING: "+models.get(0).getTitle());
                 break;
 
             case "2":
+                titlePage.setText(getString(R.string.obligasi_capslock));
                 models = DummyData.setMateriObligasi();
                 break;
 
             case "3":
+                titlePage.setText(getString(R.string.asuransi_capslock));
                 models = DummyData.setMateriAsuransi();
                 break;
         }
 
-        adapter = new LearningMateriAdapter(models,this, this);
+        viewModel = new ViewModelProvider(this).get(MateriQuizViewModel.class);
+        viewModel.setCallback(this);
+
+        viewModel.getScoreData("ychris",topic);
 
         viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(adapter);
         viewPager.setPadding(50,0,50, 0);
+
+        /*
+        adapter = new LearningMateriAdapter(models,this, this,null);
+        viewPager.setAdapter(adapter);
+        */
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -96,6 +96,7 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
 
             @Override
             public void onPageSelected(int position) {
+                System.out.println("INI TOPIC YANG TERPILIH: "+topic);
                 currentPage = position;
                 switch (position){
                     case 0:
@@ -162,5 +163,16 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void onRetriveData(KuisData.UserScore userScore) {
+        adapter = new LearningMateriAdapter(models,this, this,userScore);
+        viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onFailed(String msg) {
+        System.out.println("ERROR: "+msg);
     }
 }

@@ -258,12 +258,24 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
         ETBHIModalAwal.setText(formatModalAwal);
         ETBHIIvestasiBulanan.setText(formatInvestBulanan);
         ETBHIROR.setText(formatRoR);
+
+        /*
         if(hasilKalkulasi.equals("NaN") || hasilKalkulasi.equals("-NaN") ){
             rpLabel.setText(getString(R.string.ror_tidak_boleh_bernilai_nol));
             hasilBHI.setVisibility(View.INVISIBLE);
         }else{
             rpLabel.setVisibility(View.VISIBLE);
             hasilBHI.setText(hasilKalkulasi);
+            */
+
+        hasilBHI.setText(hasilKalkulasi);
+        if(spinnerDurasiBulanBHI.getSelectedItemPosition()==0 && spinnerDurasiTahunBHI.getSelectedItemPosition()==0
+                || Double.parseDouble(ETBHIROR.getText().toString()) <= 0) {
+            rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
+            hasilBHI.setVisibility(View.INVISIBLE);
+        }else{
+            rpLabel.setText(getString(R.string.rp));
+            hasilBHI.setVisibility(View.VISIBLE);
         }
     }
 }

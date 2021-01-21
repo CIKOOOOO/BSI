@@ -74,4 +74,80 @@ public class QuizViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public void getScore(String bcaId, String categoryId){
+        Call<OutputResponse> call = apiInterface.getUserScore(Integer.parseInt(categoryId),bcaId);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                if(response.body() != null){
+                    System.out.println("GETUSERSCORE: INI RESPONSE BODY TIDAK SAMA DENGAN NULL");
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+
+                    if(errorSchema.getErrorCode().equals("200")){
+                        System.out.println("GETUSERSCORE: INI ERROR SCHEMA NYA 200");
+                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                        KuisData.UserScore userScore = outputSchema.getUserScore();
+                        if(userScore != null){
+                            System.out.println("GETUSERSCORE: DATAA ADAAAAAAAAAAAAAAAAAAAAAA");
+                            callback.onRetrieveDataGetUserScore(userScore);
+                        }else {
+                            callback.onFailedScoreGetUserScore("Data is null");
+                        }
+                    }else {
+                        System.out.println("GETUSERSCORE: ERROR SCHEMA NDA 200");
+                        callback.onFailedScoreGetUserScore(errorSchema.getErrorMessage());
+                    }
+
+                }else {
+                    System.out.println("GETUSERSCORE: Ini data null");
+                    callback.onFailedScoreGetUserScore("Jaringan Anda hilang");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                System.out.println("GETUSERSCORE: nda masuk ke API"+ t.getMessage());
+                callback.onFailedScoreGetUserScore("Jaringan Anda hilang");
+            }
+        });
+    }
+
+    public void putUserScore(String bcaId, String categoryId, int score){
+        Call<OutputResponse> call = apiInterface.putUserScore(Integer.parseInt(categoryId),bcaId,score);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                if(response.body() != null){
+                    System.out.println("PUTUSERSCORE: INI RESPONSE BODY TIDAK SAMA DENGAN NULL");
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if(errorSchema.getErrorCode().equals("200")) {
+                        System.out.println("PUTUSERSCORE: INI ERROR SCHEMA NYA 200");
+                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                        KuisData.UserScore userScore = outputSchema.getUserScore();
+                        if(userScore != null){
+                            System.out.println("PUTUSERSCORE: DATAA ADAAAAAAAAAAAAAAAAAAAAAA");
+                            callback.onRetrieveDataGetUserScore(userScore);
+                        }else {
+                            callback.onFailedScoreGetUserScore("Data is null");
+                        }
+                    }else{
+                        System.out.println("PUTUSERSCORE: ERROR SCHEMA NDA 200");
+                        callback.onFailedScoreGetUserScore(errorSchema.getErrorMessage());
+                    }
+                }else{
+                    System.out.println("PUTUSERSCORE: Ini data null");
+                    callback.onFailedScoreGetUserScore("Jaringan Anda hilang");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                System.out.println("GETUSERSCORE: nda masuk ke API"+ t.getMessage());
+                callback.onFailedScoreGetUserScore("Jaringan Anda hilang");
+            }
+        });
+    }
 }

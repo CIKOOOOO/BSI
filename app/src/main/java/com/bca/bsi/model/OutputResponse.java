@@ -66,6 +66,9 @@ public class OutputResponse {
         @SerializedName("kuis_data")
         private KuisData kuisData;
 
+        @SerializedName("user_score")
+        private KuisData.UserScore userScore;
+
         public OutputSchema() {
         }
 
@@ -94,5 +97,7 @@ public class OutputResponse {
         }
 
         public KuisData getKuisData() { return kuisData; }
+
+        public KuisData.UserScore getUserScore() { return userScore; };
     }
 }

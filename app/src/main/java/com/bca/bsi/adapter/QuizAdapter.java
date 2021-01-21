@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.KuisData;
+import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,7 +44,7 @@ public class QuizAdapter extends PagerAdapter {
     private int correctCounter = 0;
 
     public interface onItemClick{
-        void onClick();
+        void onClick(KuisData.UserScore userScore);
         void openPage();
     }
 
@@ -59,6 +62,9 @@ public class QuizAdapter extends PagerAdapter {
         Date currentDate = new Date();
         dateAttempt.setText(new SimpleDateFormat("d MMMM yyyy", Locale.getDefault()).format(currentDate));
 
+        String date = Utils.getTime(Constant.DATE_FORMAT_1);
+
+//        String convertDate = Utils.formatDateFromDateString()
 
         switch (correctCounter){
             case 0:
@@ -193,13 +199,24 @@ public class QuizAdapter extends PagerAdapter {
                 jawabanUser.add("a");
                 if(models.getQuizIndex(position).getKunciJawaban().getAnswerOption().equalsIgnoreCase(jawabanUser.get(position))){
                     correctCounter+=1;
+                    /*
                     noSoal.setBackground(ContextCompat.getDrawable(context,R.drawable.circle_stroke_tosca_dark_filled));
                     noSoal.setTextColor(Color.WHITE);
                     noSoal.setText(R.string.symbol_centang);
+                    */
+                    noSoal.setBackground(null);
+                    noSoal.setText("BENAR");
+                    noSoal.setTextColor(ContextCompat.getColor(context,R.color.deep_cerulean_palette));
+
                 }else{
+                    /*
                     noSoal.setBackground(ContextCompat.getDrawable(context,R.drawable.circle_stroke_tosca_dark));
                     noSoal.setTextColor(ContextCompat.getColor(context,R.color.deep_cerulean_palette));
                     noSoal.setText(R.string.symbol_cross);
+                    */
+                    noSoal.setBackground(null);
+                    noSoal.setText("SALAH");
+                    noSoal.setTextColor(ContextCompat.getColor(context,R.color.deep_cerulean_palette));
                 }
                 switch (models.getQuizIndex(position).getKunciJawaban().getAnswerOption().toLowerCase()){
                     case "a":
@@ -231,13 +248,23 @@ public class QuizAdapter extends PagerAdapter {
                 jawabanUser.add("b");
                 if(models.getQuizIndex(position).getKunciJawaban().getAnswerOption().equalsIgnoreCase(jawabanUser.get(position))){
                     correctCounter+=1;
+                    /*
                     noSoal.setBackground(ContextCompat.getDrawable(context,R.drawable.circle_stroke_tosca_dark_filled));
                     noSoal.setTextColor(Color.WHITE);
                     noSoal.setText(R.string.symbol_centang);
+                    */
+                    noSoal.setBackground(null);
+                    noSoal.setText("BENAR");
+                    noSoal.setTextColor(ContextCompat.getColor(context,R.color.deep_cerulean_palette));
                 }else{
+                    /*
                     noSoal.setBackground(ContextCompat.getDrawable(context,R.drawable.circle_stroke_tosca_dark));
                     noSoal.setTextColor(ContextCompat.getColor(context,R.color.deep_cerulean_palette));
                     noSoal.setText(R.string.symbol_cross);
+                    */
+                    noSoal.setBackground(null);
+                    noSoal.setText("SALAH");
+                    noSoal.setTextColor(ContextCompat.getColor(context,R.color.deep_cerulean_palette));
                 }
                 switch (models.getQuizIndex(position).getKunciJawaban().getAnswerOption().toLowerCase()){
                     case "a":
@@ -270,13 +297,23 @@ public class QuizAdapter extends PagerAdapter {
                 jawabanUser.add("c");
                 if(models.getQuizIndex(position).getKunciJawaban().getAnswerOption().equalsIgnoreCase(jawabanUser.get(position))){
                     correctCounter+=1;
+                    /*
                     noSoal.setBackground(ContextCompat.getDrawable(context,R.drawable.circle_stroke_tosca_dark_filled));
                     noSoal.setTextColor(Color.WHITE);
                     noSoal.setText(R.string.symbol_centang);
+                    */
+                    noSoal.setBackground(null);
+                    noSoal.setText("BENAR");
+                    noSoal.setTextColor(ContextCompat.getColor(context,R.color.deep_cerulean_palette));
                 }else{
+                    /*
                     noSoal.setBackground(ContextCompat.getDrawable(context,R.drawable.circle_stroke_tosca_dark));
                     noSoal.setTextColor(ContextCompat.getColor(context,R.color.deep_cerulean_palette));
                     noSoal.setText(R.string.symbol_cross);
+                    */
+                    noSoal.setBackground(null);
+                    noSoal.setText("SALAH");
+                    noSoal.setTextColor(ContextCompat.getColor(context,R.color.deep_cerulean_palette));
                 }
 
                 switch (models.getQuizIndex(position).getKunciJawaban().getAnswerOption().toLowerCase()){
@@ -298,7 +335,8 @@ public class QuizAdapter extends PagerAdapter {
             public void onClick(View v) {
                 if(position<4){
                     if(next.getText().toString().equals(context.getString(R.string.soal_berikutnya))) {
-                        onItemClick.onClick();
+
+                        onItemClick.onClick(new KuisData.UserScore());
                     }else {
                         pilganA.setVisibility(View.VISIBLE);
                         pilganB.setVisibility(View.VISIBLE);
@@ -306,11 +344,15 @@ public class QuizAdapter extends PagerAdapter {
                         penjelasan.setVisibility(View.VISIBLE);
                         pertanyaan.setTextColor(Color.BLACK);
                         penjelasanText.setVisibility(View.INVISIBLE);
+                        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) next.getLayoutParams();
+                        params2.removeRule(RelativeLayout.BELOW);
+                        params2.addRule(RelativeLayout.BELOW, R.id.btn_ke_penjelasan);
+                        next.setLayoutParams(params2);
                         next.setText(R.string.soal_berikutnya);
                     }
                 }else if(position == 4){
                     if(next.getText().toString().equals(context.getString(R.string.selesai))) {
-                        onItemClick.onClick();
+                        onItemClick.onClick(new KuisData.UserScore(models.getCategoryId(),"ychris", dateAttempt.getText().toString(),String.valueOf(correctCounter)));
                     }else {
                         pilganA.setVisibility(View.VISIBLE);
                         pilganB.setVisibility(View.VISIBLE);
@@ -318,10 +360,14 @@ public class QuizAdapter extends PagerAdapter {
                         penjelasan.setVisibility(View.VISIBLE);
                         pertanyaan.setTextColor(Color.BLACK);
                         penjelasanText.setVisibility(View.INVISIBLE);
+                        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) next.getLayoutParams();
+                        params2.removeRule(RelativeLayout.BELOW);
+                        params2.addRule(RelativeLayout.BELOW, R.id.btn_ke_penjelasan);
+                        next.setLayoutParams(params2);
                         next.setText(R.string.selesai);
                     }
                 }else {
-                    onItemClick.onClick();
+                    onItemClick.onClick(null);
                 }
             }
         });
@@ -338,10 +384,14 @@ public class QuizAdapter extends PagerAdapter {
                     next.setText("Kembali");
 
                     penjelasanText.setVisibility(View.VISIBLE);
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) next.getLayoutParams();
+                    params.addRule(RelativeLayout.BELOW, R.id.penjelasan_text);
+                    next.setLayoutParams(params);
+
                     if(models.getQuizIndex(position).getKunciJawaban().getAnswerOption().equalsIgnoreCase(jawabanUser.get(position))){
-                        penjelasanText.setText(models.getQuizIndex(position).getCorrectExplanation());
+                        penjelasanText.setText(models.getQuizIndex(position).getCorrectExplanation().replaceAll("\\\\n", "\\\n"));
                     }else{
-                        penjelasanText.setText(models.getQuizIndex(position).getFalseExplanation());
+                        penjelasanText.setText(models.getQuizIndex(position).getFalseExplanation().replaceAll("\\\\n", "\\\n"));
                     }
 
                 }else {

@@ -194,8 +194,8 @@
             android:id="@+id/label_bib_rp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_marginTop="@dimen/size_for_10dp"
             android:text="@string/rp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_besar_setoran_investasi_bulanan" />
@@ -204,8 +204,9 @@
             android:id="@+id/tv_bib_hasil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/size_for_5dp"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:layout_marginEnd="@dimen/size_for_20dp"
             android:text="Hasil Perhitungan"
             app:layout_constraintStart_toEndOf="@+id/label_bib_rp"
             app:layout_constraintTop_toBottomOf="@+id/label_besar_setoran_investasi_bulanan" />

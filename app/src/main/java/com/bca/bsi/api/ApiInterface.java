@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -36,4 +37,10 @@ public interface ApiInterface {
 
     @GET("quiz")
     Call<OutputResponse> getKuisData(@Header("category_id") int categoryId);
+
+    @GET("quiz/score")
+    Call<OutputResponse> getUserScore(@Header("category_id") int categoryId, @Header("bca_id") String bcaId);
+
+    @PUT("quiz/score")
+    Call<OutputResponse> putUserScore(@Header("category_id") int categoryId, @Header("bca_id") String bcaId, @Header("score") int score);
 }
