@@ -22,6 +22,12 @@ public class PrefConfig {
         editor.apply();
     }
 
+    public void setTipsOfTheWeek(boolean tipsActivated) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(context.getString(R.string.pref_tips_of_the_week), tipsActivated);
+        editor.apply();
+    }
+
     public void removeTokenAccess() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(context.getString(R.string.pref_token_access), Constant.EMPTY);
@@ -104,6 +110,10 @@ public class PrefConfig {
 
     public String getUsername() {
         return sharedPreferences.getString(context.getString(R.string.pref_username), Constant.EMPTY);
+    }
+
+    public Boolean getTipsActivated() {
+        return sharedPreferences.getBoolean(context.getString(R.string.pref_tips_of_the_week),true);
     }
 
 }

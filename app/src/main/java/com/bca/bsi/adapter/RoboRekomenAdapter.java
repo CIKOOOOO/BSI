@@ -42,7 +42,7 @@ public class RoboRekomenAdapter extends RecyclerView.Adapter<RoboRekomenAdapter.
 
     @Override
     public int getItemCount() {
-        return JUMLAH_PRODUK;
+        return productRekomenList.size();
     }
 
     static class Holder extends RecyclerView.ViewHolder {

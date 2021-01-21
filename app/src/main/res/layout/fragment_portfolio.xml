@@ -85,6 +85,15 @@
             app:layout_constraintTop_toTopOf="@id/percent_reksadana" />
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/percent_reksadana"
+            app:layout_constraintTop_toTopOf="@id/percent_reksadana"
+            app:layout_constraintBottom_toTopOf="@id/seperator_line"
+            android:id="@+id/tv_reksa_selector"/>
+
+
+        <TextView
             android:id="@+id/title_reksadana"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -134,7 +143,7 @@
             android:id="@+id/tv_percent_obligasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20 %"
+            android:text="0%"
             android:textColor="@color/white_palette"
             app:layout_constraintBottom_toBottomOf="@id/percent_obligasi"
             app:layout_constraintEnd_toEndOf="@id/percent_obligasi"

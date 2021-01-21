@@ -9,6 +9,7 @@ import com.bca.bsi.model.FilterJenisReksa;
 import com.bca.bsi.model.LearningChapter;
 import com.bca.bsi.model.Product;
 import com.bca.bsi.model.ProductChoice;
+import com.bca.bsi.model.ProductIH;
 import com.bca.bsi.model.ProductRekomen;
 import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.model.SortJenisReksa;
@@ -41,7 +42,7 @@ public class DummyData {
 
     private static final String[] kinerjaString = {"+14.13%", "+14.89%", "+10.13%"};
     private static final String[] nabString = {"1462.81", "1575.39", "1672.98"};
-    private static final String[] percentage = {"70%", "20%", "10%"};
+    private static final String[] percentage = {"70", "20", "10"};
     private static final boolean[] isChoosen = {false, false, false};
 
     private static final String[] inboxUsername = {"User123", "Andrew Abednego Gunawan", "Andrew001"};
@@ -62,6 +63,33 @@ public class DummyData {
     private static final String[] sortTypeEnd = {"Z","A","Rendah","Tinggi"};
     private static final boolean[] isChoosenSort = {true,false,false,false};
     private static final boolean[] isChoosenSortDefault = {false,false,false,false};
+
+    private static  final String[] ihReksaName = {"Bahana Pendapatan Tetap Makara Prima","Ashmore lalala","Batavia itu Jakarta"};
+    private static  final String[] infJenisReksa = {"Pendapatan Tetap","Saham","Terproteksi"};
+    private static  final String[] ihDate = {"10/12/2020","11/11/2021","02/02/2020"};
+    private static  final String[] ihCost = {"200.000","100.000","300.000"};
+    private static final String[] ihUnit = {"123123","20,44","2323"};
+    private static final String[] hisJenisTransaksi = {"Pembelian","Pembelian","Penjualan"};
+    private static final String[] iRaise = {"+10.000,00","-5.000,00","+2.000,00"};
+
+    public static List<ProductIH> getProductsInformation(){
+        List<ProductIH> res = new ArrayList<>();
+        for(int i=0;i<3;i++){
+            ProductIH prod = new ProductIH(ihReksaName[i],infJenisReksa[i],ihUnit[i],ihCost[i],ihDate[i]);
+            prod.setRaise(iRaise[i]);
+            res.add(prod);
+        }
+        return res;
+    }
+
+    public static List<ProductIH> getProductsHistory(){
+        List<ProductIH> res = new ArrayList<>();
+        for(int i=0;i<3;i++){
+            ProductIH prod = new ProductIH(ihReksaName[i],hisJenisTransaksi[i],ihUnit[i],ihCost[i],ihDate[i]);
+            res.add(prod);
+        }
+        return res;
+    }
 
 
     public static List<Product.ReksaDana> getReksaDanaDummyList() {

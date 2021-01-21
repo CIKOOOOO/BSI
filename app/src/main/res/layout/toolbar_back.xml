@@ -24,7 +24,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/size_for_20dp"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,21 +33,21 @@
 
             <TextView
                 android:id="@+id/tv_title_toolbar_back"
+                style="@style/TitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_for_10dp"
-                tools:text="@string/product"
-                style="@style/TitleTextView"/>
+                tools:text="@string/product" />
 
             <TextView
                 android:id="@+id/tv_child_toolbar_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_for_10dp"
-                tools:text="Reksa Dana"
                 android:textColor="@color/white_palette"
                 android:textSize="@dimen/size_for_12sp"
-                app:layout_constraintTop_toBottomOf="@id/tv_title_toolbar_back" />
+                app:layout_constraintTop_toBottomOf="@id/tv_title_toolbar_back"
+                tools:text="Reksa Dana" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.Toolbar>

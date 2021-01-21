@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Portfolio;
-import com.bca.bsi.model.ProductChoice;
+import com.bca.bsi.model.Product;
+import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProdukChoiceAdapter extends RecyclerView.Adapter<ProdukChoiceAdapter.Holder> {
 
-    List<ProductChoice> products = new ArrayList<>();
+    List<Product.ReksaDana> products = new ArrayList<>();
 
-    public void setProducts(List<ProductChoice> products) {
+    public void setProducts(List<Product.ReksaDana> products) {
         this.products = products;
     }
 
@@ -33,22 +37,29 @@ public class ProdukChoiceAdapter extends RecyclerView.Adapter<ProdukChoiceAdapte
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        final ProductChoice productChoice = products.get(position);
+        final Product.ReksaDana productChoice = products.get(position);
         holder.tvJenisReksa.setText(productChoice.getType());
         holder.tvNab.setText(productChoice.getNab());
         holder.tvKinerja.setText(productChoice.getKinerja());
-        holder.tvReksaName.setText(productChoice.getTitle());
+        holder.tvReksaName.setText(productChoice.getName());
         holder.cbChoosen.setChecked(productChoice.isChoosen());
-        holder.tvLastDate.setText(productChoice.getLastDate());
 
-//        holder.tvReksaName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(position==1){
-//                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-//                }
-//            }
-//        });
+        String date = null;
+        try {
+            date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3,Constant.DATE_FORMAT_2,productChoice.getDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.tvLastDate.setText(date);
+
+        holder.cbChoosen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                products.get(position).setChoosen(isChecked);
+                holder.cbChoosen.setChecked(productChoice.isChoosen());
+            }
+        });
+
     }
 
     @Override
@@ -74,6 +85,28 @@ public class ProdukChoiceAdapter extends RecyclerView.Adapter<ProdukChoiceAdapte
     /////// BIKIN KLIK /////////
     public interface onItemClick {
         void onItemClick(Portfolio portfolio);
+    }
+
+    public String getReksaIds(){
+        String res = "";
+        for (Product.ReksaDana product:this.products
+             ) {
+            if(product.isChoosen()){
+                res += product.getReksadanaID()+",";
+            }
+        }
+        return res.substring(0,res.length()-1);
+    }
+
+    public int getChoosenAmount(){
+        int res = 0;
+        for (Product.ReksaDana product:this.products
+        ) {
+            if(product.isChoosen()){
+                res += 1;
+            }
+        }
+        return res;
     }
 
 }

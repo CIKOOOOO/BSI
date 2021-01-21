@@ -46,7 +46,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Hold
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 2) {
+        if (position == portfolioList.size()) {
             return 0;
         }
         return 1;
@@ -54,7 +54,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Hold
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        if (position == 2) {
+        if (position == portfolioList.size()) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -64,9 +64,13 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Hold
 
         } else {
             final Portfolio portfolio = portfolioList.get(position);
-            holder.tvReturn.setText(portfolio.getExpReturn());
+            holder.tvReturn.setText(portfolio.getExpReturn()+"%");
             holder.tvRisk.setText(portfolio.getRisk());
-            holder.tvBundleName.setText(portfolio.getBundleName());
+            if(position == 0) {
+                holder.tvBundleName.setText("Bundle 1");
+            } else if(position == 1) {
+                holder.tvBundleName.setText("Bundle 2");
+            }
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,7 +82,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Hold
 
     @Override
     public int getItemCount() {
-        return JUMLAH_PORTFOLIO;
+        return portfolioList.size()+1;
     }
 
     static class Holder extends RecyclerView.ViewHolder {

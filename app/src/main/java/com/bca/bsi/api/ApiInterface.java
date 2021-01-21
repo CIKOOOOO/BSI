@@ -22,7 +22,7 @@ public interface ApiInterface {
     Call<OutputResponse> loginWith(@Header("token") String token, @Body Map<String, Object> data);
 
 //    @Headers({"Accept: application/json", "content-type: application/json"})
-    @GET("Reksadana")
+    @GET("products/Reksadana")
     Call<OutputResponse> getReksaDanaData(@Header("profile_risiko") int profile_risiko);
 
     @GET("Reksadana/{reksaDanaID}")
@@ -36,4 +36,14 @@ public interface ApiInterface {
 
     @GET("quiz")
     Call<OutputResponse> getKuisData(@Header("category_id") int categoryId);
+
+    @Headers({"Content-Type:application/json","client_id: OV4B2FXHY1Y7W0WMSUUB","hashcode:x"})
+    @GET("smartbot/recommendation")
+    Call<OutputResponse> getRoboRekomen(@Header("profil_resiko") String profil_resiko, @Header("no_rekening") String no_rekening);
+
+    @Headers({"Content-Type:application/json","client_id: OV4B2FXHY1Y7W0WMSUUB","hashcode:x"})
+    @GET("smartbot/custom")
+    Call<OutputResponse> getRoboHitungCustom(@Header("no_rekening") String no_rekening, @Query("reksa-dana-id") String reksa_id,
+                                             @Query("proportion") String proportion);
+
 }

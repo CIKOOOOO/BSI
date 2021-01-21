@@ -1,6 +1,7 @@
 package com.bca.bsi.model;
 
 public class ProductChoice {
+
     private String title,type,lastDate,nab,kinerja;
     private boolean isChoosen;
 

@@ -20,7 +20,6 @@ import java.util.List;
 public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSmartbotAdapter.Holder> {
 
     private List<ProductRekomen> productRekomenList = new ArrayList<>();
-    private final int JUMLAH_PRODUK = 3;
 
     public void setProductRekomenList(List<ProductRekomen> productRekomenList) {
         this.productRekomenList = productRekomenList;

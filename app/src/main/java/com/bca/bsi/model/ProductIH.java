@@ -2,6 +2,15 @@ package com.bca.bsi.model;
 
 public class ProductIH {
     private String name,jenis,unit,cost,date;
+    private String raise;
+
+    public String getRaise() {
+        return raise;
+    }
+
+    public void setRaise(String raise) {
+        this.raise = raise;
+    }
 
     public String getName() {
         return name;

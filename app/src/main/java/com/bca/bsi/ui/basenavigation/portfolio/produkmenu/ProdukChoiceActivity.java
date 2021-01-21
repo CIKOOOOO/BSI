@@ -8,19 +8,23 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Product;
 import com.bca.bsi.ui.basenavigation.portfolio.filter.FilterSortActivity;
 import com.bca.bsi.ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity;
 import com.bca.bsi.utils.BaseActivity;
-import com.bca.bsi.utils.dummydata.DummyData;
 
-public class ProdukChoiceActivity extends BaseActivity {
+import java.util.List;
+
+public class ProdukChoiceActivity extends BaseActivity implements IProductChoiceCallback {
     ProdukChoiceAdapter produkChoiceAdapter;
     TextView tvLanjut, tvToolbarTitle, tvToolbarSubtitle;
     ImageButton backButton, filterButton;
+    ProdukChoiceViewModel viewModel;
 
     int sortPosition = 0;
 
@@ -37,8 +41,13 @@ public class ProdukChoiceActivity extends BaseActivity {
         tvLanjut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PurchasingSmartbotActivity.class);
-                v.getContext().startActivity(intent);
+                if(produkChoiceAdapter.getChoosenAmount()<2){
+                    showSnackBar("Pilihan minimal sebanyak dua produk !");
+                } else {
+                    Intent intent = new Intent(v.getContext(), PurchasingSmartbotActivity.class);
+                    intent.putExtra("data2",produkChoiceAdapter.getReksaIds());
+                    v.getContext().startActivity(intent);
+                }
             }
         });
 
@@ -54,7 +63,10 @@ public class ProdukChoiceActivity extends BaseActivity {
     private void initVar() {
         RecyclerView rec = findViewById(R.id.recycler_produk_choice_main);
         produkChoiceAdapter = new ProdukChoiceAdapter();
-        produkChoiceAdapter.setProducts(DummyData.getProductChoiceList());
+//        produkChoiceAdapter.setProducts(DummyData.getProductChoiceList());
+        viewModel = new ViewModelProvider(this).get(ProdukChoiceViewModel.class);
+        viewModel.setCallback(this);
+        viewModel.loadProducts(prefConfig.getProfileRisiko());
 
 
 
@@ -95,5 +107,16 @@ public class ProdukChoiceActivity extends BaseActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void onLoadData(List<Product.ReksaDana> products) {
+        produkChoiceAdapter.setProducts(products);
+        produkChoiceAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFail(String msg) {
+        showSnackBar(msg);
     }
 }

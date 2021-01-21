@@ -47,4 +47,8 @@
     <color name="white_ice_palette">#DBF6F9</color>
     <color name="gray_filter_bg">#ececf4</color>
     <color name="gray_filter_text">#737577</color>
+    <color name="darkblue_profile_box">#065760</color>
+    <color name="blue_profile_box">#04646c</color>
+    <color name="blue_dot_in_profile">#3d8f98</color>
+    <color name="blue_profile_box2">#04646c</color>
 </resources>

@@ -47,6 +47,16 @@ public class Product {
         @SerializedName("NAB_per_unit")
         private String nab;
 
+        private boolean isChoosen;
+
+        public boolean isChoosen() {
+            return isChoosen;
+        }
+
+        public void setChoosen(boolean choosen) {
+            isChoosen = choosen;
+        }
+
         public ReksaDana() {
         }
 
