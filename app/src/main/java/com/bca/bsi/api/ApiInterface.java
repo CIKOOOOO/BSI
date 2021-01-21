@@ -45,7 +45,7 @@ public interface ApiInterface {
     Call<OutputResponse> getRoboRekomen(@Header("profil_resiko") String profil_resiko, @Header("no_rekening") String no_rekening);
 
     @Headers({"Content-Type:application/json","client_id: OV4B2FXHY1Y7W0WMSUUB","hashcode:x"})
-    @GET("smartbot/custom")
+    @GET("smartbot/recommendation/custom")
     Call<OutputResponse> getRoboHitungCustom(@Header("no_rekening") String no_rekening, @Query("reksa-dana-id") String reksa_id,
                                              @Query("proportion") String proportion);
 

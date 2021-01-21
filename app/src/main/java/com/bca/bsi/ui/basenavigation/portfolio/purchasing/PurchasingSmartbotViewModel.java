@@ -56,4 +56,36 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
             }
         });
     }
+
+
+
+    public void loadCustomBundle(String no_rekening, String reksa_id, String proportion){
+        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(no_rekening,reksa_id,proportion);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("a","tes1"+response.code());
+                if(response.body()!=null){
+                    Log.e("b","tes2");
+                    OutputResponse outputResponse = response.body();
+                    if(outputResponse.getErrorSchema().getErrorCode().equals("200")){
+                        Log.e("c","tes3");
+                        OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
+                        callback.onLoadDataCustom(outputSchema.getBundles());
+                    } else {
+                        Log.e("d","tes4");
+                        callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
+                    }
+                } else {
+                    Log.e("e","tes5");
+                    callback.onFail("Mohon periksa jaringan anda");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFail("Mohon periksa jaringan anda");
+            }
+        });
+    }
 }

@@ -223,15 +223,17 @@
 
         <TextView
             android:id="@+id/tv_SID"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="IDD1804RL156230"
             android:textColor="@color/white_palette"
             android:textSize="21sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tv_daftar"
             app:layout_constraintStart_toStartOf="@id/text_SID"
-            app:layout_constraintTop_toBottomOf="@id/text_SID" />
+            app:layout_constraintTop_toBottomOf="@id/text_SID"
+            app:layout_constraintHorizontal_bias="0"/>
 
         <TextView
             android:id="@+id/tv_daftar"
