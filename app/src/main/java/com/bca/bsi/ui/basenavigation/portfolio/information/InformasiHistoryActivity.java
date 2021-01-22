@@ -88,6 +88,7 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
                 informasiHistoryAdapter.setType(InformasiHistoryAdapter.HISTORY);
                 break;
         }
+        informasiHistoryAdapter.clearData();
     }
 
     @Override

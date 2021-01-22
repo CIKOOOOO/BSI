@@ -46,6 +46,12 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
         this.historyList = new ArrayList<>();
     }
 
+    public void clearData(){
+        this.historyList.clear();
+        this.informationList.clear();
+        notifyDataSetChanged();
+    }
+
     public void setInformationList(List<Portfolio.Information> informationList) {
         this.informationList = informationList;
     }
