@@ -10,6 +10,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +47,10 @@ public class ReksadanaProductViewModel extends AndroidViewModel {
                     OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
 
                     if (!errorSchema.getErrorCode().equals("200")) {
+                        Log.e("asd", errorSchema.getErrorMessage());
                         callback.onFailed(errorSchema.getErrorMessage());
                     } else {
+//                        Log.e("asd", Utils.toJSON(outputSchema));
                         reksaDanaList = outputSchema.getReksaDanaList();
                         callback.resultOf(reksaDanaList);
                     }

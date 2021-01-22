@@ -31,6 +31,8 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
         void onShareNews(Portfolio.Information information);
 
         void onShareNews(Portfolio.History history);
+
+        void onSell(Portfolio.Information information);
     }
 
     public void setType(String type) {
@@ -105,6 +107,12 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
                 @Override
                 public void onClick(View view) {
                     onClickShare.onShareNews(information);
+                }
+            });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickShare.onSell(information);
                 }
             });
         }

@@ -39,6 +39,8 @@ public class BaseActivity extends AppCompatActivity implements CustomDialog.onCl
     }
 
     public void showSnackBar(String msg) {
+        if(msg.trim().isEmpty())
+            msg = "Mohon periksa jaringan Anda";
         Snackbar snackbar = Snackbar
                 .make(view, msg, Snackbar.LENGTH_LONG)
                 .setBackgroundTint(getResources().getColor(R.color.dark_gray_palette))

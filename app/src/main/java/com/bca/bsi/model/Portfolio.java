@@ -55,6 +55,9 @@ public class Portfolio {
 
     public static class Information {
 
+        @SerializedName("reksa_dana_id")
+        private String reksadanaID;
+
         @SerializedName("nama_reksa_dana")
         private String name;
 
@@ -105,6 +108,10 @@ public class Portfolio {
 
         public Double getNab() {
             return nab;
+        }
+
+        public String getReksadanaID() {
+            return reksadanaID;
         }
     }
 

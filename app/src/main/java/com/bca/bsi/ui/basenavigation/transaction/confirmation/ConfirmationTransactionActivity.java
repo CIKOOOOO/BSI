@@ -28,7 +28,8 @@ public class ConfirmationTransactionActivity extends BaseActivity implements Vie
 
     public static final String DATA_REKSA_DANA = "dana_reksa_data";
     public static final String DATA_TRANSACTION = "transaction_data";
-    public static final String FROM_CONFIRMATION_ACTIVITY = "from_conformation_activity";
+    public static final String PURCHASE_FROM_CONFIRMATION_ACTIVITY = "purchase_from_confirmation_activity";
+    public static final String SELLING_FROM_CONFIRMATION_ACTIVITY = "selling_from_confirmation_activity";
     public static final String CONFIRMATION_TYPE = "confirmation_type";
 
     private TextView tvPaymentType, tvNominalPembelian, tvNominalBiayaPembelian, tvTotalPembelian, tvRekeningSumberDana, tvProductName;
@@ -51,6 +52,8 @@ public class ConfirmationTransactionActivity extends BaseActivity implements Vie
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
         final Button btnNext = findViewById(R.id.btn_next_transaction_confirmation);
         RecyclerView recycler_product = findViewById(R.id.recycler_product_confirmation_transaction);
+        TextView tvJumlahUnitPenjualan = findViewById(R.id.tv_jumlah_unit_penjualan_confirmation);
+        TextView tvBiayaPembelian = findViewById(R.id.tv_nominal_biaya_pembelian_confirmation);
 
         tvPaymentType = findViewById(R.id.tv_transaction_type_confirmation);
         tvRekeningSumberDana = findViewById(R.id.tv_rekening_sumber_dana_confirmation);
@@ -78,6 +81,17 @@ public class ConfirmationTransactionActivity extends BaseActivity implements Vie
 
             if (type.equals(Type.PURCHASING_WITH_SMARTBOT)) {
 
+            } else if (type.equals(Type.SELLING)) {
+                this.detailReksaDana = gson.fromJson(reksadana, Product.DetailReksaDana.class);
+                String biayaProdukPenjualan = detailReksaDana.getBiayaPenjualan().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPenjualan() + "%" : Double.parseDouble(detailReksaDana.getBiayaPenjualan()) + "%";
+                tvBiayaPembelian.setText(biayaProdukPenjualan);
+                tvPaymentType.setText(this.purchasing.getPaymentType());
+                tvRekeningSumberDana.setText(prefConfig.getAccountNumber());
+                tvJumlahUnitPenjualan.setText(this.purchasing.getReksaDanaUnit());
+                detailReksaDanaList.add(this.detailReksaDana);
+                productNameConfirmationAdapter.setType(type);
+                productNameConfirmationAdapter.setDetailReksaDanas(detailReksaDanaList);
+                productNameConfirmationAdapter.notifyDataSetChanged();
             } else {
                 this.detailReksaDana = gson.fromJson(reksadana, Product.DetailReksaDana.class);
                 String paymentType = this.purchasing.getPaymentType().equals(Type.PEMBELIAN_BERKALA) ? "Pembelian Berkala" : "Pembelian Sekali Bayar";
@@ -128,7 +142,9 @@ public class ConfirmationTransactionActivity extends BaseActivity implements Vie
 
                     Intent intent = new Intent(this, PinActivity.class);
 
-                    intent.putExtra(PinActivity.TRANSACTION_TYPE, FROM_CONFIRMATION_ACTIVITY);
+                    String transactionType = type.equals(Type.SELLING) ? SELLING_FROM_CONFIRMATION_ACTIVITY : PURCHASE_FROM_CONFIRMATION_ACTIVITY;
+
+                    intent.putExtra(PinActivity.TRANSACTION_TYPE, transactionType);
                     intent.putExtra(PinActivity.PARCEL_DATA, Utils.toJSON(this.purchasing));
 
                     startActivity(intent);

@@ -38,6 +38,8 @@ public class BaseFragment extends Fragment {
     }
 
     public void showSnackBar(String msg) {
+        if(msg.trim().isEmpty())
+            msg = "Mohon periksa jaringan Anda";
         View view = mActivity.findViewById(android.R.id.content);
         Snackbar snackbar = Snackbar
                 .make(view, msg, Snackbar.LENGTH_LONG)

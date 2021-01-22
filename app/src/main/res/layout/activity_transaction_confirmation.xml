@@ -64,6 +64,73 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_sell_confirmation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_for_20dp"
+                        android:layout_marginTop="@dimen/size_for_20dp"
+                        android:layout_marginEnd="@dimen/size_for_20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="@string/jumlah_unit_penjualan"
+                            android:textSize="@dimen/size_for_15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_jumlah_unit_penjualan_confirmation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/size_for_10dp"
+                            android:layout_weight="3.5"
+                            android:text="5271517891"
+                            android:textColor="@color/java_palette"
+                            android:textSize="@dimen/size_for_15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_for_20dp"
+                        android:layout_marginTop="@dimen/size_for_20dp"
+                        android:layout_marginEnd="@dimen/size_for_20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="@string/nominal_biaya_penjualan"
+                            android:textSize="@dimen/size_for_15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_nominal_biaya_pembelian_confirmation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/size_for_10dp"
+                            android:layout_weight="3.5"
+                            android:text="5271517891"
+                            android:textColor="@color/java_palette"
+                            android:textSize="@dimen/size_for_15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_for_20dp"

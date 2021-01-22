@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.transaction.detail_transaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Transaction;
 import com.bca.bsi.ui.basenavigation.BaseNavigationActivity;
+import com.bca.bsi.ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
@@ -17,8 +19,11 @@ import com.google.gson.Gson;
 public class DetailTransactionActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String PARCEL_DATA = "parcel_data";
+    public static final String RESULT_TYPE = "type";
 
     private TextView tvProductName, tvTransactionType, tvNominalPembelian, tvNominalBiayaPembelian, tvNominalTotalPembelian, tvRekeningSumberDana, tvTransactionTime, tvReferenceNumber;
+
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +51,33 @@ public class DetailTransactionActivity extends BaseActivity implements View.OnCl
         findViewById(R.id.img_btn_action_toolbar_image).setVisibility(View.GONE);
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(PARCEL_DATA)) {
+        if (intent != null && intent.hasExtra(PARCEL_DATA) && intent.hasExtra(RESULT_TYPE)) {
             String data = intent.getStringExtra(PARCEL_DATA);
+            this.type = intent.getStringExtra(RESULT_TYPE);
             Gson gson = new Gson();
             Transaction.TransactionResult transactionResult = gson.fromJson(data, Transaction.TransactionResult.class);
 
-            String paymentType = transactionResult.getPaymentType().equals(Type.PEMBELIAN_BERKALA) ? "Pembelian Berkala" : "Pembelian Sekali Bayar";
+            String dummyNominalPembelian, dummyNominalBiayaPembelian, dummyTotalPenjualan, dummyRekeningTujuan;
+
+            String paymentType;
+            if(type.equals(ConfirmationTransactionActivity.SELLING_FROM_CONFIRMATION_ACTIVITY)){
+                paymentType = transactionResult.getPaymentType();
+                dummyNominalPembelian = "Nominal Penjualan";
+                dummyNominalBiayaPembelian = "Nominal Biaya Penjualan";
+                dummyTotalPenjualan = "Nominal Total Penjualan";
+                dummyRekeningTujuan = "Rekening Tujuan";
+            }else{
+                paymentType = transactionResult.getPaymentType().equals(Type.PEMBELIAN_BERKALA) ? "Pembelian Berkala" : "Pembelian Sekali Bayar";
+                dummyNominalPembelian = "Nominal Pembelian";
+                dummyNominalBiayaPembelian = "Nominal Biaya Pembelian";
+                dummyTotalPenjualan = "Nominal Total Pembelian";
+                dummyRekeningTujuan = "Rekening Sumber Dana";
+            }
+
+            ((TextView)findViewById(R.id.tv_01_detail_transaction)).setText(dummyNominalPembelian);
+            ((TextView)findViewById(R.id.tv_02_detail_transaction)).setText(dummyNominalBiayaPembelian);
+            ((TextView)findViewById(R.id.tv_03_detail_transaction)).setText(dummyTotalPenjualan);
+            ((TextView)findViewById(R.id.tv_04_detail_transaction)).setText(dummyRekeningTujuan);
 
             tvProductName.setText(transactionResult.getProductName());
             tvTransactionType.setText(paymentType);

@@ -92,6 +92,7 @@
                 android:weightSum="5">
 
                 <TextView
+                    android:id="@+id/tv_01_detail_transaction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
@@ -123,6 +124,7 @@
                 android:weightSum="5">
 
                 <TextView
+                    android:id="@+id/tv_02_detail_transaction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
@@ -154,6 +156,7 @@
                 android:weightSum="5">
 
                 <TextView
+                    android:id="@+id/tv_03_detail_transaction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
@@ -184,6 +187,7 @@
                 android:weightSum="5">
 
                 <TextView
+                    android:id="@+id/tv_04_detail_transaction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"

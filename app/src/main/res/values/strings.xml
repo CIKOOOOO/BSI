@@ -26,14 +26,19 @@
     <string name="notice">Pemberitahuan</string>
     <string name="buy">Beli</string>
     <string name="sell">Jual</string>
+    <string name="selling">Penjualan</string>
     <string name="performance_1_month">Kinerja 1 Bln</string>
     <string name="nab_unit">NAB/Unit</string>
     <string name="product_not_found">Produk tidak ditemukan</string>
     <string name="rekening_sumber_dana">Rekening Sumber Dana</string>
+    <string name="rekening_tujuan">Rekening Tujuan</string>
     <string name="nominal_pembelian">Nominal Pembelian</string>
+    <string name="jumlah_unit_penjualan">Jumlah Unit Penjualan</string>
     <string name="nominal_biaya_pembelian">Nominal Biaya Pembelian</string>
+    <string name="nominal_biaya_penjualan">Nominal Biaya Penjualan</string>
     <string name="nominal_total_pembelian">Nominal Total Pembelian</string>
     <string name="berkala">Berkala?</string>
+    <string name="sell_all">Jual Semua?</string>
     <string name="rp">Rp</string>
     <string name="additional_information">Informasi Tambahan</string>
     <string name="prospectus">Prospectus</string>
@@ -71,6 +76,8 @@
     <string name="delete">Delete</string>
     <string name="save">Save</string>
     <string name="write_something">Write something...</string>
+    <string name="my_unit">Jumlah Unit Dimiliki</string>
+    <string name="info_sell">Mohon sisakan sedikitnya 100 unit atau jual semua</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>

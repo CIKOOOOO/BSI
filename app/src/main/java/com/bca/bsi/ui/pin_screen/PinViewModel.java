@@ -11,6 +11,7 @@ import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Transaction;
 import com.bca.bsi.ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity;
+import com.bca.bsi.utils.Utils;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -37,7 +38,8 @@ public class PinViewModel extends AndroidViewModel {
     public void checkingPin(String type, String pin, String bcaID, String data) {
         Gson gson = new Gson();
         switch (type) {
-            case ConfirmationTransactionActivity.FROM_CONFIRMATION_ACTIVITY:
+            case ConfirmationTransactionActivity.PURCHASE_FROM_CONFIRMATION_ACTIVITY:
+            case ConfirmationTransactionActivity.SELLING_FROM_CONFIRMATION_ACTIVITY:
 //                Log.e("asd", "masuk switch case");
                 Transaction.Purchasing purchasing = gson.fromJson(data, Transaction.Purchasing.class);
 
@@ -52,7 +54,7 @@ public class PinViewModel extends AndroidViewModel {
                 stringObjectMap.put("reksa_dana_unit", purchasing.getReksaDanaUnit());
                 stringObjectMap.put("nab", purchasing.getNab());
 
-//                Log.e("asd", stringObjectMap.toString());
+                Log.e("asd", stringObjectMap.toString());
 
                 Call<OutputResponse> call = apiInterface.sendTransactionData(bcaID, pin, stringObjectMap);
                 call.enqueue(new Callback<OutputResponse>() {
@@ -66,7 +68,7 @@ public class PinViewModel extends AndroidViewModel {
                                 Transaction.TransactionResult transactionResult = outputSchema.getTransactionResult();
                                 callback.onSuccessPin(transactionResult);
                             } else {
-                                Log.e("asd", errorSchema.getErrorMessage());
+                                Log.e("asd", Utils.toJSON(response.body()));
                                 callback.onFailed(errorSchema.getErrorMessage());
                             }
                         } else {

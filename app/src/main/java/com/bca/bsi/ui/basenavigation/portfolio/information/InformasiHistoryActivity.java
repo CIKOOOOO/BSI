@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
+import com.bca.bsi.ui.basenavigation.transaction.sell_transaction.DetailSellActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;
 
@@ -131,6 +132,13 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
         Intent intent = new Intent(this, PostActivity.class);
         intent.putExtra(PostActivity.DATA, Utils.toJSON(history));
         intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_TRADE_HISTORY);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onSell(Portfolio.Information information) {
+        Intent intent = new Intent(this, DetailSellActivity.class);
+        intent.putExtra(DetailSellActivity.DATA, Utils.toJSON(information));
         startActivity(intent);
     }
 }

@@ -10,13 +10,16 @@ public class Type {
     public static final String OBLIGASI_PASAR_PERDANA = "obligasi_pasar_perdana";
 
     public static final String PURCHASING = "beli";
-    public static final String SALES = "jual";
+    public static final String SELLING = "jual";
 
     public static final String NEWS = "news";
     public static final String PROMO = "promo";
 
     public static final String PEMBELIAN_BERKALA = "pembelian_berkala";
     public static final String PEMBELIAN_SEKALI_BAYAR = "pembelian_sekali_bayar";
+
+    public static final String PENJUALAN_SEMUA = "penjualan_semua";
+    public static final String PENJUALAN_SEBAGIAN = "penjualan_sebagian";
 
     public static final String PURCHASING_WITH_SMARTBOT = "purchasing_with_smartbot";
 
