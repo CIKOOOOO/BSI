@@ -23,9 +23,10 @@ public class DummyData {
     private static final String[] title = {"Ashmore Dana Ekuitas Nusantara", "Ashmore Dana Progresif Nusantara", "Bahana Pendapatan Tetap Makara Prima"};
     private static final String[] type = {"Saham", "Saham", "Pendapatan Tetap"};
     private static final String[] date = {"16/12/20", "16/12/20", "16/12/20"};
-    private static final String[] promoTitle = {"Cashback hingga Rp300 ribu di Promo Leave Contact Asuransi via Welma", "Investasi ST007 untuk Bumi, Dapatkan cashback Rp70 Ribu!"};
-    private static final String[] promoDescription = {"#PasangKudaKuda tanpa keluar rumah, dapat cashback hingga Rp300 ribu", "#PasangKudaKuda tanpa keluar rumah, dapat cashback hingga Rp300 ribu"};
-    private static final String[] content = {"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"};
+    private static final String[] promoTitle = {"Cashback hingga Rp300 ribu di Promo Leave Contact Asuransi via Welma", "Investasi ST007 untuk Bumi, Dapatkan cashback Rp70 Ribu!", "Investasi ST007 untuk Bumi, Dapatkan cashback Rp70 Ribu!"};
+    private static final String[] promoImage = {"https://nos.jkt-1.neo.id/mcdonalds/promos/November2020/tCaLR1RWEPfD0rYQT8QB.jpg", "https://cbn.id/images/uploads/2018/august/img-bca.jpg", "https://ik.imagekit.io/tvlk/blog/2020/10/fields-FrontApp_PromoFrontImage_a.jpg?tr=dpr-1,w-675"};
+    private static final String[] promoDescription = {"#PasangKudaKuda tanpa keluar rumah, dapat cashback hingga Rp300 ribu", "#PasangKudaKuda tanpa keluar rumah, dapat cashback hingga Rp300 ribu", "#PasangKudaKuda tanpa keluar rumah, dapat cashback hingga Rp300 ribu"};
+    private static final String[] content = {"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"};
 
     private static final String[] kinerja = {"14.13", "14.89", "10.13"};
     private static final String[] nab = {"1462.81", "1575.39", "1672.98"};
@@ -78,28 +79,28 @@ public class DummyData {
     private static final String[] categoryID = {"1", "2", "3"};
     private static final String[] categoryName = {"Category 1", "Category 2", "Category 3"};
 
-    private static  final String[] ihReksaName = {"Bahana Pendapatan Tetap Makara Prima","Ashmore lalala","Batavia itu Jakarta"};
-    private static  final String[] infJenisReksa = {"Pendapatan Tetap","Saham","Terproteksi"};
-    private static  final String[] ihDate = {"10/12/2020","11/11/2021","02/02/2020"};
-    private static  final String[] ihCost = {"200.000","100.000","300.000"};
-    private static final String[] ihUnit = {"123123","20,44","2323"};
-    private static final String[] hisJenisTransaksi = {"Pembelian","Pembelian","Penjualan"};
-    private static final String[] iRaise = {"+10.000,00","-5.000,00","+2.000,00"};
+    private static final String[] ihReksaName = {"Bahana Pendapatan Tetap Makara Prima", "Ashmore lalala", "Batavia itu Jakarta"};
+    private static final String[] infJenisReksa = {"Pendapatan Tetap", "Saham", "Terproteksi"};
+    private static final String[] ihDate = {"10/12/2020", "11/11/2021", "02/02/2020"};
+    private static final String[] ihCost = {"200.000", "100.000", "300.000"};
+    private static final String[] ihUnit = {"123123", "20,44", "2323"};
+    private static final String[] hisJenisTransaksi = {"Pembelian", "Pembelian", "Penjualan"};
+    private static final String[] iRaise = {"+10.000,00", "-5.000,00", "+2.000,00"};
 
-    public static List<ProductIH> getProductsInformation(){
+    public static List<ProductIH> getProductsInformation() {
         List<ProductIH> res = new ArrayList<>();
-        for(int i=0;i<3;i++){
-            ProductIH prod = new ProductIH(ihReksaName[i],infJenisReksa[i],ihUnit[i],ihCost[i],ihDate[i]);
+        for (int i = 0; i < 3; i++) {
+            ProductIH prod = new ProductIH(ihReksaName[i], infJenisReksa[i], ihUnit[i], ihCost[i], ihDate[i]);
             prod.setRaise(iRaise[i]);
             res.add(prod);
         }
         return res;
     }
 
-    public static List<ProductIH> getProductsHistory(){
+    public static List<ProductIH> getProductsHistory() {
         List<ProductIH> res = new ArrayList<>();
-        for(int i=0;i<3;i++){
-            ProductIH prod = new ProductIH(ihReksaName[i],hisJenisTransaksi[i],ihUnit[i],ihCost[i],ihDate[i]);
+        for (int i = 0; i < 3; i++) {
+            ProductIH prod = new ProductIH(ihReksaName[i], hisJenisTransaksi[i], ihUnit[i], ihCost[i], ihDate[i]);
             res.add(prod);
         }
         return res;
@@ -118,7 +119,7 @@ public class DummyData {
     public static List<PromoNews> getPromoNewsList() {
         List<PromoNews> promoNewsList = new ArrayList<>();
         for (int i = 0; i < promoTitle.length; i++) {
-            PromoNews promoNews = new PromoNews(promoTitle[i], promoDescription[i], content[i], date[i]);
+            PromoNews promoNews = new PromoNews(i+"",promoTitle[i], promoDescription[i], promoImage[i], content[i], date[i]);
             promoNewsList.add(promoNews);
         }
         return promoNewsList;
@@ -340,7 +341,7 @@ public class DummyData {
     public static List<Forum.Post> getPostList() {
         List<Forum.Post> postList = new ArrayList<>();
         for (int i = 0; i < postComment.length; i++) {
-            Forum.Post post = new Forum.Post(postID[i], imageProfile[i], postProfileName[i], postDate[i], postType[i], postContent[i], "", postLike[i], postComment[i], postShare[i], postStatusLike[i], postProfileID[i]);
+            Forum.Post post = new Forum.Post(postID[i], imageProfile[i], postProfileName[i], postDate[i], postType[i], postContent[i], "", postLike[i], postComment[i], postShare[i], postStatusLike[i], postProfileID[i], getPromoNewsList().get(i));
             postList.add(post);
         }
         return postList;

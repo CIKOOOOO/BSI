@@ -23,7 +23,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadForumPost(){
+    public void loadForumPost(String type){
         callback.onLoadData(DummyData.getPostList());
     }
 }

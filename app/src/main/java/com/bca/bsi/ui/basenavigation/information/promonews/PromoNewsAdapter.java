@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.PromoNews;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,11 @@ public class PromoNewsAdapter extends RecyclerView.Adapter<PromoNewsAdapter.Hold
         holder.tvTitle.setText(promoNews.getTitle());
         holder.tvDesc.setText(promoNews.getDescription());
         holder.tvDate.setText(promoNews.getDate());
+        if (!promoNews.getImage().isEmpty()) {
+            Picasso.get()
+                    .load(promoNews.getImage())
+                    .into(holder.imgView);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

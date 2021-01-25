@@ -78,6 +78,10 @@ public class Utils {
         return gson.toJson(o);
     }
 
+    public static String removeEnter(String data) {
+        return data.replaceAll("\n", "");
+    }
+
     public static String formatDecimal(String currentFormat) {
         String output = "";
         output = currentFormat.replaceAll("[.]", ",");

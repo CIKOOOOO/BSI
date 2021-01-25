@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white_palette">
+    android:layout_height="wrap_content">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/recycler_img_profile_child_main_forum"
@@ -98,27 +97,14 @@
         app:layout_constraintStart_toStartOf="@id/recycler_tv_content_child_main_forum"
         app:layout_constraintTop_toBottomOf="@id/recycler_tv_content_child_main_forum" />
 
-    <FrameLayout
-        android:id="@+id/fl_01"
+    <include
+        layout="@layout/custom_share_trade"
         android:layout_width="@dimen/size_for_0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_for_10dp"
-        app:layout_constrainedHeight="true"
+        android:layout_marginTop="@dimen/size_for_10dp"
         app:layout_constraintEnd_toEndOf="@id/recycler_img_btn_more_child_main_forum"
-        app:layout_constraintHeight_min="@dimen/size_for_0dp"
         app:layout_constraintStart_toStartOf="@id/recycler_tv_view_more_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/recycler_tv_view_more_child_main_forum">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_child_rv_main_forum"
-            android:layout_width="match_parent"
-            android:overScrollMode="never"
-            android:layout_height="wrap_content" />
-
-        <include
-            layout="@layout/custom_share_trade"
-            android:visibility="gone" />
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_view_more_child_main_forum" />
 
     <TextView
         android:id="@+id/recycler_tv_like_child_main_forum"
@@ -129,7 +115,7 @@
         android:textColor="@color/black_palette"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/recycler_img_profile_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/fl_01"
+        app:layout_constraintTop_toBottomOf="@id/cl_share_trade"
         tools:text="32" />
 
     <TextView
@@ -143,7 +129,7 @@
         android:textStyle="bold"
         app:drawableStartCompat="@drawable/ic_comment"
         app:layout_constraintStart_toEndOf="@id/recycler_tv_like_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/fl_01"
+        app:layout_constraintTop_toBottomOf="@id/cl_share_trade"
         tools:text="32" />
 
     <TextView
@@ -157,7 +143,7 @@
         android:textStyle="bold"
         app:drawableEndCompat="@drawable/ic_share"
         app:layout_constraintEnd_toEndOf="@id/recycler_img_btn_more_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/fl_01"
+        app:layout_constraintTop_toBottomOf="@id/cl_share_trade"
         tools:text="32" />
 
     <View

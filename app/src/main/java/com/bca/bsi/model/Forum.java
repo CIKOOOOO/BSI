@@ -15,11 +15,12 @@ public class Forum {
         private String share;
         private String statusLike;
         private String profileID;
+        private PromoNews promoNews;
 
         public Post() {
         }
 
-        public Post(String postID, String imageProfile, String name, String date, String type, String content, String imageContent, String like, String comment, String share, String statusLike, String profileID) {
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String imageContent, String like, String comment, String share, String statusLike, String profileID, PromoNews promoNews) {
             this.postID = postID;
             this.imageProfile = imageProfile;
             this.name = name;
@@ -32,6 +33,7 @@ public class Forum {
             this.share = share;
             this.statusLike = statusLike;
             this.profileID = profileID;
+            this.promoNews = promoNews;
         }
 
         public String getImageProfile() {
@@ -80,6 +82,10 @@ public class Forum {
 
         public String getProfileID() {
             return profileID;
+        }
+
+        public PromoNews getPromoNews() {
+            return promoNews;
         }
     }
 
@@ -200,5 +206,9 @@ public class Forum {
         public void setChoose(boolean choose) {
             this.choose = choose;
         }
+    }
+
+    public static class ShareTrade{
+
     }
 }

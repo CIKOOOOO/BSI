@@ -18,7 +18,7 @@ import com.bca.bsi.utils.constant.Constant;
 
 import java.util.List;
 
-public class ChildMainForumFragment extends BaseFragment implements IChildMainForumCallback, ChildMainForumAdapter.onPostClick {
+public class ChildMainForumFragment extends BaseFragment implements IChildMainForumCallback, ChildMainForumAdapter.OnPostClick {
     private static final String PARCEL_DATA = "parcel_data";
 
     private ChildMainForumViewModel viewModel;
@@ -59,12 +59,10 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         Bundle bundle = getArguments();
         if (bundle != null) {
             String type = bundle.getString(PARCEL_DATA);
-            adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID());
-            adapter.setOnPostClick(this);
+            adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID(), this);
             recyclerView.setAdapter(adapter);
-            viewModel.loadForumPost();
+            viewModel.loadForumPost(type);
         }
-
     }
 
     @Override
@@ -85,6 +83,31 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onPostLike(String postID) {
+
+    }
+
+    @Override
+    public void onReport(String postID) {
+
+    }
+
+    @Override
+    public void onSavedPost(String postID) {
+
+    }
+
+    @Override
+    public void onOtherProfile(String profileID) {
+
+    }
+
+    @Override
+    public void onMyProfile() {
+
+    }
+
+    @Override
+    public void onDetailNews(String newsID) {
 
     }
 }

@@ -83,6 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_for_10dp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_character_counter_post">
 
@@ -90,21 +91,21 @@
                         android:id="@+id/img_share_trade_post"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size_for_0dp"
-                        tools:background="@drawable/img_share_trade_buy"
                         app:layout_constraintBottom_toBottomOf="@id/tv_name_share_trade_post"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:background="@drawable/img_share_trade_buy" />
 
                     <TextView
                         android:id="@+id/tv_share_trade_type_post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/size_for_10dp"
-                        tools:text="Beli"
                         android:textSize="@dimen/size_for_12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Beli" />
 
                     <TextView
                         android:id="@+id/tv_name_share_trade_post"
@@ -113,24 +114,24 @@
                         android:layout_marginStart="@dimen/size_for_20dp"
                         android:paddingTop="@dimen/size_for_15dp"
                         android:paddingBottom="@dimen/size_for_15dp"
-                        tools:text="Bahana Pendapatan Tetap Makara Tetap"
                         android:textColor="@color/black_palette"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/tv_price_share_trade_post"
                         app:layout_constraintStart_toEndOf="@id/tv_share_trade_type_post"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Bahana Pendapatan Tetap Makara Tetap" />
 
                     <TextView
                         android:id="@+id/tv_price_share_trade_post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/size_for_50dp"
-                        android:text="Rp 2.310"
                         android:textColor="@color/black_palette"
                         android:textSize="@dimen/size_for_20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Rp 2.310" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <EditText

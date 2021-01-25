@@ -23,7 +23,7 @@ public class CommentViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadComment(){
+    public void loadComment(String commentID){
 //        callback.onLoadComment();
     }
 
