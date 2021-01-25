@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,14 +55,18 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         viewModel.setCallback(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-//        recyclerView.addItemDecoration();
 
         Bundle bundle = getArguments();
         if (bundle != null) {
             String type = bundle.getString(PARCEL_DATA);
-            adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID(), this);
-            recyclerView.setAdapter(adapter);
-            viewModel.loadForumPost(type);
+            if (type != null) {
+                type = type.toLowerCase();
+                adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID(), this);
+//                Log.e("asd", "1st : "+type);
+                recyclerView.setAdapter(adapter);
+                viewModel.loadForumPost(type);
+//                Log.e("asd", "2nd : "+type);
+            }
         }
     }
 

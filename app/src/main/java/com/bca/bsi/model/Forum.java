@@ -1,5 +1,7 @@
 package com.bca.bsi.model;
 
+import java.util.List;
+
 public class Forum {
 
     public static class Post {
@@ -9,13 +11,14 @@ public class Forum {
         private String date;
         private String type;
         private String content;
-        private String imageContent;
         private String like;
         private String comment;
         private String share;
         private String statusLike;
         private String profileID;
         private PromoNews promoNews;
+        private ShareTrade shareTrade;
+        private List<ImagePost> imagePostList;
 
         public Post() {
         }
@@ -27,13 +30,42 @@ public class Forum {
             this.date = date;
             this.type = type;
             this.content = content;
-            this.imageContent = imageContent;
             this.like = like;
             this.comment = comment;
             this.share = share;
             this.statusLike = statusLike;
             this.profileID = profileID;
             this.promoNews = promoNews;
+        }
+
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String imageContent, String like, String comment, String share, String statusLike, String profileID, ShareTrade shareTrade) {
+            this.postID = postID;
+            this.imageProfile = imageProfile;
+            this.name = name;
+            this.date = date;
+            this.type = type;
+            this.content = content;
+            this.like = like;
+            this.comment = comment;
+            this.share = share;
+            this.statusLike = statusLike;
+            this.profileID = profileID;
+            this.shareTrade = shareTrade;
+        }
+
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String imageContent, String like, String comment, String share, String statusLike, String profileID, List<ImagePost> imagePostList) {
+            this.postID = postID;
+            this.imageProfile = imageProfile;
+            this.name = name;
+            this.date = date;
+            this.type = type;
+            this.content = content;
+            this.like = like;
+            this.comment = comment;
+            this.share = share;
+            this.statusLike = statusLike;
+            this.profileID = profileID;
+            this.imagePostList = imagePostList;
         }
 
         public String getImageProfile() {
@@ -54,10 +86,6 @@ public class Forum {
 
         public String getContent() {
             return content;
-        }
-
-        public String getImageContent() {
-            return imageContent;
         }
 
         public String getLike() {
@@ -86,6 +114,35 @@ public class Forum {
 
         public PromoNews getPromoNews() {
             return promoNews;
+        }
+
+        public ShareTrade getShareTrade() {
+            return shareTrade;
+        }
+
+        public List<ImagePost> getImagePostList() {
+            return imagePostList;
+        }
+
+        public static class ImagePost{
+            private String imageID;
+            private String imageURL;
+
+            public ImagePost(String imageID, String imageURL) {
+                this.imageID = imageID;
+                this.imageURL = imageURL;
+            }
+
+            public ImagePost() {
+            }
+
+            public String getImageID() {
+                return imageID;
+            }
+
+            public String getImageURL() {
+                return imageURL;
+            }
         }
     }
 
@@ -208,7 +265,44 @@ public class Forum {
         }
     }
 
-    public static class ShareTrade{
+    public static class ShareTrade {
 
+        private String shareTradeID, title, type, value, productName, date;
+
+        public ShareTrade() {
+        }
+
+        public ShareTrade(String shareTradeID, String title, String type, String value, String productName, String date) {
+            this.shareTradeID = shareTradeID;
+            this.title = title;
+            this.type = type;
+            this.value = value;
+            this.productName = productName;
+            this.date = date;
+        }
+
+        public String getShareTradeID() {
+            return shareTradeID;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public String getProductName() {
+            return productName;
+        }
+
+        public String getDate() {
+            return date;
+        }
     }
 }

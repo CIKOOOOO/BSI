@@ -1,6 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,34 +59,23 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
         int layout;
         RecyclerView.ViewHolder viewHolder = null;
         switch (viewType) {
-            case ChildMainForumAdapter.STRATEGY:
-                layout = R.layout.recycler_child_main_forum;
-                break;
             case ChildMainForumAdapter.SHARE_TRADE:
                 layout = R.layout.recycler_share_trade_main_forum;
                 break;
             case ChildMainForumAdapter.NEWS:
                 layout = R.layout.recycler_news_main_forum;
                 break;
-            case ChildMainForumAdapter.TIMELINE:
-                layout = R.layout.recycler_child_main_forum;
-                break;
             default:
                 layout = R.layout.recycler_child_main_forum;
         }
+
         View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         switch (viewType) {
-            case ChildMainForumAdapter.STRATEGY:
-                viewHolder = new GeneralHolder(v, this.onPostClick);
-                break;
             case ChildMainForumAdapter.SHARE_TRADE:
                 viewHolder = new ShareTradeViewHolder(v, this.onPostClick);
                 break;
             case ChildMainForumAdapter.NEWS:
                 viewHolder = new NewsViewHolder(v, this.onPostClick);
-                break;
-            case ChildMainForumAdapter.TIMELINE:
-                viewHolder = new GeneralHolder(v, this.onPostClick);
                 break;
             default:
                 viewHolder = new GeneralHolder(v, this.onPostClick);
@@ -99,9 +88,6 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
         Forum.Post post = forumList.get(position);
         switch (getItemViewType(position)) {
-            case ChildMainForumAdapter.STRATEGY:
-
-                break;
             case ChildMainForumAdapter.SHARE_TRADE:
                 ShareTradeViewHolder viewHolder = (ShareTradeViewHolder) myHolder;
                 viewHolder.loadData(post, profileID);
@@ -110,9 +96,9 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
                 NewsViewHolder newsViewHolder = (NewsViewHolder) myHolder;
                 newsViewHolder.loadData(post, profileID, type.equals(Type.TRENDING));
                 break;
-            case ChildMainForumAdapter.TIMELINE:
-
-                break;
+            default:
+                GeneralHolder generalHolder = (GeneralHolder) myHolder;
+                generalHolder.setData(post, profileID, type.equals(Type.TRENDING));
         }
     }
 
@@ -123,12 +109,12 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        int viewType = -1;
+        int viewType = 0;
 
-        String currentType = type.equals(Type.TRENDING) ? forumList.get(position).getType() : type;
+        String currentType = type.equals(Type.TRENDING) || type.equals(Type.TIMELINE) ? forumList.get(position).getType() : type;
 
         switch (currentType) {
-            case Type.STRATEGI:
+            case Type.STRATEGY:
                 viewType = ChildMainForumAdapter.STRATEGY;
                 break;
             case Type.SHARE_TRADE:
@@ -136,9 +122,6 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
                 break;
             case Type.NEWS:
                 viewType = ChildMainForumAdapter.NEWS;
-                break;
-            case Type.TIMELINE:
-                viewType = ChildMainForumAdapter.TIMELINE;
                 break;
         }
         return viewType;

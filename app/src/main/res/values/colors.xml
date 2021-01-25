@@ -36,6 +36,7 @@
     <color name="jaffa_palette">#F27D30</color>
     <color name="dove_gray_palette">#737373</color>
     <color name="ziggurat_palette">#B3DCE0</color>
+    <color name="ziggurat_palette2">#BDCFE0</color>
     <color name="kournikova_palette">#FFF080</color>
     <color name="turbo_palette">#FEE100</color>
     <color name="light_tosca_palette">#CCE7EA</color>
@@ -53,4 +54,5 @@
     <color name="blue_profile_box">#04646c</color>
     <color name="blue_dot_in_profile">#3d8f98</color>
     <color name="blue_profile_box2">#04646c</color>
+    <color name="cherokee_palette">#FBCE8B</color>
 </resources>

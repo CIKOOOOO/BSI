@@ -64,17 +64,17 @@ public class DummyData {
     private static final boolean[] isChoosenSort = {true, false, false, false};
     private static final boolean[] isChoosenSortDefault = {false, false, false, false};
 
-    private static final String[] imageProfile = {"https://qph.fs.quoracdn.net/main-qimg-40eacebc7bb9f75b867254ed81b45181", "https://upload.wikimedia.org/wikipedia/commons/5/52/Chaeyoung_at_Gaon_Awards_red_carpet_on_January_23%2C_2019.jpg", "https://media.matamata.com/thumbs/2020/10/18/92787-jeongyeon-twice-instagramattwicetagram/745x489-img-92787-jeongyeon-twice-instagramattwicetagram.jpg"};
-    private static final String[] postProfileName = {"Chou Tzuyu", "Son Chaeyoung", "Yoo Jeongyeon"};
-    private static final String[] postDate = {"18 January 2021 10:00", "16 January 2021 11:00", "15 January 2021 12:00"};
-    private static final String[] postType = {"strategi", "news", "share trade"};
-    private static final String[] postLike = {"15", "11", "10"};
-    private static final String[] postStatusLike = {"true", "false", "false"};
-    private static final String[] postComment = {"20", "10", "5"};
-    private static final String[] postShare = {"30", "25", "22"};
-    private static final String[] postID = {"1", "2", "3"};
-    private static final String[] postProfileID = {"YCHRIS", "2", "3"};
-    private static final String[] postContent = {"Secara historis, pengunjung suku kanibal sering kali terlihat sangat aman dan memang diperlakukan dengan baik. Seperti mafia, orang seperti itu biasanya hanya membunuh sendiri. Pada akhir abad ke-16 misalnya, penulis Prancis AndreThevet mengamati kanibalisme Brasil secara pribadi dan pulang tanpa cedera. Thevet menyaksikan baik kanibalisme perang yang kejam dan agresif dan apa yang sekarang dikenal sebagai kanibalisme konsensual atau penguburan. Orang-orang Tapuia, memakan kerabat mereka sendiri yang telah meninggal untuk mengampuni mereka dari penghinaan membusuk di bumi. Sekitar waktu yang sama, orang Prancis lainnya tinggal bersama Tupinamba di Brasil. Namun terlepas dari reputasi mereka sebagai beberapa kanibal paling kejam yang dikenal saat itu, ia juga hidup untuk menceritakan kisah para pelancongnya.", "Mungkin yang paling aneh dari semuanya adalah kisah Joseph Kabris, seorang pelaut Prancis yang datang untuk tinggal di antara suku kanibal di Nuku Hiva dari tahun 1796-1804. Setelahbeberapa ketakutan awal tentang dimakan, Kabris sebenarnya menjalani kehidupan barunya dengan semangat yang sedemikian rupa sehingga dia benar-benar menjadi pribumi. Dia ditato dengan gaya kesukuan, menikah dengan dua istri yang berbeda, dan bertempur dalam pertempuran dengan tuan rumah barunya. Pada waktunya dia seharusnya melupakan bahasa Prancis dan bahkan namanya sendiri. Kabris mengklaim selain saat kelaparan atau perang, penduduk pulau ini sangat lembut. Orang asing diperlakukan dengan sangat hormat dan dapat melakukan perjalanan melalui darat  dengan keamanan penuh.", "Memang, perang dan kelaparan di Nuku Hiva adalah masalah lain. Tentara angkat Kabris menceritakan tentang bagaimana, setelah pertempuran para tahanan dimakan. Mata, otak dan pipi dianggap sebagai makanan lezat,tengkorak dibelah, otak dan darah diminum, kemudian dikerok bersih. Kabris juga berbicara tentang bagaimana, selama kelaparan yang disebabkan oleh kekeringan penduduk pulau akan bertengkar di antara mereka sendiri, paling tidak perselisihan, dan memotong leher untuk menyediakan makanan. Di masa Kabris, penduduk pulau tampaknya tidak mempraktikkan kanibalisme pemakaman. Namun, seperti halnya suku Tapuia, kanibalisme internal ini jauh lebih umum daripada yang mungkin disarankan oleh banyak penulis perjalanan Barat. "};
+    private static final String[] imageProfile = {"https://qph.fs.quoracdn.net/main-qimg-40eacebc7bb9f75b867254ed81b45181", "https://upload.wikimedia.org/wikipedia/commons/5/52/Chaeyoung_at_Gaon_Awards_red_carpet_on_January_23%2C_2019.jpg", "https://media.matamata.com/thumbs/2020/10/18/92787-jeongyeon-twice-instagramattwicetagram/745x489-img-92787-jeongyeon-twice-instagramattwicetagram.jpg", "https://www.wowkeren.com/images/news/00148900.jpg"};
+    private static final String[] postProfileName = {"Chou Tzuyu", "Son Chaeyoung", "Yoo Jeongyeon", "Im Nayeon"};
+    private static final String[] postDate = {"18 January 2021 10:00", "16 January 2021 11:00", "15 January 2021 12:00", "12 January 2021 12:00"};
+    private static final String[] postType = {"news", "news", "news", "news"};
+    private static final String[] postLike = {"15", "11", "10", "12"};
+    private static final String[] postStatusLike = {"true", "false", "false", "true"};
+    private static final String[] postComment = {"20", "10", "5", "20"};
+    private static final String[] postShare = {"30", "25", "22", "1"};
+    private static final String[] postID = {"1", "2", "3", "4"};
+    private static final String[] postProfileID = {"YCHRIS", "2", "3", "4"};
+    private static final String[] postContent = {"Secara historis, pengunjung suku kanibal sering kali terlihat sangat aman dan memang diperlakukan dengan baik. Seperti mafia, orang seperti itu biasanya hanya membunuh sendiri. Pada akhir abad ke-16 misalnya, penulis Prancis AndreThevet mengamati kanibalisme Brasil secara pribadi dan pulang tanpa cedera. Thevet menyaksikan baik kanibalisme perang yang kejam dan agresif dan apa yang sekarang dikenal sebagai kanibalisme konsensual atau penguburan. Orang-orang Tapuia, memakan kerabat mereka sendiri yang telah meninggal untuk mengampuni mereka dari penghinaan membusuk di bumi. Sekitar waktu yang sama, orang Prancis lainnya tinggal bersama Tupinamba di Brasil. Namun terlepas dari reputasi mereka sebagai beberapa kanibal paling kejam yang dikenal saat itu, ia juga hidup untuk menceritakan kisah para pelancongnya.", "Secara historis, pengunjung suku kanibal sering kali terlihat sangat aman dan memang diperlakukan dengan baik. Seperti mafia, orang seperti itu biasanya hanya membunuh sendiri. Pada akhir abad ke-16 misalnya, penulis Prancis AndreThevet mengamati kanibalisme Brasil secara pribadi dan pulang tanpa cedera. Thevet menyaksikan baik kanibalisme perang yang kejam dan agresif dan apa yang sekarang dikenal sebagai kanibalisme konsensual atau penguburan. Orang-orang Tapuia, memakan kerabat mereka sendiri yang telah meninggal untuk mengampuni mereka dari penghinaan membusuk di bumi. Sekitar waktu yang sama, orang Prancis lainnya tinggal bersama Tupinamba di Brasil. Namun terlepas dari reputasi mereka sebagai beberapa kanibal paling kejam yang dikenal saat itu, ia juga hidup untuk menceritakan kisah para pelancongnya.", "Mungkin yang paling aneh dari semuanya adalah kisah Joseph Kabris, seorang pelaut Prancis yang datang untuk tinggal di antara suku kanibal di Nuku Hiva dari tahun 1796-1804. Setelahbeberapa ketakutan awal tentang dimakan, Kabris sebenarnya menjalani kehidupan barunya dengan semangat yang sedemikian rupa sehingga dia benar-benar menjadi pribumi. Dia ditato dengan gaya kesukuan, menikah dengan dua istri yang berbeda, dan bertempur dalam pertempuran dengan tuan rumah barunya. Pada waktunya dia seharusnya melupakan bahasa Prancis dan bahkan namanya sendiri. Kabris mengklaim selain saat kelaparan atau perang, penduduk pulau ini sangat lembut. Orang asing diperlakukan dengan sangat hormat dan dapat melakukan perjalanan melalui darat  dengan keamanan penuh.", "Memang, perang dan kelaparan di Nuku Hiva adalah masalah lain. Tentara angkat Kabris menceritakan tentang bagaimana, setelah pertempuran para tahanan dimakan. Mata, otak dan pipi dianggap sebagai makanan lezat,tengkorak dibelah, otak dan darah diminum, kemudian dikerok bersih. Kabris juga berbicara tentang bagaimana, selama kelaparan yang disebabkan oleh kekeringan penduduk pulau akan bertengkar di antara mereka sendiri, paling tidak perselisihan, dan memotong leher untuk menyediakan makanan. Di masa Kabris, penduduk pulau tampaknya tidak mempraktikkan kanibalisme pemakaman. Namun, seperti halnya suku Tapuia, kanibalisme internal ini jauh lebih umum daripada yang mungkin disarankan oleh banyak penulis perjalanan Barat. "};
 
     private static final String[] categoryID = {"1", "2", "3"};
     private static final String[] categoryName = {"Category 1", "Category 2", "Category 3"};
@@ -119,7 +119,7 @@ public class DummyData {
     public static List<PromoNews> getPromoNewsList() {
         List<PromoNews> promoNewsList = new ArrayList<>();
         for (int i = 0; i < promoTitle.length; i++) {
-            PromoNews promoNews = new PromoNews(i+"",promoTitle[i], promoDescription[i], promoImage[i], content[i], date[i]);
+            PromoNews promoNews = new PromoNews(i + "", promoTitle[i], promoDescription[i], promoImage[i], content[i], date[i]);
             promoNewsList.add(promoNews);
         }
         return promoNewsList;
@@ -338,10 +338,88 @@ public class DummyData {
         return res;
     }
 
-    public static List<Forum.Post> getPostList() {
+    public static List<Forum.Post> getPostNewsList() {
         List<Forum.Post> postList = new ArrayList<>();
-        for (int i = 0; i < postComment.length; i++) {
+        for (int i = 0; i < getPromoNewsList().size(); i++) {
             Forum.Post post = new Forum.Post(postID[i], imageProfile[i], postProfileName[i], postDate[i], postType[i], postContent[i], "", postLike[i], postComment[i], postShare[i], postStatusLike[i], postProfileID[i], getPromoNewsList().get(i));
+            postList.add(post);
+        }
+        return postList;
+    }
+
+    private static final String[] shareTradePostID = {"1", "2", "3", "4"};
+    private static final String[] shareTradeImageProfile = {"https://qph.fs.quoracdn.net/main-qimg-40eacebc7bb9f75b867254ed81b45181", "https://upload.wikimedia.org/wikipedia/commons/5/52/Chaeyoung_at_Gaon_Awards_red_carpet_on_January_23%2C_2019.jpg", "https://media.matamata.com/thumbs/2020/10/18/92787-jeongyeon-twice-instagramattwicetagram/745x489-img-92787-jeongyeon-twice-instagramattwicetagram.jpg", "https://www.wowkeren.com/images/news/00148900.jpg"};
+    private static final String[] shareTradePostProfileName = {"Chou Tzuyu", "Son Chaeyoung", "Yoo Jeongyeon", "Im Nayeon"};
+    private static final String[] shareTradePostDate = {"18 January 2021 10:00", "16 January 2021 11:00", "15 January 2021 12:00", "12 January 2021 12:00"};
+    private static final String[] shareTradePostType = {"share trade", "share trade", "share trade", "share trade"};
+    private static final String[] shareTradePostLike = {"15", "11", "10", "12"};
+    private static final String[] shareTradePostStatusLike = {"true", "false", "false", "true"};
+    private static final String[] shareTradePostComment = {"20", "10", "5", "20"};
+    private static final String[] shareTradePostContent = {"Aku tadi ngejual karena bosan, mau coba yang lain ah...", "Aku tadi beli karena menurut orang kepercayaanku, produk ini mau naik loh hihihi", "Aku invest di siniii, terus naik doooong. Jadi cuaaan", "Hmmmm sekarang sabar duluuu, yakin naik lagi deeeh"};
+
+    private static final String[] shareTradeID = {"1", "2", "3", "4"};
+    private static final String[] shareTradeTitle = {"Saya baru saja menjual", "Saya baru saja membeli", "Nilai Investasi Saya", "Nilai Investasi Saya"};
+    private static final String[] shareTradeProduct = {"Bahana Pendapatan tetap Makara Prima", "Ashmore Dana Ekuitas Nusantara", "Ashmore Dana Progresif Nusantara", "Batavia Dana Kas Maxima"};
+    private static final String[] shareTradeValue = {"2510", "3220", "1.4", "-2.0"};
+    private static final String[] shareTradeType = {"Jual", "Beli", "Naik", "Turun"};
+    private static final String[] shareTradeDate = {"8 Januari 2019", "20 Januari 2020", "21 Februari 2020", "29 Desember 2020"};
+
+    public static List<Forum.Post> getPostShareTradeList() {
+        List<Forum.Post> postList = new ArrayList<>();
+        for (int i = 0; i < shareTradeID.length; i++) {
+            Forum.ShareTrade shareTrade = new Forum.ShareTrade(shareTradeID[i], shareTradeTitle[i], shareTradeType[i], shareTradeValue[i], shareTradeProduct[i], shareTradeDate[i]);
+            Forum.Post post = new Forum.Post(shareTradePostID[i], shareTradeImageProfile[i], shareTradePostProfileName[i], shareTradePostDate[i], shareTradePostType[i], shareTradePostContent[i], "", shareTradePostLike[i], shareTradePostComment[i], postShare[i], shareTradePostStatusLike[i], postProfileID[i], shareTrade);
+            postList.add(post);
+        }
+        return postList;
+    }
+
+    private static final String[] strategyPostID = {"1", "2", "3", "4"};
+    private static final String[] strategyImageProfile = {"https://qph.fs.quoracdn.net/main-qimg-40eacebc7bb9f75b867254ed81b45181", "https://upload.wikimedia.org/wikipedia/commons/5/52/Chaeyoung_at_Gaon_Awards_red_carpet_on_January_23%2C_2019.jpg", "https://media.matamata.com/thumbs/2020/10/18/92787-jeongyeon-twice-instagramattwicetagram/745x489-img-92787-jeongyeon-twice-instagramattwicetagram.jpg", "https://www.wowkeren.com/images/news/00148900.jpg"};
+    private static final String[] strategyPostProfileName = {"Chou Tzuyu", "Son Chaeyoung", "Yoo Jeongyeon", "Im Nayeon"};
+    private static final String[] strategyPostDate = {"18 January 2021 10:00", "16 January 2021 11:00", "15 January 2021 12:00", "12 January 2021 12:00"};
+    private static final String[] strategyPostType = {"strategy", "strategy", "strategy", "strategy"};
+    private static final String[] strategyPostLike = {"15", "11", "10", "12"};
+    private static final String[] strategyPostStatusLike = {"true", "false", "false", "true"};
+    private static final String[] strategyPostComment = {"20", "10", "5", "20"};
+    private static final String[] strategyPostContent = {"Wabah virus corona menghantui perekonomian global, termasuk kurs dollar Australia. Lalu, bagaimana nasib dari kurs dollar Australia ini? Untuk menjawabnya, simak ulasan berikut ini.\nNilai tukar rupiah terpantau menguat tajam dalam upaya melawan dollar Australia di awal perdagangan pada akhir pekan ini. Namun menjelang penutupan, penguatan terus terjadi dan kurs dollar Australia semakin tergerus.\n" +
+            "\n" +
+            "Pada awal perdagangan, nilai tukar rupiah sempat menguat 1,45 persen yakni pada level Rp9.726 per dollar Australia. Namun demikian, penguatan mata uang terus terpangkas sampai dengan berbalik melemah 0,19 persen yakni pada level Rp9.887 per dollar Australia tengah sesi perdagangan.\n" +
+            "\n" +
+            "Pergerakan ini juga sama yang mana terjadi pada pekan lalu dimana rupiah terpantau pada awal perdagangan melesat menguat bahkan hingga nyaris menuju penguatan 3 persen, tetapi pada akhir perdagangan justru rupiah malah berbalik melemah 0,7 persen.\n" +
+            "\n" +
+            "Rupiah saat ini berada pada dekat level terlemah selama 9 bulan yakni Rp9.988 per dollar Australia atau setelah sempat amblas pada lebih dari 10 persen dalam sepekan terakhir. Padahal hari Rabu pekan lalu, rupiah sempat bertengger dan berada pada level terkuat sejak Desember 2011 dalam melawan kurs dollar Australia.", "Investasi adalah satu dari sekian banyak cara dalam memperoleh tambahan uang. Setiap orang yang melakukan investasi tentunya menginginkan keuntungan. Namun, bagi kamu yang sangat baru dalam dunia investasi dan belum berpengalaman, pastinya ada keraguan dan ketakutan akan terjadinya kerugian.\n" +
+            "\n" +
+            "Di sisi lain, dengan investasi kamu akan mendapatkan penghasilan tanpa perlu bekerja dan menghabisakan waktu mengerjakan sesuatu tanpa bersusah payah. Dalam investasi, uang yang kamu tanamkan akan secara otomatis bekerja untuk kamu dan mendapatkan keuntungan alias passive income.\n" +
+            "\n" +
+            "Adapun beberapa tips yang bisa kamu lakukan untuk mendapatkan keuntungan dalam berinvestasi, antara lain:\n" +
+            "\n" +
+            "    Menentukan tujuan kamu dalam melakukan investasi.\n" +
+            "    Mencari tahu apa itu investasi dan menetapkan tujuan kamu.\n" +
+            "    Mulai membuat rencana untuk makukan pelunasan utang.\n" +
+            "\n" +
+            "Investasi adalah sebuah wadah yang bisa dilakukan untuk mendapatkan penghasilan tambahan. Semua orang tentunya melakukan investasi dan berkeinginan memperoleh keuntungan dari investasi tersebut.", "PT Astra International Tbk (ASII) pada tahun 2019 berhasil mengumpulkan keuntungan senilai Rp21,7 triliun. Laba bersih perseroan tersebut tak jauh berbeda dengan posisi tahun 2018 yang meraih keuntungan Rp21,67 triliun. \n" +
+            "\n" +
+            "Kinerja keuangan Astra International kembali terjadi penurunan pada tahun 2020 dikarenakan adanya penurunan volume penjualan mobil sepanjang Januari dan Februari 2019. Padahal pada tahun 2019 kinerja keuangan Astra Internasional sempat pulih karena didukung pulihnya penjualan mobil nasional tahun 2019 dan realisasi volume penjualan mobil perseroan sepanjang tahun lalu sudah sesuai ekspektasi. Astra International berusaha mempertahankan pencapaiannya tersebut agar terealisasi lagi di tahun 2020 ini, namun kenyataannya tidak semudah itu. Meski demikian, penurunan dan pelemahan tersebut tidak akan menggoyahkan perkiraan peningkatan volume penjualan mobil perseroan hingga akhir tahun 2020.\n" +
+            "\n" +
+            "Sepanjang pembukaan tahun 2020 yaitu bulan Januari, penjualan mobil turun sebesar 2,4% menjadi 79.983 unit dibandingkan periode Januari 2018. Penurunan tersebut diperkirakan akibat banjir yang melanda sebagian besar wilayah ibu kota awal tahun ini. Lain halnya jika dilihat dari sudut pangsa pasar, Astra International justru mampu untuk menaikkan pangsa pasarnya menjadi 50,4% pada Januari 2020 dibandingkan dengan bulan Desember 2019 yang sebesar 47,4%. Meski naik dari bulan sebelumnya, jika dilihat dari sepanjang tahun 2019 pangsa pasar Astra International tetap turun karena sepanjang tahun 2019 pangsa pasarnya sebesar 51,5%.", "Kamu bertanya-tanya cara investasi bagi mahasiswa yang tepat? Tenang, redaksi Ajaib akan menjawabnya secara lengkap melalui ulasan berikut ini. Disimak ya!\n" +
+            "\n" +
+            "Mengenyam pendidikan sekaligus bekerja bukanlah sesuatu yang mudah. Mengingat banyaknya kebutuhan yang harus dipenuhi demi menunjang kebutuhan perkuliahan tidak aneh rasanya apabila sebagai mahasiswa pun sudah harus memikirkan investasi. Memang tidak mudah tetapi sebenarnya hal ini pun tidak sulit untuk dilakukan. Banyak beberapa cara bagi mahasiswa untuk tetap dapat berinvestasi meskipun masih mengikuti kegiatan pembelajaran.\n" +
+            "\n" +
+            "Selain banyaknya pilihan untuk berinvestasi, perkembangan teknologi yang canggih juga memungkinkan mahasiswa untuk memiliki pendapatan tambahan melalui pekerjaan sampingan yang disediakan oleh internet. Mulai dari penulis lepas hingga reseller bisa dilakukan demi pemasukan tambahan. Namun pada artikel kali ini, kita akan membahas lebih lanjut mengenai cara investasi bagi mahasiswa. Tidak perlu melakukan pekerjaan tersebut, cukup dengan berinvestasi kamu bisa langsung melipatgandakan asetmu. Hal ini sangat cocok untuk para milenial yang suka dengan sesuatu yang praktis."};
+
+    public static List<Forum.Post.ImagePost> getPostImageList(int i) {
+        List<Forum.Post.ImagePost> imagePostList = new ArrayList<>();
+        for (int j = 0; j <= i; j++) {
+            imagePostList.add(new Forum.Post.ImagePost(i + "", strategyImageProfile[j]));
+        }
+        return imagePostList;
+    }
+
+    public static List<Forum.Post> getPostStrategyList() {
+        List<Forum.Post> postList = new ArrayList<>();
+        for (int i = 0; i < shareTradeID.length; i++) {
+            Forum.Post post = new Forum.Post(strategyPostID[i], strategyImageProfile[i], strategyPostProfileName[i], strategyPostDate[i], strategyPostType[i], strategyPostContent[i], "", strategyPostLike[i], strategyPostComment[i], postShare[i], strategyPostStatusLike[i], postProfileID[i], getPostImageList(i));
             postList.add(post);
         }
         return postList;

@@ -27,7 +27,7 @@ public class Type {
     public static final String FOLLOWERS = "followers";
 
     public static final String TRENDING = "trending";
-    public static final String STRATEGI = "strategi";
-    public static final String SHARE_TRADE = "share_trade";
+    public static final String STRATEGY = "strategy";
+    public static final String SHARE_TRADE = "share trade";
     public static final String TIMELINE = "timeline";
 }
