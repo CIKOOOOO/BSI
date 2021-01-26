@@ -19,6 +19,7 @@ public class Forum {
         private PromoNews promoNews;
         private ShareTrade shareTrade;
         private List<ImagePost> imagePostList;
+        private Post post;
 
         public Post() {
         }
@@ -122,6 +123,10 @@ public class Forum {
 
         public List<ImagePost> getImagePostList() {
             return imagePostList;
+        }
+
+        public Post getPost() {
+            return post;
         }
 
         public static class ImagePost{

@@ -29,7 +29,7 @@ public class SplashActivity extends BaseActivity implements ISplashCallback {
 
         prefConfig.logOut();
 
-        viewModel.getAccessToken();
+//        viewModel.getAccessToken();
 
         Runnable runnable = () -> startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 
@@ -38,8 +38,8 @@ public class SplashActivity extends BaseActivity implements ISplashCallback {
 
     @Override
     public void onGettingToken(String token) {
-        Log.e("asd", token);
-        prefConfig.setTokenUser(token);
+//        Log.e("asd", token);
+//        prefConfig.setTokenUser(token);
     }
 
     @Override

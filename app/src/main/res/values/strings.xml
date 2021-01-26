@@ -217,6 +217,9 @@
     <string name="up">Naik</string>
     <string name="down">Turun</string>
     <string name="stay">Tetap</string>
+    <string name="okay_understand">Oke, mengerti</string>
+    <string name="about_smartbot">Tentang SmartBot</string>
+    <string name="banned_account">Akun forum anda telah dibekukan oleh admin. Silahkan hubungi HaloBCA</string>
 
     <!--END HERE-->
 
@@ -231,6 +234,8 @@
     <string name="pref_account_number">pref_account_number</string>
     <string name="pref_token_user">pref_token_user</string>
     <string name="pref_tips_of_the_week">pref_tips_of_the_week</string>
+    <string name="pref_time_tips_of_the_week">pref_time_tips_of_the_week</string>
+    <string name="pref_account_banned">pref_account_banned</string>
 
     <!--FORUM USER-->
     <string name="pref_profile_id">pref_profile_id</string>

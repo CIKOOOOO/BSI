@@ -13,6 +13,8 @@ import com.bca.bsi.model.ProductIH;
 import com.bca.bsi.model.ProductRekomen;
 import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.model.SortJenisReksa;
+import com.bca.bsi.model.TipsOfTheWeek;
+import com.bca.bsi.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -433,4 +435,35 @@ public class DummyData {
         }
         return categoryList;
     }
+
+    public static TipsOfTheWeek getTipsOfTheWeek() {
+        return new TipsOfTheWeek("Yuk belajar analisa sahammu!", "Berikut informasi yang kamu perlu baca untuk pemilihan sahammu:\n" +
+                "1. Laporan Keuangan\n" +
+                "2. Laporan Tahunan\n" +
+                "3. Corporate Action\n" +
+                "4. Public Expose\n" +
+                "Informasi di atas bisa dibaca secara bebas dan gratis loh!", "https://awsimages.detik.net.id/community/media/visual/2019/09/23/23c082cf-81e3-41d5-b8ad-bb5b6101de77_43.jpeg?w=700&q=90");
+    }
+
+    private static final String[] directImageProfile = {"https://qph.fs.quoracdn.net/main-qimg-40eacebc7bb9f75b867254ed81b45181"
+            , "https://upload.wikimedia.org/wikipedia/commons/5/52/Chaeyoung_at_Gaon_Awards_red_carpet_on_January_23%2C_2019.jpg"
+            , "https://media.matamata.com/thumbs/2020/10/18/92787-jeongyeon-twice-instagramattwicetagram/745x489-img-92787-jeongyeon-twice-instagramattwicetagram.jpg"
+            , "https://www.wowkeren.com/images/news/00148900.jpg"
+            , "https://i.pinimg.com/originals/fd/66/48/fd6648d97f920447576363607cc833bd.jpg"
+            , "https://cdn-2.tstatic.net/manado/foto/bank/images/mina-twice-1d.jpg"
+            , "https://cdn.idntimes.com/content-images/community/2020/12/els1vqvxuae4jyc-edbe2f50e2e7e76a907f34c405aea3f2-5e503a9df8032e880d6025b6317ae761_600x400.jpg"
+            , "https://akcdn.detik.net.id/visual/2019/08/05/72446715-5a3a-47ef-b21e-1f27a998204f_169.jpeg?w=650"
+            , "https://i.pinimg.com/originals/25/b8/5b/25b85b7820d5ee63f379438511d80c8d.jpg"};
+    private static final String[] directProfileName = {"Chou Tzuyu", "Son Chaeyoung", "Yoo Jeongyeon"
+            , "Im Nayeon", "Kim Dahyun", "Myoi Mina", "Minatozaki Sana", "Park Jihyo","Hirai Momo"};
+
+    public static List<User.ForumUser> getForumUser() {
+        List<User.ForumUser> forumUserList = new ArrayList<>();
+        for (int i = 0; i < directImageProfile.length; i++) {
+            User.ForumUser forumUser = new User.ForumUser(i + "", directProfileName[i], directImageProfile[i]);
+            forumUserList.add(forumUser);
+        }
+        return forumUserList;
+    }
+
 }

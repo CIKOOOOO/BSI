@@ -20,7 +20,7 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.Holder> {
     private onInboxClick onInboxClick;
 
     public interface onInboxClick{
-
+        void onDetailInbox(Forum.Inbox inbox);
     }
 
     public InboxAdapter(InboxAdapter.onInboxClick onInboxClick) {

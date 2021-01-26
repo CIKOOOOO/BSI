@@ -28,6 +28,12 @@ public class PrefConfig {
         editor.apply();
     }
 
+    public void setTimeOfTipsOfTheWeek(String date) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getString(R.string.pref_time_tips_of_the_week), date);
+        editor.apply();
+    }
+
     public void removeTokenAccess() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(context.getString(R.string.pref_token_user), Constant.EMPTY);
@@ -44,6 +50,8 @@ public class PrefConfig {
         editor.putString(context.getString(R.string.pref_email), welmaUser.getEmail());
         editor.putString(context.getString(R.string.pref_profile_id), user.getProfileID());
         editor.putString(context.getString(R.string.pref_username), user.getUsername());
+        editor.putString(context.getString(R.string.pref_account_banned), user.getActive());
+        editor.putString(context.getString(R.string.pref_token_user), welmaUser.getTokenUser());
         editor.apply();
     }
 
@@ -105,6 +113,7 @@ public class PrefConfig {
     public String getAccountNumber() {
         return sharedPreferences.getString(context.getString(R.string.pref_account_number), Constant.EMPTY);
     }
+
     public String getTokenUser() {
         return sharedPreferences.getString(context.getString(R.string.pref_token_user), Constant.EMPTY);
     }
@@ -120,8 +129,17 @@ public class PrefConfig {
     public String getImageProfile() {
         return sharedPreferences.getString(context.getString(R.string.pref_img_profile), Constant.EMPTY);
     }
+
+    public String getTimeTipsOfTheWeek() {
+        return sharedPreferences.getString(context.getString(R.string.pref_time_tips_of_the_week), Constant.EMPTY);
+    }
+
+    public String isForumAccountBanned() {
+        return sharedPreferences.getString(context.getString(R.string.pref_account_banned), Constant.EMPTY);
+    }
+
     public Boolean getTipsActivated() {
-        return sharedPreferences.getBoolean(context.getString(R.string.pref_tips_of_the_week),true);
+        return sharedPreferences.getBoolean(context.getString(R.string.pref_tips_of_the_week), true);
     }
 
 }

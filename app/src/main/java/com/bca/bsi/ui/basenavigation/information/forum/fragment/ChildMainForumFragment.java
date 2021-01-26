@@ -1,7 +1,7 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.ui.basenavigation.information.forum.comment.CommentActivity;
+import com.bca.bsi.ui.basenavigation.information.forum.profile.ForumProfileActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.constant.Constant;
 
@@ -83,7 +85,9 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onDetailPost(String postID) {
-
+        Intent intent = new Intent(mActivity, CommentActivity.class);
+        intent.putExtra(CommentActivity.DATA, postID);
+        startActivity(intent);
     }
 
     @Override
@@ -108,7 +112,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onMyProfile() {
-
+        startActivity(new Intent(mActivity, ForumProfileActivity.class));
     }
 
     @Override

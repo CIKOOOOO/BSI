@@ -61,4 +61,10 @@ public class InboxActivity extends BaseActivity implements View.OnClickListener,
         inboxAdapter.setInboxList(inboxes);
         inboxAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onDetailInbox(Forum.Inbox inbox) {
+        // pindah activity sesuai dengan tipe inbox
+        // TODO
+    }
 }

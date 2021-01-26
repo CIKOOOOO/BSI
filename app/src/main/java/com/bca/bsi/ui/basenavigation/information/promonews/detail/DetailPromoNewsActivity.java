@@ -4,28 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;
-import com.bca.bsi.utils.constant.Type;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
-public class DetailPromoNewsActivity extends BaseActivity implements View.OnClickListener {
+public class DetailPromoNewsActivity extends BaseActivity implements View.OnClickListener, IDetailNewsCallback {
 
-    public static final String TYPE = "type";
     public static final String DATA = "data";
 
     private PromoNews promoNews;
-//    private BottomSheetBehavior<ConstraintLayout> bottomSheetBehavior;
-//    private FrameLayout frameLayout;
-
-    private String type;
+    private DetailNewsViewModel viewModel;
+    private ImageView imgNews;
+    private TextView tvTitle, tvDate, tvContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,48 +36,35 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
     private void initVar() {
         TextView tvTitleToolbar = findViewById(R.id.tv_title_toolbar_back);
         TextView tvChildToolbar = findViewById(R.id.tv_child_toolbar_back);
-        TextView tvTitle = findViewById(R.id.tv_title_detail_promo_news);
-        TextView tvDate = findViewById(R.id.tv_date_detail_promo_news);
-        TextView tvContent = findViewById(R.id.tv_content_detail_promo_news);
         TextView tvShare = findViewById(R.id.tv_share_to_forum_detail_promo_news);
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
-        ConstraintLayout bottomSheet = findViewById(R.id.bs_cl_share_news);
 
-//        frameLayout = findViewById(R.id.frame_detail_promo_news);
+        imgNews = findViewById(R.id.img_detail_promo_news);
+        tvTitle = findViewById(R.id.tv_title_detail_promo_news);
+        tvDate = findViewById(R.id.tv_date_detail_promo_news);
+        tvContent = findViewById(R.id.tv_content_detail_promo_news);
 
-//        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        viewModel = new ViewModelProvider(this).get(DetailNewsViewModel.class);
+        viewModel.setCallback(this);
 
         tvChildToolbar.setVisibility(View.GONE);
 
         tvShare.setAllCaps(false);
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(TYPE) && intent.hasExtra(DATA)) {
+        if (intent != null && intent.hasExtra(DATA)) {
             Gson gson = new Gson();
             String data = intent.getStringExtra(DATA);
-            this.type = intent.getStringExtra(TYPE);
             this.promoNews = gson.fromJson(data, PromoNews.class);
 
-            String title = this.type.equals(Type.NEWS) ? getString(R.string.detail_news) : getString(R.string.detail_promo);
-            tvTitleToolbar.setText(title);
+            tvTitleToolbar.setText(getString(R.string.detail_news));
 
             tvTitle.setText(this.promoNews.getTitle());
             tvDate.setText("Dirilis pada " + this.promoNews.getDate());
             tvContent.setText(this.promoNews.getContent());
-        }
 
-//        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-//            @Override
-//            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-//                int visibility = newState == BottomSheetBehavior.STATE_COLLAPSED ? View.GONE : View.VISIBLE;
-//                frameLayout.setVisibility(visibility);
-//            }
-//
-//            @Override
-//            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-//
-//            }
-//        });
+            viewModel.loadNews(prefConfig.getTokenUser(), data);
+        }
 
         tvShare.setOnClickListener(this);
         imgBack.setOnClickListener(this);
@@ -92,7 +78,6 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
                 intent.putExtra(PostActivity.DATA, Utils.toJSON(this.promoNews));
                 intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_NEWS);
                 startActivity(intent);
-//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.img_btn_back_toolbar:
                 onBackPressed();
@@ -101,10 +86,20 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
     }
 
     @Override
-    public void onBackPressed() {
-//        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-//            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-//        } else
-        super.onBackPressed();
+    public void onLoadDetailNews(PromoNews promoNews) {
+        this.promoNews = promoNews;
+
+        Picasso.get()
+                .load(promoNews.getImage())
+                .into(imgNews);
+
+        tvTitle.setText(this.promoNews.getTitle());
+        tvDate.setText("Dirilis pada " + this.promoNews.getDate());
+        tvContent.setText(this.promoNews.getContent());
+    }
+
+    @Override
+    public void onFailed(String msg) {
+        showSnackBar(msg);
     }
 }

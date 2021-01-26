@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/size_for_100dp"
+    android:layout_height="wrap_content">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/recycler_img_profile_people"
+        android:layout_width="@dimen/size_for_70dp"
+        android:layout_height="@dimen/size_for_70dp"
+        android:layout_marginTop="@dimen/size_for_5dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_corner_radius="@dimen/size_for_10dp"
+        app:riv_mutate_background="true"
+        tools:background="@drawable/ic_no_img" />
+
+    <TextView
+        android:id="@+id/recycler_tv_name_people"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_5dp"
+        android:layout_marginBottom="@dimen/size_for_5dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_img_profile_people" />
+
+    <ImageButton
+        android:id="@+id/recycler_img_btn_close_chosen_profile"
+        android:layout_width="@dimen/size_for_20dp"
+        android:layout_height="@dimen/size_for_20dp"
+        android:background="@color/color_base_welma"
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

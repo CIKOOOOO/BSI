@@ -66,7 +66,6 @@ public class PromoInformationFragment extends BaseFragment implements IPromoInfo
     public void onObjectClick(PromoNews promoNews) {
         String data = Utils.toJSON(promoNews);
         Intent intent = new Intent(mActivity, DetailPromoNewsActivity.class);
-        intent.putExtra(DetailPromoNewsActivity.TYPE, Type.PROMO);
         intent.putExtra(DetailPromoNewsActivity.DATA, data);
 //        mActivity.startActivity(intent);
     }

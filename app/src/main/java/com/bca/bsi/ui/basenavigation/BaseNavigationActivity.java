@@ -7,10 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +24,7 @@ import com.bca.bsi.adapter.ReportAdapter;
 import com.bca.bsi.adapter.RoboRekomenAdapter;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.Portfolio;
+import com.bca.bsi.model.TipsOfTheWeek;
 import com.bca.bsi.ui.basenavigation.information.InformationFragment;
 import com.bca.bsi.ui.basenavigation.more.MoreFragment;
 import com.bca.bsi.ui.basenavigation.portfolio.PortfolioFragment;
@@ -35,13 +33,16 @@ import com.bca.bsi.ui.basenavigation.products.ProductsFragment;
 import com.bca.bsi.ui.basenavigation.profile.ProfileFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
+import com.bca.bsi.utils.dialog.AboutRoboDialog;
+import com.bca.bsi.utils.dialog.TipsOfTheWeekDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.Calendar;
 import java.util.List;
 
-public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick, InformationFragment.onReport, ReportAdapter.onReportClick, View.OnClickListener, IBaseNavigatonCallback {
+public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick, InformationFragment.onReport, ReportAdapter.onReportClick, View.OnClickListener, IBaseNavigatonCallback, TipsOfTheWeekDialog.onItemClick, AboutRoboDialog.onCloseDialog {
 
     private BottomSheetBehavior<ConstraintLayout> bsSmartBot, bsReport;
     private RoboRekomenAdapter roboRekomenAdapter;
@@ -50,11 +51,9 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     private Button btnReport;
     private BaseNavigationViewModel viewModel;
     private Forum.Report report;
-    private ConstraintLayout roboAboutLayout, tipsOfTheWeekLayout;
-    private TextView okeMengerti, bottomLanjut, minPembelian;
-    private ImageButton clearPopupTOTW;
-    private CheckBox noTips;
+    private AboutRoboDialog aboutRoboDialog;
     private Portfolio portfolio;
+    private TipsOfTheWeekDialog tipsOfTheWeekDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +73,8 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         btnReport = findViewById(R.id.bs_btn_update_choose_image);
 
         reportAdapter = new ReportAdapter(this);
+        tipsOfTheWeekDialog = new TipsOfTheWeekDialog(this);
+        aboutRoboDialog = new AboutRoboDialog(this);
 
         viewModel = new ViewModelProvider(this).get(BaseNavigationViewModel.class);
         viewModel.setCallback(this);
@@ -102,60 +103,16 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         bsSmartBot = BottomSheetBehavior.from(clBSRoboRekomen);
         bsReport = BottomSheetBehavior.from(clBSReport);
         // lanjut bottom sheet
-        bottomLanjut = findViewById(R.id.tv_lanjut);
-        bottomLanjut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // INTENT LANJUT BUTTON
-                if(portfolio!=null) {
-                    Intent intent = new Intent(v.getContext(), PurchasingSmartbotActivity.class);
-                    intent.putExtra("data", Utils.toJSON(portfolio));
-                    startActivity(intent);
-                }
-
-            }
-        });
+        TextView bottomLanjut = findViewById(R.id.tv_lanjut);
 
         //Popup tips of the week
-        tipsOfTheWeekLayout = findViewById(R.id.popup_tips_of_the_week);
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        if (dayOfWeek == 2 && prefConfig.getTipsActivated()) { // Day-2 = Monday
-            tipsOfTheWeekLayout.setVisibility(View.VISIBLE);
+        if (dayOfWeek == 3
+                && prefConfig.getTipsActivated()
+                && !prefConfig.getTimeTipsOfTheWeek().equals(Utils.getTime(Constant.DATE_FORMAT_2))) { // Day-2 = Monday
+            viewModel.getTipsOfTheWeek(prefConfig.getTokenUser());
         }
-        // Clear button tips of the week
-        clearPopupTOTW = findViewById(R.id.ib_clear3);
-        clearPopupTOTW.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tipsOfTheWeekLayout.setVisibility(View.GONE);
-            }
-        });
-        // Jangan tampilkan lagi checkbox
-        noTips = findViewById((R.id.cb_jangan_tampilkan_lagi));
-        noTips.setChecked(false);
-        noTips.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    prefConfig.setTipsOfTheWeek(false);
-                } else {
-                    prefConfig.setTipsOfTheWeek(true);
-                }
-            }
-        });
-
-        // Popup tentang robo
-        roboAboutLayout = findViewById(R.id.popup_tentang_robo);
-        // Oke Mengerti Popup
-        okeMengerti = findViewById(R.id.tv_oke);
-        okeMengerti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                roboAboutLayout.setVisibility(View.GONE);
-            }
-        });
 
         bottomNavigationView.setItemIconTintList(null);
 
@@ -199,6 +156,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         bsReport.addBottomSheetCallback(bottomSheetCallback);
 
         btnReport.setOnClickListener(this);
+        bottomLanjut.setOnClickListener(this);
     }
 
     private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -247,9 +205,8 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         roboRekomenAdapter.setProductRekomenList(portfolio.getProductRekomenList());
         roboRekomenAdapter.notifyDataSetChanged();
 
-        minPembelian = findViewById(R.id.tv_min_pembelian_value);
+        TextView minPembelian = findViewById(R.id.tv_min_pembelian_value);
         minPembelian.setText(portfolio.getMinPurchase());
-
     }
 
     @Override
@@ -296,10 +253,48 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
                     viewModel.reportPostOrForumWith(this.report);
                 }
                 break;
+            case R.id.tv_lanjut:
+                if (portfolio != null) {
+                    Intent intent = new Intent(v.getContext(), PurchasingSmartbotActivity.class);
+                    intent.putExtra("data", Utils.toJSON(portfolio));
+                    startActivity(intent);
+                }
+                break;
         }
     }
 
-    public void onInfoClick () {
-        roboAboutLayout.setVisibility(View.VISIBLE);
+    public void onInfoClick() {
+        aboutRoboDialog.show(getSupportFragmentManager(), "");
+    }
+
+    @Override
+    public void onCloseDialog() {
+        if (tipsOfTheWeekDialog != null && tipsOfTheWeekDialog.getTag() != null) {
+            tipsOfTheWeekDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void dontAskTipsOfTheWeek(boolean isShow) {
+        prefConfig.setTipsOfTheWeek(isShow);
+    }
+
+    @Override
+    public void onLoadTipsOfTheWeek(TipsOfTheWeek tipsOfTheWeek) {
+//        prefConfig.setTimeOfTipsOfTheWeek(Utils.getTime(Constant.DATE_FORMAT_2));
+        tipsOfTheWeekDialog.setTipsOfTheWeek(tipsOfTheWeek);
+        tipsOfTheWeekDialog.show(getSupportFragmentManager(), "");
+    }
+
+    @Override
+    public void onFailed(String msg) {
+        showSnackBar(msg);
+    }
+
+    @Override
+    public void onCloseAboutRoboDialog() {
+        if (aboutRoboDialog != null && aboutRoboDialog.getTag() != null) {
+            aboutRoboDialog.dismiss();
+        }
     }
 }

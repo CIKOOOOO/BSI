@@ -37,6 +37,7 @@ import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.model.Privacy;
 import com.bca.bsi.model.PromoNews;
+import com.bca.bsi.ui.basenavigation.information.forum.post.direct.DirectShareActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.Utils;
@@ -210,7 +211,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                             if (this.history.getTransactionType().equals("Pembelian")) {
                                 value = getString(R.string.buy);
                                 drawable = R.drawable.img_share_trade_buy;
-                            }else {
+                            } else {
                                 value = getString(R.string.sell);
                                 drawable = R.drawable.img_share_trade_sell;
                             }
@@ -248,7 +249,6 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
     @Override
     public void onItemPrivacyClick(Privacy privacy) {
         this.privacy = privacy;
-
     }
 
     @Override
@@ -358,7 +358,6 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
                     .show();
         }
-
     }
 
     @Override
@@ -372,7 +371,10 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 bsCategory.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.bs_btn_update_choose_image:
-
+                if (this.privacy.getName().equalsIgnoreCase("direct")) {
+                    Intent intent = new Intent(this, DirectShareActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
     }

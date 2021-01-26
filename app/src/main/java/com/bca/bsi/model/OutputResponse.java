@@ -78,6 +78,9 @@ public class OutputResponse {
         @SerializedName("transaction_history")
         private List<Portfolio.History> historyList;
 
+        @SerializedName("tips")
+        private TipsOfTheWeek tipsOfTheWeek;
+
         public OutputSchema() {
         }
 
@@ -123,6 +126,10 @@ public class OutputResponse {
 
         public List<Portfolio.History> getHistoryList() {
             return historyList;
+        }
+
+        public TipsOfTheWeek getTipsOfTheWeek() {
+            return tipsOfTheWeek;
         }
     }
 }

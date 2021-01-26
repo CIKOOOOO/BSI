@@ -78,14 +78,13 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         tvLike.setText(post.getLike());
         tvComment.setText(post.getComment());
         tvShare.setText(post.getShare());
+        tvName.setText(post.getName());
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
 
         if (tvContent.getText().toString().equals(post.getContent())) {
             tvLookMore.setVisibility(View.GONE);
         }
-
-        tvName.setText(post.getName());
 
         if (post.getImagePostList() != null) {
             if (post.getImagePostList().size() == 1) {

@@ -84,8 +84,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra(DATA)){
-            String commentID = intent.getStringExtra(DATA);
-            viewModel.loadComment(commentID);
+            String postID = intent.getStringExtra(DATA);
+            viewModel.loadComment(postID);
         }
 
         etComment.addTextChangedListener(new TextWatcher() {
@@ -108,7 +108,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         imgBack.setOnClickListener(this);
         tvComment.setOnClickListener(this);
 
-        tvTransactionTypeShareTrade.setOnClickListener(this);
+//        tvTransactionTypeShareTrade.setOnClickListener(this);
         imgBtnMore.setOnClickListener(this);
         tvLike.setOnClickListener(this);
         tvShare.setOnClickListener(this);

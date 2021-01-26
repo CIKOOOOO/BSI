@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.basenavigation.transaction.sell_transaction.DetailSellActivity"></activity>
+        <activity
+            android:name=".ui.basenavigation.information.forum.post.direct.DirectShareActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".ui.basenavigation.transaction.sell_transaction.DetailSellActivity" />
         <activity
             android:name=".ui.basenavigation.information.forum.post.PostActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />

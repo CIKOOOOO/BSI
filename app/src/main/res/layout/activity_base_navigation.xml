@@ -43,15 +43,4 @@
     <include layout="@layout/bottom_sheet_robo_rekomen" />
 
     <include layout="@layout/bottom_sheet_choose_image" />
-
-    <include
-        android:id="@+id/popup_tentang_robo"
-        layout="@layout/popup_tentang_robo"
-        android:visibility="gone" />
-
-    <include
-        android:id="@+id/popup_tips_of_the_week"
-        layout="@layout/popup_tips_of_the_week"
-        android:visibility="gone" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

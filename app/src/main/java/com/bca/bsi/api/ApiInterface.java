@@ -62,4 +62,8 @@ public interface ApiInterface {
     @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("transaction")
     Call<OutputResponse> getHistoryTransaction(@Header("token") String token, @Header("no-rekening") String nomor_rekening);
+
+    @Headers({"client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
+    @GET("")
+    Call<OutputResponse> getTipsOfTheWeek(@Header("token") String token);
 }
