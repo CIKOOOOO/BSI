@@ -2,6 +2,9 @@ package com.bca.bsi.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -233,5 +236,12 @@ public class Utils {
 
     private boolean nearZero(double val) {
         return Math.abs(val) < eps;
+    }
+
+    public static String getRealPathFromURI(Uri uri, Context context) {
+        Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
     }
 }

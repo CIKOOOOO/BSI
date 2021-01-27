@@ -28,6 +28,9 @@ public class ProdukChoiceViewModel extends AndroidViewModel {
     }
 
     public void loadProducts(String profil_resiko){
+        if(profil_resiko.isEmpty()){
+            return;
+        }
         Call<OutputResponse> call = apiInterface.getReksaDanaData(Integer.parseInt(profil_resiko));
         call.enqueue(new Callback<OutputResponse>() {
             @Override

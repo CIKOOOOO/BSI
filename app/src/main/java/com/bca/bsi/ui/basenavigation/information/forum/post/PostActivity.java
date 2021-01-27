@@ -2,8 +2,10 @@ package com.bca.bsi.ui.basenavigation.information.forum.post;
 
 import android.Manifest;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -37,9 +40,9 @@ import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.model.Privacy;
 import com.bca.bsi.model.PromoNews;
-import com.bca.bsi.ui.basenavigation.information.forum.post.direct.DirectShareActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
+import com.bca.bsi.utils.ImageFilePath;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
 import com.bumptech.glide.Glide;
@@ -48,6 +51,7 @@ import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +84,8 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
     private Portfolio.History history;
 
     private String type;
+
+    private String filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,9 +271,11 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 
     private void openGallery() {
         if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         REQUEST_GALLERY_THUMBNAIL);
             }
         } else {
@@ -316,8 +324,10 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_GALLERY_THUMBNAIL && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == REQUEST_GALLERY_THUMBNAIL
+                && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
             openGallery();
         } else {
             showSnackBar(getString(R.string.permission_failed));
@@ -337,6 +347,11 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 if (data.getData() != null) {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
                     imagesEncodedList.add(bitmap);
+                    Uri uri = getImageUri(this, bitmap);
+//                    filePath = getPath(this, data.getData());
+                    filePath = ImageFilePath.getPath(this, data.getData());
+//                    filePath = Utils.getRealPathFromURI(uri, this);
+                    Log.e("asd", filePath);
                 } else {
                     if (data.getClipData() != null) {
                         ClipData mClipData = data.getClipData();
@@ -355,6 +370,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 showSnackBar("You haven't picked Image");
             }
         } catch (Exception e) {
+            Log.e("asd", e.getMessage());
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
                     .show();
         }
@@ -371,10 +387,12 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 bsCategory.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.bs_btn_update_choose_image:
-                if (this.privacy.getName().equalsIgnoreCase("direct")) {
-                    Intent intent = new Intent(this, DirectShareActivity.class);
-                    startActivity(intent);
-                }
+//                if (this.privacy.getName().equalsIgnoreCase("direct")) {
+//                    Intent intent = new Intent(this, DirectShareActivity.class);
+//                    startActivity(intent);
+//                }
+
+                viewModel.sendData(imagesEncodedList, filePath);
                 break;
         }
     }
@@ -401,5 +419,29 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
     @Override
     public void onFailed(String msg) {
         showSnackBar(msg);
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.PNG, 30, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public static String getPath(Context context, Uri uri) {
+        String result = null;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int column_index = cursor.getColumnIndexOrThrow(proj[0]);
+                result = cursor.getString(column_index);
+            }
+            cursor.close();
+        }
+        if (result == null) {
+            result = "Not found";
+        }
+        return result;
     }
 }

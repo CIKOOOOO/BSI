@@ -15,6 +15,7 @@ import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.model.SortJenisReksa;
 import com.bca.bsi.model.TipsOfTheWeek;
 import com.bca.bsi.model.User;
+import com.bca.bsi.utils.constant.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -455,7 +456,7 @@ public class DummyData {
             , "https://akcdn.detik.net.id/visual/2019/08/05/72446715-5a3a-47ef-b21e-1f27a998204f_169.jpeg?w=650"
             , "https://i.pinimg.com/originals/25/b8/5b/25b85b7820d5ee63f379438511d80c8d.jpg"};
     private static final String[] directProfileName = {"Chou Tzuyu", "Son Chaeyoung", "Yoo Jeongyeon"
-            , "Im Nayeon", "Kim Dahyun", "Myoi Mina", "Minatozaki Sana", "Park Jihyo","Hirai Momo"};
+            , "Im Nayeon", "Kim Dahyun", "Myoi Mina", "Minatozaki Sana", "Park Jihyo", "Hirai Momo"};
 
     public static List<User.ForumUser> getForumUser() {
         List<User.ForumUser> forumUserList = new ArrayList<>();
@@ -466,4 +467,22 @@ public class DummyData {
         return forumUserList;
     }
 
+
+    public static List<Forum.Post> getRepostNewsList() {
+        List<Forum.Post> postList = new ArrayList<>();
+        for (int i = 0; i < getPromoNewsList().size(); i++) {
+            Forum.Post post = new Forum.Post(postID[i], imageProfile[i], postProfileName[i], postDate[i], Type.REPOST_NEWS, "", postLike[i], postComment[i], postShare[i], postStatusLike[i], postProfileID[i], getPostNewsList().get(getPromoNewsList().size() - i - 1));
+            postList.add(post);
+        }
+        return postList;
+    }
+
+    public static List<Forum.Post> getRepostGeneralList() {
+        List<Forum.Post> postList = new ArrayList<>();
+        for (int i = 0; i < shareTradeID.length; i++) {
+            Forum.Post post = new Forum.Post(strategyPostID[i], strategyImageProfile[i], strategyPostProfileName[i], strategyPostDate[i], Type.REPOST, strategyPostContent[i], strategyPostLike[i], strategyPostComment[i], postShare[i], strategyPostStatusLike[i], postProfileID[i] , getPostStrategyList().get(getPostStrategyList().size() - i - 1));
+            postList.add(post);
+        }
+        return postList;
+    }
 }

@@ -7,7 +7,6 @@
     android:background="@color/white_palette"
     tools:context=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity">
 
-
     <include
         android:id="@+id/toolbar_back"
         layout="@layout/toolbar_back" />
@@ -203,15 +202,13 @@
                 android:layout_marginTop="@dimen/size_for_10dp"
                 android:background="@drawable/rectangle_yellow"
                 android:gravity="center"
-                android:text="LANJUT"
+                android:text="@string/next"
                 android:textColor="@color/black_palette"
                 android:textFontWeight="600"
                 android:textSize="@dimen/size_for_17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_disclaimer" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

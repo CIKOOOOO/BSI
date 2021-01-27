@@ -69,6 +69,21 @@ public class Forum {
             this.imagePostList = imagePostList;
         }
 
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String like, String comment, String share, String statusLike, String profileID, Post post) {
+            this.postID = postID;
+            this.imageProfile = imageProfile;
+            this.name = name;
+            this.date = date;
+            this.type = type;
+            this.content = content;
+            this.like = like;
+            this.comment = comment;
+            this.share = share;
+            this.statusLike = statusLike;
+            this.profileID = profileID;
+            this.post = post;
+        }
+
         public String getImageProfile() {
             return imageProfile;
         }

@@ -1,6 +1,5 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,8 @@ import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.GeneralHolder;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.NewsViewHolder;
+import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.RepostGeneralHolder;
+import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.RepostNewsViewHolder;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.ShareTradeViewHolder;
 import com.bca.bsi.utils.constant.Type;
 
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
-    private static final int TRENDING = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, TIMELINE = 5;
+    private static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5;
 
     private String type, profileID;
     private List<Forum.Post> forumList;
@@ -65,6 +66,12 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             case ChildMainForumAdapter.NEWS:
                 layout = R.layout.recycler_news_main_forum;
                 break;
+            case ChildMainForumAdapter.REPOST_NEWS:
+                layout = R.layout.recycler_repost_news_main_forum;
+                break;
+            case ChildMainForumAdapter.REPOST_GENERAL:
+                layout = R.layout.recycler_repost_child_main_forum;
+                break;
             default:
                 layout = R.layout.recycler_child_main_forum;
         }
@@ -76,6 +83,12 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
                 break;
             case ChildMainForumAdapter.NEWS:
                 viewHolder = new NewsViewHolder(v, this.onPostClick);
+                break;
+            case ChildMainForumAdapter.REPOST_NEWS:
+                viewHolder = new RepostNewsViewHolder(v, this.onPostClick);
+                break;
+            case ChildMainForumAdapter.REPOST_GENERAL:
+                viewHolder = new RepostGeneralHolder(v, this.onPostClick);
                 break;
             default:
                 viewHolder = new GeneralHolder(v, this.onPostClick);
@@ -96,6 +109,14 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
                 NewsViewHolder newsViewHolder = (NewsViewHolder) myHolder;
                 newsViewHolder.loadData(post, profileID, type.equals(Type.TRENDING));
                 break;
+            case ChildMainForumAdapter.REPOST_NEWS:
+                RepostNewsViewHolder repostNewsViewHolder = (RepostNewsViewHolder) myHolder;
+                repostNewsViewHolder.setData(post, profileID);
+                break;
+            case ChildMainForumAdapter.REPOST_GENERAL:
+                RepostGeneralHolder repostGeneralHolder = (RepostGeneralHolder) myHolder;
+                repostGeneralHolder.setData(post, profileID);
+                break;
             default:
                 GeneralHolder generalHolder = (GeneralHolder) myHolder;
                 generalHolder.setData(post, profileID, type.equals(Type.TRENDING));
@@ -111,7 +132,19 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         int viewType = 0;
 
-        String currentType = type.equals(Type.TRENDING) || type.equals(Type.TIMELINE) ? forumList.get(position).getType() : type;
+        String currentType;
+
+        if (type.equals(Type.TRENDING) || type.equals(Type.TIMELINE)) {
+            currentType = forumList.get(position).getType();
+        } else if (null != forumList.get(position).getPost()) {
+            if (null != forumList.get(position).getPost().getPromoNews()) {
+                currentType = Type.REPOST_NEWS;
+            } else {
+                currentType = Type.REPOST;
+            }
+        } else {
+            currentType = type;
+        }
 
         switch (currentType) {
             case Type.STRATEGY:
@@ -122,6 +155,12 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
                 break;
             case Type.NEWS:
                 viewType = ChildMainForumAdapter.NEWS;
+                break;
+            case Type.REPOST_NEWS:
+                viewType = ChildMainForumAdapter.REPOST_NEWS;
+                break;
+            case Type.REPOST:
+                viewType = ChildMainForumAdapter.REPOST_GENERAL;
                 break;
         }
         return viewType;

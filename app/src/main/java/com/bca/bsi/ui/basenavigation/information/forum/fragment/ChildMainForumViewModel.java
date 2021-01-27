@@ -29,29 +29,34 @@ public class ChildMainForumViewModel extends AndroidViewModel {
     }
 
     public void loadForumPost(String type) {
+        List<Forum.Post> postList = new ArrayList<>();
         switch (type.toLowerCase()) {
             case Type.TRENDING:
-                List<Forum.Post> postList = new ArrayList<>();
                 postList.addAll(DummyData.getPostNewsList());
                 postList.addAll(DummyData.getPostShareTradeList());
                 postList.addAll(DummyData.getPostStrategyList());
                 callback.onLoadData(postList);
                 break;
             case Type.STRATEGY:
-                callback.onLoadData(DummyData.getPostStrategyList());
+                postList.addAll(DummyData.getRepostGeneralList());
+                postList.addAll(DummyData.getPostStrategyList());
+                callback.onLoadData(postList);
                 break;
             case Type.SHARE_TRADE:
                 callback.onLoadData(DummyData.getPostShareTradeList());
                 break;
             case Type.NEWS:
-                callback.onLoadData(DummyData.getPostNewsList());
+                postList.addAll(DummyData.getRepostNewsList());
+                postList.addAll(DummyData.getPostNewsList());
+                callback.onLoadData(postList);
                 break;
             case Type.TIMELINE:
-                List<Forum.Post> postList2 = new ArrayList<>();
-                postList2.addAll(DummyData.getPostStrategyList());
-                postList2.addAll(DummyData.getPostShareTradeList());
-                postList2.addAll(DummyData.getPostNewsList());
-                callback.onLoadData(postList2);
+                postList.addAll(DummyData.getPostStrategyList());
+                postList.addAll(DummyData.getRepostNewsList());
+                postList.addAll(DummyData.getPostShareTradeList());
+                postList.addAll(DummyData.getRepostGeneralList());
+                postList.addAll(DummyData.getPostNewsList());
+                callback.onLoadData(postList);
                 break;
         }
 

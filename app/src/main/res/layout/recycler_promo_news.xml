@@ -25,8 +25,9 @@
         android:id="@+id/recycler_img_promo_news"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_for_200dp"
-        android:background="@drawable/img_carousel"
-        app:layout_constraintTop_toBottomOf="@id/recycler_tv_title_promo_news" />
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_title_promo_news"
+        tools:background="@drawable/img_carousel" />
 
     <TextView
         android:id="@+id/recycler_tv_date_promo_news"

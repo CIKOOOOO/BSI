@@ -30,4 +30,6 @@ public class Type {
     public static final String STRATEGY = "strategy";
     public static final String SHARE_TRADE = "share trade";
     public static final String TIMELINE = "timeline";
+    public static final String REPOST_NEWS = "repost_news";
+    public static final String REPOST = "repost";
 }

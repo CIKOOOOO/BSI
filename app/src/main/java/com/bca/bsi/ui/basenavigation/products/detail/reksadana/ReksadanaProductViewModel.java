@@ -10,7 +10,6 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Product;
-import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +36,8 @@ public class ReksadanaProductViewModel extends AndroidViewModel {
 
     public void getReksaDanaList(String profile_risiko) {
 //        callback.resultOf(DummyData.getReksaDanaDummyList());
+        if (profile_risiko.isEmpty()) return;
+
         Call<OutputResponse> call = apiInterface.getReksaDanaData(Integer.parseInt(profile_risiko));
         call.enqueue(new Callback<OutputResponse>() {
             @Override
