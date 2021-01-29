@@ -40,6 +40,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick, InformationFragment.onReport, ReportAdapter.onReportClick, View.OnClickListener, IBaseNavigatonCallback, TipsOfTheWeekDialog.onItemClick, AboutRoboDialog.onCloseDialog {
@@ -105,10 +106,12 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         // lanjut bottom sheet
         TextView bottomLanjut = findViewById(R.id.tv_lanjut);
 
-        //Popup tips of the week
-        Calendar calendar = Calendar.getInstance();
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        if (dayOfWeek == 5
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date(Utils.getTime(Constant.DATE_FORMAT_1)));
+        boolean monday = cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+
+        if (
+                monday
                 && prefConfig.getTipsActivated()
 //                && !prefConfig.getTimeTipsOfTheWeek().equals(Utils.getTime(Constant.DATE_FORMAT_2))
         ) { // Day-2 = Monday

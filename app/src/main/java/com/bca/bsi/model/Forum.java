@@ -1,5 +1,7 @@
 package com.bca.bsi.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Forum {
@@ -144,7 +146,7 @@ public class Forum {
             return post;
         }
 
-        public static class ImagePost{
+        public static class ImagePost {
             private String imageID;
             private String imageURL;
 
@@ -323,6 +325,66 @@ public class Forum {
 
         public String getDate() {
             return date;
+        }
+    }
+
+    public static class User {
+
+        @SerializedName("img_background_url")
+        private String imgBackgroundUrl;
+
+        @SerializedName("img_profile_url")
+        private String imgProfileUrl;
+
+        @SerializedName("follower_count")
+        private String followerCount;
+
+        @SerializedName("following_count")
+        private String followingCount;
+
+        @SerializedName("flag_unread_inbox")
+        private String statusInbox;
+
+        public User() {
+        }
+
+        public String getImgBackgroundUrl() {
+            return imgBackgroundUrl;
+        }
+
+        public String getImgProfileUrl() {
+            return imgProfileUrl;
+        }
+
+        public String getFollowerCount() {
+            return followerCount;
+        }
+
+        public String getFollowingCount() {
+            return followingCount;
+        }
+
+        public String getStatusInbox() {
+            return statusInbox;
+        }
+    }
+
+    public static class ProfilePicture {
+        @SerializedName("id")
+        private String id;
+
+        @SerializedName("url")
+        private String imgURL;
+
+        public ProfilePicture() {
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getImgURL() {
+            return imgURL;
         }
     }
 }

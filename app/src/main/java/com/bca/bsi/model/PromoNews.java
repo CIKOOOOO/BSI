@@ -5,7 +5,6 @@ public class PromoNews {
     private String newsID;
     private String title, description, image, content, date;
 
-
     public PromoNews(String newsID, String title, String description, String image, String content, String date) {
         this.newsID = newsID;
         this.title = title;
