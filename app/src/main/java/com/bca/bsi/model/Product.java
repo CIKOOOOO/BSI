@@ -58,6 +58,7 @@ public class Product {
         }
 
         public ReksaDana() {
+            setChoosen(false);
         }
 
         public ReksaDana(String reksadanaID, String name, String type, String date, String kinerja, String nab) {
@@ -170,8 +171,16 @@ public class Product {
 
         @SerializedName("RoR")
         private String ror;
-		
+
         public DetailReksaDana() {
+        }
+
+        public void setBiayaPembelian(String biayaPembelian) {
+            this.biayaPembelian = biayaPembelian;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public String getName() {
@@ -293,7 +302,7 @@ public class Product {
         }
     }
 
-    public static class ProductTransaction{
+    public static class ProductTransaction {
         private String name;
         private String date;
         private String price;

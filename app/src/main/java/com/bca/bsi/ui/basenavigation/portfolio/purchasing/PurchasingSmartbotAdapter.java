@@ -25,6 +25,10 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
         this.productRekomenList = productRekomenList;
     }
 
+    public List<ProductRekomen> getProductRekomenList() {
+        return productRekomenList;
+    }
+
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

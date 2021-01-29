@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="@string/product_name"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recycler_tv_product_name_detail_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_weight="3.5"
+            android:textColor="@color/java_palette"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold"
+            tools:text="Danareksa Gebyar Indonesia II" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/tv_01_detail_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="@string/nominal_pembelian"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recycler_tv_nominal_pembelian_detail_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_weight="3.5"
+            android:textColor="@color/java_palette"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold"
+            tools:text="Rp 100,000" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/tv_02_detail_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="@string/nominal_biaya_pembelian"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recycler_tv_nominal_biaya_pembelian_detail_pembelian"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_weight="3.5"
+            android:textColor="@color/java_palette"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold"
+            tools:text="Rp 1.000 (1%)" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/tv_03_detail_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="@string/nominal_total_pembelian"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recycler_tv_nominal_total_pembelian_detail_pembelian"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_weight="3.5"
+            android:textColor="@color/java_palette"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold"
+            tools:text="Rp 101.000," />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="@string/referensi_number"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recycler_tv_referensi_number_detail_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_weight="3.5"
+            android:textColor="@color/java_palette"
+            android:textSize="@dimen/size_for_15sp"
+            android:textStyle="bold"
+            tools:text="W20201020120101021" />
+    </LinearLayout>
+</LinearLayout>

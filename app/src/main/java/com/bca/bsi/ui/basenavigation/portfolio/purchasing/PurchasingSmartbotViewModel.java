@@ -10,6 +10,8 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,31 +29,37 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadBundle(String no_rekening, String reksa_id){
-        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(no_rekening,reksa_id,"");
+    public void loadBundle(String no_rekening, String reksa_id, String proportion) {
+        Log.e("asd", reksa_id);
+        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(no_rekening, reksa_id, proportion);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("a","tes1"+response.code());
-                if(response.body()!=null){
-                    Log.e("b","tes2");
+//                try {
+//                    Log.e("asd", "tes1" + response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+                if (response.body() != null) {
+                    Log.e("asd", "tes2");
                     OutputResponse outputResponse = response.body();
-                    if(outputResponse.getErrorSchema().getErrorCode().equals("200")){
-                        Log.e("c","tes3");
+                    if (outputResponse.getErrorSchema().getErrorCode().equals("200")) {
+                        Log.e("asd", "tes3");
                         OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                         callback.onLoadData(outputSchema.getBundles());
                     } else {
-                        Log.e("d","tes4");
+                        Log.e("asd", "tes4");
                         callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
                     }
                 } else {
-                    Log.e("e","tes5");
+                    Log.e("asd", "tes5");
                     callback.onFail("Mohon periksa jaringan anda");
                 }
             }
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
+                Log.e("asd", "tes6");
                 callback.onFail("Mohon periksa jaringan anda");
             }
         });

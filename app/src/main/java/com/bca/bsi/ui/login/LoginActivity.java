@@ -70,7 +70,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             customLoading.dismiss();
         }
         finishAffinity();
-//        prefConfig.setUser(forumUser, welmaUser);
+        prefConfig.setUser(forumUser, welmaUser);
         startActivity(new Intent(this, BaseNavigationActivity.class));
     }
 

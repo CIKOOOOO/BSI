@@ -1,10 +1,13 @@
 package com.bca.bsi.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Transaction {
 
-    public static class Purchasing{
+    public static class Purchasing implements Parcelable {
 
         @SerializedName("bca_id")
         private String bcaID;
@@ -27,12 +30,49 @@ public class Transaction {
         @SerializedName("nominal_biaya_pembelian")
         private String nominalBiayaPembelian;
 
+        @SerializedName("nominal_biaya_transaksi")
+        private String nominalBiayaTransaksi;
+
         @SerializedName("reksa_dana_unit")
         private String reksaDanaUnit;
 
+        @SerializedName("nab")
         private String nab;
 
         public Purchasing() {
+        }
+
+        protected Purchasing(Parcel in) {
+            bcaID = in.readString();
+            amount = in.readString();
+            accountNumber = in.readString();
+            reksaDanaID = in.readString();
+            transactionType = in.readString();
+            paymentType = in.readString();
+            nominalBiayaPembelian = in.readString();
+            reksaDanaUnit = in.readString();
+            nab = in.readString();
+            nominalBiayaTransaksi = in.readString();
+        }
+
+        public static final Creator<Purchasing> CREATOR = new Creator<Purchasing>() {
+            @Override
+            public Purchasing createFromParcel(Parcel in) {
+                return new Purchasing(in);
+            }
+
+            @Override
+            public Purchasing[] newArray(int size) {
+                return new Purchasing[size];
+            }
+        };
+
+        public String getNominalBiayaTransaksi() {
+            return nominalBiayaTransaksi;
+        }
+
+        public void setNominalBiayaTransaksi(String nominalBiayaTransaksi) {
+            this.nominalBiayaTransaksi = nominalBiayaTransaksi;
         }
 
         public String getBcaID() {
@@ -106,9 +146,28 @@ public class Transaction {
         public void setNab(String nab) {
             this.nab = nab;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel parcel, int i) {
+            parcel.writeString(bcaID);
+            parcel.writeString(amount);
+            parcel.writeString(accountNumber);
+            parcel.writeString(reksaDanaID);
+            parcel.writeString(transactionType);
+            parcel.writeString(paymentType);
+            parcel.writeString(nominalBiayaPembelian);
+            parcel.writeString(reksaDanaUnit);
+            parcel.writeString(nab);
+            parcel.writeString(nominalBiayaTransaksi);
+        }
     }
 
-    public static class TransactionResult{
+    public static class TransactionResult implements Parcelable{
 
         @SerializedName("nama_produk")
         private String productName;
@@ -136,6 +195,29 @@ public class Transaction {
 
         public TransactionResult() {
         }
+
+        protected TransactionResult(Parcel in) {
+            productName = in.readString();
+            paymentType = in.readString();
+            nominalTransaksi = in.readString();
+            nominalBiayaTransaksi = in.readString();
+            nominalTotalTransaksi = in.readString();
+            rekeningSumberDana = in.readString();
+            transactionTime = in.readString();
+            referenceNumber = in.readString();
+        }
+
+        public static final Creator<TransactionResult> CREATOR = new Creator<TransactionResult>() {
+            @Override
+            public TransactionResult createFromParcel(Parcel in) {
+                return new TransactionResult(in);
+            }
+
+            @Override
+            public TransactionResult[] newArray(int size) {
+                return new TransactionResult[size];
+            }
+        };
 
         public String getProductName() {
             return productName;
@@ -167,6 +249,23 @@ public class Transaction {
 
         public String getReferenceNumber() {
             return referenceNumber;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel parcel, int i) {
+            parcel.writeString(productName);
+            parcel.writeString(paymentType);
+            parcel.writeString(nominalTransaksi);
+            parcel.writeString(nominalBiayaTransaksi);
+            parcel.writeString(nominalTotalTransaksi);
+            parcel.writeString(rekeningSumberDana);
+            parcel.writeString(transactionTime);
+            parcel.writeString(referenceNumber);
         }
     }
 

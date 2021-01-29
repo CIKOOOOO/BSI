@@ -45,7 +45,7 @@
             android:id="@+id/content_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_for_200dp"
-            android:background="@drawable/img_asset_reksa_dana"
+            tools:background="@drawable/img_asset_reksa_dana"
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius_top_left="@dimen/size_for_15dp"

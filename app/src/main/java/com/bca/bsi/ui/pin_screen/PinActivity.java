@@ -2,6 +2,7 @@ package com.bca.bsi.ui.pin_screen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,8 +17,12 @@ import com.bca.bsi.ui.basenavigation.transaction.detail_transaction.DetailTransa
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.CustomLoading;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Type;
 import com.mukesh.OnOtpCompletionListener;
 import com.mukesh.OtpView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PinActivity extends BaseActivity implements IPinCallback, View.OnClickListener {
 
@@ -61,7 +66,7 @@ public class PinActivity extends BaseActivity implements IPinCallback, View.OnCl
             public void onOtpCompleted(String otp) {
                 Log.e("asd", otp);
                 customLoading.show(getSupportFragmentManager(), "");
-                viewModel.checkingPin(type, otp, prefConfig.getBCAID(), data);
+                viewModel.checkingPin(type, otp, prefConfig.getBCAID(), data, prefConfig.getTokenUser());
             }
         });
         imgBack.setOnClickListener(this);
@@ -86,6 +91,14 @@ public class PinActivity extends BaseActivity implements IPinCallback, View.OnCl
         }
 
 //        startActivity(new Intent(PinActivity.this, DetailTransactionActivity.class));
+    }
+
+    @Override
+    public void onSuccessPin(List<Transaction.TransactionResult> transactionResultList) {
+        Intent intent = new Intent(this, DetailTransactionActivity.class);
+        intent.putParcelableArrayListExtra(DetailTransactionActivity.PARCEL_DATA, (ArrayList<? extends Parcelable>) transactionResultList);
+        intent.putExtra(DetailTransactionActivity.RESULT_TYPE, Type.PURCHASING_WITH_SMARTBOT);
+        startActivity(intent);
     }
 
     @Override

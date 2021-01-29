@@ -108,9 +108,10 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         //Popup tips of the week
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        if (dayOfWeek == 3
+        if (dayOfWeek == 5
                 && prefConfig.getTipsActivated()
-                && !prefConfig.getTimeTipsOfTheWeek().equals(Utils.getTime(Constant.DATE_FORMAT_2))) { // Day-2 = Monday
+//                && !prefConfig.getTimeTipsOfTheWeek().equals(Utils.getTime(Constant.DATE_FORMAT_2))
+        ) { // Day-2 = Monday
             viewModel.getTipsOfTheWeek(prefConfig.getTokenUser());
         }
 

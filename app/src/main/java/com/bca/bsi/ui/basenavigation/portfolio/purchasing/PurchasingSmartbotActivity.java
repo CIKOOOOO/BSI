@@ -2,9 +2,11 @@ package com.bca.bsi.ui.basenavigation.portfolio.purchasing;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -17,12 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.model.ProductRekomen;
+import com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.constant.Type;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback {
+public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback, View.OnClickListener {
 
     ImageButton rekomenRoboButton;
     ConstraintLayout roboHitungPopupLayout;
@@ -33,6 +38,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
     EditText etNominal;
     Portfolio portfolio;
     PurchasingSmartbotViewModel viewModel;
+    private CheckBox cbAgreement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,9 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
     }
 
     private void initVar() {
+
+        TextView tvLanjut = findViewById(R.id.tv_lanjut);
+
         rekomenRoboButton = findViewById(R.id.ib_rekomen_robo);
         roboHitungPopupLayout = findViewById(R.id.popup_rekomen_robo);
         clearButton = findViewById(R.id.ib_clear2);
@@ -49,6 +58,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         etNominal = findViewById(R.id.et_nominal_pembelian_robo);
         tvReturn = findViewById(R.id.tv_return_val);
         tvRisk = findViewById(R.id.tv_risk_val);
+        cbAgreement = findViewById(R.id.cb_confirmation_purchasing_smartbot);
 
         // inisialisasi adapter dan recycler
         adapter = new PurchasingSmartbotAdapter();
@@ -95,7 +105,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
             //TODO hit API dari sini
             viewModel = new ViewModelProvider(this).get(PurchasingSmartbotViewModel.class);
             viewModel.setCallback(this);
-            viewModel.loadBundle(prefConfig.getAccountNumber(), hasil);
+            viewModel.loadBundle(prefConfig.getAccountNumber(), hasil, "");
         }
 
         //Toolbar variables
@@ -130,12 +140,13 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         });
 
         // Do something with adapter
+        tvLanjut.setOnClickListener(this);
     }
 
 
     @Override
     public void onLoadData(List<Portfolio> bundles) {
-        Portfolio portfolio = bundles.get(0);
+        this.portfolio = bundles.get(0);
         adapter.setProductRekomenList(portfolio.getProductRekomenList());
         adapter.notifyDataSetChanged();
 
@@ -147,5 +158,28 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
     @Override
     public void onFail(String msg) {
         showSnackBar(msg);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_lanjut:
+                String nominal = etNominal.getText().toString().trim();
+                if (nominal.isEmpty()) {
+                    showSnackBar("Mohon isi nominal pembelian");
+                } else if (Double.parseDouble(nominal) < Double.parseDouble(this.portfolio.getMinPurchase())) {
+                    showSnackBar("Nominal pembelian harus lebih besar atau sama dengan minimal pembelian");
+                } else if (cbAgreement.isChecked()) {
+                    Intent intent = new Intent(this, DetailProductTransactionActivity.class);
+                    intent.putExtra(DetailProductTransactionActivity.PRODUCT_TYPE, Type.PURCHASING_WITH_SMARTBOT);
+                    intent.putExtra(DetailProductTransactionActivity.SALES_TYPE, Type.PURCHASING);
+                    intent.putExtra(DetailProductTransactionActivity.NOMINAL_PEMBELIAN, nominal);
+                    intent.putParcelableArrayListExtra(DetailProductTransactionActivity.DATA, (ArrayList<? extends Parcelable>) adapter.getProductRekomenList());
+                    startActivity(intent);
+                } else {
+                    showSnackBar("Mohon setuju pada syarat dan ketentuan");
+                }
+                break;
+        }
     }
 }

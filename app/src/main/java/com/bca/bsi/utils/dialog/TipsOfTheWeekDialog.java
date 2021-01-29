@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.TipsOfTheWeek;
+import com.bca.bsi.utils.constant.Constant;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -29,7 +31,7 @@ public class TipsOfTheWeekDialog extends DialogFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ib_clear3:
                 onItemClick.onCloseDialog();
                 break;
@@ -87,9 +89,12 @@ public class TipsOfTheWeekDialog extends DialogFragment implements View.OnClickL
         ImageButton imgBtnClose = view.findViewById(R.id.ib_clear3);
         CheckBox checkBox = view.findViewById(R.id.cb_jangan_tampilkan_lagi);
 
-        Picasso.get()
-                .load(tipsOfTheWeek.getImgURL())
-                .into(imageView);
+        Log.e("asd", tipsOfTheWeek.getImgURL() + ": URL");
+
+        if (!tipsOfTheWeek.getImgURL().isEmpty())
+            Picasso.get()
+                    .load(Constant.BASE_URL + "" + tipsOfTheWeek.getImgURL())
+                    .into(imageView);
 
         tvTitle.setText(tipsOfTheWeek.getTitle());
         tvContent.setText(tipsOfTheWeek.getContent());

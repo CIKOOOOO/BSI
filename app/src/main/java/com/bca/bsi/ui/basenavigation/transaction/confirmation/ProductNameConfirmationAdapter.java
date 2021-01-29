@@ -22,13 +22,14 @@ public class ProductNameConfirmationAdapter extends RecyclerView.Adapter<Product
 
     private List<Product.DetailReksaDana> detailReksaDanas;
     private List<Double> percentageList;
-    private double nominalPembelian;
+    private double nominalPembelian, totalSeluruhPembelian;
     private String type;
 
     public ProductNameConfirmationAdapter() {
         this.detailReksaDanas = new ArrayList<>();
         this.percentageList = new ArrayList<>();
         type = "";
+        totalSeluruhPembelian = 0;
         nominalPembelian = -1;
     }
 
@@ -46,6 +47,10 @@ public class ProductNameConfirmationAdapter extends RecyclerView.Adapter<Product
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public double getTotalSeluruhPembelian() {
+        return totalSeluruhPembelian;
     }
 
     @NonNull
@@ -70,10 +75,10 @@ public class ProductNameConfirmationAdapter extends RecyclerView.Adapter<Product
 
             if (getItemViewType(position) == 1) {
                 biayaProdukPembelian = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : String.valueOf(Double.parseDouble(detailReksaDana.getBiayaPembelian()) / 100);
-                nominalPembelian = this.nominalPembelian * percentageList.get(position);
+                nominalPembelian = this.nominalPembelian * percentageList.get(position) / 100;
                 biayaPembelian = (Double.parseDouble(biayaProdukPembelian) / 100) * nominalPembelian;
+                totalSeluruhPembelian += biayaPembelian;
             } else {
-                Log.e("asd", detailReksaDana.getBiayaPembelian() + "");
                 biayaProdukPembelian = detailReksaDana.getBiayaPembelian();
                 nominalPembelian = this.nominalPembelian;
                 biayaPembelian = Double.parseDouble(biayaProdukPembelian) / 100 * this.nominalPembelian;
