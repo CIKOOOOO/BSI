@@ -42,14 +42,7 @@ public class PostViewModel extends AndroidViewModel {
         callback.onLoadCategoryData(DummyData.getCategoryList());
     }
 
-    public void sendData(List<Bitmap> bitmapList, String filePath) {
-//
-//        Log.e("asd", filePath);
-//
-//        File file = new File(filePath);
-//        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//        MultipartBody.Part part = MultipartBody.Part.createFormData("images", file.getName(), requestBody);
-
+    public void sendData(List<Bitmap> bitmapList) {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         for (Bitmap bitmap : bitmapList) {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -57,9 +50,7 @@ public class PostViewModel extends AndroidViewModel {
 
             builder.addFormDataPart("images", "lalala", RequestBody.create(MultipartBody.FORM, bos.toByteArray()));
         }
-//
-//        Log.e("asd", "masuk");
-//
+
         RequestBody requestBody = builder.build();
         Call<OutputResponse> call = apiInterface.sendData(requestBody);
         call.enqueue(new Callback<OutputResponse>() {

@@ -19,7 +19,7 @@
             android:id="@+id/img_detail_promo_news"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_for_200dp"
-            android:background="@drawable/img_carousel"
+            tools:background="@drawable/img_carousel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include6" />

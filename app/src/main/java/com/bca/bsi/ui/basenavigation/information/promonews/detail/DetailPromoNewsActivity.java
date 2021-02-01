@@ -55,13 +55,13 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
         if (intent != null && intent.hasExtra(DATA)) {
             Gson gson = new Gson();
             String data = intent.getStringExtra(DATA);
-            this.promoNews = gson.fromJson(data, PromoNews.class);
-
+//            this.promoNews = gson.fromJson(data, PromoNews.class);
+//
             tvTitleToolbar.setText(getString(R.string.detail_news));
-
-            tvTitle.setText(this.promoNews.getTitle());
-            tvDate.setText("Dirilis pada " + this.promoNews.getDate());
-            tvContent.setText(this.promoNews.getContent());
+//
+//            tvTitle.setText(this.promoNews.getTitle());
+//            tvDate.setText("Dirilis pada " + this.promoNews.getDate());
+//            tvContent.setText(this.promoNews.getContent());
 
             viewModel.loadNews(prefConfig.getTokenUser(), data);
         }

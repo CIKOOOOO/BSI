@@ -27,23 +27,7 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
     private List<Forum.Post> forumList;
     private OnPostClick onPostClick;
 
-    public interface OnPostClick {
-        void onDetailPost(String postID);
-
-        void onPostLike(String postID);
-
-        void onReport(String postID);
-
-        void onSavedPost(String postID);
-
-        void onOtherProfile(String profileID);
-
-        void onMyProfile();
-
-        void onDetailNews(String newsID);
-    }
-
-    public ChildMainForumAdapter(String type, String profileID, ChildMainForumAdapter.OnPostClick onPostClick) {
+    public ChildMainForumAdapter(String type, String profileID, OnPostClick onPostClick) {
         this.profileID = profileID;
         this.onPostClick = onPostClick;
         this.type = type.toLowerCase();
@@ -134,7 +118,9 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
         String currentType;
 
-        if (type.equals(Type.TRENDING) || type.equals(Type.TIMELINE)) {
+        if (type.equals(Type.TRENDING)
+                || type.equals(Type.TIMELINE)
+                || (type.equals(Type.PROFILE) && null == forumList.get(position).getPost())) {
             currentType = forumList.get(position).getType();
         } else if (null != forumList.get(position).getPost()) {
             if (null != forumList.get(position).getPost().getPromoNews()) {

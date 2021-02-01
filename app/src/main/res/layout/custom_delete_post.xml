@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        style="@style/BackgroundBlur"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/size_for_40dp"
+        android:layout_marginEnd="@dimen/size_for_40dp"
+        android:background="@drawable/rectangle_rounded_white_5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_marginTop="@dimen/size_for_20dp"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:textAlignment="center"
+            android:textColor="@color/color_base_welma"
+            android:textSize="@dimen/size_for_12sp"
+            android:text="@string/delete_confirmation_post" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_marginTop="@dimen/size_for_10dp"
+            android:layout_marginEnd="@dimen/size_for_20dp"
+            android:textAlignment="center"
+            android:textColor="@color/black_palette"
+            android:text="@string/delete_post" />
+
+        <TextView
+            android:id="@+id/tv_yes_delete_post"
+            style="@style/TextViewForButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/size_for_40dp"
+            android:layout_marginTop="@dimen/size_for_20dp"
+            android:layout_marginEnd="@dimen/size_for_40dp"
+            android:layout_marginBottom="@dimen/size_for_10dp"
+            android:background="@drawable/rectangle_rounded_welma_5dp"
+            android:paddingStart="@dimen/size_for_50dp"
+            android:paddingTop="@dimen/size_for_7dp"
+            android:paddingEnd="@dimen/size_for_50dp"
+            android:paddingBottom="@dimen/size_for_7dp"
+            android:text="@string/yes"
+            android:textAllCaps="false"
+            android:textColor="@color/white_palette" />
+
+        <TextView
+            android:id="@+id/tv_no_delete_post"
+            style="@style/TextViewForButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/size_for_40dp"
+            android:layout_marginEnd="@dimen/size_for_40dp"
+            android:layout_marginBottom="@dimen/size_for_10dp"
+            android:background="@drawable/rectangle_rounded_white_5dp"
+            android:paddingStart="@dimen/size_for_50dp"
+            android:paddingTop="@dimen/size_for_7dp"
+            android:paddingEnd="@dimen/size_for_50dp"
+            android:paddingBottom="@dimen/size_for_7dp"
+            android:text="@string/no"
+            android:textAllCaps="false"
+            android:textColor="@color/color_base_welma"
+            android:visibility="gone" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

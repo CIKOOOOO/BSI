@@ -32,4 +32,5 @@ public class Type {
     public static final String TIMELINE = "timeline";
     public static final String REPOST_NEWS = "repost_news";
     public static final String REPOST = "repost";
+    public static final String PROFILE = "profile";
 }

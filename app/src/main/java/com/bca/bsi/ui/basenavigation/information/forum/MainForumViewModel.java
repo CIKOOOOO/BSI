@@ -23,8 +23,4 @@ public class MainForumViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadReportData(){
-        callback.onLoadReportData(DummyData.getReportList());
-    }
-
 }

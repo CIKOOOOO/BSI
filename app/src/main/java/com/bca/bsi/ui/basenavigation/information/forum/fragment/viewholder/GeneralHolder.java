@@ -1,5 +1,7 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
+import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.PostImageAdapter;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
@@ -26,13 +29,13 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
     private TextView tvName, tvDate, tvContent, tvType, tvLike, tvComment, tvShare, tvLookMore;
     private RecyclerView recyclerChild;
     private ImageButton imgBtnMore;
-    private ChildMainForumAdapter.OnPostClick onPostClick;
+    private OnPostClick onPostClick;
     private Forum.Post post;
     private PostImageAdapter postImageAdapter;
 
     private String profileID;
 
-    public GeneralHolder(@NonNull View itemView, ChildMainForumAdapter.OnPostClick onPostClick) {
+    public GeneralHolder(@NonNull View itemView, OnPostClick onPostClick) {
         super(itemView);
         this.onPostClick = onPostClick;
         roundedImageView = itemView.findViewById(R.id.recycler_img_profile_child_main_forum);
@@ -55,6 +58,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         itemView.setOnClickListener(this);
         tvLike.setOnClickListener(this);
         imgBtnMore.setOnClickListener(this);
+        tvShare.setOnClickListener(this);
     }
 
     public void setData(Forum.Post post, String profileID, boolean isTrending) {
@@ -72,6 +76,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
                     .into(roundedImageView);
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
+        int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;
 
         tvDate.setText(post.getDate());
         tvContent.setText(Utils.removeEnter(post.getContent()));
@@ -81,6 +86,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         tvName.setText(post.getName());
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
+        tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
 
         if (tvContent.getText().toString().equals(post.getContent())) {
             tvLookMore.setVisibility(View.GONE);
@@ -134,15 +140,36 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
                 popup.getMenuInflater()
                         .inflate(layout, popup.getMenu());
 
+                if(popup.getMenu().findItem(R.id.menu_save) != null){
+                    popup.getMenu().findItem(R.id.menu_save).setTitle("Saved");
+                }
+
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-
+                        switch (item.getItemId()) {
+                            case R.id.menu_report:
+                                onPostClick.onReport(post.getPostID());
+                                break;
+                            case R.id.menu_save:
+                                onPostClick.onSavedPost(post.getPostID());
+                                break;
+                            case R.id.menu_delete:
+                                onPostClick.onDeletePost(post.getPostID());
+                                break;
+                            case R.id.menu_edit:
+                                onPostClick.onEditPost(post);
+                                break;
+                        }
                         return true;
                     }
                 });
 
                 popup.show(); //showing popup menu
                 break;
+            case R.id.recycler_tv_share_child_main_forum:
+                onPostClick.onResharePost(post.getStatusShare().equalsIgnoreCase("true"), post.getPostID());
+                break;
+
         }
     }
 }

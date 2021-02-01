@@ -66,12 +66,26 @@ public interface ApiInterface {
     Call<OutputResponse> getHistoryTransaction(@Header("token") String token, @Header("no-rekening") String nomor_rekening);
 
     @Headers({"client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
-    @GET("tips/{id}")
-    Call<OutputResponse> getTipsOfTheWeek(@Header("token") String token, @Path("id") String id);
+    @GET("tips")
+    Call<OutputResponse> getTipsOfTheWeek(@Header("token-user") String token);
 
     //    @Multipart
     @Headers({"client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @POST("attachment")
     Call<OutputResponse> sendData(@Body RequestBody file);
-//    Call<OutputResponse> sendData(@Part MultipartBody.Part part);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/profile/me")
+    Call<OutputResponse> getForumProfile(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET
+    Call<OutputResponse> getForumProfilePicture(@Url String url, @Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @PUT
+    Call<OutputResponse> setForumProfilePicture(@Url String url, @Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Body String s);
 }

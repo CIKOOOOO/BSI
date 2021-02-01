@@ -1,5 +1,7 @@
 package com.bca.bsi.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Forum {
@@ -15,6 +17,7 @@ public class Forum {
         private String comment;
         private String share;
         private String statusLike;
+        private String statusShare;
         private String profileID;
         private PromoNews promoNews;
         private ShareTrade shareTrade;
@@ -24,7 +27,7 @@ public class Forum {
         public Post() {
         }
 
-        public Post(String postID, String imageProfile, String name, String date, String type, String content, String imageContent, String like, String comment, String share, String statusLike, String profileID, PromoNews promoNews) {
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String statusShare, String like, String comment, String share, String statusLike, String profileID, PromoNews promoNews) {
             this.postID = postID;
             this.imageProfile = imageProfile;
             this.name = name;
@@ -37,9 +40,10 @@ public class Forum {
             this.statusLike = statusLike;
             this.profileID = profileID;
             this.promoNews = promoNews;
+            this.statusShare = statusShare;
         }
 
-        public Post(String postID, String imageProfile, String name, String date, String type, String content, String imageContent, String like, String comment, String share, String statusLike, String profileID, ShareTrade shareTrade) {
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String statusShare, String like, String comment, String share, String statusLike, String profileID, ShareTrade shareTrade) {
             this.postID = postID;
             this.imageProfile = imageProfile;
             this.name = name;
@@ -54,7 +58,7 @@ public class Forum {
             this.shareTrade = shareTrade;
         }
 
-        public Post(String postID, String imageProfile, String name, String date, String type, String content, String imageContent, String like, String comment, String share, String statusLike, String profileID, List<ImagePost> imagePostList) {
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String statusShare, String like, String comment, String share, String statusLike, String profileID, List<ImagePost> imagePostList) {
             this.postID = postID;
             this.imageProfile = imageProfile;
             this.name = name;
@@ -67,9 +71,10 @@ public class Forum {
             this.statusLike = statusLike;
             this.profileID = profileID;
             this.imagePostList = imagePostList;
+            this.statusShare = statusShare;
         }
 
-        public Post(String postID, String imageProfile, String name, String date, String type, String content, String like, String comment, String share, String statusLike, String profileID, Post post) {
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String like, String comment, String share, String statusLike, String profileID, Post post, String statusShare) {
             this.postID = postID;
             this.imageProfile = imageProfile;
             this.name = name;
@@ -82,6 +87,7 @@ public class Forum {
             this.statusLike = statusLike;
             this.profileID = profileID;
             this.post = post;
+            this.statusShare = statusShare;
         }
 
         public String getImageProfile() {
@@ -106,6 +112,10 @@ public class Forum {
 
         public String getLike() {
             return like;
+        }
+
+        public String getStatusShare() {
+            return statusShare;
         }
 
         public String getComment() {
@@ -144,7 +154,7 @@ public class Forum {
             return post;
         }
 
-        public static class ImagePost{
+        public static class ImagePost {
             private String imageID;
             private String imageURL;
 
@@ -323,6 +333,66 @@ public class Forum {
 
         public String getDate() {
             return date;
+        }
+    }
+
+    public static class User {
+
+        @SerializedName("img_background_url")
+        private String imgBackgroundUrl;
+
+        @SerializedName("img_profile_url")
+        private String imgProfileUrl;
+
+        @SerializedName("follower_count")
+        private String followerCount;
+
+        @SerializedName("following_count")
+        private String followingCount;
+
+        @SerializedName("flag_unread_inbox")
+        private String statusInbox;
+
+        public User() {
+        }
+
+        public String getImgBackgroundUrl() {
+            return imgBackgroundUrl;
+        }
+
+        public String getImgProfileUrl() {
+            return imgProfileUrl;
+        }
+
+        public String getFollowerCount() {
+            return followerCount;
+        }
+
+        public String getFollowingCount() {
+            return followingCount;
+        }
+
+        public String getStatusInbox() {
+            return statusInbox;
+        }
+    }
+
+    public static class ProfilePicture {
+        @SerializedName("id")
+        private String id;
+
+        @SerializedName("url")
+        private String imgURL;
+
+        public ProfilePicture() {
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getImgURL() {
+            return imgURL;
         }
     }
 }

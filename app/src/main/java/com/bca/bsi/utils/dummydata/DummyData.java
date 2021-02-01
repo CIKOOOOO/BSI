@@ -344,7 +344,7 @@ public class DummyData {
     public static List<Forum.Post> getPostNewsList() {
         List<Forum.Post> postList = new ArrayList<>();
         for (int i = 0; i < getPromoNewsList().size(); i++) {
-            Forum.Post post = new Forum.Post(postID[i], imageProfile[i], postProfileName[i], postDate[i], postType[i], postContent[i], "", postLike[i], postComment[i], postShare[i], postStatusLike[i], postProfileID[i], getPromoNewsList().get(i));
+            Forum.Post post = new Forum.Post(postID[i], imageProfile[i], postProfileName[i], postDate[i], postType[i], postContent[i], "true", postLike[i], postComment[i], postShare[i], postStatusLike[i], postProfileID[i], getPromoNewsList().get(i));
             postList.add(post);
         }
         return postList;
@@ -422,7 +422,7 @@ public class DummyData {
     public static List<Forum.Post> getPostStrategyList() {
         List<Forum.Post> postList = new ArrayList<>();
         for (int i = 0; i < shareTradeID.length; i++) {
-            Forum.Post post = new Forum.Post(strategyPostID[i], strategyImageProfile[i], strategyPostProfileName[i], strategyPostDate[i], strategyPostType[i], strategyPostContent[i], "", strategyPostLike[i], strategyPostComment[i], postShare[i], strategyPostStatusLike[i], postProfileID[i], getPostImageList(i));
+            Forum.Post post = new Forum.Post(strategyPostID[i], strategyImageProfile[i], strategyPostProfileName[i], strategyPostDate[i], strategyPostType[i], strategyPostContent[i], "false", strategyPostLike[i], strategyPostComment[i], postShare[i], strategyPostStatusLike[i], postProfileID[i], getPostImageList(i));
             postList.add(post);
         }
         return postList;
@@ -471,7 +471,7 @@ public class DummyData {
     public static List<Forum.Post> getRepostNewsList() {
         List<Forum.Post> postList = new ArrayList<>();
         for (int i = 0; i < getPromoNewsList().size(); i++) {
-            Forum.Post post = new Forum.Post(postID[i], imageProfile[i], postProfileName[i], postDate[i], Type.REPOST_NEWS, "", postLike[i], postComment[i], postShare[i], postStatusLike[i], postProfileID[i], getPostNewsList().get(getPromoNewsList().size() - i - 1));
+            Forum.Post post = new Forum.Post(postID[i], imageProfile[i], postProfileName[i], postDate[i], Type.REPOST_NEWS, "", postLike[i], postComment[i], postShare[i], postStatusLike[i], postProfileID[i], getPostNewsList().get(getPromoNewsList().size() - i - 1), "true");
             postList.add(post);
         }
         return postList;
@@ -480,7 +480,7 @@ public class DummyData {
     public static List<Forum.Post> getRepostGeneralList() {
         List<Forum.Post> postList = new ArrayList<>();
         for (int i = 0; i < shareTradeID.length; i++) {
-            Forum.Post post = new Forum.Post(strategyPostID[i], strategyImageProfile[i], strategyPostProfileName[i], strategyPostDate[i], Type.REPOST, strategyPostContent[i], strategyPostLike[i], strategyPostComment[i], postShare[i], strategyPostStatusLike[i], postProfileID[i] , getPostStrategyList().get(getPostStrategyList().size() - i - 1));
+            Forum.Post post = new Forum.Post(strategyPostID[i], strategyImageProfile[i], strategyPostProfileName[i], strategyPostDate[i], Type.REPOST, strategyPostContent[i], strategyPostLike[i], strategyPostComment[i], postShare[i], strategyPostStatusLike[i], postProfileID[i] , getPostStrategyList().get(getPostStrategyList().size() - i - 1),"false");
             postList.add(post);
         }
         return postList;

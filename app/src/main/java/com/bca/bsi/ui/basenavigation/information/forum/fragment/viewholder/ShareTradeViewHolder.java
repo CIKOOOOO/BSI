@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
+import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -24,11 +25,11 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
     private ImageButton imgBtnMore;
     private ConstraintLayout constraintLayout;
 
-    private ChildMainForumAdapter.OnPostClick onPostClick;
+    private OnPostClick onPostClick;
     private Forum.Post post;
     private String profileID;
 
-    public ShareTradeViewHolder(@NonNull View itemView, ChildMainForumAdapter.OnPostClick onPostClick) {
+    public ShareTradeViewHolder(@NonNull View itemView, OnPostClick onPostClick) {
         super(itemView);
         this.onPostClick = onPostClick;
         roundedImageView = itemView.findViewById(R.id.recycler_img_profile_child_main_forum);
@@ -73,7 +74,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
         tvLike.setText(post.getLike());
         tvComment.setText(post.getComment());
 
-        if(shareTrade != null){
+        if (shareTrade != null) {
             String value;
             int background;
 
@@ -149,7 +150,20 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-
+                        switch (item.getItemId()) {
+                            case R.id.menu_report:
+                                onPostClick.onReport(post.getPostID());
+                                break;
+                            case R.id.menu_save:
+                                onPostClick.onSavedPost(post.getPostID());
+                                break;
+                            case R.id.menu_delete:
+                                onPostClick.onDeletePost(post.getPostID());
+                                break;
+                            case R.id.menu_edit:
+                                onPostClick.onEditPost(post);
+                                break;
+                        }
                         return true;
                     }
                 });

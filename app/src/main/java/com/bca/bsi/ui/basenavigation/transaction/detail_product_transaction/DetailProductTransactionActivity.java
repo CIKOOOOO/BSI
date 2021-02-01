@@ -102,9 +102,6 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                 List<Product.ProductTransaction> productTransactionList = new ArrayList<>();
                 productTransactionList.add(productTransaction);
 
-                Log.e("asd", productTransaction.getName());
-
-
                 productNameDetailTransactionAdapter.setProductTransactions(productTransactionList);
                 productNameDetailTransactionAdapter.notifyDataSetChanged();
 

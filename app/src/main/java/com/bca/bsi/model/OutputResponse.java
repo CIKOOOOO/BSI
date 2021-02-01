@@ -84,6 +84,18 @@ public class OutputResponse {
         @SerializedName("transaction_result_list")
         private List<Transaction.TransactionResult> transactionResultList;
 
+        @SerializedName("my_profile")
+        private Forum.User forumProfileUser;
+
+        @SerializedName("my_posting")
+        private List<Forum.Post> myPostList;
+
+        @SerializedName("my_bookmark")
+        private List<Forum.Post> myBookmarkList;
+
+        @SerializedName("picture_list")
+        private List<Forum.ProfilePicture> profilePictureList;
+
         public OutputSchema() {
         }
 
@@ -137,6 +149,22 @@ public class OutputResponse {
 
         public List<Transaction.TransactionResult> getTransactionResultList() {
             return transactionResultList;
+        }
+
+        public Forum.User getForumProfileUser() {
+            return forumProfileUser;
+        }
+
+        public List<Forum.Post> getMyPostList() {
+            return myPostList;
+        }
+
+        public List<Forum.Post> getMyBookmarkList() {
+            return myBookmarkList;
+        }
+
+        public List<Forum.ProfilePicture> getProfilePictureList() {
+            return profilePictureList;
         }
     }
 }

@@ -61,4 +61,28 @@ public class ChildMainForumViewModel extends AndroidViewModel {
         }
 
     }
+
+    public void loadReportData(){
+        callback.onLoadReportData(DummyData.getReportList());
+    }
+
+    public void sendDeleteConfirmation(String postID){
+
+    }
+
+    public void savedPost(String postID){
+
+    }
+
+    public void likePost(String postID){
+
+    }
+
+    public void resharePost(String postID){
+
+    }
+
+    public void undoResharePost(String postID){
+
+    }
 }
