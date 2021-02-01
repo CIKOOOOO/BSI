@@ -30,6 +30,7 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
     private ProgressBar progressBar;
     private ImageButton infoButton;
     private TextView reksaSelector, tvPercentReksadana;
+    private ImageButton customBundleButton;
 
     private PortfolioViewModel portfolioViewModel;
 
@@ -92,6 +93,16 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         portfolioViewModel = new ViewModelProvider(this).get(PortfolioViewModel.class);
         portfolioViewModel.setCallback(this);
         portfolioViewModel.loadBundle(prefConfig.getProfileRisiko(),prefConfig.getAccountNumber());
+
+        // custom bundle button
+        customBundleButton = view.findViewById(R.id.ib_custom_bundle);
+        customBundleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ProdukChoiceActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
 
         //info robo
