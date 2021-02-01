@@ -5,7 +5,7 @@ import com.bca.bsi.model.Forum;
 import java.util.List;
 
 public interface IForumProfileCallback {
-    void onLoadData(Forum.User user);
+    void onLoadData(Forum.User user, List<Forum.Post> postList, List<Forum.Post> bookmarkList);
 
     void onLoadProfilePicture(List<Forum.ProfilePicture> profilePictureList);
 

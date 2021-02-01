@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface IMainForumCallback {
 
-    void onLoadReportData(List<Forum.Report> reportList);
-
 }

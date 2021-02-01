@@ -40,6 +40,8 @@
     <string name="berkala">Berkala?</string>
     <string name="sell_all">Jual Semua?</string>
     <string name="rp">Rp</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
     <string name="additional_information">Informasi Tambahan</string>
     <string name="prospectus">Prospectus</string>
     <string name="fund_fact_sheet">Fund Fact Sheet</string>
@@ -79,6 +81,8 @@
     <string name="my_unit">Jumlah Unit Dimiliki</string>
     <string name="info_sell">Mohon sisakan sedikitnya 100 unit atau jual semua</string>
     <string name="total">Total</string>
+    <string name="delete_post">Semua komentar dan likes di postingan ini akan ikut hilang.</string>
+    <string name="delete_confirmation_post">Konfirmasi Hapus Post</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>

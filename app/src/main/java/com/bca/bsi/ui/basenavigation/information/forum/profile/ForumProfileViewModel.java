@@ -39,7 +39,7 @@ public class ForumProfileViewModel extends AndroidViewModel {
                     if (errorSchema.getErrorCode().equals("200")) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         Forum.User user = outputSchema.getForumProfileUser();
-                        callback.onLoadData(user);
+                        callback.onLoadData(user, outputSchema.getMyPostList(), outputSchema.getMyBookmarkList());
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

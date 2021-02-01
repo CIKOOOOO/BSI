@@ -17,6 +17,7 @@ public class Forum {
         private String comment;
         private String share;
         private String statusLike;
+        private String statusShare;
         private String profileID;
         private PromoNews promoNews;
         private ShareTrade shareTrade;
@@ -26,7 +27,7 @@ public class Forum {
         public Post() {
         }
 
-        public Post(String postID, String imageProfile, String name, String date, String type, String content, String imageContent, String like, String comment, String share, String statusLike, String profileID, PromoNews promoNews) {
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String statusShare, String like, String comment, String share, String statusLike, String profileID, PromoNews promoNews) {
             this.postID = postID;
             this.imageProfile = imageProfile;
             this.name = name;
@@ -39,9 +40,10 @@ public class Forum {
             this.statusLike = statusLike;
             this.profileID = profileID;
             this.promoNews = promoNews;
+            this.statusShare = statusShare;
         }
 
-        public Post(String postID, String imageProfile, String name, String date, String type, String content, String imageContent, String like, String comment, String share, String statusLike, String profileID, ShareTrade shareTrade) {
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String statusShare, String like, String comment, String share, String statusLike, String profileID, ShareTrade shareTrade) {
             this.postID = postID;
             this.imageProfile = imageProfile;
             this.name = name;
@@ -56,7 +58,7 @@ public class Forum {
             this.shareTrade = shareTrade;
         }
 
-        public Post(String postID, String imageProfile, String name, String date, String type, String content, String imageContent, String like, String comment, String share, String statusLike, String profileID, List<ImagePost> imagePostList) {
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String statusShare, String like, String comment, String share, String statusLike, String profileID, List<ImagePost> imagePostList) {
             this.postID = postID;
             this.imageProfile = imageProfile;
             this.name = name;
@@ -69,9 +71,10 @@ public class Forum {
             this.statusLike = statusLike;
             this.profileID = profileID;
             this.imagePostList = imagePostList;
+            this.statusShare = statusShare;
         }
 
-        public Post(String postID, String imageProfile, String name, String date, String type, String content, String like, String comment, String share, String statusLike, String profileID, Post post) {
+        public Post(String postID, String imageProfile, String name, String date, String type, String content, String like, String comment, String share, String statusLike, String profileID, Post post, String statusShare) {
             this.postID = postID;
             this.imageProfile = imageProfile;
             this.name = name;
@@ -84,6 +87,7 @@ public class Forum {
             this.statusLike = statusLike;
             this.profileID = profileID;
             this.post = post;
+            this.statusShare = statusShare;
         }
 
         public String getImageProfile() {
@@ -108,6 +112,10 @@ public class Forum {
 
         public String getLike() {
             return like;
+        }
+
+        public String getStatusShare() {
+            return statusShare;
         }
 
         public String getComment() {

@@ -214,7 +214,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                             this.history = gson.fromJson(data, Portfolio.History.class);
                             String value;
                             int drawable;
-                            if (this.history.getTransactionType().equals("Pembelian")) {
+                            if (this.history.getTransactionType().equalsIgnoreCase("Pembelian")) {
                                 value = getString(R.string.buy);
                                 drawable = R.drawable.img_share_trade_buy;
                             } else {
@@ -342,16 +342,10 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
             if (requestCode == GALLERY_THUMBNAIL && resultCode == RESULT_OK
                     && null != data) {
                 // Get the Image from data
-
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
                 if (data.getData() != null) {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
                     imagesEncodedList.add(bitmap);
-                    Uri uri = getImageUri(this, bitmap);
-//                    filePath = getPath(this, data.getData());
                     filePath = ImageFilePath.getPath(this, data.getData());
-//                    filePath = Utils.getRealPathFromURI(uri, this);
-                    Log.e("asd", filePath);
                 } else {
                     if (data.getClipData() != null) {
                         ClipData mClipData = data.getClipData();
@@ -392,7 +386,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 //                    startActivity(intent);
 //                }
 
-                viewModel.sendData(imagesEncodedList, filePath);
+                viewModel.sendData(imagesEncodedList);
                 break;
         }
     }

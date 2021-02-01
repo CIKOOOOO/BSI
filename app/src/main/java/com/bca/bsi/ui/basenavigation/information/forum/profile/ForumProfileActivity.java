@@ -21,12 +21,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bca.bsi.R;
+import com.bca.bsi.adapter.TabAdapter;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.inbox.InboxActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.connection.ConnectionActivity;
+import com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.bookmark.BookmarkFragment;
+import com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.posting.PostingFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.constant.Constant;
+import com.bca.bsi.utils.dummydata.DummyData;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -49,6 +53,8 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
     private RoundedImageView imageProfile;
     private ConstraintLayout.LayoutParams layoutParams;
     private GridSpacingItemDecoration gridSpacingItemDecoration;
+    private PostingFragment postingFragment;
+    private BookmarkFragment bookmarkFragment;
 
     private String imageID;
     private int typeUpload;
@@ -92,6 +98,8 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
         viewModel = new ViewModelProvider(this).get(ForumProfileViewModel.class);
         viewModel.setCallback(this);
 
+        setupTab();
+
         viewModel.loadProfile(prefConfig.getTokenUser(), prefConfig.getProfileID());
 
         tvTitle.setText(prefConfig.getUsername());
@@ -99,7 +107,7 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
 
         imgActionBtn.setBackground(getDrawable(R.drawable.ic_inbox_logo));
 
-        setupTab();
+        bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallback);
 
         imgActionBtn.setOnClickListener(this);
         imgEditUsername.setOnClickListener(this);
@@ -108,20 +116,20 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
         imgBtnProfilePhoto.setOnClickListener(this);
         linearLayout.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
-
-        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                int visibility = newState == BottomSheetBehavior.STATE_EXPANDED ? View.VISIBLE : View.GONE;
-                frameLayout.setVisibility(visibility);
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
-        });
     }
+
+    private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
+        @Override
+        public void onStateChanged(@NonNull View bottomSheet, int newState) {
+            int visibility = newState == BottomSheetBehavior.STATE_EXPANDED ? View.VISIBLE : View.GONE;
+            frameLayout.setVisibility(visibility);
+        }
+
+        @Override
+        public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+        }
+    };
 
     @Override
     public void onClick(View v) {
@@ -195,13 +203,17 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
     private void setupTab() {
         TabLayout tabLayout = findViewById(R.id.tl_forum_profile);
         final ViewPager viewPager = findViewById(R.id.vp_forum_profile);
-        ForumProfileTabAdapter adapter = new ForumProfileTabAdapter(getSupportFragmentManager(), Constant.FORUM_PROFILE_MENU.length);
+        TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
 
-        for (String name : Constant.FORUM_PROFILE_MENU) {
-            tabLayout.addTab(tabLayout.newTab().setText(name));
-        }
+        postingFragment = new PostingFragment();
+        bookmarkFragment = new BookmarkFragment();
 
-        viewPager.setAdapter(adapter);
+        tabAdapter.addTab(postingFragment, Constant.FORUM_PROFILE_MENU[0]);
+        tabAdapter.addTab(bookmarkFragment, Constant.FORUM_PROFILE_MENU[1]);
+
+        viewPager.setAdapter(tabAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
         viewPager.setOffscreenPageLimit(1);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -234,6 +246,9 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
         } else {
             tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         }
+
+        postingFragment.loadData(DummyData.getPostStrategyList());
+        bookmarkFragment.loadData(DummyData.getRepostGeneralList());
     }
 
     @Override
@@ -251,7 +266,7 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
-    public void onLoadData(Forum.User user) {
+    public void onLoadData(Forum.User user, List<Forum.Post> postList, List<Forum.Post> bookmarkList) {
 
         int visibility = user.getStatusInbox().equalsIgnoreCase("read") ? View.GONE : View.VISIBLE;
 
@@ -266,6 +281,9 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
                     .load(user.getImgBackgroundUrl())
                     .into(imgHeader);
         }
+
+        postingFragment.loadData(postList);
+        bookmarkFragment.loadData(bookmarkList);
 
         imgRedDot.setVisibility(visibility);
 

@@ -71,8 +71,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             customLoading.dismiss();
         }
         finishAffinity();
-        Log.e("asd", welmaUser.getTokenUser());
-        prefConfig.setUser(forumUser, welmaUser);
+//        Log.e("asd", welmaUser.getTokenUser());
+//        prefConfig.setUser(forumUser, welmaUser);
         startActivity(new Intent(this, BaseNavigationActivity.class));
     }
 

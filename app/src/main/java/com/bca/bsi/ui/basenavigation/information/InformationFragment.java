@@ -24,17 +24,12 @@ import com.bca.bsi.utils.BaseFragment;
 
 import java.util.List;
 
-public class InformationFragment extends BaseFragment implements View.OnClickListener, MainForumFragment.onReport {
+public class InformationFragment extends BaseFragment implements View.OnClickListener{
 
     private TextView tvStart, tvMid, tvEnd;
-    private onReport onReport;
 
     public interface onReport {
         void onClick(List<Forum.Report> reportList);
-    }
-
-    public void setOnReport(onReport onReport) {
-        this.onReport = onReport;
     }
 
     @Override
@@ -130,14 +125,8 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
 
     private void changeFragmentToForum() {
         MainForumFragment mainForumFragment = new MainForumFragment();
-        mainForumFragment.setOnReport(this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_information_fragment, mainForumFragment);
         transaction.commit();
-    }
-
-    @Override
-    public void onClick(List<Forum.Report> reportList) {
-        onReport.onClick(reportList);
     }
 }
