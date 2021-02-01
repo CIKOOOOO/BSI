@@ -10,8 +10,6 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 
-import java.io.IOException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -79,7 +77,7 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
                     if(outputResponse.getErrorSchema().getErrorCode().equals("200")){
                         Log.e("c","tes3");
                         OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
-                        callback.onLoadDataCustom(outputSchema.getBundles());
+//                        callback.onLoadDataCustom(outputSchema.getBundles());
                     } else {
                         Log.e("d","tes4");
                         callback.onFail(outputResponse.getErrorSchema().getErrorMessage());

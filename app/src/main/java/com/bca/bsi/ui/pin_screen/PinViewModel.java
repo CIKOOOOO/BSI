@@ -67,7 +67,12 @@ public class PinViewModel extends AndroidViewModel {
                 call.enqueue(new Callback<OutputResponse>() {
                     @Override
                     public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-//                        Log.e("asd", "on response " + response.code());
+                        Log.e("asd", "on response " + response.code());
+//                        try {
+//                            Log.e("asd", "on response " + response.errorBody().string());
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
                         if (response.body() != null) {
                             OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                             if (errorSchema.getErrorCode().equals("200")) {
@@ -85,7 +90,7 @@ public class PinViewModel extends AndroidViewModel {
 
                     @Override
                     public void onFailure(Call<OutputResponse> call, Throwable t) {
-//                        Log.e("asd", "on failed " + t.getMessage());
+                        Log.e("asd", "on failed " + t.getMessage());
                         callback.onFailed("Mohon cek kembali jaringan Anda");
                     }
                 });
@@ -141,6 +146,7 @@ public class PinViewModel extends AndroidViewModel {
                                     callback.onFailed(errorSchema.getErrorMessage());
                                 }
                             } else {
+
                                 callback.onFailed("Mohon cek kembali jaringan Anda");
                             }
                         }

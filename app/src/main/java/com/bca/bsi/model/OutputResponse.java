@@ -60,7 +60,7 @@ public class OutputResponse {
         @SerializedName("rekening")
         private User.BCAUser.Rekening rekeningUser;
 
-//        @SerializedName("transaction")
+        @SerializedName("transaction")
         private Transaction.TransactionResult transactionResult;
 
         @SerializedName("kuis_data")
@@ -81,7 +81,7 @@ public class OutputResponse {
         @SerializedName("tips")
         private TipsOfTheWeek tipsOfTheWeek;
 
-        @SerializedName("transaction")
+        @SerializedName("transaction_result_list")
         private List<Transaction.TransactionResult> transactionResultList;
 
         public OutputSchema() {

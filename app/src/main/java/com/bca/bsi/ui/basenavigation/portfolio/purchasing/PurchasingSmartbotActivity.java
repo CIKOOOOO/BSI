@@ -155,6 +155,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         tvRisk.setText(portfolio.getRisk());
     }
 
+
     @Override
     public void onFail(String msg) {
         showSnackBar(msg);
