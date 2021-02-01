@@ -202,7 +202,7 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
                         case 3:
                             viewModel.kalkulasi(ETBHIModalAwal.getText().toString(),ETBHIIvestasiBulanan.getText().toString(),
                                     rorValue,spinnerDurasiBulanBHI.getSelectedItem().toString(),spinnerDurasiTahunBHI.getSelectedItem().toString());
-
+                            System.out.print("INIIIIII ROR VALUE DARI BESAR HASIL INVESTASI FRAGMENT: "+rorValue);
                             break;
                         case 4:
                             viewModel.kalkulasi(ETBHIModalAwal.getText().toString(),ETBHIIvestasiBulanan.getText().toString(),ETBHIROR.getText().toString(),
@@ -269,13 +269,28 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
             */
 
         hasilBHI.setText(hasilKalkulasi);
-        if(spinnerDurasiBulanBHI.getSelectedItemPosition()==0 && spinnerDurasiTahunBHI.getSelectedItemPosition()==0
-                || Double.parseDouble(ETBHIROR.getText().toString()) <= 0) {
-            rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
-            hasilBHI.setVisibility(View.INVISIBLE);
-        }else{
-            rpLabel.setText(getString(R.string.rp));
-            hasilBHI.setVisibility(View.VISIBLE);
+
+        switch (numbOfTabs){
+            case 3:
+                if(spinnerDurasiBulanBHI.getSelectedItemPosition()==0 && spinnerDurasiTahunBHI.getSelectedItemPosition()==0) {
+                    rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
+                    hasilBHI.setVisibility(View.INVISIBLE);
+                }else{
+                    rpLabel.setText(getString(R.string.rp));
+                    hasilBHI.setVisibility(View.VISIBLE);
+                }
+                break;
+
+            case 4:
+                if(spinnerDurasiBulanBHI.getSelectedItemPosition()==0 && spinnerDurasiTahunBHI.getSelectedItemPosition()==0
+                        || Double.parseDouble(ETBHIROR.getText().toString()) <= 0) {
+                    rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
+                    hasilBHI.setVisibility(View.INVISIBLE);
+                }else{
+                    rpLabel.setText(getString(R.string.rp));
+                    hasilBHI.setVisibility(View.VISIBLE);
+                }
+                break;
         }
     }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,8 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
     private FrameLayout frameLayout;
     private ChooseImageAdapter chooseImageAdapter;
     private EditText etName;
+    private ImageView imgRedDot;
+    // TODO: Set Red dot if data is available
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
         recycler_choose_image = findViewById(R.id.bs_recycler_choose_image);
         tvTitleBottomSheet = findViewById(R.id.bs_tv_title_choose_image);
         etName = findViewById(R.id.et_name_forum_profile);
+        imgRedDot = findViewById(R.id.iv_red_dot_toolbar_back_with_image);
 
         bottomSheetBehavior = BottomSheetBehavior.from(constraintLayout);
         chooseImageAdapter = new ChooseImageAdapter(this);

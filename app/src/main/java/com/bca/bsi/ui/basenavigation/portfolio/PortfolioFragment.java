@@ -66,7 +66,6 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         this.onBundleClick = onBundleClick;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

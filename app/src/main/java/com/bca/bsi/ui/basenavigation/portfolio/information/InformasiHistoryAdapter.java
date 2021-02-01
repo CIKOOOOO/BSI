@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Portfolio;
+import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,8 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
         void onShareNews(Portfolio.Information information);
 
         void onShareNews(Portfolio.History history);
+
+        void onSell(Portfolio.Information information);
     }
 
     public void setType(String type) {
@@ -41,6 +44,12 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
         this.onClickShare = onClickShare;
         this.informationList = new ArrayList<>();
         this.historyList = new ArrayList<>();
+    }
+
+    public void clearData(){
+        this.historyList.clear();
+        this.informationList.clear();
+        notifyDataSetChanged();
     }
 
     public void setInformationList(List<Portfolio.Information> informationList) {
@@ -92,8 +101,8 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
             holder.tvJenisReksa_INF.setText(information.getJenis());
             holder.tvDate_INF.setText(information.getDate());
             holder.tvUnit_INF.setText(String.valueOf(information.getUnit()));
-            holder.tvCost_INF.setText(String.valueOf(information.getCost()));
-            holder.tvRaise_INF.setText("Rp. " + information.getRaise());
+            holder.tvCost_INF.setText(Utils.formatUang3(information.getCost()));
+            holder.tvRaise_INF.setText("Rp. " + Utils.formatUang3(information.getRaise()));
             if (information.getRaise() < 0) {
                 holder.tvRaise_INF.setTextColor(Color.parseColor("#d12f24"));
             } else {
@@ -106,12 +115,18 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
                     onClickShare.onShareNews(information);
                 }
             });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickShare.onSell(information);
+                }
+            });
         }
     }
 
     @Override
     public int getItemCount() {
-        return type.equals(HISTORY) ? informationList.size() : informationList.size();
+        return type.equals(HISTORY) ? historyList.size() : informationList.size();
     }
 
     @Override

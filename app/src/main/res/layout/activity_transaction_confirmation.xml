@@ -24,6 +24,7 @@
                 android:id="@+id/recycler_product_confirmation_transaction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_for_20dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,6 +65,74 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_sell_confirmation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_for_20dp"
+                        android:layout_marginTop="@dimen/size_for_20dp"
+                        android:layout_marginEnd="@dimen/size_for_20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="@string/jumlah_unit_penjualan"
+                            android:textSize="@dimen/size_for_15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_jumlah_unit_penjualan_confirmation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/size_for_10dp"
+                            android:layout_weight="3.5"
+                            android:text="5271517891"
+                            android:textColor="@color/java_palette"
+                            android:textSize="@dimen/size_for_15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_for_20dp"
+                        android:layout_marginTop="@dimen/size_for_20dp"
+                        android:layout_marginEnd="@dimen/size_for_20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="@string/nominal_biaya_penjualan"
+                            android:textSize="@dimen/size_for_15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_nominal_biaya_pembelian_confirmation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/size_for_10dp"
+                            android:layout_weight="3.5"
+                            android:text="5271517891"
+                            android:textColor="@color/java_palette"
+                            android:textSize="@dimen/size_for_15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_for_20dp"
@@ -82,6 +151,38 @@
 
                     <TextView
                         android:id="@+id/tv_rekening_sumber_dana_confirmation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/size_for_10dp"
+                        android:layout_weight="3.5"
+                        android:text="5271517891"
+                        android:textColor="@color/java_palette"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_total_confirmation_transaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginTop="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="@string/total"
+                        android:textSize="@dimen/size_for_15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_total_pembelian_dana_confirmation"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

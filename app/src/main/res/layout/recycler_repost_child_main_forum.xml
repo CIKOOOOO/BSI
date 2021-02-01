@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_palette">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/recycler_img_profile_child_main_forum"
+        android:layout_width="@dimen/size_for_50dp"
+        android:layout_height="@dimen/size_for_50dp"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_border_color="@color/java_palette"
+        app:riv_border_width="@dimen/size_for_2dp"
+        app:riv_corner_radius="@dimen/size_for_10dp"
+        app:riv_mutate_background="true"
+        app:riv_oval="false"
+        tools:src="@drawable/img_asset_reksa_dana" />
+
+    <TextView
+        android:id="@+id/recycler_tv_name_child_main_forum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_10dp"
+        android:layout_marginTop="@dimen/size_for_5dp"
+        android:textColor="@color/java_palette"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/recycler_img_profile_child_main_forum"
+        app:layout_constraintTop_toTopOf="@id/recycler_img_profile_child_main_forum"
+        tools:text="Me" />
+
+    <TextView
+        android:id="@+id/recycler_tv_date_child_main_forum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_palette"
+        android:textSize="@dimen/size_for_12sp"
+        app:layout_constraintStart_toStartOf="@id/recycler_tv_name_child_main_forum"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_name_child_main_forum"
+        tools:text="15 Desember 2020 16:21" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/recycler_cv_repost_news_main_forum"
+        android:layout_width="@dimen/size_for_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:backgroundTint="@color/white_palette"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/recycler_img_profile_child_main_forum"
+        app:layout_constraintTop_toBottomOf="@id/recycler_img_profile_child_main_forum">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/recycler_img_profile_post_source_repost_news"
+                android:layout_width="@dimen/size_for_50dp"
+                android:layout_height="@dimen/size_for_50dp"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:layout_marginTop="@dimen/size_for_10dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_border_color="@color/java_palette"
+                app:riv_border_width="@dimen/size_for_2dp"
+                app:riv_corner_radius="@dimen/size_for_10dp"
+                app:riv_mutate_background="true"
+                app:riv_oval="false"
+                tools:src="@drawable/img_asset_reksa_dana" />
+
+            <TextView
+                android:id="@+id/recycler_tv_name_post_source_repost_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_10dp"
+                android:layout_marginTop="@dimen/size_for_5dp"
+                android:textColor="@color/java_palette"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/recycler_img_profile_post_source_repost_news"
+                app:layout_constraintTop_toTopOf="@id/recycler_img_profile_post_source_repost_news"
+                tools:text="Me" />
+
+            <TextView
+                android:id="@+id/recycler_tv_date_source_repost_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_palette"
+                android:textSize="@dimen/size_for_12sp"
+                app:layout_constraintStart_toStartOf="@id/recycler_tv_name_post_source_repost_news"
+                app:layout_constraintTop_toBottomOf="@id/recycler_tv_name_post_source_repost_news"
+                tools:text="15 Desember 2020 16:21" />
+
+            <TextView
+                android:id="@+id/recycler_tv_content_child_main_forum"
+                android:layout_width="@dimen/size_for_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_10dp"
+                android:layout_marginTop="@dimen/size_for_20dp"
+                android:layout_marginEnd="@dimen/size_for_20dp"
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="1.2"
+                android:maxLength="160"
+                android:maxLines="5"
+                android:scrollHorizontally="true"
+                android:textSize="@dimen/size_for_15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/recycler_img_profile_post_source_repost_news"
+                app:layout_constraintTop_toBottomOf="@id/recycler_img_profile_post_source_repost_news"
+                tools:text="Status Order Saham: Wajib Dipahami Oleh Seluruh Investor\n\nInvestor perlu memahami status order dalam mengajukan order transaksi jual beli saham. Terdapat 6 Status Order, yaitu:\n\n🎯Open (hanya muncul ketika pasar dibuka)\nLihat selengkapnya" />
+
+            <TextView
+                android:id="@+id/recycler_tv_view_more_child_main_forum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_for_5dp"
+                android:text="@string/view_more"
+                android:textColor="@color/dodger_blue_palette"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/recycler_tv_content_child_main_forum"
+                app:layout_constraintTop_toBottomOf="@id/recycler_tv_content_child_main_forum" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_rv_img_repost_child_main_forum"
+                android:layout_width="@dimen/size_for_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_for_10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_tv_view_more_child_main_forum" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/recycler_tv_like_child_main_forum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:drawablePadding="@dimen/size_for_5dp"
+        android:textColor="@color/black_palette"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/recycler_img_profile_child_main_forum"
+        app:layout_constraintTop_toBottomOf="@id/recycler_cv_repost_news_main_forum"
+        tools:text="32" />
+
+    <TextView
+        android:id="@+id/recycler_tv_comment_child_main_forum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:drawablePadding="@dimen/size_for_5dp"
+        android:textColor="@color/black_palette"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_comment"
+        app:layout_constraintStart_toEndOf="@id/recycler_tv_like_child_main_forum"
+        app:layout_constraintTop_toBottomOf="@id/recycler_cv_repost_news_main_forum"
+        tools:text="32" />
+
+    <TextView
+        android:id="@+id/recycler_tv_share_child_main_forum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:layout_marginTop="@dimen/size_for_15dp"
+        android:drawablePadding="@dimen/size_for_5dp"
+        android:textColor="@color/black_palette"
+        android:textStyle="bold"
+        app:drawableEndCompat="@drawable/ic_share"
+        app:layout_constraintEnd_toEndOf="@id/recycler_cv_repost_news_main_forum"
+        app:layout_constraintTop_toBottomOf="@id/recycler_cv_repost_news_main_forum"
+        tools:text="32" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0.5dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:layout_marginBottom="@dimen/size_for_2dp"
+        android:background="@color/gray_palette"
+        android:elevation="@dimen/size_for_2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_share_child_main_forum" />
+</androidx.constraintlayout.widget.ConstraintLayout>

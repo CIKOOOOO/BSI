@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.portfolio.produkmenu;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,11 @@ import java.util.List;
 
 public class ProdukChoiceAdapter extends RecyclerView.Adapter<ProdukChoiceAdapter.Holder> {
 
-    List<Product.ReksaDana> products = new ArrayList<>();
+    List<Product.ReksaDana> products;
+
+    public ProdukChoiceAdapter() {
+        products = new ArrayList<>();
+    }
 
     public void setProducts(List<Product.ReksaDana> products) {
         this.products = products;
@@ -42,11 +47,13 @@ public class ProdukChoiceAdapter extends RecyclerView.Adapter<ProdukChoiceAdapte
         holder.tvNab.setText(productChoice.getNab());
         holder.tvKinerja.setText(productChoice.getKinerja());
         holder.tvReksaName.setText(productChoice.getName());
+
+        holder.cbChoosen.setOnCheckedChangeListener(null);
         holder.cbChoosen.setChecked(productChoice.isChoosen());
 
         String date = null;
         try {
-            date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3,Constant.DATE_FORMAT_2,productChoice.getDate());
+            date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, productChoice.getDate());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -55,8 +62,8 @@ public class ProdukChoiceAdapter extends RecyclerView.Adapter<ProdukChoiceAdapte
         holder.cbChoosen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                products.get(position).setChoosen(isChecked);
-                holder.cbChoosen.setChecked(productChoice.isChoosen());
+                productChoice.setChoosen(isChecked);
+                products.set(position, productChoice);
             }
         });
 
@@ -87,22 +94,21 @@ public class ProdukChoiceAdapter extends RecyclerView.Adapter<ProdukChoiceAdapte
         void onItemClick(Portfolio portfolio);
     }
 
-    public String getReksaIds(){
+    public String getReksaIds() {
         String res = "";
-        for (Product.ReksaDana product:this.products
-             ) {
-            if(product.isChoosen()){
-                res += product.getReksadanaID()+",";
+        for (Product.ReksaDana product : this.products
+        ) {
+            if (product.isChoosen()) {
+                res += product.getReksadanaID() + ",";
             }
         }
-        return res.substring(0,res.length()-1);
+        return res.substring(0, res.length() - 1);
     }
 
-    public int getChoosenAmount(){
+    public int getChoosenAmount() {
         int res = 0;
-        for (Product.ReksaDana product:this.products
-        ) {
-            if(product.isChoosen()){
+        for (Product.ReksaDana product : this.products) {
+            if (product.isChoosen()) {
                 res += 1;
             }
         }

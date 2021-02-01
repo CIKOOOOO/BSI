@@ -36,6 +36,8 @@ public class ReksadanaProductViewModel extends AndroidViewModel {
 
     public void getReksaDanaList(String profile_risiko) {
 //        callback.resultOf(DummyData.getReksaDanaDummyList());
+        if (profile_risiko.isEmpty()) return;
+
         Call<OutputResponse> call = apiInterface.getReksaDanaData(Integer.parseInt(profile_risiko));
         call.enqueue(new Callback<OutputResponse>() {
             @Override
@@ -46,8 +48,10 @@ public class ReksadanaProductViewModel extends AndroidViewModel {
                     OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
 
                     if (!errorSchema.getErrorCode().equals("200")) {
+                        Log.e("asd", errorSchema.getErrorMessage());
                         callback.onFailed(errorSchema.getErrorMessage());
                     } else {
+//                        Log.e("asd", Utils.toJSON(outputSchema));
                         reksaDanaList = outputSchema.getReksaDanaList();
                         callback.resultOf(reksaDanaList);
                     }

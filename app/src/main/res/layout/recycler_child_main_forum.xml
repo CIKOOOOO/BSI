@@ -98,30 +98,15 @@
         app:layout_constraintStart_toStartOf="@id/recycler_tv_content_child_main_forum"
         app:layout_constraintTop_toBottomOf="@id/recycler_tv_content_child_main_forum" />
 
-    <FrameLayout
-        android:id="@+id/fl_01"
-        android:layout_width="@dimen/size_for_0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_child_rv_main_forum"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_for_10dp"
-        app:layout_constrainedHeight="true"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="@id/recycler_img_btn_more_child_main_forum"
-        app:layout_constraintHeight_min="@dimen/size_for_0dp"
         app:layout_constraintStart_toStartOf="@id/recycler_tv_view_more_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/recycler_tv_view_more_child_main_forum">
-
-        <ImageView
-            android:id="@+id/recycler_img_content_child_main_forum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            app:layout_constrainedHeight="true"
-            app:layout_constraintHeight_max="@dimen/size_for_150dp"
-            app:layout_constraintHeight_min="@dimen/size_for_0dp" />
-
-        <include
-            layout="@layout/custom_share_trade"
-            android:visibility="gone" />
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_view_more_child_main_forum" />
 
     <TextView
         android:id="@+id/recycler_tv_like_child_main_forum"
@@ -132,7 +117,7 @@
         android:textColor="@color/black_palette"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/recycler_img_profile_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/fl_01"
+        app:layout_constraintTop_toBottomOf="@id/recycler_child_rv_main_forum"
         tools:text="32" />
 
     <TextView
@@ -146,17 +131,8 @@
         android:textStyle="bold"
         app:drawableStartCompat="@drawable/ic_comment"
         app:layout_constraintStart_toEndOf="@id/recycler_tv_like_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/fl_01"
+        app:layout_constraintTop_toBottomOf="@id/recycler_child_rv_main_forum"
         tools:text="32" />
-
-    <ImageView
-        android:id="@+id/recycler_img_share_child_main_forum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size_for_2dp"
-        android:background="@drawable/ic_triangle_yellow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/recycler_tv_share_child_main_forum"
@@ -169,7 +145,7 @@
         android:textStyle="bold"
         app:drawableEndCompat="@drawable/ic_share"
         app:layout_constraintEnd_toEndOf="@id/recycler_img_btn_more_child_main_forum"
-        app:layout_constraintTop_toBottomOf="@id/fl_01"
+        app:layout_constraintTop_toBottomOf="@id/recycler_child_rv_main_forum"
         tools:text="32" />
 
     <View

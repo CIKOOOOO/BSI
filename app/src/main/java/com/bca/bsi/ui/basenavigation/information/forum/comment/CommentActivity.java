@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.comment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,11 +24,12 @@ import java.util.List;
 
 public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onReport, ICommentCallback {
 
+    public static final String DATA = "data";
+
     private EditText etComment;
     private RoundedImageView rivProfile;
     private TextView tvName, tvDate, tvType, tvAmountCharacter, tvContent, tvViewMore, tvLike, tvAmountComment, tvShare, tvTransactionTypeShareTrade, tvContentShareTrade, tvNameProductShareTrade, tvPriceProductShareTrade, tvManagerInvestShareTrade;
     private ImageButton imgBtnMore;
-    private ImageView imageContent, imageShare;
     private ConstraintLayout clShareTrade;
     private CommentAdapter commentAdapter;
     private CommentViewModel viewModel;
@@ -57,9 +59,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         tvLike = findViewById(R.id.recycler_tv_like_child_main_forum);
         tvAmountComment = findViewById(R.id.recycler_tv_comment_child_main_forum);
         tvShare = findViewById(R.id.recycler_tv_share_child_main_forum);
-        imageShare = findViewById(R.id.recycler_img_share_child_main_forum);
         imgBtnMore = findViewById(R.id.recycler_img_btn_more_child_main_forum);
-        imageContent = findViewById(R.id.recycler_img_content_child_main_forum);
         tvAmountCharacter = findViewById(R.id.tv_counter_character_comment);
 
         clShareTrade = findViewById(R.id.cl_share_trade);
@@ -82,7 +82,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         recyclerComment.setLayoutManager(new LinearLayoutManager(this));
         recyclerComment.setAdapter(commentAdapter);
 
-        viewModel.loadComment();
+        Intent intent = getIntent();
+        if(intent != null && intent.hasExtra(DATA)){
+            String postID = intent.getStringExtra(DATA);
+            viewModel.loadComment(postID);
+        }
 
         etComment.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,7 +108,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         imgBack.setOnClickListener(this);
         tvComment.setOnClickListener(this);
 
-        tvTransactionTypeShareTrade.setOnClickListener(this);
+//        tvTransactionTypeShareTrade.setOnClickListener(this);
         imgBtnMore.setOnClickListener(this);
         tvLike.setOnClickListener(this);
         tvShare.setOnClickListener(this);

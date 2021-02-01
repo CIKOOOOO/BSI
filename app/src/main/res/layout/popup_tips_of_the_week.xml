@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -43,18 +44,18 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/content_image"
             android:layout_width="match_parent"
-            android:background="@drawable/img_asset_reksa_dana"
-            app:riv_mutate_background="true"
+            android:layout_height="@dimen/size_for_200dp"
+            tools:background="@drawable/img_asset_reksa_dana"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius_top_left="@dimen/size_for_15dp"
             app:riv_corner_radius_top_right="@dimen/size_for_15dp"
-            android:layout_height="@dimen/size_for_200dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="centerCrop"/>
+            app:riv_mutate_background="true" />
 
         <ImageButton
             android:id="@+id/ib_clear3"
-            android:layout_width="@dimen/size_for_40dp"
-            android:layout_height="@dimen/size_for_40dp"
+            android:layout_width="@dimen/size_for_30dp"
+            android:layout_height="@dimen/size_for_30dp"
             android:layout_marginTop="@dimen/size_for_10dp"
             android:layout_marginEnd="@dimen/size_for_10dp"
             android:background="@drawable/ic_clear3"
@@ -95,11 +96,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginTop="@dimen/size_for_10dp"
                     android:layout_marginEnd="@dimen/size_for_20dp"
-                    android:text="Yuk Belajar Analisa Sahammu"
                     android:textColor="@color/white_palette"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/size_for_20sp"
+                    android:textStyle="bold"
+                    tools:text="Yuk Belajar Analisa Sahammu" />
 
                 <TextView
                     android:id="@+id/tv_content"
@@ -111,7 +113,7 @@
                     android:lineSpacingMultiplier="1.1"
                     android:text="@string/lorem"
                     android:textColor="@color/white_palette"
-                    android:textSize="@dimen/size_for_17sp" />
+                    android:textSize="@dimen/size_for_15sp" />
 
             </LinearLayout>
 
@@ -130,7 +132,6 @@
             app:layout_constraintStart_toStartOf="parent" />
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
@@ -139,10 +140,9 @@
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="5dp"
         android:src="@drawable/img_textbubblearrow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/popup_bubble"
         app:layout_constraintBottom_toTopOf="@id/img_robo_popup"
-       />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/popup_bubble" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

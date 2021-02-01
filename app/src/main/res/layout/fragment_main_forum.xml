@@ -22,8 +22,10 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_main_forum"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/size_for_0dp"
         android:animateLayoutChanges="true"
+        android:background="@color/white_palette"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tl_main_forum" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -32,8 +34,40 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/size_for_20dp"
         android:layout_marginBottom="@dimen/size_for_20dp"
-        app:backgroundTint="@color/color_base_welma"
         android:src="@drawable/ic_baseline_add_24"
+        app:backgroundTint="@color/color_base_welma"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/fl_main_forum"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_palette"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_for_50dp"
+                android:background="@drawable/ic_halo_bca" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_30dp"
+                android:layout_marginEnd="@dimen/size_for_30dp"
+                android:text="@string/banned_account"
+                android:textAlignment="center"
+                android:textColor="@color/white_palette"
+                android:textSize="@dimen/size_for_17sp" />
+        </LinearLayout>
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

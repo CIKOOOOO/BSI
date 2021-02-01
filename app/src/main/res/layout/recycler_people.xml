@@ -11,11 +11,12 @@
         android:layout_width="@dimen/size_for_50dp"
         android:layout_height="@dimen/size_for_50dp"
         android:layout_marginStart="@dimen/size_for_20dp"
-        android:background="@drawable/ic_no_img"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:riv_corner_radius="@dimen/size_for_10dp"
         app:riv_mutate_background="true"
-        app:riv_corner_radius="@dimen/size_for_10dp" />
+        tools:background="@drawable/ic_no_img" />
 
     <TextView
         android:id="@+id/recycler_tv_name_people"

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.basenavigation.transaction.sell_transaction.DetailSellActivity">
+
+    <include
+        android:id="@+id/include15"
+        layout="@layout/toolbar_back" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0dp"
+        app:layout_constraintBottom_toTopOf="@id/include9"
+        app:layout_constraintTop_toBottomOf="@+id/include15">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/include1"
+                layout="@layout/recycler_product_name_detail_product_transaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/size_for_10dp" />
+
+            <TextView
+                android:id="@+id/tv_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:gravity="center_vertical"
+                android:text="@string/rekening_tujuan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/include1" />
+
+            <TextView
+                android:id="@+id/tv_nomor_rekening_detail_sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:textColor="@color/java_palette"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/tv_01"
+                app:layout_constraintTop_toTopOf="@id/tv_01"
+                tools:text="5271517891" />
+
+            <TextView
+                android:id="@+id/tv_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:layout_marginTop="@dimen/size_for_10dp"
+                android:gravity="center_vertical"
+                android:text="@string/my_unit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_jumlah_unit_detail_sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_for_20dp"
+                android:textColor="@color/dark_gray_palette"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/tv_02"
+                app:layout_constraintTop_toTopOf="@id/tv_02"
+                tools:text="39,723" />
+
+            <TextView
+                android:id="@+id/tv_03"
+                android:layout_width="@dimen/size_for_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_for_20dp"
+                android:drawableStart="@drawable/ic_baseline_info_24_gray"
+                android:drawablePadding="@dimen/size_for_10dp"
+                android:gravity=""
+                android:text="@string/info_sell"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_02"
+                app:layout_constraintTop_toBottomOf="@id/tv_02" />
+
+            <TextView
+                android:id="@+id/tv_05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_for_20dp"
+                android:text="@string/jumlah_unit_penjualan"
+                app:layout_constraintStart_toStartOf="@id/tv_01"
+                app:layout_constraintTop_toBottomOf="@id/tv_03" />
+
+            <TextView
+                android:id="@+id/tv_06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/size_for_20dp"
+                android:text="@string/sell_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_05" />
+
+            <CheckBox
+                android:id="@+id/cb_sell_all_detail_transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/size_for_20dp"
+                android:buttonTint="@color/color_base_welma"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_06" />
+
+            <EditText
+                android:id="@+id/et_nominal_penjualan_detail_sell"
+                android:layout_width="@dimen/size_for_150dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/java_palette"
+                android:textSize="@dimen/size_for_15sp"
+                app:layout_constraintStart_toStartOf="@id/tv_05"
+                app:layout_constraintTop_toBottomOf="@id/tv_05" />
+
+            <TextView
+                android:id="@+id/tv_07"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_for_20dp"
+                android:background="@color/wild_sand_palette"
+                android:padding="@dimen/size_for_20dp"
+                android:text="@string/additional_information"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_palette"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_nominal_penjualan_detail_sell" />
+
+            <include
+                android:id="@+id/include3"
+                layout="@layout/custom_additional_information_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_07" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/include9"
+        layout="@layout/custom_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/btn_next_detail_sell" />
+
+    <Button
+        android:id="@+id/btn_next_detail_sell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light"
+        android:text="@string/next"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

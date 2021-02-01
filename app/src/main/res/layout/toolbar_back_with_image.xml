@@ -38,9 +38,18 @@
             android:layout_width="@dimen/size_for_25dp"
             android:layout_height="@dimen/size_for_25dp"
             android:layout_marginEnd="@dimen/size_for_20dp"
-            tools:background="@drawable/ic_download"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/ic_download" />
+
+        <ImageView
+            android:id="@+id/iv_red_dot_toolbar_back_with_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/oval_red"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/img_btn_action_toolbar_back_with_image"
+            app:layout_constraintTop_toTopOf="@id/img_btn_action_toolbar_back_with_image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.Toolbar>

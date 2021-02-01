@@ -22,6 +22,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_detail_transaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,24 +39,25 @@
                 android:weightSum="5">
 
                 <TextView
+                    android:id="@+id/tv_04_detail_transaction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:text="@string/product_name"
+                    android:text="@string/rekening_sumber_dana"
                     android:textSize="@dimen/size_for_15sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_product_name_detail_transaction"
+                    android:id="@+id/tv_rekening_sumber_dana_detail_pembelian"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/size_for_20dp"
                     android:layout_weight="3.5"
-                    tools:text="Danareksa Gebyar Indonesia II"
                     android:textColor="@color/java_palette"
                     android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="5271517891" />
             </LinearLayout>
 
             <LinearLayout
@@ -76,132 +84,10 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/size_for_20dp"
                     android:layout_weight="3.5"
-                    tools:text="Pembelian Sekali Bayar"
                     android:textColor="@color/java_palette"
                     android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_for_20dp"
-                android:layout_marginTop="@dimen/size_for_20dp"
-                android:layout_marginEnd="@dimen/size_for_20dp"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:text="@string/nominal_pembelian"
-                    android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_nominal_pembelian_detail_transaction"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/size_for_20dp"
-                    android:layout_weight="3.5"
-                    tools:text="Rp 100,000"
-                    android:textColor="@color/java_palette"
-                    android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_for_20dp"
-                android:layout_marginTop="@dimen/size_for_20dp"
-                android:layout_marginEnd="@dimen/size_for_20dp"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:text="@string/nominal_biaya_pembelian"
-                    android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_nominal_biaya_pembelian_detail_pembelian"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/size_for_20dp"
-                    android:layout_weight="3.5"
-                    tools:text="Rp 1.000 (1%)"
-                    android:textColor="@color/java_palette"
-                    android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_for_20dp"
-                android:layout_marginTop="@dimen/size_for_20dp"
-                android:layout_marginEnd="@dimen/size_for_20dp"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:text="@string/nominal_total_pembelian"
-                    android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_nominal_total_pembelian_detail_pembelian"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/size_for_20dp"
-                    android:layout_weight="3.5"
-                    tools:text="Rp 101.000,"
-                    android:textColor="@color/java_palette"
-                    android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_for_20dp"
-                android:layout_marginTop="@dimen/size_for_20dp"
-                android:layout_marginEnd="@dimen/size_for_20dp"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:text="@string/rekening_sumber_dana"
-                    android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_rekening_sumber_dana_detail_pembelian"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/size_for_20dp"
-                    android:layout_weight="3.5"
-                    tools:text="5271517891"
-                    android:textColor="@color/java_palette"
-                    android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="Pembelian Sekali Bayar" />
             </LinearLayout>
 
             <LinearLayout
@@ -228,40 +114,10 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/size_for_20dp"
                     android:layout_weight="3.5"
-                    tools:text="22/10/2020 13:40:23"
                     android:textColor="@color/java_palette"
                     android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_for_20dp"
-                android:layout_marginTop="@dimen/size_for_20dp"
-                android:layout_marginEnd="@dimen/size_for_20dp"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:text="@string/referensi_number"
-                    android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_referensi_number_detail_transaction"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/size_for_20dp"
-                    android:layout_weight="3.5"
-                    tools:text="W20201020120101021"
-                    android:textColor="@color/java_palette"
-                    android:textSize="@dimen/size_for_15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="22/10/2020 13:40:23" />
             </LinearLayout>
 
             <LinearLayout

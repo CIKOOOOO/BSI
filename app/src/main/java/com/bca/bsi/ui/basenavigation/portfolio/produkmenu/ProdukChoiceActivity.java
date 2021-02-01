@@ -68,8 +68,6 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
         viewModel.setCallback(this);
         viewModel.loadProducts(prefConfig.getProfileRisiko());
 
-
-
         // Toolbar variables
         backButton = findViewById(R.id.img_btn_back_toolbar);
         tvToolbarSubtitle = findViewById(R.id.tv_child_toolbar_back);
@@ -89,7 +87,6 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
 
 
         tvLanjut = findViewById(R.id.tv_lanjut);
-
 
         rec.setLayoutManager(new LinearLayoutManager(this));
         rec.setAdapter(produkChoiceAdapter);

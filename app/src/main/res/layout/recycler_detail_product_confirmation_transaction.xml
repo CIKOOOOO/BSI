@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_marginBottom="@dimen/size_for_20dp">
 
     <TextView
         android:id="@+id/recycler_tv_name_confirmation_transaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_for_20dp"
-        android:layout_marginTop="@dimen/size_for_20dp"
         android:text="Danareksa Gebyar Indonesia II"
         android:textSize="@dimen/size_for_17sp"
         android:textStyle="bold"
@@ -45,12 +45,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="3.5"
                 android:layout_marginStart="@dimen/size_for_10dp"
-                tools:text="Rp 100,000"
+                android:layout_weight="3.5"
                 android:textColor="@color/java_palette"
                 android:textSize="@dimen/size_for_15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="Rp 100,000" />
         </LinearLayout>
 
 
@@ -75,13 +75,13 @@
                 android:id="@+id/recycler_tv_nominal_biaya_pembelian_confirmation"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_for_10dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/size_for_10dp"
                 android:layout_weight="3.5"
-                tools:text="Rp 1.000 (1%)"
                 android:textColor="@color/java_palette"
                 android:textSize="@dimen/size_for_15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="Rp 1.000 (1%)" />
         </LinearLayout>
 
 
@@ -107,12 +107,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="3.5"
                 android:layout_marginStart="@dimen/size_for_10dp"
-                tools:text="Rp 101.000,"
+                android:layout_weight="3.5"
                 android:textColor="@color/java_palette"
                 android:textSize="@dimen/size_for_15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="Rp 101.000," />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

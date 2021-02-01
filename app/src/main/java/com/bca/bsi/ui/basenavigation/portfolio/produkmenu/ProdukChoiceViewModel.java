@@ -28,6 +28,9 @@ public class ProdukChoiceViewModel extends AndroidViewModel {
     }
 
     public void loadProducts(String profil_resiko){
+        if(profil_resiko.isEmpty()){
+            return;
+        }
         Call<OutputResponse> call = apiInterface.getReksaDanaData(Integer.parseInt(profil_resiko));
         call.enqueue(new Callback<OutputResponse>() {
             @Override
@@ -39,9 +42,9 @@ public class ProdukChoiceViewModel extends AndroidViewModel {
                     if(outputResponse.getErrorSchema().getErrorCode().equals("200")){
                         Log.e("c","tes3");
                         OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
-                        for (int i = 0; i < outputSchema.getReksaDanaList().size(); i++) {
-                            outputSchema.getReksaDanaList().get(i).setChoosen(false);
-                        }
+//                        for (int i = 0; i < outputSchema.getReksaDanaList().size(); i++) {
+//                            outputSchema.getReksaDanaList().get(i).setChoosen(false);
+//                        }
                         callback.onLoadData(outputSchema.getReksaDanaList());
                     } else {
                         Log.e("d","tes4");

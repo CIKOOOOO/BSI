@@ -7,7 +7,6 @@
     android:background="@color/white_palette"
     tools:context=".ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity">
 
-
     <include
         android:id="@+id/toolbar_back"
         layout="@layout/toolbar_back" />
@@ -15,10 +14,9 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_lanjut"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_back">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,16 +24,14 @@
 
             <TextView
                 android:id="@+id/tv_title_detail_produk"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_for_20dp"
                 android:layout_marginTop="@dimen/size_for_10dp"
-                android:layout_marginEnd="@dimen/size_for_20dp"
                 android:text="Detail Produk Rekomendasi SmartBot"
                 android:textColor="@color/black_palette"
                 android:textSize="@dimen/size_for_20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/size_for_20dp"
                 android:layout_marginTop="@dimen/size_for_20dp"
+                android:overScrollMode="never"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title_detail_produk" />
@@ -52,9 +49,9 @@
             <!--    RETURN-->
             <ImageView
                 android:id="@+id/img_return"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="@dimen/size_for_10dp"
+                android:layout_width="@dimen/size_for_25dp"
+                android:layout_height="@dimen/size_for_25dp"
+                android:layout_marginTop="@dimen/size_for_15dp"
                 android:src="@drawable/ic_return_robo"
                 app:layout_constraintStart_toStartOf="@id/recycler_product_main_p"
                 app:layout_constraintTop_toBottomOf="@id/recycler_product_main_p" />
@@ -83,13 +80,12 @@
                 app:layout_constraintBottom_toBottomOf="@id/img_return"
                 app:layout_constraintStart_toEndOf="@id/tv_return" />
 
-
             <!--RISK-->
             <ImageView
                 android:id="@+id/img_risk"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="@dimen/size_for_10dp"
+                android:layout_width="@dimen/size_for_25dp"
+                android:layout_height="@dimen/size_for_25dp"
+                android:layout_marginTop="@dimen/size_for_5dp"
                 android:src="@drawable/ic_risk_robo"
                 app:layout_constraintStart_toStartOf="@id/img_return"
                 app:layout_constraintTop_toBottomOf="@id/img_return" />
@@ -124,21 +120,22 @@
                 android:id="@+id/tv_nominal_pembelian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_for_50dp"
+                android:layout_marginTop="@dimen/size_for_10dp"
                 android:text="Nominal Pembelian"
                 android:textColor="@color/black_palette"
                 android:textSize="19sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/recycler_product_main_p"
-                app:layout_constraintTop_toBottomOf="@id/img_return" />
+                app:layout_constraintTop_toBottomOf="@id/img_risk" />
 
             <EditText
                 android:id="@+id/et_nominal_pembelian_robo"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/size_for_40dp"
                 android:layout_marginTop="@dimen/size_for_5dp"
                 android:background="@drawable/bg_textbox"
                 android:inputType="number"
+                android:padding="@dimen/size_for_5dp"
                 app:layout_constraintEnd_toEndOf="@id/recycler_product_main_p"
                 app:layout_constraintStart_toStartOf="@id/recycler_product_main_p"
                 app:layout_constraintTop_toBottomOf="@id/tv_nominal_pembelian" />
@@ -174,11 +171,12 @@
                 android:text="@string/disclaimer_purchasing_robo"
                 android:textColor="@color/black_palette"
                 android:textSize="@dimen/size_for_12sp"
-                app:layout_constraintBottom_toTopOf="@id/tv_lanjut"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_nominal_pembelian"
                 app:layout_constraintTop_toBottomOf="@id/tv_min_pembelian_title" />
 
             <CheckBox
+                android:id="@+id/cb_confirmation_purchasing_smartbot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_for_10dp"
@@ -188,34 +186,28 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_disclaimer" />
 
             <!--    BUTTON REKOMEN ROBO-->
-
             <ImageButton
                 android:id="@+id/ib_rekomen_robo"
-                android:layout_width="100dp"
-                android:layout_height="87dp"
-                android:layout_marginBottom="4dp"
+                android:layout_width="115dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="@dimen/size_for_10dp"
+                android:layout_marginBottom="@dimen/size_for_10dp"
                 android:background="@drawable/btn_rekomen_robo"
-                app:layout_constraintBottom_toTopOf="@id/tv_lanjut"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_lanjut"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_for_50dp"
-                android:layout_marginTop="@dimen/size_for_10dp"
-                android:background="@drawable/rectangle_yellow"
-                android:gravity="center"
-                android:text="LANJUT"
-                android:textColor="@color/black_palette"
-                android:textFontWeight="600"
-                android:textSize="@dimen/size_for_17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_disclaimer" />
-
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tv_lanjut"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_50dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        android:background="@drawable/rectangle_yellow"
+        android:text="@string/next"
+        style="@style/TextViewForButton"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <include
         android:id="@+id/popup_rekomen_robo"

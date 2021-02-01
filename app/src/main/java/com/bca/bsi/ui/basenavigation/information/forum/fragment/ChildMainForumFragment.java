@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.ui.basenavigation.information.forum.comment.CommentActivity;
+import com.bca.bsi.ui.basenavigation.information.forum.profile.ForumProfileActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.constant.Constant;
 
 import java.util.List;
 
-public class ChildMainForumFragment extends BaseFragment implements IChildMainForumCallback, ChildMainForumAdapter.onPostClick {
+public class ChildMainForumFragment extends BaseFragment implements IChildMainForumCallback, ChildMainForumAdapter.OnPostClick {
     private static final String PARCEL_DATA = "parcel_data";
 
     private ChildMainForumViewModel viewModel;
@@ -54,17 +57,19 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         viewModel.setCallback(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-//        recyclerView.addItemDecoration();
 
         Bundle bundle = getArguments();
         if (bundle != null) {
             String type = bundle.getString(PARCEL_DATA);
-            adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID());
-            adapter.setOnPostClick(this);
-            recyclerView.setAdapter(adapter);
-            viewModel.loadForumPost();
+            if (type != null) {
+                type = type.toLowerCase();
+                adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID(), this);
+//                Log.e("asd", "1st : "+type);
+                recyclerView.setAdapter(adapter);
+                viewModel.loadForumPost(type);
+//                Log.e("asd", "2nd : "+type);
+            }
         }
-
     }
 
     @Override
@@ -80,11 +85,38 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onDetailPost(String postID) {
-
+        Intent intent = new Intent(mActivity, CommentActivity.class);
+        intent.putExtra(CommentActivity.DATA, postID);
+        startActivity(intent);
     }
 
     @Override
     public void onPostLike(String postID) {
+
+    }
+
+    @Override
+    public void onReport(String postID) {
+
+    }
+
+    @Override
+    public void onSavedPost(String postID) {
+
+    }
+
+    @Override
+    public void onOtherProfile(String profileID) {
+
+    }
+
+    @Override
+    public void onMyProfile() {
+        startActivity(new Intent(mActivity, ForumProfileActivity.class));
+    }
+
+    @Override
+    public void onDetailNews(String newsID) {
 
     }
 }

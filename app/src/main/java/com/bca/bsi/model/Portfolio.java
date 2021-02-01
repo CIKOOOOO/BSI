@@ -55,6 +55,9 @@ public class Portfolio {
 
     public static class Information {
 
+        @SerializedName("reksa_dana_id")
+        private String reksadanaID;
+
         @SerializedName("nama_reksa_dana")
         private String name;
 
@@ -72,6 +75,9 @@ public class Portfolio {
 
         @SerializedName("profit")
         private Double raise;
+
+        @SerializedName("nab")
+        private Double nab;
 
         public Information() {
         }
@@ -99,6 +105,14 @@ public class Portfolio {
         public String getDate() {
             return date;
         }
+
+        public Double getNab() {
+            return nab;
+        }
+
+        public String getReksadanaID() {
+            return reksadanaID;
+        }
     }
 
     public static class History {
@@ -113,6 +127,8 @@ public class Portfolio {
         private String amount;
         @SerializedName("reksa_dana_unit")
         private String reksaDanaUnit;
+        @SerializedName("nab")
+        private Double nab;
 
         public History() {
         }
@@ -135,6 +151,10 @@ public class Portfolio {
 
         public String getReksaDanaUnit() {
             return reksaDanaUnit;
+        }
+
+        public Double getNab() {
+            return nab;
         }
     }
 }

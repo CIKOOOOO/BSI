@@ -44,9 +44,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/size_for_20dp"
-            android:text="Tentang SmartBot"
+            android:text="@string/about_smartbot"
             android:textColor="@color/white_palette"
-            android:textSize="22sp"
+            android:textSize="@dimen/size_for_25sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,24 +75,23 @@
 
         <TextView
             android:id="@+id/tv_oke"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_for_20dp"
+            android:layout_marginEnd="@dimen/size_for_20dp"
             android:layout_marginBottom="@dimen/size_for_40dp"
-            android:background="@drawable/rectangle_rounded_white"
-            android:paddingHorizontal="@dimen/size_for_40dp"
-            android:paddingVertical="@dimen/size_for_5dp"
-            android:text="Oke, mengerti"
+            android:background="@drawable/rectangle_rounded_white_5dp"
+            android:paddingTop="@dimen/size_for_10dp"
+            android:paddingBottom="@dimen/size_for_10dp"
+            android:text="@string/okay_understand"
+            android:textAlignment="center"
             android:textColor="@color/keppel_palette"
-            android:textSize="22sp"
+            android:textSize="@dimen/size_for_17sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

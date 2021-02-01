@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +40,15 @@ public class ProductNameDetailTransactionAdapter extends RecyclerView.Adapter<Pr
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         Product.ProductTransaction productTransaction = productTransactions.get(position);
         if (productTransaction != null) {
-            holder.tvName.setText(productTransaction.getName());
-            holder.tvDate.setText(productTransaction.getDate());
-            holder.tvPrice.setText(productTransaction.getPrice() + "\nNAB/Unit");
+            try {
+                String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, productTransaction.getDate());
+
+                holder.tvName.setText(productTransaction.getName());
+                holder.tvDate.setText(date);
+                holder.tvPrice.setText(productTransaction.getPrice() + "\nNAB/Unit");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 

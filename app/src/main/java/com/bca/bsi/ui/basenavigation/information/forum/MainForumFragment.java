@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -67,13 +68,19 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
         super.onViewCreated(view, savedInstanceState);
 
         FloatingActionButton floatingActionButton = view.findViewById(R.id.fab_main_forum);
+        if (prefConfig.isForumAccountBanned().equals("true")) {
+            FrameLayout frameLayout = view.findViewById(R.id.fl_main_forum);
+            frameLayout.setVisibility(View.VISIBLE);
+            floatingActionButton.hide();
+            frameLayout.setOnClickListener(this);
+        } else {
+            viewModel = new ViewModelProvider(this).get(MainForumViewModel.class);
+            viewModel.setCallback(this);
 
-        viewModel = new ViewModelProvider(this).get(MainForumViewModel.class);
-        viewModel.setCallback(this);
+            setupTab(view);
 
-        setupTab(view);
-
-        floatingActionButton.setOnClickListener(this);
+            floatingActionButton.setOnClickListener(this);
+        }
     }
 
     private void setupTab(View view) {

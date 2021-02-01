@@ -29,6 +29,7 @@ public class DurasiInvestasiViewModel extends AndroidViewModel {
         Utils utils = new Utils();
         int[] hasil = utils.getDuration(modalAwal,investBulanan,targetHasilInvestasi,ror);
         hasilStr = hasil[1]+" tahun "+hasil[0]+" bulan";
-        callback.kalkulasiOutput(hasilStr,utils.formatUang(targetHasilInvestasi),utils.formatUang(modalAwal),utils.formatUang(investBulanan),utils.formatDecimal(rorStr));
+        //callback.kalkulasiOutput(hasilStr,utils.formatUang(targetHasilInvestasi),utils.formatUang(modalAwal),utils.formatUang(investBulanan),utils.formatDecimal(rorStr));
+        callback.kalkulasiOutput(hasilStr,utils.formatUang(targetHasilInvestasi),utils.formatUang(modalAwal),utils.formatUang(investBulanan),rorStr);
     }
 }

@@ -10,7 +10,7 @@ public class Type {
     public static final String OBLIGASI_PASAR_PERDANA = "obligasi_pasar_perdana";
 
     public static final String PURCHASING = "beli";
-    public static final String SALES = "jual";
+    public static final String SELLING = "jual";
 
     public static final String NEWS = "news";
     public static final String PROMO = "promo";
@@ -18,13 +18,18 @@ public class Type {
     public static final String PEMBELIAN_BERKALA = "pembelian_berkala";
     public static final String PEMBELIAN_SEKALI_BAYAR = "pembelian_sekali_bayar";
 
+    public static final String PENJUALAN_SEMUA = "penjualan_semua";
+    public static final String PENJUALAN_SEBAGIAN = "penjualan_sebagian";
+
     public static final String PURCHASING_WITH_SMARTBOT = "purchasing_with_smartbot";
 
     public static final String FOLLOWING = "following";
     public static final String FOLLOWERS = "followers";
 
     public static final String TRENDING = "trending";
-    public static final String STRATEGI = "strategi";
-    public static final String SHARE_TRADE = "share_trade";
+    public static final String STRATEGY = "strategy";
+    public static final String SHARE_TRADE = "share trade";
     public static final String TIMELINE = "timeline";
+    public static final String REPOST_NEWS = "repost_news";
+    public static final String REPOST = "repost";
 }

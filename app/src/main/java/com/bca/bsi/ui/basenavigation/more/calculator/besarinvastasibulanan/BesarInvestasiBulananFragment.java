@@ -274,14 +274,29 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
             hasilBIB.setText(formatHasil);
             */
 
-        hasilBIB.setText(formatHasil);
-        if(spinnerDurasiBulanBIB.getSelectedItemPosition()==0 && spinnerDurasiTahunBIB.getSelectedItemPosition()==0
-        || Double.parseDouble(ETBIBROR.getText().toString()) <= 0){
-            rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
-            hasilBIB.setVisibility(View.INVISIBLE);
-        }else {
-            rpLabel.setText(getString(R.string.rp));
-            hasilBIB.setVisibility(View.VISIBLE);
+        switch (numbOfTabs){
+            case 3:
+                hasilBIB.setText(formatHasil);
+                if(spinnerDurasiBulanBIB.getSelectedItemPosition()==0 && spinnerDurasiTahunBIB.getSelectedItemPosition()==0){
+                    rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
+                    hasilBIB.setVisibility(View.INVISIBLE);
+                }else {
+                    rpLabel.setText(getString(R.string.rp));
+                    hasilBIB.setVisibility(View.VISIBLE);
+                }
+                break;
+
+            case 4:
+                hasilBIB.setText(formatHasil);
+                if(spinnerDurasiBulanBIB.getSelectedItemPosition()==0 && spinnerDurasiTahunBIB.getSelectedItemPosition()==0
+                        || Double.parseDouble(ETBIBROR.getText().toString()) <= 0){
+                    rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
+                    hasilBIB.setVisibility(View.INVISIBLE);
+                }else {
+                    rpLabel.setText(getString(R.string.rp));
+                    hasilBIB.setVisibility(View.VISIBLE);
+                }
+                break;
         }
     }
 }
