@@ -24,6 +24,13 @@ import java.util.List;
 public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSmartbotAdapter.Holder> {
 
     private List<ProductRekomen> productRekomenList = new ArrayList<>();
+    private onEventMatch onEventMatch;
+    public PurchasingSmartbotAdapter(PurchasingSmartbotAdapter.onEventMatch onEventMatch) {
+        this.onEventMatch = onEventMatch;
+    }
+    public interface onEventMatch {
+        void sendValue(String reksaDanaID, String proportion);
+    }
 
 
     public void setProductRekomenList(List<ProductRekomen> productRekomenList) {
@@ -122,15 +129,15 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
 
             @Override
             public void afterTextChanged(Editable s) {
-//                if (s.length() != 0) {
-//                    productRekomen.setPercentage(holder.etPercent.getText().toString());
-//                    if (is100()) {
-//                        //TODO HIT API reksaid + proportions
-//                        onEventMatch.sendValue(getReksaIds(), getProportions());
-//                    }
-//                } else {
-//                    holder.etPercent.setText("0");
-//                }
+                if (s.length() != 0) {
+                    productRekomen.setPercentage(holder.etPercent.getText().toString());
+                    if (is100()) {
+                        //TODO HIT API reksaid + proportions
+                        onEventMatch.sendValue(getReksaIds(), getProportions());
+                    }
+                } else {
+                    holder.etPercent.setText("0");
+                }
 
             }
         });

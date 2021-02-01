@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback, View.OnClickListener {
+public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback, View.OnClickListener, PurchasingSmartbotAdapter.onEventMatch {
 
     ImageButton rekomenRoboButton;
     ConstraintLayout roboHitungPopupLayout;
@@ -107,6 +107,8 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
             viewModel = new ViewModelProvider(this).get(PurchasingSmartbotViewModel.class);
             viewModel.setCallback(this);
             viewModel.loadBundle(prefConfig.getAccountNumber(), hasil, "");
+
+
         }
 
         //Toolbar variables
@@ -146,7 +148,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         tvHitungSekarang.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.loadBundle(prefConfig.getAccountNumber(), adapter.getReksaIds());
+//                viewModel.loadBundle(prefConfig.getAccountNumber(), adapter.getReksaIds());
                 roboHitungPopupLayout.setVisibility(View.GONE);
             }
         }));
@@ -158,15 +160,18 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         this.portfolio = bundles.get(0);
         adapter.setProductRekomenList(portfolio.getProductRekomenList());
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onLoadDataCustom(List<Portfolio> bundles) {
-        Portfolio portfolio = bundles.get(0);
         minPembelian.setText(portfolio.getMinPurchase());
         tvReturn.setText(portfolio.getExpReturn() + "%");
         tvRisk.setText(portfolio.getRisk());
     }
+
+//    @Override
+//    public void onLoadDataCustom(List<Portfolio> bundles) {
+//        Portfolio portfolio = bundles.get(0);
+//        minPembelian.setText(portfolio.getMinPurchase());
+//        tvReturn.setText(portfolio.getExpReturn() + "%");
+//        tvRisk.setText(portfolio.getRisk());
+//    }
 
     @Override
     public void onFail(String msg) {
@@ -194,5 +199,18 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
                 }
                 break;
         }
+    }
+
+    @Override
+    public void sendValue(String reksaDanaID, String proportion) {
+        viewModel.loadBundleCustom(prefConfig.getAccountNumber(),reksaDanaID,proportion);
+    }
+
+    @Override
+    public void onLoadDataCustom(List<Portfolio> bundles) {
+        this.portfolio = bundles.get(0);
+        minPembelian.setText(portfolio.getMinPurchase());
+        tvReturn.setText(portfolio.getExpReturn() + "%");
+        tvRisk.setText(portfolio.getRisk());
     }
 }
