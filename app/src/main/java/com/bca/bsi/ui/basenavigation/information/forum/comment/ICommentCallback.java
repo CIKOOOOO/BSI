@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ICommentCallback {
 
-    void onLoadComment(List<Forum.Comment> commentList);
+    void onLoadComment(Forum.Post post, List<Forum.Comment> commentList, int type);
 
     void onFailed(String msg);
 

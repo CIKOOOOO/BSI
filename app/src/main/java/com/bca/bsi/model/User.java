@@ -3,7 +3,7 @@ package com.bca.bsi.model;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
-    public static class ForumUser{
+    public static class ForumUser {
         @SerializedName("profile_id")
         private String profileID;
 
@@ -16,7 +16,7 @@ public class User {
         @SerializedName("follower_count")
         private String followerCount;
 
-        @SerializedName("img_profile")
+        @SerializedName(value = "img_profile", alternate = {"profile_picture"})
         private String imageProfile;
 
         @SerializedName("is_active")
@@ -56,7 +56,7 @@ public class User {
         }
     }
 
-    public static class WelmaUser{
+    public static class WelmaUser {
 
         @SerializedName("name")
         private String name;
@@ -104,9 +104,9 @@ public class User {
         }
     }
 
-    public static class BCAUser{
+    public static class BCAUser {
 
-        public static class Rekening{
+        public static class Rekening {
 
             @SerializedName("saldo")
             private String saldo;

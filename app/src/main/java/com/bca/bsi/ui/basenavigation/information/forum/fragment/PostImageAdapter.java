@@ -19,9 +19,18 @@ import java.util.List;
 
 public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Holder> {
     private List<Forum.Post.ImagePost> imageList;
+    private onImageClick onImageClick;
 
     public PostImageAdapter() {
         this.imageList = new ArrayList<>();
+    }
+
+    public interface onImageClick {
+        void onImageClickWith(String URl);
+    }
+
+    public void setOnImageClick(PostImageAdapter.onImageClick onImageClick) {
+        this.onImageClick = onImageClick;
     }
 
     public void setImageList(List<Forum.Post.ImagePost> imageList) {
@@ -70,6 +79,13 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Hold
                 holder.tv.setText("+" + amount);
             }
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onImageClick.onImageClickWith(imagePost.getImageURL());
+            }
+        });
     }
 
     @Override

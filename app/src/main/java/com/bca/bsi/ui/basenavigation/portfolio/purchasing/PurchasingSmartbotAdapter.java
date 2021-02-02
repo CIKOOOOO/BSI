@@ -20,6 +20,11 @@ import java.util.List;
 public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSmartbotAdapter.Holder> {
 
     private List<ProductRekomen> productRekomenList = new ArrayList<>();
+    private onEventMatch onEventMatch;
+
+    public PurchasingSmartbotAdapter(PurchasingSmartbotAdapter.onEventMatch onEventMatch) {
+        this.onEventMatch = onEventMatch;
+    }
 
     public void setProductRekomenList(List<ProductRekomen> productRekomenList) {
         this.productRekomenList = productRekomenList;
@@ -27,6 +32,10 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
 
     public List<ProductRekomen> getProductRekomenList() {
         return productRekomenList;
+    }
+
+    public interface onEventMatch {
+        void sendValue(String reksaDanaID, String proportion);
     }
 
     @NonNull
@@ -46,7 +55,7 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
         holder.etPercent.setText(productRekomen.getPercentage());
         holder.tvLastDate.setText(productRekomen.getLastDate());
 
-        if(productRekomenList.size()<=2){
+        if (productRekomenList.size() <= 2) {
             holder.ibClear.setVisibility(View.INVISIBLE);
             holder.ibClear.setEnabled(false);
         } else {
@@ -59,7 +68,7 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
             public void onClick(View v) {
                 String isiPercentString = holder.etPercent.getText().toString();
                 int nilaiPercent = Integer.parseInt(isiPercentString);
-                if(nilaiPercent<100) {
+                if (nilaiPercent < 100) {
                     nilaiPercent += 1;
                 }
                 isiPercentString = String.valueOf(nilaiPercent);
@@ -73,7 +82,7 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
             public void onClick(View v) {
                 String isiPercentString = holder.etPercent.getText().toString();
                 int nilaiPercent = Integer.parseInt(isiPercentString);
-                if(nilaiPercent>0) {
+                if (nilaiPercent > 0) {
                     nilaiPercent -= 1;
                 }
                 isiPercentString = String.valueOf(nilaiPercent);
@@ -85,7 +94,7 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
         holder.ibClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getItemCount()>1) {
+                if (getItemCount() > 1) {
                     productRekomenList.remove(position);
                 }
 
@@ -103,7 +112,7 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 char zero = '0';
-                if(holder.etPercent.getText().length()==2 && holder.etPercent.getText().charAt(0)==zero){
+                if (holder.etPercent.getText().length() == 2 && holder.etPercent.getText().charAt(0) == zero) {
                     holder.etPercent.setText("");
                 }
             }

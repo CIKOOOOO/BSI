@@ -90,6 +90,54 @@ public class Forum {
             this.statusShare = statusShare;
         }
 
+        public void setPostID(String postID) {
+            this.postID = postID;
+        }
+
+        public void setImageProfile(String imageProfile) {
+            this.imageProfile = imageProfile;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public void setLike(String like) {
+            this.like = like;
+        }
+
+        public void setComment(String comment) {
+            this.comment = comment;
+        }
+
+        public void setShare(String share) {
+            this.share = share;
+        }
+
+        public void setStatusLike(String statusLike) {
+            this.statusLike = statusLike;
+        }
+
+        public void setStatusShare(String statusShare) {
+            this.statusShare = statusShare;
+        }
+
+        public void setProfileID(String profileID) {
+            this.profileID = profileID;
+        }
+
         public String getImageProfile() {
             return imageProfile;
         }

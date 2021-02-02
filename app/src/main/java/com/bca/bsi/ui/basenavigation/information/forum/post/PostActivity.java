@@ -2,15 +2,12 @@ package com.bca.bsi.ui.basenavigation.information.forum.post;
 
 import android.Manifest;
 import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -40,9 +37,10 @@ import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.model.Privacy;
 import com.bca.bsi.model.PromoNews;
+import com.bca.bsi.ui.basenavigation.information.forum.post.direct.DirectShareActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.DecodeBitmap;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
-import com.bca.bsi.utils.ImageFilePath;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
 import com.bumptech.glide.Glide;
@@ -51,8 +49,8 @@ import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PostActivity extends BaseActivity implements PrivacyAdapter.onPrivacyClick, PostImageAdapter.onItemClick, View.OnClickListener, CategoryAdapter.onCategoryClick, IPostCallback {
@@ -82,10 +80,9 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
     private PromoNews promoNews;
     private Portfolio.Information information;
     private Portfolio.History history;
+    private Forum.Category category;
 
     private String type;
-
-    private String filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,7 +191,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                                 drawable = R.drawable.img_share_trade_down;
                             } else {
                                 value = getString(R.string.stay);
-                                drawable = R.drawable.img_share_trade_up;
+                                drawable = R.drawable.img_share_trade_stay;
                             }
                             tvTransactionType.setText(value);
                             tvNameShareTrade.setText(this.information.getName());
@@ -230,6 +227,10 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                         } else {
                             onBackPressed();
                         }
+                        break;
+                    case EDIT_POST:
+                        String data = intent.getStringExtra(DATA);
+                        viewModel.loadDetail(prefConfig.getTokenUser(), data);
                         break;
                 }
                 tvTitleToolbar.setText(titleToolbar);
@@ -343,16 +344,24 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                     && null != data) {
                 // Get the Image from data
                 if (data.getData() != null) {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+                    Bitmap bitmap = DecodeBitmap.decodeSampleBitmapFromUri(data.getData(), 70, 70, this);
                     imagesEncodedList.add(bitmap);
-                    filePath = ImageFilePath.getPath(this, data.getData());
                 } else {
                     if (data.getClipData() != null) {
                         ClipData mClipData = data.getClipData();
                         for (int i = 0; i < mClipData.getItemCount(); i++) {
                             ClipData.Item item = mClipData.getItemAt(i);
                             Uri uri = item.getUri();
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+//                            BitmapFactory.Options o = new BitmapFactory.Options();
+//                            o.inJustDecodeBounds = true;
+//                            BitmapFactory.decodeFile(getAbsolutePath(uri), o);
+//                            int imageHeight = o.outHeight;
+//                            int imageWidth = o.outWidth;
+//                            Bitmap bitmaps = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            Bitmap bitmap = DecodeBitmap.decodeSampleBitmapFromUri(uri, 70, 70, this);
+//                            Log.e("asd", "Bitmap before decode : " + bitmaps.getRowBytes() * bitmaps.getHeight());
+//                            Log.e("asd", "Bitmap after decode : " + bitmap.getRowBytes() * bitmap.getHeight());
                             imagesEncodedList.add(bitmap);
                         }
                     }
@@ -381,19 +390,78 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 bsCategory.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.bs_btn_update_choose_image:
-//                if (this.privacy.getName().equalsIgnoreCase("direct")) {
-//                    Intent intent = new Intent(this, DirectShareActivity.class);
-//                    startActivity(intent);
-//                }
+                HashMap<String, Object> createPostMap = new HashMap<>();
+                String content = etContent.getText().toString().trim();
+                String value;
+                if (content.isEmpty()) {
+                    showSnackBar("Mohon isi konten postingan");
+                } else if (null == this.category) {
+                    showSnackBar("Mohon pilih kategori postingan");
+                } else if (null == this.privacy) {
+                    showSnackBar("Mohon pilih kepada siapa Anda akan membagikan postingan");
+                } else {
+                    createPostMap.put("post_id_source", "");
+                    createPostMap.put("profile_id", prefConfig.getProfileID());
+                    createPostMap.put("post_privacy", this.privacy.getName());
+                    createPostMap.put("post_text", content);
+                    createPostMap.put("news_id", "");
+                    createPostMap.put("post_attachment", this.imagesEncodedList);
+                    createPostMap.put("post_category_id", this.category.getCategoryID());
+                    createPostMap.put("repost_from", "");
+                    createPostMap.put("visible_to_id", "");
+                    createPostMap.put("reksa_dana_id", "");
+                    createPostMap.put("transaction_type", "");
+                    createPostMap.put("share_trade_type", "");
 
-                viewModel.sendData(imagesEncodedList);
+                    switch (type) {
+                        case NEW_STANDARD_POST:
+                            break;
+                        case EDIT_POST:
+                            break;
+                        case SHARE_NEWS:
+                            createPostMap.put("news_id", this.promoNews.getNewsID());
+                            break;
+                        case SHARE_TRADE_INFORMATION:
+                            createPostMap.put("reksa_dana_id", this.information.getReksadanaID());
+                            if (this.information.getRaise() > 0) {
+                                value = getString(R.string.up);
+                            } else if (this.information.getRaise() < 0) {
+                                value = getString(R.string.down);
+                            } else {
+                                value = getString(R.string.stay);
+                            }
+                            createPostMap.put("transaction_type", value);
+                            createPostMap.put("share_trade_type", "information");
+
+                            break;
+                        case SHARE_TRADE_HISTORY:
+                            createPostMap.put("reksa_dana_id", this.history.getReksaDanaID());
+                            if (this.history.getTransactionType().equalsIgnoreCase("Pembelian")) {
+                                value = getString(R.string.buy);
+                            } else {
+                                value = getString(R.string.sell);
+                            }
+                            createPostMap.put("transaction_type", value);
+                            createPostMap.put("share_trade_type", "history");
+                            break;
+                    }
+
+                    if (this.privacy.getName().equalsIgnoreCase("direct")) {
+                        Intent intent = new Intent(this, DirectShareActivity.class);
+                        intent.putExtra(DirectShareActivity.DATA, createPostMap);
+                        startActivity(intent);
+                    } else {
+                        viewModel.sendNewPost(prefConfig.getTokenUser(), createPostMap);
+                    }
+//                    viewModel.sendData(imagesEncodedList);
+                }
                 break;
         }
     }
 
     @Override
     public void onItemCategoryChoose(Forum.Category category) {
-
+        this.category = category;
     }
 
     @Override
@@ -415,27 +483,8 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
         showSnackBar(msg);
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.PNG, 30, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
-    }
+    @Override
+    public void onSuccessPost() {
 
-    public static String getPath(Context context, Uri uri) {
-        String result = null;
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                int column_index = cursor.getColumnIndexOrThrow(proj[0]);
-                result = cursor.getString(column_index);
-            }
-            cursor.close();
-        }
-        if (result == null) {
-            result = "Not found";
-        }
-        return result;
     }
 }

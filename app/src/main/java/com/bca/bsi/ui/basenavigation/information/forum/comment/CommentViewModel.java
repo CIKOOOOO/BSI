@@ -8,6 +8,9 @@ import androidx.lifecycle.AndroidViewModel;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.utils.dummydata.DummyData;
+
+import java.util.ArrayList;
 
 public class CommentViewModel extends AndroidViewModel {
 
@@ -23,8 +26,9 @@ public class CommentViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadComment(String commentID){
+    public void loadData(String postID) {
 //        callback.onLoadComment();
+        callback.onLoadComment(DummyData.getPostShareTradeList().get(2), new ArrayList<Forum.Comment>(), CommentActivity.SHARE_TRADE);
     }
 
     public void onReport(Forum.Comment comment) {

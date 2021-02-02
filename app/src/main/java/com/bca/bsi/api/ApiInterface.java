@@ -88,4 +88,13 @@ public interface ApiInterface {
     @PUT
     Call<OutputResponse> setForumProfilePicture(@Url String url, @Header("token-user") String tokenUser
             , @Header("profile-id") String profileID, @Body String s);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("user")
+    Call<OutputResponse> getDirectUserList(@Header("token-user") String tokenUser, @Query("username") String username);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @POST("syalala")
+    Call<OutputResponse> sendNewPost(@Header("token-user") String tokenUser, @Body RequestBody requestBody);
+
 }

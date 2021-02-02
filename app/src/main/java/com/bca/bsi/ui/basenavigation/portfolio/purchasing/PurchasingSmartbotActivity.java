@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback, View.OnClickListener {
+public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback, View.OnClickListener, PurchasingSmartbotAdapter.onEventMatch {
 
     ImageButton rekomenRoboButton;
     ConstraintLayout roboHitungPopupLayout;
@@ -61,7 +61,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         cbAgreement = findViewById(R.id.cb_confirmation_purchasing_smartbot);
 
         // inisialisasi adapter dan recycler
-        adapter = new PurchasingSmartbotAdapter();
+        adapter = new PurchasingSmartbotAdapter(this);
         recyclerView = findViewById(R.id.recycler_product_main_p);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -156,6 +156,14 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
     }
 
     @Override
+    public void onLoadDataCustom(List<Portfolio> bundles) {
+        this.portfolio = bundles.get(0);
+        minPembelian.setText(portfolio.getMinPurchase());
+        tvReturn.setText(portfolio.getExpReturn() + "%");
+        tvRisk.setText(portfolio.getRisk());
+    }
+
+    @Override
     public void onFail(String msg) {
         showSnackBar(msg);
     }
@@ -181,5 +189,10 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
                 }
                 break;
         }
+    }
+
+    @Override
+    public void sendValue(String reksaDanaID, String proportion) {
+        viewModel.loadBundleCustom(prefConfig.getAccountNumber(), reksaDanaID, proportion);
     }
 }

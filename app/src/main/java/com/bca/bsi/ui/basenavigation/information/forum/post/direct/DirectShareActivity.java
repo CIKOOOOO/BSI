@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.post.direct;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +18,8 @@ import com.bca.bsi.R;
 import com.bca.bsi.model.User;
 import com.bca.bsi.utils.BaseActivity;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class DirectShareActivity extends BaseActivity implements IDirectShareCallback, View.OnClickListener, DirectShareAdapter.onUserClick {
@@ -25,6 +28,7 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
     private DirectShareViewModel viewModel;
     private DirectShareAdapter directShareAdapter, chosenUserAdapter;
     private RecyclerView recyclerChosenUser;
+    private HashMap<String, Object> hashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,13 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
 
         findViewById(R.id.tv_child_toolbar_back).setVisibility(View.GONE);
 
-        viewModel.loadUser("");
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(DATA)) {
+            this.hashMap = (HashMap<String, Object>) intent.getSerializableExtra(DATA);
+            viewModel.loadUser(prefConfig.getTokenUser(), "");
+        } else {
+            onBackPressed();
+        }
 
         etSearch.addTextChangedListener(textWatcher);
 
@@ -80,7 +90,7 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
 
         @Override
         public void afterTextChanged(Editable s) {
-            viewModel.loadUser(s.toString());
+            viewModel.loadUser(prefConfig.getTokenUser(), s.toString());
         }
     };
 
@@ -103,16 +113,22 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
     }
 
     @Override
+    public void onSuccessPost() {
+
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_btn_back_toolbar:
                 onBackPressed();
                 break;
             case R.id.btn_share_direct:
-                if (viewModel.getChosenUserList().size() == 0) {
+                if (viewModel.getChosenUserList().length == 0) {
                     showSnackBar("Mohon pilih user untuk melanjutkan");
                 } else {
-
+                    this.hashMap.put("visible_to_id", Arrays.toString(viewModel.getChosenUserList()));
+                    viewModel.sendNewPost(prefConfig.getTokenUser(), this.hashMap);
                 }
                 break;
         }
