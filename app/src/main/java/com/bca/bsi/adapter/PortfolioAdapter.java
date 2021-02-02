@@ -82,7 +82,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Hold
 
     @Override
     public int getItemCount() {
-        return portfolioList.size()+1;
+        return portfolioList.size();
     }
 
     static class Holder extends RecyclerView.ViewHolder {
