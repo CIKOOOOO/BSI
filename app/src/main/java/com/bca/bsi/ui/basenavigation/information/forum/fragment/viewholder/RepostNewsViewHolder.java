@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
+import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -71,7 +72,7 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         }
 
         Picasso.get()
-                .load(data.getImageProfile())
+                .load(Utils.imageURL(data.getImageProfile()))
                 .into(imgProfile);
 
         Forum.Post post = data.getPost();
@@ -82,11 +83,11 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         tvNews.setText(post.getPromoNews().getContent());
 
         Picasso.get()
-                .load(post.getImageProfile())
+                .load(Utils.imageURL(post.getImageProfile()))
                 .into(imgSourceProfile);
 
         Picasso.get()
-                .load(post.getPromoNews().getImage())
+                .load(Utils.imageURL(post.getPromoNews().getImage()))
                 .into(imgContentNews);
     }
 

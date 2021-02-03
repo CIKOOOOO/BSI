@@ -110,8 +110,6 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
 
         clBSReport.setLayoutParams(layoutParams);
 
-
-
         bsSmartBot = BottomSheetBehavior.from(clBSRoboRekomen);
         BOTTOM_SHEET_REPORT = BottomSheetBehavior.from(clBSReport);
         // lanjut bottom sheet

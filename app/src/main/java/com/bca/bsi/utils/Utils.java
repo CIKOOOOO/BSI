@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.bca.bsi.utils.constant.Constant;
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
@@ -48,6 +49,10 @@ public class Utils {
                 setupUI(innerView, activity);
             }
         }
+    }
+
+    public static String imageURL(String path) {
+        return Constant.BASE_URL + path;
     }
 
     public static String priceFormat(double totalPrice) {

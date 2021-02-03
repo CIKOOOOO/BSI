@@ -146,7 +146,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 
         if (!prefConfig.getImageProfile().isEmpty())
             Picasso.get()
-                    .load(prefConfig.getImageProfile())
+                    .load(Utils.imageURL(prefConfig.getImageProfile()))
                     .into(imgProfile);
 
         Intent intent = getIntent();

@@ -142,6 +142,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
             //BIKIN SWITCH CASE PRODUCT TYPE
             int productType = 0;
             intent.putExtra(DetailProductActivity.PRODUCT_TYPE,productType);
+            intent.putExtra(DetailProductActivity.PRODUCT_TYPE,1);
             startActivity(intent);
         }
     }

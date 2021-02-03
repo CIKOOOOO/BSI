@@ -10,8 +10,6 @@ import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.utils.dummydata.DummyData;
 
-import java.util.ArrayList;
-
 public class CommentViewModel extends AndroidViewModel {
 
     private ApiInterface apiInterface;
@@ -28,11 +26,38 @@ public class CommentViewModel extends AndroidViewModel {
 
     public void loadData(String postID) {
 //        callback.onLoadComment();
-        callback.onLoadComment(DummyData.getPostShareTradeList().get(2), new ArrayList<Forum.Comment>(), CommentActivity.SHARE_TRADE);
+        callback.onLoadComment(DummyData.getPostShareTradeList().get(1), DummyData.getCommentList(), CommentActivity.SHARE_TRADE);
     }
 
     public void onReport(Forum.Comment comment) {
+        callback.onLoadReport(DummyData.getReportList(), comment);
+    }
+
+    public void onReport(Forum.Post post) {
+        callback.onLoadReport(DummyData.getReportList(), post);
+    }
+
+    public void reportPostOrForumWith(Forum.Report report, String profileID, String token) {
 
     }
 
+    public void savePost(String postID) {
+
+    }
+
+    public void deletePost(String postID) {
+
+    }
+
+    public void likePost(String postID) {
+
+    }
+
+    public void sharePost(String postID) {
+
+    }
+
+    public void sendComment(String tokenUser, String profileID, String content) {
+
+    }
 }

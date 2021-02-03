@@ -263,6 +263,14 @@ public class Forum {
         public Comment() {
         }
 
+        public Comment(String commentID, String name, String date, String content, String image) {
+            this.commentID = commentID;
+            this.name = name;
+            this.date = date;
+            this.content = content;
+            this.image = image;
+        }
+
         public String getCommentID() {
             return commentID;
         }
@@ -346,6 +354,7 @@ public class Forum {
     public static class ShareTrade {
 
         private String shareTradeID, title, type, value, productName, date;
+        private String reksadanaID;
 
         public ShareTrade() {
         }
@@ -381,6 +390,10 @@ public class Forum {
 
         public String getDate() {
             return date;
+        }
+
+        public String getReksadanaID() {
+            return reksadanaID;
         }
     }
 

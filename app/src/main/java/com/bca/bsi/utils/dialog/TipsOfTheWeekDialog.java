@@ -20,7 +20,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.TipsOfTheWeek;
-import com.bca.bsi.utils.constant.Constant;
+import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -93,7 +93,7 @@ public class TipsOfTheWeekDialog extends DialogFragment implements View.OnClickL
 
         if (!tipsOfTheWeek.getImgURL().isEmpty())
             Picasso.get()
-                    .load(Constant.BASE_URL + "" + tipsOfTheWeek.getImgURL())
+                    .load(Utils.imageURL(tipsOfTheWeek.getImgURL()))
                     .into(imageView);
 
         tvTitle.setText(tipsOfTheWeek.getTitle());

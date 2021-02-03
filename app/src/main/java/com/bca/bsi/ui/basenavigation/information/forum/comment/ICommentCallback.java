@@ -11,4 +11,7 @@ public interface ICommentCallback {
     void onFailed(String msg);
 
     void onSuccessReport();
+
+    void onLoadReport(List<Forum.Report> reportList, Forum.Comment comment);
+    void onLoadReport(List<Forum.Report> reportList, Forum.Post post);
 }

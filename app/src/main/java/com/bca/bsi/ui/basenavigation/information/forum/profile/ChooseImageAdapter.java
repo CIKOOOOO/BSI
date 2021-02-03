@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class ChooseImageAdapter extends RecyclerView.Adapter<ChooseImageAdapter.
 //        holder.constraintLayout.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         Picasso.get()
-                .load(imageList.get(position).getImgURL())
+                .load(Utils.imageURL(imageList.get(position).getImgURL()))
                 .into(imageView);
 
         int visibility = position == lastPosition ? View.VISIBLE : View.GONE;

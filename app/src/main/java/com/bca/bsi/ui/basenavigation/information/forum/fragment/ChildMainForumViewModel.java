@@ -18,6 +18,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
 
     private ApiInterface apiInterface;
     private IChildMainForumCallback callback;
+    private int page;
 
     public void setCallback(IChildMainForumCallback callback) {
         this.callback = callback;
@@ -28,38 +29,40 @@ public class ChildMainForumViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadForumPost(String type) {
-        List<Forum.Post> postList = new ArrayList<>();
-        switch (type.toLowerCase()) {
-            case Type.TRENDING:
-                postList.addAll(DummyData.getPostNewsList());
-                postList.addAll(DummyData.getPostShareTradeList());
-                postList.addAll(DummyData.getPostStrategyList());
-                callback.onLoadData(postList);
-                break;
-            case Type.STRATEGY:
-                postList.addAll(DummyData.getRepostGeneralList());
-                postList.addAll(DummyData.getPostStrategyList());
-                callback.onLoadData(postList);
-                break;
-            case Type.SHARE_TRADE:
-                callback.onLoadData(DummyData.getPostShareTradeList());
-                break;
-            case Type.NEWS:
-                postList.addAll(DummyData.getRepostNewsList());
-                postList.addAll(DummyData.getPostNewsList());
-                callback.onLoadData(postList);
-                break;
-            case Type.TIMELINE:
-                postList.addAll(DummyData.getPostStrategyList());
-                postList.addAll(DummyData.getRepostNewsList());
-                postList.addAll(DummyData.getPostShareTradeList());
-                postList.addAll(DummyData.getRepostGeneralList());
-                postList.addAll(DummyData.getPostNewsList());
-                callback.onLoadData(postList);
-                break;
+    public void loadForumPost(String type, int page) {
+        if(this.page != page){
+            this.page = page;
+            List<Forum.Post> postList = new ArrayList<>();
+            switch (type.toLowerCase()) {
+                case Type.TRENDING:
+                    postList.addAll(DummyData.getPostNewsList());
+                    postList.addAll(DummyData.getPostShareTradeList());
+                    postList.addAll(DummyData.getPostStrategyList());
+                    callback.onLoadData(postList);
+                    break;
+                case Type.STRATEGY:
+                    postList.addAll(DummyData.getRepostGeneralList());
+                    postList.addAll(DummyData.getPostStrategyList());
+                    callback.onLoadData(postList);
+                    break;
+                case Type.SHARE_TRADE:
+                    callback.onLoadData(DummyData.getPostShareTradeList());
+                    break;
+                case Type.NEWS:
+                    postList.addAll(DummyData.getRepostNewsList());
+                    postList.addAll(DummyData.getPostNewsList());
+                    callback.onLoadData(postList);
+                    break;
+                case Type.TIMELINE:
+                    postList.addAll(DummyData.getPostStrategyList());
+                    postList.addAll(DummyData.getRepostNewsList());
+                    postList.addAll(DummyData.getPostShareTradeList());
+                    postList.addAll(DummyData.getRepostGeneralList());
+                    postList.addAll(DummyData.getPostNewsList());
+                    callback.onLoadData(postList);
+                    break;
+            }
         }
-
     }
 
     public void loadReportData(){

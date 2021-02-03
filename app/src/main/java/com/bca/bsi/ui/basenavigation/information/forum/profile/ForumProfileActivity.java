@@ -29,6 +29,7 @@ import com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.bookmark
 import com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.posting.PostingFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
+import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.dummydata.DummyData;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -272,13 +273,13 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
 
         if (!user.getImgProfileUrl().isEmpty()) {
             Picasso.get()
-                    .load(user.getImgProfileUrl())
+                    .load(Utils.imageURL(user.getImgProfileUrl()))
                     .into(imageProfile);
         }
 
         if (!user.getImgBackgroundUrl().isEmpty()) {
             Picasso.get()
-                    .load(user.getImgBackgroundUrl())
+                    .load(Utils.imageURL(user.getImgBackgroundUrl()))
                     .into(imgHeader);
         }
 

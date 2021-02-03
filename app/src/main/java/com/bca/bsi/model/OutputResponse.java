@@ -99,6 +99,9 @@ public class OutputResponse {
         @SerializedName("list_users")
         private List<User.ForumUser> directUserList;
 
+        @SerializedName("list_news")
+        private List<PromoNews> promoNewsList;
+
         public OutputSchema() {
         }
 
@@ -172,6 +175,10 @@ public class OutputResponse {
 
         public List<User.ForumUser> getDirectUserList() {
             return directUserList;
+        }
+
+        public List<PromoNews> getPromoNewsList() {
+            return promoNewsList;
         }
     }
 }

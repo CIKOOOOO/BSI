@@ -64,7 +64,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
         if (!post.getImageProfile().isEmpty()) {
             Picasso.get()
-                    .load(post.getImageProfile())
+                    .load(Utils.imageURL(post.getImageProfile()))
                     .into(roundedImageView);
         }
 

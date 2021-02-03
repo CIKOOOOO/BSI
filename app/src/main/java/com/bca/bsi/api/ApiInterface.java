@@ -97,4 +97,11 @@ public interface ApiInterface {
     @POST("syalala")
     Call<OutputResponse> sendNewPost(@Header("token-user") String tokenUser, @Body RequestBody requestBody);
 
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("news")
+    Call<OutputResponse> getListDetailNews(@Header("token-user") String tokenUser);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("news/{news_id}")
+    Call<OutputResponse> getListDetailNews(@Header("token-user") String tokenUser, @Path("news_id") String newsID);
 }

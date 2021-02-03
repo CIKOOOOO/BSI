@@ -67,7 +67,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         if (!post.getImageProfile().isEmpty())
             Picasso.get()
-                    .load(post.getImageProfile())
+                    .load(Utils.imageURL(post.getImageProfile()))
                     .into(roundedProfile);
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
@@ -93,7 +93,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         tvContentNews.setText(Utils.removeEnter(promoNews.getContent()));
 
         Picasso.get()
-                .load(promoNews.getImage())
+                .load(Utils.imageURL(promoNews.getImage()))
                 .into(imgNews);
 
         itemView.setOnClickListener(v -> onPostClick.onDetailPost(post.getPostID()));

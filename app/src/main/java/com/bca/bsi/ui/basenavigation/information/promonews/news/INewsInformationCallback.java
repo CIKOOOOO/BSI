@@ -7,4 +7,6 @@ import java.util.List;
 public interface INewsInformationCallback {
 
     void resultOf(List<PromoNews> promoNewsList);
+
+    void onFailed(String msg);
 }
