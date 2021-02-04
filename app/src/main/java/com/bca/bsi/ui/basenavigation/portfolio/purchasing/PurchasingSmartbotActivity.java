@@ -105,7 +105,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
             //TODO hit API dari sini
             viewModel = new ViewModelProvider(this).get(PurchasingSmartbotViewModel.class);
             viewModel.setCallback(this);
-            viewModel.loadBundle(prefConfig.getAccountNumber(), hasil, "");
+            viewModel.loadBundle(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), hasil, "");
         }
 
         //Toolbar variables
@@ -193,6 +193,6 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
 
     @Override
     public void sendValue(String reksaDanaID, String proportion) {
-        viewModel.loadBundleCustom(prefConfig.getAccountNumber(), reksaDanaID, proportion);
+        viewModel.loadBundleCustom(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), reksaDanaID, proportion);
     }
 }

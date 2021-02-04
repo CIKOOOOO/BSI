@@ -28,37 +28,37 @@ public class MateriQuizViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void getScoreData(String bcaId, String categoryId){
-        Call<OutputResponse> call = apiInterface.getUserScore(Integer.parseInt(categoryId),bcaId);
+    public void getScoreData(String token, String bcaId, String categoryId) {
+        Call<OutputResponse> call = apiInterface.getUserScore(token, Integer.parseInt(categoryId), bcaId);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                if(response.body() != null){
+                if (response.body() != null) {
                     System.out.println("INI RESPONSE BODY TIDAK SAMA DENGAN NULL");
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
 
-                    if(errorSchema.getErrorCode().equals("200")){
+                    if (errorSchema.getErrorCode().equals("200")) {
                         System.out.println("INI ERROR SCHEMA NYA 200");
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         KuisData.UserScore userScore = outputSchema.getUserScore();
 
-                        if(userScore != null){
+                        if (userScore != null) {
                             System.out.println("DATAA ADAAAAAAAAAAAAAAAAAAAAAA");
                             callback.onRetriveData(userScore);
-                        }else {
+                        } else {
                             callback.onFailed("Data is null");
                         }
 
-                    }else if(errorSchema.getErrorCode().equals("500")){
+                    } else if (errorSchema.getErrorCode().equals("500")) {
                         KuisData.UserScore userScore = null;
                         callback.onRetriveData(userScore);
-                    }else {
+                    } else {
                         System.out.println("ERROR SCHEMA NDA 200");
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
 
-                }else {
+                } else {
                     System.out.println("Ini data null");
                     callback.onFailed("Jaringan Anda hilang");
                 }
@@ -66,7 +66,7 @@ public class MateriQuizViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
-                System.out.println("nda masuk ke API"+ t.getMessage());
+                System.out.println("nda masuk ke API" + t.getMessage());
                 callback.onFailed("Jaringan Anda hilang");
             }
         });

@@ -41,34 +41,34 @@ public class PostViewModel extends AndroidViewModel {
         callback.onLoadCategoryData(DummyData.getCategoryList());
     }
 
-    public void sendData(List<Bitmap> bitmapList) {
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        for (Bitmap bitmap : bitmapList) {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 30, bos);
-
-            builder.addFormDataPart("images", "lalala", RequestBody.create(MultipartBody.FORM, bos.toByteArray()));
-        }
-
-        RequestBody requestBody = builder.build();
-        Call<OutputResponse> call = apiInterface.sendData(requestBody);
-        call.enqueue(new Callback<OutputResponse>() {
-            @Override
-            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("asd", "response " + Utils.toJSON(response.body()));
-//                try {
-//                    Log.e("asd", "response " + response.errorBody().string());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-            }
-
-            @Override
-            public void onFailure(Call<OutputResponse> call, Throwable t) {
-                Log.e("asd", "On Failure : " + t.getMessage());
-            }
-        });
-    }
+//    public void sendData(List<Bitmap> bitmapList) {
+//        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+//        for (Bitmap bitmap : bitmapList) {
+//            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 30, bos);
+//
+//            builder.addFormDataPart("images", "lalala", RequestBody.create(MultipartBody.FORM, bos.toByteArray()));
+//        }
+//
+//        RequestBody requestBody = builder.build();
+//        Call<OutputResponse> call = apiInterface.sendData(requestBody);
+//        call.enqueue(new Callback<OutputResponse>() {
+//            @Override
+//            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+//                Log.e("asd", "response " + Utils.toJSON(response.body()));
+////                try {
+////                    Log.e("asd", "response " + response.errorBody().string());
+////                } catch (IOException e) {
+////                    e.printStackTrace();
+////                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<OutputResponse> call, Throwable t) {
+//                Log.e("asd", "On Failure : " + t.getMessage());
+//            }
+//        });
+//    }
 
     public void loadDetail(String token, String postID) {
 

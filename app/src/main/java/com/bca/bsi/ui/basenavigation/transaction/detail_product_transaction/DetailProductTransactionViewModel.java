@@ -1,7 +1,6 @@
 package com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -9,8 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,8 +29,8 @@ public class DetailProductTransactionViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadDetailTransaksi(String nomorRekening, String reksaDanaID) {
-        Call<OutputResponse> call = apiInterface.getDetailTransaksi(reksaDanaID, nomorRekening);
+    public void loadDetailTransaksi(String token, String nomorRekening, String reksaDanaID) {
+        Call<OutputResponse> call = apiInterface.getDetailTransaksi(token, reksaDanaID, nomorRekening);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {

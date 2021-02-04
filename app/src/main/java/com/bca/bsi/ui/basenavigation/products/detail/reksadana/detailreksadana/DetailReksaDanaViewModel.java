@@ -31,10 +31,10 @@ public class DetailReksaDanaViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadDetailReksaDana(int reksaDanaID) {
+    public void loadDetailReksaDana(String token, int reksaDanaID) {
         List<Product.Performance> performanceList = new ArrayList<>();
 
-        Call<OutputResponse> call = apiInterface.getDetailReksaDana(reksaDanaID);
+        Call<OutputResponse> call = apiInterface.getDetailReksaDana(token, reksaDanaID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {

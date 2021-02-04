@@ -69,7 +69,7 @@ public class DetailSellActivity extends BaseActivity implements View.OnClickList
             tvNab.setText("Rp " + information.getNab() + "\nNAB/Unit");
             tvAccountNumber.setText(prefConfig.getAccountNumber());
             tvJumlahUnit.setText(String.valueOf(information.getUnit()));
-            viewModel.loadData(information.getReksadanaID());
+            viewModel.loadData(prefConfig.getTokenUser(), information.getReksadanaID());
             this.reksadanaID = information.getReksadanaID();
 
             try {
@@ -96,7 +96,7 @@ public class DetailSellActivity extends BaseActivity implements View.OnClickList
                 if (amount.isEmpty()) {
                     showSnackBar("Mohon isi jumlah unit penjualan");
                 } else if (null == this.detailReksaDana) {
-                    viewModel.loadData(reksadanaID);
+                    viewModel.loadData(prefConfig.getTokenUser(), reksadanaID);
                 } else {
                     double nominal = Double.parseDouble(amount) * Double.parseDouble(this.detailReksaDana.getNabPerUnit());
                     String type = cbSellAll.isChecked() ? "Penjualan Semua" : "Penjualan Sebagian";
