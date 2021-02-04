@@ -25,14 +25,13 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
 
     private List<ProductRekomen> productRekomenList = new ArrayList<>();
     private onEventMatch onEventMatch;
-
-    public interface onEventMatch {
-        void sendValue(String ids, String proportion);
-    }
-
     public PurchasingSmartbotAdapter(PurchasingSmartbotAdapter.onEventMatch onEventMatch) {
         this.onEventMatch = onEventMatch;
     }
+    public interface onEventMatch {
+        void sendValue(String reksaDanaID, String proportion);
+    }
+
 
     public void setProductRekomenList(List<ProductRekomen> productRekomenList) {
         this.productRekomenList = productRekomenList;

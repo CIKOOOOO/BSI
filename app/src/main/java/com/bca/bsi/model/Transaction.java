@@ -196,6 +196,7 @@ public class Transaction {
         public TransactionResult() {
         }
 
+
         protected TransactionResult(Parcel in) {
             productName = in.readString();
             paymentType = in.readString();
@@ -251,21 +252,22 @@ public class Transaction {
             return referenceNumber;
         }
 
+
         @Override
         public int describeContents() {
             return 0;
         }
 
         @Override
-        public void writeToParcel(Parcel parcel, int i) {
-            parcel.writeString(productName);
-            parcel.writeString(paymentType);
-            parcel.writeString(nominalTransaksi);
-            parcel.writeString(nominalBiayaTransaksi);
-            parcel.writeString(nominalTotalTransaksi);
-            parcel.writeString(rekeningSumberDana);
-            parcel.writeString(transactionTime);
-            parcel.writeString(referenceNumber);
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(productName);
+            dest.writeString(paymentType);
+            dest.writeString(nominalTransaksi);
+            dest.writeString(nominalBiayaTransaksi);
+            dest.writeString(nominalTotalTransaksi);
+            dest.writeString(rekeningSumberDana);
+            dest.writeString(transactionTime);
+            dest.writeString(referenceNumber);
         }
     }
 

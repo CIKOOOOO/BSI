@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
@@ -21,6 +21,7 @@ import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.ui.basenavigation.portfolio.information.InformasiHistoryActivity;
 import com.bca.bsi.ui.basenavigation.portfolio.produkmenu.ProdukChoiceActivity;
 import com.bca.bsi.utils.BaseFragment;
+import com.bca.bsi.utils.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
     private ProgressBar progressBar;
     private ImageButton infoButton;
     private TextView reksaSelector, tvPercentReksadana;
+    private ImageButton customBundleButton;
 
     private PortfolioViewModel portfolioViewModel;
 
@@ -85,14 +87,25 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         super.onViewCreated(view, savedInstanceState);
         //recycler robo
         RecyclerView recyclerView = view.findViewById(R.id.recycler_robo_main);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.HORIZONTAL, false));
         adapter = new PortfolioAdapter(this);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 0, true));
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
         recyclerView.setAdapter(adapter);
 //        adapter.setPortfolioList(getPortfolioList());
 
         portfolioViewModel = new ViewModelProvider(this).get(PortfolioViewModel.class);
         portfolioViewModel.setCallback(this);
         portfolioViewModel.loadBundle(prefConfig.getTokenUser(), prefConfig.getProfileRisiko(), prefConfig.getAccountNumber());
+
+        // custom bundle button
+        customBundleButton = view.findViewById(R.id.ib_custom_bundle);
+        customBundleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ProdukChoiceActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
 
         //info robo

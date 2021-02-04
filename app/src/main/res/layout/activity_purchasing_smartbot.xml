@@ -24,16 +24,14 @@
 
             <TextView
                 android:id="@+id/tv_title_detail_produk"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_for_20dp"
                 android:layout_marginTop="@dimen/size_for_10dp"
-                android:layout_marginEnd="@dimen/size_for_20dp"
                 android:text="Detail Produk Rekomendasi SmartBot"
                 android:textColor="@color/black_palette"
                 android:textSize="@dimen/size_for_20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,7 +120,7 @@
                 android:id="@+id/tv_nominal_pembelian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_for_50dp"
+                android:layout_marginTop="@dimen/size_for_10dp"
                 android:text="Nominal Pembelian"
                 android:textColor="@color/black_palette"
                 android:textSize="19sp"
@@ -188,12 +186,12 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_disclaimer" />
 
             <!--    BUTTON REKOMEN ROBO-->
-
             <ImageButton
                 android:id="@+id/ib_rekomen_robo"
-                android:layout_width="100dp"
-                android:layout_height="87dp"
-                android:layout_marginBottom="4dp"
+                android:layout_width="115dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="@dimen/size_for_10dp"
+                android:layout_marginBottom="@dimen/size_for_10dp"
                 android:background="@drawable/btn_rekomen_robo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
