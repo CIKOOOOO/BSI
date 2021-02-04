@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.User;
+import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -58,7 +59,7 @@ public class DirectShareAdapter extends RecyclerView.Adapter<DirectShareAdapter.
 
         holder.tvName.setText(forumUser.getUsername());
         Picasso.get()
-                .load(forumUser.getImageProfile())
+                .load(Utils.imageURL(forumUser.getImageProfile()))
                 .into(holder.rivImage);
 
         if (getItemViewType(position) == 0) {

@@ -131,6 +131,7 @@
                 android:layout_width="@dimen/size_for_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_for_10dp"
+                android:overScrollMode="never"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -179,6 +180,7 @@
         tools:text="32" />
 
     <View
+        android:id="@+id/recycler_view_01"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_for_0.5dp"
         android:layout_marginTop="@dimen/size_for_20dp"

@@ -57,8 +57,9 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         showSnackBar(msg);
     }
 
-    public interface onBundleClick{
+    public interface onBundleClick {
         void onItemClick(Portfolio portfolio);
+
         void onInfoClick();
     }
 
@@ -91,7 +92,7 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
 
         portfolioViewModel = new ViewModelProvider(this).get(PortfolioViewModel.class);
         portfolioViewModel.setCallback(this);
-        portfolioViewModel.loadBundle(prefConfig.getProfileRisiko(),prefConfig.getAccountNumber());
+        portfolioViewModel.loadBundle(prefConfig.getTokenUser(), prefConfig.getProfileRisiko(), prefConfig.getAccountNumber());
 
 
         //info robo
@@ -116,7 +117,7 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         // setting progressbar percentage
         tvPercentReksadana = view.findViewById(R.id.tv_percent_reksadana);
         int percentReksaValue = 100;
-        tvPercentReksadana.setText(percentReksaValue+"%");
+        tvPercentReksadana.setText(percentReksaValue + "%");
         ProgressBar progressBar_reksa = view.findViewById(R.id.percent_reksadana);
         progressBar_reksa.setProgress(percentReksaValue);
 
@@ -127,8 +128,8 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
 
     private List<Portfolio> getPortfolioList() {
         List<Portfolio> portfolioList = new ArrayList<>();
-        portfolioList.add(new Portfolio("1%", "0.02","Bundle 1"));
-        portfolioList.add(new Portfolio("3%", "0.04","Bundle 2"));
+        portfolioList.add(new Portfolio("1%", "0.02", "Bundle 1"));
+        portfolioList.add(new Portfolio("3%", "0.04", "Bundle 2"));
         return portfolioList;
     }
 }

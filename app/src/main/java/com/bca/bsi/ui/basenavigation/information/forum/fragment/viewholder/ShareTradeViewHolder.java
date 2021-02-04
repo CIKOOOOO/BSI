@@ -64,7 +64,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
         if (!post.getImageProfile().isEmpty()) {
             Picasso.get()
-                    .load(post.getImageProfile())
+                    .load(Utils.imageURL(post.getImageProfile()))
                     .into(roundedImageView);
         }
 
@@ -95,11 +95,11 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
                 if (Double.parseDouble(shareTrade.getValue()) == 0) {
                     value = Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
-                    background = R.drawable.rectangle_rounded_stroke_ziggurat;
+                    background = R.drawable.rectangle_rounded_stroke_fringy_flower;
                 } else if (Double.parseDouble(shareTrade.getValue()) < 0) {
                     value = Utils.formatUang3(Double.parseDouble(shareTrade.getValue())) + "%";
                     tvValueShareTrade.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_black_down, 0, 0, 0);
-                    background = R.drawable.rectangle_rounded_stroke_cherokee;
+                    background = R.drawable.rectangle_rounded_stroke_your_pink;
                 } else {
                     value = "+" + Utils.formatUang3(Double.parseDouble(shareTrade.getValue())) + "%";
                     tvValueShareTrade.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_black_up, 0, 0, 0);

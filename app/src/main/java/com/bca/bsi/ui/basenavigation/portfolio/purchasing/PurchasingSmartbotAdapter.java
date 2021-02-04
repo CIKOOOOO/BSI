@@ -42,6 +42,10 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
         return productRekomenList;
     }
 
+    public interface onEventMatch {
+        void sendValue(String reksaDanaID, String proportion);
+    }
+
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -18,7 +18,6 @@ import com.bca.bsi.ui.basenavigation.information.promonews.PromoNewsAdapter;
 import com.bca.bsi.ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
-import com.bca.bsi.utils.constant.Type;
 
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class NewsInformationFragment extends BaseFragment implements PromoNewsAd
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(promoNewsAdapter);
 
-        viewModel.getNewsList();
+        viewModel.getNewsList(prefConfig.getTokenUser());
     }
 
     @Override
@@ -69,5 +68,10 @@ public class NewsInformationFragment extends BaseFragment implements PromoNewsAd
     public void resultOf(List<PromoNews> promoNews) {
         this.promoNewsAdapter.setPromoNewsList(promoNews);
         this.promoNewsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailed(String msg) {
+        showSnackBar(msg);
     }
 }

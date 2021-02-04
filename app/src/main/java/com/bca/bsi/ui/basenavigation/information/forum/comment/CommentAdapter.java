@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -55,7 +56,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
             holder.tvName.setText(comment.getName());
             holder.tvContent.setText(comment.getContent());
             Picasso.get()
-                    .load(comment.getImage())
+                    .load(Utils.imageURL(comment.getImage()))
                     .into(holder.roundedImageView);
             holder.tvDate.setText(comment.getDate());
         }

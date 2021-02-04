@@ -10,8 +10,6 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 
-import java.io.IOException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,9 +27,9 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadBundle(String no_rekening, String reksa_id, String proportion) {
+    public void loadBundle(String token, String no_rekening, String reksa_id, String proportion) {
         Log.e("asd", reksa_id);
-        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(no_rekening, reksa_id, proportion);
+        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(token, no_rekening, reksa_id, proportion);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
@@ -92,6 +90,7 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
+                Log.e("asd", "tes6");
                 callback.onFail("Mohon periksa jaringan anda");
             }
         });

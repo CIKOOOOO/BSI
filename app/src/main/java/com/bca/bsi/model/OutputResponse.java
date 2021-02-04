@@ -96,6 +96,12 @@ public class OutputResponse {
         @SerializedName("picture_list")
         private List<Forum.ProfilePicture> profilePictureList;
 
+        @SerializedName("list_users")
+        private List<User.ForumUser> directUserList;
+
+        @SerializedName("list_news")
+        private List<PromoNews> promoNewsList;
+
         public OutputSchema() {
         }
 
@@ -165,6 +171,14 @@ public class OutputResponse {
 
         public List<Forum.ProfilePicture> getProfilePictureList() {
             return profilePictureList;
+        }
+
+        public List<User.ForumUser> getDirectUserList() {
+            return directUserList;
+        }
+
+        public List<PromoNews> getPromoNewsList() {
+            return promoNewsList;
         }
     }
 }

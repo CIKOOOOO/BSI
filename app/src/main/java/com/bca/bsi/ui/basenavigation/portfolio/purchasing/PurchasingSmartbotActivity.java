@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback, View.OnClickListener {
+public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback, View.OnClickListener, PurchasingSmartbotAdapter.onEventMatch {
 
     ImageButton rekomenRoboButton;
     ConstraintLayout roboHitungPopupLayout;
@@ -106,7 +106,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
             //hit API dari sini
             viewModel = new ViewModelProvider(this).get(PurchasingSmartbotViewModel.class);
             viewModel.setCallback(this);
-            viewModel.loadBundle(prefConfig.getAccountNumber(), hasil, "");
+            viewModel.loadBundle(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), hasil, "");
         }
 
         //Toolbar variables
@@ -169,6 +169,14 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
     }
 
     @Override
+    public void onLoadDataCustom(List<Portfolio> bundles) {
+        this.portfolio = bundles.get(0);
+        minPembelian.setText(portfolio.getMinPurchase());
+        tvReturn.setText(portfolio.getExpReturn() + "%");
+        tvRisk.setText(portfolio.getRisk());
+    }
+
+    @Override
     public void onFail(String msg) {
         showSnackBar(msg);
     }
@@ -194,5 +202,10 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
                 }
                 break;
         }
+    }
+
+    @Override
+    public void sendValue(String reksaDanaID, String proportion) {
+        viewModel.loadBundleCustom(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), reksaDanaID, proportion);
     }
 }

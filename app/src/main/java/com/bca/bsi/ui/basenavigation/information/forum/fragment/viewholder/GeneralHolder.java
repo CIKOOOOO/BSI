@@ -52,6 +52,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         recyclerChild = itemView.findViewById(R.id.recycler_child_rv_main_forum);
 
         postImageAdapter = new PostImageAdapter();
+        recyclerChild.addItemDecoration(new SpacesItemDecoration(5));
 
         tvLookMore.setOnClickListener(this);
         tvComment.setOnClickListener(this);
@@ -72,7 +73,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
 
         if (!post.getImageProfile().isEmpty())
             Picasso.get()
-                    .load(post.getImageProfile())
+                    .load(Utils.imageURL(post.getImageProfile()))
                     .into(roundedImageView);
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
@@ -108,7 +109,6 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
                 });
                 recyclerChild.setLayoutManager(glm);
             }
-            recyclerChild.addItemDecoration(new SpacesItemDecoration(5));
 
             recyclerChild.setAdapter(postImageAdapter);
             postImageAdapter.setImageList(post.getImagePostList());

@@ -480,9 +480,29 @@ public class DummyData {
     public static List<Forum.Post> getRepostGeneralList() {
         List<Forum.Post> postList = new ArrayList<>();
         for (int i = 0; i < shareTradeID.length; i++) {
-            Forum.Post post = new Forum.Post(strategyPostID[i], strategyImageProfile[i], strategyPostProfileName[i], strategyPostDate[i], Type.REPOST, strategyPostContent[i], strategyPostLike[i], strategyPostComment[i], postShare[i], strategyPostStatusLike[i], postProfileID[i] , getPostStrategyList().get(getPostStrategyList().size() - i - 1),"false");
+            Forum.Post post = new Forum.Post(strategyPostID[i], strategyImageProfile[i], strategyPostProfileName[i], strategyPostDate[i], Type.REPOST, strategyPostContent[i], strategyPostLike[i], strategyPostComment[i], postShare[i], strategyPostStatusLike[i], postProfileID[i], getPostStrategyList().get(getPostStrategyList().size() - i - 1), "false");
             postList.add(post);
         }
         return postList;
     }
+
+
+    private static final String[] commentImageProfile = {"https://qph.fs.quoracdn.net/main-qimg-40eacebc7bb9f75b867254ed81b45181", "https://upload.wikimedia.org/wikipedia/commons/5/52/Chaeyoung_at_Gaon_Awards_red_carpet_on_January_23%2C_2019.jpg", "https://media.matamata.com/thumbs/2020/10/18/92787-jeongyeon-twice-instagramattwicetagram/745x489-img-92787-jeongyeon-twice-instagramattwicetagram.jpg", "https://www.wowkeren.com/images/news/00148900.jpg"};
+    private static final String[] commentPostProfileName = {"Chou Tzuyu", "Son Chaeyoung", "Yoo Jeongyeon", "Im Nayeon"};
+    private static final String[] commentID = {"1", "2", "3", "4"};
+    private static final String[] commentDate = {"18 November 2020", "19 November 2020", "20 November 2020", "21 November 2020"};
+    private static final String[] commentContent = {"Halo semua, aku sih gini gini ya", "Menurutku sih engga gitu ya, coba deh kamu cek ke sini", "Halo Mantab terima kasih syaalalalalala", "Okeiii, Mantab terima kasih"};
+
+    public static List<Forum.Comment> getCommentList() {
+        List<Forum.Comment> commentList = new ArrayList<>();
+
+        for (int i = 0; i < commentImageProfile.length; i++) {
+            Forum.Comment comment = new Forum.Comment(commentID[i], commentPostProfileName[i], commentDate[i], commentContent[i], commentImageProfile[i]);
+            commentList.add(comment);
+        }
+
+        return commentList;
+    }
+
+
 }

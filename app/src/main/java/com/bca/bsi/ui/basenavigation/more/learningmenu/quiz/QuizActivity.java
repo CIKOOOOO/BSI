@@ -1,16 +1,14 @@
 package com.bca.bsi.ui.basenavigation.more.learningmenu.quiz;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.QuizAdapter;
@@ -34,7 +32,6 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
     //private KuisData kuisData;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +49,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         topic = intent.getStringExtra("topic");
 
         //BIKIN SWITCH CASE UNTUK INIIII
-        switch (topic){
+        switch (topic) {
             case "1":
                 titleChild.setText(getString(R.string.reksadana));
                 break;
@@ -72,10 +69,10 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
         viewModel.setCallback(this);
 
         //BIKIN SWITCH CASE
-        viewModel.getData(topic);
+        viewModel.getData(prefConfig.getTokenUser(), topic);
 
         viewPager = findViewById(R.id.viewPagerKuis);
-        viewPager.setPadding(50,0,50, 0);
+        viewPager.setPadding(50, 0, 50, 0);
         viewPager.setAllowedSwipeDirection(SwipeDirection.left);
         viewPager.setOffscreenPageLimit(6);
 
@@ -88,7 +85,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void onPageSelected(int position) {
                 currentPage = position;
-                switch (position){
+                switch (position) {
                     case 0:
                         pagination.setImageResource(R.drawable.asset_pagination_1_6);
                         break;
@@ -121,7 +118,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.img_btn_back_toolbar:
                 onBackPressed();
                 break;
@@ -130,18 +127,19 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onClick(KuisData.UserScore userScore) {
-        if(currentPage == 4){
-            viewModel.putUserScore(userScore.getBcaId(),userScore.getCategoryId(),Integer.parseInt(userScore.getScore()));
-            viewModel.getScore(userScore.getBcaId(),userScore.getCategoryId());
-            viewPager.setCurrentItem(currentPage+1);
-        }else if(currentPage<5){
-            viewPager.setCurrentItem(currentPage+1);
-        }else{
+        if (currentPage == 4) {
+            viewModel.putUserScore(prefConfig.getTokenUser(), userScore.getBcaId(), userScore.getCategoryId(), Integer.parseInt(userScore.getScore()));
+            viewModel.getScore(prefConfig.getTokenUser(), userScore.getBcaId(), userScore.getCategoryId());
+            viewPager.setCurrentItem(currentPage + 1);
+        } else if (currentPage < 5) {
+            viewPager.setCurrentItem(currentPage + 1);
+        } else {
             System.out.println("udah masuk siniii");
             Intent intent = new Intent(this, DetailProductActivity.class);
             //BIKIN SWITCH CASE PRODUCT TYPE
             int productType = 0;
-            intent.putExtra(DetailProductActivity.PRODUCT_TYPE,productType);
+            intent.putExtra(DetailProductActivity.PRODUCT_TYPE, productType);
+            intent.putExtra(DetailProductActivity.PRODUCT_TYPE, 1);
             startActivity(intent);
         }
     }
@@ -155,13 +153,13 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onRetriveData(KuisData kuisData) {
-        adapter = new QuizAdapter(kuisData,this,this);
+        adapter = new QuizAdapter(kuisData, this, this);
         viewPager.setAdapter(adapter);
     }
 
     @Override
     public void onFailed(String msg) {
-        System.out.println("ERROR: "+msg);
+        System.out.println("ERROR: " + msg);
     }
 
     @Override
@@ -171,6 +169,6 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onFailedScoreGetUserScore(String msg) {
-        System.out.println("ERROR GETSCORE DARI QUIZVIEWMODEL: "+msg);
+        System.out.println("ERROR GETSCORE DARI QUIZVIEWMODEL: " + msg);
     }
 }

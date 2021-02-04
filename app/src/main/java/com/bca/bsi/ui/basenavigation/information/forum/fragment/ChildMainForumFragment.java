@@ -26,6 +26,7 @@ import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.dialog.DeleteDialog;
 import com.bca.bsi.utils.dialog.ReshareDialog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChildMainForumFragment extends BaseFragment implements IChildMainForumCallback, OnPostClick, DeleteDialog.onDelete, ReshareDialog.onReshare {
@@ -35,6 +36,8 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     private ChildMainForumAdapter adapter;
     private ReshareDialog reshareDialog;
     private DeleteDialog deleteDialog;
+    private int page;
+    private String type;
 
     public static ChildMainForumFragment newInstance(int param1) {
         ChildMainForumFragment fragment = new ChildMainForumFragment();
@@ -60,6 +63,8 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        page = 1;
+
         RecyclerView recyclerView = view.findViewById(R.id.recycler_child_main_forum);
 
         viewModel = new ViewModelProvider(this).get(ChildMainForumViewModel.class);
@@ -69,18 +74,29 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            String type = bundle.getString(PARCEL_DATA);
+            type = bundle.getString(PARCEL_DATA);
             if (type != null) {
                 type = type.toLowerCase();
                 adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID(), this);
                 recyclerView.setAdapter(adapter);
-                viewModel.loadForumPost(type);
+                viewModel.loadForumPost(type, page);
             }
         }
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (!recyclerView.canScrollVertically(1)) {
+                    viewModel.loadForumPost(type, page);
+                }
+            }
+        });
     }
 
     @Override
     public void onLoadData(List<Forum.Post> postList) {
+        this.page++;
         adapter.setForumList(postList);
         adapter.notifyDataSetChanged();
     }
@@ -93,6 +109,14 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     @Override
     public void onLoadReportData(List<Forum.Report> reportList) {
         BaseNavigationActivity.loadReport(reportList);
+    }
+
+    @Override
+    public void onOutOfData() {
+        List<Forum.Post> postList = new ArrayList<>();
+        postList.add(new Forum.Post());
+        adapter.setForumList(postList);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -159,7 +183,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onSendDeletePost(String postID) {
-        if(deleteDialog != null && deleteDialog.getTag() != null){
+        if (deleteDialog != null && deleteDialog.getTag() != null) {
             deleteDialog.dismiss();
         }
         viewModel.sendDeleteConfirmation(postID);
@@ -167,7 +191,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onResharePost(String postID) {
-        if(reshareDialog != null && reshareDialog.getTag() != null){
+        if (reshareDialog != null && reshareDialog.getTag() != null) {
             reshareDialog.dismiss();
         }
         viewModel.resharePost(postID);
@@ -175,7 +199,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onUndoResharePost(String postID) {
-        if(reshareDialog != null && reshareDialog.getTag() != null){
+        if (reshareDialog != null && reshareDialog.getTag() != null) {
             reshareDialog.dismiss();
         }
         viewModel.undoResharePost(postID);

@@ -8,4 +8,6 @@ public interface IPostCallback {
     void onLoadCategoryData(List<Forum.Category> categoryList);
 
     void onFailed(String msg);
+
+    void onSuccessPost();
 }
