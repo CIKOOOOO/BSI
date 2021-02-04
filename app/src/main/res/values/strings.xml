@@ -107,6 +107,10 @@
     <string name="durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol">Durasi tidak boleh kosong dan RoR tidak boleh bernilai nol</string>
     <string name="ror_tidak_boleh_bernilai_nol">RoR tidak boleh bernilai nol</string>
     <string name="durasi_tidak_boleh_kosong">Durasi tidak boleh kosong</string>
+    <string name="produk_reksadana_capslock">PRODUK REKSA DANA : </string>
+    <string name="pilih_produk_reksadana_capslock">PILIH PRODUK REKSA DANA : </string>
+    <string name="kinerja_satu_bln">Kinerja 1 Bln</string>
+    <string name="nab_per_unit">nab/unit</string>
 
     <string name="input_tidak_sesuai">Data yang diinput tidak sesuai</string>
     <string name="ror_bernilai_negatif">RoR bernilai negatif</string>

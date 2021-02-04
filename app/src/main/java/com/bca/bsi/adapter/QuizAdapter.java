@@ -40,6 +40,7 @@ public class QuizAdapter extends PagerAdapter {
     private Context context;
     private onItemClick onItemClick;
     private KuisData models;
+    private String bcaID;
     private List<String> jawabanUser = new ArrayList<>(5);
     private int correctCounter = 0;
 
@@ -99,10 +100,11 @@ public class QuizAdapter extends PagerAdapter {
         return 6;
     }
 
-    public QuizAdapter(KuisData models, Context context, onItemClick onItemClick) {
+    public QuizAdapter(KuisData models, Context context, onItemClick onItemClick, String bcaID) {
         this.onItemClick = onItemClick;
         this.models = models;
         this.context = context;
+        this.bcaID = bcaID;
     }
 
     @Override
@@ -352,7 +354,7 @@ public class QuizAdapter extends PagerAdapter {
                     }
                 }else if(position == 4){
                     if(next.getText().toString().equals(context.getString(R.string.selesai))) {
-                        onItemClick.onClick(new KuisData.UserScore(models.getCategoryId(),"ychris", dateAttempt.getText().toString(),String.valueOf(correctCounter)));
+                        onItemClick.onClick(new KuisData.UserScore(models.getCategoryId(),bcaID, dateAttempt.getText().toString(),String.valueOf(correctCounter)));
                     }else {
                         pilganA.setVisibility(View.VISIBLE);
                         pilganB.setVisibility(View.VISIBLE);

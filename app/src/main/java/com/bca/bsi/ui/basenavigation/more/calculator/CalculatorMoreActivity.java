@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.bca.bsi.adapter.CalculatorPagerAdapter;
+import com.bca.bsi.model.Product;
 import com.bca.bsi.utils.BaseActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -29,6 +30,7 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
     private ImageButton backBtn;
     private int numberOfTabs;
     private String rorValue = "0";
+    private String selectedProdukReksadana = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +64,10 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
         Intent intent = getIntent();
         numberOfTabs =  intent.getIntExtra("numberOfTabs",4);
         rorValue = intent.getStringExtra("rorValue");
+        selectedProdukReksadana = intent.getStringExtra("namaProduk");
 
-        calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),numberOfTabs,rorValue);
+
+        calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),numberOfTabs,rorValue, selectedProdukReksadana);
         viewPager.setAdapter(calculatorPagerAdapter);
         viewPager.setOffscreenPageLimit(numberOfTabs);
 

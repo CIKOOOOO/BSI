@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bca.bsi.R;
@@ -64,6 +66,8 @@ public class LearningMateriAdapter extends PagerAdapter {
         ImageView scoreStar;
         TextView dateAttempt;
         TextView userScoreInt;
+        NestedScrollView nestedScrollView;
+        ImageView welbotStartQuiz;
 
         imageView = view.findViewById(R.id.image_materi);
         title = view.findViewById(R.id.tv_title_materi);
@@ -73,6 +77,8 @@ public class LearningMateriAdapter extends PagerAdapter {
         scoreStar = view.findViewById(R.id.image_score_quiz);
         dateAttempt = view.findViewById(R.id.date_attempt);
         userScoreInt = view.findViewById(R.id.user_score);
+        nestedScrollView = view.findViewById(R.id.nested_scroll_view);
+        welbotStartQuiz = view.findViewById(R.id.image_start_quiz);
 
         imageView.setImageResource(models.get(position).getImage());
         title.setText(models.get(position).getTitle());
@@ -114,10 +120,34 @@ public class LearningMateriAdapter extends PagerAdapter {
                 String[] dateFormated = userScore.getDateAttempt().split(" ");
                 dateAttempt.setText(dateFormated[0]);
                 userScoreInt.setText(userScore.getScore());
-                button.setText(context.getString(R.string.ulangi_kuis));
-            }else{
+
+
+                RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) button.getLayoutParams();
+                params2.removeRule(RelativeLayout.BELOW);
+                params2.addRule(RelativeLayout.BELOW, R.id.scoring_quiz);
+                //params2.addRule(RelativeLayout.BELOW, R.id.image_start_quiz);
+                button.setLayoutParams(params2);
+
+
+                scoring.setVisibility(View.VISIBLE);
+                welbotStartQuiz.setVisibility(View.GONE);
+
+
+                /*
                 scoring.setVisibility(View.GONE);
+                welbotStartQuiz.setVisibility(View.VISIBLE);
+                */
+            }else{
+                //scoreStar.setImageResource(R.drawable.welbot_start_quiz);
                 button.setText(context.getString(R.string.ayo_ikuti_kuis));
+
+                RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) button.getLayoutParams();
+                params2.removeRule(RelativeLayout.BELOW);
+                params2.addRule(RelativeLayout.BELOW, R.id.image_start_quiz);
+                button.setLayoutParams(params2);
+
+                scoring.setVisibility(View.GONE);
+                welbotStartQuiz.setVisibility(View.VISIBLE);
             }
 
             /*
@@ -132,6 +162,14 @@ public class LearningMateriAdapter extends PagerAdapter {
 
             button.setTextColor(ContextCompat.getColor(context, R.color.deep_cerulean_palette));
             button.setAllCaps(false);
+
+            nestedScrollView.post(new Runnable() {
+                @Override
+                public void run() {
+                    nestedScrollView.fullScroll(View.FOCUS_DOWN);
+                }
+            });
+
         }else if (position == models.size() - 2){
             button.setVisibility(View.VISIBLE);
             button.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_rounded_orange_light_5dp));
@@ -139,9 +177,11 @@ public class LearningMateriAdapter extends PagerAdapter {
             button.setTextColor(Color.BLACK);
             button.setAllCaps(true);
             scoring.setVisibility(View.GONE);
+            welbotStartQuiz.setVisibility(View.GONE);
         } else {
             button.setVisibility(View.INVISIBLE);
             scoring.setVisibility(View.GONE);
+            welbotStartQuiz.setVisibility(View.GONE);
         }
 
         button.setOnClickListener(new View.OnClickListener() {

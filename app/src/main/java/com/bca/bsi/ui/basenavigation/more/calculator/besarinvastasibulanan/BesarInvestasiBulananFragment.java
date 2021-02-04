@@ -1,9 +1,11 @@
 package com.bca.bsi.ui.basenavigation.more.calculator.besarinvastasibulanan;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -19,9 +21,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Product;
+import com.bca.bsi.ui.basenavigation.more.calculator.ProductsPopUpActivity;
 import com.bca.bsi.utils.BaseFragment;
+import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +50,20 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     private TextView tvRoR;
     private TextView tvRoRPertahun;
     private TextView tvRoRPersen;
+    private TextView produkReksadanaLabel;
+    private String selectedProdukReksadana;
+    private CardView cardViewSelectedReksadana;
+    private TextView selectedNamaReksadanaTV;
+    private TextView selectedTanggalReksadanaTV;
+    private TextView selectedKinerjaSatuBulanReksadanaTV;
+    private TextView selectedNABUnitReksadanaTV;
+    private TextView selectedTipeReksadana;
 
-    public BesarInvestasiBulananFragment(int numbOfTabs, String rorValue) {
+    public BesarInvestasiBulananFragment(int numbOfTabs, String rorValue, String selectedProdukReksadana) {
         this.numbOfTabs = numbOfTabs;
         this.rorValue = rorValue;
+        this.selectedProdukReksadana = selectedProdukReksadana;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,6 +89,13 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         tvRoR = view.findViewById(R.id.tv_ror);
         tvRoRPertahun = view.findViewById(R.id.tv_ror_pertahun);
         tvRoRPersen = view.findViewById(R.id.tv_ror_persen);
+        produkReksadanaLabel = view.findViewById(R.id.tv_produk_reksadana_label);
+        cardViewSelectedReksadana = view.findViewById(R.id.card_view);
+        selectedNamaReksadanaTV = view.findViewById(R.id.tv_selected_nama_reksadana);
+        selectedTanggalReksadanaTV = view.findViewById(R.id.tv_selected_tanggal_reksadana);
+        selectedKinerjaSatuBulanReksadanaTV = view.findViewById(R.id.tv_kinerja_1_bulan);
+        selectedNABUnitReksadanaTV = view.findViewById(R.id.tv_nab_unit);
+        selectedTipeReksadana = view.findViewById(R.id.tv_selected_tipe_reksadana);
 
         switch (numbOfTabs){
             case 3:
@@ -81,18 +103,26 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                 tvRoR.setVisibility(View.GONE);
                 tvRoRPertahun.setVisibility(View.GONE);
                 tvRoRPersen.setVisibility(View.GONE);
+                //produkReksadanaLabel.setVisibility(View.VISIBLE);
+                produkReksadanaLabel.setVisibility(View.GONE);
+                cardViewSelectedReksadana.setVisibility(View.VISIBLE);
                 break;
             case 4:
                 ETBIBROR.setVisibility(View.VISIBLE);
                 tvRoR.setVisibility(View.VISIBLE);
                 tvRoRPertahun.setVisibility(View.VISIBLE);
                 tvRoRPersen.setVisibility(View.VISIBLE);
+                produkReksadanaLabel.setVisibility(View.GONE);
+                cardViewSelectedReksadana.setVisibility(View.GONE);
                 break;
         }
 
         viewModel = new ViewModelProvider(this).get(BesarInvestasiBulananViewModel.class);
         viewModel.setCallback(this);
         kalkulasi.setOnClickListener(this);
+
+        viewModel.getReksaDanaList(prefConfig.getProfileRisiko());
+        //viewModel.getReksaDanaList("1");
 
         List<Integer> durasiTahun = new ArrayList<Integer>();
         List<Integer> durasiBulan = new ArrayList<Integer>();
@@ -173,6 +203,14 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
             }
         });
 
+        cardViewSelectedReksadana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent popUpWindow = new Intent(mActivity, ProductsPopUpActivity.class);
+                startActivity(popUpWindow);
+            }
+        });
+
         BIBLabel.setVisibility(View.GONE);
         rpLabel.setVisibility(View.GONE);
         hasilBIB.setVisibility(View.GONE);
@@ -240,11 +278,13 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     hasilBIB.setVisibility(View.GONE);
                     kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
 
+                    /*
                     ETBIBModalAwal.setText("");
                     ETBIBROR.setText("");
                     ETBIBTargetHasilInvestasi.setText("");
                     spinnerDurasiTahunBIB.setSelection(0);
                     spinnerDurasiBulanBIB.setSelection(0);
+                    */
 
                     nestedScrollView.post(new Runnable() {
                         @Override
@@ -261,9 +301,12 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
     @Override
     public void kalkulasiOutput(String formatTargetHasilInvest, String formatModalAwal, String formatRoR, String formatHasil) {
+
+        /*
         ETBIBTargetHasilInvestasi.setText(formatTargetHasilInvest);
         ETBIBModalAwal.setText(formatModalAwal);
         ETBIBROR.setText(formatRoR);
+        */
 
         /*
         if(formatHasil.equals("NaN") || formatHasil.equals("-NaN") ){
@@ -298,5 +341,36 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                 }
                 break;
         }
+    }
+
+    @Override
+    public void resultOf(List<Product.ReksaDana> reksaDanaList) {
+
+        List<String> reksadanaList = new ArrayList<String>();
+
+        for (int i = 0; i < reksaDanaList.size(); i++) {
+            reksadanaList.add(reksaDanaList.get(i).getName());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(mActivity, android.R.layout.simple_dropdown_item_1line, reksadanaList);
+        Integer position = adapter.getPosition(selectedProdukReksadana);
+        rorValue = reksaDanaList.get(position).getKinerja();
+        selectedNamaReksadanaTV.setText(reksaDanaList.get(position).getName());
+
+        try {
+            String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, (reksaDanaList.get(position).getDate()));
+            selectedTanggalReksadanaTV.setText(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        selectedTipeReksadana.setText(reksaDanaList.get(position).getType());
+        selectedNABUnitReksadanaTV.setText(reksaDanaList.get(position).getNab());
+
+    }
+
+    @Override
+    public void onFailed(String msg) {
+
     }
 }

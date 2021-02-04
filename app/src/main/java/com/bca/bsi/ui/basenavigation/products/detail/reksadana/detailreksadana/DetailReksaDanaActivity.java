@@ -99,9 +99,7 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
                 intent2.putExtra("numberOfTabs",3);
                 intent2.putExtra("rorValue",this.detailReksaDana.getKinerja1Tahun());
                 Log.e("asdf", this.detailReksaDana.getKinerja1Tahun());
-//                intent2.putExtra("rorValue","2");
                 intent2.putExtra("namaProduk",this.detailReksaDana.getName());
-                //intent.putExtra("namaProduk","Nama Produk");
                 startActivity(intent2);
                 break;
             case R.id.btn_buy_reksa_dana_detail:

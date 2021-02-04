@@ -38,6 +38,7 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
     private ImageView pagination;
     private String topic;
     private MateriQuizViewModel viewModel;
+    private TextView titleChild;
 
     private int currentPage;
 
@@ -47,13 +48,14 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
         setContentView(R.layout.activity_materi);
 
         titlePage = findViewById(R.id.tv_title_toolbar_back);
+        titleChild = findViewById(R.id.tv_child_toolbar_back);
         backBtn = findViewById(R.id.img_btn_back_toolbar);
         pagination = findViewById(R.id.pagination);
 
         //AMBIL EXTRA DARI INTENT
         Intent intent = getIntent();
         topic = intent.getStringExtra("topic");
-
+        titleChild.setVisibility(View.GONE);
         backBtn.setOnClickListener(this);
 
         //BIKIN SWITCH CASE DI SINI
@@ -78,15 +80,17 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
         viewModel = new ViewModelProvider(this).get(MateriQuizViewModel.class);
         viewModel.setCallback(this);
 
-        viewModel.getScoreData("ychris",topic);
+        viewModel.getScoreData(prefConfig.getBCAID(),topic);
 
         viewPager = findViewById(R.id.view_pager);
         viewPager.setPadding(50,0,50, 0);
+
 
         /*
         adapter = new LearningMateriAdapter(models,this, this,null);
         viewPager.setAdapter(adapter);
         */
+
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -167,8 +171,10 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onRetriveData(KuisData.UserScore userScore) {
+
         adapter = new LearningMateriAdapter(models,this, this,userScore);
         viewPager.setAdapter(adapter);
+
     }
 
     @Override

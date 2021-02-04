@@ -155,7 +155,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onRetriveData(KuisData kuisData) {
-        adapter = new QuizAdapter(kuisData,this,this);
+        adapter = new QuizAdapter(kuisData,this,this, prefConfig.getBCAID());
         viewPager.setAdapter(adapter);
     }
 
