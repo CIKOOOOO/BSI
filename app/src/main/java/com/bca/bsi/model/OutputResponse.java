@@ -87,7 +87,7 @@ public class OutputResponse {
         @SerializedName("my_profile")
         private Forum.User forumProfileUser;
 
-        @SerializedName("my_posting")
+        @SerializedName(value = "my_posting", alternate = {"share_trade"})
         private List<Forum.Post> myPostList;
 
         @SerializedName("my_bookmark")

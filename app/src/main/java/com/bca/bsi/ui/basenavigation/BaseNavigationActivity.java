@@ -1,6 +1,5 @@
 package com.bca.bsi.ui.basenavigation;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
@@ -28,6 +28,7 @@ import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.model.TipsOfTheWeek;
 import com.bca.bsi.ui.basenavigation.information.InformationFragment;
+import com.bca.bsi.ui.basenavigation.information.forum.MainForumFragment;
 import com.bca.bsi.ui.basenavigation.more.MoreFragment;
 import com.bca.bsi.ui.basenavigation.portfolio.PortfolioFragment;
 import com.bca.bsi.ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity;
@@ -62,6 +63,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     private AboutRoboDialog aboutRoboDialog;
     private Portfolio portfolio;
     private TipsOfTheWeekDialog tipsOfTheWeekDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

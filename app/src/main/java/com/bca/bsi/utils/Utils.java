@@ -2,9 +2,8 @@ package com.bca.bsi.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.MediaStore;
+import android.graphics.Bitmap;
+import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.EditText;
 import com.bca.bsi.utils.constant.Constant;
 import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -243,10 +243,10 @@ public class Utils {
         return Math.abs(val) < eps;
     }
 
-    public static String getRealPathFromURI(Uri uri, Context context) {
-        Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return cursor.getString(idx);
+    public static String encodeBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 30, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }

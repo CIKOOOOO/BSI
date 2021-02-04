@@ -88,7 +88,7 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         //recycler robo
         RecyclerView recyclerView = view.findViewById(R.id.recycler_robo_main);
         adapter = new PortfolioAdapter(this);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 0, true));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 10, true));
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
         recyclerView.setAdapter(adapter);
 //        adapter.setPortfolioList(getPortfolioList());

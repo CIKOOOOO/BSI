@@ -108,27 +108,27 @@ public class DirectShareViewModel extends AndroidViewModel {
 
         RequestBody requestBody = builder.build();
 
-        Call<OutputResponse> call = apiInterface.sendNewPost(token, requestBody);
-        call.enqueue(new Callback<OutputResponse>() {
-            @Override
-            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                if (null != response.body()) {
-                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
-                    if (errorSchema.getErrorCode().equals("200")) {
-                        callback.onSuccessPost();
-                    } else {
-                        callback.onFailed(errorSchema.getErrorMessage());
-                    }
-                } else {
-                    callback.onFailed("");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OutputResponse> call, Throwable t) {
-                callback.onFailed("");
-            }
-        });
+//        Call<OutputResponse> call = apiInterface.sendNewPost(token, requestBody);
+//        call.enqueue(new Callback<OutputResponse>() {
+//            @Override
+//            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+//                if (null != response.body()) {
+//                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
+//                    if (errorSchema.getErrorCode().equals("200")) {
+//                        callback.onSuccessPost();
+//                    } else {
+//                        callback.onFailed(errorSchema.getErrorMessage());
+//                    }
+//                } else {
+//                    callback.onFailed("");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<OutputResponse> call, Throwable t) {
+//                callback.onFailed("");
+//            }
+//        });
     }
 
     public void addChosenUser(User.ForumUser forumUser) {

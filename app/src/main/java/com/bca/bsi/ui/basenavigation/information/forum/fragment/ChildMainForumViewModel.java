@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -8,11 +9,16 @@ import androidx.lifecycle.AndroidViewModel;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.constant.Type;
 import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChildMainForumViewModel extends AndroidViewModel {
 
@@ -29,9 +35,10 @@ public class ChildMainForumViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadForumPost(String type, int page) {
-        if(this.page != page){
-            this.page = page;
+    public void loadForumPost(String type, int pages, String tokenUser, String profileID, String profileRisiko) {
+        if (this.page != pages) {
+            Call<OutputResponse> call;
+            this.page = pages;
             List<Forum.Post> postList = new ArrayList<>();
             switch (type.toLowerCase()) {
                 case Type.TRENDING:
@@ -46,7 +53,52 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     callback.onLoadData(postList);
                     break;
                 case Type.SHARE_TRADE:
-                    callback.onLoadData(DummyData.getPostShareTradeList());
+                    call = apiInterface.getPostList("forum/post/share-trade", tokenUser, page, profileRisiko, profileID);
+                    call.enqueue(new Callback<OutputResponse>() {
+                        @Override
+                        public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                            Log.e("asd", response.code() + "");
+                            if (null != response.body()) {
+                                OutputResponse outputResponse = response.body();
+                                OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                                if ("200".equals(errorSchema.getErrorCode())) {
+                                    OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                                    List<Forum.Post> postShareTrade = outputSchema.getMyPostList();
+                                    for (int i = 0; i < postShareTrade.size(); i++) {
+                                        Forum.Post forum = postShareTrade.get(i);
+                                        Forum.ShareTrade shareTrade = forum.getShareTrade();
+                                        String title;
+                                        if (shareTrade.getType().equalsIgnoreCase("jual")) {
+                                            title = "Saya baru saja menjual";
+                                        } else if (shareTrade.getType().equalsIgnoreCase("beli")) {
+                                            title = "Saya baru saja membeli";
+                                        } else {
+                                            title = "Nilai Investasi Saya";
+                                        }
+                                        shareTrade.setTitle(title);
+                                        forum.setShareTrade(shareTrade);
+                                        postShareTrade.set(i, forum);
+                                    }
+                                    callback.onLoadData(postShareTrade);
+                                } else {
+                                    page -= 1;
+                                    callback.onFailed(errorSchema.getErrorMessage());
+                                }
+                            } else {
+                                page -= 1;
+                                callback.onFailed("");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<OutputResponse> call, Throwable t) {
+                            page -= 1;
+                            Log.e("asd", "On failed " + t.getMessage());
+                            callback.onFailed("");
+                        }
+                    });
+//
+//                    callback.onLoadData(DummyData.getPostShareTradeList());
                     break;
                 case Type.NEWS:
                     postList.addAll(DummyData.getRepostNewsList());
@@ -65,27 +117,27 @@ public class ChildMainForumViewModel extends AndroidViewModel {
         }
     }
 
-    public void loadReportData(){
+    public void loadReportData() {
         callback.onLoadReportData(DummyData.getReportList());
     }
 
-    public void sendDeleteConfirmation(String postID){
+    public void sendDeleteConfirmation(String postID) {
 
     }
 
-    public void savedPost(String postID){
+    public void savedPost(String postID) {
 
     }
 
-    public void likePost(String postID){
+    public void likePost(String postID) {
 
     }
 
-    public void resharePost(String postID){
+    public void resharePost(String postID) {
 
     }
 
-    public void undoResharePost(String postID){
+    public void undoResharePost(String postID) {
 
     }
 }

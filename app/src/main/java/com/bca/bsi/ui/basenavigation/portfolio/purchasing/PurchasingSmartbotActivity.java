@@ -209,14 +209,6 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
 
     @Override
     public void sendValue(String reksaDanaID, String proportion) {
-        viewModel.loadBundleCustom(prefConfig.getAccountNumber(),reksaDanaID,proportion);
-    }
-
-    @Override
-    public void onLoadDataCustom(List<Portfolio> bundles) {
-        this.portfolio = bundles.get(0);
-        minPembelian.setText(portfolio.getMinPurchase());
-        tvReturn.setText(portfolio.getExpReturn() + "%");
-        tvRisk.setText(portfolio.getRisk());
+        viewModel.loadBundleCustom(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), reksaDanaID, proportion);
     }
 }

@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.ui.basenavigation.BaseNavigationActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.MainForumFragment;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.ForumProfileActivity;
 import com.bca.bsi.ui.basenavigation.information.promonews.news.NewsInformationFragment;
@@ -27,10 +28,6 @@ import java.util.List;
 public class InformationFragment extends BaseFragment implements View.OnClickListener{
 
     private TextView tvStart, tvMid, tvEnd;
-
-    public interface onReport {
-        void onClick(List<Forum.Report> reportList);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

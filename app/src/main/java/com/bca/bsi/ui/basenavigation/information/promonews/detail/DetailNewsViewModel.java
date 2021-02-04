@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.information.promonews.detail;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -32,6 +33,7 @@ public class DetailNewsViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", response.code()+"");
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();

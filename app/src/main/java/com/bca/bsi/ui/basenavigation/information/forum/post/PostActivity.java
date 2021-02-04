@@ -39,6 +39,7 @@ import com.bca.bsi.model.Privacy;
 import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.ui.basenavigation.information.forum.post.direct.DirectShareActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.CustomLoading;
 import com.bca.bsi.utils.DecodeBitmap;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.Utils;
@@ -81,6 +82,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
     private Portfolio.Information information;
     private Portfolio.History history;
     private Forum.Category category;
+    private CustomLoading customLoading;
 
     private String type;
 
@@ -116,6 +118,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
         PrivacyAdapter privacyAdapter = new PrivacyAdapter(this);
 
         categoryAdapter = new CategoryAdapter(this);
+        customLoading = new CustomLoading();
 
         viewModel = new ViewModelProvider(this).get(PostViewModel.class);
         viewModel.setCallback(this);
@@ -350,7 +353,14 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 } else {
                     if (data.getClipData() != null) {
                         ClipData mClipData = data.getClipData();
-                        for (int i = 0; i < mClipData.getItemCount(); i++) {
+                        int count = 0;
+                        if (imagesEncodedList.size() < 5) {
+                            count = Math.min(mClipData.getItemCount(), 5);
+                            if (count + imagesEncodedList.size() > 5) {
+                                count = 5 - imagesEncodedList.size();
+                            }
+                        }
+                        for (int i = 0; i < count; i++) {
                             ClipData.Item item = mClipData.getItemAt(i);
                             Uri uri = item.getUri();
 //                            BitmapFactory.Options o = new BitmapFactory.Options();
@@ -408,7 +418,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                     createPostMap.put("post_attachment", this.imagesEncodedList);
                     createPostMap.put("post_category_id", this.category.getCategoryID());
                     createPostMap.put("repost_from", "");
-                    createPostMap.put("visible_to_id", "");
+                    createPostMap.put("visible_to_id", new ArrayList<String>());
                     createPostMap.put("reksa_dana_id", "");
                     createPostMap.put("transaction_type", "");
                     createPostMap.put("share_trade_type", "");
@@ -451,6 +461,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                         intent.putExtra(DirectShareActivity.DATA, createPostMap);
                         startActivity(intent);
                     } else {
+                        customLoading.show(getSupportFragmentManager(), "");
                         viewModel.sendNewPost(prefConfig.getTokenUser(), createPostMap);
                     }
 //                    viewModel.sendData(imagesEncodedList);
@@ -480,11 +491,18 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 
     @Override
     public void onFailed(String msg) {
+        if (null != customLoading && null != customLoading.getTag()) {
+            customLoading.dismiss();
+        }
         showSnackBar(msg);
     }
 
     @Override
     public void onSuccessPost() {
-
+        if (null != customLoading && null != customLoading.getTag()) {
+            customLoading.dismiss();
+        }
+        setResult(0);
+        finish();
     }
 }

@@ -11,6 +11,8 @@ import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Portfolio;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,7 +35,11 @@ public class PortfolioViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("a", "tes1" + response.code());
+//                try {
+//                    Log.e("a", "tes1" + response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 if (response.body() != null) {
                     Log.e("b", "tes2");
                     OutputResponse outputResponse = response.body();

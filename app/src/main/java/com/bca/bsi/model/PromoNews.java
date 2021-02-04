@@ -10,6 +10,7 @@ public class PromoNews {
     @SerializedName("news_title")
     private String title;
 
+    @SerializedName("news_description")
     private String description;
 
     @SerializedName("news_image")

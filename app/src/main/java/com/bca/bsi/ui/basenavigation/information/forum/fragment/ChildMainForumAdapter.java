@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
-    private static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5, END_OF_DATA = 6;
+    private static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5;
 
     private String type, profileID;
     private List<Forum.Post> forumList;
@@ -118,22 +118,18 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
         String currentType;
 
-        if(null != forumList.get(position).getPostID()){
-            if (type.equals(Type.TRENDING)
-                    || type.equals(Type.TIMELINE)
-                    || (type.equals(Type.PROFILE) && null == forumList.get(position).getPost())) {
-                currentType = forumList.get(position).getType();
-            } else if (null != forumList.get(position).getPost()) {
-                if (null != forumList.get(position).getPost().getPromoNews()) {
-                    currentType = Type.REPOST_NEWS;
-                } else {
-                    currentType = Type.REPOST;
-                }
+        if (type.equals(Type.TRENDING)
+                || type.equals(Type.TIMELINE)
+                || (type.equals(Type.PROFILE) && null == forumList.get(position).getPost())) {
+            currentType = forumList.get(position).getType();
+        } else if (null != forumList.get(position).getPost()) {
+            if (null != forumList.get(position).getPost().getPromoNews()) {
+                currentType = Type.REPOST_NEWS;
             } else {
-                currentType = type;
+                currentType = Type.REPOST;
             }
-        }else{
-            currentType = "end of data";
+        } else {
+            currentType = type;
         }
 
         switch (currentType) {
@@ -152,8 +148,6 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             case Type.REPOST:
                 viewType = ChildMainForumAdapter.REPOST_GENERAL;
                 break;
-            default:
-                viewType = ChildMainForumAdapter.END_OF_DATA;
         }
         return viewType;
     }
