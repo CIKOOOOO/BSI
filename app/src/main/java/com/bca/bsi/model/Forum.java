@@ -7,18 +7,29 @@ import java.util.List;
 public class Forum {
 
     public static class Post {
+        @SerializedName("post_id")
         private String postID;
+        @SerializedName("profile_picture")
         private String imageProfile;
+        @SerializedName("username")
         private String name;
+        @SerializedName("created_date")
         private String date;
         private String type;
+        @SerializedName("post_text")
         private String content;
+        @SerializedName("like_count")
         private String like;
+        @SerializedName("comment_count")
         private String comment;
+        @SerializedName("share_count")
         private String share;
         private String statusLike;
         private String statusShare;
+        @SerializedName("profile_id")
         private String profileID;
+        @SerializedName("post_privacy")
+        private String privacy;
         private PromoNews promoNews;
         private ShareTrade shareTrade;
         private List<ImagePost> imagePostList;
@@ -136,6 +147,14 @@ public class Forum {
 
         public void setProfileID(String profileID) {
             this.profileID = profileID;
+        }
+
+        public void setShareTrade(ShareTrade shareTrade) {
+            this.shareTrade = shareTrade;
+        }
+
+        public String getPrivacy() {
+            return privacy;
         }
 
         public String getImageProfile() {
@@ -353,7 +372,16 @@ public class Forum {
 
     public static class ShareTrade {
 
-        private String shareTradeID, title, type, value, productName, date;
+        @SerializedName("share_trade_id")
+        private String shareTradeID;
+        private String title;
+        @SerializedName("transaction_type")
+        private String type;
+        private String value;
+        @SerializedName("reksa_dana_name")
+        private String productName;
+        private String date;
+        @SerializedName("reksa_dana_id")
         private String reksadanaID;
 
         public ShareTrade() {
@@ -366,6 +394,10 @@ public class Forum {
             this.value = value;
             this.productName = productName;
             this.date = date;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
         }
 
         public String getShareTradeID() {

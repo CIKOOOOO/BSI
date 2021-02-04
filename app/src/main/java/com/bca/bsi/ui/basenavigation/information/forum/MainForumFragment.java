@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,19 +14,27 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bca.bsi.R;
-import com.bca.bsi.model.Forum;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumFragment;
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.constant.Constant;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.List;
-
-public class MainForumFragment extends BaseFragment implements IMainForumCallback, View.OnClickListener{
+public class MainForumFragment extends BaseFragment implements IMainForumCallback, View.OnClickListener {
 
     private MainForumViewModel viewModel;
+    private TabLayout tabLayout;
+    private onRecyclerView onRecyclerView;
+
+    public interface onRecyclerView{
+        void onGoToTop();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        onRecyclerView = (MainForumFragment.onRecyclerView) getActivity();
+    }
 
     @Override
     public void onClick(View v) {
@@ -33,7 +42,7 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
             case R.id.fab_main_forum:
                 Intent intent = new Intent(mActivity, PostActivity.class);
                 intent.putExtra(PostActivity.POST_TYPE, PostActivity.NEW_STANDARD_POST);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 break;
         }
     }
@@ -71,7 +80,8 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
     }
 
     private void setupTab(View view) {
-        TabLayout tabLayout = view.findViewById(R.id.tl_main_forum);
+        tabLayout = view.findViewById(R.id.tl_main_forum);
+
         final ViewPager viewPager = view.findViewById(R.id.vp_main_forum);
         MainForumTabAdapter adapter = new MainForumTabAdapter(getChildFragmentManager(), Constant.FORUM_MENU.length);
 
@@ -111,6 +121,14 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
             tabLayout.setTabMode(TabLayout.MODE_FIXED);
         } else {
             tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 0) {
+            tabLayout.getTabAt(4).select();
         }
     }
 }

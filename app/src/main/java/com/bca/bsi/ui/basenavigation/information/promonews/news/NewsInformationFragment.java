@@ -58,9 +58,8 @@ public class NewsInformationFragment extends BaseFragment implements PromoNewsAd
 
     @Override
     public void onObjectClick(PromoNews promoNews) {
-        String data = Utils.toJSON(promoNews);
         Intent intent = new Intent(mActivity, DetailPromoNewsActivity.class);
-        intent.putExtra(DetailPromoNewsActivity.DATA, data);
+        intent.putExtra(DetailPromoNewsActivity.DATA, promoNews.getNewsID());
         mActivity.startActivity(intent);
     }
 

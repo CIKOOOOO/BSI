@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,10 +68,12 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_child_main_forum);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+
         viewModel = new ViewModelProvider(this).get(ChildMainForumViewModel.class);
         viewModel.setCallback(this);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -79,7 +82,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
                 type = type.toLowerCase();
                 adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID(), this);
                 recyclerView.setAdapter(adapter);
-                viewModel.loadForumPost(type, page);
+                viewModel.loadForumPost(type, page, prefConfig.getTokenUser(), prefConfig.getProfileID(), prefConfig.getProfileRisiko());
             }
         }
 
@@ -87,8 +90,12 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
+                    Log.e("asd", "start");
+                }
                 if (!recyclerView.canScrollVertically(1)) {
-                    viewModel.loadForumPost(type, page);
+                    Log.e("asd", "last");
+                    viewModel.loadForumPost(type, page, prefConfig.getTokenUser(), prefConfig.getProfileID(), prefConfig.getProfileRisiko());
                 }
             }
         });

@@ -67,9 +67,10 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
     }
 
 
-    public void loadBundleCustom(String no_rekening, String reksa_id, String proportion, String token) {
+    public void loadBundleCustom(String token, String no_rekening, String reksa_id, String proportion) {
         Log.e("asd", reksa_id);
-        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(token, no_rekening, reksa_id, proportion);
+        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(token,no_rekening, reksa_id, proportion);
+
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
@@ -94,6 +95,7 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
                     callback.onFail("Mohon periksa jaringan anda");
                 }
             }
+
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
                 Log.e("asd", "tes6");
