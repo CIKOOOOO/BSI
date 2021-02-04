@@ -135,12 +135,20 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
             viewPager.setCurrentItem(currentPage + 1);
         } else {
             System.out.println("udah masuk siniii");
-            Intent intent = new Intent(this, DetailProductActivity.class);
+
             //BIKIN SWITCH CASE PRODUCT TYPE
-            int productType = 0;
-            intent.putExtra(DetailProductActivity.PRODUCT_TYPE, productType);
-            intent.putExtra(DetailProductActivity.PRODUCT_TYPE, 1);
-            startActivity(intent);
+
+            if(currentPage < 2) {
+                Intent intent = new Intent(this, DetailProductActivity.class);
+                intent.putExtra(DetailProductActivity.PRODUCT_TYPE, currentPage);
+                startActivity(intent);
+            }else{
+                openPage();
+            }
+
+            //intent.putExtra(DetailProductActivity.PRODUCT_TYPE, productType);
+
+
         }
     }
 
@@ -153,7 +161,7 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onRetriveData(KuisData kuisData) {
-        adapter = new QuizAdapter(kuisData, this, this);
+        adapter = new QuizAdapter(kuisData, this, this, prefConfig.getBCAID());
         viewPager.setAdapter(adapter);
     }
 

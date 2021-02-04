@@ -24,11 +24,11 @@ public interface ApiInterface {
     Call<OutputResponse> loginWith(@Body Map<String, Object> data);
 
     @Headers({"Accept: application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
-    @GET("products/Reksadana")
+    @GET("products/reksadana")
     Call<OutputResponse> getReksaDanaData(@Header("token-user") String token, @Header("profile-risiko") int profile_risiko);
 
     @Headers({"Accept: application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
-    @GET("products/Reksadana/{reksaDanaID}")
+    @GET("products/reksadana/{reksaDanaID}")
     Call<OutputResponse> getDetailReksaDana(@Header("token-user") String token, @Path("reksaDanaID") int reksaDanaID);
 
     @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB"})

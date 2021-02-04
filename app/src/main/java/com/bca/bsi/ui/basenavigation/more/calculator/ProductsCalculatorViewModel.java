@@ -28,11 +28,11 @@ public class ProductsCalculatorViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadProducts(String profil_resiko){
+    public void loadProducts(String profil_resiko, String token){
         if(profil_resiko.isEmpty()){
             return;
         }
-        Call<OutputResponse> call = apiInterface.getReksaDanaData(Integer.parseInt(profil_resiko));
+        Call<OutputResponse> call = apiInterface.getReksaDanaData(token, Integer.parseInt(profil_resiko));
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {

@@ -47,7 +47,7 @@ public class ProductsPopUpActivity extends BaseActivity implements IProductsCalc
 
         viewModel = new ViewModelProvider(this).get(ProductsCalculatorViewModel.class);
         viewModel.setCallback(this);
-        viewModel.loadProducts(prefConfig.getProfileRisiko());
+        viewModel.loadProducts(prefConfig.getTokenUser(), prefConfig.getProfileRisiko());
 
         /*
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +67,7 @@ public class ProductsPopUpActivity extends BaseActivity implements IProductsCalc
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
 
-        getWindow().setLayout((int)(width*.7),(int)(height*.5));
+        getWindow().setLayout((int) (width * .7), (int) (height * .5));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;

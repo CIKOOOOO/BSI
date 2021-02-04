@@ -49,11 +49,11 @@ public class BesarInvestasiBulananViewModel extends AndroidViewModel {
         callback.kalkulasiOutput(utils.formatUang(targetHasil),utils.formatUang(modalAwal),rorStr,utils.formatUang(hasil));
     }
 
-    public void getReksaDanaList(String profile_risiko) {
+    public void getReksaDanaList(String profile_risiko, String token) {
 //        callback.resultOf(DummyData.getReksaDanaDummyList());
         if (profile_risiko.isEmpty()) return;
 
-        Call<OutputResponse> call = apiInterface.getReksaDanaData(Integer.parseInt(profile_risiko));
+        Call<OutputResponse> call = apiInterface.getReksaDanaData(token,Integer.parseInt(profile_risiko));
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {

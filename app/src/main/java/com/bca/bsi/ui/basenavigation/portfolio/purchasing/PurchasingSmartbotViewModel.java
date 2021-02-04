@@ -67,9 +67,9 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
     }
 
 
-    public void loadBundleCustom(String no_rekening, String reksa_id, String proportion) {
+    public void loadBundleCustom(String no_rekening, String reksa_id, String proportion, String token) {
         Log.e("asd", reksa_id);
-        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(no_rekening, reksa_id, proportion);
+        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(token, no_rekening, reksa_id, proportion);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {

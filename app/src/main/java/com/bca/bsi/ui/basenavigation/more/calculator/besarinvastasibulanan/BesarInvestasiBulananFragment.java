@@ -97,7 +97,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         selectedNABUnitReksadanaTV = view.findViewById(R.id.tv_nab_unit);
         selectedTipeReksadana = view.findViewById(R.id.tv_selected_tipe_reksadana);
 
-        switch (numbOfTabs){
+        switch (numbOfTabs) {
             case 3:
                 ETBIBROR.setVisibility(View.GONE);
                 tvRoR.setVisibility(View.GONE);
@@ -121,7 +121,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         viewModel.setCallback(this);
         kalkulasi.setOnClickListener(this);
 
-        viewModel.getReksaDanaList(prefConfig.getProfileRisiko());
+        viewModel.getReksaDanaList(prefConfig.getTokenUser(), prefConfig.getProfileRisiko());
         //viewModel.getReksaDanaList("1");
 
         List<Integer> durasiTahun = new ArrayList<Integer>();
@@ -150,7 +150,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 char zero = '0';
-                if(ETBIBModalAwal.getText().length()==2 && ETBIBModalAwal.getText().charAt(0)==zero){
+                if (ETBIBModalAwal.getText().length() == 2 && ETBIBModalAwal.getText().charAt(0) == zero) {
                     ETBIBModalAwal.setText("");
                 }
             }
@@ -170,7 +170,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 char zero = '0';
-                if(ETBIBTargetHasilInvestasi.getText().length()==2 && ETBIBTargetHasilInvestasi.getText().charAt(0)==zero){
+                if (ETBIBTargetHasilInvestasi.getText().length() == 2 && ETBIBTargetHasilInvestasi.getText().charAt(0) == zero) {
                     ETBIBTargetHasilInvestasi.setText("");
                 }
             }
@@ -190,8 +190,8 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 char zero = '0';
-                if(ETBIBROR.getText().length()>1 && ETBIBROR.getText().charAt(0)==zero){
-                    if(ETBIBROR.getText().length()==2 && !ETBIBROR.getText().toString().equals("0.")){
+                if (ETBIBROR.getText().length() > 1 && ETBIBROR.getText().charAt(0) == zero) {
+                    if (ETBIBROR.getText().length() == 2 && !ETBIBROR.getText().toString().equals("0.")) {
                         ETBIBROR.setText("");
                     }
                 }
@@ -221,7 +221,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
         switch (v.getId()) {
             case R.id.btn_bib_kalkulasi:
-                if(kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))){
+                if (kalkulasi.getText().equals(getString(R.string.calculator_kalkulasi_label))) {
 
                     ETBIBModalAwal.setEnabled(false);
                     ETBIBTargetHasilInvestasi.setEnabled(false);
@@ -229,26 +229,26 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     spinnerDurasiTahunBIB.setEnabled(false);
                     spinnerDurasiBulanBIB.setEnabled(false);
 
-                    if(ETBIBModalAwal.getText().toString().isEmpty()){
+                    if (ETBIBModalAwal.getText().toString().isEmpty()) {
                         ETBIBModalAwal.setText("0");
                     }
 
-                    if(ETBIBTargetHasilInvestasi.getText().toString().equals("")){
+                    if (ETBIBTargetHasilInvestasi.getText().toString().equals("")) {
                         ETBIBTargetHasilInvestasi.setText("0");
                     }
 
-                    if(ETBIBROR.getText().toString().equals("")){
+                    if (ETBIBROR.getText().toString().equals("")) {
                         ETBIBROR.setText("0");
                     }
 
-                    switch (numbOfTabs){
+                    switch (numbOfTabs) {
                         case 3:
-                            viewModel.kalkulasi(ETBIBModalAwal.getText().toString(),ETBIBTargetHasilInvestasi.getText().toString(),
-                                    rorValue,spinnerDurasiBulanBIB.getSelectedItem().toString(),spinnerDurasiTahunBIB.getSelectedItem().toString());
+                            viewModel.kalkulasi(ETBIBModalAwal.getText().toString(), ETBIBTargetHasilInvestasi.getText().toString(),
+                                    rorValue, spinnerDurasiBulanBIB.getSelectedItem().toString(), spinnerDurasiTahunBIB.getSelectedItem().toString());
                             break;
                         case 4:
-                            viewModel.kalkulasi(ETBIBModalAwal.getText().toString(),ETBIBTargetHasilInvestasi.getText().toString(),
-                                    ETBIBROR.getText().toString(),spinnerDurasiBulanBIB.getSelectedItem().toString(),spinnerDurasiTahunBIB.getSelectedItem().toString());
+                            viewModel.kalkulasi(ETBIBModalAwal.getText().toString(), ETBIBTargetHasilInvestasi.getText().toString(),
+                                    ETBIBROR.getText().toString(), spinnerDurasiBulanBIB.getSelectedItem().toString(), spinnerDurasiTahunBIB.getSelectedItem().toString());
                             break;
                     }
 
@@ -265,7 +265,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                         }
                     });
 
-                }else {
+                } else {
                     ETBIBModalAwal.setEnabled(true);
                     ETBIBTargetHasilInvestasi.setEnabled(true);
                     ETBIBROR.setEnabled(true);
@@ -317,13 +317,13 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
             hasilBIB.setText(formatHasil);
             */
 
-        switch (numbOfTabs){
+        switch (numbOfTabs) {
             case 3:
                 hasilBIB.setText(formatHasil);
-                if(spinnerDurasiBulanBIB.getSelectedItemPosition()==0 && spinnerDurasiTahunBIB.getSelectedItemPosition()==0){
+                if (spinnerDurasiBulanBIB.getSelectedItemPosition() == 0 && spinnerDurasiTahunBIB.getSelectedItemPosition() == 0) {
                     rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
                     hasilBIB.setVisibility(View.INVISIBLE);
-                }else {
+                } else {
                     rpLabel.setText(getString(R.string.rp));
                     hasilBIB.setVisibility(View.VISIBLE);
                 }
@@ -331,11 +331,11 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
             case 4:
                 hasilBIB.setText(formatHasil);
-                if(spinnerDurasiBulanBIB.getSelectedItemPosition()==0 && spinnerDurasiTahunBIB.getSelectedItemPosition()==0
-                        || Double.parseDouble(ETBIBROR.getText().toString()) <= 0){
+                if (spinnerDurasiBulanBIB.getSelectedItemPosition() == 0 && spinnerDurasiTahunBIB.getSelectedItemPosition() == 0
+                        || Double.parseDouble(ETBIBROR.getText().toString()) <= 0) {
                     rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
                     hasilBIB.setVisibility(View.INVISIBLE);
-                }else {
+                } else {
                     rpLabel.setText(getString(R.string.rp));
                     hasilBIB.setVisibility(View.VISIBLE);
                 }
