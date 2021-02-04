@@ -60,7 +60,7 @@ public class OutputResponse {
         @SerializedName("rekening")
         private User.BCAUser.Rekening rekeningUser;
 
-//        @SerializedName("transaction")
+        @SerializedName("transaction")
         private Transaction.TransactionResult transactionResult;
 
         @SerializedName("kuis_data")
@@ -81,8 +81,26 @@ public class OutputResponse {
         @SerializedName("tips")
         private TipsOfTheWeek tipsOfTheWeek;
 
-        @SerializedName("transaction")
+        @SerializedName("transaction_result_list")
         private List<Transaction.TransactionResult> transactionResultList;
+
+        @SerializedName("my_profile")
+        private Forum.User forumProfileUser;
+
+        @SerializedName("my_posting")
+        private List<Forum.Post> myPostList;
+
+        @SerializedName("my_bookmark")
+        private List<Forum.Post> myBookmarkList;
+
+        @SerializedName("picture_list")
+        private List<Forum.ProfilePicture> profilePictureList;
+
+        @SerializedName("list_users")
+        private List<User.ForumUser> directUserList;
+
+        @SerializedName("list_news")
+        private List<PromoNews> promoNewsList;
 
         public OutputSchema() {
         }
@@ -137,6 +155,30 @@ public class OutputResponse {
 
         public List<Transaction.TransactionResult> getTransactionResultList() {
             return transactionResultList;
+        }
+
+        public Forum.User getForumProfileUser() {
+            return forumProfileUser;
+        }
+
+        public List<Forum.Post> getMyPostList() {
+            return myPostList;
+        }
+
+        public List<Forum.Post> getMyBookmarkList() {
+            return myBookmarkList;
+        }
+
+        public List<Forum.ProfilePicture> getProfilePictureList() {
+            return profilePictureList;
+        }
+
+        public List<User.ForumUser> getDirectUserList() {
+            return directUserList;
+        }
+
+        public List<PromoNews> getPromoNewsList() {
+            return promoNewsList;
         }
     }
 }

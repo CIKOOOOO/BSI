@@ -34,11 +34,11 @@ public class ReksadanaProductViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void getReksaDanaList(String profile_risiko) {
+    public void getReksaDanaList(String token, String profile_risiko) {
 //        callback.resultOf(DummyData.getReksaDanaDummyList());
         if (profile_risiko.isEmpty()) return;
 
-        Call<OutputResponse> call = apiInterface.getReksaDanaData(Integer.parseInt(profile_risiko));
+        Call<OutputResponse> call = apiInterface.getReksaDanaData(token, Integer.parseInt(profile_risiko));
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {

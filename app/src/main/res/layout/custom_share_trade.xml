@@ -5,7 +5,7 @@
     android:id="@+id/cl_share_trade"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rectangle_rounded_stroke_ziggurat">
+    tools:background="@drawable/rectangle_rounded_stroke_ziggurat">
 
     <TextView
         android:id="@+id/tv_transaction_type_share_trade"

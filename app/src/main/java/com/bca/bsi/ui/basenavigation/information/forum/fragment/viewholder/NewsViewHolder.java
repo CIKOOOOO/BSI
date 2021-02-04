@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -14,6 +15,7 @@ import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
+import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -23,11 +25,11 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private TextView tvName, tvDate, tvContent, tvType, tvLike, tvComment, tvShare, tvLookMore, tvContentNews;
     private ImageView imgNews;
     private ImageButton imgBtnMore;
-    private ChildMainForumAdapter.OnPostClick onPostClick;
+    private OnPostClick onPostClick;
     private String profileID;
     private Forum.Post post;
 
-    public NewsViewHolder(@NonNull View itemView, ChildMainForumAdapter.OnPostClick onPostClick) {
+    public NewsViewHolder(@NonNull View itemView, OnPostClick onPostClick) {
         super(itemView);
         this.onPostClick = onPostClick;
         roundedProfile = itemView.findViewById(R.id.recycler_img_profile_child_main_forum);
@@ -65,10 +67,11 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         if (!post.getImageProfile().isEmpty())
             Picasso.get()
-                    .load(post.getImageProfile())
+                    .load(Utils.imageURL(post.getImageProfile()))
                     .into(roundedProfile);
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
+        int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;
 
         tvDate.setText(post.getDate());
         tvContent.setText(Utils.removeEnter(post.getContent()));
@@ -77,6 +80,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         tvShare.setText(post.getShare());
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
+        tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
 
         if (tvContent.getText().toString().equals(post.getContent())) {
             tvLookMore.setVisibility(View.GONE);
@@ -89,7 +93,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         tvContentNews.setText(Utils.removeEnter(promoNews.getContent()));
 
         Picasso.get()
-                .load(promoNews.getImage())
+                .load(Utils.imageURL(promoNews.getImage()))
                 .into(imgNews);
 
         itemView.setOnClickListener(v -> onPostClick.onDetailPost(post.getPostID()));
@@ -115,7 +119,20 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-
+                        switch (item.getItemId()) {
+                            case R.id.menu_report:
+                                onPostClick.onReport(post.getPostID());
+                                break;
+                            case R.id.menu_save:
+                                onPostClick.onSavedPost(post.getPostID());
+                                break;
+                            case R.id.menu_delete:
+                                onPostClick.onDeletePost(post.getPostID());
+                                break;
+                            case R.id.menu_edit:
+                                onPostClick.onEditPost(post);
+                                break;
+                        }
                         return true;
                     }
                 });
@@ -132,7 +149,11 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
                 break;
             case R.id.recycler_tv_content_news:
             case R.id.recycler_img_thumbnail_news:
+                Log.e("asd", post.getPromoNews().getNewsID()+"");
                 onPostClick.onDetailNews(post.getPromoNews().getNewsID());
+                break;
+            case R.id.recycler_tv_share_child_main_forum:
+                onPostClick.onResharePost(post.getStatusShare().equalsIgnoreCase("true"), post.getPostID());
                 break;
         }
     }

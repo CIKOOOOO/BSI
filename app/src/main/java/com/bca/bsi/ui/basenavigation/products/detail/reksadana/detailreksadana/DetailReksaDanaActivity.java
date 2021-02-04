@@ -80,7 +80,7 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
         if (intent != null && intent.hasExtra(REKSA_DANA_ID)) {
             String reksaDanaID = intent.getStringExtra(REKSA_DANA_ID);
             if (reksaDanaID != null)
-                viewModel.loadDetailReksaDana(Integer.parseInt(reksaDanaID));
+                viewModel.loadDetailReksaDana(prefConfig.getTokenUser(), Integer.parseInt(reksaDanaID));
         }
 
         imgBack.setOnClickListener(this);
@@ -96,8 +96,8 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.tv_kalkulator_perencanaan_detail_reksa_dana:
                 Intent intent2 = new Intent(this, CalculatorMoreActivity.class);
-                intent2.putExtra("numberOfTabs",3);
-                intent2.putExtra("rorValue",this.detailReksaDana.getKinerja1Tahun());
+                intent2.putExtra("numberOfTabs", 3);
+                intent2.putExtra("rorValue", this.detailReksaDana.getKinerja1Tahun());
                 Log.e("asdf", this.detailReksaDana.getKinerja1Tahun());
                 intent2.putExtra("namaProduk",this.detailReksaDana.getName());
                 startActivity(intent2);
@@ -119,7 +119,7 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
         this.detailReksaDana = detailReksaDana;
         tvProductName.setText(detailReksaDana.getName());
 
-        String nab = "Rp "+detailReksaDana.getNabPerUnit() + "\n NAB/Unit";
+        String nab = "Rp " + detailReksaDana.getNabPerUnit() + "\n NAB/Unit";
         String purchasingCost = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : detailReksaDana.getBiayaPembelian();
         String biayaAgenPenjual = detailReksaDana.getBiayaAgen() == null ? "Rp N/A" : "Rp " + Utils.priceFormat(Double.parseDouble(detailReksaDana.getBiayaAgen()));
 

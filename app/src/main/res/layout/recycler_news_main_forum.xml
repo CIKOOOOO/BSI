@@ -160,7 +160,7 @@
         android:drawablePadding="@dimen/size_for_5dp"
         android:textColor="@color/black_palette"
         android:textStyle="bold"
-        app:drawableEndCompat="@drawable/ic_share"
+        tools:drawableEndCompat="@drawable/ic_share"
         app:layout_constraintEnd_toEndOf="@id/recycler_img_btn_more_child_main_forum"
         app:layout_constraintTop_toBottomOf="@id/recycler_tv_content_news"
         tools:text="32" />

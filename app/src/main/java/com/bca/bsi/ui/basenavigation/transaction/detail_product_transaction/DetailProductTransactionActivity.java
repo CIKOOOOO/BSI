@@ -102,13 +102,10 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                 List<Product.ProductTransaction> productTransactionList = new ArrayList<>();
                 productTransactionList.add(productTransaction);
 
-                Log.e("asd", productTransaction.getName());
-
-
                 productNameDetailTransactionAdapter.setProductTransactions(productTransactionList);
                 productNameDetailTransactionAdapter.notifyDataSetChanged();
 
-                viewModel.loadDetailTransaksi(prefConfig.getAccountNumber(), this.reksaDana.getReksadanaID());
+                viewModel.loadDetailTransaksi(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), this.reksaDana.getReksadanaID());
             } else if (productType.equals(Type.PURCHASING_WITH_SMARTBOT)) {
                 // Here to retrieve data from smartbot
                 // Data : berapa persen pembagian setiap produk + list of product
@@ -122,7 +119,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                     }
                     productNameDetailTransactionAdapter.setProductTransactions(productTransactions);
                     productNameDetailTransactionAdapter.notifyDataSetChanged();
-                    viewModel.loadDetailTransaksi(prefConfig.getAccountNumber(), productRekomenList.get(0).getReksaId());
+                    viewModel.loadDetailTransaksi(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), productRekomenList.get(0).getReksaId());
 
                     etNominalPembelian.setText(nominalPembelian);
                     etNominalPembelian.setEnabled(false);

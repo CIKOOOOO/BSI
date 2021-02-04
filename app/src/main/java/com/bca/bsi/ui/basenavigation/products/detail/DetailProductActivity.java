@@ -8,25 +8,22 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.bca.bsi.R;
-import com.bca.bsi.model.Product;
 import com.bca.bsi.ui.basenavigation.BaseNavigationActivity;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.TopicListActivity;
 import com.bca.bsi.ui.basenavigation.products.detail.reksadana.ReksadanaProductFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 
-import java.util.List;
-
-public class DetailProductActivity extends BaseActivity implements View.OnClickListener{
+public class DetailProductActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String PRODUCT_TYPE = "product_type";
+    public static final String FROM = "from_quiz";
 
     private TextView btnLeft, btnRight;
     private String type;
+    private int fromQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +43,7 @@ public class DetailProductActivity extends BaseActivity implements View.OnClickL
             TextView tvTitleToolbar = findViewById(R.id.tv_title_toolbar_back);
             TextView tvChildToolbar = findViewById(R.id.tv_child_toolbar_back);
             int pos = intent.getIntExtra(PRODUCT_TYPE, -1);
+            fromQuiz = intent.getIntExtra(FROM, -1);
             if (pos == -1) {
                 onBackPressed();
             }
@@ -114,8 +112,12 @@ public class DetailProductActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, BaseNavigationActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        if (fromQuiz == -1) {
+            super.onBackPressed();
+        } else {
+            Intent intent = new Intent(this, BaseNavigationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
     }
 }

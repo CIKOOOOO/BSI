@@ -1,10 +1,25 @@
 package com.bca.bsi.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PromoNews {
 
+    @SerializedName("news_id")
     private String newsID;
-    private String title, description, image, content, date;
 
+    @SerializedName("news_title")
+    private String title;
+
+    private String description;
+
+    @SerializedName("news_image")
+    private String image;
+
+    @SerializedName("news_content")
+    private String content;
+
+    @SerializedName("news_release_date")
+    private String date;
 
     public PromoNews(String newsID, String title, String description, String image, String content, String date) {
         this.newsID = newsID;

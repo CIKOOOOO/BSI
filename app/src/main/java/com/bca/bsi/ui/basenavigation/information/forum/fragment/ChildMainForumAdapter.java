@@ -21,29 +21,13 @@ import java.util.List;
 
 public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
-    private static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5;
+    private static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5, END_OF_DATA = 6;
 
     private String type, profileID;
     private List<Forum.Post> forumList;
     private OnPostClick onPostClick;
 
-    public interface OnPostClick {
-        void onDetailPost(String postID);
-
-        void onPostLike(String postID);
-
-        void onReport(String postID);
-
-        void onSavedPost(String postID);
-
-        void onOtherProfile(String profileID);
-
-        void onMyProfile();
-
-        void onDetailNews(String newsID);
-    }
-
-    public ChildMainForumAdapter(String type, String profileID, ChildMainForumAdapter.OnPostClick onPostClick) {
+    public ChildMainForumAdapter(String type, String profileID, OnPostClick onPostClick) {
         this.profileID = profileID;
         this.onPostClick = onPostClick;
         this.type = type.toLowerCase();
@@ -51,7 +35,7 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
     }
 
     public void setForumList(List<Forum.Post> forumList) {
-        this.forumList = forumList;
+        this.forumList.addAll(forumList);
     }
 
     @NonNull
@@ -134,16 +118,22 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
         String currentType;
 
-        if (type.equals(Type.TRENDING) || type.equals(Type.TIMELINE)) {
-            currentType = forumList.get(position).getType();
-        } else if (null != forumList.get(position).getPost()) {
-            if (null != forumList.get(position).getPost().getPromoNews()) {
-                currentType = Type.REPOST_NEWS;
+        if(null != forumList.get(position).getPostID()){
+            if (type.equals(Type.TRENDING)
+                    || type.equals(Type.TIMELINE)
+                    || (type.equals(Type.PROFILE) && null == forumList.get(position).getPost())) {
+                currentType = forumList.get(position).getType();
+            } else if (null != forumList.get(position).getPost()) {
+                if (null != forumList.get(position).getPost().getPromoNews()) {
+                    currentType = Type.REPOST_NEWS;
+                } else {
+                    currentType = Type.REPOST;
+                }
             } else {
-                currentType = Type.REPOST;
+                currentType = type;
             }
-        } else {
-            currentType = type;
+        }else{
+            currentType = "end of data";
         }
 
         switch (currentType) {
@@ -162,6 +152,8 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             case Type.REPOST:
                 viewType = ChildMainForumAdapter.REPOST_GENERAL;
                 break;
+            default:
+                viewType = ChildMainForumAdapter.END_OF_DATA;
         }
         return viewType;
     }

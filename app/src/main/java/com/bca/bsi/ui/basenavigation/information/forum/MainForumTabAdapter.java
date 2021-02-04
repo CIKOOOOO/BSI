@@ -1,14 +1,19 @@
 package com.bca.bsi.ui.basenavigation.information.forum;
 
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumFragment;
 
+import java.util.List;
 
-public class MainForumTabAdapter extends FragmentStatePagerAdapter {
+
+public class MainForumTabAdapter extends FragmentStatePagerAdapter{
 
     private int numOfTabs;
 

@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
+import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
+import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -19,12 +20,12 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
     private TextView tvName, tvDate, tvSourceName, tvSourceDate, tvContent, tvNews, tvLike, tvComment, tvShare, tvLookMore;
     private RoundedImageView imgProfile, imgSourceProfile;
     private ImageView imgContentNews;
-    private ChildMainForumAdapter.OnPostClick onPostClick;
+    private OnPostClick onPostClick;
 
     private Forum.Post post;
     private String profileID;
 
-    public RepostNewsViewHolder(@NonNull View itemView, ChildMainForumAdapter.OnPostClick onPostClick) {
+    public RepostNewsViewHolder(@NonNull View itemView, OnPostClick onPostClick) {
         super(itemView);
         this.onPostClick = onPostClick;
 
@@ -47,6 +48,7 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         cardView.setOnClickListener(this);
         tvName.setOnClickListener(this);
         imgProfile.setOnClickListener(this);
+        tvShare.setOnClickListener(this);
     }
 
     public void setData(Forum.Post data, String profileID) {
@@ -60,14 +62,17 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         tvShare.setText(data.getShare());
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
+        int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;
+
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
+        tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
 
         if (tvContent.getText().toString().equals(post.getContent())) {
             tvLookMore.setVisibility(View.GONE);
         }
 
         Picasso.get()
-                .load(data.getImageProfile())
+                .load(Utils.imageURL(data.getImageProfile()))
                 .into(imgProfile);
 
         Forum.Post post = data.getPost();
@@ -78,11 +83,11 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         tvNews.setText(post.getPromoNews().getContent());
 
         Picasso.get()
-                .load(post.getImageProfile())
+                .load(Utils.imageURL(post.getImageProfile()))
                 .into(imgSourceProfile);
 
         Picasso.get()
-                .load(post.getPromoNews().getImage())
+                .load(Utils.imageURL(post.getPromoNews().getImage()))
                 .into(imgContentNews);
     }
 
@@ -98,7 +103,10 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
                     onPostClick.onOtherProfile(post.getProfileID());
                 break;
             case R.id.recycler_cv_repost_news_main_forum:
-//                onPostClick.onDetailPost();
+                onPostClick.onDetailNews(post.getPost().getPromoNews().getNewsID());
+                break;
+            case R.id.recycler_tv_share_child_main_forum:
+                onPostClick.onResharePost(post.getStatusShare().equalsIgnoreCase("true"), post.getPostID());
                 break;
         }
     }

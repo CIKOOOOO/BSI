@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -50,19 +51,19 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Hold
         Forum.Post.ImagePost imagePost = imageList.get(position);
         if (getItemViewType(position) == 1) {
             Picasso.get()
-                    .load(imagePost.getImageURL())
+                    .load(Utils.imageURL(imagePost.getImageURL()))
                     .into(holder.img1);
         } else if (getItemViewType(position) == 2) {
             Picasso.get()
-                    .load(imagePost.getImageURL())
+                    .load(Utils.imageURL(imagePost.getImageURL()))
                     .into(holder.img2);
         } else if (getItemViewType(position) == 4) {
             Picasso.get()
-                    .load(imagePost.getImageURL())
+                    .load(Utils.imageURL(imagePost.getImageURL()))
                     .into(holder.img4);
         } else {
             Picasso.get()
-                    .load(imagePost.getImageURL())
+                    .load(Utils.imageURL(imagePost.getImageURL()))
                     .into(holder.img3);
             if (imageList.size() - 1 > position && position == 2) {
                 int amount = imageList.size() - 3;

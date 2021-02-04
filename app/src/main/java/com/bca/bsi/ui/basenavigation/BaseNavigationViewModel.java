@@ -36,7 +36,7 @@ public class BaseNavigationViewModel extends AndroidViewModel {
     public void getTipsOfTheWeek(String token) {
 //        callback.onLoadTipsOfTheWeek(DummyData.getTipsOfTheWeek());
 
-        Call<OutputResponse> call = apiInterface.getTipsOfTheWeek(token, "45");
+        Call<OutputResponse> call = apiInterface.getTipsOfTheWeek(token);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {

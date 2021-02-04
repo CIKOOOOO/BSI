@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
@@ -21,6 +21,7 @@ import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.ui.basenavigation.portfolio.information.InformasiHistoryActivity;
 import com.bca.bsi.ui.basenavigation.portfolio.produkmenu.ProdukChoiceActivity;
 import com.bca.bsi.utils.BaseFragment;
+import com.bca.bsi.utils.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
     private ProgressBar progressBar;
     private ImageButton infoButton;
     private TextView reksaSelector, tvPercentReksadana;
+    private ImageButton customBundleButton;
 
     private PortfolioViewModel portfolioViewModel;
 
@@ -57,8 +59,9 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         showSnackBar(msg);
     }
 
-    public interface onBundleClick{
+    public interface onBundleClick {
         void onItemClick(Portfolio portfolio);
+
         void onInfoClick();
     }
 
@@ -84,14 +87,25 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         super.onViewCreated(view, savedInstanceState);
         //recycler robo
         RecyclerView recyclerView = view.findViewById(R.id.recycler_robo_main);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.HORIZONTAL, false));
         adapter = new PortfolioAdapter(this);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 0, true));
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
         recyclerView.setAdapter(adapter);
 //        adapter.setPortfolioList(getPortfolioList());
 
         portfolioViewModel = new ViewModelProvider(this).get(PortfolioViewModel.class);
         portfolioViewModel.setCallback(this);
-        portfolioViewModel.loadBundle(prefConfig.getProfileRisiko(),prefConfig.getAccountNumber());
+        portfolioViewModel.loadBundle(prefConfig.getTokenUser(), prefConfig.getProfileRisiko(), prefConfig.getAccountNumber());
+
+        // custom bundle button
+        customBundleButton = view.findViewById(R.id.ib_custom_bundle);
+        customBundleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ProdukChoiceActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
 
         //info robo
@@ -116,7 +130,7 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         // setting progressbar percentage
         tvPercentReksadana = view.findViewById(R.id.tv_percent_reksadana);
         int percentReksaValue = 100;
-        tvPercentReksadana.setText(percentReksaValue+"%");
+        tvPercentReksadana.setText(percentReksaValue + "%");
         ProgressBar progressBar_reksa = view.findViewById(R.id.percent_reksadana);
         progressBar_reksa.setProgress(percentReksaValue);
 
@@ -127,8 +141,8 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
 
     private List<Portfolio> getPortfolioList() {
         List<Portfolio> portfolioList = new ArrayList<>();
-        portfolioList.add(new Portfolio("1%", "0.02","Bundle 1"));
-        portfolioList.add(new Portfolio("3%", "0.04","Bundle 2"));
+        portfolioList.add(new Portfolio("1%", "0.02", "Bundle 1"));
+        portfolioList.add(new Portfolio("3%", "0.04", "Bundle 2"));
         return portfolioList;
     }
 }

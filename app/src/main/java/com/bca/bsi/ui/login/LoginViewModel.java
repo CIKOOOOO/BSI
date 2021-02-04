@@ -18,7 +18,6 @@ import com.bca.bsi.model.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -50,7 +49,7 @@ public class LoginViewModel extends AndroidViewModel {
         stringStringMap.put("bca_id", bcaID);
         stringStringMap.put("password", getEncryptedPassword(password));
 
-        Log.e("asd", stringStringMap.toString());
+//        Log.e("asd", stringStringMap.toString());
 
         Call<OutputResponse> call = apiInterface.loginWith(stringStringMap);
         call.enqueue(new Callback<OutputResponse>() {
@@ -71,14 +70,14 @@ public class LoginViewModel extends AndroidViewModel {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
                 } else {
-                    callback.onFailed("Terdapat kesalahan jaringan");
+                    callback.onFailed("");
                 }
             }
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
                 Log.e("asd", t.getMessage() + "on fail");
-                callback.onFailed("Terdapat kesalahan jaringan");
+                callback.onFailed("");
             }
         });
 

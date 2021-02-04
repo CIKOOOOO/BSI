@@ -89,8 +89,8 @@
         android:text="NAB/UNIT : "
         android:textSize="13sp"
         app:layout_constraintTop_toBottomOf="@id/calendar_logo"
-        app:layout_constraintStart_toEndOf="@id/tv_kinerja"
-        android:layout_marginStart="@dimen/size_for_60dp"
+        app:layout_constraintStart_toEndOf="@id/tv_kinerja_value"
+        android:layout_marginStart="@dimen/size_for_10dp"
         android:layout_marginTop="@dimen/size_for_2dp"
         android:textColor="@color/black_palette"/>
 

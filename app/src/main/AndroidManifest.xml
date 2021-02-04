@@ -20,22 +20,41 @@
             ></activity>
         <activity
             android:name=".ui.basenavigation.information.forum.post.direct.DirectShareActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.basenavigation.transaction.sell_transaction.DetailSellActivity" />
+        <activity
+            android:name=".ui.basenavigation.transaction.sell_transaction.DetailSellActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.basenavigation.information.forum.post.PostActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.basenavigation.profile.SettingsActivity" />
-        <activity android:name=".ui.basenavigation.more.learningmenu.materi.MateriActivity" />
-        <activity android:name=".ui.basenavigation.more.learningmenu.quiz.QuizActivity" />
-        <activity android:name=".ui.basenavigation.information.forum.comment.CommentActivity" />
-        <activity android:name=".ui.basenavigation.information.forum.otherprofile.OtherProfileActivity" />
-        <activity android:name=".ui.basenavigation.information.forum.inbox.InboxActivity" />
+        <activity
+            android:name=".ui.basenavigation.profile.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.more.learningmenu.materi.MateriActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.more.learningmenu.quiz.QuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.information.forum.comment.CommentActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ui.basenavigation.information.forum.otherprofile.OtherProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basenavigation.information.forum.inbox.InboxActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.basenavigation.information.forum.profile.connection.ConnectionActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.basenavigation.information.forum.profile.ForumProfileActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.basenavigation.portfolio.information.InformasiHistoryActivity"

@@ -27,12 +27,12 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback, View.OnClickListener {
+public class PurchasingSmartbotActivity extends BaseActivity implements IPurchasingSmartbotCallback, View.OnClickListener, PurchasingSmartbotAdapter.onEventMatch {
 
     ImageButton rekomenRoboButton;
     ConstraintLayout roboHitungPopupLayout;
     ImageButton clearButton, backToolbarButton;
-    TextView toolbarTitle, toolbarSubtitle, minPembelian, tvReturn, tvRisk;
+    TextView toolbarTitle, toolbarSubtitle, minPembelian, tvReturn, tvRisk, tvHitungSekarang;
     PurchasingSmartbotAdapter adapter;
     RecyclerView recyclerView;
     EditText etNominal;
@@ -59,9 +59,10 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         tvReturn = findViewById(R.id.tv_return_val);
         tvRisk = findViewById(R.id.tv_risk_val);
         cbAgreement = findViewById(R.id.cb_confirmation_purchasing_smartbot);
+        tvHitungSekarang = findViewById(R.id.tv_hitungsekarang);
 
         // inisialisasi adapter dan recycler
-        adapter = new PurchasingSmartbotAdapter();
+        adapter = new PurchasingSmartbotAdapter(this);
         recyclerView = findViewById(R.id.recycler_product_main_p);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -102,10 +103,10 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         } else {
             // ini kalau custom
             String hasil = intent.getStringExtra("data2");
-            //TODO hit API dari sini
+            //hit API dari sini
             viewModel = new ViewModelProvider(this).get(PurchasingSmartbotViewModel.class);
             viewModel.setCallback(this);
-            viewModel.loadBundle(prefConfig.getAccountNumber(), hasil, "");
+            viewModel.loadBundle(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), hasil, "");
         }
 
         //Toolbar variables
@@ -141,6 +142,14 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
 
         // Do something with adapter
         tvLanjut.setOnClickListener(this);
+        // klik hitung sekarang
+        tvHitungSekarang.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                viewModel.loadBundle(prefConfig.getAccountNumber(), adapter.getReksaIds());
+                roboHitungPopupLayout.setVisibility(View.GONE);
+            }
+        }));
     }
 
 
@@ -149,7 +158,22 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         this.portfolio = bundles.get(0);
         adapter.setProductRekomenList(portfolio.getProductRekomenList());
         adapter.notifyDataSetChanged();
+        minPembelian.setText(portfolio.getMinPurchase());
+        tvReturn.setText(portfolio.getExpReturn() + "%");
+        tvRisk.setText(portfolio.getRisk());
+    }
 
+//    @Override
+//    public void onLoadDataCustom(List<Portfolio> bundles) {
+//        Portfolio portfolio = bundles.get(0);
+//        minPembelian.setText(portfolio.getMinPurchase());
+//        tvReturn.setText(portfolio.getExpReturn() + "%");
+//        tvRisk.setText(portfolio.getRisk());
+//    }
+
+    @Override
+    public void onLoadDataCustom(List<Portfolio> bundles) {
+        this.portfolio = bundles.get(0);
         minPembelian.setText(portfolio.getMinPurchase());
         tvReturn.setText(portfolio.getExpReturn() + "%");
         tvRisk.setText(portfolio.getRisk());
@@ -181,5 +205,18 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
                 }
                 break;
         }
+    }
+
+    @Override
+    public void sendValue(String reksaDanaID, String proportion) {
+        viewModel.loadBundleCustom(prefConfig.getAccountNumber(),reksaDanaID,proportion);
+    }
+
+    @Override
+    public void onLoadDataCustom(List<Portfolio> bundles) {
+        this.portfolio = bundles.get(0);
+        minPembelian.setText(portfolio.getMinPurchase());
+        tvReturn.setText(portfolio.getExpReturn() + "%");
+        tvRisk.setText(portfolio.getRisk());
     }
 }

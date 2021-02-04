@@ -28,29 +28,28 @@ public class PortfolioViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadBundle(String profil_resiko, String no_rekening){
-        Call<OutputResponse> call = apiInterface.getRoboRekomen(profil_resiko,no_rekening);
+    public void loadBundle(String token, String profil_resiko, String no_rekening) {
+        Call<OutputResponse> call = apiInterface.getRoboRekomen(token, profil_resiko, no_rekening);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("a","tes1"+response.code());
-                if(response.body()!=null){
-                    Log.e("b","tes2");
+                Log.e("a", "tes1" + response.code());
+                if (response.body() != null) {
+                    Log.e("b", "tes2");
                     OutputResponse outputResponse = response.body();
-                    if(outputResponse.getErrorSchema().getErrorCode().equals("200")){
-                        Log.e("c","tes3");
+                    if (outputResponse.getErrorSchema().getErrorCode().equals("200")) {
+                        Log.e("c", "tes3");
                         OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
-                        for (Portfolio p: outputSchema.getBundles()
-                             ) {
-                            Log.e("x",p.getExpReturn());
+                        for (Portfolio p : outputSchema.getBundles()) {
+                            Log.e("x", p.getExpReturn());
                         }
                         callback.onLoadData(outputSchema.getBundles());
                     } else {
-                        Log.e("d","tes4");
+                        Log.e("d", "tes4");
                         callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
                     }
                 } else {
-                    Log.e("e","tes5");
+                    Log.e("e", "tes5");
                     callback.onFail("Mohon periksa jaringan anda");
                 }
             }

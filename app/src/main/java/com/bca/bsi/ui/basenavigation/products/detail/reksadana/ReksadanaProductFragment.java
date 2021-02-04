@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,7 +59,7 @@ public class ReksadanaProductFragment extends BaseFragment implements IReksaDana
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
 
-        viewModel.getReksaDanaList(prefConfig.getProfileRisiko());
+        viewModel.getReksaDanaList(prefConfig.getTokenUser(), prefConfig.getProfileRisiko());
 
         etSearchProduct.addTextChangedListener(new TextWatcher() {
             @Override

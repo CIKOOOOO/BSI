@@ -1,6 +1,8 @@
 package com.bca.bsi.ui.basenavigation;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,15 +42,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick, InformationFragment.onReport, ReportAdapter.onReportClick, View.OnClickListener, IBaseNavigatonCallback, TipsOfTheWeekDialog.onItemClick, AboutRoboDialog.onCloseDialog {
+public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick, ReportAdapter.onReportClick, View.OnClickListener, IBaseNavigatonCallback, TipsOfTheWeekDialog.onItemClick, AboutRoboDialog.onCloseDialog {
 
-    private BottomSheetBehavior<ConstraintLayout> bsSmartBot, bsReport;
+    public static BottomSheetBehavior<ConstraintLayout> BOTTOM_SHEET_REPORT;
+
+    private static ReportAdapter reportAdapter;
+    private static Button btnReport;
+    private static TextView tvTitle;
+    private static Resources resources;
+
+    private BottomSheetBehavior<ConstraintLayout> bsSmartBot;
     private RoboRekomenAdapter roboRekomenAdapter;
     private FrameLayout frameLayout;
-    private ReportAdapter reportAdapter;
-    private Button btnReport;
     private BaseNavigationViewModel viewModel;
     private Forum.Report report;
     private AboutRoboDialog aboutRoboDialog;
@@ -71,10 +79,12 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
 
         frameLayout = findViewById(R.id.frame_blur);
         btnReport = findViewById(R.id.bs_btn_update_choose_image);
+        tvTitle = findViewById(R.id.bs_tv_title_choose_image);
 
         reportAdapter = new ReportAdapter(this);
         tipsOfTheWeekDialog = new TipsOfTheWeekDialog(this);
         aboutRoboDialog = new AboutRoboDialog(this);
+        resources = getResources();
 
         viewModel = new ViewModelProvider(this).get(BaseNavigationViewModel.class);
         viewModel.setCallback(this);
@@ -101,15 +111,17 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         clBSReport.setLayoutParams(layoutParams);
 
         bsSmartBot = BottomSheetBehavior.from(clBSRoboRekomen);
-        bsReport = BottomSheetBehavior.from(clBSReport);
+        BOTTOM_SHEET_REPORT = BottomSheetBehavior.from(clBSReport);
         // lanjut bottom sheet
         TextView bottomLanjut = findViewById(R.id.tv_lanjut);
 
-        //Popup tips of the week
-        Calendar calendar = Calendar.getInstance();
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        if (dayOfWeek == 5
-                && prefConfig.getTipsActivated()
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date(Utils.getTime(Constant.DATE_FORMAT_1)));
+        boolean monday = cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+
+        if (
+                monday
+                        && prefConfig.getTipsActivated()
 //                && !prefConfig.getTimeTipsOfTheWeek().equals(Utils.getTime(Constant.DATE_FORMAT_2))
         ) { // Day-2 = Monday
             viewModel.getTipsOfTheWeek(prefConfig.getTokenUser());
@@ -154,7 +166,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         changeFragmentToPortfolio();
 
         bsSmartBot.addBottomSheetCallback(bottomSheetCallback);
-        bsReport.addBottomSheetCallback(bottomSheetCallback);
+        BOTTOM_SHEET_REPORT.addBottomSheetCallback(bottomSheetCallback);
 
         btnReport.setOnClickListener(this);
         bottomLanjut.setOnClickListener(this);
@@ -192,7 +204,6 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
 
     private void changeFragmentToInformation() {
         InformationFragment informationFragment = new InformationFragment();
-        informationFragment.setOnReport(this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_base_navigation, informationFragment);
         transaction.commit();
@@ -211,26 +222,9 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     }
 
     @Override
-    public void onClick(List<Forum.Report> reportList) {
-        TextView tvTitle = findViewById(R.id.bs_tv_title_choose_image);
-
-        bsReport.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-        tvTitle.setText(getResources().getString(R.string.reason_to_report));
-        btnReport.setText(getResources().getString(R.string.report_now));
-
-        btnReport.setEnabled(false);
-        btnReport.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-        btnReport.setTextColor(getResources().getColor(android.R.color.white));
-
-        reportAdapter.setReportList(reportList);
-        reportAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void onBackPressed() {
-        if (bsReport.getState() == BottomSheetBehavior.STATE_EXPANDED || bsSmartBot.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-            bsReport.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        if (BOTTOM_SHEET_REPORT.getState() == BottomSheetBehavior.STATE_EXPANDED || bsSmartBot.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            BOTTOM_SHEET_REPORT.setState(BottomSheetBehavior.STATE_COLLAPSED);
             bsSmartBot.setState(BottomSheetBehavior.STATE_COLLAPSED);
         } else
             super.onBackPressed();
@@ -297,5 +291,19 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         if (aboutRoboDialog != null && aboutRoboDialog.getTag() != null) {
             aboutRoboDialog.dismiss();
         }
+    }
+
+    public static void loadReport(List<Forum.Report> reportList) {
+        BOTTOM_SHEET_REPORT.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+        tvTitle.setText("Alasan Pelaporan");
+        btnReport.setText("Laporkan");
+
+        btnReport.setEnabled(false);
+        btnReport.setBackgroundColor(resources.getColor(android.R.color.darker_gray));
+        btnReport.setTextColor(resources.getColor(android.R.color.white));
+
+        reportAdapter.setReportList(reportList);
+        reportAdapter.notifyDataSetChanged();
     }
 }

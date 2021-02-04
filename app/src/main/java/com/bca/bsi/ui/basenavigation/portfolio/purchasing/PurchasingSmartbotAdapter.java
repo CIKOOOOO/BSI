@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.portfolio.purchasing;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.ProductRekomen;
+import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSmartbotAdapter.Holder> {
 
     private List<ProductRekomen> productRekomenList = new ArrayList<>();
+    private onEventMatch onEventMatch;
+    public PurchasingSmartbotAdapter(PurchasingSmartbotAdapter.onEventMatch onEventMatch) {
+        this.onEventMatch = onEventMatch;
+    }
+    public interface onEventMatch {
+        void sendValue(String reksaDanaID, String proportion);
+    }
+
 
     public void setProductRekomenList(List<ProductRekomen> productRekomenList) {
         this.productRekomenList = productRekomenList;
@@ -27,6 +39,10 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
 
     public List<ProductRekomen> getProductRekomenList() {
         return productRekomenList;
+    }
+
+    public interface onEventMatch {
+        void sendValue(String reksaDanaID, String proportion);
     }
 
     @NonNull
@@ -41,12 +57,19 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
         final ProductRekomen productRekomen = productRekomenList.get(position);
         holder.tvJenisReksa.setText(productRekomen.getJenisReksadana());
         holder.tvNab.setText(productRekomen.getNab());
-        holder.tvKinerja.setText(productRekomen.getKinerja());
+        holder.tvKinerja.setText("+" + productRekomen.getKinerja() + "%");
         holder.tvReksaName.setText(productRekomen.getProductName());
         holder.etPercent.setText(productRekomen.getPercentage());
-        holder.tvLastDate.setText(productRekomen.getLastDate());
 
-        if(productRekomenList.size()<=2){
+        String date = null;
+        try {
+            date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, productRekomen.getLastDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.tvLastDate.setText(date);
+
+        if (productRekomenList.size() <= 2) {
             holder.ibClear.setVisibility(View.INVISIBLE);
             holder.ibClear.setEnabled(false);
         } else {
@@ -59,7 +82,7 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
             public void onClick(View v) {
                 String isiPercentString = holder.etPercent.getText().toString();
                 int nilaiPercent = Integer.parseInt(isiPercentString);
-                if(nilaiPercent<100) {
+                if (nilaiPercent < 100) {
                     nilaiPercent += 1;
                 }
                 isiPercentString = String.valueOf(nilaiPercent);
@@ -73,7 +96,7 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
             public void onClick(View v) {
                 String isiPercentString = holder.etPercent.getText().toString();
                 int nilaiPercent = Integer.parseInt(isiPercentString);
-                if(nilaiPercent>0) {
+                if (nilaiPercent > 0) {
                     nilaiPercent -= 1;
                 }
                 isiPercentString = String.valueOf(nilaiPercent);
@@ -85,7 +108,7 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
         holder.ibClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getItemCount()>1) {
+                if (getItemCount() > 1) {
                     productRekomenList.remove(position);
                 }
 
@@ -103,13 +126,22 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 char zero = '0';
-                if(holder.etPercent.getText().length()==2 && holder.etPercent.getText().charAt(0)==zero){
+                if (holder.etPercent.getText().length() == 2 && holder.etPercent.getText().charAt(0) == zero) {
                     holder.etPercent.setText("");
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (s.length() != 0) {
+                    productRekomen.setPercentage(holder.etPercent.getText().toString());
+                    if (is100()) {
+                        //TODO HIT API reksaid + proportions
+                        onEventMatch.sendValue(getReksaIds(), getProportions());
+                    }
+                } else {
+                    holder.etPercent.setText("0");
+                }
 
             }
         });
@@ -136,6 +168,33 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
             ibMin = itemView.findViewById(R.id.ib_min);
             ibClear = itemView.findViewById(R.id.ib_clear);
         }
+    }
+
+    public String getReksaIds() {
+        String res = "";
+        for (ProductRekomen product : this.productRekomenList
+        ) {
+            res += product.getReksaId() + ",";
+        }
+        return res.substring(0, res.length() - 1);
+    }
+
+    public String getProportions() {
+        String res = "";
+        for (ProductRekomen product : this.productRekomenList) {
+            res += product.getPercentage() + ",";
+        }
+        return res.substring(0, res.length() - 1);
+    }
+
+    public boolean is100() {
+        int total = 0;
+        for (ProductRekomen produk : this.productRekomenList) {
+            Log.e("asdas", produk.getPercentage() + " Total : " + total);
+            total += Integer.parseInt(produk.getPercentage());
+
+        }
+        return total == 100;
     }
 
 }

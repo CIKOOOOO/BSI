@@ -129,6 +129,7 @@ public class Portfolio {
         private String reksaDanaUnit;
         @SerializedName("nab")
         private Double nab;
+        private String reksaDanaID;
 
         public History() {
         }
@@ -155,6 +156,10 @@ public class Portfolio {
 
         public Double getNab() {
             return nab;
+        }
+
+        public String getReksaDanaID() {
+            return reksaDanaID;
         }
     }
 }

@@ -1,9 +1,5 @@
 package com.bca.bsi.ui.basenavigation.more.learningmenu.materi;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,14 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bca.bsi.R;
 import com.bca.bsi.adapter.LearningMateriAdapter;
 import com.bca.bsi.model.KuisData;
 import com.bca.bsi.model.LearningChapter;
-import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.IQuizCallback;
 import com.bca.bsi.ui.basenavigation.more.learningmenu.quiz.QuizActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
@@ -59,11 +56,11 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
         backBtn.setOnClickListener(this);
 
         //BIKIN SWITCH CASE DI SINI
-        switch (topic){
+        switch (topic) {
             case "1":
                 titlePage.setText(getString(R.string.reksadana_capslock));
                 models = DummyData.setMateriReksaDana();
-                System.out.println("INI MODEEEEEEEEEEL LEARNING: "+models.get(0).getTitle());
+                System.out.println("INI MODEEEEEEEEEEL LEARNING: " + models.get(0).getTitle());
                 break;
 
             case "2":
@@ -80,10 +77,9 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
         viewModel = new ViewModelProvider(this).get(MateriQuizViewModel.class);
         viewModel.setCallback(this);
 
-        viewModel.getScoreData(prefConfig.getBCAID(),topic);
-
+        viewModel.getScoreData(prefConfig.getTokenUser(), prefConfig.getBCAID(), topic);
         viewPager = findViewById(R.id.view_pager);
-        viewPager.setPadding(50,0,50, 0);
+        viewPager.setPadding(50, 0, 50, 0);
 
 
         /*
@@ -100,9 +96,9 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
 
             @Override
             public void onPageSelected(int position) {
-                System.out.println("INI TOPIC YANG TERPILIH: "+topic);
+                System.out.println("INI TOPIC YANG TERPILIH: " + topic);
                 currentPage = position;
-                switch (position){
+                switch (position) {
                     case 0:
                         pagination.setImageResource(R.drawable.asset_pagination_1_4);
                         break;
@@ -127,7 +123,7 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.img_btn_back_toolbar:
                 onBackPressed();
                 break;
@@ -136,15 +132,15 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onClick() {
-        switch (currentPage){
-            case 2 :
-                Log.e("asd","hit");
+        switch (currentPage) {
+            case 2:
+                Log.e("asd", "hit");
                 Intent intentBrowse = new Intent();
                 intentBrowse.setAction(Intent.ACTION_VIEW);
                 intentBrowse.addCategory(Intent.CATEGORY_BROWSABLE);
 
                 //SET SWITCH CASE
-                switch (topic){
+                switch (topic) {
                     case "1":
                         intentBrowse.setData(Uri.parse("https://www.bca.co.id/id/Individu/Produk/Investasi-dan-Asuransi/Reksadana"));
                         break;
@@ -163,7 +159,7 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
 
             case 3:
                 Intent intent = new Intent(this, QuizActivity.class);
-                intent.putExtra("topic",topic);
+                intent.putExtra("topic", topic);
                 startActivity(intent);
                 break;
         }
@@ -172,13 +168,13 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onRetriveData(KuisData.UserScore userScore) {
 
-        adapter = new LearningMateriAdapter(models,this, this,userScore);
+        adapter = new LearningMateriAdapter(models, this, this, userScore);
         viewPager.setAdapter(adapter);
 
     }
 
     @Override
     public void onFailed(String msg) {
-        System.out.println("ERROR: "+msg);
+        System.out.println("ERROR: " + msg);
     }
 }

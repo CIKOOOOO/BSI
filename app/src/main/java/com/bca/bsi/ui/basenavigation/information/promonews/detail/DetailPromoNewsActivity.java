@@ -14,7 +14,6 @@ import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 public class DetailPromoNewsActivity extends BaseActivity implements View.OnClickListener, IDetailNewsCallback {
@@ -53,16 +52,8 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(DATA)) {
-            Gson gson = new Gson();
             String data = intent.getStringExtra(DATA);
-            this.promoNews = gson.fromJson(data, PromoNews.class);
-
             tvTitleToolbar.setText(getString(R.string.detail_news));
-
-            tvTitle.setText(this.promoNews.getTitle());
-            tvDate.setText("Dirilis pada " + this.promoNews.getDate());
-            tvContent.setText(this.promoNews.getContent());
-
             viewModel.loadNews(prefConfig.getTokenUser(), data);
         }
 
@@ -90,7 +81,7 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
         this.promoNews = promoNews;
 
         Picasso.get()
-                .load(promoNews.getImage())
+                .load(Utils.imageURL(promoNews.getImage()))
                 .into(imgNews);
 
         tvTitle.setText(this.promoNews.getTitle());

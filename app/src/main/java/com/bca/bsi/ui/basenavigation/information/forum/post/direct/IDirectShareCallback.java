@@ -10,4 +10,6 @@ public interface IDirectShareCallback {
     void onLoadChosenForumUser(List<User.ForumUser> forumUserList);
 
     void onFailed(String msg);
+
+    void onSuccessPost();
 }

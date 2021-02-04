@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumFragment;
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.constant.Constant;
@@ -22,15 +23,9 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
-public class MainForumFragment extends BaseFragment implements IMainForumCallback, View.OnClickListener {
+public class MainForumFragment extends BaseFragment implements IMainForumCallback, View.OnClickListener{
 
-    private onReport onReport;
     private MainForumViewModel viewModel;
-
-    @Override
-    public void onLoadReportData(List<Forum.Report> reportList) {
-        onReport.onClick(reportList);
-    }
 
     @Override
     public void onClick(View v) {
@@ -41,14 +36,6 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
                 startActivity(intent);
                 break;
         }
-    }
-
-    public interface onReport {
-        void onClick(List<Forum.Report> reportList);
-    }
-
-    public void setOnReport(onReport onReport) {
-        this.onReport = onReport;
     }
 
     @Override

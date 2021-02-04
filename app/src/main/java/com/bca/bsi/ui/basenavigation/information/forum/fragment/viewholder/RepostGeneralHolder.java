@@ -12,22 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
+import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.PostImageAdapter;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
+import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView tvName, tvDate, tvSourceName, tvSourceDate, tvContent, tvLike, tvComment, tvShare, tvLookMore;
     private RoundedImageView imgProfile, imgSourceProfile;
-    private ChildMainForumAdapter.OnPostClick onPostClick;
+    private OnPostClick onPostClick;
     private RecyclerView recyclerImage;
 
     private Forum.Post post;
     private String profileID;
 
-    public RepostGeneralHolder(@NonNull View itemView, ChildMainForumAdapter.OnPostClick onPostClick) {
+    public RepostGeneralHolder(@NonNull View itemView, OnPostClick onPostClick) {
         super(itemView);
         this.onPostClick = onPostClick;
 
@@ -46,8 +48,11 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
         imgSourceProfile = itemView.findViewById(R.id.recycler_img_profile_post_source_repost_news);
         recyclerImage = itemView.findViewById(R.id.recycler_rv_img_repost_child_main_forum);
 
+        recyclerImage.addItemDecoration(new SpacesItemDecoration(5));
+
         cardView.setOnClickListener(this);
         tvName.setOnClickListener(this);
+        tvShare.setOnClickListener(this);
         imgProfile.setOnClickListener(this);
     }
 
@@ -62,14 +67,17 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
         tvShare.setText(data.getShare());
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
+        int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;
+
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
+        tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
 
         if (tvContent.getText().toString().equals(post.getContent())) {
             tvLookMore.setVisibility(View.GONE);
         }
 
         Picasso.get()
-                .load(data.getImageProfile())
+                .load(Utils.imageURL(data.getImageProfile()))
                 .into(imgProfile);
 
         Forum.Post post = data.getPost();
@@ -81,7 +89,7 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
         tvContent.setText(post.getContent());
 
         Picasso.get()
-                .load(post.getImageProfile())
+                .load(Utils.imageURL(post.getImageProfile()))
                 .into(imgSourceProfile);
 
         if (post.getImagePostList() != null) {
@@ -100,7 +108,6 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
                 });
                 recyclerImage.setLayoutManager(glm);
             }
-            recyclerImage.addItemDecoration(new SpacesItemDecoration(5));
 
             recyclerImage.setAdapter(postImageAdapter);
             postImageAdapter.setImageList(post.getImagePostList());
@@ -119,6 +126,9 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
                 break;
             case R.id.recycler_cv_repost_news_main_forum:
 //                onPostClick.onDetailPost();
+                break;
+            case R.id.recycler_tv_share_child_main_forum:
+                onPostClick.onResharePost(post.getStatusShare().equalsIgnoreCase("true"), post.getPost().getPostID());
                 break;
         }
     }

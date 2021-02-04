@@ -41,11 +41,11 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
         tvLanjut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(produkChoiceAdapter.getChoosenAmount()<2){
+                if (produkChoiceAdapter.getChoosenAmount() < 2) {
                     showSnackBar("Pilihan minimal sebanyak dua produk !");
                 } else {
                     Intent intent = new Intent(v.getContext(), PurchasingSmartbotActivity.class);
-                    intent.putExtra("data2",produkChoiceAdapter.getReksaIds());
+                    intent.putExtra("data2", produkChoiceAdapter.getReksaIds());
                     v.getContext().startActivity(intent);
                 }
             }
@@ -66,7 +66,7 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
 //        produkChoiceAdapter.setProducts(DummyData.getProductChoiceList());
         viewModel = new ViewModelProvider(this).get(ProdukChoiceViewModel.class);
         viewModel.setCallback(this);
-        viewModel.loadProducts(prefConfig.getProfileRisiko());
+        viewModel.loadProducts(prefConfig.getTokenUser(), prefConfig.getProfileRisiko());
 
         // Toolbar variables
         backButton = findViewById(R.id.img_btn_back_toolbar);
@@ -80,7 +80,7 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FilterSortActivity.class);
-                intent.putExtra("sort_position",sortPosition);
+                intent.putExtra("sort_position", sortPosition);
                 startActivityForResult(intent, 0);
             }
         });
@@ -95,11 +95,11 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 0){
-            if(resultCode == 1){
-                int chosenPosition = data.getIntExtra("filter_data",-1);
-                if(chosenPosition != -1){
-                    Log.e("asd","Data retrieve : "+chosenPosition);
+        if (requestCode == 0) {
+            if (resultCode == 1) {
+                int chosenPosition = data.getIntExtra("filter_data", -1);
+                if (chosenPosition != -1) {
+                    Log.e("asd", "Data retrieve : " + chosenPosition);
                     sortPosition = chosenPosition;
                 }
             }

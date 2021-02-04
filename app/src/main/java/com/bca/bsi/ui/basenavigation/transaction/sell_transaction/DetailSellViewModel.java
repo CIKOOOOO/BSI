@@ -28,8 +28,8 @@ public class DetailSellViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadData(String reksaDana) {
-        Call<OutputResponse> call = apiInterface.getDetailReksaDana(Integer.parseInt(reksaDana));
+    public void loadData(String token, String reksaDana) {
+        Call<OutputResponse> call = apiInterface.getDetailReksaDana(token, Integer.parseInt(reksaDana));
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {

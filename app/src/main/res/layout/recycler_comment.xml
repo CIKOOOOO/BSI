@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:backgroundTint="@color/white_ice_palette"
     app:cardElevation="@dimen/size_for_5dp">
 
@@ -12,8 +13,8 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/recycler_img_profile_comment"
-            android:layout_width="@dimen/size_for_50dp"
-            android:layout_height="@dimen/size_for_50dp"
+            android:layout_width="@dimen/size_for_40dp"
+            android:layout_height="@dimen/size_for_40dp"
             android:layout_marginStart="@dimen/size_for_20dp"
             android:layout_marginTop="@dimen/size_for_10dp"
             android:scaleType="centerCrop"
@@ -31,8 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size_for_10dp"
-            android:layout_marginTop="@dimen/size_for_5dp"
-            android:text="Me"
+            tools:text="Me"
             android:textColor="@color/java_palette"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/recycler_img_profile_comment"
@@ -42,7 +42,7 @@
             android:id="@+id/recycler_tv_date_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="15 Desember 2020 16:21"
+            tools:text="15 Desember 2020 16:21"
             android:textColor="@color/black_palette"
             android:textSize="@dimen/size_for_12sp"
             app:layout_constraintStart_toStartOf="@id/recycler_tv_name_comment"
@@ -64,10 +64,21 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/size_for_5dp"
             android:layout_marginBottom="@dimen/size_for_10dp"
-            android:text="@string/lorem"
+            tools:text="@string/lorem"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/recycler_img_btn_more_child_main_forum"
+            app:layout_constraintEnd_toStartOf="@id/recycler_img_btn_more_comment"
             app:layout_constraintStart_toStartOf="@id/recycler_tv_name_comment"
-            app:layout_constraintTop_toBottomOf="@id/recycler_img_profile_comment" />
+            app:layout_constraintTop_toBottomOf="@id/recycler_tv_date_comment" />
+
+        <View
+            android:id="@+id/recycler_view_01"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_for_0.5dp"
+            android:layout_marginTop="@dimen/size_for_20dp"
+            android:layout_marginBottom="@dimen/size_for_2dp"
+            android:background="@color/gray_palette"
+            android:elevation="@dimen/size_for_1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_tv_content_comment" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
