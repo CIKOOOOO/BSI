@@ -25,6 +25,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
     private ApiInterface apiInterface;
     private IChildMainForumCallback callback;
     private int page;
+    private boolean isLast;
 
     public void setCallback(IChildMainForumCallback callback) {
         this.callback = callback;
@@ -32,11 +33,12 @@ public class ChildMainForumViewModel extends AndroidViewModel {
 
     public ChildMainForumViewModel(@NonNull Application application) {
         super(application);
+        isLast = false;
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
     public void loadForumPost(String type, int pages, String tokenUser, String profileID, String profileRisiko) {
-        if (this.page != pages) {
+        if (this.page != pages && !isLast) {
             Call<OutputResponse> call;
             this.page = pages;
             List<Forum.Post> postList = new ArrayList<>();
@@ -57,11 +59,15 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     call.enqueue(new Callback<OutputResponse>() {
                         @Override
                         public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                            Log.e("asd", response.code() + "");
+                            Log.e("asd", response.code() + "" + response.raw().request().url().toString());
                             if (null != response.body()) {
                                 OutputResponse outputResponse = response.body();
                                 OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
-                                if ("200".equals(errorSchema.getErrorCode())) {
+                                if ("200".equals(errorSchema.getErrorCode())
+                                        || "206".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                                    if("206".equalsIgnoreCase(errorSchema.getErrorCode())){
+                                       isLast = true;
+                                    }
                                     OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                                     List<Forum.Post> postShareTrade = outputSchema.getMyPostList();
                                     for (int i = 0; i < postShareTrade.size(); i++) {
@@ -80,6 +86,8 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                                         postShareTrade.set(i, forum);
                                     }
                                     callback.onLoadData(postShareTrade);
+                                } else if ("204".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                                    isLast = true;
                                 } else {
                                     page -= 1;
                                     callback.onFailed(errorSchema.getErrorMessage());

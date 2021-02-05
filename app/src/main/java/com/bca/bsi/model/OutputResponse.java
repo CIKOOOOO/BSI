@@ -102,6 +102,12 @@ public class OutputResponse {
         @SerializedName("list_news")
         private List<PromoNews> promoNewsList;
 
+        @SerializedName("my_inbox")
+        private List<Forum.Inbox> inboxList;
+
+        @SerializedName(value = "list_followingme", alternate = {"list_followerme"})
+        private List<Forum.Connection> connectionList;
+
         public OutputSchema() {
         }
 
@@ -179,6 +185,14 @@ public class OutputResponse {
 
         public List<PromoNews> getPromoNewsList() {
             return promoNewsList;
+        }
+
+        public List<Forum.Inbox> getInboxList() {
+            return inboxList;
+        }
+
+        public List<Forum.Connection> getConnectionList() {
+            return connectionList;
         }
     }
 }

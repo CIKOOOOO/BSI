@@ -28,6 +28,7 @@ import java.util.List;
 public class InformationFragment extends BaseFragment implements View.OnClickListener{
 
     private TextView tvStart, tvMid, tvEnd;
+    private MainForumFragment mainForumFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,9 +122,13 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
     }
 
     private void changeFragmentToForum() {
-        MainForumFragment mainForumFragment = new MainForumFragment();
+        mainForumFragment = new MainForumFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_information_fragment, mainForumFragment);
         transaction.commit();
+    }
+
+    public void goToTop(){
+
     }
 }

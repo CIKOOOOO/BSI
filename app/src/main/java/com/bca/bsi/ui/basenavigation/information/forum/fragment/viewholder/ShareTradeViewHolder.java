@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -68,6 +67,9 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
                     .into(roundedImageView);
         }
 
+        int visibilityOfContent = post.getContent().trim().isEmpty()? View.GONE: View.VISIBLE;
+        tvContent.setVisibility(visibilityOfContent);
+
         tvName.setText(post.getName());
         tvDate.setText(post.getDate());
         tvContent.setText(Utils.removeEnter(post.getContent()));
@@ -81,8 +83,9 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
             tvTitle.setText(shareTrade.getTitle());
             tvProductName.setText(shareTrade.getProductName());
             tvShareTradeType.setText(shareTrade.getType());
+            tvValueShareTrade.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 
-            if (shareTrade.getType().equals("Jual") || shareTrade.getType().equals("Beli")) {
+            if (shareTrade.getType().equalsIgnoreCase("jual") || shareTrade.getType().equalsIgnoreCase("beli")) {
                 tvTransactionType.setVisibility(View.VISIBLE);
                 tvDateShareTrade.setVisibility(View.INVISIBLE);
 
@@ -118,9 +121,8 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
 
-        if (tvContent.getText().toString().equals(post.getContent())) {
-            tvLookMore.setVisibility(View.GONE);
-        }
+        int visibility = tvContent.getText().toString().equals(post.getContent()) ? View.GONE : View.VISIBLE;
+        tvLookMore.setVisibility(visibility);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

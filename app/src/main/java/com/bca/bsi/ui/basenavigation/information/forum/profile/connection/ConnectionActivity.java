@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.information.forum.profile.connection;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -10,10 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Forum;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.Type;
 
-public class ConnectionActivity extends BaseActivity implements View.OnClickListener, IConnectionCallback {
+import java.util.List;
+
+public class ConnectionActivity extends BaseActivity implements View.OnClickListener, IConnectionCallback, ConnectionAdapter.onPeopleClick {
 
     private TextView tvStart, tvEnd;
     private ConnectionViewModel viewModel;
@@ -34,7 +38,7 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
         tvStart = findViewById(R.id.tv_start_connection);
         tvEnd = findViewById(R.id.tv_end_connection);
 
-        connectionAdapter = new ConnectionAdapter();
+        connectionAdapter = new ConnectionAdapter(this);
 
         viewModel = new ViewModelProvider(this).get(ConnectionViewModel.class);
         viewModel.setCallback(this);
@@ -77,15 +81,43 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
                 tvEnd.setTextColor(getResources().getColor(R.color.white_palette));
                 tvStart.setBackground(getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvEnd.setBackground(getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
-                viewModel.loadConnection(Type.FOLLOWING);
+                viewModel.loadConnection(Type.FOLLOWING, prefConfig.getTokenUser(), prefConfig.getProfileID());
                 break;
             case 2:
                 tvStart.setTextColor(getResources().getColor(R.color.white_palette));
                 tvEnd.setTextColor(getResources().getColor(R.color.black_palette));
                 tvStart.setBackground(getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 tvEnd.setBackground(getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
-                viewModel.loadConnection(Type.FOLLOWERS);
+                viewModel.loadConnection(Type.FOLLOWERS, prefConfig.getTokenUser(), prefConfig.getProfileID());
                 break;
         }
+//        connectionAdapter.clearData();
+    }
+
+    @Override
+    public void onLoadData(List<Forum.Connection> connectionList) {
+        Log.e("asd", connectionList.size() + "");
+        connectionAdapter.setConnectionList(connectionList);
+        connectionAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailed(String msg) {
+        showSnackBar(msg);
+    }
+
+    @Override
+    public void onFollow() {
+
+    }
+
+    @Override
+    public void onUnfollow() {
+
+    }
+
+    @Override
+    public void onDetailPeople() {
+
     }
 }

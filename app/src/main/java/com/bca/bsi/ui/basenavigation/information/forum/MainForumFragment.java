@@ -1,6 +1,5 @@
 package com.bca.bsi.ui.basenavigation.information.forum;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,17 +23,6 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
 
     private MainForumViewModel viewModel;
     private TabLayout tabLayout;
-    private onRecyclerView onRecyclerView;
-
-    public interface onRecyclerView{
-        void onGoToTop();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        onRecyclerView = (MainForumFragment.onRecyclerView) getActivity();
-    }
 
     @Override
     public void onClick(View v) {
@@ -95,6 +83,7 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+//                adapter.getChildMainForumFragment().goToTop();
                 for (int i = 0; i < Constant.FORUM_MENU.length; i++) {
                     String name = Constant.FORUM_MENU[i];
                     if (tab.getText() != null && tab.getText().equals(name)) {
@@ -111,7 +100,7 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                adapter.getChildMainForumFragment().goToTop();
             }
         });
 

@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.GeneralHolder;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.NewsViewHolder;
+import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.NoDataViewHolder;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.RepostGeneralHolder;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.RepostNewsViewHolder;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder.ShareTradeViewHolder;
@@ -21,7 +23,7 @@ import java.util.List;
 
 public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
-    private static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5;
+    private static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5, NO_DATA = 6;
 
     private String type, profileID;
     private List<Forum.Post> forumList;
@@ -35,7 +37,8 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
     }
 
     public void setForumList(List<Forum.Post> forumList) {
-        this.forumList.addAll(forumList);
+        if (null != forumList)
+            this.forumList.addAll(forumList);
     }
 
     @NonNull
@@ -56,6 +59,9 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             case ChildMainForumAdapter.REPOST_GENERAL:
                 layout = R.layout.recycler_repost_child_main_forum;
                 break;
+            case ChildMainForumAdapter.NO_DATA:
+                layout = R.layout.recycler_empty_image;
+                break;
             default:
                 layout = R.layout.recycler_child_main_forum;
         }
@@ -74,6 +80,9 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             case ChildMainForumAdapter.REPOST_GENERAL:
                 viewHolder = new RepostGeneralHolder(v, this.onPostClick);
                 break;
+            case ChildMainForumAdapter.NO_DATA:
+                viewHolder = new NoDataViewHolder(v, this.onPostClick);
+                break;
             default:
                 viewHolder = new GeneralHolder(v, this.onPostClick);
         }
@@ -82,34 +91,35 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder myHolder, int position) {
-
-        Forum.Post post = forumList.get(position);
-        switch (getItemViewType(position)) {
-            case ChildMainForumAdapter.SHARE_TRADE:
-                ShareTradeViewHolder viewHolder = (ShareTradeViewHolder) myHolder;
-                viewHolder.loadData(post, profileID);
-                break;
-            case ChildMainForumAdapter.NEWS:
-                NewsViewHolder newsViewHolder = (NewsViewHolder) myHolder;
-                newsViewHolder.loadData(post, profileID, type.equals(Type.TRENDING));
-                break;
-            case ChildMainForumAdapter.REPOST_NEWS:
-                RepostNewsViewHolder repostNewsViewHolder = (RepostNewsViewHolder) myHolder;
-                repostNewsViewHolder.setData(post, profileID);
-                break;
-            case ChildMainForumAdapter.REPOST_GENERAL:
-                RepostGeneralHolder repostGeneralHolder = (RepostGeneralHolder) myHolder;
-                repostGeneralHolder.setData(post, profileID);
-                break;
-            default:
-                GeneralHolder generalHolder = (GeneralHolder) myHolder;
-                generalHolder.setData(post, profileID, type.equals(Type.TRENDING));
+        if (getItemViewType(position) != ChildMainForumAdapter.NO_DATA) {
+            Forum.Post post = forumList.get(position);
+            switch (getItemViewType(position)) {
+                case ChildMainForumAdapter.SHARE_TRADE:
+                    ShareTradeViewHolder viewHolder = (ShareTradeViewHolder) myHolder;
+                    viewHolder.loadData(post, profileID);
+                    break;
+                case ChildMainForumAdapter.NEWS:
+                    NewsViewHolder newsViewHolder = (NewsViewHolder) myHolder;
+                    newsViewHolder.loadData(post, profileID, type.equals(Type.TRENDING));
+                    break;
+                case ChildMainForumAdapter.REPOST_NEWS:
+                    RepostNewsViewHolder repostNewsViewHolder = (RepostNewsViewHolder) myHolder;
+                    repostNewsViewHolder.setData(post, profileID);
+                    break;
+                case ChildMainForumAdapter.REPOST_GENERAL:
+                    RepostGeneralHolder repostGeneralHolder = (RepostGeneralHolder) myHolder;
+                    repostGeneralHolder.setData(post, profileID);
+                    break;
+                default:
+                    GeneralHolder generalHolder = (GeneralHolder) myHolder;
+                    generalHolder.setData(post, profileID, type.equals(Type.TRENDING));
+            }
         }
     }
 
     @Override
     public int getItemCount() {
-        return forumList.size();
+        return forumList.size() == 0 ? 1 : forumList.size();
     }
 
     @Override
@@ -117,6 +127,9 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
         int viewType = 0;
 
         String currentType;
+
+        if (this.forumList.size() == 0)
+            return NO_DATA;
 
         if (type.equals(Type.TRENDING)
                 || type.equals(Type.TIMELINE)

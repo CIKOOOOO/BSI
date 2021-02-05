@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
-import com.bca.bsi.model.Forum;
 import com.bca.bsi.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -18,7 +17,7 @@ import java.util.List;
 
 public class CommentImageAdapter extends RecyclerView.Adapter<CommentImageAdapter.Holder> {
 
-    private List<Forum.Post.ImagePost> imageList;
+    private List<String> imageList;
     private CommentImageAdapter.onImageClick onImageClick;
 
     public CommentImageAdapter() {
@@ -33,7 +32,7 @@ public class CommentImageAdapter extends RecyclerView.Adapter<CommentImageAdapte
         this.onImageClick = onImageClick;
     }
 
-    public void setImageList(List<Forum.Post.ImagePost> imageList) {
+    public void setImageList(List<String> imageList) {
         this.imageList = imageList;
     }
 
@@ -46,13 +45,12 @@ public class CommentImageAdapter extends RecyclerView.Adapter<CommentImageAdapte
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        Forum.Post.ImagePost imagePost = imageList.get(position);
-        if (null != imagePost) {
+        if (!imageList.get(position).isEmpty()) {
             Picasso.get()
-                    .load(Utils.imageURL(imagePost.getImageURL()))
+                    .load(Utils.imageURL(imageList.get(position)))
                     .into(holder.img);
 
-            holder.img.setOnClickListener(v -> onImageClick.onImageClickWith(imagePost.getImageURL()));
+            holder.img.setOnClickListener(v -> onImageClick.onImageClickWith(imageList.get(position)));
         }
     }
 

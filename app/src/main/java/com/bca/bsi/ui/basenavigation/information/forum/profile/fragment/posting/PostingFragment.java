@@ -22,10 +22,10 @@ import java.util.List;
 public class PostingFragment extends BaseFragment implements OnPostClick {
 
     private ChildMainForumAdapter adapter;
-    private List<Forum.Post> postList;
 
     public void loadData(List<Forum.Post> postList) {
-        this.postList = postList;
+        adapter.setForumList(postList);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -50,9 +50,6 @@ public class PostingFragment extends BaseFragment implements OnPostClick {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
-
-        adapter.setForumList(this.postList);
-        adapter.notifyDataSetChanged();
     }
 
     @Override

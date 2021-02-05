@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.bookmark;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +24,11 @@ import java.util.List;
 public class BookmarkFragment extends BaseFragment implements OnPostClick {
 
     private ChildMainForumAdapter adapter;
-    private List<Forum.Post> postList;
     private BookmarkViewModel viewModel;
 
     public void loadData(List<Forum.Post> postList) {
-        this.postList = postList;
+        adapter.setForumList(postList);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -52,9 +53,6 @@ public class BookmarkFragment extends BaseFragment implements OnPostClick {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
-
-        adapter.setForumList(this.postList);
-        adapter.notifyDataSetChanged();
     }
 
     @Override

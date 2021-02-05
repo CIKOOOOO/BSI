@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
@@ -29,6 +28,7 @@ import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.model.TipsOfTheWeek;
 import com.bca.bsi.ui.basenavigation.information.InformationFragment;
 import com.bca.bsi.ui.basenavigation.information.forum.MainForumFragment;
+import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumFragment;
 import com.bca.bsi.ui.basenavigation.more.MoreFragment;
 import com.bca.bsi.ui.basenavigation.portfolio.PortfolioFragment;
 import com.bca.bsi.ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity;
@@ -46,7 +46,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick, ReportAdapter.onReportClick, View.OnClickListener, IBaseNavigatonCallback, TipsOfTheWeekDialog.onItemClick, AboutRoboDialog.onCloseDialog {
+public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick, ReportAdapter.onReportClick, View.OnClickListener, IBaseNavigatonCallback, TipsOfTheWeekDialog.onItemClick, AboutRoboDialog.onCloseDialog{
 
     public static BottomSheetBehavior<ConstraintLayout> BOTTOM_SHEET_REPORT;
 
@@ -63,6 +63,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     private AboutRoboDialog aboutRoboDialog;
     private Portfolio portfolio;
     private TipsOfTheWeekDialog tipsOfTheWeekDialog;
+    private InformationFragment informationFragment;
 
 
     @Override
@@ -205,7 +206,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     }
 
     private void changeFragmentToInformation() {
-        InformationFragment informationFragment = new InformationFragment();
+        informationFragment = new InformationFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_base_navigation, informationFragment);
         transaction.commit();

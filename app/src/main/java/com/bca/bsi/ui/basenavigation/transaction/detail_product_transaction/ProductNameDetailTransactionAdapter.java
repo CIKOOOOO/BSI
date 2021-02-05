@@ -43,12 +43,13 @@ public class ProductNameDetailTransactionAdapter extends RecyclerView.Adapter<Pr
             try {
                 String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, productTransaction.getDate());
 
-                holder.tvName.setText(productTransaction.getName());
-                holder.tvDate.setText(date);
-                holder.tvPrice.setText(productTransaction.getPrice() + "\nNAB/Unit");
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            holder.tvName.setText(productTransaction.getName());
+            holder.tvDate.setText(productTransaction.getDate());
+            holder.tvPrice.setText(productTransaction.getPrice() + "\nNAB/Unit");
         }
     }
 

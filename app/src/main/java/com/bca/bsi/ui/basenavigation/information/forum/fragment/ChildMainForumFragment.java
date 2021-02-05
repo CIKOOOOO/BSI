@@ -37,6 +37,8 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     private ChildMainForumAdapter adapter;
     private ReshareDialog reshareDialog;
     private DeleteDialog deleteDialog;
+    private RecyclerView recycler_post;
+
     private int page;
     private String type;
 
@@ -66,14 +68,14 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
         page = 1;
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_child_main_forum);
+        recycler_post = view.findViewById(R.id.recycler_child_main_forum);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
 
         viewModel = new ViewModelProvider(this).get(ChildMainForumViewModel.class);
         viewModel.setCallback(this);
 
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recycler_post.setLayoutManager(linearLayoutManager);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -81,20 +83,20 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
             if (type != null) {
                 type = type.toLowerCase();
                 adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID(), this);
-                recyclerView.setAdapter(adapter);
+                recycler_post.setAdapter(adapter);
                 viewModel.loadForumPost(type, page, prefConfig.getTokenUser(), prefConfig.getProfileID(), prefConfig.getProfileRisiko());
             }
         }
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recycler_post.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
-                    Log.e("asd", "start");
+//                    Log.e("asd", "start");
                 }
                 if (!recyclerView.canScrollVertically(1)) {
-                    Log.e("asd", "last");
+//                    Log.e("asd", "last");
                     viewModel.loadForumPost(type, page, prefConfig.getTokenUser(), prefConfig.getProfileID(), prefConfig.getProfileRisiko());
                 }
             }
@@ -210,5 +212,10 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
             reshareDialog.dismiss();
         }
         viewModel.undoResharePost(postID);
+    }
+
+    public void goToTop() {
+        Log.e("asd", "aaaaa");
+        recycler_post.smoothScrollToPosition(0);
     }
 }

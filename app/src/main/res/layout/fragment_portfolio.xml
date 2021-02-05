@@ -205,7 +205,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_robo_main"
-            android:layout_width="@dimen/size_for_0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_for_20dp"
             android:layout_marginBottom="@dimen/size_for_20dp"

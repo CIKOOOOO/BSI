@@ -12,4 +12,8 @@ public interface IForumProfileCallback {
     void onFailed(String msg);
 
     void onDismissBottomNavigation();
+
+    void onLoadUsername(String username);
+
+    void onUsernameNotUnique();
 }

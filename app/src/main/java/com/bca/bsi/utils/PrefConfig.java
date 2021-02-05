@@ -86,6 +86,12 @@ public class PrefConfig {
         editor.apply();
     }
 
+    public void setUsername(String username) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getString(R.string.pref_username), username);
+        editor.apply();
+    }
+
     public String getBCAID() {
         return sharedPreferences.getString(context.getString(R.string.pref_bca_id), Constant.EMPTY);
     }

@@ -31,7 +31,7 @@ public interface ApiInterface {
     @GET("products/reksadana/{reksaDanaID}")
     Call<OutputResponse> getDetailReksaDana(@Header("token-user") String token, @Path("reksaDanaID") int reksaDanaID);
 
-    @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
     @GET("ceksaldo")
     Call<OutputResponse> getDetailTransaksi(@Header("token-user") String token, @Header("reksadana-id") String reksadanaID, @Header("no-rekening") String accountNumber);
 
@@ -116,5 +116,17 @@ public interface ApiInterface {
             , @Query("page") int page, @Header("profile-risiko") String profileRisiko
             , @Header("profile-id") String profileID);
 
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/profile/me/inbox")
+    Call<OutputResponse> getInboxList(@Header("token-user") String tokenUser, @Header("profile-id") String profileID);
 
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @PUT("forum/profile/me/username")
+    Call<OutputResponse> editUsername(@Header("token-user") String tokenUser, @Header("profile-id") String profileID
+            , @Header("username") String username);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET
+    Call<OutputResponse> getSelfConnection(@Url String url, @Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID);
 }

@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.information.forum.profile;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -94,6 +95,35 @@ public class ForumProfileViewModel extends AndroidViewModel {
                     if (errorSchema.getErrorCode().equals("200")) {
                         loadProfile(tokenUser, profileID);
                         callback.onDismissBottomNavigation();
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
+    }
+
+    public void editUsername(String token, String profileID, String username) {
+        Call<OutputResponse> call = apiInterface.editUsername(token, profileID, username);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", response.code() + "");
+                if (null != response.body()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if (errorSchema.getErrorCode().equals("200")) {
+                        callback.onLoadUsername(username);
+                    } else if ("409".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                        callback.onDismissBottomNavigation();
+                        callback.onFailed(errorSchema.getErrorMessage());
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

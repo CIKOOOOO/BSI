@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IInboxCallback {
     void onLoadInbox(List<Forum.Inbox> inboxes);
+
+    void onFailed(String msg);
 }

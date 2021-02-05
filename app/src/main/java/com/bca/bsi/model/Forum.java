@@ -15,6 +15,7 @@ public class Forum {
         private String name;
         @SerializedName("created_date")
         private String date;
+        @SerializedName("post_category")
         private String type;
         @SerializedName("post_text")
         private String content;
@@ -24,15 +25,23 @@ public class Forum {
         private String comment;
         @SerializedName("share_count")
         private String share;
+        @SerializedName("like_status")
         private String statusLike;
+        @SerializedName("share_status")
         private String statusShare;
         @SerializedName("profile_id")
         private String profileID;
         @SerializedName("post_privacy")
         private String privacy;
+        @SerializedName("save_status")
+        private String statusSave;
         private PromoNews promoNews;
+        @SerializedName(value = "share_trade_detail", alternate = {"share_trade"})
         private ShareTrade shareTrade;
         private List<ImagePost> imagePostList;
+        @SerializedName("post_attachment")
+        private List<String> imageURLList;
+        @SerializedName("repost_content")
         private Post post;
 
         public Post() {
@@ -213,12 +222,16 @@ public class Forum {
             return shareTrade;
         }
 
-        public List<ImagePost> getImagePostList() {
-            return imagePostList;
+        public List<String> getImagePostList() {
+            return imageURLList;
         }
 
         public Post getPost() {
             return post;
+        }
+
+        public String getStatusSave() {
+            return statusSave;
         }
 
         public static class ImagePost {
@@ -245,9 +258,20 @@ public class Forum {
 
     public static class Inbox {
 
+        @SerializedName("profile_id")
+        private String profileID;
+        @SerializedName("username")
         private String username;
+        @SerializedName("inbox_date")
         private String date;
+        @SerializedName("inbox_content")
         private String content;
+        @SerializedName("other_profile_id")
+        private String otherProfileID;
+        @SerializedName("inbox_id")
+        private String inboxID;
+        @SerializedName("post_id")
+        private String postID;
 
         public Inbox() {
         }
@@ -268,6 +292,22 @@ public class Forum {
 
         public String getContent() {
             return content;
+        }
+
+        public String getProfileID() {
+            return profileID;
+        }
+
+        public String getOtherProfileID() {
+            return otherProfileID;
+        }
+
+        public String getInboxID() {
+            return inboxID;
+        }
+
+        public String getPostID() {
+            return postID;
         }
     }
 
@@ -375,11 +415,13 @@ public class Forum {
         @SerializedName("share_trade_id")
         private String shareTradeID;
         private String title;
-        @SerializedName("transaction_type")
+        @SerializedName("type")
         private String type;
+        @SerializedName("value")
         private String value;
         @SerializedName("reksa_dana_name")
         private String productName;
+        @SerializedName("date")
         private String date;
         @SerializedName("reksa_dana_id")
         private String reksadanaID;
@@ -486,6 +528,43 @@ public class Forum {
 
         public String getImgURL() {
             return imgURL;
+        }
+    }
+
+    public static class Connection {
+
+        @SerializedName("profile_id")
+        private String profileID;
+        @SerializedName("follow_profile_id")
+        private String followProfileID;
+        @SerializedName("username")
+        private String username;
+        @SerializedName("is_followed")
+        private String follow;
+        @SerializedName("profile_picture")
+        private String imgProfile;
+
+        public Connection() {
+        }
+
+        public String getProfileID() {
+            return profileID;
+        }
+
+        public String getFollowProfileID() {
+            return followProfileID;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getFollow() {
+            return follow;
+        }
+
+        public String getImgProfile() {
+            return imgProfile;
         }
     }
 }

@@ -43,7 +43,7 @@
         android:paddingTop="@dimen/size_for_2dp"
         android:paddingEnd="@dimen/size_for_15dp"
         android:paddingBottom="@dimen/size_for_2dp"
-        android:text="Unfollow"
+        tools:text="Unfollow"
         android:textColor="@color/white_palette"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/recycler_img_profile_people"
