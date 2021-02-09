@@ -13,4 +13,6 @@ public interface IChildMainForumCallback {
     void onLoadReportData(List<Forum.Report> reportList);
 
     void onOutOfData();
+
+    void onReshareResult(boolean isReshare, String postID);
 }

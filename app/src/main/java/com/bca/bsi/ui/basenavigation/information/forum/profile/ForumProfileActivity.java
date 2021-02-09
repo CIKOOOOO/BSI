@@ -30,6 +30,8 @@ import com.bca.bsi.ui.basenavigation.information.forum.profile.connection.Connec
 import com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.bookmark.BookmarkFragment;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.posting.PostingFragment;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.CustomLoading;
+import com.bca.bsi.utils.CustomViewPager;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
@@ -58,6 +60,7 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
     private PostingFragment postingFragment;
     private BookmarkFragment bookmarkFragment;
     private ImageButton imgEditUsername;
+    private CustomLoading customLoading;
 
     private String imageID;
     private int typeUpload;
@@ -100,6 +103,9 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
         chooseImageAdapter = new ChooseImageAdapter(this);
         postingFragment = new PostingFragment();
         bookmarkFragment = new BookmarkFragment();
+        customLoading = new CustomLoading();
+        customLoading.show(getSupportFragmentManager(), "");
+
         viewModel = new ViewModelProvider(this).get(ForumProfileViewModel.class);
         viewModel.setCallback(this);
 
@@ -157,6 +163,7 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
                     } else if (username.length() < 3 || username.length() > 15) {
                         showSnackBar("Username harus terdiri dari 3 karakter dan kurang dari 15 karakter");
                     } else {
+                        customLoading.show(getSupportFragmentManager(),"");
                         viewModel.editUsername(prefConfig.getTokenUser(), prefConfig.getProfileID(), username);
                     }
                 } else {
@@ -284,6 +291,10 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onLoadData(Forum.User user, List<Forum.Post> postList, List<Forum.Post> bookmarkList) {
 
+        if (null != customLoading && null != customLoading.getTag()) {
+            customLoading.dismiss();
+        }
+
         int visibility = user.getStatusInbox().equalsIgnoreCase("read") ? View.GONE : View.VISIBLE;
 
         if (!user.getImgProfileUrl().isEmpty()) {
@@ -315,6 +326,9 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onFailed(String msg) {
+        if(null != customLoading && null != customLoading.getTag()){
+            customLoading.dismiss();
+        }
         showSnackBar(msg);
     }
 
@@ -325,6 +339,9 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onLoadUsername(String username) {
+        if (null != customLoading && null != customLoading.getTag()) {
+            customLoading.dismiss();
+        }
         Utils.hideSoftKeyboard(this);
         showSnackBar("Mengganti username berhasil");
         prefConfig.setUsername(username);

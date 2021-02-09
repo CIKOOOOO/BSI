@@ -1,6 +1,5 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +38,18 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
     public void setForumList(List<Forum.Post> forumList) {
         if (null != forumList)
             this.forumList.addAll(forumList);
+    }
+
+    public void setReshareStatus(String reshareStatus, String postID) {
+        for (int i = 0; i < this.forumList.size(); i++) {
+            Forum.Post post = this.forumList.get(i);
+            if (post.getPostID().equalsIgnoreCase(postID)) {
+                post.setStatusShare(reshareStatus);
+                this.forumList.set(i, post);
+                notifyDataSetChanged();
+                break;
+            }
+        }
     }
 
     @NonNull
@@ -96,7 +107,7 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             switch (getItemViewType(position)) {
                 case ChildMainForumAdapter.SHARE_TRADE:
                     ShareTradeViewHolder viewHolder = (ShareTradeViewHolder) myHolder;
-                    viewHolder.loadData(post, profileID);
+                    viewHolder.loadData(post, profileID, type.equals(Type.TRENDING));
                     break;
                 case ChildMainForumAdapter.NEWS:
                     NewsViewHolder newsViewHolder = (NewsViewHolder) myHolder;
@@ -145,22 +156,24 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             currentType = type;
         }
 
-        switch (currentType) {
-            case Type.STRATEGY:
-                viewType = ChildMainForumAdapter.STRATEGY;
-                break;
-            case Type.SHARE_TRADE:
-                viewType = ChildMainForumAdapter.SHARE_TRADE;
-                break;
-            case Type.NEWS:
-                viewType = ChildMainForumAdapter.NEWS;
-                break;
-            case Type.REPOST_NEWS:
-                viewType = ChildMainForumAdapter.REPOST_NEWS;
-                break;
-            case Type.REPOST:
-                viewType = ChildMainForumAdapter.REPOST_GENERAL;
-                break;
+        if (null != currentType) {
+            switch (currentType) {
+                case Type.STRATEGY:
+                    viewType = ChildMainForumAdapter.STRATEGY;
+                    break;
+                case Type.SHARE_TRADE:
+                    viewType = ChildMainForumAdapter.SHARE_TRADE;
+                    break;
+                case Type.NEWS:
+                    viewType = ChildMainForumAdapter.NEWS;
+                    break;
+                case Type.REPOST_NEWS:
+                    viewType = ChildMainForumAdapter.REPOST_NEWS;
+                    break;
+                case Type.REPOST:
+                    viewType = ChildMainForumAdapter.REPOST_GENERAL;
+                    break;
+            }
         }
         return viewType;
     }

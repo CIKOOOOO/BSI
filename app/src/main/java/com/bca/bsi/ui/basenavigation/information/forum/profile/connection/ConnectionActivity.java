@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.profile.connection;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,9 +20,12 @@ import java.util.List;
 
 public class ConnectionActivity extends BaseActivity implements View.OnClickListener, IConnectionCallback, ConnectionAdapter.onPeopleClick {
 
+    public static final String DATA = "data";
+
     private TextView tvStart, tvEnd;
     private ConnectionViewModel viewModel;
     private ConnectionAdapter connectionAdapter;
+    private String profileID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,8 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initVar() {
+        profileID = "";
+
         TextView tvTitle = findViewById(R.id.tv_title_toolbar_back);
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
         RecyclerView recyclerView = findViewById(R.id.recycler_connection);
@@ -50,6 +56,11 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
         recyclerView.setAdapter(connectionAdapter);
 
         tvTitle.setText(getString(R.string.connection));
+
+        Intent intent = getIntent();
+        if (null != intent && intent.hasExtra(DATA)) {
+            profileID = intent.getStringExtra(DATA);
+        }
 
         switchButton(1);
 
@@ -81,14 +92,14 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
                 tvEnd.setTextColor(getResources().getColor(R.color.white_palette));
                 tvStart.setBackground(getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvEnd.setBackground(getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
-                viewModel.loadConnection(Type.FOLLOWING, prefConfig.getTokenUser(), prefConfig.getProfileID());
+                viewModel.loadConnection(Type.FOLLOWING, prefConfig.getTokenUser(), prefConfig.getProfileID(), profileID);
                 break;
             case 2:
                 tvStart.setTextColor(getResources().getColor(R.color.white_palette));
                 tvEnd.setTextColor(getResources().getColor(R.color.black_palette));
                 tvStart.setBackground(getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 tvEnd.setBackground(getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
-                viewModel.loadConnection(Type.FOLLOWERS, prefConfig.getTokenUser(), prefConfig.getProfileID());
+                viewModel.loadConnection(Type.FOLLOWERS, prefConfig.getTokenUser(), prefConfig.getProfileID(), profileID);
                 break;
         }
 //        connectionAdapter.clearData();

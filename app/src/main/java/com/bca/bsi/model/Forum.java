@@ -15,7 +15,7 @@ public class Forum {
         private String name;
         @SerializedName("created_date")
         private String date;
-        @SerializedName("post_category")
+        @SerializedName(value = "post_category", alternate = {"category_name"})
         private String type;
         @SerializedName("post_text")
         private String content;
@@ -35,8 +35,9 @@ public class Forum {
         private String privacy;
         @SerializedName("save_status")
         private String statusSave;
+        @SerializedName("news")
         private PromoNews promoNews;
-        @SerializedName(value = "share_trade_detail", alternate = {"share_trade"})
+        @SerializedName(value = "share_trade_detail", alternate = {"share_trade", "share_trade_content"})
         private ShareTrade shareTrade;
         private List<ImagePost> imagePostList;
         @SerializedName("post_attachment")
@@ -380,7 +381,9 @@ public class Forum {
     }
 
     public static class Category {
+        @SerializedName("category_id")
         private String categoryID;
+        @SerializedName("category_name")
         private String categoryName;
         private boolean choose;
 
@@ -488,6 +491,15 @@ public class Forum {
         @SerializedName("flag_unread_inbox")
         private String statusInbox;
 
+        @SerializedName("username")
+        private String username;
+
+        @SerializedName("profile_id")
+        private String profileID;
+
+        @SerializedName(value = "follow_status", alternate = {"is_followed"})
+        private String followStatus;
+
         public User() {
         }
 
@@ -509,6 +521,18 @@ public class Forum {
 
         public String getStatusInbox() {
             return statusInbox;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getProfileID() {
+            return profileID;
+        }
+
+        public String getFollowStatus() {
+            return followStatus;
         }
     }
 

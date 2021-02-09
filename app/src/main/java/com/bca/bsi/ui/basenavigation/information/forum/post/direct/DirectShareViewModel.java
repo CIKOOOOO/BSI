@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.information.forum.post.direct;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -10,7 +11,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.User;
-import com.bca.bsi.utils.dummydata.DummyData;
+import com.bca.bsi.utils.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -35,6 +36,10 @@ public class DirectShareViewModel extends AndroidViewModel {
         this.callback = callback;
     }
 
+    public void clearForumList() {
+        this.forumUserList = new ArrayList<>();
+    }
+
     public DirectShareViewModel(@NonNull Application application) {
         super(application);
         chosenUserList = new ArrayList<>();
@@ -51,11 +56,18 @@ public class DirectShareViewModel extends AndroidViewModel {
         return strings;
     }
 
-    public void loadUser(String token, String username) {
-        Call<OutputResponse> call = apiInterface.getDirectUserList(token, username);
+    public void loadUser(String token, String username, String profileID) {
+        clearForumList();
+        Call<OutputResponse> call = apiInterface.getDirectUserList(token, profileID, username);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+//                try {
+//                    Log.e("asd", "aaa" + response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+                Log.e("aaaaa", "" + Utils.toJSON(response.body()) + " - " + response.raw().request().url().toString());
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
@@ -64,6 +76,10 @@ public class DirectShareViewModel extends AndroidViewModel {
                         forumUserList = outputSchema.getDirectUserList();
                         if (0 != chosenUserList.size())
                             compareData();
+                        else {
+                            visibleForumList.addAll(forumUserList);
+                            callback.onLoadForumUser(forumUserList);
+                        }
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -79,9 +95,9 @@ public class DirectShareViewModel extends AndroidViewModel {
         });
 
 
-        this.forumUserList = DummyData.getForumUser();
-        this.visibleForumList.addAll(this.forumUserList);
-        callback.onLoadForumUser(DummyData.getForumUser());
+//        this.forumUserList = DummyData.getForumUser();
+//        this.visibleForumList.addAll(this.forumUserList);
+//        callback.onLoadForumUser(DummyData.getForumUser());
     }
 
     public void sendNewPost(String token, HashMap<String, Object> hashMap) {
@@ -164,6 +180,7 @@ public class DirectShareViewModel extends AndroidViewModel {
     }
 
     private void compareData() {
+        this.visibleForumList.clear();
         this.visibleForumList.addAll(this.forumUserList);
         int removeCounter = 0;
         for (int i = 0; i < this.forumUserList.size(); i++) {
@@ -178,8 +195,10 @@ public class DirectShareViewModel extends AndroidViewModel {
             }
 
             if (isChosen) {
-                removeCounter++;
-                this.visibleForumList.remove(i + removeCounter);
+                if (null != this.visibleForumList.get(i + removeCounter)) {
+                    this.visibleForumList.remove(i + removeCounter);
+                    removeCounter++;
+                }
             }
         }
         callback.onLoadForumUser(this.visibleForumList);

@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.PostImageAdapter;
+import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;

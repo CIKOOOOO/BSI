@@ -6,152 +6,159 @@
     android:layout_height="match_parent"
     tools:context=".ui.basenavigation.information.forum.profile.ForumProfileActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <include
             android:id="@+id/include10"
             layout="@layout/toolbar_back_with_image" />
 
-        <ImageView
-            android:id="@+id/img_view_header_forum_profile"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_for_0dp"
-            android:background="@drawable/img_background_example"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@id/img_btn_background_forum_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/include10" />
+            android:layout_height="wrap_content">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/rounded_image_view_profile_forum"
-            android:layout_width="@dimen/size_for_100dp"
-            android:layout_height="@dimen/size_for_100dp"
-            android:layout_marginTop="@dimen/size_for_20dp"
-            android:src="@drawable/ic_photo_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include10"
-            app:riv_corner_radius="@dimen/size_for_10dp"
-            app:riv_mutate_background="true" />
+            <ImageView
+                android:id="@+id/img_view_header_forum_profile"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_for_0dp"
+                android:background="@drawable/img_background_example"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@id/img_btn_background_forum_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/img_btn_photo_profile_forum_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_third_half_rounded_welma"
-            android:paddingStart="@dimen/size_for_5dp"
-            android:paddingTop="@dimen/size_for_3dp"
-            android:paddingEnd="@dimen/size_for_5dp"
-            android:paddingBottom="@dimen/size_for_3dp"
-            android:src="@drawable/ic_gallery_white"
-            app:layout_constraintBottom_toBottomOf="@id/rounded_image_view_profile_forum"
-            app:layout_constraintEnd_toEndOf="@id/rounded_image_view_profile_forum" />
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/rounded_image_view_profile_forum"
+                android:layout_width="@dimen/size_for_100dp"
+                android:layout_height="@dimen/size_for_100dp"
+                android:layout_marginTop="@dimen/size_for_20dp"
+                android:src="@drawable/ic_photo_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius="@dimen/size_for_10dp"
+                app:riv_mutate_background="true" />
 
-        <EditText
-            android:id="@+id/et_name_forum_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_for_10dp"
-            android:background="@android:color/transparent"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:maxLines="1"
-            android:textColor="@color/color_base_welma"
-            android:textSize="@dimen/size_for_17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rounded_image_view_profile_forum" />
-
-        <ImageButton
-            android:id="@+id/img_btn_edit_name_forum_profile"
-            android:layout_width="@dimen/size_for_25dp"
-            android:layout_height="@dimen/size_for_20dp"
-            android:layout_marginStart="@dimen/size_for_10dp"
-            android:background="@drawable/rectangle_rounded_welma"
-            android:paddingStart="@dimen/size_for_5dp"
-            android:paddingTop="@dimen/size_for_2dp"
-            android:paddingEnd="@dimen/size_for_5dp"
-            android:paddingBottom="@dimen/size_for_2dp"
-            android:src="@drawable/ic_baseline_edit_24"
-            app:layout_constraintBottom_toBottomOf="@id/et_name_forum_profile"
-            app:layout_constraintStart_toEndOf="@id/et_name_forum_profile"
-            app:layout_constraintTop_toTopOf="@id/et_name_forum_profile" />
-
-        <LinearLayout
-            android:id="@+id/ll_forum_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_for_10dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_name_forum_profile">
-
-            <LinearLayout
+            <ImageButton
+                android:id="@+id/img_btn_photo_profile_forum_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/size_for_20dp"
-                android:orientation="vertical">
+                android:background="@drawable/rectangle_third_half_rounded_welma"
+                android:paddingStart="@dimen/size_for_5dp"
+                android:paddingTop="@dimen/size_for_3dp"
+                android:paddingEnd="@dimen/size_for_5dp"
+                android:paddingBottom="@dimen/size_for_3dp"
+                android:src="@drawable/ic_gallery_white"
+                app:layout_constraintBottom_toBottomOf="@id/rounded_image_view_profile_forum"
+                app:layout_constraintEnd_toEndOf="@id/rounded_image_view_profile_forum" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/follower"
-                    android:textColor="@color/color_base_welma"
-                    app:layout_constraintStart_toStartOf="@id/et_name_forum_profile"
-                    app:layout_constraintTop_toBottomOf="@id/et_name_forum_profile" />
-
-                <TextView
-                    android:id="@+id/tv_follower_forum_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/color_base_welma"
-                    android:textSize="@dimen/size_for_20sp"
-                    tools:text="7" />
-            </LinearLayout>
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/et_name_forum_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_for_20dp"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/size_for_10dp"
+                android:background="@android:color/transparent"
+                android:enabled="false"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:textColor="@color/color_base_welma"
+                android:textSize="@dimen/size_for_17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rounded_image_view_profile_forum" />
 
-                <TextView
+            <ImageButton
+                android:id="@+id/img_btn_edit_name_forum_profile"
+                android:layout_width="@dimen/size_for_25dp"
+                android:layout_height="@dimen/size_for_20dp"
+                android:layout_marginStart="@dimen/size_for_10dp"
+                android:background="@drawable/rectangle_rounded_welma"
+                android:paddingStart="@dimen/size_for_5dp"
+                android:paddingTop="@dimen/size_for_2dp"
+                android:paddingEnd="@dimen/size_for_5dp"
+                android:paddingBottom="@dimen/size_for_2dp"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:layout_constraintBottom_toBottomOf="@id/et_name_forum_profile"
+                app:layout_constraintStart_toEndOf="@id/et_name_forum_profile"
+                app:layout_constraintTop_toTopOf="@id/et_name_forum_profile" />
+
+            <LinearLayout
+                android:id="@+id/ll_forum_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_for_10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_name_forum_profile">
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/following"
-                    android:textColor="@color/color_base_welma"
-                    app:layout_constraintStart_toStartOf="@id/et_name_forum_profile"
-                    app:layout_constraintTop_toBottomOf="@id/et_name_forum_profile" />
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_following_forum_profile"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/follower"
+                        android:textColor="@color/color_base_welma"
+                        app:layout_constraintStart_toStartOf="@id/et_name_forum_profile"
+                        app:layout_constraintTop_toBottomOf="@id/et_name_forum_profile" />
+
+                    <TextView
+                        android:id="@+id/tv_follower_forum_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/color_base_welma"
+                        android:textSize="@dimen/size_for_20sp"
+                        tools:text="7" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/color_base_welma"
-                    android:textSize="@dimen/size_for_20sp"
-                    tools:text="6" />
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/following"
+                        android:textColor="@color/color_base_welma"
+                        app:layout_constraintStart_toStartOf="@id/et_name_forum_profile"
+                        app:layout_constraintTop_toBottomOf="@id/et_name_forum_profile" />
+
+                    <TextView
+                        android:id="@+id/tv_following_forum_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/color_base_welma"
+                        android:textSize="@dimen/size_for_20sp"
+                        tools:text="6" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/img_btn_background_forum_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_start_rounded_welma"
-            android:paddingStart="@dimen/size_for_5dp"
-            android:paddingTop="@dimen/size_for_3dp"
-            android:paddingEnd="@dimen/size_for_5dp"
-            android:paddingBottom="@dimen/size_for_3dp"
-            android:src="@drawable/ic_gallery_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_forum_profile" />
+            <ImageButton
+                android:id="@+id/img_btn_background_forum_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_start_rounded_welma"
+                android:paddingStart="@dimen/size_for_5dp"
+                android:paddingTop="@dimen/size_for_3dp"
+                android:paddingEnd="@dimen/size_for_5dp"
+                android:paddingBottom="@dimen/size_for_3dp"
+                android:src="@drawable/ic_gallery_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_forum_profile" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_forum_profile"
@@ -169,11 +176,11 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_forum_profile"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_for_0dp"
+            android:layout_height="match_parent"
             android:animateLayoutChanges="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tl_forum_profile" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/frame_forum_profile"

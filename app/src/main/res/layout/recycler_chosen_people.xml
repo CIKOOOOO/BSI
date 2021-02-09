@@ -2,17 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/size_for_100dp"
+    android:layout_width="@dimen/size_for_70dp"
     android:layout_height="wrap_content">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/recycler_img_profile_people"
-        android:layout_width="@dimen/size_for_70dp"
-        android:layout_height="@dimen/size_for_70dp"
+        android:layout_width="@dimen/size_for_50dp"
+        android:layout_height="@dimen/size_for_50dp"
         android:layout_marginTop="@dimen/size_for_5dp"
         android:scaleType="centerCrop"
-        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_corner_radius="@dimen/size_for_10dp"
@@ -33,8 +33,8 @@
 
     <ImageButton
         android:id="@+id/recycler_img_btn_close_chosen_profile"
-        android:layout_width="@dimen/size_for_20dp"
-        android:layout_height="@dimen/size_for_20dp"
+        android:layout_width="@dimen/size_for_15dp"
+        android:layout_height="@dimen/size_for_15dp"
         android:background="@color/color_base_welma"
         android:src="@drawable/ic_baseline_close_24"
         app:layout_constraintEnd_toEndOf="parent"

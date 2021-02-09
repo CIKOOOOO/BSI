@@ -28,10 +28,11 @@ public class ConnectionViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadConnection(String type, String token, String profileID) {
-        String url = type.equalsIgnoreCase(Type.FOLLOWING) ? "forum/profile/me/following" : "forum/profile/me/follower";
+    public void loadConnection(String type, String token, String profileID, String otherProfileID) {
+        String firstURL = otherProfileID.isEmpty() ? "forum/profile/me" : "forum/profile/" + otherProfileID;
+        String url = type.equalsIgnoreCase(Type.FOLLOWING) ? "/following" : "/follower";
 
-        Call<OutputResponse> call = apiInterface.getSelfConnection(url, token, profileID);
+        Call<OutputResponse> call = apiInterface.getSelfConnection(firstURL + url, token, profileID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {

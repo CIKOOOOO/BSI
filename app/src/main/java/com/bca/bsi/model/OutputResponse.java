@@ -84,10 +84,10 @@ public class OutputResponse {
         @SerializedName("transaction_result_list")
         private List<Transaction.TransactionResult> transactionResultList;
 
-        @SerializedName("my_profile")
+        @SerializedName(value = "my_profile", alternate = {"profile"})
         private Forum.User forumProfileUser;
 
-        @SerializedName(value = "my_posting", alternate = {"share_trade"})
+        @SerializedName(value = "my_posting", alternate = {"share_trade", "posting","trending"})
         private List<Forum.Post> myPostList;
 
         @SerializedName("my_bookmark")
@@ -107,6 +107,12 @@ public class OutputResponse {
 
         @SerializedName(value = "list_followingme", alternate = {"list_followerme"})
         private List<Forum.Connection> connectionList;
+
+        @SerializedName("categories")
+        private List<Forum.Category> categoryList;
+
+        @SerializedName("report_list")
+        private List<Forum.Report> reportList;
 
         public OutputSchema() {
         }
@@ -193,6 +199,14 @@ public class OutputResponse {
 
         public List<Forum.Connection> getConnectionList() {
             return connectionList;
+        }
+
+        public List<Forum.Category> getCategoryList() {
+            return categoryList;
+        }
+
+        public List<Forum.Report> getReportList() {
+            return reportList;
         }
     }
 }

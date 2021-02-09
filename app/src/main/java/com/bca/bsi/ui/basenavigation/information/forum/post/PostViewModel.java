@@ -11,9 +11,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
-import com.bca.bsi.utils.dummydata.DummyData;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,8 +34,36 @@ public class PostViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadCategoryData() {
-        callback.onLoadCategoryData(DummyData.getCategoryList());
+    public void loadCategoryData(String tokenUser) {
+//        callback.onLoadCategoryData(DummyData.getCategoryList());
+
+        Call<OutputResponse> call = apiInterface.getCategoryList(tokenUser);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                if (null != response.body()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if (null != errorSchema) {
+                        if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                            OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                            callback.onLoadCategoryData(outputSchema.getCategoryList());
+                        } else {
+                            callback.onFailed(errorSchema.getErrorMessage());
+                        }
+                    } else {
+                        callback.onFailed("");
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
     }
 
 //    public void sendData(List<Bitmap> bitmapList) {

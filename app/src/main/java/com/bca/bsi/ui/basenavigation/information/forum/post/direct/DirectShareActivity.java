@@ -66,7 +66,7 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(DATA)) {
             this.hashMap = (HashMap<String, Object>) intent.getSerializableExtra(DATA);
-            viewModel.loadUser(prefConfig.getTokenUser(), "");
+            viewModel.loadUser(prefConfig.getTokenUser(), "", prefConfig.getProfileID());
         } else {
             onBackPressed();
         }
@@ -85,12 +85,12 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            viewModel.clearForumList();
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-            viewModel.loadUser(prefConfig.getTokenUser(), s.toString());
+            viewModel.loadUser(prefConfig.getTokenUser(), s.toString(), prefConfig.getProfileID());
         }
     };
 

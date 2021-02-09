@@ -31,6 +31,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
     public ShareTradeViewHolder(@NonNull View itemView, OnPostClick onPostClick) {
         super(itemView);
         this.onPostClick = onPostClick;
+
         roundedImageView = itemView.findViewById(R.id.recycler_img_profile_child_main_forum);
         tvDate = itemView.findViewById(R.id.recycler_tv_date_child_main_forum);
         tvName = itemView.findViewById(R.id.recycler_tv_name_child_main_forum);
@@ -56,9 +57,15 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
         tvLookMore.setOnClickListener(this);
     }
 
-    public void loadData(Forum.Post post, String profileID) {
+    public void loadData(Forum.Post post, String profileID, boolean isTrending) {
         this.post = post;
         this.profileID = profileID;
+
+        if (isTrending) {
+            tvType.setVisibility(View.VISIBLE);
+            tvType.setText(post.getType());
+        }
+
         Forum.ShareTrade shareTrade = post.getShareTrade();
 
         if (!post.getImageProfile().isEmpty()) {
@@ -67,7 +74,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
                     .into(roundedImageView);
         }
 
-        int visibilityOfContent = post.getContent().trim().isEmpty()? View.GONE: View.VISIBLE;
+        int visibilityOfContent = post.getContent().trim().isEmpty() ? View.GONE : View.VISIBLE;
         tvContent.setVisibility(visibilityOfContent);
 
         tvName.setText(post.getName());

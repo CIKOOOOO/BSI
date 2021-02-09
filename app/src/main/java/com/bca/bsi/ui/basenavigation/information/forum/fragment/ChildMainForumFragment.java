@@ -2,7 +2,6 @@ package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +39,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     private RecyclerView recycler_post;
 
     private int page;
-    private String type;
+    private String type, postID;
 
     public static ChildMainForumFragment newInstance(int param1) {
         ChildMainForumFragment fragment = new ChildMainForumFragment();
@@ -129,6 +128,11 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     }
 
     @Override
+    public void onReshareResult(boolean isReshare, String postID) {
+        adapter.setReshareStatus(isReshare ? "true" : "", postID);
+    }
+
+    @Override
     public void onDetailPost(String postID) {
         Intent intent = new Intent(mActivity, CommentActivity.class);
         intent.putExtra(CommentActivity.DATA, postID);
@@ -142,7 +146,8 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onReport(String postID) {
-        viewModel.loadReportData();
+        this.postID = postID;
+        viewModel.loadReportData(prefConfig.getTokenUser());
     }
 
     @Override
@@ -203,7 +208,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         if (reshareDialog != null && reshareDialog.getTag() != null) {
             reshareDialog.dismiss();
         }
-        viewModel.resharePost(postID);
+        viewModel.resharePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
     }
 
     @Override
@@ -211,11 +216,10 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         if (reshareDialog != null && reshareDialog.getTag() != null) {
             reshareDialog.dismiss();
         }
-        viewModel.undoResharePost(postID);
+        viewModel.undoResharePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
     }
 
     public void goToTop() {
-        Log.e("asd", "aaaaa");
         recycler_post.smoothScrollToPosition(0);
     }
 }

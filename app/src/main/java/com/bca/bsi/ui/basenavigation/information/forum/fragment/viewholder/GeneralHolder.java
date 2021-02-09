@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.PostImageAdapter;
+import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
@@ -74,7 +74,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
                     .load(Utils.imageURL(post.getImageProfile()))
                     .into(roundedImageView);
 
-        Log.e("asd", post.getImageProfile());
+//        Log.e("asd", post.getImageProfile());
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
         int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;

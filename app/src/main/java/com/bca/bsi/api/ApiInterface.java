@@ -94,8 +94,8 @@ public interface ApiInterface {
             , @Header("profile-id") String profileID, @Body String s);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
-    @GET("user")
-    Call<OutputResponse> getDirectUserList(@Header("token-user") String tokenUser, @Query("username") String username);
+    @GET("forum/post/user")
+    Call<OutputResponse> getDirectUserList(@Header("token-user") String tokenUser, @Header("profile-id") String profileID, @Query("username") String username);
 
     //    @Multipart
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
@@ -129,4 +129,32 @@ public interface ApiInterface {
     @GET
     Call<OutputResponse> getSelfConnection(@Url String url, @Header("token-user") String tokenUser
             , @Header("profile-id") String profileID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/profile/{profileID}")
+    Call<OutputResponse> getOtherProfile(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/post/category")
+    Call<OutputResponse> getCategoryList(@Header("token-user") String tokenUser);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @PUT("forum/profile/{profileID}/follow")
+    Call<OutputResponse> editFollowUnFollowProfile(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @PUT("forum/profile/{profileID}/save")
+    Call<OutputResponse> savePost(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("")
+    Call<OutputResponse> getReportReason(@Header("token-user") String tokenUser);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @POST("forum/post/{postID}/repost")
+    Call<OutputResponse> sendRepost(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("postID") String postID);
 }

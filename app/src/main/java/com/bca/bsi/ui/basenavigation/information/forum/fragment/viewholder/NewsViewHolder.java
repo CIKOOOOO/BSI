@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.PromoNews;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -88,13 +87,16 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         tvName.setText(post.getName());
 
-        PromoNews promoNews = post.getPromoNews();
+        if (null != post.getPromoNews()) {
+            PromoNews promoNews = post.getPromoNews();
+            if (!promoNews.getContent().isEmpty()) {
+                tvContentNews.setText(Utils.removeEnter(promoNews.getContent()));
+            }
 
-        tvContentNews.setText(Utils.removeEnter(promoNews.getContent()));
-
-        Picasso.get()
-                .load(Utils.imageURL(promoNews.getImage()))
-                .into(imgNews);
+            Picasso.get()
+                    .load(Utils.imageURL(promoNews.getImage()))
+                    .into(imgNews);
+        }
 
         itemView.setOnClickListener(v -> onPostClick.onDetailPost(post.getPostID()));
     }
@@ -149,7 +151,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
                 break;
             case R.id.recycler_tv_content_news:
             case R.id.recycler_img_thumbnail_news:
-                Log.e("asd", post.getPromoNews().getNewsID()+"");
+                Log.e("asd", post.getPromoNews().getNewsID() + "");
                 onPostClick.onDetailNews(post.getPromoNews().getNewsID());
                 break;
             case R.id.recycler_tv_share_child_main_forum:

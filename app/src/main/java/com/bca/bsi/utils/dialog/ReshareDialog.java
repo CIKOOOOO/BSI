@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,8 +77,8 @@ public class ReshareDialog extends DialogFragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_info_reshare_post:
-                if(isReshare){
+            case R.id.tv_yes_reshare_post:
+                if(!isReshare){
                     onReshare.onResharePost(postID);
                 }else{
                     onReshare.onUndoResharePost(postID);
