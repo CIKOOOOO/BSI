@@ -58,47 +58,47 @@ public class DirectShareViewModel extends AndroidViewModel {
     }
 
     public void loadUser(String token, String username, String profileID) {
-//        clearForumList();
-//        Call<OutputResponse> call = apiInterface.getDirectUserList(token, profileID, username);
-//        call.enqueue(new Callback<OutputResponse>() {
-//            @Override
-//            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-////                try {
-////                    Log.e("asd", "aaa" + response.errorBody().string());
-////                } catch (IOException e) {
-////                    e.printStackTrace();
-////                }
-//                Log.e("aaaaa", "" + Utils.toJSON(response.body()) + " - " + response.raw().request().url().toString());
-//                if (null != response.body()) {
-//                    OutputResponse outputResponse = response.body();
-//                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
-//                    if (errorSchema.getErrorCode().equals("200")) {
-//                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
-//                        forumUserList = outputSchema.getDirectUserList();
-//                        if (0 != chosenUserList.size())
-//                            compareData();
-//                        else {
-//                            visibleForumList.addAll(forumUserList);
-//                            callback.onLoadForumUser(forumUserList);
-//                        }
-//                    } else {
-//                        callback.onFailed(errorSchema.getErrorMessage());
-//                    }
-//                } else {
-//                    callback.onFailed("");
+        clearForumList();
+        Call<OutputResponse> call = apiInterface.getDirectUserList(token, profileID, username);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+//                try {
+//                    Log.e("asd", "aaa" + response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
 //                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<OutputResponse> call, Throwable t) {
-//                callback.onFailed("");
-//            }
-//        });
+                Log.e("aaaaa", "" + Utils.toJSON(response.body()) + " - " + response.raw().request().url().toString());
+                if (null != response.body()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if (errorSchema.getErrorCode().equals("200")) {
+                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                        forumUserList = outputSchema.getDirectUserList();
+                        if (0 != chosenUserList.size())
+                            compareData();
+                        else {
+                            visibleForumList.addAll(forumUserList);
+                            callback.onLoadForumUser(forumUserList);
+                        }
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
 
 
-        this.forumUserList = DummyData.getForumUser();
-        this.visibleForumList.addAll(this.forumUserList);
-        callback.onLoadForumUser(DummyData.getForumUser());
+//        this.forumUserList = DummyData.getForumUser();
+//        this.visibleForumList.addAll(this.forumUserList);
+//        callback.onLoadForumUser(DummyData.getForumUser());
     }
 
     public void sendNewPost(String token, HashMap<String, Object> hashMap) {
