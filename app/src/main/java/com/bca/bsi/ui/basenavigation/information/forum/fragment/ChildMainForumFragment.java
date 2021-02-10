@@ -129,7 +129,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onReshareResult(boolean isReshare, String postID) {
-        adapter.setReshareStatus(isReshare ? "true" : "", postID);
+        adapter.setReshareStatus("true", postID);
     }
 
     @Override
