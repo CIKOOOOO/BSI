@@ -204,7 +204,7 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
-    public void onReport(String postID) {
+    public void onReport(String postID, String type) {
 
     }
 

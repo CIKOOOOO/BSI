@@ -111,7 +111,7 @@ public class OutputResponse {
         @SerializedName("categories")
         private List<Forum.Category> categoryList;
 
-        @SerializedName("report_list")
+        @SerializedName("list_reason")
         private List<Forum.Report> reportList;
 
         public OutputSchema() {

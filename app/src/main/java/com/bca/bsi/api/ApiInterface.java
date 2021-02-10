@@ -150,11 +150,17 @@ public interface ApiInterface {
             , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
-    @GET("")
+    @GET("forum/report-reason/")
     Call<OutputResponse> getReportReason(@Header("token-user") String tokenUser);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @POST("forum/post/{postID}/repost")
     Call<OutputResponse> sendRepost(@Header("token-user") String tokenUser
             , @Header("profile-id") String profileID, @Path("postID") String postID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @POST("forum/{report-type}/{post-id}/report")
+    Call<OutputResponse> sendReportPost(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Header("reason-id") String reasonID
+            , @Path("post-id") String postID, @Path("report-type") String reportType);
 }

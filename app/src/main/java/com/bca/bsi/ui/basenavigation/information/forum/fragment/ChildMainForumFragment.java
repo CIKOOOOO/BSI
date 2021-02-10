@@ -115,8 +115,8 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     }
 
     @Override
-    public void onLoadReportData(List<Forum.Report> reportList) {
-        BaseNavigationActivity.loadReport(reportList);
+    public void onLoadReportData(List<Forum.Report> reportList, String postID, String type) {
+        BaseNavigationActivity.loadReport(reportList, postID, type);
     }
 
     @Override
@@ -145,9 +145,9 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     }
 
     @Override
-    public void onReport(String postID) {
+    public void onReport(String postID, String type) {
         this.postID = postID;
-        viewModel.loadReportData(prefConfig.getTokenUser());
+        viewModel.loadReportData(prefConfig.getTokenUser(), type, postID);
     }
 
     @Override

@@ -29,8 +29,29 @@ public class BaseNavigationViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void reportPostOrForumWith(Forum.Report report) {
+    public void reportPostOrForumWith(Forum.Report report, String postID, String token, String profileID, String type) {
+        Call<OutputResponse> call = apiInterface.sendReportPost(token, profileID, report.getReportID(), postID, type);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                if (null != response.body() && null != response.body().getErrorSchema()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                        callback.onFailed("Mengirim report sukses");
+                    } else {
+                        callback.onFailed("Mengirim report gagal. Mohon coba lagi kembali");
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
     }
 
     public void getTipsOfTheWeek(String token) {

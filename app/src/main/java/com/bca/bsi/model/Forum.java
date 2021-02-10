@@ -353,7 +353,9 @@ public class Forum {
     }
 
     public static class Report {
+        @SerializedName("report_reason_id")
         private String reportID;
+        @SerializedName("report_reason_name")
         private String value;
         private boolean choose;
 

@@ -7,7 +7,7 @@ public interface OnPostClick {
 
     void onPostLike(String postID);
 
-    void onReport(String postID);
+    void onReport(String postID, String type);
 
     void onSavedPost(String postID);
 

@@ -27,8 +27,6 @@ import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.model.TipsOfTheWeek;
 import com.bca.bsi.ui.basenavigation.information.InformationFragment;
-import com.bca.bsi.ui.basenavigation.information.forum.MainForumFragment;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumFragment;
 import com.bca.bsi.ui.basenavigation.more.MoreFragment;
 import com.bca.bsi.ui.basenavigation.portfolio.PortfolioFragment;
 import com.bca.bsi.ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity;
@@ -46,7 +44,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick, ReportAdapter.onReportClick, View.OnClickListener, IBaseNavigatonCallback, TipsOfTheWeekDialog.onItemClick, AboutRoboDialog.onCloseDialog{
+public class BaseNavigationActivity extends BaseActivity implements PortfolioFragment.onBundleClick, ReportAdapter.onReportClick, View.OnClickListener, IBaseNavigatonCallback, TipsOfTheWeekDialog.onItemClick, AboutRoboDialog.onCloseDialog {
 
     public static BottomSheetBehavior<ConstraintLayout> BOTTOM_SHEET_REPORT;
 
@@ -54,6 +52,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     private static Button btnReport;
     private static TextView tvTitle;
     private static Resources resources;
+    private static String postID, reportType;
 
     private BottomSheetBehavior<ConstraintLayout> bsSmartBot;
     private RoboRekomenAdapter roboRekomenAdapter;
@@ -245,10 +244,10 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bs_btn_update_choose_image:
-                if (this.report == null) {
+                if (null == this.report) {
                     showSnackBar("Mohon pilih jenis laporan");
                 } else {
-                    viewModel.reportPostOrForumWith(this.report);
+                    viewModel.reportPostOrForumWith(this.report, postID, prefConfig.getTokenUser(), prefConfig.getProfileID(), reportType);
                 }
                 break;
             case R.id.tv_lanjut:
@@ -296,7 +295,9 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         }
     }
 
-    public static void loadReport(List<Forum.Report> reportList) {
+    public static void loadReport(List<Forum.Report> reportList, String postID, String type) {
+        BaseNavigationActivity.postID = postID;
+        BaseNavigationActivity.reportType = type;
         BOTTOM_SHEET_REPORT.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         tvTitle.setText("Alasan Pelaporan");

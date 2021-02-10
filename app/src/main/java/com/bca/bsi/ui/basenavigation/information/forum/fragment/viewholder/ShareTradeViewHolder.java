@@ -161,7 +161,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_report:
-                                onPostClick.onReport(post.getPostID());
+                                onPostClick.onReport(post.getPostID(),"post");
                                 break;
                             case R.id.menu_save:
                                 onPostClick.onSavedPost(post.getPostID());

@@ -68,9 +68,10 @@ public class ChildMainForumViewModel extends AndroidViewModel {
 //                    callback.onLoadData(DummyData.getPostShareTradeList());
                     break;
                 case Type.NEWS:
-                    postList.addAll(DummyData.getRepostNewsList());
-                    postList.addAll(DummyData.getPostNewsList());
-                    callback.onLoadData(postList);
+                    url = "forum/post/news";
+//                    postList.addAll(DummyData.getRepostNewsList());
+//                    postList.addAll(DummyData.getPostNewsList());
+//                    callback.onLoadData(postList);
                     break;
                 case Type.TIMELINE:
                     url = "forum/post/timeline";
@@ -149,7 +150,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
 //        Log.e("asd", page + "");
     }
 
-    public void loadReportData(String token) {
+    public void loadReportData(String token, String type, String postID) {
         Call<OutputResponse> call = apiInterface.getReportReason(token);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
@@ -159,7 +160,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
-                        callback.onLoadReportData(outputSchema.getReportList());
+                        callback.onLoadReportData(outputSchema.getReportList(), type, postID);
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

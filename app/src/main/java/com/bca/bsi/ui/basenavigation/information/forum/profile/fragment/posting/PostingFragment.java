@@ -63,7 +63,7 @@ public class PostingFragment extends BaseFragment implements OnPostClick {
     }
 
     @Override
-    public void onReport(String postID) {
+    public void onReport(String postID, String type) {
 
     }
 
