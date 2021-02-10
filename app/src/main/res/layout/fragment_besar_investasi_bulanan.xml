@@ -59,7 +59,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="21"
+                    android:weightSum="22"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -70,7 +70,7 @@
                         android:layout_width="@dimen/size_for_0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_weight="17"
+                        android:layout_weight="19"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_produk_reksadana_label">
@@ -96,7 +96,7 @@
                                 android:orientation="vertical">
                                 <TextView
                                     android:id="@+id/tv_selected_tipe_reksadana"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Saham"
                                     android:textSize="@dimen/size_for_12sp"/>
@@ -174,10 +174,11 @@
                     </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/chevron_arrow"
                         android:layout_width="@dimen/size_for_0dp"
                         android:layout_height="@dimen/size_for_20dp"
                         android:layout_gravity="center_vertical|end"
-                        android:layout_weight="4"
+                        android:layout_weight="3"
                         android:src="@drawable/ic_arrow_black"/>
 
                 </LinearLayout>

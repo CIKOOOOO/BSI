@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.more.calculator;
+package com.bca.bsi.ui.basenavigation.more.calculator.popup;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.ReksadanaProductAdapter;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
 
@@ -19,9 +20,23 @@ import java.util.List;
 public class ProductsCalculatorAdapter extends RecyclerView.Adapter<ProductsCalculatorAdapter.MyViewHolder> {
 
     private List<Product.ReksaDana> products;
+    private ProductsCalculatorAdapter.onItemClick onItemClick;
+
+    public interface onItemClick {
+        void onReksaDanaClick(Product.ReksaDana reksaDana);
+    }
+
+    public ProductsCalculatorAdapter(ProductsCalculatorAdapter.onItemClick onItemClick) {
+        this.onItemClick = onItemClick;
+    }
 
     public void setProductsCalculatorAdapter (List<Product.ReksaDana> products) {
+        System.out.println("PRODUCTNYA UDAH DI SET YA");
         this.products = products;
+    }
+
+    public List<Product.ReksaDana> getProducts() {
+        return products;
     }
 
     @NonNull
@@ -33,7 +48,9 @@ public class ProductsCalculatorAdapter extends RecyclerView.Adapter<ProductsCalc
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final Product.ReksaDana productChoice = products.get(position);
+        Product.ReksaDana productChoice = products.get(position);
+
+
         holder.tvJenisReksa.setText(productChoice.getType());
         holder.tvNab.setText(productChoice.getNab());
         holder.tvKinerja.setText(productChoice.getKinerja());
@@ -46,11 +63,30 @@ public class ProductsCalculatorAdapter extends RecyclerView.Adapter<ProductsCalc
             e.printStackTrace();
         }
         holder.tvLastDate.setText(date);
+
+        holder.tvReksaName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClick.onReksaDanaClick(productChoice);
+
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
+        /*
+        if(!products.isEmpty()){
+            return products.size();
+        }else{
+            return 10;
+        }*/
+
+        //return 10;
+
         return products.size();
+
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -60,11 +96,11 @@ public class ProductsCalculatorAdapter extends RecyclerView.Adapter<ProductsCalc
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvJenisReksa = itemView.findViewById(R.id.recycler_tv_type_product_reksadana_c);
-            tvLastDate = itemView.findViewById(R.id.recycler_tv_date_product_reksadana_c);
-            tvReksaName = itemView.findViewById(R.id.recycler_tv_title_product_reksadana_c);
-            tvKinerja = itemView.findViewById(R.id.recycler_tv_kinerja_product_reksadana_c);
-            tvNab = itemView.findViewById(R.id.recycler_tv_nab_product_reksadana_c);
+            tvJenisReksa = itemView.findViewById(R.id.recycler_tv_type_product_reksadana_cp);
+            tvLastDate = itemView.findViewById(R.id.recycler_tv_date_product_reksadana_cp);
+            tvReksaName = itemView.findViewById(R.id.recycler_tv_title_product_reksadana_cp);
+            tvKinerja = itemView.findViewById(R.id.recycler_tv_kinerja_product_reksadana_cp);
+            tvNab = itemView.findViewById(R.id.recycler_tv_nab_product_reksadana_cp);
         }
     }
 }

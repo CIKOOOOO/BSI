@@ -138,12 +138,15 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
 
             //BIKIN SWITCH CASE PRODUCT TYPE
 
-            if(currentPage < 2) {
-                Intent intent = new Intent(this, DetailProductActivity.class);
-                intent.putExtra(DetailProductActivity.PRODUCT_TYPE, currentPage);
-                startActivity(intent);
-            }else{
+            if(topic.equals("3")) {
                 openPage();
+            }else{
+                System.out.println("Ini udah masuk dari else");
+                Intent intent = new Intent(this, DetailProductActivity.class);
+                intent.putExtra(DetailProductActivity.PRODUCT_TYPE, Integer.parseInt(topic)-1);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                System.out.println();
             }
 
             //intent.putExtra(DetailProductActivity.PRODUCT_TYPE, productType);

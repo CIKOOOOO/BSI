@@ -7,7 +7,7 @@
     android:background="@color/white_palette">
 
     <TextView
-        android:id="@+id/recycler_tv_title_product_reksadana_c"
+        android:id="@+id/recycler_tv_title_product_reksadana_cp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_for_20dp"
@@ -20,18 +20,18 @@
         tools:text="Ashmore Dana Ekuitas Nusantara" />
 
     <TextView
-        android:id="@+id/recycler_tv_type_product_reksadana_c"
+        android:id="@+id/recycler_tv_type_product_reksadana_cp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_for_10dp"
         android:textColor="@color/gray_palette"
         android:textSize="@dimen/size_for_15sp"
-        app:layout_constraintStart_toStartOf="@id/recycler_tv_title_product_reksadana_c"
-        app:layout_constraintTop_toBottomOf="@id/recycler_tv_title_product_reksadana_c"
+        app:layout_constraintStart_toStartOf="@id/recycler_tv_title_product_reksadana_cp"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_title_product_reksadana_cp"
         tools:text="Saham" />
 
     <TextView
-        android:id="@+id/recycler_tv_date_product_reksadana_c"
+        android:id="@+id/recycler_tv_date_product_reksadana_cp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_for_15dp"
@@ -42,22 +42,22 @@
         android:textColor="@color/gray_palette"
         app:drawableStartCompat="@drawable/ic_baseline_date_range_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycler_tv_type_product_reksadana_c"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_type_product_reksadana_cp"
         tools:text="16/12/20" />
 
     <TextView
-        android:id="@+id/tv_01_c"
+        android:id="@+id/tv_01_cp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_for_15dp"
         android:text="@string/performance_1_month"
         android:textAllCaps="true"
         android:textSize="@dimen/size_for_12sp"
-        app:layout_constraintStart_toStartOf="@id/recycler_tv_title_product_reksadana_c"
-        app:layout_constraintTop_toBottomOf="@id/recycler_tv_date_product_reksadana_c" />
+        app:layout_constraintStart_toStartOf="@id/recycler_tv_title_product_reksadana_cp"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_date_product_reksadana_cp" />
 
     <TextView
-        android:id="@+id/tv_02_c"
+        android:id="@+id/tv_02_cp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_for_20dp"
@@ -65,25 +65,25 @@
         android:text="@string/nab_unit"
         android:textAllCaps="true"
         android:textSize="@dimen/size_for_12sp"
-        app:layout_constraintStart_toEndOf="@id/tv_01_c"
-        app:layout_constraintTop_toBottomOf="@id/recycler_tv_date_product_reksadana_c" />
+        app:layout_constraintStart_toEndOf="@id/tv_01_cp"
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_date_product_reksadana_cp" />
 
     <TextView
-        android:id="@+id/recycler_tv_kinerja_product_reksadana_c"
+        android:id="@+id/recycler_tv_kinerja_product_reksadana_cp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/green_base_palette"
-        app:layout_constraintStart_toStartOf="@id/recycler_tv_title_product_reksadana_c"
-        app:layout_constraintTop_toBottomOf="@id/tv_01_c"
+        app:layout_constraintStart_toStartOf="@id/recycler_tv_title_product_reksadana_cp"
+        app:layout_constraintTop_toBottomOf="@id/tv_01_cp"
         tools:text="+14,89%" />
 
     <TextView
-        android:id="@+id/recycler_tv_nab_product_reksadana_c"
+        android:id="@+id/recycler_tv_nab_product_reksadana_cp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/java_palette"
-        app:layout_constraintStart_toStartOf="@id/tv_02_c"
-        app:layout_constraintTop_toBottomOf="@id/tv_01_c"
+        app:layout_constraintStart_toStartOf="@id/tv_02_cp"
+        app:layout_constraintTop_toBottomOf="@id/tv_01_cp"
         tools:text="Rp 1462,81" />
 
     <View
@@ -93,7 +93,7 @@
         android:background="@color/gray_palette"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycler_tv_nab_product_reksadana_c" />
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_nab_product_reksadana_cp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

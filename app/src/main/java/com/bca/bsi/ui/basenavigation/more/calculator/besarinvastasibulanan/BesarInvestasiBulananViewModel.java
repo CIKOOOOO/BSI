@@ -51,7 +51,8 @@ public class BesarInvestasiBulananViewModel extends AndroidViewModel {
 
     public void getReksaDanaList(String profile_risiko, String token) {
 //        callback.resultOf(DummyData.getReksaDanaDummyList());
-        if (profile_risiko.isEmpty()) return;
+
+        if (profile_risiko.isEmpty()) {return;}
 
         Call<OutputResponse> call = apiInterface.getReksaDanaData(token,Integer.parseInt(profile_risiko));
         call.enqueue(new Callback<OutputResponse>() {
@@ -80,6 +81,8 @@ public class BesarInvestasiBulananViewModel extends AndroidViewModel {
                 Log.e("asd", t.getMessage() + "");
                 callback.onFailed("Mohon coba lagi kembali");
             }
+
         });
+
     }
 }

@@ -17,22 +17,26 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Product;
 import com.bca.bsi.ui.basenavigation.more.calculator.ProductsPopUpActivity;
+import com.bca.bsi.ui.basenavigation.more.calculator.popup.IProductsCalculatorCallback;
+import com.bca.bsi.ui.basenavigation.more.calculator.popup.ProductsPopUpDialog;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
+import com.google.gson.Gson;
 
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BesarInvestasiBulananFragment extends BaseFragment implements View.OnClickListener, IBesarInvestasiBulananCallback {
+public class BesarInvestasiBulananFragment extends BaseFragment implements View.OnClickListener, IBesarInvestasiBulananCallback, ProductsPopUpDialog.onDataRetrieved {
 
     private BesarInvestasiBulananViewModel viewModel;
     private Button kalkulasi;
@@ -46,23 +50,26 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     private Spinner spinnerDurasiTahunBIB;
     private Spinner spinnerDurasiBulanBIB;
     private int numbOfTabs;
-    private String rorValue;
     private TextView tvRoR;
     private TextView tvRoRPertahun;
     private TextView tvRoRPersen;
     private TextView produkReksadanaLabel;
-    private String selectedProdukReksadana;
     private CardView cardViewSelectedReksadana;
     private TextView selectedNamaReksadanaTV;
     private TextView selectedTanggalReksadanaTV;
     private TextView selectedKinerjaSatuBulanReksadanaTV;
     private TextView selectedNABUnitReksadanaTV;
     private TextView selectedTipeReksadana;
+    private Product.DetailReksaDana selectedDetailReksadana;
+    private Product.DetailReksaDana detailReksaDana;
+    private String value;
+    private ProductsPopUpDialog productsPopUpDialog;
+    private String rorValue;
+    private ImageView chevronArrow;
 
-    public BesarInvestasiBulananFragment(int numbOfTabs, String rorValue, String selectedProdukReksadana) {
+    public BesarInvestasiBulananFragment(int numbOfTabs, Product.DetailReksaDana selectedDetailReksadana) {
         this.numbOfTabs = numbOfTabs;
-        this.rorValue = rorValue;
-        this.selectedProdukReksadana = selectedProdukReksadana;
+        this.selectedDetailReksadana = selectedDetailReksadana;
     }
 
     @Override
@@ -96,6 +103,29 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         selectedKinerjaSatuBulanReksadanaTV = view.findViewById(R.id.tv_kinerja_1_bulan);
         selectedNABUnitReksadanaTV = view.findViewById(R.id.tv_nab_unit);
         selectedTipeReksadana = view.findViewById(R.id.tv_selected_tipe_reksadana);
+        chevronArrow = view.findViewById(R.id.chevron_arrow);
+
+        productsPopUpDialog = new ProductsPopUpDialog();
+        productsPopUpDialog.setOnDataRetrieved(this);
+
+        /*
+        Bundle bundle = getArguments();
+
+        if(bundle != null){
+            value = bundle.getString("selectedProductReksadana");
+        }
+
+        if(value != null){
+            Gson gson = new Gson();
+            detailReksaDana = gson.fromJson(value, Product.DetailReksaDana.class);
+        }else {
+            System.out.println("VALUE DARI VALUE DETAIL REKSADANA NULL");
+        }
+
+        if (detailReksaDana != null){
+            selectedDetailReksadana = detailReksaDana;
+        }
+        */
 
         switch (numbOfTabs) {
             case 3:
@@ -104,7 +134,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                 tvRoRPertahun.setVisibility(View.GONE);
                 tvRoRPersen.setVisibility(View.GONE);
                 //produkReksadanaLabel.setVisibility(View.VISIBLE);
-                produkReksadanaLabel.setVisibility(View.GONE);
+                produkReksadanaLabel.setVisibility(View.VISIBLE);
                 cardViewSelectedReksadana.setVisibility(View.VISIBLE);
                 break;
             case 4:
@@ -120,9 +150,6 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         viewModel = new ViewModelProvider(this).get(BesarInvestasiBulananViewModel.class);
         viewModel.setCallback(this);
         kalkulasi.setOnClickListener(this);
-
-        viewModel.getReksaDanaList(prefConfig.getTokenUser(), prefConfig.getProfileRisiko());
-        //viewModel.getReksaDanaList("1");
 
         List<Integer> durasiTahun = new ArrayList<Integer>();
         List<Integer> durasiBulan = new ArrayList<Integer>();
@@ -140,6 +167,32 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBIB.setAdapter(adapterBulan);
+
+        selectedNamaReksadanaTV.setText(selectedDetailReksadana.getName());
+        selectedTipeReksadana.setText(selectedDetailReksadana.getProductCategory());
+        selectedNABUnitReksadanaTV.setText("Rp."+selectedDetailReksadana.getNabPerUnit());
+        selectedKinerjaSatuBulanReksadanaTV.setText(selectedDetailReksadana.getKinerja1Bulan());
+        rorValue = selectedDetailReksadana.getKinerja1Tahun();
+        try {
+            Double kinerja1Bulan = Double.parseDouble(selectedDetailReksadana.getKinerja1Bulan());
+            if (kinerja1Bulan < 0) {
+                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.red_palette));
+            }else{
+                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.green_base_palette));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        selectedTanggalReksadanaTV.setText(selectedDetailReksadana.getUpdateDate());
+
+        /*
+        try {
+            String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, (selectedDetailReksadana.getReleaseDate()));
+            selectedTanggalReksadanaTV.setText(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        */
 
         ETBIBModalAwal.addTextChangedListener(new TextWatcher() {
             @Override
@@ -206,8 +259,9 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         cardViewSelectedReksadana.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent popUpWindow = new Intent(mActivity, ProductsPopUpActivity.class);
-                startActivity(popUpWindow);
+//                Intent popUpWindow = new Intent(mActivity, ProductsPopUpActivity.class);
+//                startActivity(popaaUpWindow);
+                productsPopUpDialog.show(getChildFragmentManager(), "");
             }
         });
 
@@ -255,6 +309,8 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     BIBLabel.setVisibility(View.VISIBLE);
                     rpLabel.setVisibility(View.VISIBLE);
                     //hasilBIB.setVisibility(View.VISIBLE);
+                    cardViewSelectedReksadana.setEnabled(false);
+                    chevronArrow.setVisibility(View.INVISIBLE);
 
                     kalkulasi.setText(getString(R.string.calculator_reset_label));
 
@@ -271,6 +327,8 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     ETBIBROR.setEnabled(true);
                     spinnerDurasiTahunBIB.setEnabled(true);
                     spinnerDurasiBulanBIB.setEnabled(true);
+                    cardViewSelectedReksadana.setEnabled(true);
+                    chevronArrow.setVisibility(View.VISIBLE);
 
                     BIBLabel.setVisibility(View.GONE);
                     rpLabel.setText(getString(R.string.rp));
@@ -302,21 +360,6 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     @Override
     public void kalkulasiOutput(String formatTargetHasilInvest, String formatModalAwal, String formatRoR, String formatHasil) {
 
-        /*
-        ETBIBTargetHasilInvestasi.setText(formatTargetHasilInvest);
-        ETBIBModalAwal.setText(formatModalAwal);
-        ETBIBROR.setText(formatRoR);
-        */
-
-        /*
-        if(formatHasil.equals("NaN") || formatHasil.equals("-NaN") ){
-            rpLabel.setText(getString(R.string.ror_tidak_boleh_bernilai_nol));
-            hasilBIB.setVisibility(View.INVISIBLE);
-        }else{
-            rpLabel.setVisibility(View.VISIBLE);
-            hasilBIB.setText(formatHasil);
-            */
-
         switch (numbOfTabs) {
             case 3:
                 hasilBIB.setText(formatHasil);
@@ -346,6 +389,7 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     @Override
     public void resultOf(List<Product.ReksaDana> reksaDanaList) {
 
+        /*
         List<String> reksadanaList = new ArrayList<String>();
 
         for (int i = 0; i < reksaDanaList.size(); i++) {
@@ -366,11 +410,33 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
 
         selectedTipeReksadana.setText(reksaDanaList.get(position).getType());
         selectedNABUnitReksadanaTV.setText(reksaDanaList.get(position).getNab());
+        */
 
     }
 
     @Override
     public void onFailed(String msg) {
 
+    }
+
+    @Override
+    public void onDataArrived(Product.DetailReksaDana detailReksaDana, List<Product.Performance> performances) {
+        selectedNamaReksadanaTV.setText(detailReksaDana.getName());
+        selectedTipeReksadana.setText(detailReksaDana.getProductCategory());
+        selectedNABUnitReksadanaTV.setText("Rp."+detailReksaDana.getNabPerUnit());
+        selectedKinerjaSatuBulanReksadanaTV.setText(detailReksaDana.getKinerja1Bulan());
+        rorValue = detailReksaDana.getKinerja1Tahun();
+        try {
+            Double kinerja1Bulan = Double.parseDouble(detailReksaDana.getKinerja1Bulan());
+            if (kinerja1Bulan < 0) {
+                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.red_palette));
+            }else{
+                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.green_base_palette));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        selectedTanggalReksadanaTV.setText(detailReksaDana.getUpdateDate());
+        productsPopUpDialog.dismiss();
     }
 }

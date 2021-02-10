@@ -6,29 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ui.basenavigation.more.calculator.ProductsPopUpActivity">
 
-    <include
-        android:id="@+id/produk_choice_toolbar_back"
-        layout="@layout/toolbar_back"
+    <FrameLayout
+        style="@style/BackgroundBlur"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent" />
 
-    <include
-        android:id="@+id/produk_choice_searchbar"
-        layout="@layout/search"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/produk_choice_toolbar_back" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_produk_choice_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_for_5dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/size_for_30dp"
+        android:layout_marginLeft="@dimen/size_for_10dp"
+        android:layout_marginRight="@dimen/size_for_10dp"
+        android:layout_marginBottom="@dimen/size_for_20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/produk_choice_searchbar"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/produk_choice_toolbar_back"
+            layout="@layout/toolbar_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/produk_choice_searchbar"
+            layout="@layout/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/produk_choice_toolbar_back" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_produk_choice_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_for_5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/produk_choice_searchbar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

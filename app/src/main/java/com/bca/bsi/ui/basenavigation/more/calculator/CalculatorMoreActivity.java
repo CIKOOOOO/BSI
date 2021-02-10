@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bca.bsi.R;
+import com.google.gson.Gson;
 
 public class CalculatorMoreActivity extends BaseActivity implements View.OnClickListener {
 
@@ -31,6 +32,7 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
     private int numberOfTabs;
     private String rorValue = "0";
     private String selectedProdukReksadana = null;
+    private String selectedDetailReksadana;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +67,12 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
         numberOfTabs =  intent.getIntExtra("numberOfTabs",4);
         rorValue = intent.getStringExtra("rorValue");
         selectedProdukReksadana = intent.getStringExtra("namaProduk");
+        selectedDetailReksadana = intent.getStringExtra("selectedDetailReksadana");
 
+        Gson gson = new Gson();
+        Product.DetailReksaDana detailReksaDana = gson.fromJson(selectedDetailReksadana, Product.DetailReksaDana.class);
 
-        calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),numberOfTabs,rorValue, selectedProdukReksadana);
+        calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),numberOfTabs,rorValue, selectedProdukReksadana, detailReksaDana);
         viewPager.setAdapter(calculatorPagerAdapter);
         viewPager.setOffscreenPageLimit(numberOfTabs);
 
@@ -75,7 +80,7 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
             case 3:
                 lastTab.setVisibility(View.GONE);
                 besarRoRTab.setVisibility(View.GONE);
-                titleChildPage.setVisibility(View.VISIBLE);
+                titleChildPage.setVisibility(View.GONE);
                 titleChildPage.setText(intent.getStringExtra("namaProduk"));
                 break;
             case 4:

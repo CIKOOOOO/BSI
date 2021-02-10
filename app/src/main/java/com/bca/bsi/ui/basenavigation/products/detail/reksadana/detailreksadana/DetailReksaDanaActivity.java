@@ -100,6 +100,7 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
                 intent2.putExtra("rorValue", this.detailReksaDana.getKinerja1Tahun());
                 Log.e("asdf", this.detailReksaDana.getKinerja1Tahun());
                 intent2.putExtra("namaProduk",this.detailReksaDana.getName());
+                intent2.putExtra("selectedDetailReksadana", Utils.toJSON(this.detailReksaDana));
                 startActivity(intent2);
                 break;
             case R.id.btn_buy_reksa_dana_detail:

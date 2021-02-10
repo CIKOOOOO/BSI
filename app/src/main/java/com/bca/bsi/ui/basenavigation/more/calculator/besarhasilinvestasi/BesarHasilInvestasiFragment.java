@@ -3,6 +3,7 @@ package com.bca.bsi.ui.basenavigation.more.calculator.besarhasilinvestasi;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,14 +15,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.bca.bsi.R;
+import com.bca.bsi.model.Product;
+import com.bca.bsi.ui.basenavigation.more.calculator.popup.ProductsPopUpDialog;
 import com.bca.bsi.utils.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BesarHasilInvestasiFragment extends BaseFragment implements View.OnClickListener, IBesarHasilInvestasiCallback {
+public class BesarHasilInvestasiFragment extends BaseFragment implements View.OnClickListener, IBesarHasilInvestasiCallback, ProductsPopUpDialog.onDataRetrieved {
 
     private BesarHasilInvestasiViewModel viewModel;
     private Spinner spinnerDurasiTahunBHI;
@@ -39,10 +43,20 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
     private TextView tvRoR;
     private TextView tvRoRPertahun;
     private TextView tvRoRPersen;
+    private Product.DetailReksaDana selectedDetailReksadana;
+    private CardView cardViewSelectedReksadana;
+    private TextView produkReksadanaLabel;
+    private TextView selectedNamaReksadanaTV;
+    private TextView selectedTanggalReksadanaTV;
+    private TextView selectedKinerjaSatuBulanReksadanaTV;
+    private TextView selectedNABUnitReksadanaTV;
+    private TextView selectedTipeReksadana;
+    private ProductsPopUpDialog productsPopUpDialog;
+    private ImageView chevronArrow;
 
-    public BesarHasilInvestasiFragment(int numbOfTabs, String rorValue) {
+    public BesarHasilInvestasiFragment(int numbOfTabs, Product.DetailReksaDana selectedReksadana) {
         this.numbOfTabs = numbOfTabs;
-        this.rorValue = rorValue;
+        this.selectedDetailReksadana = selectedReksadana;
     }
 
     @Override
@@ -69,6 +83,16 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
         tvRoR = view.findViewById(R.id.tv_ror);
         tvRoRPertahun = view.findViewById(R.id.tv_ror_pertahun);
         tvRoRPersen = view.findViewById(R.id.tv_ror_persen);
+        produkReksadanaLabel = view.findViewById(R.id.tv_produk_reksadana_label);
+        cardViewSelectedReksadana = view.findViewById(R.id.card_view);
+        selectedNamaReksadanaTV = view.findViewById(R.id.tv_selected_nama_reksadana);
+        selectedTanggalReksadanaTV = view.findViewById(R.id.tv_selected_tanggal_reksadana);
+        selectedKinerjaSatuBulanReksadanaTV = view.findViewById(R.id.tv_kinerja_1_bulan);
+        selectedNABUnitReksadanaTV = view.findViewById(R.id.tv_nab_unit);
+        selectedTipeReksadana = view.findViewById(R.id.tv_selected_tipe_reksadana);
+
+        productsPopUpDialog = new ProductsPopUpDialog();
+        productsPopUpDialog.setOnDataRetrieved(this);
 
         viewModel = new ViewModelProvider(this).get(BesarHasilInvestasiViewModel.class);
         viewModel.setCallback(this);
@@ -80,12 +104,16 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
                 tvRoR.setVisibility(View.GONE);
                 tvRoRPertahun.setVisibility(View.GONE);
                 tvRoRPersen.setVisibility(View.GONE);
+                produkReksadanaLabel.setVisibility(View.VISIBLE);
+                cardViewSelectedReksadana.setVisibility(View.VISIBLE);
                 break;
             case 4:
                 ETBHIROR.setVisibility(View.VISIBLE);
                 tvRoR.setVisibility(View.VISIBLE);
                 tvRoRPertahun.setVisibility(View.VISIBLE);
                 tvRoRPersen.setVisibility(View.VISIBLE);
+                produkReksadanaLabel.setVisibility(View.GONE);
+                cardViewSelectedReksadana.setVisibility(View.VISIBLE);
                 break;
         }
 
@@ -105,6 +133,23 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
 
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBHI.setAdapter(adapterBulan);
+
+        selectedNamaReksadanaTV.setText(selectedDetailReksadana.getName());
+        selectedTipeReksadana.setText(selectedDetailReksadana.getProductCategory());
+        selectedNABUnitReksadanaTV.setText("Rp."+ selectedDetailReksadana.getNabPerUnit());
+        selectedKinerjaSatuBulanReksadanaTV.setText(selectedDetailReksadana.getKinerja1Bulan());
+        rorValue = selectedDetailReksadana.getKinerja1Tahun();
+        try {
+            Double kinerja1Bulan = Double.parseDouble(selectedDetailReksadana.getKinerja1Bulan());
+            if (kinerja1Bulan < 0) {
+                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.red_palette));
+            }else{
+                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.green_base_palette));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        selectedTanggalReksadanaTV.setText(selectedDetailReksadana.getUpdateDate());
 
 
         ETBHIModalAwal.addTextChangedListener(new TextWatcher() {
@@ -169,6 +214,15 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
             }
         });
 
+        cardViewSelectedReksadana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent popUpWindow = new Intent(mActivity, ProductsPopUpActivity.class);
+//                startActivity(popaaUpWindow);
+                productsPopUpDialog.show(getChildFragmentManager(), "");
+            }
+        });
+
         BHILabel.setVisibility(View.GONE);
         rpLabel.setVisibility(View.GONE);
         hasilBHI.setVisibility(View.GONE);
@@ -213,6 +267,10 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
                     BHILabel.setVisibility(View.VISIBLE);
                     rpLabel.setVisibility(View.VISIBLE);
                     //hasilBHI.setVisibility(View.VISIBLE);
+
+                    cardViewSelectedReksadana.setEnabled(false);
+                    chevronArrow.setVisibility(View.INVISIBLE);
+
                     kalkulasi.setText(getString(R.string.calculator_reset_label));
 
                     nestedScrollView.post(new Runnable() {
@@ -234,11 +292,16 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
                     rpLabel.setVisibility(View.GONE);
                     hasilBHI.setVisibility(View.GONE);
 
+                    cardViewSelectedReksadana.setEnabled(true);
+                    chevronArrow.setVisibility(View.VISIBLE);
+
+                    /*
                     ETBHIIvestasiBulanan.setText("");
                     ETBHIModalAwal.setText("");
                     ETBHIROR.setText("");
                     spinnerDurasiTahunBHI.setSelection(0);
                     spinnerDurasiBulanBHI.setSelection(0);
+                    */
 
                     kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
 
@@ -292,5 +355,26 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onDataArrived(Product.DetailReksaDana detailReksaDana, List<Product.Performance> performances) {
+        selectedNamaReksadanaTV.setText(detailReksaDana.getName());
+        selectedTipeReksadana.setText(detailReksaDana.getProductCategory());
+        selectedNABUnitReksadanaTV.setText("Rp."+detailReksaDana.getNabPerUnit());
+        selectedKinerjaSatuBulanReksadanaTV.setText(detailReksaDana.getKinerja1Bulan());
+        rorValue = detailReksaDana.getKinerja1Tahun();
+        try {
+            Double kinerja1Bulan = Double.parseDouble(detailReksaDana.getKinerja1Bulan());
+            if (kinerja1Bulan < 0) {
+                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.red_palette));
+            }else{
+                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.green_base_palette));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        selectedTanggalReksadanaTV.setText(detailReksaDana.getUpdateDate());
+        productsPopUpDialog.dismiss();
     }
 }
