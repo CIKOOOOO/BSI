@@ -106,7 +106,7 @@ public class DirectShareViewModel extends AndroidViewModel {
         List<String> imageEncodedList = new ArrayList<>();
 
         for (Bitmap bitmap : (List<Bitmap>) hashMap.get("post_attachment")) {
-            Log.e("asd", Utils.encodeBitmap(bitmap));
+//            Log.e("asd", Utils.encodeBitmap(bitmap));
             imageEncodedList.add(Utils.encodeBitmap(bitmap));
         }
 

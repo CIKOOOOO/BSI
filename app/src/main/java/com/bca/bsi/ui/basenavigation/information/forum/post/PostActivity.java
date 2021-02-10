@@ -469,6 +469,9 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
             createPostMap.put("post_category_id", this.category.getCategoryID());
             createPostMap.put("repost_from", "");
             createPostMap.put("visible_to_id", new ArrayList<String>());
+            createPostMap.put("reksa_dana_id", "");
+            createPostMap.put("transaction_type", "");
+            createPostMap.put("share_trade_type", "");
 
             switch (type) {
                 case NEW_STANDARD_POST:
