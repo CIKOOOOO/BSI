@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -40,7 +41,6 @@ import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.ui.basenavigation.information.forum.post.direct.DirectShareActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.CustomLoading;
-import com.bca.bsi.utils.DecodeBitmap;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
@@ -347,8 +347,8 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                     && null != data) {
                 // Get the Image from data
                 if (data.getData() != null) {
-//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                    Bitmap bitmap = DecodeBitmap.decodeSampleBitmapFromUri(data.getData(), 70, 70, this);
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+//                    Bitmap bitmap = DecodeBitmap.decodeSampleBitmapFromUri(data.getData(), 70, 70, this);
                     imagesEncodedList.add(bitmap);
                 } else {
                     if (data.getClipData() != null) {
@@ -368,8 +368,8 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 //                            BitmapFactory.decodeFile(getAbsolutePath(uri), o);
 //                            int imageHeight = o.outHeight;
 //                            int imageWidth = o.outWidth;
-//                            Bitmap bitmaps = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                            Bitmap bitmap = DecodeBitmap.decodeSampleBitmapFromUri(uri, 70, 70, this);
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+//                            Bitmap bitmap = DecodeBitmap.decodeSampleBitmapFromUri(uri, 70, 70, this);
 //                            Log.e("asd", "Bitmap before decode : " + bitmaps.getRowBytes() * bitmaps.getHeight());
 //                            Log.e("asd", "Bitmap after decode : " + bitmap.getRowBytes() * bitmap.getHeight());
                             imagesEncodedList.add(bitmap);
@@ -451,10 +451,10 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
         String value;
         if (content.isEmpty()) {
             showSnackBar("Mohon isi konten postingan");
-        } else if (null == this.category) {
-            showSnackBar("Mohon pilih kategori postingan");
         } else if (null == this.privacy) {
             showSnackBar("Mohon pilih kepada siapa Anda akan membagikan postingan");
+        } else if (null == this.category && null != this.promoNews) {
+            showSnackBar("Mohon pilih kategori postingan");
         } else {
             createPostMap.put("post_id_source", "");
             createPostMap.put("profile_id", prefConfig.getProfileID());

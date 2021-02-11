@@ -105,7 +105,7 @@ public class OutputResponse {
         @SerializedName("my_inbox")
         private List<Forum.Inbox> inboxList;
 
-        @SerializedName(value = "list_followingme", alternate = {"list_followerme"})
+        @SerializedName(value = "list_followingme", alternate = {"list_followerme","list_follower","list_following"})
         private List<Forum.Connection> connectionList;
 
         @SerializedName("categories")

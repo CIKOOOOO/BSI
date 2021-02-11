@@ -107,7 +107,7 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onLoadData(List<Forum.Connection> connectionList) {
-        Log.e("asd", connectionList.size() + "");
+//        Log.e("asd", connectionList.size() + "");
         connectionAdapter.setConnectionList(connectionList);
         connectionAdapter.notifyDataSetChanged();
     }

@@ -36,35 +36,35 @@ public class PostViewModel extends AndroidViewModel {
     }
 
     public void loadCategoryData(String tokenUser) {
-        callback.onLoadCategoryData(DummyData.getCategoryList());
+//        callback.onLoadCategoryData(DummyData.getCategoryList());
 
-//        Call<OutputResponse> call = apiInterface.getCategoryList(tokenUser);
-//        call.enqueue(new Callback<OutputResponse>() {
-//            @Override
-//            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-//                if (null != response.body()) {
-//                    OutputResponse outputResponse = response.body();
-//                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
-//                    if (null != errorSchema) {
-//                        if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
-//                            OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
-//                            callback.onLoadCategoryData(outputSchema.getCategoryList());
-//                        } else {
-//                            callback.onFailed(errorSchema.getErrorMessage());
-//                        }
-//                    } else {
-//                        callback.onFailed("");
-//                    }
-//                } else {
-//                    callback.onFailed("");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<OutputResponse> call, Throwable t) {
-//                callback.onFailed("");
-//            }
-//        });
+        Call<OutputResponse> call = apiInterface.getCategoryList(tokenUser);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                if (null != response.body()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if (null != errorSchema) {
+                        if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                            OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                            callback.onLoadCategoryData(outputSchema.getCategoryList());
+                        } else {
+                            callback.onFailed(errorSchema.getErrorMessage());
+                        }
+                    } else {
+                        callback.onFailed("");
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
     }
 
 //    public void sendData(List<Bitmap> bitmapList) {
@@ -102,7 +102,6 @@ public class PostViewModel extends AndroidViewModel {
     }
 
     public void sendNewPost(String token, HashMap<String, Object> hashMap) {
-
         List<String> imageEncodedList = new ArrayList<>();
 
         for (Bitmap bitmap : (List<Bitmap>) hashMap.get("post_attachment")) {

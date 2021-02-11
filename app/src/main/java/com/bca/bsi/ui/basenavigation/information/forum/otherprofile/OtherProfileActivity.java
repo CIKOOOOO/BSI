@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.information.forum.otherprofile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -135,12 +136,14 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
 
             if (!user.getImgBackgroundUrl().isEmpty()) {
                 Picasso.get()
-                        .load(Utils.imageURL(user.getImgProfileUrl()))
+                        .load(Utils.imageURL(user.getImgBackgroundUrl()))
                         .into(imgBackground);
             }
 
             int drawable, color;
             String followStatus;
+
+            Log.e("asd", user.getFollowStatus());
 
             if (user.getFollowStatus().equalsIgnoreCase("true")) {
                 drawable = R.drawable.rectangle_rounded_white_5dp;
