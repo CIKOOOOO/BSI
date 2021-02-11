@@ -114,6 +114,9 @@ public class OutputResponse {
         @SerializedName("list_reason")
         private List<Forum.Report> reportList;
 
+        @SerializedName("")
+        private Forum.SavePost savePost;
+
         public OutputSchema() {
         }
 
@@ -207,6 +210,10 @@ public class OutputResponse {
 
         public List<Forum.Report> getReportList() {
             return reportList;
+        }
+
+        public Forum.SavePost getSavePost() {
+            return savePost;
         }
     }
 }

@@ -111,6 +111,10 @@ public class Forum {
             this.statusShare = statusShare;
         }
 
+        public void setStatusSave(String statusSave) {
+            this.statusSave = statusSave;
+        }
+
         public void setPostID(String postID) {
             this.postID = postID;
         }
@@ -591,6 +595,33 @@ public class Forum {
 
         public String getImgProfile() {
             return imgProfile;
+        }
+    }
+
+    public static class SavePost{
+
+        @SerializedName("profile_id")
+        private String profileID;
+
+        @SerializedName("post_id")
+        private String postID;
+
+        @SerializedName("status")
+        private String saveStatus;
+
+        public SavePost() {
+        }
+
+        public String getProfileID() {
+            return profileID;
+        }
+
+        public String getPostID() {
+            return postID;
+        }
+
+        public String getSaveStatus() {
+            return saveStatus;
         }
     }
 }

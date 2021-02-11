@@ -122,8 +122,9 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         boolean monday = cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
 
         if (
-                monday
-                        && prefConfig.getTipsActivated()
+//                monday
+//                        &&
+                        prefConfig.getTipsActivated()
 //                && !prefConfig.getTimeTipsOfTheWeek().equals(Utils.getTime(Constant.DATE_FORMAT_2))
         ) { // Day-2 = Monday
             viewModel.getTipsOfTheWeek(prefConfig.getTokenUser());

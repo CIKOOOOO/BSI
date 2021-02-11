@@ -130,6 +130,14 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     @Override
     public void onReshareResult(boolean isReshare, String postID) {
         adapter.setReshareStatus("true", postID);
+        showSnackBar("Share post berhasil");
+    }
+
+    @Override
+    public void onSaveResult(Forum.SavePost savePost) {
+        adapter.setSavePost(savePost);
+        String saveStatus = savePost.getSaveStatus().equalsIgnoreCase("true") ? "Save post berhasil" : "Unsave post berhasil";
+        showSnackBar(saveStatus);
     }
 
     @Override
@@ -152,7 +160,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onSavedPost(String postID) {
-        viewModel.savedPost(postID);
+        viewModel.savedPost(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
     }
 
     @Override

@@ -9,9 +9,10 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
+import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
-import com.bca.bsi.utils.dummydata.DummyData;
+import com.bca.bsi.utils.constant.Type;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -96,9 +97,21 @@ public class PostViewModel extends AndroidViewModel {
 //        });
 //    }
 
-    public void loadDetail(String token, String postID) {
+    public void loadDetail(String token, Forum.Post post) {
+        switch (post.getType().toLowerCase()) {
+            case "general":
 
+                break;
+            case Type.STRATEGY:
 
+                break;
+            case Type.SHARE_TRADE:
+
+                break;
+            case Type.NEWS:
+
+                break;
+        }
     }
 
     public void sendNewPost(String token, HashMap<String, Object> hashMap) {

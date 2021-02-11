@@ -15,4 +15,6 @@ public interface IChildMainForumCallback {
     void onOutOfData();
 
     void onReshareResult(boolean isReshare, String postID);
+
+    void onSaveResult(Forum.SavePost savePost);
 }

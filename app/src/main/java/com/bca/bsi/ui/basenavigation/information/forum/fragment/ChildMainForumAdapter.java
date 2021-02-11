@@ -45,6 +45,20 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             Forum.Post post = this.forumList.get(i);
             if (post.getPostID().equalsIgnoreCase(postID)) {
                 post.setStatusShare(reshareStatus);
+                int share = Integer.parseInt(post.getShare()) + 1;
+                post.setShare(String.valueOf(share));
+                this.forumList.set(i, post);
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
+    public void setSavePost(Forum.SavePost savePost) {
+        for (int i = 0; i < this.forumList.size(); i++) {
+            Forum.Post post = this.forumList.get(i);
+            if (post.getPostID().equalsIgnoreCase(savePost.getPostID())) {
+                post.setStatusSave(savePost.getSaveStatus());
                 this.forumList.set(i, post);
                 notifyDataSetChanged();
                 break;
@@ -142,9 +156,9 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
         if (this.forumList.size() == 0)
             return NO_DATA;
 
-        if (type.equals(Type.TRENDING)
+        if ((type.equals(Type.TRENDING)
                 || type.equals(Type.TIMELINE)
-                || (type.equals(Type.PROFILE) && null == forumList.get(position).getPost())) {
+                || type.equals(Type.PROFILE)) && null == forumList.get(position).getPost()) {
             currentType = forumList.get(position).getType();
         } else if (null != forumList.get(position).getPost()) {
             if (null != forumList.get(position).getPost().getPromoNews()) {

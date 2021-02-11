@@ -12,7 +12,6 @@ import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
-import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +102,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                             if (null != postShareTrade && postShareTrade.size() > 0) {
                                 for (int i = 0; i < postShareTrade.size(); i++) {
                                     Forum.Post forum = postShareTrade.get(i);
+//                                    Log.e("asd", Utils.toJSON(forum));
                                     switch (forum.getType()) {
                                         case Type.STRATEGY:
                                             break;
@@ -182,8 +182,30 @@ public class ChildMainForumViewModel extends AndroidViewModel {
 
     }
 
-    public void savedPost(String postID) {
+    public void savedPost(String token, String profileID, String postID) {
+        Call<OutputResponse> call = apiInterface.savePost(token, profileID, postID);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                if (null != response.body() && null != response.body().getErrorSchema()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                        callback.onSaveResult(outputSchema.getSavePost());
+                    }else{
+                        callback.onFailed("");
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
     }
 
     public void likePost(String postID) {

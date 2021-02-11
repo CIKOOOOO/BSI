@@ -13,7 +13,7 @@
         android:src="@drawable/img_robo_rekomen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/recycler_tv_return"
@@ -22,12 +22,11 @@
         android:layout_marginStart="45dp"
         android:layout_marginTop="@dimen/size_for_20dp"
         android:text="2%"
-        app:layout_constraintStart_toStartOf="@+id/recycler_robo_rekomen"
-        app:layout_constraintTop_toTopOf="@+id/recycler_robo_rekomen"
-        android:textSize="@dimen/size_for_17sp"
         android:textColor="@color/green_base_palette"
+        android:textSize="@dimen/size_for_17sp"
         android:textStyle="bold"
-        />
+        app:layout_constraintStart_toStartOf="@+id/recycler_robo_rekomen"
+        app:layout_constraintTop_toTopOf="@+id/recycler_robo_rekomen" />
 
     <TextView
         android:id="@+id/recycler_tv_risk"
@@ -35,8 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_for_60dp"
         android:text="1%"
-        android:textSize="@dimen/size_for_17sp"
         android:textColor="@color/blue_stone_palette"
+        android:textSize="@dimen/size_for_17sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/recycler_tv_return"
         app:layout_constraintTop_toTopOf="@+id/recycler_robo_rekomen" />
@@ -47,12 +46,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="115dp"
         android:text="Bundle 1"
-        android:textSize="@dimen/size_for_20sp"
         android:textColor="@color/black_palette"
+        android:textSize="@dimen/size_for_20sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_robo_rekomen"
         app:layout_constraintStart_toStartOf="@+id/recycler_robo_rekomen"
-        app:layout_constraintTop_toTopOf="@+id/recycler_robo_rekomen"
-        app:layout_constraintEnd_toEndOf="@+id/recycler_robo_rekomen"/>
+        app:layout_constraintTop_toTopOf="@+id/recycler_robo_rekomen" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
-import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
@@ -142,14 +141,15 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
                         .inflate(layout, popup.getMenu());
 
                 if (popup.getMenu().findItem(R.id.menu_save) != null) {
-                    popup.getMenu().findItem(R.id.menu_save).setTitle("Saved");
+                    String share = post.getStatusSave().equalsIgnoreCase("true") ? "Saved" : "Save";
+                    popup.getMenu().findItem(R.id.menu_save).setTitle(share);
                 }
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_report:
-                                onPostClick.onReport(post.getPostID(),"post");
+                                onPostClick.onReport(post.getPostID(), "post");
                                 break;
                             case R.id.menu_save:
                                 onPostClick.onSavedPost(post.getPostID());

@@ -146,9 +146,9 @@ public interface ApiInterface {
             , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
-    @PUT("forum/profile/{profileID}/save")
+    @PUT("forum/profile/{postID}/save")
     Call<OutputResponse> savePost(@Header("token-user") String tokenUser
-            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+            , @Header("profile-id") String profileID, @Path("postID") String postID);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("forum/report-reason/")
@@ -164,4 +164,6 @@ public interface ApiInterface {
     Call<OutputResponse> sendReportPost(@Header("token-user") String tokenUser
             , @Header("profile-id") String profileID, @Header("reason-id") String reasonID
             , @Path("post-id") String postID, @Path("report-type") String reportType);
+
+
 }
