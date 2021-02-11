@@ -102,6 +102,7 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
                 tvRoRPertahun.setVisibility(View.GONE);
                 tvRoRPersen.setVisibility(View.GONE);
                 cardViewSelectedReksadana.setVisibility(View.VISIBLE);
+                produkReksadanaLabel.setVisibility(View.VISIBLE);
                 break;
             case 4:
                 ETDIROR.setVisibility(View.VISIBLE);
@@ -109,6 +110,7 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
                 tvRoRPertahun.setVisibility(View.VISIBLE);
                 tvRoRPersen.setVisibility(View.VISIBLE);
                 cardViewSelectedReksadana.setVisibility(View.GONE);
+                produkReksadanaLabel.setVisibility(View.GONE);
                 break;
         }
 
@@ -313,17 +315,30 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
 
     @Override
     public void kalkulasiOutput(String hasilKalkulasi, String formatTargetHasil, String formatModalAwal, String formatInvestBulanan, String formatRoR) {
+        /*
         ETDITargetHasilInvestasi.setText(formatTargetHasil);
         ETDIModalAwal.setText(formatModalAwal);
         ETDIInvestasiBulanan.setText(formatInvestBulanan);
         ETDIROR.setText(formatRoR);
-        hasilDI.setText(hasilKalkulasi);
+        */
 
-        if(numbOfTabs==4){
-            if(Double.parseDouble(ETDIROR.getText().toString()) <= 0) {
-                hasilDI.setText(getString(R.string.ror_tidak_boleh_bernilai_nol));
+        Integer modalAwalPlusBulanan = Integer.parseInt(ETDIModalAwal.getText().toString()) + Integer.parseInt(ETDIInvestasiBulanan.getText().toString());
+
+        if(Integer.parseInt(ETDITargetHasilInvestasi.getText().toString()) <= modalAwalPlusBulanan){
+
+            hasilDI.setText("Target Hasil Investasi tidak lebih besar dari Modal Awal dan Investasi Bulanan");
+
+        }else{
+            hasilDI.setText(hasilKalkulasi);
+
+            if(numbOfTabs==4){
+                if(Double.parseDouble(ETDIROR.getText().toString()) <= 0) {
+                    hasilDI.setText(getString(R.string.ror_tidak_boleh_bernilai_nol));
+                }
             }
         }
+
+
 
     }
 
