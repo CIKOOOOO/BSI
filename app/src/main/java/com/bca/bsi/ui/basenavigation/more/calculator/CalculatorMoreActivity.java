@@ -33,6 +33,7 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
     private String rorValue = "0";
     private String selectedProdukReksadana = null;
     private String selectedDetailReksadana;
+    private Product.DetailReksaDana detailReksaDana;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +68,16 @@ public class CalculatorMoreActivity extends BaseActivity implements View.OnClick
         numberOfTabs =  intent.getIntExtra("numberOfTabs",4);
         rorValue = intent.getStringExtra("rorValue");
         selectedProdukReksadana = intent.getStringExtra("namaProduk");
-        selectedDetailReksadana = intent.getStringExtra("selectedDetailReksadana");
 
-        Gson gson = new Gson();
-        Product.DetailReksaDana detailReksaDana = gson.fromJson(selectedDetailReksadana, Product.DetailReksaDana.class);
+        if(numberOfTabs == 3){
+            selectedDetailReksadana = intent.getStringExtra("selectedDetailReksadana");
+
+            Gson gson = new Gson();
+            detailReksaDana = gson.fromJson(selectedDetailReksadana, Product.DetailReksaDana.class);
+
+        }else{
+            detailReksaDana = null;
+        }
 
         calculatorPagerAdapter = new CalculatorPagerAdapter(getSupportFragmentManager(),numberOfTabs,rorValue, selectedProdukReksadana, detailReksaDana);
         viewPager.setAdapter(calculatorPagerAdapter);

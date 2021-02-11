@@ -168,22 +168,24 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         ArrayAdapter<Integer> adapterBulan = new ArrayAdapter<Integer>(view.getContext(), android.R.layout.simple_dropdown_item_1line, durasiBulan);
         spinnerDurasiBulanBIB.setAdapter(adapterBulan);
 
-        selectedNamaReksadanaTV.setText(selectedDetailReksadana.getName());
-        selectedTipeReksadana.setText(selectedDetailReksadana.getProductCategory());
-        selectedNABUnitReksadanaTV.setText("Rp."+selectedDetailReksadana.getNabPerUnit());
-        selectedKinerjaSatuBulanReksadanaTV.setText(selectedDetailReksadana.getKinerja1Bulan());
-        rorValue = selectedDetailReksadana.getKinerja1Tahun();
-        try {
-            Double kinerja1Bulan = Double.parseDouble(selectedDetailReksadana.getKinerja1Bulan());
-            if (kinerja1Bulan < 0) {
-                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.red_palette));
-            }else{
-                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.green_base_palette));
+        if(numbOfTabs == 3){
+            selectedNamaReksadanaTV.setText(selectedDetailReksadana.getName());
+            selectedTipeReksadana.setText(selectedDetailReksadana.getProductCategory());
+            selectedNABUnitReksadanaTV.setText("Rp."+selectedDetailReksadana.getNabPerUnit());
+            selectedKinerjaSatuBulanReksadanaTV.setText(selectedDetailReksadana.getKinerja1Bulan());
+            rorValue = selectedDetailReksadana.getKinerja1Tahun();
+            try {
+                Double kinerja1Bulan = Double.parseDouble(selectedDetailReksadana.getKinerja1Bulan());
+                if (kinerja1Bulan < 0) {
+                    selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.red_palette));
+                }else{
+                    selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.green_base_palette));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            selectedTanggalReksadanaTV.setText(selectedDetailReksadana.getUpdateDate());
         }
-        selectedTanggalReksadanaTV.setText(selectedDetailReksadana.getUpdateDate());
 
         /*
         try {

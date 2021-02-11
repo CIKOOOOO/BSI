@@ -101,31 +101,35 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
                 tvRoR.setVisibility(View.GONE);
                 tvRoRPertahun.setVisibility(View.GONE);
                 tvRoRPersen.setVisibility(View.GONE);
+                cardViewSelectedReksadana.setVisibility(View.VISIBLE);
                 break;
             case 4:
                 ETDIROR.setVisibility(View.VISIBLE);
                 tvRoR.setVisibility(View.VISIBLE);
                 tvRoRPertahun.setVisibility(View.VISIBLE);
                 tvRoRPersen.setVisibility(View.VISIBLE);
+                cardViewSelectedReksadana.setVisibility(View.GONE);
                 break;
         }
 
-        selectedNamaReksadanaTV.setText(selectedDetailReksadana.getName());
-        selectedTipeReksadana.setText(selectedDetailReksadana.getProductCategory());
-        selectedNABUnitReksadanaTV.setText("Rp."+ selectedDetailReksadana.getNabPerUnit());
-        selectedKinerjaSatuBulanReksadanaTV.setText(selectedDetailReksadana.getKinerja1Bulan());
-        rorValue = selectedDetailReksadana.getKinerja1Tahun();
-        try {
-            Double kinerja1Bulan = Double.parseDouble(selectedDetailReksadana.getKinerja1Bulan());
-            if (kinerja1Bulan < 0) {
-                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.red_palette));
-            }else{
-                selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.green_base_palette));
+        if(numbOfTabs == 3){
+            selectedNamaReksadanaTV.setText(selectedDetailReksadana.getName());
+            selectedTipeReksadana.setText(selectedDetailReksadana.getProductCategory());
+            selectedNABUnitReksadanaTV.setText("Rp."+ selectedDetailReksadana.getNabPerUnit());
+            selectedKinerjaSatuBulanReksadanaTV.setText(selectedDetailReksadana.getKinerja1Bulan());
+            rorValue = selectedDetailReksadana.getKinerja1Tahun();
+            try {
+                Double kinerja1Bulan = Double.parseDouble(selectedDetailReksadana.getKinerja1Bulan());
+                if (kinerja1Bulan < 0) {
+                    selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.red_palette));
+                }else{
+                    selectedKinerjaSatuBulanReksadanaTV.setTextColor(getResources().getColor(R.color.green_base_palette));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            selectedTanggalReksadanaTV.setText(selectedDetailReksadana.getUpdateDate());
         }
-        selectedTanggalReksadanaTV.setText(selectedDetailReksadana.getUpdateDate());
 
 
         ETDITargetHasilInvestasi.addTextChangedListener(new TextWatcher() {
