@@ -122,7 +122,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 
         viewModel = new ViewModelProvider(this).get(PostViewModel.class);
         viewModel.setCallback(this);
-        viewModel.loadCategoryData();
+        viewModel.loadCategoryData(prefConfig.getTokenUser());
 
         bsCategory = BottomSheetBehavior.from(clCategory);
 
@@ -396,76 +396,15 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 onBackPressed();
                 break;
             case R.id.btn_share_post:
-                ((TextView) findViewById(R.id.bs_tv_title_choose_image)).setText(getString(R.string.choose_category));
-                bsCategory.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if (null != this.promoNews) {
+                    checkingDataBeforeSend();
+                } else {
+                    ((TextView) findViewById(R.id.bs_tv_title_choose_image)).setText(getString(R.string.choose_category));
+                    bsCategory.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
                 break;
             case R.id.bs_btn_update_choose_image:
-                HashMap<String, Object> createPostMap = new HashMap<>();
-                String content = etContent.getText().toString().trim();
-                String value;
-                if (content.isEmpty()) {
-                    showSnackBar("Mohon isi konten postingan");
-                } else if (null == this.category) {
-                    showSnackBar("Mohon pilih kategori postingan");
-                } else if (null == this.privacy) {
-                    showSnackBar("Mohon pilih kepada siapa Anda akan membagikan postingan");
-                } else {
-                    createPostMap.put("post_id_source", "");
-                    createPostMap.put("profile_id", prefConfig.getProfileID());
-                    createPostMap.put("post_privacy", this.privacy.getName());
-                    createPostMap.put("post_text", content);
-                    createPostMap.put("news_id", "");
-                    createPostMap.put("post_attachment", this.imagesEncodedList);
-                    createPostMap.put("post_category_id", this.category.getCategoryID());
-                    createPostMap.put("repost_from", "");
-                    createPostMap.put("visible_to_id", new ArrayList<String>());
-                    createPostMap.put("reksa_dana_id", "");
-                    createPostMap.put("transaction_type", "");
-                    createPostMap.put("share_trade_type", "");
-
-                    switch (type) {
-                        case NEW_STANDARD_POST:
-                            break;
-                        case EDIT_POST:
-                            break;
-                        case SHARE_NEWS:
-                            createPostMap.put("news_id", this.promoNews.getNewsID());
-                            break;
-                        case SHARE_TRADE_INFORMATION:
-                            createPostMap.put("reksa_dana_id", this.information.getReksadanaID());
-                            if (this.information.getRaise() > 0) {
-                                value = getString(R.string.up);
-                            } else if (this.information.getRaise() < 0) {
-                                value = getString(R.string.down);
-                            } else {
-                                value = getString(R.string.stay);
-                            }
-                            createPostMap.put("transaction_type", value);
-                            createPostMap.put("share_trade_type", "information");
-
-                            break;
-                        case SHARE_TRADE_HISTORY:
-                            createPostMap.put("reksa_dana_id", this.history.getReksaDanaID());
-                            if (this.history.getTransactionType().equalsIgnoreCase("Pembelian")) {
-                                value = getString(R.string.buy);
-                            } else {
-                                value = getString(R.string.sell);
-                            }
-                            createPostMap.put("transaction_type", value);
-                            createPostMap.put("share_trade_type", "history");
-                            break;
-                    }
-
-                    if (this.privacy.getName().equalsIgnoreCase("direct")) {
-                        Intent intent = new Intent(this, DirectShareActivity.class);
-                        intent.putExtra(DirectShareActivity.DATA, createPostMap);
-                        startActivity(intent);
-                    } else {
-                        customLoading.show(getSupportFragmentManager(), "");
-                        viewModel.sendNewPost(prefConfig.getTokenUser(), createPostMap);
-                    }
-//                    viewModel.sendData(imagesEncodedList);
-                }
+                checkingDataBeforeSend();
                 break;
         }
     }
@@ -504,5 +443,78 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
         }
         setResult(0);
         finish();
+    }
+
+    private void checkingDataBeforeSend() {
+        HashMap<String, Object> createPostMap = new HashMap<>();
+        String content = etContent.getText().toString().trim();
+        String value;
+        if (content.isEmpty()) {
+            showSnackBar("Mohon isi konten postingan");
+        } else if (null == this.category) {
+            showSnackBar("Mohon pilih kategori postingan");
+        } else if (null == this.privacy) {
+            showSnackBar("Mohon pilih kepada siapa Anda akan membagikan postingan");
+        } else {
+            createPostMap.put("post_id_source", "");
+            createPostMap.put("profile_id", prefConfig.getProfileID());
+            createPostMap.put("post_privacy", this.privacy.getName());
+            createPostMap.put("post_text", content);
+            if (null != this.promoNews) {
+                createPostMap.put("news_id", this.promoNews.getNewsID());
+            } else {
+                createPostMap.put("news_id", "");
+            }
+            createPostMap.put("post_attachment", this.imagesEncodedList);
+            createPostMap.put("post_category_id", this.category.getCategoryID());
+            createPostMap.put("repost_from", "");
+            createPostMap.put("visible_to_id", new ArrayList<String>());
+            createPostMap.put("reksa_dana_id", "");
+            createPostMap.put("transaction_type", "");
+            createPostMap.put("share_trade_type", "");
+
+            switch (type) {
+                case NEW_STANDARD_POST:
+                    break;
+                case EDIT_POST:
+                    break;
+                case SHARE_NEWS:
+                    createPostMap.put("news_id", this.promoNews.getNewsID());
+                    break;
+                case SHARE_TRADE_INFORMATION:
+                    createPostMap.put("reksa_dana_id", this.information.getReksadanaID());
+                    if (this.information.getRaise() > 0) {
+                        value = getString(R.string.up);
+                    } else if (this.information.getRaise() < 0) {
+                        value = getString(R.string.down);
+                    } else {
+                        value = getString(R.string.stay);
+                    }
+                    createPostMap.put("transaction_type", value);
+                    createPostMap.put("share_trade_type", "information");
+
+                    break;
+                case SHARE_TRADE_HISTORY:
+                    createPostMap.put("reksa_dana_id", this.history.getReksaDanaID());
+                    if (this.history.getTransactionType().equalsIgnoreCase("Pembelian")) {
+                        value = getString(R.string.buy);
+                    } else {
+                        value = getString(R.string.sell);
+                    }
+                    createPostMap.put("transaction_type", value);
+                    createPostMap.put("share_trade_type", "history");
+                    break;
+            }
+
+            if (this.privacy.getName().equalsIgnoreCase("direct")) {
+                Intent intent = new Intent(this, DirectShareActivity.class);
+                intent.putExtra(DirectShareActivity.DATA, createPostMap);
+                startActivity(intent);
+            } else {
+                customLoading.show(getSupportFragmentManager(), "");
+                viewModel.sendNewPost(prefConfig.getTokenUser(), createPostMap);
+            }
+//                    viewModel.sendData(imagesEncodedList);
+        }
     }
 }

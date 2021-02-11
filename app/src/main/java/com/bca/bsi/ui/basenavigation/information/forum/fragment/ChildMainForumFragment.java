@@ -2,7 +2,6 @@ package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +36,10 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     private ChildMainForumAdapter adapter;
     private ReshareDialog reshareDialog;
     private DeleteDialog deleteDialog;
+    private RecyclerView recycler_post;
+
     private int page;
-    private String type;
+    private String type, postID;
 
     public static ChildMainForumFragment newInstance(int param1) {
         ChildMainForumFragment fragment = new ChildMainForumFragment();
@@ -66,14 +67,14 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
         page = 1;
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_child_main_forum);
+        recycler_post = view.findViewById(R.id.recycler_child_main_forum);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
 
         viewModel = new ViewModelProvider(this).get(ChildMainForumViewModel.class);
         viewModel.setCallback(this);
 
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recycler_post.setLayoutManager(linearLayoutManager);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -81,20 +82,20 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
             if (type != null) {
                 type = type.toLowerCase();
                 adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID(), this);
-                recyclerView.setAdapter(adapter);
+                recycler_post.setAdapter(adapter);
                 viewModel.loadForumPost(type, page, prefConfig.getTokenUser(), prefConfig.getProfileID(), prefConfig.getProfileRisiko());
             }
         }
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recycler_post.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
-                    Log.e("asd", "start");
+//                    Log.e("asd", "start");
                 }
                 if (!recyclerView.canScrollVertically(1)) {
-                    Log.e("asd", "last");
+//                    Log.e("asd", "last");
                     viewModel.loadForumPost(type, page, prefConfig.getTokenUser(), prefConfig.getProfileID(), prefConfig.getProfileRisiko());
                 }
             }
@@ -114,8 +115,8 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     }
 
     @Override
-    public void onLoadReportData(List<Forum.Report> reportList) {
-        BaseNavigationActivity.loadReport(reportList);
+    public void onLoadReportData(List<Forum.Report> reportList, String postID, String type) {
+        BaseNavigationActivity.loadReport(reportList, postID, type);
     }
 
     @Override
@@ -124,6 +125,11 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         postList.add(new Forum.Post());
         adapter.setForumList(postList);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onReshareResult(boolean isReshare, String postID) {
+        adapter.setReshareStatus("true", postID);
     }
 
     @Override
@@ -139,8 +145,9 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     }
 
     @Override
-    public void onReport(String postID) {
-        viewModel.loadReportData();
+    public void onReport(String postID, String type) {
+        this.postID = postID;
+        viewModel.loadReportData(prefConfig.getTokenUser(), type, postID);
     }
 
     @Override
@@ -201,7 +208,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         if (reshareDialog != null && reshareDialog.getTag() != null) {
             reshareDialog.dismiss();
         }
-        viewModel.resharePost(postID);
+        viewModel.resharePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
     }
 
     @Override
@@ -209,6 +216,10 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         if (reshareDialog != null && reshareDialog.getTag() != null) {
             reshareDialog.dismiss();
         }
-        viewModel.undoResharePost(postID);
+        viewModel.undoResharePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
+    }
+
+    public void goToTop() {
+        recycler_post.smoothScrollToPosition(0);
     }
 }

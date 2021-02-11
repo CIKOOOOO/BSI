@@ -10,7 +10,9 @@ public interface IChildMainForumCallback {
 
     void onFailed(String msg);
 
-    void onLoadReportData(List<Forum.Report> reportList);
+    void onLoadReportData(List<Forum.Report> reportList, String type, String postID);
 
     void onOutOfData();
+
+    void onReshareResult(boolean isReshare, String postID);
 }

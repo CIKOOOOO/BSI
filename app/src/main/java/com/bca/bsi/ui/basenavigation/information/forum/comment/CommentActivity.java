@@ -29,7 +29,7 @@ import com.bca.bsi.R;
 import com.bca.bsi.adapter.ReportAdapter;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.PromoNews;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.PostImageAdapter;
+import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.ui.basenavigation.information.forum.otherprofile.OtherProfileActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.ForumProfileActivity;

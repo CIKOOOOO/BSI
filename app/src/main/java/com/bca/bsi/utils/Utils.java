@@ -24,6 +24,11 @@ import java.util.Locale;
 
 public class Utils {
 
+    public static void showKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    }
+
     public static void hideSoftKeyboard(Activity activity) {
         if (activity == null) return;
         else if (activity.getCurrentFocus() == null) return;
@@ -247,6 +252,6 @@ public class Utils {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 30, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        return Base64.encodeToString(byteArray, Base64.DEFAULT).replaceAll("\\s+","");
     }
 }

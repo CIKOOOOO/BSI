@@ -1,4 +1,4 @@
-package com.bca.bsi.ui.basenavigation.information.forum.fragment;
+package com.bca.bsi.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
-import com.bca.bsi.model.Forum;
 import com.bca.bsi.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -19,13 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Holder> {
-    private List<Forum.Post.ImagePost> imageList;
+    private List<String> imageList;
 
     public PostImageAdapter() {
         this.imageList = new ArrayList<>();
     }
 
-    public void setImageList(List<Forum.Post.ImagePost> imageList) {
+    public void setImageList(List<String> imageList) {
         this.imageList = imageList;
     }
 
@@ -48,22 +47,22 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Hold
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        Forum.Post.ImagePost imagePost = imageList.get(position);
+//        Log.e("asd", imageList.get(position)+"aaaaaaaaaaaa");
         if (getItemViewType(position) == 1) {
             Picasso.get()
-                    .load(Utils.imageURL(imagePost.getImageURL()))
+                    .load(Utils.imageURL(imageList.get(position)))
                     .into(holder.img1);
         } else if (getItemViewType(position) == 2) {
             Picasso.get()
-                    .load(Utils.imageURL(imagePost.getImageURL()))
+                    .load(Utils.imageURL(imageList.get(position)))
                     .into(holder.img2);
         } else if (getItemViewType(position) == 4) {
             Picasso.get()
-                    .load(Utils.imageURL(imagePost.getImageURL()))
+                    .load(Utils.imageURL(imageList.get(position)))
                     .into(holder.img4);
         } else {
             Picasso.get()
-                    .load(Utils.imageURL(imagePost.getImageURL()))
+                    .load(Utils.imageURL(imageList.get(position)))
                     .into(holder.img3);
             if (imageList.size() - 1 > position && position == 2) {
                 int amount = imageList.size() - 3;

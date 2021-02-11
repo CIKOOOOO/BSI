@@ -1,7 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.PostImageAdapter;
+import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
@@ -76,11 +74,14 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
                     .load(Utils.imageURL(post.getImageProfile()))
                     .into(roundedImageView);
 
+//        Log.e("asd", post.getImageProfile());
+
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
         int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;
 
         tvDate.setText(post.getDate());
-        tvContent.setText(Utils.removeEnter(post.getContent()));
+        if (null != post.getContent())
+            tvContent.setText(Utils.removeEnter(post.getContent()));
         tvLike.setText(post.getLike());
         tvComment.setText(post.getComment());
         tvShare.setText(post.getShare());
@@ -140,7 +141,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
                 popup.getMenuInflater()
                         .inflate(layout, popup.getMenu());
 
-                if(popup.getMenu().findItem(R.id.menu_save) != null){
+                if (popup.getMenu().findItem(R.id.menu_save) != null) {
                     popup.getMenu().findItem(R.id.menu_save).setTitle("Saved");
                 }
 
@@ -148,7 +149,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_report:
-                                onPostClick.onReport(post.getPostID());
+                                onPostClick.onReport(post.getPostID(),"post");
                                 break;
                             case R.id.menu_save:
                                 onPostClick.onSavedPost(post.getPostID());

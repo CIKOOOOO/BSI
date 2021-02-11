@@ -32,7 +32,7 @@ public interface ApiInterface {
     @GET("products/reksadana/{reksaDanaID}")
     Call<OutputResponse> getDetailReksaDana(@Header("token-user") String token, @Path("reksaDanaID") int reksaDanaID);
 
-    @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
     @GET("ceksaldo")
     Call<OutputResponse> getDetailTransaksi(@Header("token-user") String token, @Header("reksadana-id") String reksadanaID, @Header("no-rekening") String accountNumber);
 
@@ -95,8 +95,8 @@ public interface ApiInterface {
             , @Header("profile-id") String profileID, @Body String s);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
-    @GET("user")
-    Call<OutputResponse> getDirectUserList(@Header("token-user") String tokenUser, @Query("username") String username);
+    @GET("forum/post/user")
+    Call<OutputResponse> getDirectUserList(@Header("token-user") String tokenUser, @Header("profile-id") String profileID, @Query("username") String username);
 
     //    @Multipart
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
@@ -117,5 +117,51 @@ public interface ApiInterface {
             , @Query("page") int page, @Header("profile-risiko") String profileRisiko
             , @Header("profile-id") String profileID);
 
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/profile/me/inbox")
+    Call<OutputResponse> getInboxList(@Header("token-user") String tokenUser, @Header("profile-id") String profileID);
 
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @PUT("forum/profile/me/username")
+    Call<OutputResponse> editUsername(@Header("token-user") String tokenUser, @Header("profile-id") String profileID
+            , @Header("username") String username);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET
+    Call<OutputResponse> getSelfConnection(@Url String url, @Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/profile/{profileID}")
+    Call<OutputResponse> getOtherProfile(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/post/category")
+    Call<OutputResponse> getCategoryList(@Header("token-user") String tokenUser);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @PUT("forum/profile/{profileID}/follow")
+    Call<OutputResponse> editFollowUnFollowProfile(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @PUT("forum/profile/{profileID}/save")
+    Call<OutputResponse> savePost(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/report-reason/")
+    Call<OutputResponse> getReportReason(@Header("token-user") String tokenUser);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @POST("forum/post/{postID}/repost")
+    Call<OutputResponse> sendRepost(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("postID") String postID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @POST("forum/{report-type}/{post-id}/report")
+    Call<OutputResponse> sendReportPost(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Header("reason-id") String reasonID
+            , @Path("post-id") String postID, @Path("report-type") String reportType);
 }

@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.information.forum.post.direct;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -10,6 +11,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.User;
+import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.io.ByteArrayOutputStream;
@@ -35,6 +37,10 @@ public class DirectShareViewModel extends AndroidViewModel {
         this.callback = callback;
     }
 
+    public void clearForumList() {
+        this.forumUserList = new ArrayList<>();
+    }
+
     public DirectShareViewModel(@NonNull Application application) {
         super(application);
         chosenUserList = new ArrayList<>();
@@ -51,11 +57,18 @@ public class DirectShareViewModel extends AndroidViewModel {
         return strings;
     }
 
-    public void loadUser(String token, String username) {
-        Call<OutputResponse> call = apiInterface.getDirectUserList(token, username);
+    public void loadUser(String token, String username, String profileID) {
+        clearForumList();
+        Call<OutputResponse> call = apiInterface.getDirectUserList(token, profileID, username);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+//                try {
+//                    Log.e("asd", "aaa" + response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+                Log.e("aaaaa", "" + Utils.toJSON(response.body()) + " - " + response.raw().request().url().toString());
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
@@ -64,6 +77,10 @@ public class DirectShareViewModel extends AndroidViewModel {
                         forumUserList = outputSchema.getDirectUserList();
                         if (0 != chosenUserList.size())
                             compareData();
+                        else {
+                            visibleForumList.addAll(forumUserList);
+                            callback.onLoadForumUser(forumUserList);
+                        }
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -79,56 +96,51 @@ public class DirectShareViewModel extends AndroidViewModel {
         });
 
 
-        this.forumUserList = DummyData.getForumUser();
-        this.visibleForumList.addAll(this.forumUserList);
-        callback.onLoadForumUser(DummyData.getForumUser());
+//        this.forumUserList = DummyData.getForumUser();
+//        this.visibleForumList.addAll(this.forumUserList);
+//        callback.onLoadForumUser(DummyData.getForumUser());
     }
 
     public void sendNewPost(String token, HashMap<String, Object> hashMap) {
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        builder.addFormDataPart("post_id_source", hashMap.get("post_id_source").toString());
-        builder.addFormDataPart("profile_id", hashMap.get("profile_id").toString());
-        builder.addFormDataPart("post_privacy", hashMap.get("post_privacy").toString());
-        builder.addFormDataPart("post_text", hashMap.get("post_text").toString());
-        builder.addFormDataPart("news_id", hashMap.get("news_id").toString());
-        builder.addFormDataPart("post_attachment", "");
-        builder.addFormDataPart("post_category_id", hashMap.get("post_category_id").toString());
-        builder.addFormDataPart("repost_from", hashMap.get("repost_from").toString());
-        builder.addFormDataPart("visible_to_id", hashMap.get("visible_to_id").toString());
-        builder.addFormDataPart("reksa_dana_id", hashMap.get("reksa_dana_id").toString());
-        builder.addFormDataPart("transaction_type", hashMap.get("transaction_type").toString());
-        builder.addFormDataPart("share_trade_type", hashMap.get("share_trade_type").toString());
+
+        List<String> imageEncodedList = new ArrayList<>();
 
         for (Bitmap bitmap : (List<Bitmap>) hashMap.get("post_attachment")) {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 30, bos);
-
-            builder.addFormDataPart("post_attachment", "x", RequestBody.create(MultipartBody.FORM, bos.toByteArray()));
+//            Log.e("asd", Utils.encodeBitmap(bitmap));
+            imageEncodedList.add(Utils.encodeBitmap(bitmap));
         }
 
-        RequestBody requestBody = builder.build();
+        hashMap.put("post_attachment", imageEncodedList);
 
-//        Call<OutputResponse> call = apiInterface.sendNewPost(token, requestBody);
-//        call.enqueue(new Callback<OutputResponse>() {
-//            @Override
-//            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-//                if (null != response.body()) {
-//                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
-//                    if (errorSchema.getErrorCode().equals("200")) {
-//                        callback.onSuccessPost();
-//                    } else {
-//                        callback.onFailed(errorSchema.getErrorMessage());
-//                    }
-//                } else {
-//                    callback.onFailed("");
+        Log.e("asd", hashMap.toString());
+        Call<OutputResponse> call = apiInterface.sendNewPost(token, hashMap);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", response.code() + " - ");
+//                try {
+//                    Log.e("asd", response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
 //                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<OutputResponse> call, Throwable t) {
-//                callback.onFailed("");
-//            }
-//        });
+                if (null != response.body()) {
+                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
+                    if (errorSchema.getErrorCode().equals("200")) {
+                        callback.onSuccessPost();
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                Log.e("asd", "Onfailed " + t.getMessage());
+                callback.onFailed("");
+            }
+        });
     }
 
     public void addChosenUser(User.ForumUser forumUser) {
@@ -164,6 +176,7 @@ public class DirectShareViewModel extends AndroidViewModel {
     }
 
     private void compareData() {
+        this.visibleForumList.clear();
         this.visibleForumList.addAll(this.forumUserList);
         int removeCounter = 0;
         for (int i = 0; i < this.forumUserList.size(); i++) {
@@ -178,8 +191,10 @@ public class DirectShareViewModel extends AndroidViewModel {
             }
 
             if (isChosen) {
-                removeCounter++;
-                this.visibleForumList.remove(i + removeCounter);
+                if (null != this.visibleForumList.get(i + removeCounter)) {
+                    this.visibleForumList.remove(i + removeCounter);
+                    removeCounter++;
+                }
             }
         }
         callback.onLoadForumUser(this.visibleForumList);

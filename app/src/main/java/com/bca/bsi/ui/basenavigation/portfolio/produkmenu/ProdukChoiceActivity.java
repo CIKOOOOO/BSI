@@ -41,8 +41,8 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
         tvLanjut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (produkChoiceAdapter.getChoosenAmount() < 2) {
-                    showSnackBar("Pilihan minimal sebanyak dua produk !");
+                if (produkChoiceAdapter.getChoosenAmount() < 2 && produkChoiceAdapter.getChoosenAmount() > 5) {
+                    showSnackBar("Jumlah produk yang dipilih minimal dua dan maksimal 5");
                 } else {
                     Intent intent = new Intent(v.getContext(), PurchasingSmartbotActivity.class);
                     intent.putExtra("data2", produkChoiceAdapter.getReksaIds());

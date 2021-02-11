@@ -95,17 +95,19 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
             tvAccountNumber.setText(prefConfig.getAccountNumber());
 
             if (productType.equals(Type.REKSA_DANA)) {
-                this.reksaDana = gson.fromJson(product, Product.ReksaDana.class);
+//                Product.ProductTransaction productTransaction = new Product.ProductTransaction(this.reksaDana.getName(), this.reksaDana.getDate(), this.reksaDana.getNab());
+//
+//                List<Product.ProductTransaction> productTransactionList = new ArrayList<>();
+//                productTransactionList.add(productTransaction);
+//
+//                Log.e("asd",this.reksaDana.getName());
+//
+//                productNameDetailTransactionAdapter.setProductTransactions(productTransactionList);
+//                productNameDetailTransactionAdapter.notifyDataSetChanged();
 
-                Product.ProductTransaction productTransaction = new Product.ProductTransaction(this.reksaDana.getName(), this.reksaDana.getDate(), this.reksaDana.getNab());
+                Log.e("asd", product);
 
-                List<Product.ProductTransaction> productTransactionList = new ArrayList<>();
-                productTransactionList.add(productTransaction);
-
-                productNameDetailTransactionAdapter.setProductTransactions(productTransactionList);
-                productNameDetailTransactionAdapter.notifyDataSetChanged();
-
-                viewModel.loadDetailTransaksi(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), this.reksaDana.getReksadanaID());
+                viewModel.loadDetailTransaksi(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), product);
             } else if (productType.equals(Type.PURCHASING_WITH_SMARTBOT)) {
                 // Here to retrieve data from smartbot
                 // Data : berapa persen pembagian setiap produk + list of product
@@ -220,6 +222,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
     public void loadSaldo(User.BCAUser.Rekening bcaUser, Product.DetailReksaDana detailReksaDana) {
         this.detailReksaDana = detailReksaDana;
         this.rekening = bcaUser;
+        Log.e("asd", detailReksaDana.getName() + " " + productType);
 
         if (!productType.equals(Type.PURCHASING_WITH_SMARTBOT)) {
             String updateDate = null;
@@ -228,6 +231,8 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
+            Log.e("asd", updateDate);
 
             List<Product.ProductTransaction> productTransactions = new ArrayList<>();
             productTransactions.add(new Product.ProductTransaction(detailReksaDana.getName(), updateDate, detailReksaDana.getNabPerUnit()));

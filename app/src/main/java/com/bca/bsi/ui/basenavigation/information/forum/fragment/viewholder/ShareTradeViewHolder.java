@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
-import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -32,6 +31,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
     public ShareTradeViewHolder(@NonNull View itemView, OnPostClick onPostClick) {
         super(itemView);
         this.onPostClick = onPostClick;
+
         roundedImageView = itemView.findViewById(R.id.recycler_img_profile_child_main_forum);
         tvDate = itemView.findViewById(R.id.recycler_tv_date_child_main_forum);
         tvName = itemView.findViewById(R.id.recycler_tv_name_child_main_forum);
@@ -57,9 +57,15 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
         tvLookMore.setOnClickListener(this);
     }
 
-    public void loadData(Forum.Post post, String profileID) {
+    public void loadData(Forum.Post post, String profileID, boolean isTrending) {
         this.post = post;
         this.profileID = profileID;
+
+        if (isTrending) {
+            tvType.setVisibility(View.VISIBLE);
+            tvType.setText(post.getType());
+        }
+
         Forum.ShareTrade shareTrade = post.getShareTrade();
 
         if (!post.getImageProfile().isEmpty()) {
@@ -67,6 +73,9 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
                     .load(Utils.imageURL(post.getImageProfile()))
                     .into(roundedImageView);
         }
+
+        int visibilityOfContent = post.getContent().trim().isEmpty() ? View.GONE : View.VISIBLE;
+        tvContent.setVisibility(visibilityOfContent);
 
         tvName.setText(post.getName());
         tvDate.setText(post.getDate());
@@ -81,8 +90,9 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
             tvTitle.setText(shareTrade.getTitle());
             tvProductName.setText(shareTrade.getProductName());
             tvShareTradeType.setText(shareTrade.getType());
+            tvValueShareTrade.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 
-            if (shareTrade.getType().equals("Jual") || shareTrade.getType().equals("Beli")) {
+            if (shareTrade.getType().equalsIgnoreCase("jual") || shareTrade.getType().equalsIgnoreCase("beli")) {
                 tvTransactionType.setVisibility(View.VISIBLE);
                 tvDateShareTrade.setVisibility(View.INVISIBLE);
 
@@ -118,9 +128,8 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
 
-        if (tvContent.getText().toString().equals(post.getContent())) {
-            tvLookMore.setVisibility(View.GONE);
-        }
+        int visibility = tvContent.getText().toString().equals(post.getContent()) ? View.GONE : View.VISIBLE;
+        tvLookMore.setVisibility(visibility);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +161,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_report:
-                                onPostClick.onReport(post.getPostID());
+                                onPostClick.onReport(post.getPostID(),"post");
                                 break;
                             case R.id.menu_save:
                                 onPostClick.onSavedPost(post.getPostID());

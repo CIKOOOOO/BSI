@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,10 +30,11 @@ import com.bca.bsi.ui.basenavigation.information.forum.profile.connection.Connec
 import com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.bookmark.BookmarkFragment;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.posting.PostingFragment;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.CustomLoading;
+import com.bca.bsi.utils.CustomViewPager;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
-import com.bca.bsi.utils.dummydata.DummyData;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -43,7 +46,7 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
 
     private static final int PROFILE_PICTURE = 0, BACKGROUND = 1;
 
-    private TextView tvFollower, tvFollowing, tvTitleBottomSheet;
+    private TextView tvFollower, tvFollowing, tvTitleBottomSheet, tvTitle;
     private BottomSheetBehavior<ConstraintLayout> bottomSheetBehavior;
     private RecyclerView recycler_choose_image;
     private FrameLayout frameLayout;
@@ -56,6 +59,8 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
     private GridSpacingItemDecoration gridSpacingItemDecoration;
     private PostingFragment postingFragment;
     private BookmarkFragment bookmarkFragment;
+    private ImageButton imgEditUsername;
+    private CustomLoading customLoading;
 
     private String imageID;
     private int typeUpload;
@@ -71,16 +76,15 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
         typeUpload = -1;
         imageID = "";
 
-        TextView tvTitle = findViewById(R.id.tv_title_toolbar_back_with_image);
         ImageButton imgActionBtn = findViewById(R.id.img_btn_action_toolbar_back_with_image);
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar_with_image);
-        ImageButton imgEditUsername = findViewById(R.id.img_btn_edit_name_forum_profile);
         ImageButton imgBtnBackground = findViewById(R.id.img_btn_background_forum_profile);
         ImageButton imgBtnProfilePhoto = findViewById(R.id.img_btn_photo_profile_forum_profile);
         ConstraintLayout constraintLayout = findViewById(R.id.cl_choose_image);
         LinearLayout linearLayout = findViewById(R.id.ll_forum_profile);
-        Button btnUpdate = findViewById(R.id.bs_btn_update_choose_image);
+        Button btnUpdateName = findViewById(R.id.bs_btn_update_choose_image);
 
+        imgEditUsername = findViewById(R.id.img_btn_edit_name_forum_profile);
         tvFollower = findViewById(R.id.tv_follower_forum_profile);
         tvFollowing = findViewById(R.id.tv_following_forum_profile);
         frameLayout = findViewById(R.id.frame_forum_profile);
@@ -90,12 +94,18 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
         imgRedDot = findViewById(R.id.iv_red_dot_toolbar_back_with_image);
         imageProfile = findViewById(R.id.rounded_image_view_profile_forum);
         imgHeader = findViewById(R.id.img_view_header_forum_profile);
+        tvTitle = findViewById(R.id.tv_title_toolbar_back_with_image);
 
         layoutParams = (ConstraintLayout.LayoutParams) recycler_choose_image.getLayoutParams();
         gridSpacingItemDecoration = new GridSpacingItemDecoration(2, 20, true);
 
         bottomSheetBehavior = BottomSheetBehavior.from(constraintLayout);
         chooseImageAdapter = new ChooseImageAdapter(this);
+        postingFragment = new PostingFragment();
+        bookmarkFragment = new BookmarkFragment();
+        customLoading = new CustomLoading();
+        customLoading.show(getSupportFragmentManager(), "");
+
         viewModel = new ViewModelProvider(this).get(ForumProfileViewModel.class);
         viewModel.setCallback(this);
 
@@ -116,7 +126,7 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
         imgBtnBackground.setOnClickListener(this);
         imgBtnProfilePhoto.setOnClickListener(this);
         linearLayout.setOnClickListener(this);
-        btnUpdate.setOnClickListener(this);
+        btnUpdateName.setOnClickListener(this);
     }
 
     private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -140,16 +150,31 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.img_btn_action_toolbar_back_with_image:
                 Intent intents = new Intent(this, InboxActivity.class);
-
-                startActivity(intents);
+                startActivityForResult(intents, 5);
                 break;
             case R.id.img_btn_edit_name_forum_profile:
+                int drawable;
+                String username = etName.getText().toString().trim();
                 if (etName.isEnabled()) {
                     etName.setEnabled(false);
+                    drawable = R.drawable.ic_baseline_edit_24;
+                    if (username.isEmpty()) {
+                        showSnackBar("Username tidak boleh kosong");
+                    } else if (username.length() < 3 || username.length() > 15) {
+                        showSnackBar("Username harus terdiri dari 3 karakter dan kurang dari 15 karakter");
+                    } else {
+                        customLoading.show(getSupportFragmentManager(),"");
+                        viewModel.editUsername(prefConfig.getTokenUser(), prefConfig.getProfileID(), username);
+                    }
                 } else {
+                    Utils.showKeyboard(this);
                     etName.setEnabled(true);
                     etName.requestFocus();
+                    etName.setSelection(etName.getText().length());
+                    drawable = R.drawable.ic_baseline_check_gray;
                 }
+                imgEditUsername.setBackground(ContextCompat.getDrawable(this, R.drawable.rectangle_rounded_welma));
+                imgEditUsername.setImageResource(drawable);
                 break;
             case R.id.img_btn_photo_profile_forum_profile:
                 imageID = "";
@@ -206,9 +231,6 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
         final ViewPager viewPager = findViewById(R.id.vp_forum_profile);
         TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
 
-        postingFragment = new PostingFragment();
-        bookmarkFragment = new BookmarkFragment();
-
         tabAdapter.addTab(postingFragment, Constant.FORUM_PROFILE_MENU[0]);
         tabAdapter.addTab(bookmarkFragment, Constant.FORUM_PROFILE_MENU[1]);
 
@@ -248,8 +270,8 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
             tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         }
 
-        postingFragment.loadData(DummyData.getPostStrategyList());
-        bookmarkFragment.loadData(DummyData.getRepostGeneralList());
+//        postingFragment.loadData(DummyData.getPostStrategyList());
+//        bookmarkFragment.loadData(DummyData.getRepostGeneralList());
     }
 
     @Override
@@ -268,6 +290,10 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onLoadData(Forum.User user, List<Forum.Post> postList, List<Forum.Post> bookmarkList) {
+
+        if (null != customLoading && null != customLoading.getTag()) {
+            customLoading.dismiss();
+        }
 
         int visibility = user.getStatusInbox().equalsIgnoreCase("read") ? View.GONE : View.VISIBLE;
 
@@ -300,11 +326,39 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onFailed(String msg) {
+        if(null != customLoading && null != customLoading.getTag()){
+            customLoading.dismiss();
+        }
         showSnackBar(msg);
     }
 
     @Override
     public void onDismissBottomNavigation() {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    @Override
+    public void onLoadUsername(String username) {
+        if (null != customLoading && null != customLoading.getTag()) {
+            customLoading.dismiss();
+        }
+        Utils.hideSoftKeyboard(this);
+        showSnackBar("Mengganti username berhasil");
+        prefConfig.setUsername(username);
+        tvTitle.setText(username);
+    }
+
+    @Override
+    public void onUsernameNotUnique() {
+        showSnackBar("Username harus unik");
+        etName.setText(prefConfig.getUsername());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 5) {
+            imgRedDot.setVisibility(View.GONE);
+        }
     }
 }

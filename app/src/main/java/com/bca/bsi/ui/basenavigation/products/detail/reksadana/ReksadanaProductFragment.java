@@ -20,7 +20,6 @@ import com.bca.bsi.model.Product;
 import com.bca.bsi.ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity;
 import com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity;
 import com.bca.bsi.utils.BaseFragment;
-import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
 
 import java.util.List;
@@ -95,7 +94,7 @@ public class ReksadanaProductFragment extends BaseFragment implements IReksaDana
         Intent intent = new Intent(mActivity, DetailProductTransactionActivity.class);
         intent.putExtra(DetailProductTransactionActivity.PRODUCT_TYPE, Type.REKSA_DANA);
         intent.putExtra(DetailProductTransactionActivity.SALES_TYPE, Type.PURCHASING);
-        intent.putExtra(DetailProductTransactionActivity.DATA, Utils.toJSON(reksaDana));
+        intent.putExtra(DetailProductTransactionActivity.DATA, reksaDana.getReksadanaID());
         startActivity(intent);
     }
 

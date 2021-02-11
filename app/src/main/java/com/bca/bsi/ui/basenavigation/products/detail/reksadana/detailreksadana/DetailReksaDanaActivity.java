@@ -104,11 +104,11 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
                 startActivity(intent2);
                 break;
             case R.id.btn_buy_reksa_dana_detail:
-                if (this.detailReksaDana != null) {
+                if (null != this.detailReksaDana) {
                     Intent intent = new Intent(this, DetailProductTransactionActivity.class);
                     intent.putExtra(DetailProductTransactionActivity.PRODUCT_TYPE, Type.REKSA_DANA);
                     intent.putExtra(DetailProductTransactionActivity.SALES_TYPE, Type.PURCHASING);
-                    intent.putExtra(DetailProductTransactionActivity.DATA, Utils.toJSON(this.detailReksaDana));
+                    intent.putExtra(DetailProductTransactionActivity.DATA, this.detailReksaDana.getReksadanaID());
                     startActivity(intent);
                 }
                 break;
