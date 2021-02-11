@@ -34,6 +34,7 @@ public class OtherProfileViewModel extends AndroidViewModel {
     }
 
     public void loadOtherProfile(String token, String profileID) {
+        Log.e("asd",profileID);
         Call<OutputResponse> call = apiInterface.getOtherProfile(token, profileID, profileID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
@@ -66,12 +67,15 @@ public class OtherProfileViewModel extends AndroidViewModel {
     }
 
     public void followUnFollowProfile(String token, String profileID, String otherProfileID) {
+        Log.e("asd", otherProfileID + " - " + profileID);
         Call<OutputResponse> call = apiInterface.editFollowUnFollowProfile(token, profileID, otherProfileID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", response.code() + " follow");
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
+                    Log.e("asd", Utils.toJSON(outputResponse));
                     if (null != outputResponse.getErrorSchema()) {
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                         if (errorSchema.getErrorCode().equals("200")) {
@@ -95,7 +99,7 @@ public class OtherProfileViewModel extends AndroidViewModel {
         });
     }
 
-    private List<Forum.Post> getListPost(List<Forum.Post> postList){
+    private List<Forum.Post> getListPost(List<Forum.Post> postList) {
         if (null != postList && postList.size() > 0) {
             for (int i = 0; i < postList.size(); i++) {
                 Forum.Post forum = postList.get(i);
