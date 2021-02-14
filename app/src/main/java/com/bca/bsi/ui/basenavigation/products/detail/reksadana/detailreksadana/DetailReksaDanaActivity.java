@@ -120,7 +120,8 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
         this.detailReksaDana = detailReksaDana;
         tvProductName.setText(detailReksaDana.getName());
 
-        String nab = "Rp " + detailReksaDana.getNabPerUnit() + "\n NAB/Unit";
+        String nab = "Rp " + Utils.formatUang3(Double.parseDouble(detailReksaDana.getNabPerUnit())) + "\n NAB/Unit";
+//        String nab = "Rp " + detailReksaDana.getNabPerUnit() + "\n NAB/Unit";
         String purchasingCost = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : detailReksaDana.getBiayaPembelian();
         String biayaAgenPenjual = detailReksaDana.getBiayaAgen() == null ? "Rp N/A" : "Rp " + Utils.priceFormat(Double.parseDouble(detailReksaDana.getBiayaAgen()));
 

@@ -205,7 +205,7 @@ public class ConfirmationTransactionActivity extends BaseActivity implements Vie
                         }
 //                        stringObjectMap.put("transaction", );
                         data = Utils.toJSON(this.purchasingList);
-                        Log.e("asd", data);
+//                        Log.e("asd", data);
                     }
 
                     Intent intent = new Intent(this, PinActivity.class);

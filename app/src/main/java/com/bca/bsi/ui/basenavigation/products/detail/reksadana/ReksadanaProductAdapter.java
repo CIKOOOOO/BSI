@@ -65,11 +65,12 @@ public class ReksadanaProductAdapter extends RecyclerView.Adapter<ReksadanaProdu
             holder.tvTitle.setText(reksaDana.getName());
             holder.tvType.setText(reksaDana.getType());
             holder.tvKinerja.setText(reksaDana.getKinerja());
-            holder.tvNab.setText(reksaDana.getNab());
+            holder.tvNab.setText(Utils.formatUang3(Double.parseDouble(reksaDana.getNab())));
+//            holder.tvNab.setText(reksaDana.getNab());
             holder.tvBuy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("asd", "buy");
+//                    Log.e("asd", "buy");
                     onItemClick.onReksaDanaClick(reksaDana);
                 }
             });
@@ -82,7 +83,7 @@ public class ReksadanaProductAdapter extends RecyclerView.Adapter<ReksadanaProdu
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("asd", "detail");
+//                    Log.e("asd", "detail");
                     onItemClick.onDetail(reksaDana);
                 }
             });

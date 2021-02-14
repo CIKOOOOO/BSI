@@ -52,7 +52,8 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         final ProductRekomen productRekomen = productRekomenList.get(position);
         holder.tvJenisReksa.setText(productRekomen.getJenisReksadana());
-        holder.tvNab.setText(productRekomen.getNab());
+//        holder.tvNab.setText(productRekomen.getNab());
+        holder.tvNab.setText(Utils.formatUang3(Double.parseDouble(productRekomen.getNab())));
         holder.tvKinerja.setText("+" + productRekomen.getKinerja() + "%");
         holder.tvReksaName.setText(productRekomen.getProductName());
         holder.etPercent.setText(productRekomen.getPercentage());

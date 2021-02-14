@@ -44,7 +44,8 @@ public class ProdukChoiceAdapter extends RecyclerView.Adapter<ProdukChoiceAdapte
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         final Product.ReksaDana productChoice = products.get(position);
         holder.tvJenisReksa.setText(productChoice.getType());
-        holder.tvNab.setText(productChoice.getNab());
+        holder.tvNab.setText(Utils.formatUang3(Double.parseDouble(productChoice.getNab())));
+//        holder.tvNab.setText(productChoice.getNab());
         holder.tvKinerja.setText(productChoice.getKinerja());
         holder.tvReksaName.setText(productChoice.getName());
 

@@ -21,6 +21,7 @@ import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.model.ProductRekomen;
 import com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
 import com.google.gson.Gson;
 
@@ -96,7 +97,8 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
             String hasil = intent.getStringExtra("data");
             Gson gson = new Gson();
             portfolio = gson.fromJson(hasil, Portfolio.class);
-            minPembelian.setText(portfolio.getMinPurchase());
+            minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
+//            minPembelian.setText(portfolio.getMinPurchase());
             tvReturn.setText(portfolio.getExpReturn() + "%");
             tvRisk.setText(portfolio.getRisk());
             adapter.setProductRekomenList(portfolio.getProductRekomenList());
@@ -158,7 +160,8 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         this.portfolio = bundles.get(0);
         adapter.setProductRekomenList(portfolio.getProductRekomenList());
         adapter.notifyDataSetChanged();
-        minPembelian.setText(portfolio.getMinPurchase());
+        minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
+//        minPembelian.setText(portfolio.getMinPurchase());
         tvReturn.setText(portfolio.getExpReturn() + "%");
         tvRisk.setText(portfolio.getRisk());
     }
@@ -174,7 +177,8 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
     @Override
     public void onLoadDataCustom(List<Portfolio> bundles) {
         this.portfolio = bundles.get(0);
-        minPembelian.setText(portfolio.getMinPurchase());
+        minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
+//        minPembelian.setText(portfolio.getMinPurchase());
         tvReturn.setText(portfolio.getExpReturn() + "%");
         tvRisk.setText(portfolio.getRisk());
     }

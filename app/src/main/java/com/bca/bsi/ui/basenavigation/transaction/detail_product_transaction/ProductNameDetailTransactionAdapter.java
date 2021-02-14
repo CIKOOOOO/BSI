@@ -40,16 +40,14 @@ public class ProductNameDetailTransactionAdapter extends RecyclerView.Adapter<Pr
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         Product.ProductTransaction productTransaction = productTransactions.get(position);
         if (productTransaction != null) {
-            try {
-                String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, productTransaction.getDate());
-
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, productTransaction.getDate());
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
             holder.tvName.setText(productTransaction.getName());
             holder.tvDate.setText(productTransaction.getDate());
-            holder.tvPrice.setText(productTransaction.getPrice() + "\nNAB/Unit");
+            holder.tvPrice.setText(Utils.formatUang3(Double.parseDouble(productTransaction.getPrice())) + "\nNAB/Unit");
         }
     }
 
