@@ -115,6 +115,8 @@ public class Forum {
             this.statusSave = statusSave;
         }
 
+
+
         public void setPostID(String postID) {
             this.postID = postID;
         }
@@ -622,6 +624,56 @@ public class Forum {
 
         public String getSaveStatus() {
             return saveStatus;
+        }
+    }
+
+    public static class LikePost{
+
+        @SerializedName("is_liked")
+        private String like;
+
+        // Post made by this id
+        @SerializedName("profile_post")
+        private String profilePostID;
+
+        @SerializedName("profile_likers")
+        private String profileLikeBy;
+
+        // Post is liked by this id
+        @SerializedName("post_id")
+        private String postID;
+
+        @SerializedName("profile_id")
+        private String profileID;
+
+        @SerializedName("message")
+        private String message;
+
+        public LikePost() {
+        }
+
+        public String getLike() {
+            return like;
+        }
+
+        public String getProfilePostID() {
+            return profilePostID;
+        }
+
+        public String getProfileLikeBy() {
+            return profileLikeBy;
+        }
+
+        public String getPostID() {
+            return postID;
+        }
+
+        public String getProfileID() {
+            return profileID;
+        }
+
+        public String getMessage() {
+            return message;
         }
     }
 }

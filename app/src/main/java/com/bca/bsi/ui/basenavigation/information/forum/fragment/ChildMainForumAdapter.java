@@ -66,11 +66,36 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
         }
     }
 
+    public void removePost(String postID) {
+        for (int i = 0; i < this.forumList.size(); i++) {
+            Forum.Post post = this.forumList.get(i);
+            if (post.getPostID().equalsIgnoreCase(postID)) {
+                this.forumList.remove(i);
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
+    public void setLikePost(Forum.LikePost likePost) {
+        for (int i = 0; i < this.forumList.size(); i++) {
+            Forum.Post post = this.forumList.get(i);
+            if (post.getPostID().equalsIgnoreCase(likePost.getPostID())) {
+                post.setStatusLike(likePost.getLike());
+                int like = Integer.parseInt(post.getLike()) + 1;
+                post.setLike(String.valueOf(like));
+                this.forumList.set(i, post);
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         int layout;
-        RecyclerView.ViewHolder viewHolder = null;
+        RecyclerView.ViewHolder viewHolder;
         switch (viewType) {
             case ChildMainForumAdapter.SHARE_TRADE:
                 layout = R.layout.recycler_share_trade_main_forum;

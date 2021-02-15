@@ -239,21 +239,69 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                         }
                         break;
                     case EDIT_POST:
-                        titleToolbar = "Edit Post";
+                        titleToolbar = getResources().getString(R.string.edit_post);
                         String data = intent.getStringExtra(DATA);
                         Forum.Post post = gson.fromJson(data, Forum.Post.class);
+                        if (null != post.getPrivacy() && !post.getPrivacy().trim().isEmpty())
+                            this.privacy = privacyAdapter.getCategoryDetail(post.getPrivacy());
+                        else
+                            this.privacy = privacyAdapter.getCategoryDetail("public");
+                        if (!post.getContent().trim().isEmpty()) {
+                            etContent.setText(post.getContent());
+                            tvCharacterCounter.setText(post.getContent().length() + "/1000");
+                            etContent.requestFocus();
+                            etContent.setSelection(etContent.getText().length());
+                        }
                         switch (post.getType().toLowerCase()) {
                             case "general":
-
-                                break;
                             case Type.STRATEGY:
-
+                                if (null != post.getImagePostList() && post.getImagePostList().size() > 0) {
+                                    postImageAdapter = new PostImageAdapter(PostImageAdapter.CHOOSE_IMAGE, this);
+                                    recyclerImageNews.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+                                    recyclerImageNews.setAdapter(postImageAdapter);
+                                    this.imagesEncodedList = viewModel.convertToBitmap(post.getImagePostList());
+                                    postImageAdapter.setBitmapList(this.imagesEncodedList);
+                                    postImageAdapter.notifyDataSetChanged();
+                                }
                                 break;
                             case Type.SHARE_TRADE:
+                                clShareTrade.setVisibility(View.VISIBLE);
+                                if (null != post.getShareTrade()) {
+                                    Forum.ShareTrade shareTrade = post.getShareTrade();
+                                    tvTransactionType.setText(shareTrade.getType());
+                                    tvNameShareTrade.setText(shareTrade.getProductName());
 
+                                    int drawable;
+                                    String value;
+
+                                    if (shareTrade.getType().equalsIgnoreCase("beli")) {
+                                        drawable = R.drawable.img_share_trade_buy;
+                                        value = Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
+                                    } else if (shareTrade.getType().equalsIgnoreCase("jual")) {
+                                        drawable = R.drawable.img_share_trade_sell;
+                                        value = Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
+                                    } else if (shareTrade.getType().equalsIgnoreCase(getString(R.string.up))) {
+                                        drawable = R.drawable.img_share_trade_up;
+                                        value = shareTrade.getValue();
+                                    } else if (shareTrade.getType().equalsIgnoreCase(getString(R.string.down))) {
+                                        drawable = R.drawable.img_share_trade_down;
+                                        value = shareTrade.getValue();
+                                    } else {
+                                        drawable = R.drawable.img_share_trade_stay;
+                                        value = shareTrade.getValue();
+                                    }
+                                    tvNab.setText(value);
+                                    imageShareTrade.setBackground(ContextCompat.getDrawable(this, drawable));
+                                }
                                 break;
                             case Type.NEWS:
+                                if (null != post.getPromoNews()) {
+                                    postImageAdapter = new PostImageAdapter(PostImageAdapter.NEWS, this);
 
+                                    recyclerImageNews.setLayoutManager(new LinearLayoutManager(this));
+                                    postImageAdapter.setPromoNews(post.getPromoNews());
+                                    recyclerImageNews.setAdapter(postImageAdapter);
+                                }
                                 break;
                         }
                         break;
@@ -502,8 +550,6 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
             switch (type) {
                 case NEW_STANDARD_POST:
                     break;
-                case EDIT_POST:
-                    break;
                 case SHARE_NEWS:
                     createPostMap.put("news_id", this.promoNews.getNewsID());
                     createPostMap.put("post_category_id", "4");
@@ -541,8 +587,13 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 startActivity(intent);
             } else {
                 customLoading.show(getSupportFragmentManager(), "");
-                Log.e("asd", createPostMap.toString());
-                viewModel.sendNewPost(prefConfig.getTokenUser(), createPostMap);
+//                Log.e("asd", createPostMap.toString());
+                Log.e("asd", type);
+                if (type.equalsIgnoreCase(EDIT_POST)) {
+                    viewModel.editPost(prefConfig.getTokenUser(), prefConfig.getProfileID(), createPostMap);
+                } else {
+                    viewModel.sendNewPost(prefConfig.getTokenUser(), createPostMap);
+                }
             }
 //                    viewModel.sendData(imagesEncodedList);
         }

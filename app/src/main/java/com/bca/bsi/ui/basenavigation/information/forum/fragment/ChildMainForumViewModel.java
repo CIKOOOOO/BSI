@@ -88,7 +88,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                 @Override
                 public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
 //                            Log.e("asd", response.code() + "" + response.raw().request().url().toString());
-                    Log.e("asd", finalUrl + " - " + Utils.toJSON(response.body()));
+//                    Log.e("asd", finalUrl + " - " + Utils.toJSON(response.body()));
                     if (null != response.body()) {
                         OutputResponse outputResponse = response.body();
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
@@ -160,7 +160,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
-                        callback.onLoadReportData(outputSchema.getReportList(), type, postID);
+                        callback.onLoadReportData(outputSchema.getReportList(), postID, type);
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -178,12 +178,8 @@ public class ChildMainForumViewModel extends AndroidViewModel {
 //        callback.onLoadReportData(DummyData.getReportList());
     }
 
-    public void sendDeleteConfirmation(String postID) {
-
-    }
-
-    public void savedPost(String token, String profileID, String postID) {
-        Call<OutputResponse> call = apiInterface.savePost(token, profileID, postID);
+    public void sendDeleteConfirmation(String token, String profileID, String postID) {
+        Call<OutputResponse> call = apiInterface.deletePost(token, profileID, postID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
@@ -191,10 +187,64 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                        callback.onDeleteSuccess(postID);
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("Hapus post gagal, mohon cek jaringan Anda");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("Hapus post gagal, mohon cek jaringan Anda");
+            }
+        });
+    }
+
+    public void savedPost(String token, String profileID, String postID) {
+        Call<OutputResponse> call = apiInterface.savePost(token, profileID, postID);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", response.code() + "");
+                if (null != response.body() && null != response.body().getErrorSchema()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    Log.e("asd", Utils.toJSON(outputResponse));
+                    if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onSaveResult(outputSchema.getSavePost());
-                    }else{
-                        callback.onFailed("");
+                    } else {
+                        callback.onFailed("Save post gagal, mohon cek jaringan Anda");
+                    }
+                } else {
+                    callback.onFailed("Save post gagal, mohon cek jaringan Anda");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
+    }
+
+    public void likePost(String token, String profileID, String postID) {
+        Call<OutputResponse> call = apiInterface.likePost(token, profileID, postID);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", Utils.toJSON(response.body()));
+                if (null != response.body() && null != response.body().getErrorSchema()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                        callback.onLikeResult(outputSchema.getLikePost());
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
                     }
                 } else {
                     callback.onFailed("");
@@ -206,10 +256,6 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                 callback.onFailed("");
             }
         });
-    }
-
-    public void likePost(String postID) {
-
     }
 
     public void resharePost(String token, String profileID, String postID) {

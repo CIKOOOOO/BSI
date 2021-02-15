@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.information.forum.post;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -13,10 +14,13 @@ import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -118,7 +122,7 @@ public class PostViewModel extends AndroidViewModel {
         List<String> imageEncodedList = new ArrayList<>();
 
         for (Bitmap bitmap : (List<Bitmap>) hashMap.get("post_attachment")) {
-            Log.e("asd", Utils.encodeBitmap(bitmap));
+//            Log.e("asd", Utils.encodeBitmap(bitmap));
             imageEncodedList.add(Utils.encodeBitmap(bitmap));
         }
 
@@ -152,5 +156,73 @@ public class PostViewModel extends AndroidViewModel {
                 callback.onFailed("");
             }
         });
+    }
+
+    public void editPost(String token, String profileID, Map<String, Object> hashMap) {
+        List<String> imageEncodedList = new ArrayList<>();
+
+        for (Bitmap bitmap : (List<Bitmap>) hashMap.get("post_attachment")) {
+//            Log.e("asd", Utils.encodeBitmap(bitmap));
+            imageEncodedList.add(Utils.encodeBitmap(bitmap));
+        }
+
+        hashMap.put("post_attachment", imageEncodedList);
+
+        Call<OutputResponse> call = apiInterface.editPost(token, profileID, hashMap);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", response.code() + " - "+Utils.toJSON(response.body()));
+//                try {
+//                    Log.e("asd", response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+                if (null != response.body()) {
+                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
+                    if (errorSchema.getErrorCode().equals("200")) {
+                        callback.onSuccessPost();
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                Log.e("asd", "Onfailed " + t.getMessage());
+                callback.onFailed("");
+            }
+        });
+    }
+
+    public List<Bitmap> convertToBitmap(List<String> imageList) {
+        List<Bitmap> bitmapList = new ArrayList<>();
+        for (String s : imageList) {
+            Log.e("asd", Utils.imageURL(s));
+            Picasso.get()
+                    .load(Utils.imageURL(s))
+                    .into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            bitmapList.add(bitmap);
+                            Log.e("asd", bitmap.toString());
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                        }
+                    });
+
+        }
+        return bitmapList;
     }
 }

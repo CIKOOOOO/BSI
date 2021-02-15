@@ -5,5 +5,7 @@ import com.bca.bsi.model.TipsOfTheWeek;
 public interface IBaseNavigatonCallback {
     void onLoadTipsOfTheWeek(TipsOfTheWeek tipsOfTheWeek);
 
+    void onReportSuccess();
+
     void onFailed(String msg);
 }

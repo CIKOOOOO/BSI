@@ -141,6 +141,19 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     }
 
     @Override
+    public void onLikeResult(Forum.LikePost likePost) {
+        adapter.setLikePost(likePost);
+//        String saveStatus = savePost.getSaveStatus().equalsIgnoreCase("true") ? "Save post berhasil" : "Unsave post berhasil";
+//        showSnackBar(saveStatus);
+    }
+
+    @Override
+    public void onDeleteSuccess(String postID) {
+        adapter.removePost(postID);
+        showSnackBar("Hapus post sukses");
+    }
+
+    @Override
     public void onDetailPost(String postID) {
         Intent intent = new Intent(mActivity, CommentActivity.class);
         intent.putExtra(CommentActivity.DATA, postID);
@@ -149,7 +162,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onPostLike(String postID) {
-        viewModel.likePost(postID);
+        viewModel.likePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
     }
 
     @Override
@@ -208,7 +221,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         if (deleteDialog != null && deleteDialog.getTag() != null) {
             deleteDialog.dismiss();
         }
-        viewModel.sendDeleteConfirmation(postID);
+        viewModel.sendDeleteConfirmation(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
     }
 
     @Override

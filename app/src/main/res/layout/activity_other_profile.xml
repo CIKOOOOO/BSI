@@ -148,4 +148,14 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_blur"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.3"
+        android:background="@color/black_palette"
+        android:visibility="gone" />
+
+    <include layout="@layout/bottom_sheet_choose_image" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -67,10 +67,6 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
         tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
 
-        if (tvContent.getText().toString().equals(post.getContent())) {
-            tvLookMore.setVisibility(View.GONE);
-        }
-
         Picasso.get()
                 .load(Utils.imageURL(data.getImageProfile()))
                 .into(imgProfile);
@@ -82,6 +78,10 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         tvContent.setText(post.getContent());
         tvNews.setText(post.getPromoNews().getContent());
 
+        if (tvContent.getText().toString().equals(post.getContent())) {
+            tvLookMore.setVisibility(View.GONE);
+        }
+
         Picasso.get()
                 .load(Utils.imageURL(post.getImageProfile()))
                 .into(imgSourceProfile);
@@ -90,7 +90,6 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
                 .load(Utils.imageURL(post.getPromoNews().getImage()))
                 .into(imgContentNews);
     }
-
 
     @Override
     public void onClick(View v) {

@@ -1,7 +1,6 @@
-package com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.bookmark;
+package com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.posting;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -9,28 +8,27 @@ import androidx.lifecycle.AndroidViewModel;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
-import com.bca.bsi.utils.Utils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BookmarkViewModel extends AndroidViewModel {
+public class PostingViewModel extends AndroidViewModel {
 
     private ApiInterface apiInterface;
-    private IBookmarkCallback callback;
+    private IPostingCallback callback;
 
-    public void setCallback(IBookmarkCallback callback) {
-        this.callback = callback;
-    }
-
-    public BookmarkViewModel(@NonNull Application application) {
+    public PostingViewModel(@NonNull Application application) {
         super(application);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void savedPost(String token, String profileID, String postID) {
-        Call<OutputResponse> call = apiInterface.savePost(token, profileID, postID);
+    public void setCallback(IPostingCallback callback) {
+        this.callback = callback;
+    }
+
+    public void sendDeleteConfirmation(String token, String profileID, String postID) {
+        Call<OutputResponse> call = apiInterface.deletePost(token, profileID, postID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
@@ -38,19 +36,18 @@ public class BookmarkViewModel extends AndroidViewModel {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
-                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
-                        callback.onSaveResult(outputSchema.getSavePost());
+                        callback.onDeleteSuccess(postID);
                     } else {
-                        callback.onFailed("Save post gagal, mohon cek jaringan Anda");
+                        callback.onFailed(errorSchema.getErrorMessage());
                     }
                 } else {
-                    callback.onFailed("Save post gagal, mohon cek jaringan Anda");
+                    callback.onFailed("Hapus post gagal, mohon cek jaringan Anda");
                 }
             }
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
-                callback.onFailed("");
+                callback.onFailed("Hapus post gagal, mohon cek jaringan Anda");
             }
         });
     }
@@ -113,34 +110,6 @@ public class BookmarkViewModel extends AndroidViewModel {
                 callback.onFailed("");
             }
         });
+
     }
-
-    public void loadReportData(String token, String type, String postID) {
-        Call<OutputResponse> call = apiInterface.getReportReason(token);
-        call.enqueue(new Callback<OutputResponse>() {
-            @Override
-            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                if (null != response.body() && null != response.body().getErrorSchema()) {
-                    OutputResponse outputResponse = response.body();
-                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
-                    if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
-                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
-                        callback.onLoadReportData(outputSchema.getReportList(), type, postID);
-                    } else {
-                        callback.onFailed(errorSchema.getErrorMessage());
-                    }
-                } else {
-                    callback.onFailed("");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OutputResponse> call, Throwable t) {
-                callback.onFailed("");
-            }
-        });
-
-//        callback.onLoadReportData(DummyData.getReportList());
-    }
-
 }

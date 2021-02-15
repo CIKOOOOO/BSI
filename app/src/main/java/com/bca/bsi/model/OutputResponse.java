@@ -87,7 +87,7 @@ public class OutputResponse {
         @SerializedName(value = "my_profile", alternate = {"profile"})
         private Forum.User forumProfileUser;
 
-        @SerializedName(value = "my_posting", alternate = {"share_trade", "posting","trending"})
+        @SerializedName(value = "my_posting", alternate = {"share_trade", "posting", "trending"})
         private List<Forum.Post> myPostList;
 
         @SerializedName("my_bookmark")
@@ -105,7 +105,7 @@ public class OutputResponse {
         @SerializedName("my_inbox")
         private List<Forum.Inbox> inboxList;
 
-        @SerializedName(value = "list_followingme", alternate = {"list_followerme","list_follower","list_following"})
+        @SerializedName(value = "list_followingme", alternate = {"list_followerme", "list_follower", "list_following"})
         private List<Forum.Connection> connectionList;
 
         @SerializedName("categories")
@@ -114,8 +114,11 @@ public class OutputResponse {
         @SerializedName("list_reason")
         private List<Forum.Report> reportList;
 
-        @SerializedName("")
+        @SerializedName("return_save_post")
         private Forum.SavePost savePost;
+
+        @SerializedName("like_post")
+        private Forum.LikePost likePost;
 
         public OutputSchema() {
         }
@@ -214,6 +217,10 @@ public class OutputResponse {
 
         public Forum.SavePost getSavePost() {
             return savePost;
+        }
+
+        public Forum.LikePost getLikePost() {
+            return likePost;
         }
     }
 }

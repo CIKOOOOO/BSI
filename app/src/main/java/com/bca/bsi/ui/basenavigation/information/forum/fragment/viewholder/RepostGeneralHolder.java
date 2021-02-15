@@ -71,10 +71,6 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
         tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
 
-        if (tvContent.getText().toString().equals(post.getContent())) {
-            tvLookMore.setVisibility(View.GONE);
-        }
-
         Picasso.get()
                 .load(Utils.imageURL(data.getImageProfile()))
                 .into(imgProfile);
@@ -86,6 +82,10 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
         tvSourceName.setText(post.getName());
         tvSourceDate.setText(post.getDate());
         tvContent.setText(post.getContent());
+
+        if (tvContent.getText().toString().equals(post.getContent())) {
+            tvLookMore.setVisibility(View.GONE);
+        }
 
         Picasso.get()
                 .load(Utils.imageURL(post.getImageProfile()))

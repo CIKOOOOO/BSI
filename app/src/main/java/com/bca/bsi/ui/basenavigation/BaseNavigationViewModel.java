@@ -34,11 +34,12 @@ public class BaseNavigationViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", response.code() + " - " + response.raw().request().url().toString());
                 if (null != response.body() && null != response.body().getErrorSchema()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
-                        callback.onFailed("Mengirim report sukses");
+                        callback.onReportSuccess();
                     } else {
                         callback.onFailed("Mengirim report gagal. Mohon coba lagi kembali");
                     }
