@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.Privacy;
 import com.bca.bsi.utils.constant.Constant;
 import com.squareup.picasso.Picasso;
@@ -30,6 +31,19 @@ public class PrivacyAdapter extends RecyclerView.Adapter<PrivacyAdapter.Holder> 
 
     public interface onPrivacyClick {
         void onItemPrivacyClick(Privacy privacy);
+    }
+
+    public Privacy getCategoryDetail(String categoryName) {
+        for (int i = 0; i < this.privacyList.size(); i++) {
+            Privacy category = this.privacyList.get(i);
+            if (category.getName().equalsIgnoreCase(categoryName)) {
+                lastPosition = i;
+                privacyList.get(lastPosition).setClick(true);
+                notifyDataSetChanged();
+                return category;
+            }
+        }
+        return null;
     }
 
     @NonNull

@@ -116,7 +116,13 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                 if (productRekomenList != null) {
                     List<Product.ProductTransaction> productTransactions = new ArrayList<>();
                     for (ProductRekomen productRekomen : productRekomenList) {
-                        Product.ProductTransaction productTransaction = new Product.ProductTransaction(productRekomen.getProductName(), productRekomen.getLastDate(), productRekomen.getNab());
+                        String updateDate = null;
+                        try {
+                            updateDate = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, productRekomen.getLastDate());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Product.ProductTransaction productTransaction = new Product.ProductTransaction(productRekomen.getProductName(), updateDate, productRekomen.getNab());
                         productTransactions.add(productTransaction);
                     }
                     productNameDetailTransactionAdapter.setProductTransactions(productTransactions);

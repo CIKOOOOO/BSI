@@ -26,10 +26,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.adapter.ReportAdapter;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.PromoNews;
-import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.ui.basenavigation.information.forum.otherprofile.OtherProfileActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.ForumProfileActivity;
@@ -142,7 +142,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(DATA)) {
             String postID = intent.getStringExtra(DATA);
-            viewModel.loadData(postID);
+            viewModel.loadData(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
         } else {
             onBackPressed();
         }

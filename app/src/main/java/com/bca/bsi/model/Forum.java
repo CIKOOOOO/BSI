@@ -44,6 +44,8 @@ public class Forum {
         private List<String> imageURLList;
         @SerializedName("repost_content")
         private Post post;
+        @SerializedName("list_comment")
+        private List<Comment> commentList;
 
         public Post() {
         }
@@ -110,6 +112,12 @@ public class Forum {
             this.post = post;
             this.statusShare = statusShare;
         }
+
+        public void setStatusSave(String statusSave) {
+            this.statusSave = statusSave;
+        }
+
+
 
         public void setPostID(String postID) {
             this.postID = postID;
@@ -233,6 +241,10 @@ public class Forum {
 
         public String getStatusSave() {
             return statusSave;
+        }
+
+        public List<Comment> getCommentList() {
+            return commentList;
         }
 
         public static class ImagePost {
@@ -591,6 +603,83 @@ public class Forum {
 
         public String getImgProfile() {
             return imgProfile;
+        }
+    }
+
+    public static class SavePost{
+
+        @SerializedName("profile_id")
+        private String profileID;
+
+        @SerializedName("post_id")
+        private String postID;
+
+        @SerializedName("status")
+        private String saveStatus;
+
+        public SavePost() {
+        }
+
+        public String getProfileID() {
+            return profileID;
+        }
+
+        public String getPostID() {
+            return postID;
+        }
+
+        public String getSaveStatus() {
+            return saveStatus;
+        }
+    }
+
+    public static class LikePost{
+
+        @SerializedName("is_liked")
+        private String like;
+
+        // Post made by this id
+        @SerializedName("profile_post")
+        private String profilePostID;
+
+        @SerializedName("profile_likers")
+        private String profileLikeBy;
+
+        // Post is liked by this id
+        @SerializedName("post_id")
+        private String postID;
+
+        @SerializedName("profile_id")
+        private String profileID;
+
+        @SerializedName("message")
+        private String message;
+
+        public LikePost() {
+        }
+
+        public String getLike() {
+            return like;
+        }
+
+        public String getProfilePostID() {
+            return profilePostID;
+        }
+
+        public String getProfileLikeBy() {
+            return profileLikeBy;
+        }
+
+        public String getPostID() {
+            return postID;
+        }
+
+        public String getProfileID() {
+            return profileID;
+        }
+
+        public String getMessage() {
+            return message;
         }
     }
 }

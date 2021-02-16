@@ -15,6 +15,7 @@ import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -95,7 +96,6 @@ public class DirectShareViewModel extends AndroidViewModel {
             }
         });
 
-
 //        this.forumUserList = DummyData.getForumUser();
 //        this.visibleForumList.addAll(this.forumUserList);
 //        callback.onLoadForumUser(DummyData.getForumUser());
@@ -119,10 +119,10 @@ public class DirectShareViewModel extends AndroidViewModel {
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
                 Log.e("asd", response.code() + " - ");
 //                try {
-//                    Log.e("asd", response.errorBody().string());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+////                    Log.e("asd", response.errorBody().string());
+////                } catch (IOException e) {
+////                    e.printStackTrace();
+////                }
                 if (null != response.body()) {
                     OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                     if (errorSchema.getErrorCode().equals("200")) {

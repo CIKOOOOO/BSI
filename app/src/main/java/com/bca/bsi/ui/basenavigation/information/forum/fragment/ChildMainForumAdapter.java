@@ -45,6 +45,47 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             Forum.Post post = this.forumList.get(i);
             if (post.getPostID().equalsIgnoreCase(postID)) {
                 post.setStatusShare(reshareStatus);
+                int share = Integer.parseInt(post.getShare()) + 1;
+                post.setShare(String.valueOf(share));
+                this.forumList.set(i, post);
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
+    public void setSavePost(Forum.SavePost savePost) {
+        for (int i = 0; i < this.forumList.size(); i++) {
+            Forum.Post post = this.forumList.get(i);
+            if (post.getPostID().equalsIgnoreCase(savePost.getPostID())) {
+                post.setStatusSave(savePost.getSaveStatus());
+                this.forumList.set(i, post);
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
+    public void removePost(String postID) {
+        for (int i = 0; i < this.forumList.size(); i++) {
+            Forum.Post post = this.forumList.get(i);
+            if (post.getPostID().equalsIgnoreCase(postID)) {
+                this.forumList.remove(i);
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
+    public void setLikePost(Forum.LikePost likePost) {
+        for (int i = 0; i < this.forumList.size(); i++) {
+            Forum.Post post = this.forumList.get(i);
+            if (post.getPostID().equalsIgnoreCase(likePost.getPostID())) {
+                post.setStatusLike(likePost.getLike());
+                int like = likePost.getLike().equalsIgnoreCase("true") ?
+                        Integer.parseInt(post.getLike()) + 1
+                        : Integer.parseInt(post.getLike()) - 1;
+                post.setLike(String.valueOf(like));
                 this.forumList.set(i, post);
                 notifyDataSetChanged();
                 break;
@@ -56,7 +97,7 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         int layout;
-        RecyclerView.ViewHolder viewHolder = null;
+        RecyclerView.ViewHolder viewHolder;
         switch (viewType) {
             case ChildMainForumAdapter.SHARE_TRADE:
                 layout = R.layout.recycler_share_trade_main_forum;
@@ -142,9 +183,9 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
         if (this.forumList.size() == 0)
             return NO_DATA;
 
-        if (type.equals(Type.TRENDING)
+        if ((type.equals(Type.TRENDING)
                 || type.equals(Type.TIMELINE)
-                || (type.equals(Type.PROFILE) && null == forumList.get(position).getPost())) {
+                || type.equals(Type.PROFILE)) && null == forumList.get(position).getPost()) {
             currentType = forumList.get(position).getType();
         } else if (null != forumList.get(position).getPost()) {
             if (null != forumList.get(position).getPost().getPromoNews()) {

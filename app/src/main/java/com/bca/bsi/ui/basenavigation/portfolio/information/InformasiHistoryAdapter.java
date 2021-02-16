@@ -86,7 +86,8 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
             holder.tvJenisReksa_HIS.setText(history.getTransactionType());
             holder.tvDate_HIS.setText(history.getDate());
             holder.tvUnit_HIS.setText(history.getReksaDanaUnit());
-            holder.tvCost_HIS.setText(history.getAmount());
+            holder.tvCost_HIS.setText(Utils.formatUang3(Double.parseDouble(history.getAmount())));
+//            holder.tvCost_HIS.setText(history.getAmount());
 
             holder.tvShare_HIS.setOnClickListener(new View.OnClickListener() {
                 @Override

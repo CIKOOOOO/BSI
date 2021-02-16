@@ -58,7 +58,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/size_for_10dp"
                         android:layout_weight="3.5"
-                        android:text="Pembelian Sekali Bayar"
+                        tools:text="Pembelian Sekali Bayar"
                         android:textColor="@color/java_palette"
                         android:textSize="@dimen/size_for_15sp"
                         android:textStyle="bold" />
@@ -156,7 +156,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/size_for_10dp"
                         android:layout_weight="3.5"
-                        android:text="5271517891"
+                        tools:text="5271517891"
                         android:textColor="@color/java_palette"
                         android:textSize="@dimen/size_for_15sp"
                         android:textStyle="bold" />
@@ -166,11 +166,11 @@
                     android:id="@+id/ll_total_confirmation_transaction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:layout_marginStart="@dimen/size_for_20dp"
                     android:layout_marginTop="@dimen/size_for_20dp"
                     android:layout_marginEnd="@dimen/size_for_20dp"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:weightSum="5">
 
                     <TextView
@@ -211,12 +211,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/lorem" />
+                    android:layout_marginStart="@dimen/size_for_20dp"
+                    android:layout_marginEnd="@dimen/size_for_20dp"
+                    android:text="@string/info_sell2" />
 
                 <CheckBox
                     android:id="@+id/cb_confirmation_transaction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_for_10dp"
                     android:background="@color/wild_sand_palette"
                     android:buttonTint="@color/color_base_welma"
                     android:padding="@dimen/size_for_10dp"

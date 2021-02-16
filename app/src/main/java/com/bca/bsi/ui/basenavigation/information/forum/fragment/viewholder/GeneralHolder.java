@@ -1,6 +1,5 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
-import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
@@ -126,6 +125,13 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.recycler_img_profile_child_main_forum:
+            case R.id.recycler_tv_name_child_main_forum:
+                if (profileID.equals(post.getProfileID())) {
+                    onPostClick.onMyProfile();
+                } else
+                    onPostClick.onOtherProfile(post.getProfileID());
+                break;
             case R.id.recycler_tv_view_more_child_main_forum:
             case R.id.recycler_tv_comment_child_main_forum:
                 onPostClick.onDetailPost(post.getPostID());
@@ -142,14 +148,15 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
                         .inflate(layout, popup.getMenu());
 
                 if (popup.getMenu().findItem(R.id.menu_save) != null) {
-                    popup.getMenu().findItem(R.id.menu_save).setTitle("Saved");
+                    String share = post.getStatusSave().equalsIgnoreCase("true") ? "Saved" : "Save";
+                    popup.getMenu().findItem(R.id.menu_save).setTitle(share);
                 }
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_report:
-                                onPostClick.onReport(post.getPostID(),"post");
+                                onPostClick.onReport(post.getPostID(), "post");
                                 break;
                             case R.id.menu_save:
                                 onPostClick.onSavedPost(post.getPostID());
@@ -170,7 +177,6 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
             case R.id.recycler_tv_share_child_main_forum:
                 onPostClick.onResharePost(post.getStatusShare().equalsIgnoreCase("true"), post.getPostID());
                 break;
-
         }
     }
 }

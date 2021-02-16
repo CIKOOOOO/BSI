@@ -76,13 +76,13 @@
                 android:layout_width="@dimen/size_for_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_for_20dp"
-                android:drawableStart="@drawable/ic_baseline_info_24_gray"
                 android:drawablePadding="@dimen/size_for_10dp"
                 android:gravity=""
                 android:text="@string/info_sell"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_02"
-                app:layout_constraintTop_toBottomOf="@id/tv_02" />
+                app:layout_constraintTop_toBottomOf="@id/tv_02"
+                app:drawableStartCompat="@drawable/ic_baseline_info_24_gray" />
 
             <TextView
                 android:id="@+id/tv_05"

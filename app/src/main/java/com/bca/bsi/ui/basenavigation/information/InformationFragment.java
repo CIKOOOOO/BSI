@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -15,17 +16,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bca.bsi.R;
-import com.bca.bsi.model.Forum;
-import com.bca.bsi.ui.basenavigation.BaseNavigationActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.MainForumFragment;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.ForumProfileActivity;
 import com.bca.bsi.ui.basenavigation.information.promonews.news.NewsInformationFragment;
 import com.bca.bsi.ui.basenavigation.information.promonews.promo.PromoInformationFragment;
 import com.bca.bsi.utils.BaseFragment;
 
-import java.util.List;
-
-public class InformationFragment extends BaseFragment implements View.OnClickListener{
+public class InformationFragment extends BaseFragment implements View.OnClickListener {
 
     private TextView tvStart, tvMid, tvEnd;
     private MainForumFragment mainForumFragment;
@@ -46,23 +43,29 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView tvTitleToolbar = view.findViewById(R.id.tv_title_toolbar_image);
-        ImageButton imgToolbar = view.findViewById(R.id.img_btn_action_toolbar_image);
 
-        tvStart = view.findViewById(R.id.tv_start_information_fragment);
-        tvMid = view.findViewById(R.id.tv_mid_information_fragment);
-        tvEnd = view.findViewById(R.id.tv_end_information_fragment);
+        if (prefConfig.isForumAccountBanned().equalsIgnoreCase("true")) {
+            FrameLayout frameLayout = view.findViewById(R.id.frame_banned_information);
+            frameLayout.setVisibility(View.VISIBLE);
+        } else {
+            TextView tvTitleToolbar = view.findViewById(R.id.tv_title_toolbar_image);
+            ImageButton imgToolbar = view.findViewById(R.id.img_btn_action_toolbar_image);
 
-        tvTitleToolbar.setText(view.getContext().getString(R.string.information));
-        imgToolbar.setBackground(view.getContext().getDrawable(R.drawable.ic_people_rounded_white));
+            tvStart = view.findViewById(R.id.tv_start_information_fragment);
+            tvMid = view.findViewById(R.id.tv_mid_information_fragment);
+            tvEnd = view.findViewById(R.id.tv_end_information_fragment);
 
-        switchButton(1, view.getContext());
+            tvTitleToolbar.setText(view.getContext().getString(R.string.information));
+            imgToolbar.setBackground(view.getContext().getDrawable(R.drawable.ic_people_rounded_white));
 
-        imgToolbar.setOnClickListener(this);
+            switchButton(1, view.getContext());
 
-        tvStart.setOnClickListener(this);
-        tvMid.setOnClickListener(this);
-        tvEnd.setOnClickListener(this);
+            imgToolbar.setOnClickListener(this);
+
+            tvStart.setOnClickListener(this);
+            tvMid.setOnClickListener(this);
+            tvEnd.setOnClickListener(this);
+        }
     }
 
     @Override
@@ -128,7 +131,7 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
         transaction.commit();
     }
 
-    public void goToTop(){
+    public void goToTop() {
 
     }
 }

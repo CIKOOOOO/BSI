@@ -165,13 +165,15 @@
             <!--    DISCLAIMER-->
             <TextView
                 android:id="@+id/tv_disclaimer"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/size_for_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_for_20dp"
+                android:layout_marginEnd="@dimen/size_for_10dp"
                 android:text="@string/disclaimer_purchasing_robo"
                 android:textColor="@color/black_palette"
                 android:textSize="@dimen/size_for_12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ib_rekomen_robo"
                 app:layout_constraintStart_toStartOf="@id/tv_nominal_pembelian"
                 app:layout_constraintTop_toBottomOf="@id/tv_min_pembelian_title" />
 
@@ -201,12 +203,12 @@
 
     <TextView
         android:id="@+id/tv_lanjut"
+        style="@style/TextViewForButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_for_50dp"
         android:layout_marginTop="@dimen/size_for_10dp"
         android:background="@drawable/rectangle_yellow"
         android:text="@string/next"
-        style="@style/TextViewForButton"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <include

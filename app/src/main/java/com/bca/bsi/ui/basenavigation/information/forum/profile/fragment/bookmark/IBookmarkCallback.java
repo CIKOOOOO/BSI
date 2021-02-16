@@ -1,14 +1,10 @@
-package com.bca.bsi.ui.basenavigation.information.forum.otherprofile;
+package com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.bookmark;
 
 import com.bca.bsi.model.Forum;
 
 import java.util.List;
 
-public interface IOtherProfileCallback {
-
-    void onLoadData(Forum.User user, List<Forum.Post> postList);
-
-    void onLoadData(Forum.User user);
+public interface IBookmarkCallback {
 
     void onSaveResult(Forum.SavePost savePost);
 
@@ -16,9 +12,8 @@ public interface IOtherProfileCallback {
 
     void onLoadReportData(List<Forum.Report> reportList, String type, String postID);
 
-    void onReportSuccess();
+    void onFailed(String msg);
 
     void onLikeResult(Forum.LikePost likePost);
 
-    void onFailed(String msg);
 }

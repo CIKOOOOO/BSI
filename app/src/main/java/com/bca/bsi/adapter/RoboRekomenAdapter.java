@@ -6,15 +6,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.ProductRekomen;
+import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoboRekomenAdapter extends RecyclerView.Adapter<RoboRekomenAdapter.Holder>{
+public class RoboRekomenAdapter extends RecyclerView.Adapter<RoboRekomenAdapter.Holder> {
     private List<ProductRekomen> productRekomenList = new ArrayList<>();
     private final int JUMLAH_PRODUK = 3;
 
@@ -33,11 +37,24 @@ public class RoboRekomenAdapter extends RecyclerView.Adapter<RoboRekomenAdapter.
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         final ProductRekomen productRekomen = productRekomenList.get(position);
         holder.tvJenisReksa.setText(productRekomen.getJenisReksadana());
-        holder.tvNab.setText(productRekomen.getNab());
-        holder.tvKinerja.setText(productRekomen.getKinerja());
         holder.tvReksaName.setText(productRekomen.getProductName());
-        holder.tvPercent.setText(productRekomen.getPercentage()+"%");
-        holder.tvLastDate.setText(productRekomen.getLastDate());
+        holder.tvPercent.setText(productRekomen.getPercentage() + "%");
+
+        holder.tvNab.setText("Rp " + Utils.formatUang3(Double.parseDouble(productRekomen.getNab())));
+
+        double kinerja = Double.parseDouble(productRekomen.getKinerja());
+        int color = kinerja > 0 ? R.color.green_base_palette : R.color.red_palette;
+        String kinerjaString = kinerja > 0 ? "+" + kinerja + "%" : kinerja + "%";
+        holder.tvKinerja.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), color));
+        holder.tvKinerja.setText(kinerjaString);
+
+        try {
+            String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, productRekomen.getLastDate());
+            holder.tvLastDate.setText(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

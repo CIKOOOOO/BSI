@@ -44,6 +44,16 @@
         app:layout_constraintTop_toBottomOf="@id/recycler_tv_name_child_main_forum"
         tools:text="15 Desember 2020 16:21" />
 
+    <ImageButton
+        android:id="@+id/recycler_img_btn_more_repost_news_main_forum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_for_20dp"
+        android:background="@drawable/ic_baseline_more_horiz_24"
+        app:layout_constraintBottom_toBottomOf="@id/recycler_img_profile_child_main_forum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/recycler_img_profile_child_main_forum" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/recycler_cv_repost_news_main_forum"
         android:layout_width="@dimen/size_for_0dp"

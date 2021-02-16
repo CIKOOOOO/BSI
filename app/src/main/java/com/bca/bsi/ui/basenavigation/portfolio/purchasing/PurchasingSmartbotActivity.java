@@ -21,6 +21,7 @@ import com.bca.bsi.model.Portfolio;
 import com.bca.bsi.model.ProductRekomen;
 import com.bca.bsi.ui.basenavigation.transaction.detail_product_transaction.DetailProductTransactionActivity;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
 import com.google.gson.Gson;
 
@@ -67,6 +68,9 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        viewModel = new ViewModelProvider(this).get(PurchasingSmartbotViewModel.class);
+        viewModel.setCallback(this);
+
         // Atur nominal gbs depannya 0
         etNominal.addTextChangedListener(new TextWatcher() {
             @Override
@@ -96,7 +100,8 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
             String hasil = intent.getStringExtra("data");
             Gson gson = new Gson();
             portfolio = gson.fromJson(hasil, Portfolio.class);
-            minPembelian.setText(portfolio.getMinPurchase());
+            minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
+//            minPembelian.setText(portfolio.getMinPurchase());
             tvReturn.setText(portfolio.getExpReturn() + "%");
             tvRisk.setText(portfolio.getRisk());
             adapter.setProductRekomenList(portfolio.getProductRekomenList());
@@ -104,8 +109,6 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
             // ini kalau custom
             String hasil = intent.getStringExtra("data2");
             //hit API dari sini
-            viewModel = new ViewModelProvider(this).get(PurchasingSmartbotViewModel.class);
-            viewModel.setCallback(this);
             viewModel.loadBundle(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), hasil, "");
         }
 
@@ -146,7 +149,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         tvHitungSekarang.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                viewModel.loadBundle(prefConfig.getAccountNumber(), adapter.getReksaIds());
+                viewModel.loadBundle(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), adapter.getReksaIds(), "");
                 roboHitungPopupLayout.setVisibility(View.GONE);
             }
         }));
@@ -158,23 +161,17 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         this.portfolio = bundles.get(0);
         adapter.setProductRekomenList(portfolio.getProductRekomenList());
         adapter.notifyDataSetChanged();
-        minPembelian.setText(portfolio.getMinPurchase());
+        minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
+//        minPembelian.setText(portfolio.getMinPurchase());
         tvReturn.setText(portfolio.getExpReturn() + "%");
         tvRisk.setText(portfolio.getRisk());
     }
 
-//    @Override
-//    public void onLoadDataCustom(List<Portfolio> bundles) {
-//        Portfolio portfolio = bundles.get(0);
-//        minPembelian.setText(portfolio.getMinPurchase());
-//        tvReturn.setText(portfolio.getExpReturn() + "%");
-//        tvRisk.setText(portfolio.getRisk());
-//    }
-
     @Override
     public void onLoadDataCustom(List<Portfolio> bundles) {
         this.portfolio = bundles.get(0);
-        minPembelian.setText(portfolio.getMinPurchase());
+        minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
+//        minPembelian.setText(portfolio.getMinPurchase());
         tvReturn.setText(portfolio.getExpReturn() + "%");
         tvRisk.setText(portfolio.getRisk());
     }
@@ -209,6 +206,8 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
 
     @Override
     public void sendValue(String reksaDanaID, String proportion) {
-        viewModel.loadBundleCustom(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), reksaDanaID, proportion);
+        if (viewModel != null) {
+            viewModel.loadBundleCustom(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), reksaDanaID, proportion);
+        }
     }
 }

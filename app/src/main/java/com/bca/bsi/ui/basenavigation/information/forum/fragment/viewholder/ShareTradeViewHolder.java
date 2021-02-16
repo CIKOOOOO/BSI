@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -79,7 +80,9 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
         tvName.setText(post.getName());
         tvDate.setText(post.getDate());
-        tvContent.setText(Utils.removeEnter(post.getContent()));
+        if (!post.getContent().isEmpty())
+            tvContent.setText(Utils.removeEnter(post.getContent()));
+
         tvLike.setText(post.getLike());
         tvComment.setText(post.getComment());
 
@@ -157,11 +160,16 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
                 popup.getMenuInflater()
                         .inflate(layout, popup.getMenu());
 
+                if (popup.getMenu().findItem(R.id.menu_save) != null) {
+                    String share = post.getStatusSave().equalsIgnoreCase("true") ? "Saved" : "Save";
+                    popup.getMenu().findItem(R.id.menu_save).setTitle(share);
+                }
+
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_report:
-                                onPostClick.onReport(post.getPostID(),"post");
+                                onPostClick.onReport(post.getPostID(), "post");
                                 break;
                             case R.id.menu_save:
                                 onPostClick.onSavedPost(post.getPostID());

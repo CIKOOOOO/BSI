@@ -8,6 +8,7 @@ import java.util.Map;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -28,7 +29,7 @@ public interface ApiInterface {
     Call<OutputResponse> getReksaDanaData(@Header("token-user") String token, @Header("profile-risiko") int profile_risiko);
 
     @Headers({"Accept: application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
-	
+
     @GET("products/reksadana/{reksaDanaID}")
     Call<OutputResponse> getDetailReksaDana(@Header("token-user") String token, @Path("reksaDanaID") int reksaDanaID);
 
@@ -104,6 +105,11 @@ public interface ApiInterface {
     Call<OutputResponse> sendNewPost(@Header("token-user") String tokenUser, @Body Map<String, Object> stringObjectMap);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @PUT("forum/post/{postID}")
+    Call<OutputResponse> editPost(@Header("token-user") String tokenUser, @Path("postID") String postID, @Body Map<String, Object> stringObjectMap);
+
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("news")
     Call<OutputResponse> getListDetailNews(@Header("token-user") String tokenUser);
 
@@ -146,9 +152,9 @@ public interface ApiInterface {
             , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
-    @PUT("forum/profile/{profileID}/save")
+    @POST("forum/post/{postID}/save")
     Call<OutputResponse> savePost(@Header("token-user") String tokenUser
-            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+            , @Header("profile-id") String profileID, @Path("postID") String postID);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("forum/report-reason/")
@@ -164,4 +170,19 @@ public interface ApiInterface {
     Call<OutputResponse> sendReportPost(@Header("token-user") String tokenUser
             , @Header("profile-id") String profileID, @Header("reason-id") String reasonID
             , @Path("post-id") String postID, @Path("report-type") String reportType);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @POST("forum/post/{postID}/like")
+    Call<OutputResponse> likePost(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("postID") String postID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @DELETE("forum/post/{postID}")
+    Call<OutputResponse> deletePost(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("postID") String postID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/post/{postID}")
+    Call<OutputResponse> detailPost(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("postID") String postID);
 }

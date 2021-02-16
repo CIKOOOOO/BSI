@@ -194,11 +194,11 @@
     <string name="ayo_belajar_lagi">Ayo Belajar Lagi</string>
     <string name="mulai_investasi">Mulai Investasi</string>
     <string name="disclaimer_purchasing_robo">
-        Simulasi perhitungan berlaku untuk hari ini
-        \nsesuai dengan data historis reksa dana.
-        \nPemilihan produk reksa dana merupakan
-        \nbagian dari kebijakan pengguna dan di luar
-        \ntanggung jawab penyedia aplikasi Welma BCA
+        Simulasi perhitungan merupakan estimasi yang berlaku untuk hari ini
+        sesuai dengan data historis reksa dana.
+        Pemilihan produk reksa dana merupakan
+        bagian dari kebijakan pengguna dan di luar
+        tanggung jawab penyedia aplikasi Welma BCA
     </string>
     <string name="tentang_robo">
         1. Kalkulasi SmartBot menggunakan data historis yang akan diperbaharui setiap tanggal 1 di awal bulan
@@ -223,12 +223,19 @@
     <string name="choose_category">Pilih Kategori</string>
     <string name="choose_profile_photo">Pilih Photo Profile</string>
     <string name="make_post">Buat Post</string>
+    <string name="edit_post">Edit Post</string>
     <string name="up">Naik</string>
     <string name="down">Turun</string>
     <string name="stay">Tetap</string>
     <string name="okay_understand">Oke, mengerti</string>
     <string name="about_smartbot">Tentang SmartBot</string>
     <string name="banned_account">Akun forum anda telah dibekukan oleh admin. Silahkan hubungi HaloBCA</string>
+
+    <string name="info_sell2">\u2022 Transaksi Reksa Dana yang dilakukan hingga Pukul 13.00 Waktu Indonesia Barat (WIB) [ada hari burka akan diproses dan Penyertaan hari bursa yang sama\n\n
+                            \u2022 Transaksi Reksa Dana yang dilakukan setelah Pukul 13.00 Waktu Indonesia Barat (WIB) pada hari bursa atau yang dilakukan pada hari libur bursa (termasuk Sabtu, Minggu, dan hari libur nasional) akan diproses pada dan menggunakan NAB/Unit Penyertaan hari bursa berikutnya.\n\n
+                            \u2022 Waktu yang digunakan mengacu pada Waktu Indonesia Barat (WIB).\n\n
+                            \u2022 Pengajuan transaksi pembelian berkala selambat-lambatnya dilakukan T-1 hari bursa dari tanggal pembelian berkala. Untuk mengubah/mengakhiri transaksi pembelian berkala, silakan datang ke cabang BCA yang daftarnya dapat dilihat pada menu More - Cabang.
+    </string>
 
     <!--END HERE-->
 

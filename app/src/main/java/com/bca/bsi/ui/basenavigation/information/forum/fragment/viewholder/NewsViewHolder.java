@@ -119,6 +119,11 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
                 popup.getMenuInflater()
                         .inflate(layout, popup.getMenu());
 
+                if (popup.getMenu().findItem(R.id.menu_save) != null) {
+                    String share = post.getStatusSave().equalsIgnoreCase("true") ? "Saved" : "Save";
+                    popup.getMenu().findItem(R.id.menu_save).setTitle(share);
+                }
+
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {

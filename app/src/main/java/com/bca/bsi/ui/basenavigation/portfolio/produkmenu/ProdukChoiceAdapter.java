@@ -1,6 +1,5 @@
 package com.bca.bsi.ui.basenavigation.portfolio.produkmenu;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
@@ -44,9 +44,15 @@ public class ProdukChoiceAdapter extends RecyclerView.Adapter<ProdukChoiceAdapte
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         final Product.ReksaDana productChoice = products.get(position);
         holder.tvJenisReksa.setText(productChoice.getType());
+//        holder.tvNab.setText(Utils.formatUang3(Double.parseDouble(productChoice.getNab())));
         holder.tvNab.setText(productChoice.getNab());
-        holder.tvKinerja.setText(productChoice.getKinerja());
         holder.tvReksaName.setText(productChoice.getName());
+
+        double kinerja = Double.parseDouble(productChoice.getKinerja());
+        int color = kinerja > 0 ? R.color.green_base_palette : R.color.red_palette;
+        String kinerjaString = kinerja > 0 ? "+" + kinerja + "%" : kinerja + "%";
+        holder.tvKinerja.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), color));
+        holder.tvKinerja.setText(kinerjaString);
 
         holder.cbChoosen.setOnCheckedChangeListener(null);
         holder.cbChoosen.setChecked(productChoice.isChoosen());

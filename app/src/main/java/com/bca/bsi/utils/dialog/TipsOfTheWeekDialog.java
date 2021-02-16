@@ -89,7 +89,7 @@ public class TipsOfTheWeekDialog extends DialogFragment implements View.OnClickL
         ImageButton imgBtnClose = view.findViewById(R.id.ib_clear3);
         CheckBox checkBox = view.findViewById(R.id.cb_jangan_tampilkan_lagi);
 
-        Log.e("asd", tipsOfTheWeek.getImgURL() + ": URL");
+//        Log.e("asd", tipsOfTheWeek.getImgURL() + ": URL");
 
         if (!tipsOfTheWeek.getImgURL().isEmpty())
             Picasso.get()

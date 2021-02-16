@@ -3,6 +3,7 @@ package com.bca.bsi.ui.basenavigation;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -122,8 +123,9 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         boolean monday = cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
 
         if (
-                monday
-                        && prefConfig.getTipsActivated()
+//                monday
+//                        &&
+                prefConfig.getTipsActivated()
 //                && !prefConfig.getTimeTipsOfTheWeek().equals(Utils.getTime(Constant.DATE_FORMAT_2))
         ) { // Day-2 = Monday
             viewModel.getTipsOfTheWeek(prefConfig.getTokenUser());
@@ -170,6 +172,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         bsSmartBot.addBottomSheetCallback(bottomSheetCallback);
         BOTTOM_SHEET_REPORT.addBottomSheetCallback(bottomSheetCallback);
 
+        frameLayout.setOnClickListener(this);
         btnReport.setOnClickListener(this);
         bottomLanjut.setOnClickListener(this);
     }
@@ -220,7 +223,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         roboRekomenAdapter.notifyDataSetChanged();
 
         TextView minPembelian = findViewById(R.id.tv_min_pembelian_value);
-        minPembelian.setText(portfolio.getMinPurchase());
+        minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
     }
 
     @Override
@@ -284,6 +287,13 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     }
 
     @Override
+    public void onReportSuccess() {
+        this.report = null;
+        BOTTOM_SHEET_REPORT.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        showSnackBar("Mengirim report sukses");
+    }
+
+    @Override
     public void onFailed(String msg) {
         showSnackBar(msg);
     }
@@ -296,6 +306,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     }
 
     public static void loadReport(List<Forum.Report> reportList, String postID, String type) {
+        Log.e("asd", postID + " - " + type);
         BaseNavigationActivity.postID = postID;
         BaseNavigationActivity.reportType = type;
         BOTTOM_SHEET_REPORT.setState(BottomSheetBehavior.STATE_EXPANDED);
