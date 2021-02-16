@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.posting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.ui.basenavigation.information.forum.comment.CommentActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAdapter;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
+import com.bca.bsi.ui.basenavigation.information.forum.otherprofile.OtherProfileActivity;
+import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
+import com.bca.bsi.ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity;
 import com.bca.bsi.utils.BaseFragment;
+import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
 import com.bca.bsi.utils.dialog.DeleteDialog;
 import com.bca.bsi.utils.dialog.ReshareDialog;
@@ -63,17 +69,19 @@ public class PostingFragment extends BaseFragment implements OnPostClick, IPosti
 
     @Override
     public void onDetailPost(String postID) {
-
+        Intent intent = new Intent(mActivity, CommentActivity.class);
+        intent.putExtra(CommentActivity.DATA, postID);
+        startActivity(intent);
     }
 
     @Override
     public void onPostLike(String postID) {
-
+        viewModel.likePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
     }
 
     @Override
     public void onReport(String postID, String type) {
-
+        // cannot report your own post
     }
 
     @Override
@@ -83,23 +91,27 @@ public class PostingFragment extends BaseFragment implements OnPostClick, IPosti
 
     @Override
     public void onOtherProfile(String profileID) {
-
+        Intent intent = new Intent(mActivity, OtherProfileActivity.class);
+        intent.putExtra(OtherProfileActivity.DATA, profileID);
+        startActivity(intent);
     }
 
     @Override
     public void onMyProfile() {
-
+        // do nothing
     }
 
     @Override
     public void onDetailNews(String newsID) {
-
+        Intent intent = new Intent(mActivity, DetailPromoNewsActivity.class);
+        intent.putExtra(DetailPromoNewsActivity.DATA, newsID);
+        startActivity(intent);
     }
 
     @Override
     public void onResharePost(boolean isReshare, String postID) {
-        String info = isReshare ? "Apakah Anda ingin menghapus reshare postingan ini?" : "Apakah Anda ingin reshare postingan ini?";
-        reshareDialog = new ReshareDialog(info, isReshare, this, postID);
+//        String info = isReshare ? "Apakah Anda ingin menghapus reshare postingan ini?" : "Apakah Anda ingin reshare postingan ini?";
+        reshareDialog = new ReshareDialog("Apakah Anda ingin reshare postingan ini?", isReshare, this, postID);
         reshareDialog.show(getChildFragmentManager(), "");
     }
 
@@ -111,7 +123,10 @@ public class PostingFragment extends BaseFragment implements OnPostClick, IPosti
 
     @Override
     public void onEditPost(Forum.Post post) {
-
+        Intent intent = new Intent(mActivity, PostActivity.class);
+        intent.putExtra(PostActivity.DATA, Utils.toJSON(post));
+        intent.putExtra(PostActivity.POST_TYPE, PostActivity.EDIT_POST);
+        startActivity(intent);
     }
 
     @Override
@@ -129,6 +144,11 @@ public class PostingFragment extends BaseFragment implements OnPostClick, IPosti
     @Override
     public void onFailed(String msg) {
         showSnackBar(msg);
+    }
+
+    @Override
+    public void onLikeResult(Forum.LikePost likePost) {
+        adapter.setLikePost(likePost);
     }
 
     @Override

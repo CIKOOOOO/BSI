@@ -1,6 +1,7 @@
 package com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.posting;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -8,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
+import com.bca.bsi.utils.Utils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -111,5 +113,32 @@ public class PostingViewModel extends AndroidViewModel {
             }
         });
 
+    }
+
+    public void likePost(String token, String profileID, String postID) {
+        Call<OutputResponse> call = apiInterface.likePost(token, profileID, postID);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", Utils.toJSON(response.body()));
+                if (null != response.body() && null != response.body().getErrorSchema()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                        callback.onLikeResult(outputSchema.getLikePost());
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
     }
 }

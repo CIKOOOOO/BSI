@@ -39,7 +39,7 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
-                if (response.body() != null) {
+                if (response.body() != null && null != response.body().getErrorSchema()) {
                     Log.e("asd", "tes2");
                     OutputResponse outputResponse = response.body();
                     if (outputResponse.getErrorSchema().getErrorCode().equals("200")) {
@@ -47,7 +47,6 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
                         OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                         callback.onLoadData(outputSchema.getBundles());
                         Log.e("asd", Utils.toJSON(outputSchema));
-
                     } else {
                         Log.e("asd", "tes4");
                         callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
@@ -68,8 +67,7 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
 
 
     public void loadBundleCustom(String token, String no_rekening, String reksa_id, String proportion) {
-        Log.e("asd", reksa_id);
-        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(token,no_rekening, reksa_id, proportion);
+        Call<OutputResponse> call = apiInterface.getRoboHitungCustom(token, no_rekening, reksa_id, proportion);
 
         call.enqueue(new Callback<OutputResponse>() {
             @Override

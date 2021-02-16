@@ -1,7 +1,6 @@
 package com.bca.bsi.ui.basenavigation.products.detail.reksadana;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
@@ -64,9 +64,15 @@ public class ReksadanaProductAdapter extends RecyclerView.Adapter<ReksadanaProdu
             }
             holder.tvTitle.setText(reksaDana.getName());
             holder.tvType.setText(reksaDana.getType());
-            holder.tvKinerja.setText(reksaDana.getKinerja());
-            holder.tvNab.setText(Utils.formatUang3(Double.parseDouble(reksaDana.getNab())));
-//            holder.tvNab.setText(reksaDana.getNab());
+
+            double kinerja = Double.parseDouble(reksaDana.getKinerja());
+            int color = kinerja > 0 ? R.color.green_base_palette : R.color.red_palette;
+            holder.tvKinerja.setTextColor(ContextCompat.getColor(mContext, color));
+            String kinerjaString = kinerja > 0 ? "+" + kinerja + "%" : kinerja + "%";
+
+            holder.tvKinerja.setText(kinerjaString);
+//            holder.tvNab.setText(Utils.formatUang3(Double.parseDouble(reksaDana.getNab())));
+            holder.tvNab.setText(reksaDana.getNab());
             holder.tvBuy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

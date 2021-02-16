@@ -125,6 +125,13 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.recycler_img_profile_child_main_forum:
+            case R.id.recycler_tv_name_child_main_forum:
+                if (profileID.equals(post.getProfileID())) {
+                    onPostClick.onMyProfile();
+                } else
+                    onPostClick.onOtherProfile(post.getProfileID());
+                break;
             case R.id.recycler_tv_view_more_child_main_forum:
             case R.id.recycler_tv_comment_child_main_forum:
                 onPostClick.onDetailPost(post.getPostID());
@@ -170,7 +177,6 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
             case R.id.recycler_tv_share_child_main_forum:
                 onPostClick.onResharePost(post.getStatusShare().equalsIgnoreCase("true"), post.getPostID());
                 break;
-
         }
     }
 }

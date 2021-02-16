@@ -82,7 +82,9 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             Forum.Post post = this.forumList.get(i);
             if (post.getPostID().equalsIgnoreCase(likePost.getPostID())) {
                 post.setStatusLike(likePost.getLike());
-                int like = Integer.parseInt(post.getLike()) + 1;
+                int like = likePost.getLike().equalsIgnoreCase("true") ?
+                        Integer.parseInt(post.getLike()) + 1
+                        : Integer.parseInt(post.getLike()) - 1;
                 post.setLike(String.valueOf(like));
                 this.forumList.set(i, post);
                 notifyDataSetChanged();

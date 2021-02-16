@@ -44,6 +44,8 @@ public class Forum {
         private List<String> imageURLList;
         @SerializedName("repost_content")
         private Post post;
+        @SerializedName("list_comment")
+        private List<Comment> commentList;
 
         public Post() {
         }
@@ -239,6 +241,10 @@ public class Forum {
 
         public String getStatusSave() {
             return statusSave;
+        }
+
+        public List<Comment> getCommentList() {
+            return commentList;
         }
 
         public static class ImagePost {

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
@@ -42,10 +43,11 @@ public class ReksaDanaPerformanceAdapter extends RecyclerView.Adapter<ReksaDanaP
         if (performance != null) {
             holder.tvPeriod.setText(performance.getPeriod());
 
-            int color = performance.getValue() < 0 ? R.color.red_palette : R.color.green_base_palette;
+            int color = performance.getValue() > 0 ? R.color.green_base_palette : R.color.red_palette;
+            String kinerjaString = performance.getValue() > 0 ? "+" + performance.getValue() + "%" : performance.getValue() + "%";
 
-            holder.tvPerformance.setTextColor(mContext.getResources().getColor(color));
-            holder.tvPerformance.setText(String.valueOf(performance.getValue()));
+            holder.tvPerformance.setTextColor(ContextCompat.getColor(mContext, color));
+            holder.tvPerformance.setText(kinerjaString);
         }
     }
 

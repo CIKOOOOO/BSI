@@ -284,6 +284,11 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
+    public void onLikeResult(Forum.LikePost likePost) {
+        adapter.setLikePost(likePost);
+    }
+
+    @Override
     public void onFailed(String msg) {
         if (null != customLoading && null != customLoading.getTag()) {
             customLoading.dismiss();
@@ -300,7 +305,7 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onPostLike(String postID) {
-
+        viewModel.likePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
     }
 
     @Override
@@ -334,8 +339,8 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onResharePost(boolean isReshare, String postID) {
-        String info = isReshare ? "Apakah Anda ingin menghapus reshare postingan ini?" : "Apakah Anda ingin reshare postingan ini?";
-        reshareDialog = new ReshareDialog(info, isReshare, this, postID);
+//        String info = isReshare ? "Apakah Anda ingin menghapus reshare postingan ini?" : "Apakah Anda ingin reshare postingan ini?";
+        reshareDialog = new ReshareDialog("Apakah Anda ingin reshare postingan ini?", isReshare, this, postID);
         reshareDialog.show(getSupportFragmentManager(), "");
     }
 

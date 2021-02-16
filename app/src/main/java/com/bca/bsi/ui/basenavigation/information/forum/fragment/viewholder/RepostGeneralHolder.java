@@ -1,18 +1,21 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
-import com.bca.bsi.adapter.PostImageAdapter;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
@@ -24,6 +27,7 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
     private RoundedImageView imgProfile, imgSourceProfile;
     private OnPostClick onPostClick;
     private RecyclerView recyclerImage;
+    private ImageButton imgPopup;
 
     private Forum.Post post;
     private String profileID;
@@ -33,6 +37,7 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
         this.onPostClick = onPostClick;
 
         CardView cardView = itemView.findViewById(R.id.recycler_cv_repost_news_main_forum);
+        imgPopup = itemView.findViewById(R.id.recycler_img_btn_more_repost_main_forum);
 
         tvName = itemView.findViewById(R.id.recycler_tv_name_child_main_forum);
         tvDate = itemView.findViewById(R.id.recycler_tv_date_child_main_forum);
@@ -53,6 +58,8 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
         tvName.setOnClickListener(this);
         tvShare.setOnClickListener(this);
         imgProfile.setOnClickListener(this);
+        tvLike.setOnClickListener(this);
+        imgPopup.setOnClickListener(this);
     }
 
     public void setData(Forum.Post data, String profileID) {
@@ -67,9 +74,11 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
         int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;
+        int visibilityPopup = post.getProfileID().equalsIgnoreCase(profileID)? View.VISIBLE: View.GONE;
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
         tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
+        imgPopup.setVisibility(visibilityPopup);
 
         Picasso.get()
                 .load(Utils.imageURL(data.getImageProfile()))
@@ -124,10 +133,32 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
                     onPostClick.onOtherProfile(post.getProfileID());
                 break;
             case R.id.recycler_cv_repost_news_main_forum:
-//                onPostClick.onDetailPost();
+                onPostClick.onDetailPost(post.getPost().getPostID());
                 break;
             case R.id.recycler_tv_share_child_main_forum:
                 onPostClick.onResharePost(post.getStatusShare().equalsIgnoreCase("true"), post.getPost().getPostID());
+                break;
+            case R.id.recycler_tv_like_child_main_forum:
+                onPostClick.onPostLike(post.getPostID());
+                break;
+            case R.id.recycler_img_btn_more_repost_main_forum:
+                PopupMenu popup = new PopupMenu(v.getContext(), imgPopup);
+
+                popup.getMenuInflater()
+                        .inflate(R.menu.menu_repost, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu_delete:
+                                onPostClick.onDeletePost(post.getPostID());
+                                break;
+                        }
+                        return true;
+                    }
+                });
+
+                popup.show(); //showing popup menu
                 break;
         }
     }

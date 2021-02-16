@@ -68,6 +68,9 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        viewModel = new ViewModelProvider(this).get(PurchasingSmartbotViewModel.class);
+        viewModel.setCallback(this);
+
         // Atur nominal gbs depannya 0
         etNominal.addTextChangedListener(new TextWatcher() {
             @Override
@@ -106,8 +109,6 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
             // ini kalau custom
             String hasil = intent.getStringExtra("data2");
             //hit API dari sini
-            viewModel = new ViewModelProvider(this).get(PurchasingSmartbotViewModel.class);
-            viewModel.setCallback(this);
             viewModel.loadBundle(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), hasil, "");
         }
 
@@ -148,7 +149,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         tvHitungSekarang.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                viewModel.loadBundle(prefConfig.getAccountNumber(), adapter.getReksaIds());
+                viewModel.loadBundle(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), adapter.getReksaIds(), "");
                 roboHitungPopupLayout.setVisibility(View.GONE);
             }
         }));
@@ -165,14 +166,6 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         tvReturn.setText(portfolio.getExpReturn() + "%");
         tvRisk.setText(portfolio.getRisk());
     }
-
-//    @Override
-//    public void onLoadDataCustom(List<Portfolio> bundles) {
-//        Portfolio portfolio = bundles.get(0);
-//        minPembelian.setText(portfolio.getMinPurchase());
-//        tvReturn.setText(portfolio.getExpReturn() + "%");
-//        tvRisk.setText(portfolio.getRisk());
-//    }
 
     @Override
     public void onLoadDataCustom(List<Portfolio> bundles) {
@@ -213,6 +206,8 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
 
     @Override
     public void sendValue(String reksaDanaID, String proportion) {
-        viewModel.loadBundleCustom(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), reksaDanaID, proportion);
+        if (viewModel != null) {
+            viewModel.loadBundleCustom(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), reksaDanaID, proportion);
+        }
     }
 }

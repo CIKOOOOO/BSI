@@ -180,4 +180,9 @@ public interface ApiInterface {
     @DELETE("forum/post/{postID}")
     Call<OutputResponse> deletePost(@Header("token-user") String tokenUser
             , @Header("profile-id") String profileID, @Path("postID") String postID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/post/{postID}")
+    Call<OutputResponse> detailPost(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("postID") String postID);
 }

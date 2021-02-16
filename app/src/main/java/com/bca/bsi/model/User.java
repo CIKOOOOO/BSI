@@ -19,7 +19,7 @@ public class User {
         @SerializedName(value = "img_profile", alternate = {"profile_picture"})
         private String imageProfile;
 
-        @SerializedName("is_active")
+        @SerializedName("is_disabled")
         private String active;
 
         public ForumUser() {

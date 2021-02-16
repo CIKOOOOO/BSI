@@ -197,8 +197,8 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onResharePost(boolean isReshare, String postID) {
-        String info = isReshare ? "Apakah Anda ingin menghapus reshare postingan ini?" : "Apakah Anda ingin reshare postingan ini?";
-        reshareDialog = new ReshareDialog(info, isReshare, this, postID);
+//        String info = isReshare ? "Apakah Anda ingin menghapus reshare postingan ini?" : "Apakah Anda ingin reshare postingan ini?";
+        reshareDialog = new ReshareDialog("Apakah Anda ingin reshare postingan ini?", isReshare, this, postID);
         reshareDialog.show(getChildFragmentManager(), "");
     }
 

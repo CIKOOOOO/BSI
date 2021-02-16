@@ -117,8 +117,11 @@ public class OutputResponse {
         @SerializedName("return_save_post")
         private Forum.SavePost savePost;
 
-        @SerializedName("like_post")
+        @SerializedName("like")
         private Forum.LikePost likePost;
+
+        @SerializedName("detail_post")
+        private Forum.Post detailPost;
 
         public OutputSchema() {
         }
@@ -221,6 +224,10 @@ public class OutputResponse {
 
         public Forum.LikePost getLikePost() {
             return likePost;
+        }
+
+        public Forum.Post getDetailPost() {
+            return detailPost;
         }
     }
 }

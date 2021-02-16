@@ -18,5 +18,7 @@ public interface IOtherProfileCallback {
 
     void onReportSuccess();
 
+    void onLikeResult(Forum.LikePost likePost);
+
     void onFailed(String msg);
 }

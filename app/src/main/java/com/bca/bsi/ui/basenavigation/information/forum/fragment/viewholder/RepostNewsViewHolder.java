@@ -1,10 +1,13 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +24,7 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
     private RoundedImageView imgProfile, imgSourceProfile;
     private ImageView imgContentNews;
     private OnPostClick onPostClick;
+    private ImageButton imgPopup;
 
     private Forum.Post post;
     private String profileID;
@@ -30,6 +34,7 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         this.onPostClick = onPostClick;
 
         CardView cardView = itemView.findViewById(R.id.recycler_cv_repost_news_main_forum);
+        imgPopup = itemView.findViewById(R.id.recycler_img_btn_more_repost_news_main_forum);
 
         tvName = itemView.findViewById(R.id.recycler_tv_name_child_main_forum);
         tvDate = itemView.findViewById(R.id.recycler_tv_date_child_main_forum);
@@ -49,6 +54,8 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         tvName.setOnClickListener(this);
         imgProfile.setOnClickListener(this);
         tvShare.setOnClickListener(this);
+        tvLike.setOnClickListener(this);
+        imgPopup.setOnClickListener(this);
     }
 
     public void setData(Forum.Post data, String profileID) {
@@ -106,6 +113,28 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
                 break;
             case R.id.recycler_tv_share_child_main_forum:
                 onPostClick.onResharePost(post.getStatusShare().equalsIgnoreCase("true"), post.getPostID());
+                break;
+            case R.id.recycler_tv_like_child_main_forum:
+                onPostClick.onPostLike(post.getPostID());
+                break;
+            case R.id.recycler_img_btn_more_repost_news_main_forum:
+                PopupMenu popup = new PopupMenu(v.getContext(), imgPopup);
+
+                popup.getMenuInflater()
+                        .inflate(R.menu.menu_repost, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu_delete:
+                                onPostClick.onDeletePost(post.getPostID());
+                                break;
+                        }
+                        return true;
+                    }
+                });
+
+                popup.show(); //showing popup menu
                 break;
         }
     }

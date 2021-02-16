@@ -14,4 +14,6 @@ public interface IBookmarkCallback {
 
     void onFailed(String msg);
 
+    void onLikeResult(Forum.LikePost likePost);
+
 }

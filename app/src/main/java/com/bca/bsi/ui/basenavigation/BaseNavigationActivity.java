@@ -223,7 +223,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         roboRekomenAdapter.notifyDataSetChanged();
 
         TextView minPembelian = findViewById(R.id.tv_min_pembelian_value);
-        minPembelian.setText(portfolio.getMinPurchase());
+        minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
     }
 
     @Override
