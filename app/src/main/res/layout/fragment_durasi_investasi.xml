@@ -326,13 +326,15 @@
 
             <TextView
                 android:id="@+id/tv_di_hasil"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="@dimen/size_for_20dp"
                 android:text="x tahun y bulan"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/label_durasi_investasi" />
+                app:layout_constraintTop_toBottomOf="@+id/label_durasi_investasi"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

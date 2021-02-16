@@ -321,9 +321,11 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
 
     @Override
     public void kalkulasiOutput(String hasilKalkulasi, String formatModalAwal, String formatInvestBulanan, String formatRoR) {
+        /*
         ETBHIModalAwal.setText(formatModalAwal);
         ETBHIIvestasiBulanan.setText(formatInvestBulanan);
         ETBHIROR.setText(formatRoR);
+        */
 
         /*
         if(hasilKalkulasi.equals("NaN") || hasilKalkulasi.equals("-NaN") ){
