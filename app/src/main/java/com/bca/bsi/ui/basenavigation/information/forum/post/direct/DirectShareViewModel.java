@@ -12,16 +12,11 @@ import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.User;
 import com.bca.bsi.utils.Utils;
-import com.bca.bsi.utils.dummydata.DummyData;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,12 +45,12 @@ public class DirectShareViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public String[] getChosenUserList() {
-        String[] strings = new String[chosenUserList.size()];
+    public List<String> getChosenUserList() {
+        List<String> stringList = new ArrayList<>();
         for (int i = 0; i < chosenUserList.size(); i++) {
-            strings[i] = chosenUserList.get(i).getProfileID();
+            stringList.add(chosenUserList.get(i).getProfileID());
         }
-        return strings;
+        return stringList;
     }
 
     public void loadUser(String token, String username, String profileID) {
@@ -105,12 +100,12 @@ public class DirectShareViewModel extends AndroidViewModel {
 
         List<String> imageEncodedList = new ArrayList<>();
 
-        for (Bitmap bitmap : (List<Bitmap>) hashMap.get("post_attachment")) {
-//            Log.e("asd", Utils.encodeBitmap(bitmap));
-            imageEncodedList.add(Utils.encodeBitmap(bitmap));
-        }
-
-        hashMap.put("post_attachment", imageEncodedList);
+//        for (Bitmap bitmap : (List<Bitmap>) hashMap.get("post_attachment")) {
+////            Log.e("asd", Utils.encodeBitmap(bitmap));
+//            imageEncodedList.add(Utils.encodeBitmap(bitmap));
+//        }
+//
+//        hashMap.put("post_attachment", imageEncodedList);
 
         Log.e("asd", hashMap.toString());
         Call<OutputResponse> call = apiInterface.sendNewPost(token, hashMap);

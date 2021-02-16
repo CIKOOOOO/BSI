@@ -56,6 +56,7 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         tvShare.setOnClickListener(this);
         tvLike.setOnClickListener(this);
         imgPopup.setOnClickListener(this);
+        tvComment.setOnClickListener(this);
     }
 
     public void setData(Forum.Post data, String profileID) {
@@ -96,6 +97,13 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
         Picasso.get()
                 .load(Utils.imageURL(post.getPromoNews().getImage()))
                 .into(imgContentNews);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onPostClick.onDetailPost(post.getPostID());
+            }
+        });
     }
 
     @Override
@@ -135,6 +143,9 @@ public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements Vie
                 });
 
                 popup.show(); //showing popup menu
+                break;
+            case R.id.recycler_tv_comment_child_main_forum:
+                onPostClick.onDetailPost(post.getPostID());
                 break;
         }
     }

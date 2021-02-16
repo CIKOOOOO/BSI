@@ -117,6 +117,7 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 0) {
+            showSnackBar("Membuat post sukses");
             tabLayout.getTabAt(4).select();
         }
     }

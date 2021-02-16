@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     private Forum.Report report;
     private ImageDialog imageDialog;
     private ImageButton imgBtnMore;
+    private TextView tvLike, tvShare;
+    private String reportType, postID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         frameLayout = findViewById(R.id.frame_blur);
         btnReport = findViewById(R.id.bs_btn_update_choose_image);
         tvTitleReport = findViewById(R.id.bs_tv_title_choose_image);
+        tvLike = findViewById(R.id.recycler_tv_like_comment);
+        tvShare = findViewById(R.id.recycler_tv_share_comment);
 
         reportAdapter = new ReportAdapter(this);
 
@@ -167,6 +172,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         imgBack.setOnClickListener(this);
         tvComment.setOnClickListener(this);
         bsReport.addBottomSheetCallback(bottomSheetCallback);
+        btnReport.setOnClickListener(this);
 
 //        tvTransactionTypeShareTrade.setOnClickListener(this);
 //        imgBtnMore.setOnClickListener(this);
@@ -185,7 +191,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 if (this.report == null) {
                     showSnackBar("Mohon pilih jenis laporan");
                 } else {
-                    viewModel.reportPostOrForumWith(this.report, prefConfig.getProfileID(), prefConfig.getTokenUser());
+                    viewModel.reportPostOrForumWith(this.report, postID, prefConfig.getProfileID(), prefConfig.getTokenUser(), reportType);
                 }
                 break;
             case R.id.tv_post_new_comment:
@@ -212,7 +218,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_report:
-                                viewModel.onReport(post);
+                                reportType = "post";
+                                viewModel.onReport(prefConfig.getTokenUser(), post);
                                 break;
                             case R.id.menu_save:
                                 viewModel.savePost(post.getPostID());
@@ -223,7 +230,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                             case R.id.menu_edit:
                                 Intent intent = new Intent(CommentActivity.this, PostActivity.class);
                                 intent.putExtra(PostActivity.POST_TYPE, PostActivity.EDIT_POST);
-                                intent.putExtra(PostActivity.DATA, post.getPostID());
+                                intent.putExtra(PostActivity.DATA, Utils.toJSON(post));
                                 startActivity(intent);
                                 break;
                         }
@@ -247,7 +254,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 }
                 break;
             case R.id.recycler_tv_like_comment:
-                viewModel.likePost(post.getPostID());
+                viewModel.likePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
                 break;
             case R.id.recycler_tv_share_comment:
                 viewModel.sharePost(post.getPostID());
@@ -276,7 +283,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onReportClick(Forum.Comment comment) {
-        viewModel.onReport(comment);
+        this.postID = comment.getCommentID();
+        viewModel.onReport(prefConfig.getTokenUser(), comment);
     }
 
     private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -306,9 +314,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         ConstraintLayout clComment = findViewById(R.id.cl_comment);
         ConstraintLayout clShareTrade = findViewById(R.id.cl_share_trade);
         FrameLayout frameComment = findViewById(R.id.frame_comment);
-        TextView tvLike = findViewById(R.id.recycler_tv_like_comment);
         TextView tvComment = findViewById(R.id.recycler_tv_comment_comment);
-        TextView tvShare = findViewById(R.id.recycler_tv_share_comment);
 
         ConstraintLayout clRepost;
         RoundedImageView rivProfile, rivRepostProfile;
@@ -329,6 +335,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
             tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
             tvShare.setOnClickListener(this);
         }
+
+        Log.e("asd", post.getPostID());
 
         tvLike.setText(post.getLike());
         tvComment.setText(post.getComment());
@@ -563,17 +571,34 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onSuccessReport() {
-
+        this.postID = "";
+        this.reportType = "";
+        this.report = null;
+        bsReport.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        showSnackBar("Report sukses dikirim.");
     }
 
     @Override
     public void onLoadReport(List<Forum.Report> reportList, Forum.Comment comment) {
+        reportType = "comment";
         loadReport(reportList);
     }
 
     @Override
     public void onLoadReport(List<Forum.Report> reportList, Forum.Post post) {
+        this.postID = post.getPostID();
         loadReport(reportList);
+    }
+
+    @Override
+    public void onLikeResult(Forum.LikePost likePost) {
+        this.post.setStatusLike(likePost.getLike());
+        this.post.setLike(String.valueOf(Integer.parseInt(this.post.getLike()) + 1));
+
+        int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
+
+        tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
+        tvLike.setText(this.post.getLike());
     }
 
     @Override

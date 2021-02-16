@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.User;
 import com.bca.bsi.utils.BaseActivity;
+import com.bca.bsi.utils.CustomLoading;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +28,7 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
     private DirectShareViewModel viewModel;
     private DirectShareAdapter directShareAdapter, chosenUserAdapter;
     private RecyclerView recyclerChosenUser;
+    private CustomLoading customLoading;
     private HashMap<String, Object> hashMap;
 
     @Override
@@ -49,6 +49,7 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
 
         directShareAdapter = new DirectShareAdapter(this);
         chosenUserAdapter = new DirectShareAdapter(this);
+        customLoading = new CustomLoading();
 
         viewModel = new ViewModelProvider(this).get(DirectShareViewModel.class);
         viewModel.setCallback(this);
@@ -115,7 +116,12 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
 
     @Override
     public void onSuccessPost() {
-        showSnackBar("Membuat post sukses");
+        if (null != customLoading && null != customLoading.getTag()) {
+            customLoading.dismiss();
+        }
+
+        setResult(10);
+        finish();
     }
 
     @Override
@@ -125,10 +131,11 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
                 onBackPressed();
                 break;
             case R.id.btn_share_direct:
-                if (viewModel.getChosenUserList().length == 0) {
+                if (viewModel.getChosenUserList().size() == 0) {
                     showSnackBar("Mohon pilih user untuk melanjutkan");
                 } else {
-                    this.hashMap.put("visible_to_id", Arrays.toString(viewModel.getChosenUserList()));
+                    customLoading.show(getSupportFragmentManager(), "");
+                    this.hashMap.put("visible_to_id", viewModel.getChosenUserList());
                     viewModel.sendNewPost(prefConfig.getTokenUser(), this.hashMap);
                 }
                 break;

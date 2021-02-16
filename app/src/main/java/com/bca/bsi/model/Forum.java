@@ -13,9 +13,9 @@ public class Forum {
         private String imageProfile;
         @SerializedName("username")
         private String name;
-        @SerializedName("created_date")
+        @SerializedName(value = "created_date", alternate = {"date_time"})
         private String date;
-        @SerializedName(value = "post_category", alternate = {"category_name"})
+        @SerializedName(value = "post_category", alternate = {"category_name", "post_category_name"})
         private String type;
         @SerializedName("post_text")
         private String content;
@@ -42,7 +42,7 @@ public class Forum {
         private List<ImagePost> imagePostList;
         @SerializedName("post_attachment")
         private List<String> imageURLList;
-        @SerializedName("repost_content")
+        @SerializedName(value = "repost_content", alternate = {"reposted_post"})
         private Post post;
         @SerializedName("list_comment")
         private List<Comment> commentList;
@@ -116,7 +116,6 @@ public class Forum {
         public void setStatusSave(String statusSave) {
             this.statusSave = statusSave;
         }
-
 
 
         public void setPostID(String postID) {
@@ -606,7 +605,7 @@ public class Forum {
         }
     }
 
-    public static class SavePost{
+    public static class SavePost {
 
         @SerializedName("profile_id")
         private String profileID;
@@ -633,7 +632,7 @@ public class Forum {
         }
     }
 
-    public static class LikePost{
+    public static class LikePost {
 
         @SerializedName("is_liked")
         private String like;

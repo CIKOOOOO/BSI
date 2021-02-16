@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -60,6 +61,7 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
         imgProfile.setOnClickListener(this);
         tvLike.setOnClickListener(this);
         imgPopup.setOnClickListener(this);
+        tvComment.setOnClickListener(this);
     }
 
     public void setData(Forum.Post data, String profileID) {
@@ -74,7 +76,7 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
         int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;
-        int visibilityPopup = post.getProfileID().equalsIgnoreCase(profileID)? View.VISIBLE: View.GONE;
+        int visibilityPopup = post.getProfileID().equalsIgnoreCase(profileID) ? View.VISIBLE : View.GONE;
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
         tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
@@ -120,6 +122,13 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
             recyclerImage.setAdapter(postImageAdapter);
             postImageAdapter.setImageList(post.getImagePostList());
         }
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onPostClick.onDetailPost(data.getPostID());
+            }
+        });
     }
 
     @Override
@@ -133,7 +142,7 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
                     onPostClick.onOtherProfile(post.getProfileID());
                 break;
             case R.id.recycler_cv_repost_news_main_forum:
-                onPostClick.onDetailPost(post.getPost().getPostID());
+//                onPostClick.onDetailPost(post.getPost().getPostID());
                 break;
             case R.id.recycler_tv_share_child_main_forum:
                 onPostClick.onResharePost(post.getStatusShare().equalsIgnoreCase("true"), post.getPost().getPostID());
@@ -159,6 +168,9 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
                 });
 
                 popup.show(); //showing popup menu
+                break;
+            case R.id.recycler_tv_comment_child_main_forum:
+                onPostClick.onDetailPost(post.getPostID());
                 break;
         }
     }

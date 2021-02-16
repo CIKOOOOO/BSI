@@ -413,7 +413,10 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
         super.onActivityResult(requestCode, resultCode, data);
         try {
             // When an Image is picked
-            if (requestCode == GALLERY_THUMBNAIL && resultCode == RESULT_OK
+            if (resultCode == 10) {
+                setResult(0);
+                finish();
+            } else if (requestCode == GALLERY_THUMBNAIL && resultCode == RESULT_OK
                     && null != data) {
                 // Get the Image from data
                 if (data.getData() != null) {
@@ -449,8 +452,6 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 recyclerImageNews.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
                 postImageAdapter.setBitmapList(imagesEncodedList);
                 postImageAdapter.notifyDataSetChanged();
-            } else {
-                showSnackBar("You haven't picked Image");
             }
         } catch (Exception e) {
             Log.e("asd", e.getMessage());
@@ -583,8 +584,17 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 
             if (this.privacy.getName().equalsIgnoreCase("direct")) {
                 Intent intent = new Intent(this, DirectShareActivity.class);
+
+                List<String> imageEncodedList = new ArrayList<>();
+
+                for (Bitmap bitmap : (List<Bitmap>) createPostMap.get("post_attachment")) {
+                    imageEncodedList.add(Utils.encodeBitmap(bitmap));
+                }
+
+                createPostMap.put("post_attachment", imageEncodedList);
+
                 intent.putExtra(DirectShareActivity.DATA, createPostMap);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
             } else {
                 customLoading.show(getSupportFragmentManager(), "");
 //                Log.e("asd", createPostMap.toString());
@@ -598,4 +608,6 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 //                    viewModel.sendData(imagesEncodedList);
         }
     }
+
+
 }
