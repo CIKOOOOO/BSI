@@ -608,8 +608,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onRepostSuccess() {
         this.post.setStatusShare("true");
-        this.post.setLike(String.valueOf(Integer.parseInt(this.post.getShare()) + 1));
-        tvShare.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_share_yellow, 0, 0, 0);
+        this.post.setShare(String.valueOf(Integer.parseInt(this.post.getShare()) + 1));
+        tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_share_yellow, 0);
         tvShare.setText(this.post.getShare());
         showSnackBar("Share post berhasil");
     }
