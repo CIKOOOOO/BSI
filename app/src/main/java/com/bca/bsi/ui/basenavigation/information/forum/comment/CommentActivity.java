@@ -405,6 +405,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                             Picasso.get()
                                     .load(Utils.imageURL(post1.getPromoNews().getImage()))
                                     .into(imgNewsContent);
+
                             break;
                         case REPOST_GENERAL:
                             RecyclerView recyclerImageRepost = findViewById(R.id.recycler_rv_img_repost_child_main_forum);
@@ -444,6 +445,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                             clRepost.setOnClickListener(this);
                             break;
                     }
+                    imgBtnMore.setOnClickListener(this);
                 }
                 break;
             case STRATEGY:
