@@ -204,6 +204,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 }
                 break;
             case R.id.recycler_img_btn_more_repost_news_main_forum:
+            case R.id.recycler_img_btn_more_repost_main_forum:
             case R.id.recycler_img_btn_more_child_main_forum:
                 PopupMenu popup = new PopupMenu(v.getContext(), imgBtnMore);
 

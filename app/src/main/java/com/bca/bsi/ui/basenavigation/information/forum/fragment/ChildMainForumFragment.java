@@ -243,4 +243,12 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     public void goToTop() {
         recycler_post.smoothScrollToPosition(0);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1) {
+            showSnackBar("Hapus post sukses");
+        }
+    }
 }

@@ -118,8 +118,6 @@ public class MainForumFragment extends BaseFragment implements IMainForumCallbac
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 0) {
             tabLayout.getTabAt(4).select();
-        } else if (resultCode == 1) {
-            showSnackBar("Hapus post sukses");
         }
     }
 }
