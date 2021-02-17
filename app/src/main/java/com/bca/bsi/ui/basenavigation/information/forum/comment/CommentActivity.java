@@ -593,7 +593,9 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onLikeResult(Forum.LikePost likePost) {
         this.post.setStatusLike(likePost.getLike());
-        this.post.setLike(String.valueOf(Integer.parseInt(this.post.getLike()) + 1));
+        int amountLike = post.getStatusLike().equalsIgnoreCase("true")
+                ? Integer.parseInt(this.post.getLike()) + 1 : Integer.parseInt(this.post.getLike()) - 1;
+        this.post.setLike(String.valueOf(amountLike));
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
 
