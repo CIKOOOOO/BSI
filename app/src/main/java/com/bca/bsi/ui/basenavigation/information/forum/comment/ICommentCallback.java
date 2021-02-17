@@ -19,4 +19,6 @@ public interface ICommentCallback {
     void onLikeResult(Forum.LikePost likePost);
 
     void onRepostSuccess();
+
+    void onDeleteSuccess();
 }

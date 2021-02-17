@@ -226,7 +226,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                                 viewModel.savePost(post.getPostID());
                                 break;
                             case R.id.menu_delete:
-                                viewModel.deletePost(post.getPostID());
+                                viewModel.deletePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
                                 break;
                             case R.id.menu_edit:
                                 Intent intent = new Intent(CommentActivity.this, PostActivity.class);
@@ -612,6 +612,12 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_share_yellow, 0);
         tvShare.setText(this.post.getShare());
         showSnackBar("Share post berhasil");
+    }
+
+    @Override
+    public void onDeleteSuccess() {
+        setResult(1);
+        finish();
     }
 
     @Override

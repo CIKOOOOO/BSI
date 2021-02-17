@@ -146,8 +146,29 @@ public class CommentViewModel extends AndroidViewModel {
 
     }
 
-    public void deletePost(String postID) {
+    public void deletePost(String token, String profileID, String postID) {
+        Call<OutputResponse> call = apiInterface.deletePost(token, profileID, postID);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                if (null != response.body() && null != response.body().getErrorSchema()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                        callback.onDeleteSuccess();
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("Hapus post gagal, mohon cek jaringan Anda");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("Hapus post gagal, mohon cek jaringan Anda");
+            }
+        });
     }
 
     public void likePost(String token, String profileID, String postID) {

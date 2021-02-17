@@ -157,7 +157,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     public void onDetailPost(String postID) {
         Intent intent = new Intent(mActivity, CommentActivity.class);
         intent.putExtra(CommentActivity.DATA, postID);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     @Override
