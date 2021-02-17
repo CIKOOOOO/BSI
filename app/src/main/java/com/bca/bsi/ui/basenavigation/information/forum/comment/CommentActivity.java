@@ -75,6 +75,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     private String reportType, postID;
     private ReshareDialog reshareDialog;
     private DeleteDialog deleteDialog;
+    private int postType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,15 +215,23 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
             case R.id.recycler_img_btn_more_child_main_forum:
                 PopupMenu popup = new PopupMenu(v.getContext(), imgBtnMore);
 
-                int layout = prefConfig.getProfileID().equals(this.post.getProfileID()) ? R.menu.menu_self_post : R.menu.menu_other_post;
+                int layout = -1;
+
+                if (postType == REPOST_GENERAL || postType == REPOST_NEWS) {
+                    if (this.post.getProfileID().equalsIgnoreCase(prefConfig.getProfileID())) {
+                        layout = R.menu.menu_repost;
+                    }
+                } else {
+                    layout = prefConfig.getProfileID().equals(this.post.getProfileID()) ? R.menu.menu_self_post : R.menu.menu_other_post;
+                }
 
                 popup.getMenuInflater()
                         .inflate(layout, popup.getMenu());
 
                 if (popup.getMenu().findItem(R.id.menu_save) != null) {
-                    popup.getMenu().findItem(R.id.menu_save).setTitle("Saved");
+                    String save = this.post.getStatusSave().equalsIgnoreCase("true") ? "Save" : "Saved";
+                    popup.getMenu().findItem(R.id.menu_save).setTitle(save);
                 }
-
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
@@ -231,7 +240,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                                 viewModel.onReport(prefConfig.getTokenUser(), post);
                                 break;
                             case R.id.menu_save:
-                                viewModel.savePost(post.getPostID());
+                                viewModel.savePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
                                 break;
                             case R.id.menu_delete:
                                 deleteDialog = new DeleteDialog(postID, CommentActivity.this, "");
@@ -300,7 +309,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onDeleteComment(Forum.Comment comment) {
-        deleteDialog = new DeleteDialog(postID, this, "Komentar Anda akan dihapus dan orang lain tidak bisa melihat komentar Anda.");
+        deleteDialog = new DeleteDialog(comment.getCommentID(), this, "Komentar Anda akan dihapus dan orang lain tidak bisa melihat komentar Anda.");
         deleteDialog.show(getSupportFragmentManager(), "comment-delete");
     }
 
@@ -324,6 +333,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onLoadComment(Forum.Post post, List<Forum.Comment> commentList, int type) {
         this.post = post;
+        this.postType = type;
 
         commentAdapter.setCommentList(commentList);
         commentAdapter.notifyDataSetChanged();
@@ -467,7 +477,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                             clRepost.setOnClickListener(this);
                             break;
                     }
-                    imgBtnMore.setOnClickListener(this);
+                    if (this.post.getProfileID().equalsIgnoreCase(prefConfig.getProfileID())) {
+                        imgBtnMore.setOnClickListener(this);
+                    } else {
+                        imgBtnMore.setVisibility(View.GONE);
+                    }
                 }
                 break;
             case STRATEGY:
@@ -655,11 +669,23 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onDeleteCommentSuccess(String commentID) {
         commentAdapter.removeComment(commentID);
+        showSnackBar("Hapus Komentar berhasil");
     }
 
     @Override
-    public void onSuccessSendComment() {
+    public void onSaveResult(Forum.SavePost savePost) {
+        this.post.setStatusSave(savePost.getSaveStatus());
+        String saveStatus = savePost.getSaveStatus().equalsIgnoreCase("true") ? "Save post berhasil" : "Unsave post berhasil";
+        showSnackBar(saveStatus);
+    }
+
+    @Override
+    public void onSuccessSendComment(Forum.Comment comment) {
         etComment.setText("");
+        comment.setImage(prefConfig.getImageProfile());
+        comment.setName(prefConfig.getUsername());
+        comment.setProfileID(prefConfig.getProfileID());
+        commentAdapter.addComment(comment);
         Utils.hideSoftKeyboard(this);
         showSnackBar("Comment success");
     }
@@ -718,7 +744,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
             if (deleteDialog.getTag().equalsIgnoreCase("post-delete")) {
                 viewModel.deletePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
             } else {
-                viewModel.deleteComment(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
+                viewModel.deleteComment(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
             }
             deleteDialog.dismiss();
         }

@@ -13,7 +13,7 @@ public class PromoNews {
     @SerializedName("news_description")
     private String description;
 
-    @SerializedName("news_image")
+    @SerializedName(value = "news_image", alternate = {"news_image_url"})
     private String image;
 
     @SerializedName("news_content")

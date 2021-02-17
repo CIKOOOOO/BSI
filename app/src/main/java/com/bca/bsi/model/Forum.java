@@ -329,15 +329,18 @@ public class Forum {
         private String postID;
         @SerializedName("post_comment_id")
         private String commentID;
+        @SerializedName("username")
         private String name;
         @SerializedName("date_time")
         private String date;
-        @SerializedName("comment")
+        @SerializedName("komentar")
         private String content;
         @SerializedName("profile_id")
         private String profileID;
-
+        @SerializedName("img_profile")
         private String image;
+        @SerializedName("is_commented")
+        private String statusCommented;
 
         public Comment() {
         }
@@ -347,6 +350,18 @@ public class Forum {
             this.name = name;
             this.date = date;
             this.content = content;
+            this.image = image;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setProfileID(String profileID) {
+            this.profileID = profileID;
+        }
+
+        public void setImage(String image) {
             this.image = image;
         }
 
@@ -376,6 +391,10 @@ public class Forum {
 
         public String getProfileID() {
             return profileID;
+        }
+
+        public String getStatusCommented() {
+            return statusCommented;
         }
     }
 

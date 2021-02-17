@@ -6,12 +6,19 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -143,8 +150,32 @@ public class CommentViewModel extends AndroidViewModel {
 //        callback.onLoadReport(DummyData.getReportList(), post);
     }
 
-    public void savePost(String postID) {
+    public void savePost(String token, String profileID, String postID) {
+        Call<OutputResponse> call = apiInterface.savePost(token, profileID, postID);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", response.code() + "");
+                if (null != response.body() && null != response.body().getErrorSchema()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    Log.e("asd", Utils.toJSON(outputResponse));
+                    if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                        callback.onSaveResult(outputSchema.getSavePost());
+                    } else {
+                        callback.onFailed("Save post gagal, mohon cek jaringan Anda");
+                    }
+                } else {
+                    callback.onFailed("Save post gagal, mohon cek jaringan Anda");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
     }
 
     public void deletePost(String token, String profileID, String postID) {
@@ -192,6 +223,7 @@ public class CommentViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
+                Log.e("asd", "On Failed : " + t.getMessage());
                 callback.onFailed("Hapus comment gagal, mohon cek jaringan Anda");
             }
         });
@@ -256,7 +288,7 @@ public class CommentViewModel extends AndroidViewModel {
 
     public void sendComment(String tokenUser, String profileID, String postID, String content) {
         Map<String, Object> objectMap = new HashMap<>();
-        objectMap.put("comment-text", content);
+        objectMap.put("comment", content);
         Call<OutputResponse> call = apiInterface.sendComment(tokenUser, profileID, postID, objectMap);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
@@ -266,7 +298,8 @@ public class CommentViewModel extends AndroidViewModel {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
-                        callback.onSuccessSendComment();
+                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                        callback.onSuccessSendComment(outputSchema.getComment());
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

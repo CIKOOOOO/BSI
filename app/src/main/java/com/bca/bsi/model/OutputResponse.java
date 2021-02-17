@@ -123,6 +123,9 @@ public class OutputResponse {
         @SerializedName("detail_post")
         private Forum.Post detailPost;
 
+        @SerializedName("comment")
+        private Forum.Comment comment;
+
         public OutputSchema() {
         }
 
@@ -228,6 +231,10 @@ public class OutputResponse {
 
         public Forum.Post getDetailPost() {
             return detailPost;
+        }
+
+        public Forum.Comment getComment() {
+            return comment;
         }
     }
 }

@@ -24,5 +24,7 @@ public interface ICommentCallback {
 
     void onDeleteCommentSuccess(String commentID);
 
-    void onSuccessSendComment();
+    void onSaveResult(Forum.SavePost savePost);
+
+    void onSuccessSendComment(Forum.Comment comment);
 }

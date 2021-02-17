@@ -46,6 +46,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
         void onDeleteComment(Forum.Comment comment);
     }
 
+    public void addComment(Forum.Comment comment){
+        this.commentList.add(comment);
+        notifyDataSetChanged();
+    }
+
     public void removeComment(String commentID) {
         for (int i = 0; i < this.commentList.size(); i++) {
             Forum.Comment comment = this.commentList.get(i);
@@ -76,7 +81,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
                     .load(Utils.imageURL(comment.getImage()))
                     .into(holder.roundedImageView);
             try {
-                String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_6, comment.getDate());
+                String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_6, Constant.DATE_FORMAT_5, comment.getDate());
                 holder.tvDate.setText(date);
             } catch (ParseException e) {
                 e.printStackTrace();
