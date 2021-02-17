@@ -203,6 +203,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                     viewModel.sendComment(prefConfig.getTokenUser(), prefConfig.getProfileID(), content);
                 }
                 break;
+            case R.id.recycler_img_btn_more_repost_news_main_forum:
             case R.id.recycler_img_btn_more_child_main_forum:
                 PopupMenu popup = new PopupMenu(v.getContext(), imgBtnMore);
 
@@ -395,6 +396,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
                     switch (type) {
                         case REPOST_NEWS:
+                            imgBtnMore = findViewById(R.id.recycler_img_btn_more_repost_news_main_forum);
                             clRepost.setVisibility(View.VISIBLE);
 
                             tvContent.setText(post1.getContent());
@@ -406,6 +408,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                             break;
                         case REPOST_GENERAL:
                             RecyclerView recyclerImageRepost = findViewById(R.id.recycler_rv_img_repost_child_main_forum);
+                            imgBtnMore = findViewById(R.id.recycler_img_btn_more_repost_main_forum);
 
                             clRepost.setVisibility(View.VISIBLE);
                             tvContent.setText(post1.getContent());
