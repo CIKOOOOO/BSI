@@ -42,13 +42,14 @@ import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.dialog.ImageDialog;
+import com.bca.bsi.utils.dialog.ReshareDialog;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onReport, ICommentCallback, CommentImageAdapter.onImageClick, ReportAdapter.onReportClick, ImageDialog.onDismissView {
+public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onReport, ICommentCallback, CommentImageAdapter.onImageClick, ReportAdapter.onReportClick, ImageDialog.onDismissView, ReshareDialog.onReshare {
 
     public static final String DATA = "data";
     public static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5;
@@ -70,6 +71,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     private ImageButton imgBtnMore;
     private TextView tvLike, tvShare;
     private String reportType, postID;
+    private ReshareDialog reshareDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,6 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initVar() {
-
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
         TextView tvTitle = findViewById(R.id.tv_title_toolbar_back);
         TextView tvComment = findViewById(R.id.tv_post_new_comment);
@@ -257,7 +258,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 viewModel.likePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
                 break;
             case R.id.recycler_tv_share_comment:
-                viewModel.sharePost(post.getPostID());
+                reshareDialog = new ReshareDialog("Apakah Anda ingin reshare postingan ini?", false, this, postID);
+                reshareDialog.show(getSupportFragmentManager(), "");
                 break;
             case R.id.recycler_img_profile_child_main_forum:
             case R.id.recycler_img_profile_comment:
@@ -604,6 +606,15 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
+    public void onRepostSuccess() {
+        this.post.setStatusShare("true");
+        this.post.setLike(String.valueOf(Integer.parseInt(this.post.getShare()) + 1));
+        tvShare.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_share_yellow, 0, 0, 0);
+        tvShare.setText(this.post.getShare());
+        showSnackBar("Share post berhasil");
+    }
+
+    @Override
     public void onImageClickWith(String URl) {
         imageDialog = new ImageDialog(URl, this);
         imageDialog.show(getSupportFragmentManager(), "");
@@ -636,5 +647,18 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
         reportAdapter.setReportList(reportList);
         reportAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResharePost(String postID) {
+        if (reshareDialog != null && reshareDialog.getTag() != null) {
+            reshareDialog.dismiss();
+        }
+        viewModel.sharePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
+    }
+
+    @Override
+    public void onUndoResharePost(String postID) {
+
     }
 }

@@ -177,8 +177,34 @@ public class CommentViewModel extends AndroidViewModel {
         });
     }
 
-    public void sharePost(String postID) {
+    public void sharePost(String token, String profileID, String postID) {
+        Call<OutputResponse> call = apiInterface.sendRepost(token, profileID, postID);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+//                Log.e("asd",""+response.code());
+                if (null != response.body()) {
+                    OutputResponse outputResponse = response.body();
+                    if (null != outputResponse.getErrorSchema()) {
+                        OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                        if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                            callback.onRepostSuccess();
+                        } else {
+                            callback.onFailed(errorSchema.getErrorMessage());
+                        }
+                    } else {
+                        callback.onFailed("");
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
     }
 
     public void sendComment(String tokenUser, String profileID, String content) {

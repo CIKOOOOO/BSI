@@ -17,4 +17,6 @@ public interface ICommentCallback {
     void onLoadReport(List<Forum.Report> reportList, Forum.Post post);
 
     void onLikeResult(Forum.LikePost likePost);
+
+    void onRepostSuccess();
 }
