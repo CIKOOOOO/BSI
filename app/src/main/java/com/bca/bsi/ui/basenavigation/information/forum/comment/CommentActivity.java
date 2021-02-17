@@ -192,7 +192,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 if (this.report == null) {
                     showSnackBar("Mohon pilih jenis laporan");
                 } else {
-                    viewModel.reportPostOrForumWith(this.report, postID, prefConfig.getProfileID(), prefConfig.getTokenUser(), reportType);
+                    viewModel.reportPostOrForumWith(this.report, postID, prefConfig.getTokenUser(), prefConfig.getProfileID(), reportType);
                 }
                 break;
             case R.id.tv_post_new_comment:
@@ -200,7 +200,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 if (content.isEmpty()) {
                     showSnackBar("Mohon isi komentar");
                 } else {
-                    viewModel.sendComment(prefConfig.getTokenUser(), prefConfig.getProfileID(), content);
+                    viewModel.sendComment(prefConfig.getTokenUser(), prefConfig.getProfileID(), this.post.getPostID(), content);
                 }
                 break;
             case R.id.recycler_img_btn_more_repost_news_main_forum:
@@ -624,6 +624,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     public void onDeleteSuccess() {
         setResult(1);
         finish();
+    }
+
+    @Override
+    public void onSuccessSendComment() {
+        showSnackBar("Comment success");
     }
 
     @Override

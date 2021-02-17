@@ -21,4 +21,6 @@ public interface ICommentCallback {
     void onRepostSuccess();
 
     void onDeleteSuccess();
+
+    void onSuccessSendComment();
 }

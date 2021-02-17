@@ -13,7 +13,8 @@ import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -228,20 +229,45 @@ public class CommentViewModel extends AndroidViewModel {
         });
     }
 
-    public void sendComment(String tokenUser, String profileID, String content) {
+    public void sendComment(String tokenUser, String profileID, String postID, String content) {
+        Map<String, Object> objectMap = new HashMap<>();
+        objectMap.put("comment-text", content);
+        Call<OutputResponse> call = apiInterface.sendComment(tokenUser, profileID, postID, objectMap);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", response.code() + " - "+Utils.toJSON(response.body()));
+                if (null != response.body() && null != response.body().getErrorSchema()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                        callback.onSuccessSendComment();
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
     }
 
     public void reportPostOrForumWith(Forum.Report report, String postID, String token, String profileID, String type) {
         Call<OutputResponse> call = apiInterface.sendReportPost(token, profileID, report.getReportID(), postID, type);
+        Log.e("asd", report.getReportID() + " ");
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                try {
-                    Log.e("asd", response.raw().request().url().toString() + " - " + " - " + response.errorBody().string() + Utils.toJSON(response.body()));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Log.e("asd", response.raw().request().url().toString() + " - " + " - " + response.errorBody().string() + Utils.toJSON(response.body()));
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 if (null != response.body() && null != response.body().getErrorSchema()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
