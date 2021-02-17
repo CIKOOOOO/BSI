@@ -20,9 +20,11 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
 
     private onDelete onDelete;
     private String postID;
+    private String title;
 
-    public DeleteDialog(String postID, onDelete onDelete) {
+    public DeleteDialog(String postID, onDelete onDelete, String title) {
         this.postID = postID;
+        this.title = title;
         this.onDelete = onDelete;
     }
 
@@ -60,7 +62,10 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView tvYes = view.findViewById(R.id.tv_yes_delete_post);
+        TextView tvBody = view.findViewById(R.id.tv_body_dialog_delete_post);
 
+        if (null != this.title && !this.title.isEmpty())
+            tvBody.setText(this.title);
         tvYes.setOnClickListener(this);
     }
 

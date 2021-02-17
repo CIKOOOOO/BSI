@@ -3,7 +3,6 @@ package com.bca.bsi.api;
 
 import com.bca.bsi.model.OutputResponse;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -181,6 +180,11 @@ public interface ApiInterface {
     @DELETE("forum/post/{postID}")
     Call<OutputResponse> deletePost(@Header("token-user") String tokenUser
             , @Header("profile-id") String profileID, @Path("postID") String postID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @DELETE("forum/post/comment/{commentID}")
+    Call<OutputResponse> deleteComment(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("commentID") String postID);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("forum/post/{postID}")

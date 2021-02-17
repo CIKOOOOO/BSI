@@ -46,6 +46,17 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
         void onDeleteComment(Forum.Comment comment);
     }
 
+    public void removeComment(String commentID) {
+        for (int i = 0; i < this.commentList.size(); i++) {
+            Forum.Comment comment = this.commentList.get(i);
+            if (comment.getCommentID().equalsIgnoreCase(commentID)) {
+                this.commentList.remove(i);
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

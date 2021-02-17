@@ -22,5 +22,7 @@ public interface ICommentCallback {
 
     void onDeleteSuccess();
 
+    void onDeleteCommentSuccess(String commentID);
+
     void onSuccessSendComment();
 }

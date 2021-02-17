@@ -172,6 +172,31 @@ public class CommentViewModel extends AndroidViewModel {
         });
     }
 
+    public void deleteComment(String token, String profileID, String commentID) {
+        Call<OutputResponse> call = apiInterface.deleteComment(token, profileID, commentID);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                if (null != response.body() && null != response.body().getErrorSchema()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
+                        callback.onDeleteCommentSuccess(commentID);
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("Hapus comment gagal, mohon cek jaringan Anda");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("Hapus comment gagal, mohon cek jaringan Anda");
+            }
+        });
+    }
+
     public void likePost(String token, String profileID, String postID) {
         Call<OutputResponse> call = apiInterface.likePost(token, profileID, postID);
         call.enqueue(new Callback<OutputResponse>() {
@@ -236,7 +261,7 @@ public class CommentViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("asd", response.code() + " - "+Utils.toJSON(response.body()));
+                Log.e("asd", response.code() + " - " + Utils.toJSON(response.body()));
                 if (null != response.body() && null != response.body().getErrorSchema()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();

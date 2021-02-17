@@ -117,7 +117,7 @@ public class PostingFragment extends BaseFragment implements OnPostClick, IPosti
 
     @Override
     public void onDeletePost(String postID) {
-        deleteDialog = new DeleteDialog(postID, this);
+        deleteDialog = new DeleteDialog(postID, this, "");
         deleteDialog.show(getChildFragmentManager(), "");
     }
 

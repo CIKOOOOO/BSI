@@ -204,7 +204,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onDeletePost(String postID) {
-        deleteDialog = new DeleteDialog(postID, this);
+        deleteDialog = new DeleteDialog(postID, this,"");
         deleteDialog.show(getChildFragmentManager(), "");
     }
 

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +41,7 @@ import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
+import com.bca.bsi.utils.dialog.DeleteDialog;
 import com.bca.bsi.utils.dialog.ImageDialog;
 import com.bca.bsi.utils.dialog.ReshareDialog;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -51,7 +51,7 @@ import com.squareup.picasso.Picasso;
 import java.text.ParseException;
 import java.util.List;
 
-public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onReport, ICommentCallback, CommentImageAdapter.onImageClick, ReportAdapter.onReportClick, ImageDialog.onDismissView, ReshareDialog.onReshare {
+public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onReport, ICommentCallback, CommentImageAdapter.onImageClick, ReportAdapter.onReportClick, ImageDialog.onDismissView, ReshareDialog.onReshare, DeleteDialog.onDelete {
 
     public static final String DATA = "data";
     public static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5;
@@ -74,6 +74,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     private TextView tvLike, tvShare;
     private String reportType, postID;
     private ReshareDialog reshareDialog;
+    private DeleteDialog deleteDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -233,7 +234,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                                 viewModel.savePost(post.getPostID());
                                 break;
                             case R.id.menu_delete:
-                                viewModel.deletePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
+                                deleteDialog = new DeleteDialog(postID, CommentActivity.this, "");
+                                deleteDialog.show(getSupportFragmentManager(), "post-delete");
                                 break;
                             case R.id.menu_edit:
                                 Intent intent = new Intent(CommentActivity.this, PostActivity.class);
@@ -298,7 +300,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onDeleteComment(Forum.Comment comment) {
-
+        deleteDialog = new DeleteDialog(postID, this, "Komentar Anda akan dihapus dan orang lain tidak bisa melihat komentar Anda.");
+        deleteDialog.show(getSupportFragmentManager(), "comment-delete");
     }
 
     private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -650,6 +653,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
+    public void onDeleteCommentSuccess(String commentID) {
+        commentAdapter.removeComment(commentID);
+    }
+
+    @Override
     public void onSuccessSendComment() {
         etComment.setText("");
         Utils.hideSoftKeyboard(this);
@@ -702,5 +710,17 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onUndoResharePost(String postID) {
 
+    }
+
+    @Override
+    public void onSendDeletePost(String postID) {
+        if (null != deleteDialog && null != deleteDialog.getTag()) {
+            if (deleteDialog.getTag().equalsIgnoreCase("post-delete")) {
+                viewModel.deletePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
+            } else {
+                viewModel.deleteComment(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
+            }
+            deleteDialog.dismiss();
+        }
     }
 }
