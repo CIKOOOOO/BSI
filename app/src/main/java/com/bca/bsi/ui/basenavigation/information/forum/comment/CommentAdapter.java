@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +28,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
     private List<Forum.Comment> commentList;
     private Context mContext;
     private onReport onReport;
+    private String profileID;
 
-    public CommentAdapter(CommentAdapter.onReport onReport) {
+    public CommentAdapter(CommentAdapter.onReport onReport, String profileID) {
         this.onReport = onReport;
+        this.profileID = profileID;
         commentList = new ArrayList<>();
     }
 
@@ -38,6 +42,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
 
     public interface onReport {
         void onReportClick(Forum.Comment comment);
+
+        void onDeleteComment(Forum.Comment comment);
     }
 
     @NonNull
@@ -58,25 +64,40 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
             Picasso.get()
                     .load(Utils.imageURL(comment.getImage()))
                     .into(holder.roundedImageView);
-            holder.tvDate.setText(comment.getDate());
-        }
-
-        holder.imgBtnMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(mContext, holder.imgBtnMore);
-                popup.getMenuInflater().inflate(R.menu.menu_comment, popup.getMenu());
-
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        onReport.onReportClick(comment);
-                        return true;
-                    }
-                });
-
-                popup.show();
+            try {
+                String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_6, comment.getDate());
+                holder.tvDate.setText(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        });
+
+            holder.imgBtnMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PopupMenu popup = new PopupMenu(mContext, holder.imgBtnMore);
+
+                    int menu = profileID.equalsIgnoreCase(comment.getProfileID()) ? R.menu.menu_repost : R.menu.menu_comment;
+
+                    popup.getMenuInflater().inflate(menu, popup.getMenu());
+
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.menu_delete:
+                                    onReport.onDeleteComment(comment);
+                                    break;
+                                case R.id.menu_report:
+                                    onReport.onReportClick(comment);
+                                    break;
+                            }
+                            return true;
+                        }
+                    });
+
+                    popup.show();
+                }
+            });
+        }
     }
 
     @Override

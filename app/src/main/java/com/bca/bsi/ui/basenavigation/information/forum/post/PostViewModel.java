@@ -168,11 +168,13 @@ public class PostViewModel extends AndroidViewModel {
 
         hashMap.put("post_attachment", imageEncodedList);
 
+        Log.e("asd", hashMap.toString());
+
         Call<OutputResponse> call = apiInterface.editPost(token, profileID, hashMap);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("asd", response.code() + " - "+Utils.toJSON(response.body()));
+                Log.e("asd", response.code() + " - " + Utils.toJSON(response.body()));
 //                try {
 //                    Log.e("asd", response.errorBody().string());
 //                } catch (IOException e) {

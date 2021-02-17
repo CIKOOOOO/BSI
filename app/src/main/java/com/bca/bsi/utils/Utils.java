@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class Utils {
 
@@ -80,6 +81,7 @@ public class Utils {
         Date mParsedDate;
         String mOutputDateString;
         SimpleDateFormat mInputDateFormat = new SimpleDateFormat(inputDateFormat, java.util.Locale.getDefault());
+//        mInputDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         SimpleDateFormat mOutputDateFormat = new SimpleDateFormat(outputDateFormat, java.util.Locale.getDefault());
         mParsedDate = mInputDateFormat.parse(inputDate);
         mOutputDateString = mOutputDateFormat.format(mParsedDate);

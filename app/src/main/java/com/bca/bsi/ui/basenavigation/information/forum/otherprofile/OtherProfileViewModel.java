@@ -41,35 +41,8 @@ public class OtherProfileViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadOtherProfile(String token, String profileID) {
-//        Log.e("asd", profileID);
-
-        AndroidNetworking.get(Constant.BASE_URL + "forum/profile/{profileID}")
-                .addPathParameter("profileID", profileID)
-                .addHeaders("hashcode", "x")
-                .addHeaders("client-id", "OV4B2FXHY1Y7W0WMSUUB")
-                .addHeaders("token-user", token)
-                .addHeaders("profile-id", profileID)
-                .setTag("test")
-                .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Log.e("asd", "Android FAN : " + response.getJSONObject("profile").toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e("asd", "FAN : " + anError.getErrorBody());
-                    }
-                });
-
-        Call<OutputResponse> call = apiInterface.getOtherProfile(token, profileID, profileID);
+    public void loadOtherProfile(String token, String profileID, String selfProfileID) {
+        Call<OutputResponse> call = apiInterface.getOtherProfile(token, selfProfileID, profileID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {

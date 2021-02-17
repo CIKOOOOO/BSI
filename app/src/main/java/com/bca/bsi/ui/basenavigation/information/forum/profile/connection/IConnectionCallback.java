@@ -8,6 +8,9 @@ public interface IConnectionCallback {
 
     void onLoadData(List<Forum.Connection> connectionList);
 
+    void onLoadData(Forum.User user);
+
     void onFailed(String msg);
+
 
 }

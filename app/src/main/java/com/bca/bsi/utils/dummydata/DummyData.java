@@ -57,7 +57,7 @@ public class DummyData {
 
     private static final String[] percentage2 = {"10", "20", "30"};
 
-    private static final String[] filterJenisReksaName = {"Pasar Uang", "Pendapatan Tetap", "Campuran", "Saham", "Terproteksi"};
+    private static final String[] filterJenisReksaName = {"Pasar Uang", "Pendapatan Tetap", "Campuran", "Saham"};
     private static final boolean[] isChoosenFilter = {false, false, false, false, false};
     private static final boolean[] isChoosenFilterDefault = {true, true, true, true, true};
 
@@ -316,7 +316,7 @@ public class DummyData {
 
     public static List<FilterJenisReksa> getFilterJenisReksaListDefault() {
         List<FilterJenisReksa> res = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < filterJenisReksaName.length; i++) {
             FilterJenisReksa filterJenisReksa = new FilterJenisReksa(filterJenisReksaName[i], isChoosenFilterDefault[i]);
             res.add(filterJenisReksa);
         }

@@ -121,7 +121,7 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
             customLoading = new CustomLoading();
             customLoading.show(getSupportFragmentManager(), "");
             String data = intent.getStringExtra(DATA);
-            viewModel.loadOtherProfile(prefConfig.getTokenUser(), data);
+            viewModel.loadOtherProfile(prefConfig.getTokenUser(), data,prefConfig.getProfileID());
         } else {
             onBackPressed();
         }

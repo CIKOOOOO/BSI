@@ -141,7 +141,7 @@ public interface ApiInterface {
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("forum/profile/{profileID}")
     Call<OutputResponse> getOtherProfile(@Header("token-user") String tokenUser
-            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+            , @Header("profile-id") String selfProfileID, @Path("profileID") String profile_id);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("forum/post/category")
@@ -150,7 +150,7 @@ public interface ApiInterface {
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @PUT("forum/profile/{profileID}/follow")
     Call<OutputResponse> editFollowUnFollowProfile(@Header("token-user") String tokenUser
-            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+            , @Header("profile-id") String selfProfileID, @Path("profileID") String otherProfileID);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @POST("forum/post/{postID}/save")

@@ -141,7 +141,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                 @Override
                 public void onFailure(Call<OutputResponse> call, Throwable t) {
                     page -= 1;
-                    Log.e("asd", "On failed " + t.getMessage());
+//                    Log.e("asd", "On failed " + t.getMessage());
                     callback.onFailed("");
                 }
             });

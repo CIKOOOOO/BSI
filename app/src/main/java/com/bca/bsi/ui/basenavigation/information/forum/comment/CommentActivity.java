@@ -41,12 +41,14 @@ import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.dialog.ImageDialog;
 import com.bca.bsi.utils.dialog.ReshareDialog;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.util.List;
 
 public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onReport, ICommentCallback, CommentImageAdapter.onImageClick, ReportAdapter.onReportClick, ImageDialog.onDismissView, ReshareDialog.onReshare {
@@ -87,6 +89,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         RecyclerView recyclerComment = findViewById(R.id.recycler_comment);
         ConstraintLayout clBSReport = findViewById(R.id.cl_choose_image);
         RecyclerView recyclerReport = findViewById(R.id.bs_recycler_choose_image);
+        ImageButton imgSendComment = findViewById(R.id.img_btn_send_comment);
 
         etComment = findViewById(R.id.et_post_new_comment);
         frameLayout = findViewById(R.id.frame_blur);
@@ -97,7 +100,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
         reportAdapter = new ReportAdapter(this);
 
-        commentAdapter = new CommentAdapter(this);
+        commentAdapter = new CommentAdapter(this, prefConfig.getProfileID());
         viewModel = new ViewModelProvider(this).get(CommentViewModel.class);
         viewModel.setCallback(this);
 
@@ -174,6 +177,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         tvComment.setOnClickListener(this);
         bsReport.addBottomSheetCallback(bottomSheetCallback);
         btnReport.setOnClickListener(this);
+        imgSendComment.setOnClickListener(this);
 
 //        tvTransactionTypeShareTrade.setOnClickListener(this);
 //        imgBtnMore.setOnClickListener(this);
@@ -195,6 +199,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                     viewModel.reportPostOrForumWith(this.report, postID, prefConfig.getTokenUser(), prefConfig.getProfileID(), reportType);
                 }
                 break;
+            case R.id.img_btn_send_comment:
             case R.id.tv_post_new_comment:
                 String content = etComment.getText().toString().trim();
                 if (content.isEmpty()) {
@@ -291,6 +296,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         viewModel.onReport(prefConfig.getTokenUser(), comment);
     }
 
+    @Override
+    public void onDeleteComment(Forum.Comment comment) {
+
+    }
+
     private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -340,8 +350,6 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
             tvShare.setOnClickListener(this);
         }
 
-        Log.e("asd", post.getPostID());
-
         tvLike.setText(post.getLike());
         tvComment.setText(post.getComment());
 
@@ -379,7 +387,12 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                         .into(rivProfile);
 
                 tvName.setText(post.getName());
-                tvDatePost.setText(post.getDate());
+                try {
+                    String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, post.getDate());
+                    tvDatePost.setText(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 rivProfile.setOnClickListener(this);
                 tvName.setOnClickListener(this);
@@ -393,7 +406,12 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                             .into(rivRepostProfile);
 
                     tvRepostName.setText(post1.getName());
-                    tvDateRepost.setText(post1.getDate());
+                    try {
+                        String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, post1.getDate());
+                        tvDateRepost.setText(date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
                     switch (type) {
                         case REPOST_NEWS:
@@ -465,7 +483,12 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 clComment.setVisibility(View.VISIBLE);
 
                 tvName.setText(post.getName());
-                tvDatePost.setText(post.getDate());
+                try {
+                    String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, post.getDate());
+                    tvDatePost.setText(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 tvContent.setText(post.getContent());
 
                 Picasso.get()
@@ -628,6 +651,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onSuccessSendComment() {
+        etComment.setText("");
+        Utils.hideSoftKeyboard(this);
         showSnackBar("Comment success");
     }
 

@@ -44,22 +44,22 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
         super.onViewCreated(view, savedInstanceState);
 
 
-        if (prefConfig.isForumAccountBanned().equalsIgnoreCase("true")) {
+        TextView tvTitleToolbar = view.findViewById(R.id.tv_title_toolbar_image);
+        ImageButton imgToolbar = view.findViewById(R.id.img_btn_action_toolbar_image);
+
+        tvStart = view.findViewById(R.id.tv_start_information_fragment);
+        tvMid = view.findViewById(R.id.tv_mid_information_fragment);
+        tvEnd = view.findViewById(R.id.tv_end_information_fragment);
+
+        tvTitleToolbar.setText(view.getContext().getString(R.string.information));
+        imgToolbar.setBackground(view.getContext().getDrawable(R.drawable.ic_people_rounded_white));
+
+        switchButton(1, view.getContext());
+        if (prefConfig.isForumAccountBanned().equalsIgnoreCase("Y")) {
             FrameLayout frameLayout = view.findViewById(R.id.frame_banned_information);
             frameLayout.setVisibility(View.VISIBLE);
+            frameLayout.setOnClickListener(this);
         } else {
-            TextView tvTitleToolbar = view.findViewById(R.id.tv_title_toolbar_image);
-            ImageButton imgToolbar = view.findViewById(R.id.img_btn_action_toolbar_image);
-
-            tvStart = view.findViewById(R.id.tv_start_information_fragment);
-            tvMid = view.findViewById(R.id.tv_mid_information_fragment);
-            tvEnd = view.findViewById(R.id.tv_end_information_fragment);
-
-            tvTitleToolbar.setText(view.getContext().getString(R.string.information));
-            imgToolbar.setBackground(view.getContext().getDrawable(R.drawable.ic_people_rounded_white));
-
-            switchButton(1, view.getContext());
-
             imgToolbar.setOnClickListener(this);
 
             tvStart.setOnClickListener(this);

@@ -4,5 +4,7 @@
 
     <solid android:color="@color/white_palette" />
     <corners android:radius="@dimen/size_for_5dp" />
-    <solid android:color="@color/white_palette"/>
+    <stroke
+        android:width="@dimen/size_for_2dp"
+        android:color="@color/color_base_welma" />
 </shape>

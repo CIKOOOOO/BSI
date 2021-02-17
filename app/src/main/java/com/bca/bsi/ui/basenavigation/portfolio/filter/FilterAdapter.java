@@ -46,7 +46,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Holder>{
 
     @Override
     public int getItemCount() {
-        return JUMLAH_JENIS_REKSADANA;
+        return filterJenisReksaList.size();
     }
 
     static class Holder extends RecyclerView.ViewHolder {

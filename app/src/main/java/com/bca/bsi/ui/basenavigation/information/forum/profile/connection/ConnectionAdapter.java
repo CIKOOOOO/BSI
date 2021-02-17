@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Type;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -24,6 +25,8 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.Ho
 
     private onPeopleClick onPeopleClick;
 
+    private String type, selfProfileID;
+
     public void setConnectionList(List<Forum.Connection> connectionList) {
         this.connectionList = connectionList;
     }
@@ -31,14 +34,45 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.Ho
     public ConnectionAdapter(ConnectionAdapter.onPeopleClick onPeopleClick) {
         this.onPeopleClick = onPeopleClick;
         this.connectionList = new ArrayList<>();
+        type = "";
+        selfProfileID = "";
     }
 
     public interface onPeopleClick {
-        void onFollow();
+        void onFollow(String profileID);
 
-        void onUnfollow();
+        void onDetailPeople(String profileID);
+    }
 
-        void onDetailPeople();
+    public void changeStatus(Forum.User user) {
+        for (int i = 0; i < this.connectionList.size(); i++) {
+            Forum.Connection connection = this.connectionList.get(i);
+            if (null != type) {
+                if (type.equalsIgnoreCase(Type.FOLLOWERS)) {
+                    if (null != connection && connection.getProfileID().equalsIgnoreCase(user.getOtherProfileID())) {
+                        connection.setFollow(user.getFollowStatus());
+                        this.connectionList.set(i, connection);
+                        notifyDataSetChanged();
+                        break;
+                    }
+                } else {
+                    if (null != connection && connection.getFollowProfileID().equalsIgnoreCase(user.getOtherProfileID())) {
+                        connection.setFollow(user.getFollowStatus());
+                        this.connectionList.set(i, connection);
+                        notifyDataSetChanged();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setSelfProfileID(String selfProfileID) {
+        this.selfProfileID = selfProfileID;
     }
 
     public void clearData() {
@@ -58,15 +92,17 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.Ho
         Forum.Connection connection = connectionList.get(position);
         if (null != connection) {
             holder.tvName.setText(connection.getUsername());
-            String type;
+            String types;
+            String profileID = type.equalsIgnoreCase(Type.FOLLOWING) ? connection.getFollowProfileID() : connection.getProfileID();
             int color;
             int background;
+            int visibility = profileID.equalsIgnoreCase(selfProfileID) ? View.GONE : View.VISIBLE;
             if (connection.getFollow().equalsIgnoreCase("true")) {
-                type = "Unfollow";
+                types = "Unfollow";
                 color = R.color.color_base_welma;
                 background = R.drawable.rectangle_rounded_stroke_java_5dp;
             } else {
-                type = "Follow";
+                types = "Follow";
                 color = R.color.white_palette;
                 background = R.drawable.rectangle_rounded_welma_5dp;
             }
@@ -74,9 +110,24 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.Ho
                 Picasso.get()
                         .load(Utils.imageURL(connection.getImgProfile()))
                         .into(holder.roundedImageView);
-            holder.tvType.setText(type);
+            holder.tvType.setVisibility(visibility);
+            holder.tvType.setText(types);
             holder.tvType.setTextColor(holder.itemView.getContext().getResources().getColor(color));
             holder.tvType.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), background));
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String profileID = type.equalsIgnoreCase(Type.FOLLOWING) ? connection.getFollowProfileID() : connection.getProfileID();
+                    onPeopleClick.onDetailPeople(profileID);
+                }
+            });
+            holder.tvType.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String profileID = type.equalsIgnoreCase(Type.FOLLOWING) ? connection.getFollowProfileID() : connection.getProfileID();
+                    onPeopleClick.onFollow(profileID);
+                }
+            });
         }
     }
 

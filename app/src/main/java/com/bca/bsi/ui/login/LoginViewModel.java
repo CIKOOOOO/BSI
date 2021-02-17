@@ -79,7 +79,7 @@ public class LoginViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
-                Log.e("asd", t.getMessage() + "on fail");
+                Log.e("asd", t.getLocalizedMessage() + " on fail");
                 callback.onFailed("");
             }
         });

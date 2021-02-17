@@ -44,7 +44,7 @@ public class CommentViewModel extends AndroidViewModel {
                 if (null != response.body() && null != response.body().getErrorSchema()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
-//                    Log.e("asd", Utils.toJSON(outputResponse));
+                    Log.e("asd", Utils.toJSON(outputResponse));
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         Forum.Post post = outputSchema.getDetailPost();

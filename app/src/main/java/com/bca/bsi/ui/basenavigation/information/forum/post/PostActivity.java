@@ -241,7 +241,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                     case EDIT_POST:
                         titleToolbar = getResources().getString(R.string.edit_post);
                         String data = intent.getStringExtra(DATA);
-                        Forum.Post post = gson.fromJson(data, Forum.Post.class);
+                        this.post = gson.fromJson(data, Forum.Post.class);
                         if (null != post.getPrivacy() && !post.getPrivacy().trim().isEmpty())
                             this.privacy = privacyAdapter.getCategoryDetail(post.getPrivacy());
                         else
@@ -599,8 +599,8 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 customLoading.show(getSupportFragmentManager(), "");
 //                Log.e("asd", createPostMap.toString());
                 Log.e("asd", type);
-                if (type.equalsIgnoreCase(EDIT_POST)) {
-                    viewModel.editPost(prefConfig.getTokenUser(), prefConfig.getProfileID(), createPostMap);
+                if (type.equalsIgnoreCase(EDIT_POST) && null != this.post) {
+                    viewModel.editPost(prefConfig.getTokenUser(), this.post.getPostID(), createPostMap);
                 } else {
                     viewModel.sendNewPost(prefConfig.getTokenUser(), createPostMap);
                 }

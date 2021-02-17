@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_for_10dp"
-                android:text="Return : "
+                android:text="Return (Monthly) : "
                 android:textColor="@color/green_return"
                 android:textSize="@dimen/size_for_20sp"
                 android:textStyle="bold"

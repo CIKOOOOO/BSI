@@ -266,6 +266,14 @@
                 android:textSize="@dimen/size_for_12sp" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_for_0dp"
+            android:background="@color/powder_blue_palette"
+            android:paddingTop="@dimen/size_for_10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nested_scroll_view_comment" />
+
         <EditText
             android:id="@+id/et_post_new_comment"
             android:layout_width="@dimen/size_for_0dp"
@@ -283,8 +291,20 @@
             android:padding="@dimen/size_for_10dp"
             android:textSize="@dimen/size_for_15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_post_new_comment"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/img_btn_send_comment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <ImageButton
+            android:id="@+id/img_btn_send_comment"
+            android:layout_width="@dimen/size_for_0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_send"
+            app:layout_constraintBottom_toBottomOf="@id/et_post_new_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/et_post_new_comment"
+            app:layout_constraintTop_toTopOf="@id/et_post_new_comment"
+            app:layout_constraintWidth_percent="0.1" />
 
         <TextView
             android:id="@+id/tv_post_new_comment"
@@ -302,9 +322,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black_palette"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/et_post_new_comment"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/et_post_new_comment" />
+            android:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout

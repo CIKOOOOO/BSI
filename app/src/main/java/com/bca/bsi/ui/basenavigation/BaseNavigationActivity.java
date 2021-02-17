@@ -125,7 +125,7 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
         if (
 //                monday
 //                        &&
-                prefConfig.getTipsActivated()
+                !prefConfig.getTipsActivated()
 //                && !prefConfig.getTimeTipsOfTheWeek().equals(Utils.getTime(Constant.DATE_FORMAT_2))
         ) { // Day-2 = Monday
             viewModel.getTipsOfTheWeek(prefConfig.getTokenUser());
