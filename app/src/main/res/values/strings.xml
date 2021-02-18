@@ -82,7 +82,7 @@
     <string name="info_sell">Mohon sisakan sedikitnya 100 unit atau jual semua</string>
     <string name="total">Total</string>
     <string name="delete_post">Semua komentar dan likes di postingan ini akan ikut hilang.</string>
-    <string name="delete_confirmation_post">Konfirmasi Hapus Post</string>
+    <string name="delete_confirmation_post">Konfirmasi Hapus</string>
 
 
     <string name="calculator_besar_invest_bulanan_desc">Cari tahu berapa yang harus kamu sisihkan perbulan untuk mencapai target hasil investasimu sesuai durasi yang kamu mau</string>

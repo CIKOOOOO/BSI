@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,6 +104,12 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("asd", "On resume");
+    }
+
+    @Override
     public void onLoadData(List<Forum.Post> postList) {
         this.page++;
         adapter.setForumList(postList);
@@ -157,7 +164,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     public void onDetailPost(String postID) {
         Intent intent = new Intent(mActivity, CommentActivity.class);
         intent.putExtra(CommentActivity.DATA, postID);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     @Override
@@ -204,7 +211,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onDeletePost(String postID) {
-        deleteDialog = new DeleteDialog(postID, this);
+        deleteDialog = new DeleteDialog(postID, this, "");
         deleteDialog.show(getChildFragmentManager(), "");
     }
 
@@ -242,5 +249,13 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     public void goToTop() {
         recycler_post.smoothScrollToPosition(0);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1) {
+            showSnackBar("Hapus post sukses");
+        }
     }
 }

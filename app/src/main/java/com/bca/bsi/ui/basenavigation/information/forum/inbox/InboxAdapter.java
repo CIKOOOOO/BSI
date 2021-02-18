@@ -19,7 +19,7 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.Holder> {
     private List<Forum.Inbox> inboxList;
     private onInboxClick onInboxClick;
 
-    public interface onInboxClick{
+    public interface onInboxClick {
         void onDetailInbox(Forum.Inbox inbox);
     }
 
@@ -45,6 +45,12 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.Holder> {
         holder.tvUsername.setText(inbox.getUsername());
         holder.tvDate.setText(inbox.getDate());
         holder.tvContent.setText(inbox.getContent());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onInboxClick.onDetailInbox(inbox);
+            }
+        });
     }
 
     @Override

@@ -25,9 +25,11 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
 
     private List<ProductRekomen> productRekomenList = new ArrayList<>();
     private onEventMatch onEventMatch;
+
     public PurchasingSmartbotAdapter(PurchasingSmartbotAdapter.onEventMatch onEventMatch) {
         this.onEventMatch = onEventMatch;
     }
+
     public interface onEventMatch {
         void sendValue(String reksaDanaID, String proportion);
     }
@@ -38,6 +40,12 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
     }
 
     public List<ProductRekomen> getProductRekomenList() {
+        List<ProductRekomen> productRekomenList = new ArrayList<>();
+        for (ProductRekomen productRekomen : this.productRekomenList) {
+            if (Double.parseDouble(productRekomen.getPercentage()) > 0) {
+                productRekomenList.add(productRekomen);
+            }
+        }
         return productRekomenList;
     }
 

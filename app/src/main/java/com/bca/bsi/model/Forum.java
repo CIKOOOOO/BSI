@@ -11,11 +11,11 @@ public class Forum {
         private String postID;
         @SerializedName("profile_picture")
         private String imageProfile;
-        @SerializedName("username")
+        @SerializedName(value = "username", alternate = {"profile_name"})
         private String name;
-        @SerializedName("created_date")
+        @SerializedName(value = "created_date", alternate = {"date_time"})
         private String date;
-        @SerializedName(value = "post_category", alternate = {"category_name"})
+        @SerializedName(value = "post_category", alternate = {"category_name", "post_category_name"})
         private String type;
         @SerializedName("post_text")
         private String content;
@@ -42,7 +42,7 @@ public class Forum {
         private List<ImagePost> imagePostList;
         @SerializedName("post_attachment")
         private List<String> imageURLList;
-        @SerializedName("repost_content")
+        @SerializedName(value = "repost_content", alternate = {"reposted_post"})
         private Post post;
         @SerializedName("list_comment")
         private List<Comment> commentList;
@@ -116,7 +116,6 @@ public class Forum {
         public void setStatusSave(String statusSave) {
             this.statusSave = statusSave;
         }
-
 
 
         public void setPostID(String postID) {
@@ -326,11 +325,22 @@ public class Forum {
 
     public static class Comment {
 
+        @SerializedName("post_id")
+        private String postID;
+        @SerializedName("post_comment_id")
         private String commentID;
+        @SerializedName("username")
         private String name;
+        @SerializedName("date_time")
         private String date;
+        @SerializedName("komentar")
         private String content;
+        @SerializedName("profile_id")
+        private String profileID;
+        @SerializedName("img_profile")
         private String image;
+        @SerializedName("is_commented")
+        private String statusCommented;
 
         public Comment() {
         }
@@ -340,6 +350,22 @@ public class Forum {
             this.name = name;
             this.date = date;
             this.content = content;
+            this.image = image;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setProfileID(String profileID) {
+            this.profileID = profileID;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public void setImage(String image) {
             this.image = image;
         }
 
@@ -361,6 +387,18 @@ public class Forum {
 
         public String getImage() {
             return image;
+        }
+
+        public String getPostID() {
+            return postID;
+        }
+
+        public String getProfileID() {
+            return profileID;
+        }
+
+        public String getStatusCommented() {
+            return statusCommented;
         }
     }
 
@@ -508,11 +546,14 @@ public class Forum {
         @SerializedName("username")
         private String username;
 
-        @SerializedName("profile_id")
+        @SerializedName(value = "profile_id", alternate = {"my_profile_id"})
         private String profileID;
 
         @SerializedName(value = "follow_status", alternate = {"is_followed"})
         private String followStatus;
+
+        @SerializedName("follow_profile_id")
+        private String otherProfileID;
 
         public User() {
         }
@@ -547,6 +588,10 @@ public class Forum {
 
         public String getFollowStatus() {
             return followStatus;
+        }
+
+        public String getOtherProfileID() {
+            return otherProfileID;
         }
     }
 
@@ -604,9 +649,13 @@ public class Forum {
         public String getImgProfile() {
             return imgProfile;
         }
+
+        public void setFollow(String follow) {
+            this.follow = follow;
+        }
     }
 
-    public static class SavePost{
+    public static class SavePost {
 
         @SerializedName("profile_id")
         private String profileID;
@@ -633,7 +682,7 @@ public class Forum {
         }
     }
 
-    public static class LikePost{
+    public static class LikePost {
 
         @SerializedName("is_liked")
         private String like;

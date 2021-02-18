@@ -13,5 +13,18 @@ public interface ICommentCallback {
     void onSuccessReport();
 
     void onLoadReport(List<Forum.Report> reportList, Forum.Comment comment);
+
     void onLoadReport(List<Forum.Report> reportList, Forum.Post post);
+
+    void onLikeResult(Forum.LikePost likePost);
+
+    void onRepostSuccess();
+
+    void onDeleteSuccess();
+
+    void onDeleteCommentSuccess(String commentID);
+
+    void onSaveResult(Forum.SavePost savePost);
+
+    void onSuccessSendComment(Forum.Comment comment);
 }

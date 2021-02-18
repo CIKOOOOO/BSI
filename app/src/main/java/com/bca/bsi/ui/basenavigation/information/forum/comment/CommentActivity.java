@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,14 +41,18 @@ import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
+import com.bca.bsi.utils.dialog.DeleteDialog;
 import com.bca.bsi.utils.dialog.ImageDialog;
+import com.bca.bsi.utils.dialog.ReshareDialog;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.util.List;
 
-public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onReport, ICommentCallback, CommentImageAdapter.onImageClick, ReportAdapter.onReportClick, ImageDialog.onDismissView {
+public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onReport, ICommentCallback, CommentImageAdapter.onImageClick, ReportAdapter.onReportClick, ImageDialog.onDismissView, ReshareDialog.onReshare, DeleteDialog.onDelete {
 
     public static final String DATA = "data";
     public static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5;
@@ -67,6 +72,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     private Forum.Report report;
     private ImageDialog imageDialog;
     private ImageButton imgBtnMore;
+    private TextView tvLike, tvShare;
+    private String reportType, postID;
+    private ReshareDialog reshareDialog;
+    private DeleteDialog deleteDialog;
+    private int postType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,22 +86,24 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initVar() {
-
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
         TextView tvTitle = findViewById(R.id.tv_title_toolbar_back);
         TextView tvComment = findViewById(R.id.tv_post_new_comment);
         RecyclerView recyclerComment = findViewById(R.id.recycler_comment);
         ConstraintLayout clBSReport = findViewById(R.id.cl_choose_image);
         RecyclerView recyclerReport = findViewById(R.id.bs_recycler_choose_image);
+        ImageButton imgSendComment = findViewById(R.id.img_btn_send_comment);
 
         etComment = findViewById(R.id.et_post_new_comment);
         frameLayout = findViewById(R.id.frame_blur);
         btnReport = findViewById(R.id.bs_btn_update_choose_image);
         tvTitleReport = findViewById(R.id.bs_tv_title_choose_image);
+        tvLike = findViewById(R.id.recycler_tv_like_comment);
+        tvShare = findViewById(R.id.recycler_tv_share_comment);
 
         reportAdapter = new ReportAdapter(this);
 
-        commentAdapter = new CommentAdapter(this);
+        commentAdapter = new CommentAdapter(this, prefConfig.getProfileID());
         viewModel = new ViewModelProvider(this).get(CommentViewModel.class);
         viewModel.setCallback(this);
 
@@ -167,6 +179,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         imgBack.setOnClickListener(this);
         tvComment.setOnClickListener(this);
         bsReport.addBottomSheetCallback(bottomSheetCallback);
+        btnReport.setOnClickListener(this);
+        imgSendComment.setOnClickListener(this);
 
 //        tvTransactionTypeShareTrade.setOnClickListener(this);
 //        imgBtnMore.setOnClickListener(this);
@@ -185,45 +199,58 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 if (this.report == null) {
                     showSnackBar("Mohon pilih jenis laporan");
                 } else {
-                    viewModel.reportPostOrForumWith(this.report, prefConfig.getProfileID(), prefConfig.getTokenUser());
+                    viewModel.reportPostOrForumWith(this.report, postID, prefConfig.getTokenUser(), prefConfig.getProfileID(), reportType);
                 }
                 break;
+            case R.id.img_btn_send_comment:
             case R.id.tv_post_new_comment:
                 String content = etComment.getText().toString().trim();
                 if (content.isEmpty()) {
                     showSnackBar("Mohon isi komentar");
                 } else {
-                    viewModel.sendComment(prefConfig.getTokenUser(), prefConfig.getProfileID(), content);
+                    viewModel.sendComment(prefConfig.getTokenUser(), prefConfig.getProfileID(), this.post.getPostID(), content);
                 }
                 break;
+            case R.id.recycler_img_btn_more_repost_news_main_forum:
+            case R.id.recycler_img_btn_more_repost_main_forum:
             case R.id.recycler_img_btn_more_child_main_forum:
                 PopupMenu popup = new PopupMenu(v.getContext(), imgBtnMore);
 
-                int layout = prefConfig.getProfileID().equals(this.post.getProfileID()) ? R.menu.menu_self_post : R.menu.menu_other_post;
+                int layout = -1;
+
+                if (postType == REPOST_GENERAL || postType == REPOST_NEWS) {
+                    if (this.post.getProfileID().equalsIgnoreCase(prefConfig.getProfileID())) {
+                        layout = R.menu.menu_repost;
+                    }
+                } else {
+                    layout = prefConfig.getProfileID().equals(this.post.getProfileID()) ? R.menu.menu_self_post : R.menu.menu_other_post;
+                }
 
                 popup.getMenuInflater()
                         .inflate(layout, popup.getMenu());
 
                 if (popup.getMenu().findItem(R.id.menu_save) != null) {
-                    popup.getMenu().findItem(R.id.menu_save).setTitle("Saved");
+                    String save = this.post.getStatusSave().equalsIgnoreCase("true") ? "Saved" : "Save";
+                    popup.getMenu().findItem(R.id.menu_save).setTitle(save);
                 }
-
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_report:
-                                viewModel.onReport(post);
+                                reportType = "post";
+                                viewModel.onReport(prefConfig.getTokenUser(), post);
                                 break;
                             case R.id.menu_save:
-                                viewModel.savePost(post.getPostID());
+                                viewModel.savePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
                                 break;
                             case R.id.menu_delete:
-                                viewModel.deletePost(post.getPostID());
+                                deleteDialog = new DeleteDialog(postID, CommentActivity.this, "");
+                                deleteDialog.show(getSupportFragmentManager(), "post-delete");
                                 break;
                             case R.id.menu_edit:
                                 Intent intent = new Intent(CommentActivity.this, PostActivity.class);
                                 intent.putExtra(PostActivity.POST_TYPE, PostActivity.EDIT_POST);
-                                intent.putExtra(PostActivity.DATA, post.getPostID());
+                                intent.putExtra(PostActivity.DATA, Utils.toJSON(post));
                                 startActivity(intent);
                                 break;
                         }
@@ -247,10 +274,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 }
                 break;
             case R.id.recycler_tv_like_comment:
-                viewModel.likePost(post.getPostID());
+                viewModel.likePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
                 break;
             case R.id.recycler_tv_share_comment:
-                viewModel.sharePost(post.getPostID());
+                reshareDialog = new ReshareDialog("Apakah Anda ingin reshare postingan ini?", false, this, postID);
+                reshareDialog.show(getSupportFragmentManager(), "");
                 break;
             case R.id.recycler_img_profile_child_main_forum:
             case R.id.recycler_img_profile_comment:
@@ -276,7 +304,14 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onReportClick(Forum.Comment comment) {
-        viewModel.onReport(comment);
+        this.postID = comment.getCommentID();
+        viewModel.onReport(prefConfig.getTokenUser(), comment);
+    }
+
+    @Override
+    public void onDeleteComment(Forum.Comment comment) {
+        deleteDialog = new DeleteDialog(comment.getCommentID(), this, "Komentar Anda akan dihapus dan orang lain tidak bisa melihat komentar Anda.");
+        deleteDialog.show(getSupportFragmentManager(), "comment-delete");
     }
 
     private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -299,6 +334,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onLoadComment(Forum.Post post, List<Forum.Comment> commentList, int type) {
         this.post = post;
+        this.postType = type;
 
         commentAdapter.setCommentList(commentList);
         commentAdapter.notifyDataSetChanged();
@@ -306,9 +342,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         ConstraintLayout clComment = findViewById(R.id.cl_comment);
         ConstraintLayout clShareTrade = findViewById(R.id.cl_share_trade);
         FrameLayout frameComment = findViewById(R.id.frame_comment);
-        TextView tvLike = findViewById(R.id.recycler_tv_like_comment);
         TextView tvComment = findViewById(R.id.recycler_tv_comment_comment);
-        TextView tvShare = findViewById(R.id.recycler_tv_share_comment);
 
         ConstraintLayout clRepost;
         RoundedImageView rivProfile, rivRepostProfile;
@@ -367,7 +401,12 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                         .into(rivProfile);
 
                 tvName.setText(post.getName());
-                tvDatePost.setText(post.getDate());
+                try {
+                    String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, post.getDate());
+                    tvDatePost.setText(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 rivProfile.setOnClickListener(this);
                 tvName.setOnClickListener(this);
@@ -381,10 +420,16 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                             .into(rivRepostProfile);
 
                     tvRepostName.setText(post1.getName());
-                    tvDateRepost.setText(post1.getDate());
+                    try {
+                        String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, post1.getDate());
+                        tvDateRepost.setText(date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
                     switch (type) {
                         case REPOST_NEWS:
+                            imgBtnMore = findViewById(R.id.recycler_img_btn_more_repost_news_main_forum);
                             clRepost.setVisibility(View.VISIBLE);
 
                             tvContent.setText(post1.getContent());
@@ -393,9 +438,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                             Picasso.get()
                                     .load(Utils.imageURL(post1.getPromoNews().getImage()))
                                     .into(imgNewsContent);
+
                             break;
                         case REPOST_GENERAL:
                             RecyclerView recyclerImageRepost = findViewById(R.id.recycler_rv_img_repost_child_main_forum);
+                            imgBtnMore = findViewById(R.id.recycler_img_btn_more_repost_main_forum);
 
                             clRepost.setVisibility(View.VISIBLE);
                             tvContent.setText(post1.getContent());
@@ -431,6 +478,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                             clRepost.setOnClickListener(this);
                             break;
                     }
+                    if (this.post.getProfileID().equalsIgnoreCase(prefConfig.getProfileID())) {
+                        imgBtnMore.setOnClickListener(this);
+                    } else {
+                        imgBtnMore.setVisibility(View.GONE);
+                    }
                 }
                 break;
             case STRATEGY:
@@ -449,7 +501,12 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 clComment.setVisibility(View.VISIBLE);
 
                 tvName.setText(post.getName());
-                tvDatePost.setText(post.getDate());
+                try {
+                    String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, post.getDate());
+                    tvDatePost.setText(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 tvContent.setText(post.getContent());
 
                 Picasso.get()
@@ -563,17 +620,82 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onSuccessReport() {
-
+        this.postID = "";
+        this.reportType = "";
+        this.report = null;
+        bsReport.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        showSnackBar("Report sukses dikirim.");
     }
 
     @Override
     public void onLoadReport(List<Forum.Report> reportList, Forum.Comment comment) {
+        reportType = "comment";
         loadReport(reportList);
     }
 
     @Override
     public void onLoadReport(List<Forum.Report> reportList, Forum.Post post) {
+        this.postID = post.getPostID();
         loadReport(reportList);
+    }
+
+    @Override
+    public void onLikeResult(Forum.LikePost likePost) {
+        this.post.setStatusLike(likePost.getLike());
+        int amountLike = post.getStatusLike().equalsIgnoreCase("true")
+                ? Integer.parseInt(this.post.getLike()) + 1 : Integer.parseInt(this.post.getLike()) - 1;
+        this.post.setLike(String.valueOf(amountLike));
+
+        int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
+
+        tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
+        tvLike.setText(this.post.getLike());
+    }
+
+    @Override
+    public void onRepostSuccess() {
+        this.post.setStatusShare("true");
+        this.post.setShare(String.valueOf(Integer.parseInt(this.post.getShare()) + 1));
+        tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_share_yellow, 0);
+        tvShare.setText(this.post.getShare());
+        showSnackBar("Share post berhasil");
+    }
+
+    @Override
+    public void onDeleteSuccess() {
+        setResult(1);
+        finish();
+    }
+
+    @Override
+    public void onDeleteCommentSuccess(String commentID) {
+        commentAdapter.removeComment(commentID);
+        showSnackBar("Hapus Komentar berhasil");
+    }
+
+    @Override
+    public void onSaveResult(Forum.SavePost savePost) {
+        this.post.setStatusSave(savePost.getSaveStatus());
+        String saveStatus = savePost.getSaveStatus().equalsIgnoreCase("true") ? "Save post berhasil" : "Unsave post berhasil";
+        showSnackBar(saveStatus);
+    }
+
+    @Override
+    public void onSuccessSendComment(Forum.Comment comment) {
+        etComment.setText("");
+        comment.setImage(prefConfig.getImageProfile());
+        comment.setName(prefConfig.getUsername());
+        comment.setProfileID(prefConfig.getProfileID());
+        Log.e("asd", Utils.toJSON(comment));
+        try {
+            String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, comment.getDate());
+            comment.setDate(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        commentAdapter.addComment(comment);
+        Utils.hideSoftKeyboard(this);
+        showSnackBar("Comment success");
     }
 
     @Override
@@ -609,5 +731,30 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
         reportAdapter.setReportList(reportList);
         reportAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResharePost(String postID) {
+        if (reshareDialog != null && reshareDialog.getTag() != null) {
+            reshareDialog.dismiss();
+        }
+        viewModel.sharePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
+    }
+
+    @Override
+    public void onUndoResharePost(String postID) {
+
+    }
+
+    @Override
+    public void onSendDeletePost(String postID) {
+        if (null != deleteDialog && null != deleteDialog.getTag()) {
+            if (deleteDialog.getTag().equalsIgnoreCase("post-delete")) {
+                viewModel.deletePost(prefConfig.getTokenUser(), prefConfig.getProfileID(), post.getPostID());
+            } else {
+                viewModel.deleteComment(prefConfig.getTokenUser(), prefConfig.getProfileID(), postID);
+            }
+            deleteDialog.dismiss();
+        }
     }
 }

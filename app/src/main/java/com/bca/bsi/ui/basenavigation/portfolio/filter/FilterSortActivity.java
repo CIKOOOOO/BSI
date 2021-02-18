@@ -13,6 +13,8 @@ import com.bca.bsi.R;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
 
+import java.util.ArrayList;
+
 public class FilterSortActivity extends BaseActivity implements SortAdapter.onWholeClick {
     TextView toolbarTitle, resetButton, tvTerapkan;
     ImageButton closeButton;
@@ -108,7 +110,8 @@ public class FilterSortActivity extends BaseActivity implements SortAdapter.onWh
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("filter_data", chosenPosition);
+                intent.putExtra("sort_data", chosenPosition);
+                intent.putIntegerArrayListExtra("filter_data", (ArrayList<Integer>) filterAdapter.getFilterChosen());
                 setResult(1, intent);
                 finish();
             }

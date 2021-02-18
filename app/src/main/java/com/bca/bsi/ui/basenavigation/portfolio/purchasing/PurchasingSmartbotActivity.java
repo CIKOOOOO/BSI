@@ -190,6 +190,8 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
                     showSnackBar("Mohon isi nominal pembelian");
                 } else if (Double.parseDouble(nominal) < Double.parseDouble(this.portfolio.getMinPurchase())) {
                     showSnackBar("Nominal pembelian harus lebih besar atau sama dengan minimal pembelian");
+                } else if (!adapter.is100()) {
+                    showSnackBar("Pembelian produk harus 100%");
                 } else if (cbAgreement.isChecked()) {
                     Intent intent = new Intent(this, DetailProductTransactionActivity.class);
                     intent.putExtra(DetailProductTransactionActivity.PRODUCT_TYPE, Type.PURCHASING_WITH_SMARTBOT);

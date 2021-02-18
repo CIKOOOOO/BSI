@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
+import com.bca.bsi.ui.basenavigation.information.forum.otherprofile.OtherProfileActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.constant.Type;
 
@@ -45,6 +46,7 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
         tvEnd = findViewById(R.id.tv_end_connection);
 
         connectionAdapter = new ConnectionAdapter(this);
+        connectionAdapter.setSelfProfileID(prefConfig.getProfileID());
 
         viewModel = new ViewModelProvider(this).get(ConnectionViewModel.class);
         viewModel.setCallback(this);
@@ -93,6 +95,7 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
                 tvStart.setBackground(getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 tvEnd.setBackground(getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 viewModel.loadConnection(Type.FOLLOWING, prefConfig.getTokenUser(), prefConfig.getProfileID(), profileID);
+                connectionAdapter.setType(Type.FOLLOWING);
                 break;
             case 2:
                 tvStart.setTextColor(getResources().getColor(R.color.white_palette));
@@ -100,9 +103,10 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
                 tvStart.setBackground(getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
                 tvEnd.setBackground(getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
                 viewModel.loadConnection(Type.FOLLOWERS, prefConfig.getTokenUser(), prefConfig.getProfileID(), profileID);
+                connectionAdapter.setType(Type.FOLLOWERS);
                 break;
         }
-//        connectionAdapter.clearData();
+        connectionAdapter.clearData();
     }
 
     @Override
@@ -113,22 +117,25 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
+    public void onLoadData(Forum.User user) {
+        connectionAdapter.changeStatus(user);
+    }
+
+    @Override
     public void onFailed(String msg) {
         showSnackBar(msg);
     }
 
     @Override
-    public void onFollow() {
-
+    public void onFollow(String profileID) {
+        Log.e("asd", "Self profile : " + prefConfig.getProfileID() + " - Other Profile : " + profileID);
+        viewModel.followUnFollowProfile(prefConfig.getTokenUser(), prefConfig.getProfileID(), profileID);
     }
 
     @Override
-    public void onUnfollow() {
-
-    }
-
-    @Override
-    public void onDetailPeople() {
-
+    public void onDetailPeople(String profileID) {
+        Intent intent = new Intent(this, OtherProfileActivity.class);
+        intent.putExtra(OtherProfileActivity.DATA, profileID);
+        startActivity(intent);
     }
 }

@@ -14,10 +14,13 @@ public class Constant {
 
     public static final String EMPTY = "";
     //    public static final String BASE_URL = "http://192.168.0.8:8000/";
-    public static final String BASE_URL = "http://10.43.2.206:30706/";
+    public static final String BASE_URL = "http://10.43.2.22:1402/";
     public static final String DATE_FORMAT_1 = "dd MMMM yyyy";
     public static final String DATE_FORMAT_2 = "dd/MM/yyyy";
     public static final String DATE_FORMAT_3 = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_FORMAT_4 = "yyyy-MM-dd HH:mm:ss.SSS z";
+    public static final String DATE_FORMAT_6 = "yyyy-MM-dd HH:mm:ss.SSS";
+    public static final String DATE_FORMAT_5 = "dd MMMM yyyy HH:mm";
     public static final String DATE_FORMAT_FROM_DB = "dd-MMM-yy";
 
     public static final String[] PRODUCT_TITLE = {"Reksa Dana", "Obligasi", "Asuransi"};

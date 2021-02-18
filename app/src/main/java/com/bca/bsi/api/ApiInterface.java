@@ -65,11 +65,11 @@ public interface ApiInterface {
 
     @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("portfolio")
-    Call<OutputResponse> getInformationPortfolioData(@Header("token-user") String token, @Header("no-rekening") String nomor_rekening);
+    Call<OutputResponse> getInformationPortfolioData(@Header("user-token") String token, @Header("no-rekening") String nomor_rekening);
 
     @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("transaction")
-    Call<OutputResponse> getHistoryTransaction(@Header("token-user") String token, @Header("no-rekening") String nomor_rekening);
+    Call<OutputResponse> getHistoryTransaction(@Header("user-token") String token, @Header("no-rekening") String nomor_rekening);
 
     @Headers({"client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
     @GET("tips")
@@ -140,7 +140,7 @@ public interface ApiInterface {
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("forum/profile/{profileID}")
     Call<OutputResponse> getOtherProfile(@Header("token-user") String tokenUser
-            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+            , @Header("profile-id") String selfProfileID, @Path("profileID") String profile_id);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("forum/post/category")
@@ -149,7 +149,7 @@ public interface ApiInterface {
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @PUT("forum/profile/{profileID}/follow")
     Call<OutputResponse> editFollowUnFollowProfile(@Header("token-user") String tokenUser
-            , @Header("profile-id") String profileID, @Path("profileID") String profile_id);
+            , @Header("profile-id") String selfProfileID, @Path("profileID") String otherProfileID);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @POST("forum/post/{postID}/save")
@@ -182,7 +182,17 @@ public interface ApiInterface {
             , @Header("profile-id") String profileID, @Path("postID") String postID);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @DELETE("forum/post/comment/{commentID}")
+    Call<OutputResponse> deleteComment(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("commentID") String postID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("forum/post/{postID}")
     Call<OutputResponse> detailPost(@Header("token-user") String tokenUser
             , @Header("profile-id") String profileID, @Path("postID") String postID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @POST("forum/post/{postID}/comment")
+    Call<OutputResponse> sendComment(@Header("token-user") String tokenUser
+            , @Header("profile-id") String profileID, @Path("postID") String postID, @Body Map<String, Object> stringObjectHashMap);
 }

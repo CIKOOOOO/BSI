@@ -15,7 +15,7 @@ import com.bca.bsi.model.FilterJenisReksa;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Holder>{
+public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Holder> {
 
     List<FilterJenisReksa> filterJenisReksaList = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Holder>{
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        final FilterJenisReksa filterJenisReksa = filterJenisReksaList.get(position) ;
+        final FilterJenisReksa filterJenisReksa = filterJenisReksaList.get(position);
         holder.tvJenisReksa.setText(filterJenisReksa.getJenisReksa());
 //        holder.cbChoosen.setActivated(filterJenisReksa.isChoosen());
         holder.cbChoosen.setChecked(filterJenisReksa.isChoosen());
@@ -46,7 +46,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Holder>{
 
     @Override
     public int getItemCount() {
-        return JUMLAH_JENIS_REKSADANA;
+        return filterJenisReksaList.size();
     }
 
     static class Holder extends RecyclerView.ViewHolder {
@@ -58,5 +58,14 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Holder>{
             tvJenisReksa = itemView.findViewById(R.id.tv_filter_jenis_reksa);
             cbChoosen = itemView.findViewById(R.id.cb_filter_jenis_reksa);
         }
+    }
+
+    public List<Integer> getFilterChosen() {
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 0; i < filterJenisReksaList.size(); i++) {
+            if (filterJenisReksaList.get(i).isChoosen())
+                integerList.add(i + 1);
+        }
+        return integerList;
     }
 }

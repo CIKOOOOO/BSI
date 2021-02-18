@@ -6,12 +6,20 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -33,9 +41,8 @@ public class OtherProfileViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
-    public void loadOtherProfile(String token, String profileID) {
-        Log.e("asd", profileID);
-        Call<OutputResponse> call = apiInterface.getOtherProfile(token, profileID, profileID);
+    public void loadOtherProfile(String token, String profileID, String selfProfileID) {
+        Call<OutputResponse> call = apiInterface.getOtherProfile(token, selfProfileID, profileID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
@@ -43,7 +50,7 @@ public class OtherProfileViewModel extends AndroidViewModel {
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
-                    Log.e("asd", Utils.toJSON(outputResponse));
+                    Log.e("asd", "Retrofit 2 : " + Utils.toJSON(outputResponse));
                     if (null == errorSchema) {
                         callback.onFailed("");
                     } else {
