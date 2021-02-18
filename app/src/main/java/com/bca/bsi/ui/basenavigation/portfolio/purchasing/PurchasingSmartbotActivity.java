@@ -40,6 +40,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
     Portfolio portfolio;
     PurchasingSmartbotViewModel viewModel;
     private CheckBox cbAgreement;
+    private TextView tvTotalValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         tvRisk = findViewById(R.id.tv_risk_val);
         cbAgreement = findViewById(R.id.cb_confirmation_purchasing_smartbot);
         tvHitungSekarang = findViewById(R.id.tv_hitungsekarang);
+        tvTotalValue = findViewById(R.id.tv_total_value);
 
         // inisialisasi adapter dan recycler
         adapter = new PurchasingSmartbotAdapter(this);
@@ -102,7 +104,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
             portfolio = gson.fromJson(hasil, Portfolio.class);
             minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
 //            minPembelian.setText(portfolio.getMinPurchase());
-            tvReturn.setText(portfolio.getExpReturn() + "%");
+            tvReturn.setText(portfolio.getExpReturn() + "% p/m");
             tvRisk.setText(portfolio.getRisk());
             adapter.setProductRekomenList(portfolio.getProductRekomenList());
         } else {
@@ -163,7 +165,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         adapter.notifyDataSetChanged();
         minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
 //        minPembelian.setText(portfolio.getMinPurchase());
-        tvReturn.setText(portfolio.getExpReturn() + "%");
+        tvReturn.setText(portfolio.getExpReturn() + "% p/m");
         tvRisk.setText(portfolio.getRisk());
     }
 
@@ -172,7 +174,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         this.portfolio = bundles.get(0);
         minPembelian.setText(Utils.formatUang3(Double.parseDouble(portfolio.getMinPurchase())));
 //        minPembelian.setText(portfolio.getMinPurchase());
-        tvReturn.setText(portfolio.getExpReturn() + "%");
+        tvReturn.setText(portfolio.getExpReturn() + "%  p/m");
         tvRisk.setText(portfolio.getRisk());
     }
 
@@ -211,5 +213,10 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         if (viewModel != null) {
             viewModel.loadBundleCustom(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), reksaDanaID, proportion);
         }
+    }
+
+    @Override
+    public void loadPurchasingValue(int value) {
+        tvTotalValue.setText(String.valueOf(value));
     }
 }

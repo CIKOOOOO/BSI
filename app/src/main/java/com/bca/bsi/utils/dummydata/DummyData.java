@@ -323,6 +323,15 @@ public class DummyData {
         return res;
     }
 
+    public static List<FilterJenisReksa> getFilterJenisReksaListDefaultFalse() {
+        List<FilterJenisReksa> res = new ArrayList<>();
+        for (int i = 0; i < filterJenisReksaName.length; i++) {
+            FilterJenisReksa filterJenisReksa = new FilterJenisReksa(filterJenisReksaName[i], false);
+            res.add(filterJenisReksa);
+        }
+        return res;
+    }
+
     public static List<SortJenisReksa> getSortJenisReksaList() {
         List<SortJenisReksa> res = new ArrayList<>();
         for (int i = 0; i < 4; i++) {

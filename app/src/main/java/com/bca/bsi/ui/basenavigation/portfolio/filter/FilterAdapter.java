@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,13 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Holder> {
         holder.tvJenisReksa.setText(filterJenisReksa.getJenisReksa());
 //        holder.cbChoosen.setActivated(filterJenisReksa.isChoosen());
         holder.cbChoosen.setChecked(filterJenisReksa.isChoosen());
+        holder.cbChoosen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                filterJenisReksa.setChoosen(b);
+                filterJenisReksaList.set(position, filterJenisReksa);
+            }
+        });
     }
 
     @Override

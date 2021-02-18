@@ -3,6 +3,7 @@ package com.bca.bsi.api;
 
 import com.bca.bsi.model.OutputResponse;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -65,11 +66,11 @@ public interface ApiInterface {
 
     @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("portfolio")
-    Call<OutputResponse> getInformationPortfolioData(@Header("user-token") String token, @Header("no-rekening") String nomor_rekening);
+    Call<OutputResponse> getInformationPortfolioData(@Header("token-user") String token, @Header("no-rekening") String nomor_rekening);
 
     @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("transaction")
-    Call<OutputResponse> getHistoryTransaction(@Header("user-token") String token, @Header("no-rekening") String nomor_rekening);
+    Call<OutputResponse> getHistoryTransaction(@Header("token-user") String token, @Header("no-rekening") String nomor_rekening);
 
     @Headers({"client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
     @GET("tips")
@@ -195,4 +196,10 @@ public interface ApiInterface {
     @POST("forum/post/{postID}/comment")
     Call<OutputResponse> sendComment(@Header("token-user") String tokenUser
             , @Header("profile-id") String profileID, @Path("postID") String postID, @Body Map<String, Object> stringObjectHashMap);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("products/robo")
+    Call<OutputResponse> getFilterListProduct(@Header("token-user") String tokenUser
+            , @Header("profile-risiko") String profileRisiko, @Query("category") String category);
+
 }

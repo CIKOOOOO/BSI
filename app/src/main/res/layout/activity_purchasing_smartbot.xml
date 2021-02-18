@@ -26,12 +26,12 @@
                 android:id="@+id/tv_title_detail_produk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_for_20dp"
                 android:layout_marginTop="@dimen/size_for_10dp"
                 android:text="Detail Produk Rekomendasi SmartBot"
                 android:textColor="@color/black_palette"
                 android:textSize="@dimen/size_for_20sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_for_10dp"
-                android:text="Return (Monthly) : "
+                android:text="Return : "
                 android:textColor="@color/green_return"
                 android:textSize="@dimen/size_for_20sp"
                 android:textStyle="bold"

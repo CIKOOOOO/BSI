@@ -203,7 +203,7 @@
     <string name="tentang_robo">
         1. Kalkulasi SmartBot menggunakan data historis yang akan diperbaharui setiap tanggal 1 di awal bulan
         \n
-        \n2. Nilai Return bundle merupakan nilai kinerja gabungan dari produk-produk reksa dana yang ada pada bundle
+        \n2. Nilai Return bundle merupakan estimasi keuntungan per bulan gabungan dari produk-produk reksa dana yang ada pada bundle
         \n
         \n3. Nilai Resiko bundle merupakan gabungan resiko hasil diversifikasi produk-produk dalam bundle
         \n

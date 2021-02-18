@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
+import com.bca.bsi.model.FilterJenisReksa;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FilterSortActivity extends BaseActivity implements SortAdapter.onWholeClick {
     TextView toolbarTitle, resetButton, tvTerapkan;
@@ -22,6 +24,7 @@ public class FilterSortActivity extends BaseActivity implements SortAdapter.onWh
     SortAdapter sortAdapter;
 
     private int chosenPosition;
+    private List<Integer> filterList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +82,21 @@ public class FilterSortActivity extends BaseActivity implements SortAdapter.onWh
     }
 
     private void setFilterAdapter() {
+        Intent intent = getIntent();
+        filterList = intent.getIntegerArrayListExtra("filter_position");
         filterAdapter = new FilterAdapter();
-        filterAdapter.setFilterJenisReksaList(DummyData.getFilterJenisReksaListDefault());
+        if (null != filterList && filterList.size() > 0) {
+//            List<FilterJenisReksa> filterJenisReksaList = DummyData.getFilterJenisReksaListDefaultFalse();
+//            for (int i = 0; i < filterList.size(); i++) {
+//                if (filterList.get(i) - 1 == i) {
+//                    FilterJenisReksa filterJenisReksa = filterJenisReksaList.get(i);
+//                    filterJenisReksa.setChoosen(true);
+//                    filterJenisReksaList.set(i, filterJenisReksa);
+//                }
+//            }
+        } else {
+            filterAdapter.setFilterJenisReksaList(DummyData.getFilterJenisReksaListDefault());
+        }
 
         RecyclerView rec = findViewById(R.id.recycler_filter);
         rec.setLayoutManager(new LinearLayoutManager(this));
@@ -89,10 +105,10 @@ public class FilterSortActivity extends BaseActivity implements SortAdapter.onWh
 
     private void setSortAdapter() {
         Intent intent = getIntent();
-        int sortPosition = intent.getIntExtra("sort_position",0);
+        int sortPosition = intent.getIntExtra("sort_position", 0);
         sortAdapter = new SortAdapter(this);
         sortAdapter.setSortJenisReksas(DummyData.getSortJenisReksaListFalse());
-        sortAdapter.setCheck(sortPosition,DummyData.getSortJenisReksaListFalse().get(sortPosition));
+        sortAdapter.setCheck(sortPosition, DummyData.getSortJenisReksaListFalse().get(sortPosition));
 
         RecyclerView rec = findViewById(R.id.recycler_sort);
         rec.setLayoutManager(new LinearLayoutManager(this));
@@ -104,7 +120,7 @@ public class FilterSortActivity extends BaseActivity implements SortAdapter.onWh
         this.chosenPosition = position;
     }
 
-    private void setTvTerapkan(){
+    private void setTvTerapkan() {
         tvTerapkan = findViewById(R.id.tv_terapkan);
         tvTerapkan.setOnClickListener(new View.OnClickListener() {
             @Override

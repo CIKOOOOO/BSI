@@ -2,7 +2,6 @@ package com.bca.bsi.ui.basenavigation.portfolio.produkmenu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import com.bca.bsi.ui.basenavigation.portfolio.filter.FilterSortActivity;
 import com.bca.bsi.ui.basenavigation.portfolio.purchasing.PurchasingSmartbotActivity;
 import com.bca.bsi.utils.BaseActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProdukChoiceActivity extends BaseActivity implements IProductChoiceCallback {
@@ -25,6 +25,7 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
     TextView tvLanjut, tvToolbarTitle, tvToolbarSubtitle;
     ImageButton backButton, filterButton;
     ProdukChoiceViewModel viewModel;
+    private List<Integer> filterList;
 
     int sortPosition = 0;
 
@@ -75,12 +76,16 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
 
         // Filter button
         filterButton = findViewById(R.id.img_btn_filter_search);
+
+        filterList = new ArrayList<>();
+
         filterButton.setVisibility(View.VISIBLE); // Tampilin button filter
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FilterSortActivity.class);
                 intent.putExtra("sort_position", sortPosition);
+                intent.putIntegerArrayListExtra("filter_position", (ArrayList<Integer>) filterList);
                 startActivityForResult(intent, 0);
             }
         });
@@ -99,10 +104,12 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
             if (resultCode == 1) {
                 if (null != data) {
                     int chosenPosition = data.getIntExtra("sort_data", -1);
-                    List<Integer> integerList = data.getIntegerArrayListExtra("filter_data");
                     if (chosenPosition != -1) {
-                        sortPosition = chosenPosition;
                         // send to view model
+                        filterList = data.getIntegerArrayListExtra("filter_data");
+                        sortPosition = chosenPosition;
+                        filterList = null == filterList ? new ArrayList<>() : filterList;
+                        viewModel.setFiltering(filterList, sortPosition, prefConfig.getTokenUser(), prefConfig.getProfileRisiko());
                     }
                 }
             }

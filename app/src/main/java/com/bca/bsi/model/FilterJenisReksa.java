@@ -9,6 +9,10 @@ public class FilterJenisReksa {
         this.isChoosen = isChoosen;
     }
 
+    public void setChoosen(boolean choosen) {
+        isChoosen = choosen;
+    }
+
     public String getJenisReksa() {
         return jenisReksa;
     }

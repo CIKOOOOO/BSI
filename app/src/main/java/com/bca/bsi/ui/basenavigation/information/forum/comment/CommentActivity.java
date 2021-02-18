@@ -688,11 +688,12 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         comment.setProfileID(prefConfig.getProfileID());
         Log.e("asd", Utils.toJSON(comment));
         try {
-            String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, comment.getDate());
+            String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_7, Constant.DATE_FORMAT_5, comment.getDate());
             comment.setDate(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        comment.setDate(comment.getDate());
         commentAdapter.addComment(comment);
         Utils.hideSoftKeyboard(this);
         showSnackBar("Comment success");

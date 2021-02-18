@@ -2,7 +2,6 @@ package com.bca.bsi.ui.basenavigation.portfolio.purchasing;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +31,8 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
 
     public interface onEventMatch {
         void sendValue(String reksaDanaID, String proportion);
+
+        void loadPurchasingValue(int value);
     }
 
 
@@ -93,6 +94,7 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
                 isiPercentString = String.valueOf(nilaiPercent);
                 holder.etPercent.setText(isiPercentString);
                 productRekomen.setPercentage(isiPercentString);
+                onEventMatch.loadPurchasingValue(getTotalPercentage());
             }
         });
 
@@ -107,6 +109,7 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
                 isiPercentString = String.valueOf(nilaiPercent);
                 holder.etPercent.setText(isiPercentString);
                 productRekomen.setPercentage(isiPercentString);
+                onEventMatch.loadPurchasingValue(getTotalPercentage());
             }
         });
 
@@ -193,13 +196,16 @@ public class PurchasingSmartbotAdapter extends RecyclerView.Adapter<PurchasingSm
     }
 
     public boolean is100() {
+        return 100 == getTotalPercentage();
+    }
+
+    public int getTotalPercentage() {
         int total = 0;
         for (ProductRekomen produk : this.productRekomenList) {
-            Log.e("asdas", produk.getPercentage() + " Total : " + total);
             total += Integer.parseInt(produk.getPercentage());
 
         }
-        return total == 100;
+        return total;
     }
 
 }
