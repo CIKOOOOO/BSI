@@ -41,7 +41,6 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     private BesarInvestasiBulananViewModel viewModel;
     private Button kalkulasi;
     private TextView BIBLabel;
-    private TextView rpLabel;
     private TextView hasilBIB;
     private EditText ETBIBTargetHasilInvestasi;
     private EditText ETBIBModalAwal;
@@ -84,7 +83,6 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         super.onViewCreated(view, savedInstanceState);
 
         BIBLabel = view.findViewById(R.id.label_besar_setoran_investasi_bulanan);
-        rpLabel = view.findViewById(R.id.label_bib_rp);
         hasilBIB = view.findViewById(R.id.tv_bib_hasil);
         ETBIBModalAwal = view.findViewById(R.id.et_bib_modal_awal);
         ETBIBTargetHasilInvestasi = view.findViewById(R.id.et_bib_target_hasil_investasi);
@@ -268,7 +266,6 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
         });
 
         BIBLabel.setVisibility(View.GONE);
-        rpLabel.setVisibility(View.GONE);
         hasilBIB.setVisibility(View.GONE);
     }
 
@@ -309,7 +306,6 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     }
 
                     BIBLabel.setVisibility(View.VISIBLE);
-                    rpLabel.setVisibility(View.VISIBLE);
                     //hasilBIB.setVisibility(View.VISIBLE);
                     cardViewSelectedReksadana.setEnabled(false);
                     chevronArrow.setVisibility(View.INVISIBLE);
@@ -333,8 +329,6 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
                     chevronArrow.setVisibility(View.VISIBLE);
 
                     BIBLabel.setVisibility(View.GONE);
-                    rpLabel.setText(getString(R.string.rp));
-                    rpLabel.setVisibility(View.GONE);
                     hasilBIB.setVisibility(View.GONE);
                     kalkulasi.setText(getString(R.string.calculator_kalkulasi_label));
 
@@ -363,29 +357,40 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     public void kalkulasiOutput(String formatTargetHasilInvest, String formatModalAwal, String formatRoR, String formatHasil) {
 
         if(Integer.parseInt(ETBIBTargetHasilInvestasi.getText().toString()) <= Integer.parseInt(ETBIBModalAwal.getText().toString())){
+            /*
             rpLabel.setText("Target Hasil Investasi tidak lebih besar dari Modal Awal");
             hasilBIB.setVisibility(View.INVISIBLE);
+            */
+            hasilBIB.setVisibility(View.VISIBLE);
+            hasilBIB.setText("Target Hasil Investasi tidak lebih besar dari Modal Awal");
         }else{
+            hasilBIB.setText("Rp "+formatHasil);
             switch (numbOfTabs) {
                 case 3:
-                    hasilBIB.setText(formatHasil);
                     if (spinnerDurasiBulanBIB.getSelectedItemPosition() == 0 && spinnerDurasiTahunBIB.getSelectedItemPosition() == 0) {
+                        /*
                         rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
                         hasilBIB.setVisibility(View.INVISIBLE);
+                        */
+                        hasilBIB.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
+                        hasilBIB.setVisibility(View.VISIBLE);
                     } else {
-                        rpLabel.setText(getString(R.string.rp));
+                        //rpLabel.setText(getString(R.string.rp));
                         hasilBIB.setVisibility(View.VISIBLE);
                     }
                     break;
 
                 case 4:
-                    hasilBIB.setText(formatHasil);
                     if (spinnerDurasiBulanBIB.getSelectedItemPosition() == 0 && spinnerDurasiTahunBIB.getSelectedItemPosition() == 0
                             || Double.parseDouble(ETBIBROR.getText().toString()) <= 0) {
+                        /*
                         rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
                         hasilBIB.setVisibility(View.INVISIBLE);
+                        */
+                        hasilBIB.setVisibility(View.VISIBLE);
+                        hasilBIB.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
                     } else {
-                        rpLabel.setText(getString(R.string.rp));
+                        //rpLabel.setText(getString(R.string.rp));
                         hasilBIB.setVisibility(View.VISIBLE);
                     }
                     break;

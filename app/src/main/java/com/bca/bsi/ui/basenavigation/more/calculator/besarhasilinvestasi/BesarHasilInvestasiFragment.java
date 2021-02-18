@@ -32,7 +32,6 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
     private Spinner spinnerDurasiBulanBHI;
     private Button kalkulasi;
     private TextView BHILabel;
-    private TextView rpLabel;
     private TextView hasilBHI;
     private EditText ETBHIModalAwal;
     private EditText ETBHIIvestasiBulanan;
@@ -74,7 +73,6 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
         spinnerDurasiTahunBHI = view.findViewById(R.id.spinner_durasi_tahun);
         spinnerDurasiBulanBHI = view.findViewById(R.id.spinner_durasi_bulan);
         BHILabel = view.findViewById(R.id.main_tv_hasil);
-        rpLabel = view.findViewById(R.id.tv_hasil_kalkulasi_rp);
         hasilBHI = view.findViewById(R.id.tv_hasil);
         ETBHIIvestasiBulanan = view.findViewById(R.id.et_modal_awal);
         ETBHIModalAwal = view.findViewById(R.id.et_target_hasil_investasi);
@@ -227,7 +225,6 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
         });
 
         BHILabel.setVisibility(View.GONE);
-        rpLabel.setVisibility(View.GONE);
         hasilBHI.setVisibility(View.GONE);
     }
 
@@ -268,7 +265,6 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
                     }
 
                     BHILabel.setVisibility(View.VISIBLE);
-                    rpLabel.setVisibility(View.VISIBLE);
                     //hasilBHI.setVisibility(View.VISIBLE);
 
                     cardViewSelectedReksadana.setEnabled(false);
@@ -291,8 +287,6 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
                     spinnerDurasiTahunBHI.setEnabled(true);
 
                     BHILabel.setVisibility(View.GONE);
-                    rpLabel.setText(getString(R.string.rp));
-                    rpLabel.setVisibility(View.GONE);
                     hasilBHI.setVisibility(View.GONE);
 
                     cardViewSelectedReksadana.setEnabled(true);
@@ -336,15 +330,19 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
             hasilBHI.setText(hasilKalkulasi);
             */
 
-        hasilBHI.setText(hasilKalkulasi);
+        hasilBHI.setText("Rp "+hasilKalkulasi);
 
         switch (numbOfTabs){
             case 3:
                 if(spinnerDurasiBulanBHI.getSelectedItemPosition()==0 && spinnerDurasiTahunBHI.getSelectedItemPosition()==0) {
+                    /*
                     rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
                     hasilBHI.setVisibility(View.INVISIBLE);
+                    */
+                    hasilBHI.setVisibility(View.VISIBLE);
+                    hasilBHI.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
                 }else{
-                    rpLabel.setText(getString(R.string.rp));
+                    //rpLabel.setText(getString(R.string.rp));
                     hasilBHI.setVisibility(View.VISIBLE);
                 }
                 break;
@@ -352,10 +350,14 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
             case 4:
                 if(spinnerDurasiBulanBHI.getSelectedItemPosition()==0 && spinnerDurasiTahunBHI.getSelectedItemPosition()==0
                         || Double.parseDouble(ETBHIROR.getText().toString()) <= 0) {
+                    /*
                     rpLabel.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
                     hasilBHI.setVisibility(View.INVISIBLE);
+                    */
+                    hasilBHI.setVisibility(View.VISIBLE);
+                    hasilBHI.setText(getString(R.string.durasi_tidak_boleh_kosong_dan_ror_tidak_boleh_bernilai_nol));
                 }else{
-                    rpLabel.setText(getString(R.string.rp));
+                    //rpLabel.setText(getString(R.string.rp));
                     hasilBHI.setVisibility(View.VISIBLE);
                 }
                 break;
