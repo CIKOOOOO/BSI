@@ -86,14 +86,16 @@ public class FilterSortActivity extends BaseActivity implements SortAdapter.onWh
         filterList = intent.getIntegerArrayListExtra("filter_position");
         filterAdapter = new FilterAdapter();
         if (null != filterList && filterList.size() > 0) {
-//            List<FilterJenisReksa> filterJenisReksaList = DummyData.getFilterJenisReksaListDefaultFalse();
-//            for (int i = 0; i < filterList.size(); i++) {
-//                if (filterList.get(i) - 1 == i) {
-//                    FilterJenisReksa filterJenisReksa = filterJenisReksaList.get(i);
-//                    filterJenisReksa.setChoosen(true);
-//                    filterJenisReksaList.set(i, filterJenisReksa);
-//                }
-//            }
+            List<FilterJenisReksa> filterJenisReksaList = DummyData.getFilterJenisReksaListDefaultFalse();
+            for (int i = 0; i < filterList.size(); i++) {
+                if (filterList.size() - 1 > i)
+                    break;
+                if (filterList.get(i) - 1 == i) {
+                    FilterJenisReksa filterJenisReksa = filterJenisReksaList.get(i);
+                    filterJenisReksa.setChoosen(true);
+                    filterJenisReksaList.set(i, filterJenisReksa);
+                }
+            }
         } else {
             filterAdapter.setFilterJenisReksaList(DummyData.getFilterJenisReksaListDefault());
         }
