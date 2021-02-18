@@ -124,6 +124,10 @@ public class ConfirmationTransactionActivity extends BaseActivity implements Vie
                     productNameConfirmationAdapter.setPercentageList(percentageList);
                     productNameConfirmationAdapter.notifyDataSetChanged();
 
+                    String paymentType = purchasingList.get(0).getPaymentType().equals(Type.PEMBELIAN_BERKALA) ? "Pembelian Berkala" : "Pembelian Sekali Bayar";
+                    tvPaymentType.setText(paymentType);
+                    tvRekeningSumberDana.setText(prefConfig.getAccountNumber());
+
                     tvTotalPembelian.setText("Rp " + Utils.formatUang3(totalSeluruhPembelian));
                 }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -229,7 +230,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                         .inflate(layout, popup.getMenu());
 
                 if (popup.getMenu().findItem(R.id.menu_save) != null) {
-                    String save = this.post.getStatusSave().equalsIgnoreCase("true") ? "Save" : "Saved";
+                    String save = this.post.getStatusSave().equalsIgnoreCase("true") ? "Saved" : "Save";
                     popup.getMenu().findItem(R.id.menu_save).setTitle(save);
                 }
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -685,6 +686,13 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         comment.setImage(prefConfig.getImageProfile());
         comment.setName(prefConfig.getUsername());
         comment.setProfileID(prefConfig.getProfileID());
+        Log.e("asd", Utils.toJSON(comment));
+        try {
+            String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, comment.getDate());
+            comment.setDate(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         commentAdapter.addComment(comment);
         Utils.hideSoftKeyboard(this);
         showSnackBar("Comment success");

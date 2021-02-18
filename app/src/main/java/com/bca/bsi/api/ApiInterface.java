@@ -65,11 +65,11 @@ public interface ApiInterface {
 
     @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("portfolio")
-    Call<OutputResponse> getInformationPortfolioData(@Header("token-user") String token, @Header("no-rekening") String nomor_rekening);
+    Call<OutputResponse> getInformationPortfolioData(@Header("user-token") String token, @Header("no-rekening") String nomor_rekening);
 
     @Headers({"Content-Type:application/json", "client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode:x"})
     @GET("transaction")
-    Call<OutputResponse> getHistoryTransaction(@Header("token-user") String token, @Header("no-rekening") String nomor_rekening);
+    Call<OutputResponse> getHistoryTransaction(@Header("user-token") String token, @Header("no-rekening") String nomor_rekening);
 
     @Headers({"client-id: OV4B2FXHY1Y7W0WMSUUB", "hashcode: x"})
     @GET("tips")

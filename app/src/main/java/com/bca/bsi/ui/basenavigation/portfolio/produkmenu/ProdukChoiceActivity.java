@@ -41,8 +41,8 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
         tvLanjut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (produkChoiceAdapter.getChoosenAmount() < 2 && produkChoiceAdapter.getChoosenAmount() > 5) {
-                    showSnackBar("Jumlah produk yang dipilih minimal dua dan maksimal 5");
+                if (produkChoiceAdapter.getChoosenAmount() < 2 || produkChoiceAdapter.getChoosenAmount() > 5) {
+                    showSnackBar("Jumlah produk yang dipilih minimal dua dan maksimal lima");
                 } else {
                     Intent intent = new Intent(v.getContext(), PurchasingSmartbotActivity.class);
                     intent.putExtra("data2", produkChoiceAdapter.getReksaIds());
@@ -97,10 +97,13 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0) {
             if (resultCode == 1) {
-                int chosenPosition = data.getIntExtra("filter_data", -1);
-                if (chosenPosition != -1) {
-                    Log.e("asd", "Data retrieve : " + chosenPosition);
-                    sortPosition = chosenPosition;
+                if (null != data) {
+                    int chosenPosition = data.getIntExtra("sort_data", -1);
+                    List<Integer> integerList = data.getIntegerArrayListExtra("filter_data");
+                    if (chosenPosition != -1) {
+                        sortPosition = chosenPosition;
+                        // send to view model
+                    }
                 }
             }
         }

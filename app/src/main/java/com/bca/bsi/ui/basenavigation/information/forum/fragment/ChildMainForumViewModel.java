@@ -208,11 +208,11 @@ public class ChildMainForumViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("asd", response.code() + "");
+//                Log.e("asd", response.code() + "");
                 if (null != response.body() && null != response.body().getErrorSchema()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
-                    Log.e("asd", Utils.toJSON(outputResponse));
+//                    Log.e("asd", Utils.toJSON(outputResponse));
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onSaveResult(outputSchema.getSavePost());
@@ -263,7 +263,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-//                Log.e("asd",""+response.code());
+                Log.e("asd", "" + Utils.toJSON(response.body()));
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     if (null != outputResponse.getErrorSchema()) {
@@ -294,6 +294,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
 //                Log.e("asd",""+response.code());
+                Log.e("asd", "" + Utils.toJSON(response.body()));
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     if (null != outputResponse.getErrorSchema()) {

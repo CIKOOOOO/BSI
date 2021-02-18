@@ -2,7 +2,6 @@ package com.bca.bsi.ui.basenavigation.information.promonews.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -66,10 +65,14 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_share_to_forum_detail_promo_news:
-                Intent intent = new Intent(this, PostActivity.class);
-                intent.putExtra(PostActivity.DATA, Utils.toJSON(this.promoNews));
-                intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_NEWS);
-                startActivity(intent);
+                if (prefConfig.isForumAccountBanned().equalsIgnoreCase("Y")) {
+                    showSnackBar("Akun Anda terbanned, silahkan hubungi HaloBCA");
+                } else {
+                    Intent intent = new Intent(this, PostActivity.class);
+                    intent.putExtra(PostActivity.DATA, Utils.toJSON(this.promoNews));
+                    intent.putExtra(PostActivity.POST_TYPE, PostActivity.SHARE_NEWS);
+                    startActivity(intent);
+                }
                 break;
             case R.id.img_btn_back_toolbar:
                 onBackPressed();

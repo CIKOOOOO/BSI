@@ -165,13 +165,11 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                 } else if (this.rekening.getStatusPembelianPertama().equals("FALSE") && Double.parseDouble(this.detailReksaDana.getMinimumPembelianBerikut()) > Double.parseDouble(nominal)) {
                     showSnackBar("Jumlah nominal pembelian lebih kecil daripada minimum pembelian");
                 } else {
-                    String type = cbPaymentType.isChecked() ? "Pembelian Berkala" : "Pembelian Sekali Bayar";
+                    String type = cbPaymentType.isChecked() ? Type.PEMBELIAN_BERKALA : Type.PEMBELIAN_SEKALI_BAYAR;
                     if (productType.equals(Type.REKSA_DANA)) {
                         String biayaProdukPembelian = detailReksaDana.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + detailReksaDana.getBiayaPembelian() : String.valueOf(Double.parseDouble(detailReksaDana.getBiayaPembelian()));
                         double biayaPembelian = (Double.parseDouble(biayaProdukPembelian) / 100) * Double.parseDouble(nominal);
                         double reksaDanaUnit = Double.parseDouble(nominal) / Double.parseDouble(this.detailReksaDana.getNabPerUnit());
-
-                        Log.e("asd", biayaPembelian + "biaya" + String.format("%.2f", biayaPembelian));
 
                         Transaction.Purchasing purchasing = new Transaction.Purchasing();
                         purchasing.setTransactionType(Type.PURCHASING);
@@ -192,7 +190,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
 
                         for (ProductRekomen productRekomen : this.productRekomenList) {
                             productRekomen.setBiayaPembelian("1");
-                            Log.e("asd", productRekomen.getPercentage() + "");
+//                            Log.e("asd", productRekomen.getPercentage() + "");
                             double nominalProduk = Double.parseDouble(nominal) * Double.parseDouble(productRekomen.getPercentage()) / 100;
                             String biayaProdukPembelian = productRekomen.getBiayaPembelian().substring(0, 1).equals(".") ? "0" + productRekomen.getBiayaPembelian() : String.valueOf(Double.parseDouble(productRekomen.getBiayaPembelian()));
                             double biayaPembelian = (Double.parseDouble(biayaProdukPembelian) / 100) * nominalProduk;

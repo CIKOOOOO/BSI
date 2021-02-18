@@ -361,6 +361,10 @@ public class Forum {
             this.profileID = profileID;
         }
 
+        public void setDate(String date) {
+            this.date = date;
+        }
+
         public void setImage(String image) {
             this.image = image;
         }

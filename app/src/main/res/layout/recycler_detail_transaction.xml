@@ -159,4 +159,10 @@
             android:textStyle="bold"
             tools:text="W20201020120101021" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_for_0.5dp"
+        android:layout_marginTop="@dimen/size_for_20dp"
+        android:background="@color/gray_palette" />
 </LinearLayout>

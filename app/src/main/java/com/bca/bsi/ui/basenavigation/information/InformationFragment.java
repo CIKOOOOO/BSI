@@ -26,6 +26,7 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
 
     private TextView tvStart, tvMid, tvEnd;
     private MainForumFragment mainForumFragment;
+    private FrameLayout frameLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,10 +44,10 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         TextView tvTitleToolbar = view.findViewById(R.id.tv_title_toolbar_image);
         ImageButton imgToolbar = view.findViewById(R.id.img_btn_action_toolbar_image);
 
+        frameLayout = view.findViewById(R.id.frame_banned_information);
         tvStart = view.findViewById(R.id.tv_start_information_fragment);
         tvMid = view.findViewById(R.id.tv_mid_information_fragment);
         tvEnd = view.findViewById(R.id.tv_end_information_fragment);
@@ -55,33 +56,39 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
         imgToolbar.setBackground(view.getContext().getDrawable(R.drawable.ic_people_rounded_white));
 
         switchButton(1, view.getContext());
-        if (prefConfig.isForumAccountBanned().equalsIgnoreCase("Y")) {
-            FrameLayout frameLayout = view.findViewById(R.id.frame_banned_information);
-            frameLayout.setVisibility(View.VISIBLE);
-            frameLayout.setOnClickListener(this);
-        } else {
-            imgToolbar.setOnClickListener(this);
 
-            tvStart.setOnClickListener(this);
-            tvMid.setOnClickListener(this);
-            tvEnd.setOnClickListener(this);
-        }
+        imgToolbar.setOnClickListener(this);
+
+        tvStart.setOnClickListener(this);
+        tvMid.setOnClickListener(this);
+        tvEnd.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_btn_action_toolbar_image:
-                startActivity(new Intent(mActivity, ForumProfileActivity.class));
+                if (prefConfig.isForumAccountBanned().equalsIgnoreCase("Y")) {
+                    showSnackBar("Akun Anda terbanned, silahkan hubungi HaloBCA");
+                } else {
+                    startActivity(new Intent(mActivity, ForumProfileActivity.class));
+                }
                 break;
             case R.id.tv_start_information_fragment:
+                frameLayout.setVisibility(View.GONE);
                 switchButton(1, view.getContext());
                 break;
             case R.id.tv_mid_information_fragment:
+                frameLayout.setVisibility(View.GONE);
                 switchButton(2, view.getContext());
                 break;
             case R.id.tv_end_information_fragment:
-                switchButton(3, view.getContext());
+                if (prefConfig.isForumAccountBanned().equalsIgnoreCase("Y")) {
+                    frameLayout.setVisibility(View.VISIBLE);
+                    frameLayout.setOnClickListener(this);
+                } else {
+                    switchButton(3, view.getContext());
+                }
                 break;
         }
     }

@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.information.forum.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,6 +101,12 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("asd", "On resume");
     }
 
     @Override
@@ -204,7 +211,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 
     @Override
     public void onDeletePost(String postID) {
-        deleteDialog = new DeleteDialog(postID, this,"");
+        deleteDialog = new DeleteDialog(postID, this, "");
         deleteDialog.show(getChildFragmentManager(), "");
     }
 
