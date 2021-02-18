@@ -179,23 +179,15 @@
 
             <TextView
                 android:id="@+id/tv_bror_hasil"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="@dimen/size_for_20dp"
                 android:layout_marginTop="10dp"
                 android:text="Hasil Perhitungan"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/label_bror_pertahun" />
-
-            <TextView
-                android:id="@+id/label_bror_persen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/symbol_persen"
-                app:layout_constraintStart_toEndOf="@+id/tv_bror_hasil"
-                app:layout_constraintTop_toBottomOf="@+id/label_bror_pertahun" />
+                app:layout_constraintTop_toBottomOf="@+id/label_bror_pertahun"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

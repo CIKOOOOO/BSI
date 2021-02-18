@@ -1,5 +1,8 @@
 package com.bca.bsi.ui.basenavigation.more.calculator.popup;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +56,20 @@ public class ProductsCalculatorAdapter extends RecyclerView.Adapter<ProductsCalc
 
         holder.tvJenisReksa.setText(productChoice.getType());
         holder.tvNab.setText(productChoice.getNab());
+
+        try {
+            Double kinerja1Bulan = Double.parseDouble(productChoice.getKinerja());
+            if (kinerja1Bulan < 0) {
+                holder.tvKinerja.setTextColor(Color.parseColor("#ff0000"));
+            }else{
+                holder.tvKinerja.setTextColor(Color.parseColor("#00c300"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         holder.tvKinerja.setText(productChoice.getKinerja());
+
         holder.tvReksaName.setText(productChoice.getName());
 
         String date = null;

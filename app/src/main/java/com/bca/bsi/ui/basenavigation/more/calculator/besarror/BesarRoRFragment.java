@@ -38,7 +38,6 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
     private Spinner spinnerDurasiBulanBROR;
     private Button kalkulasi;
     private TextView BRORLabel;
-    private TextView persenLabel;
     private TextView hasilBROR;
     private TextView pertahunLabel;
     private EditText ETBRORTargetHasilInvestasi;
@@ -64,7 +63,6 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
         spinnerDurasiTahunBROR = view.findViewById(R.id.bror_durasi_tahun);
         spinnerDurasiBulanBROR = view.findViewById(R.id.bror_durasi_bulan);
         BRORLabel = view.findViewById(R.id.label_bror_ror);
-        persenLabel = view.findViewById(R.id.label_bror_persen);
         hasilBROR = view.findViewById(R.id.tv_bror_hasil);
         pertahunLabel = view.findViewById(R.id.label_bror_pertahun);
         ETBRORInvestasiBulanan = view.findViewById(R.id.et_bror_investasi_bulanan);
@@ -155,7 +153,6 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
         });
 
         BRORLabel.setVisibility(View.GONE);
-        persenLabel.setVisibility(View.GONE);
         hasilBROR.setVisibility(View.GONE);
         pertahunLabel.setVisibility(View.GONE);
     }
@@ -207,7 +204,6 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
                     spinnerDurasiTahunBROR.setEnabled(true);
 
                     BRORLabel.setVisibility(View.GONE);
-                    persenLabel.setVisibility(View.GONE);
                     hasilBROR.setVisibility(View.GONE);
                     pertahunLabel.setVisibility(View.GONE);
 
@@ -240,26 +236,19 @@ public class BesarRoRFragment extends BaseFragment implements View.OnClickListen
 
         if(Integer.parseInt(ETBRORTargetHasilInvestasi.getText().toString()) <= modalAwalPlusBulanan){
             hasilBROR.setTextColor(defaultColor);
-            hasilBROR.setText("Target Hasil Investasi tidak lebih besar dari Modal Awal \ndan Investasi Bulanan");
-            persenLabel.setVisibility(View.INVISIBLE);
+            hasilBROR.setText("Target Hasil Investasi tidak lebih besar dari Modal Awal dan Investasi Bulanan");
 
         }else{
             if (hasilKalkulasi.equals(getString(R.string.ror_bernilai_negatif))) {
                 hasilBROR.setTextColor(defaultColor);
-                hasilBROR.setText(getString(R.string.ror_bernilai));
-                persenLabel.setVisibility(View.VISIBLE);
-                persenLabel.setTextColor(Color.RED);
-                persenLabel.setText(getString(R.string.negatif));
+                hasilBROR.setText(getString(R.string.ror_bernilai)+" negatif");
+                hasilBROR.setTextColor(Color.RED);
             }else if(hasilKalkulasi.equals(getString(R.string.ror_bernilai_lebih_dari_50_persen))){
                 hasilBROR.setTextColor(defaultColor);
-                persenLabel.setVisibility(View.INVISIBLE);
                 hasilBROR.setText(hasilKalkulasi);
             }else {
                 hasilBROR.setTextColor(ContextCompat.getColor(getView().getContext(),R.color.deep_cerulean_palette));
-                persenLabel.setTextColor(defaultColor);
-                persenLabel.setText(getString(R.string.symbol_persen)+" "+getString(R.string.estimated));
-                persenLabel.setVisibility(View.VISIBLE);
-                hasilBROR.setText("+"+hasilKalkulasi);
+                hasilBROR.setText("+"+hasilKalkulasi+" "+getString(R.string.symbol_persen)+" "+getString(R.string.estimated));
             }
         }
 
