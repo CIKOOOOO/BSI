@@ -129,7 +129,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                     productNameDetailTransactionAdapter.notifyDataSetChanged();
                     viewModel.loadDetailTransaksi(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), productRekomenList.get(0).getReksaId());
 
-                    etNominalPembelian.setText(nominalPembelian);
+                    etNominalPembelian.setText(Utils.formatUang3(Double.parseDouble(nominalPembelian)));
                     etNominalPembelian.setEnabled(false);
                 } else {
                     onBackPressed();

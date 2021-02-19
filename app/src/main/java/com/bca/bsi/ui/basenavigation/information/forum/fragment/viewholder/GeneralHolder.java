@@ -3,6 +3,7 @@ package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,12 +24,13 @@ import com.squareup.picasso.Picasso;
 
 public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private RoundedImageView roundedImageView;
-    private TextView tvName, tvDate, tvContent, tvType, tvLike, tvComment, tvShare, tvLookMore;
+    private TextView tvName, tvDate, tvContent, tvType, tvLike, tvComment, tvShare, tvLookMore, tvPrivacy;
     private RecyclerView recyclerChild;
     private ImageButton imgBtnMore;
     private OnPostClick onPostClick;
     private Forum.Post post;
     private PostImageAdapter postImageAdapter;
+    private ImageView imgPrivacy;
 
     private String profileID;
 
@@ -47,16 +49,19 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         recyclerChild = itemView.findViewById(R.id.recycler_child_rv_main_forum);
         imgBtnMore = itemView.findViewById(R.id.recycler_img_btn_more_child_main_forum);
         recyclerChild = itemView.findViewById(R.id.recycler_child_rv_main_forum);
+        tvPrivacy = itemView.findViewById(R.id.recycler_tv_privacy);
+        imgPrivacy = itemView.findViewById(R.id.recycler_img_privacy);
 
         postImageAdapter = new PostImageAdapter();
         recyclerChild.addItemDecoration(new SpacesItemDecoration(5));
 
         tvLookMore.setOnClickListener(this);
         tvComment.setOnClickListener(this);
-        itemView.setOnClickListener(this);
         tvLike.setOnClickListener(this);
         imgBtnMore.setOnClickListener(this);
         tvShare.setOnClickListener(this);
+
+        itemView.setOnClickListener(v -> onPostClick.onDetailPost(post.getPostID()));
     }
 
     public void setData(Forum.Post post, String profileID, boolean isTrending) {
@@ -73,10 +78,20 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
                     .load(Utils.imageURL(post.getImageProfile()))
                     .into(roundedImageView);
 
-//        Log.e("asd", post.getImageProfile());
-
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
         int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;
+
+        int drawablePrivacy;
+
+//        if(post.getPrivacy().equalsIgnoreCase("public")){
+//            drawablePrivacy = R.drawable.ic_public;
+//        }else if(post.getPrivacy().equalsIgnoreCase("followers")){
+//            drawablePrivacy = R.drawable.ic_followers;
+//        }else{
+//            drawablePrivacy = R.drawable.ic_direct_message;
+//        }
+//
+//        imgPrivacy.setImageResource(drawablePrivacy);
 
         tvDate.setText(post.getDate());
         if (null != post.getContent())
@@ -85,6 +100,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         tvComment.setText(post.getComment());
         tvShare.setText(post.getShare());
         tvName.setText(post.getName());
+//        tvPrivacy.setText(post.getPrivacy());
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
         tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);

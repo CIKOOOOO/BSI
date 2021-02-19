@@ -19,8 +19,8 @@ import com.bca.bsi.model.User;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.CustomLoading;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DirectShareActivity extends BaseActivity implements IDirectShareCallback, View.OnClickListener, DirectShareAdapter.onUserClick {
 
@@ -29,7 +29,7 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
     private DirectShareAdapter directShareAdapter, chosenUserAdapter;
     private RecyclerView recyclerChosenUser;
     private CustomLoading customLoading;
-    private HashMap<String, Object> hashMap;
+    private Map<String, Object> hashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,9 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(DATA)) {
-            this.hashMap = (HashMap<String, Object>) intent.getSerializableExtra(DATA);
+            this.hashMap = (Map<String, Object>) intent.getSerializableExtra(DATA);
+            if (null != this.hashMap && null != this.hashMap.get("post_id"))
+                viewModel.loadExistingChosenUserList(prefConfig.getTokenUser(), this.hashMap.get("post_id").toString(), prefConfig.getProfileID());
             viewModel.loadUser(prefConfig.getTokenUser(), "", prefConfig.getProfileID());
         } else {
             onBackPressed();
@@ -136,7 +138,11 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
                 } else {
                     customLoading.show(getSupportFragmentManager(), "");
                     this.hashMap.put("visible_to_id", viewModel.getChosenUserList());
-                    viewModel.sendNewPost(prefConfig.getTokenUser(), this.hashMap);
+                    if (null != this.hashMap.get("post_id")) {
+                        viewModel.editPost(prefConfig.getTokenUser(), this.hashMap.get("post_id").toString(), this.hashMap);
+                    } else {
+                        viewModel.sendNewPost(prefConfig.getTokenUser(), this.hashMap);
+                    }
                 }
                 break;
         }

@@ -69,7 +69,7 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
         switch (view.getId()) {
             case R.id.img_btn_action_toolbar_image:
                 if (prefConfig.isForumAccountBanned().equalsIgnoreCase("Y")) {
-                    showSnackBar("Akun Anda terbanned, silahkan hubungi HaloBCA");
+                    showSnackBar("Akun Anda dibekukan, silahkan hubungi HaloBCA");
                 } else {
                     startActivity(new Intent(mActivity, ForumProfileActivity.class));
                 }

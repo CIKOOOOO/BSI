@@ -12,6 +12,7 @@ import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
+import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +54,8 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     isLast = true;
 //                    postList.addAll(DummyData.getPostNewsList());
 //                    postList.addAll(DummyData.getPostShareTradeList());
-////                    postList.addAll(DummyData.getPostStrategyList());
-////                    callback.onLoadData(postList);
+//                    postList.addAll(DummyData.getPostStrategyList());
+//                    callback.onLoadData(postList);
                     break;
                 case Type.STRATEGY:
                     url = "forum/post/strategy";

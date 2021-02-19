@@ -1,9 +1,9 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,9 +21,10 @@ import com.squareup.picasso.Picasso;
 public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private RoundedImageView roundedImageView;
-    private TextView tvName, tvDate, tvContent, tvType, tvLike, tvComment, tvLookMore, tvTitle, tvTransactionType, tvProductName, tvDateShareTrade, tvValueShareTrade, tvShareTradeType;
+    private TextView tvName, tvDate, tvContent, tvType, tvLike, tvComment, tvLookMore, tvTitle, tvTransactionType, tvProductName, tvDateShareTrade, tvValueShareTrade, tvShareTradeType, tvPrivacy;
     private ImageButton imgBtnMore;
     private ConstraintLayout constraintLayout;
+    private ImageView imgPrivacy;
 
     private OnPostClick onPostClick;
     private Forum.Post post;
@@ -49,6 +50,8 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
         tvShareTradeType = itemView.findViewById(R.id.tv_transaction_type_share_trade);
         imgBtnMore = itemView.findViewById(R.id.recycler_img_btn_more_child_main_forum);
         constraintLayout = itemView.findViewById(R.id.cl_share_trade);
+        tvPrivacy = itemView.findViewById(R.id.recycler_tv_privacy);
+        imgPrivacy = itemView.findViewById(R.id.recycler_img_privacy);
 
         roundedImageView.setOnClickListener(this);
         tvName.setOnClickListener(this);
@@ -56,6 +59,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
         tvComment.setOnClickListener(this);
         tvLike.setOnClickListener(this);
         tvLookMore.setOnClickListener(this);
+        constraintLayout.setOnClickListener(this);
     }
 
     public void loadData(Forum.Post post, String profileID, boolean isTrending) {
@@ -85,6 +89,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
         tvLike.setText(post.getLike());
         tvComment.setText(post.getComment());
+        tvPrivacy.setText(post.getPrivacy());
 
         if (shareTrade != null) {
             String value;
@@ -133,6 +138,17 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
         int visibility = tvContent.getText().toString().equals(post.getContent()) ? View.GONE : View.VISIBLE;
         tvLookMore.setVisibility(visibility);
+
+        int drawablePrivacy;
+
+        if(post.getPrivacy().equalsIgnoreCase("public")){
+            drawablePrivacy = R.drawable.ic_public;
+        }else if(post.getPrivacy().equalsIgnoreCase("followers")){
+            drawablePrivacy = R.drawable.ic_followers;
+        }else{
+            drawablePrivacy = R.drawable.ic_direct_message;
+        }
+        imgPrivacy.setImageResource(drawablePrivacy);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,6 +210,10 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
             case R.id.recycler_tv_view_more_child_main_forum:
             case R.id.recycler_tv_comment_child_main_forum:
                 onPostClick.onDetailPost(post.getPostID());
+                break;
+            case R.id.cl_share_trade:
+                Forum.ShareTrade shareTrade = this.post.getShareTrade();
+                onPostClick.onDetailProduct(shareTrade.getReksadanaID());
                 break;
         }
     }

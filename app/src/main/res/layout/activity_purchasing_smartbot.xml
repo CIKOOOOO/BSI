@@ -63,24 +63,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_for_20dp"
-                android:text="%"
-                android:textColor="@color/black_palette"
+                android:text="100%"
+                android:textColor="@color/genoa_palette"
                 android:textSize="19sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@id/recycler_product_main_p"
-                app:layout_constraintTop_toBottomOf="@id/recycler_product_main_p" />
-
-            <TextView
-                android:id="@+id/tv_total_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_for_20dp"
-                android:layout_marginEnd="2dp"
-                android:text="100"
-                android:textColor="@color/black_palette"
-                android:textSize="19sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/tv_percent_total"
                 app:layout_constraintTop_toBottomOf="@id/recycler_product_main_p" />
 
             <!--    RETURN-->

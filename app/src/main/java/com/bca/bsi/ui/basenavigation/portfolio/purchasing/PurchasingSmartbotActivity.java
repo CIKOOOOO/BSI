@@ -62,7 +62,7 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
         tvRisk = findViewById(R.id.tv_risk_val);
         cbAgreement = findViewById(R.id.cb_confirmation_purchasing_smartbot);
         tvHitungSekarang = findViewById(R.id.tv_hitungsekarang);
-        tvTotalValue = findViewById(R.id.tv_total_value);
+        tvTotalValue = findViewById(R.id.tv_percent_total);
 
         // inisialisasi adapter dan recycler
         adapter = new PurchasingSmartbotAdapter(this);
@@ -217,6 +217,8 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
 
     @Override
     public void loadPurchasingValue(int value) {
-        tvTotalValue.setText(String.valueOf(value));
+        int color = value != 100 ? R.color.alizarin_crimson_palette : R.color.genoa_palette;
+        tvTotalValue.setTextColor(getResources().getColor(color));
+        tvTotalValue.setText(value + "%");
     }
 }

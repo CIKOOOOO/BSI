@@ -158,7 +158,7 @@ public class PostViewModel extends AndroidViewModel {
         });
     }
 
-    public void editPost(String token, String profileID, Map<String, Object> hashMap) {
+    public void editPost(String token, String postID, Map<String, Object> hashMap) {
         List<String> imageEncodedList = new ArrayList<>();
 
         for (Bitmap bitmap : (List<Bitmap>) hashMap.get("post_attachment")) {
@@ -170,11 +170,11 @@ public class PostViewModel extends AndroidViewModel {
 
         Log.e("asd", hashMap.toString());
 
-        Call<OutputResponse> call = apiInterface.editPost(token, profileID, hashMap);
+        Call<OutputResponse> call = apiInterface.editPost(token, postID, hashMap);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("asd", response.code() + " - " + Utils.toJSON(response.body()));
+//                Log.e("asd", response.code() + " - " + Utils.toJSON(response.body()));
 //                try {
 //                    Log.e("asd", response.errorBody().string());
 //                } catch (IOException e) {
@@ -203,14 +203,14 @@ public class PostViewModel extends AndroidViewModel {
     public List<Bitmap> convertToBitmap(List<String> imageList) {
         List<Bitmap> bitmapList = new ArrayList<>();
         for (String s : imageList) {
-            Log.e("asd", Utils.imageURL(s));
+//            Log.e("asd", Utils.imageURL(s));
             Picasso.get()
                     .load(Utils.imageURL(s))
                     .into(new Target() {
                         @Override
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                             bitmapList.add(bitmap);
-                            Log.e("asd", bitmap.toString());
+//                            Log.e("asd", bitmap.toString());
                         }
 
                         @Override

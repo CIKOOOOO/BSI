@@ -2,7 +2,6 @@ package com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.bookmar
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ import com.bca.bsi.ui.basenavigation.information.forum.fragment.ChildMainForumAd
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.ui.basenavigation.information.forum.otherprofile.OtherProfileActivity;
 import com.bca.bsi.ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.constant.Type;
 import com.bca.bsi.utils.dialog.ReshareDialog;
@@ -34,6 +34,8 @@ public class BookmarkFragment extends BaseFragment implements OnPostClick, IBook
     private ReshareDialog reshareDialog;
 
     public void loadData(List<Forum.Post> postList) {
+        adapter.setDataExist(false);
+        adapter.notifyDataSetChanged();
         adapter.setForumList(postList);
         adapter.notifyDataSetChanged();
     }
@@ -55,7 +57,7 @@ public class BookmarkFragment extends BaseFragment implements OnPostClick, IBook
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_bookmark_fragment);
 
-        adapter = new ChildMainForumAdapter(Type.PROFILE, prefConfig.getProfileID(), this);
+        adapter = new ChildMainForumAdapter(Type.PROFILE, prefConfig.getProfileID(), this,true);
         viewModel = new ViewModelProvider(this).get(BookmarkViewModel.class);
         viewModel.setCallback(this);
 
@@ -122,6 +124,13 @@ public class BookmarkFragment extends BaseFragment implements OnPostClick, IBook
     }
 
     @Override
+    public void onDetailProduct(String reksadanaID) {
+        Intent intent = new Intent(mActivity, DetailReksaDanaActivity.class);
+        intent.putExtra(DetailReksaDanaActivity.REKSA_DANA_ID, reksadanaID);
+        startActivity(intent);
+    }
+
+    @Override
     public void onSaveResult(Forum.SavePost savePost) {
         adapter.removePost(savePost.getPostID());
         String saveStatus = savePost.getSaveStatus().equalsIgnoreCase("true") ? "Save post berhasil" : "Unsave post berhasil";
@@ -141,6 +150,8 @@ public class BookmarkFragment extends BaseFragment implements OnPostClick, IBook
 
     @Override
     public void onFailed(String msg) {
+        adapter.setDataExist(false);
+        adapter.notifyDataSetChanged();
         showSnackBar(msg);
     }
 

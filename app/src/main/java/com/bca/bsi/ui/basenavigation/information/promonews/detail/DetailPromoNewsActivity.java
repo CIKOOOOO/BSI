@@ -66,7 +66,7 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.tv_share_to_forum_detail_promo_news:
                 if (prefConfig.isForumAccountBanned().equalsIgnoreCase("Y")) {
-                    showSnackBar("Akun Anda terbanned, silahkan hubungi HaloBCA");
+                    showSnackBar("Akun Anda dibekukan, silahkan hubungi HaloBCA");
                 } else {
                     Intent intent = new Intent(this, PostActivity.class);
                     intent.putExtra(PostActivity.DATA, Utils.toJSON(this.promoNews));

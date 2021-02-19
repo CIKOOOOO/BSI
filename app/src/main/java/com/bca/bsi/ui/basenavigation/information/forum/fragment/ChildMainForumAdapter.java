@@ -22,17 +22,23 @@ import java.util.List;
 
 public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
-    private static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5, NO_DATA = 6;
+    private static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5, NO_DATA = 6, LOADING = 7;
 
     private String type, profileID;
+    private boolean isDataExist;
     private List<Forum.Post> forumList;
     private OnPostClick onPostClick;
 
-    public ChildMainForumAdapter(String type, String profileID, OnPostClick onPostClick) {
+    public ChildMainForumAdapter(String type, String profileID, OnPostClick onPostClick, boolean isDataExist) {
         this.profileID = profileID;
         this.onPostClick = onPostClick;
         this.type = type.toLowerCase();
+        this.isDataExist = isDataExist;
         this.forumList = new ArrayList<>();
+    }
+
+    public void setDataExist(boolean dataExist) {
+        isDataExist = dataExist;
     }
 
     public void setForumList(List<Forum.Post> forumList) {
@@ -114,6 +120,9 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
             case ChildMainForumAdapter.NO_DATA:
                 layout = R.layout.recycler_empty_image;
                 break;
+            case ChildMainForumAdapter.LOADING:
+                layout = R.layout.custom_loading;
+                break;
             default:
                 layout = R.layout.recycler_child_main_forum;
         }
@@ -133,6 +142,7 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
                 viewHolder = new RepostGeneralHolder(v, this.onPostClick);
                 break;
             case ChildMainForumAdapter.NO_DATA:
+            case ChildMainForumAdapter.LOADING:
                 viewHolder = new NoDataViewHolder(v, this.onPostClick);
                 break;
             default:
@@ -143,7 +153,7 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder myHolder, int position) {
-        if (getItemViewType(position) != ChildMainForumAdapter.NO_DATA) {
+        if (getItemViewType(position) != ChildMainForumAdapter.NO_DATA && getItemViewType(position) != ChildMainForumAdapter.LOADING) {
             Forum.Post post = forumList.get(position);
             switch (getItemViewType(position)) {
                 case ChildMainForumAdapter.SHARE_TRADE:
@@ -180,6 +190,8 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
         String currentType;
 
+        if (isDataExist)
+            return LOADING;
         if (this.forumList.size() == 0)
             return NO_DATA;
 

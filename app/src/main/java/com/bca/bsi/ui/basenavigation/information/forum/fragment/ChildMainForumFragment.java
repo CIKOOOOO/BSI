@@ -21,6 +21,7 @@ import com.bca.bsi.ui.basenavigation.information.forum.otherprofile.OtherProfile
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.ForumProfileActivity;
 import com.bca.bsi.ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
@@ -82,7 +83,7 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
             type = bundle.getString(PARCEL_DATA);
             if (type != null) {
                 type = type.toLowerCase();
-                adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID(), this);
+                adapter = new ChildMainForumAdapter(type, prefConfig.getProfileID(), this, true);
                 recycler_post.setAdapter(adapter);
                 viewModel.loadForumPost(type, page, prefConfig.getTokenUser(), prefConfig.getProfileID(), prefConfig.getProfileRisiko());
             }
@@ -112,12 +113,15 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     @Override
     public void onLoadData(List<Forum.Post> postList) {
         this.page++;
+        adapter.setDataExist(false);
         adapter.setForumList(postList);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onFailed(String msg) {
+        adapter.setDataExist(false);
+        adapter.notifyDataSetChanged();
         showSnackBar(msg);
     }
 
@@ -220,6 +224,13 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         Intent intent = new Intent(mActivity, PostActivity.class);
         intent.putExtra(PostActivity.DATA, Utils.toJSON(post));
         intent.putExtra(PostActivity.POST_TYPE, PostActivity.EDIT_POST);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDetailProduct(String reksadanaID) {
+        Intent intent = new Intent(mActivity, DetailReksaDanaActivity.class);
+        intent.putExtra(DetailReksaDanaActivity.REKSA_DANA_ID, reksadanaID);
         startActivity(intent);
     }
 

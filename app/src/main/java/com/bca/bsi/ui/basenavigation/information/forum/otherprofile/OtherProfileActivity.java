@@ -29,6 +29,7 @@ import com.bca.bsi.ui.basenavigation.information.forum.inbox.InboxActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.ForumProfileActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.profile.connection.ConnectionActivity;
 import com.bca.bsi.ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.CustomLoading;
 import com.bca.bsi.utils.Utils;
@@ -85,7 +86,7 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
         frameLayout = findViewById(R.id.frame_blur);
         btnReport = findViewById(R.id.bs_btn_update_choose_image);
 
-        adapter = new ChildMainForumAdapter(Type.PROFILE, prefConfig.getProfileID(), this);
+        adapter = new ChildMainForumAdapter(Type.PROFILE, prefConfig.getProfileID(), this, true);
         reportAdapter = new ReportAdapter(this);
 
         viewModel = new ViewModelProvider(this).get(OtherProfileViewModel.class);
@@ -121,7 +122,7 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
             customLoading = new CustomLoading();
             customLoading.show(getSupportFragmentManager(), "");
             String data = intent.getStringExtra(DATA);
-            viewModel.loadOtherProfile(prefConfig.getTokenUser(), data,prefConfig.getProfileID());
+            viewModel.loadOtherProfile(prefConfig.getTokenUser(), data, prefConfig.getProfileID());
         } else {
             onBackPressed();
         }
@@ -190,6 +191,9 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
 
         if (null != user) {
             this.user = user;
+
+            adapter.setDataExist(false);
+            adapter.notifyDataSetChanged();
 
             tvTitle.setText(user.getUsername());
             tvName.setText(user.getUsername());
@@ -293,6 +297,8 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
         if (null != customLoading && null != customLoading.getTag()) {
             customLoading.dismiss();
         }
+        adapter.setDataExist(false);
+        adapter.notifyDataSetChanged();
         showSnackBar(msg);
     }
 
@@ -352,6 +358,13 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onEditPost(Forum.Post post) {
         // Cannot edit other profile
+    }
+
+    @Override
+    public void onDetailProduct(String reksadanaID) {
+        Intent intent = new Intent(this, DetailReksaDanaActivity.class);
+        intent.putExtra(DetailReksaDanaActivity.REKSA_DANA_ID, reksadanaID);
+        startActivity(intent);
     }
 
     @Override

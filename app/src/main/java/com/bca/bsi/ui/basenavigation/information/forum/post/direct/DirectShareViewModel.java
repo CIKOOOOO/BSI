@@ -16,6 +16,7 @@ import com.bca.bsi.utils.Utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,7 +65,7 @@ public class DirectShareViewModel extends AndroidViewModel {
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
-                Log.e("aaaaa", "" + Utils.toJSON(response.body()) + " - " + response.raw().request().url().toString());
+//                Log.e("aaaaa", "" + Utils.toJSON(response.body()) + " - " + response.raw().request().url().toString());
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
@@ -96,9 +97,44 @@ public class DirectShareViewModel extends AndroidViewModel {
 //        callback.onLoadForumUser(DummyData.getForumUser());
     }
 
-    public void sendNewPost(String token, HashMap<String, Object> hashMap) {
+    public void loadExistingChosenUserList(String token, String postID, String profileID){
 
-        List<String> imageEncodedList = new ArrayList<>();
+    }
+
+    public void editPost(String token, String postID, Map<String, Object> hashMap) {
+        Call<OutputResponse> call = apiInterface.editPost(token, postID, hashMap);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+//                Log.e("asd", response.code() + " - " + Utils.toJSON(response.body()));
+//                try {
+//                    Log.e("asd", response.errorBody().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+                if (null != response.body()) {
+                    OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
+                    if (errorSchema.getErrorCode().equals("200")) {
+                        callback.onSuccessPost();
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                Log.e("asd", "Onfailed " + t.getMessage());
+                callback.onFailed("");
+            }
+        });
+    }
+
+    public void sendNewPost(String token, Map<String, Object> hashMap) {
+
+//        List<String> imageEncodedList = new ArrayList<>();
 
 //        for (Bitmap bitmap : (List<Bitmap>) hashMap.get("post_attachment")) {
 ////            Log.e("asd", Utils.encodeBitmap(bitmap));

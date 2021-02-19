@@ -33,6 +33,7 @@ public class DetailSellActivity extends BaseActivity implements View.OnClickList
     private DetailSellViewModel viewModel;
     private Product.DetailReksaDana detailReksaDana;
     private String reksadanaID;
+    private Portfolio.Information information;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class DetailSellActivity extends BaseActivity implements View.OnClickList
         if (intent != null && intent.hasExtra(DATA)) {
             String data = intent.getStringExtra(DATA);
             Gson gson = new Gson();
-            Portfolio.Information information = gson.fromJson(data, Portfolio.Information.class);
+            this.information = gson.fromJson(data, Portfolio.Information.class);
             tvReksadanaName.setText(information.getName());
             tvNab.setText("Rp " + information.getNab() + "\nNAB/Unit");
             tvAccountNumber.setText(prefConfig.getAccountNumber());
@@ -97,6 +98,10 @@ public class DetailSellActivity extends BaseActivity implements View.OnClickList
                     showSnackBar("Mohon isi jumlah unit penjualan");
                 } else if (null == this.detailReksaDana) {
                     viewModel.loadData(prefConfig.getTokenUser(), reksadanaID);
+                } else if (this.information.getUnit() < Double.parseDouble(amount)) {
+                    showSnackBar("Jumlah unit penjualan harus lebih kecil dari unit kepemilikan");
+                } else if (this.information.getUnit() - Double.parseDouble(amount) < 100) {
+                    showSnackBar("Anda harus menyisihkan minimal 100 unit reksa dana");
                 } else {
                     double nominal = Double.parseDouble(amount) * Double.parseDouble(this.detailReksaDana.getNabPerUnit());
                     String type = cbSellAll.isChecked() ? "Penjualan Semua" : "Penjualan Sebagian";

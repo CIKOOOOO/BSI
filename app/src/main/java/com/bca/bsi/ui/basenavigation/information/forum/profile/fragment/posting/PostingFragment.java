@@ -20,6 +20,7 @@ import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.ui.basenavigation.information.forum.otherprofile.OtherProfileActivity;
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.ui.basenavigation.information.promonews.detail.DetailPromoNewsActivity;
+import com.bca.bsi.ui.basenavigation.products.detail.reksadana.detailreksadana.DetailReksaDanaActivity;
 import com.bca.bsi.utils.BaseFragment;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
@@ -36,6 +37,8 @@ public class PostingFragment extends BaseFragment implements OnPostClick, IPosti
     private ReshareDialog reshareDialog;
 
     public void loadData(List<Forum.Post> postList) {
+        adapter.setDataExist(false);
+        adapter.notifyDataSetChanged();
         adapter.setForumList(postList);
         adapter.notifyDataSetChanged();
     }
@@ -61,7 +64,7 @@ public class PostingFragment extends BaseFragment implements OnPostClick, IPosti
         viewModel = new ViewModelProvider(this).get(PostingViewModel.class);
         viewModel.setCallback(this);
 
-        adapter = new ChildMainForumAdapter(Type.PROFILE, prefConfig.getProfileID(), this);
+        adapter = new ChildMainForumAdapter(Type.PROFILE, prefConfig.getProfileID(), this, true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
@@ -130,6 +133,13 @@ public class PostingFragment extends BaseFragment implements OnPostClick, IPosti
     }
 
     @Override
+    public void onDetailProduct(String reksadanaID) {
+        Intent intent = new Intent(mActivity, DetailReksaDanaActivity.class);
+        intent.putExtra(DetailReksaDanaActivity.REKSA_DANA_ID, reksadanaID);
+        startActivity(intent);
+    }
+
+    @Override
     public void onDeleteSuccess(String postID) {
         adapter.removePost(postID);
         showSnackBar("Hapus post sukses");
@@ -143,6 +153,8 @@ public class PostingFragment extends BaseFragment implements OnPostClick, IPosti
 
     @Override
     public void onFailed(String msg) {
+        adapter.setDataExist(false);
+        adapter.notifyDataSetChanged();
         showSnackBar(msg);
     }
 

@@ -21,12 +21,13 @@ import com.squareup.picasso.Picasso;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private RoundedImageView roundedProfile;
-    private TextView tvName, tvDate, tvContent, tvType, tvLike, tvComment, tvShare, tvLookMore, tvContentNews;
+    private TextView tvName, tvDate, tvContent, tvType, tvLike, tvComment, tvShare, tvLookMore, tvContentNews, tvPrivacy;
     private ImageView imgNews;
     private ImageButton imgBtnMore;
     private OnPostClick onPostClick;
     private String profileID;
     private Forum.Post post;
+    private ImageView imgPrivacy;
 
     public NewsViewHolder(@NonNull View itemView, OnPostClick onPostClick) {
         super(itemView);
@@ -43,6 +44,8 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         tvContentNews = itemView.findViewById(R.id.recycler_tv_content_news);
         imgNews = itemView.findViewById(R.id.recycler_img_thumbnail_news);
         imgBtnMore = itemView.findViewById(R.id.recycler_img_btn_more_child_main_forum);
+        tvPrivacy = itemView.findViewById(R.id.recycler_tv_privacy);
+        imgPrivacy = itemView.findViewById(R.id.recycler_img_privacy);
 
         roundedProfile.setOnClickListener(this);
         tvName.setOnClickListener(this);
@@ -72,11 +75,23 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
         int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;
 
+        int drawablePrivacy;
+
+        if(post.getPrivacy().equalsIgnoreCase("public")){
+            drawablePrivacy = R.drawable.ic_public;
+        }else if(post.getPrivacy().equalsIgnoreCase("followers")){
+            drawablePrivacy = R.drawable.ic_followers;
+        }else{
+            drawablePrivacy = R.drawable.ic_direct_message;
+        }
+        imgPrivacy.setImageResource(drawablePrivacy);
+
         tvDate.setText(post.getDate());
         tvContent.setText(Utils.removeEnter(post.getContent()));
         tvLike.setText(post.getLike());
         tvComment.setText(post.getComment());
         tvShare.setText(post.getShare());
+        tvPrivacy.setText(post.getPrivacy());
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
         tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);

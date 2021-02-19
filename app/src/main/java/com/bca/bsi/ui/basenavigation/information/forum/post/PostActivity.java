@@ -580,6 +580,9 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                     createPostMap.put("transaction_type", value);
                     createPostMap.put("share_trade_type", "history");
                     break;
+                case EDIT_POST:
+                    createPostMap.put("post_id", this.post.getPostID());
+                    break;
             }
 
             if (this.privacy.getName().equalsIgnoreCase("direct")) {
@@ -598,7 +601,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
             } else {
                 customLoading.show(getSupportFragmentManager(), "");
 //                Log.e("asd", createPostMap.toString());
-                Log.e("asd", type);
+//                Log.e("asd", type);
                 if (type.equalsIgnoreCase(EDIT_POST) && null != this.post) {
                     viewModel.editPost(prefConfig.getTokenUser(), this.post.getPostID(), createPostMap);
                 } else {

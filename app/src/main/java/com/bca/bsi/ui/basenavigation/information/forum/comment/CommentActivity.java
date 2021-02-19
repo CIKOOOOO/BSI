@@ -299,6 +299,12 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                     startActivity(intent);
                 }
                 break;
+            case R.id.cl_share_trade:
+                Forum.ShareTrade shareTrade = this.post.getShareTrade();
+                intent = new Intent(this, DetailReksaDanaActivity.class);
+                intent.putExtra(DetailReksaDanaActivity.REKSA_DANA_ID, shareTrade.getReksadanaID());
+                startActivity(intent);
+                break;
         }
     }
 
@@ -606,6 +612,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                             tvContentShareTrade.setText(content);
                             tvTransactionType.setText(shareTradeType);
                             tvProductName.setText(shareTrade.getProductName());
+
+                            clShareTrade.setOnClickListener(this);
                         }
                         break;
                 }

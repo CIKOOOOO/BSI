@@ -22,4 +22,6 @@ public interface OnPostClick {
     void onDeletePost(String postID);
 
     void onEditPost(Forum.Post post);
+
+    void onDetailProduct(String reksadanaID);
 }
