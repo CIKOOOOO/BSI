@@ -88,10 +88,13 @@ public class FilterSortActivity extends BaseActivity implements SortAdapter.onWh
         filterAdapter = new FilterAdapter();
         if (null != filterList && filterList.size() > 0) {
             List<FilterJenisReksa> filterJenisReksaList = DummyData.getFilterJenisReksaListDefaultFalse();
-            for (int i = 0; i < filterList.size(); i++) {
+            for (int i = 0; i < filterJenisReksaList.size(); i++) {
                 if (filterList.size() - 1 > i)
                     break;
                 Log.e("asd", filterList.get(i) - 1 + " - " + i);
+//                for (int j = 0; j < filterList.size(); j++) {
+//
+//                }
                 if (filterList.get(i) - 1 == i) {
                     FilterJenisReksa filterJenisReksa = filterJenisReksaList.get(i);
                     filterJenisReksa.setChoosen(true);
