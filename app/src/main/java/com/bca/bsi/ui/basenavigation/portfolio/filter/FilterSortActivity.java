@@ -2,6 +2,7 @@ package com.bca.bsi.ui.basenavigation.portfolio.filter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -90,6 +91,7 @@ public class FilterSortActivity extends BaseActivity implements SortAdapter.onWh
             for (int i = 0; i < filterList.size(); i++) {
                 if (filterList.size() - 1 > i)
                     break;
+                Log.e("asd", filterList.get(i) - 1 + " - " + i);
                 if (filterList.get(i) - 1 == i) {
                     FilterJenisReksa filterJenisReksa = filterJenisReksaList.get(i);
                     filterJenisReksa.setChoosen(true);
