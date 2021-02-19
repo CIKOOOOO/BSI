@@ -140,7 +140,6 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
         tvLookMore.setVisibility(visibility);
 
         int drawablePrivacy;
-
         if(post.getPrivacy().equalsIgnoreCase("public")){
             drawablePrivacy = R.drawable.ic_public;
         }else if(post.getPrivacy().equalsIgnoreCase("followers")){

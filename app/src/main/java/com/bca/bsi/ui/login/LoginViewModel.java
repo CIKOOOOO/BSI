@@ -44,7 +44,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void loginWith(String token, String bcaID, String password) {
 
-       callback.onSuccess(null, null);
+//       callback.onSuccess(null, null);
 
         Map<String, Object> stringStringMap = new HashMap<>();
         stringStringMap.put("bca_id", bcaID);
