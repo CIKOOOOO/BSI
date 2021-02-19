@@ -132,9 +132,6 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                             callback.onLoadData(postShareTrade);
                         } else if ("204".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             isLast = true;
-                            if(!type.equalsIgnoreCase(Type.TRENDING)){
-                                callback.onFailed("Anda sudah mencapai halaman akhir");
-                            }
                         } else {
                             page -= 1;
                             callback.onFailed(errorSchema.getErrorMessage());
@@ -152,6 +149,10 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     callback.onFailed("");
                 }
             });
+        }else{
+            if(!type.equalsIgnoreCase(Type.TRENDING)){
+                callback.onFailed("Anda sudah mencapai halaman akhir");
+            }
         }
 
 //        Log.e("asd", page + "");
