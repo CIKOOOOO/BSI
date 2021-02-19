@@ -208,5 +208,5 @@
         android:background="@color/gray_palette"
         android:elevation="@dimen/size_for_2dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycler_tv_share_child_main_forum" />
+        app:layout_constraintTop_toBottomOf="@id/recycler_tv_comment_child_main_forum" />
 </androidx.constraintlayout.widget.ConstraintLayout>
