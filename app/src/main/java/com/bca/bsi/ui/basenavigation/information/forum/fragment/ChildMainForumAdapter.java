@@ -121,7 +121,7 @@ public class ChildMainForumAdapter extends RecyclerView.Adapter {
                 layout = R.layout.recycler_empty_image;
                 break;
             case ChildMainForumAdapter.LOADING:
-                layout = R.layout.custom_loading;
+                layout = R.layout.custom_loading_white;
                 break;
             default:
                 layout = R.layout.recycler_child_main_forum;
