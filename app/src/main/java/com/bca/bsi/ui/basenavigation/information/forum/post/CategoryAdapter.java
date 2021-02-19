@@ -34,6 +34,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Holder
         this.categoryList = categoryList;
     }
 
+    public Forum.Category getAndSendCategory(String categoryID) {
+        for (int i = 0; i < this.categoryList.size(); i++) {
+            if (categoryList.get(i).getCategoryID().equalsIgnoreCase(categoryID)) {
+                lastPosition = i;
+                categoryList.get(i).setChoose(true);
+                notifyDataSetChanged();
+                return categoryList.get(i);
+            }
+        }
+        return null;
+    }
+
     public Forum.Category getCategoryDetail(String categoryName) {
         for (int i = 0; i < this.categoryList.size(); i++) {
             Forum.Category category = this.categoryList.get(i);

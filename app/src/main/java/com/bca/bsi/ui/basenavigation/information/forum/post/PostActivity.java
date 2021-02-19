@@ -472,6 +472,9 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                         || null != this.history) {
                     checkingDataBeforeSend();
                 } else {
+                    if (type.equalsIgnoreCase(EDIT_POST)) {
+                        this.category = categoryAdapter.getAndSendCategory(this.post.getType());
+                    }
                     ((TextView) findViewById(R.id.bs_tv_title_choose_image)).setText(getString(R.string.choose_category));
                     bsCategory.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }

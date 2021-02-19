@@ -119,6 +119,7 @@ public class DirectShareViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
+                Log.e("asd", t.getMessage()+" on fail");
                 callback.onFailed("");
             }
         });

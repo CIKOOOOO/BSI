@@ -80,8 +80,8 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
             tvType.setText(post.getType());
             tvShare.setOnClickListener(this);
         } else {
-            Log.e("asd", post.getPostID() + " post ID");
-            Log.e("asd", Utils.toJSON(post));
+//            Log.e("asd", post.getPostID() + " post ID");
+//            Log.e("asd", Utils.toJSON(post));
              if (null == post.getPrivacy() || post.getPrivacy().equalsIgnoreCase("public")) {
                 privacy = "public";
                  visibilityShare = View.VISIBLE;
