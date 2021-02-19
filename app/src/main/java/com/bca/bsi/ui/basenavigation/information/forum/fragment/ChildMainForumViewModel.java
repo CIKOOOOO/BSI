@@ -97,6 +97,9 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                                 || "206".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             if ("206".equalsIgnoreCase(errorSchema.getErrorCode())) {
                                 isLast = true;
+                                if(!type.equalsIgnoreCase(Type.TRENDING)){
+                                    callback.onFailed("Anda sudah mencapai halaman akhir");
+                                }
                             }
                             OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                             List<Forum.Post> postShareTrade = outputSchema.getMyPostList();
@@ -129,6 +132,9 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                             callback.onLoadData(postShareTrade);
                         } else if ("204".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             isLast = true;
+                            if(!type.equalsIgnoreCase(Type.TRENDING)){
+                                callback.onFailed("Anda sudah mencapai halaman akhir");
+                            }
                         } else {
                             page -= 1;
                             callback.onFailed(errorSchema.getErrorMessage());
