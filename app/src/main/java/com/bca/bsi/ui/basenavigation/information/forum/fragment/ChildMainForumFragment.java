@@ -108,8 +108,8 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     public void onResume() {
         super.onResume();
         Log.e("asd", "On resume");
-        this.page = 1;
-        viewModel.loadForumPost(type, page, prefConfig.getTokenUser(), prefConfig.getProfileID(), prefConfig.getProfileRisiko());
+//        this.page = 1;
+//        viewModel.loadForumPost(type, page, prefConfig.getTokenUser(), prefConfig.getProfileID(), prefConfig.getProfileRisiko());
     }
 
     @Override
