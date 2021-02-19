@@ -1,7 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.post.direct;
 
 import android.app.Application;
-import android.graphics.Bitmap;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -11,10 +10,8 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.User;
-import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,8 +94,32 @@ public class DirectShareViewModel extends AndroidViewModel {
 //        callback.onLoadForumUser(DummyData.getForumUser());
     }
 
-    public void loadExistingChosenUserList(String token, String postID, String profileID){
+    public void loadExistingChosenUserList(String token, String postID) {
+        Call<OutputResponse> call = apiInterface.getDirectChosenUserList(token, postID);
+        call.enqueue(new Callback<OutputResponse>() {
+            @Override
+            public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                if (null != response.body()) {
+                    OutputResponse outputResponse = response.body();
+                    OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
+                    if (errorSchema.getErrorCode().equals("200")) {
+                        OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
+                        chosenUserList.addAll(outputSchema.getDirectUserList());
+                        forumUserList = outputSchema.getDirectUserList();
+                        compareData();
+                    } else {
+                        callback.onFailed(errorSchema.getErrorMessage());
+                    }
+                } else {
+                    callback.onFailed("");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<OutputResponse> call, Throwable t) {
+                callback.onFailed("");
+            }
+        });
     }
 
     public void editPost(String token, String postID, Map<String, Object> hashMap) {

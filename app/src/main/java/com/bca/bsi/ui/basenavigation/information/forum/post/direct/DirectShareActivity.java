@@ -69,7 +69,7 @@ public class DirectShareActivity extends BaseActivity implements IDirectShareCal
         if (intent != null && intent.hasExtra(DATA)) {
             this.hashMap = (Map<String, Object>) intent.getSerializableExtra(DATA);
             if (null != this.hashMap && null != this.hashMap.get("post_id"))
-                viewModel.loadExistingChosenUserList(prefConfig.getTokenUser(), this.hashMap.get("post_id").toString(), prefConfig.getProfileID());
+                viewModel.loadExistingChosenUserList(prefConfig.getTokenUser(), this.hashMap.get("post_id").toString());
             viewModel.loadUser(prefConfig.getTokenUser(), "", prefConfig.getProfileID());
         } else {
             onBackPressed();

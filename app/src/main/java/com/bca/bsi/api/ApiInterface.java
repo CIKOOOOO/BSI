@@ -144,6 +144,10 @@ public interface ApiInterface {
             , @Header("profile-id") String selfProfileID, @Path("profileID") String profile_id);
 
     @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
+    @GET("forum/post/{postID}/direct")
+    Call<OutputResponse> getDirectChosenUserList(@Header("token-user") String tokenUser, @Path("postID") String postID);
+
+    @Headers({"hashcode: x", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("forum/post/category")
     Call<OutputResponse> getCategoryList(@Header("token-user") String tokenUser);
 
