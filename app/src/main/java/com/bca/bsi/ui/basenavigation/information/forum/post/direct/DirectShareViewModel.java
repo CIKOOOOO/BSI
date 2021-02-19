@@ -10,6 +10,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.User;
+import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +100,7 @@ public class DirectShareViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
+                Log.e("asd", Utils.toJSON(response.body()));
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
