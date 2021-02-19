@@ -64,24 +64,35 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         int drawablePrivacy;
         String privacy;
+        int visibilityShare;
 
         if (isTrending) {
             privacy = "public";
             drawablePrivacy = R.drawable.ic_public;
+            visibilityShare = View.VISIBLE;
+
             tvType.setVisibility(View.VISIBLE);
             tvType.setText(post.getType());
+            tvShare.setOnClickListener(this);
         } else {
+            Log.e("asd", post.getPostID() + " post ID");
+            Log.e("asd", Utils.toJSON(post));
             if (null == post.getPrivacy() || post.getPrivacy().equalsIgnoreCase("public")) {
                 privacy = "public";
+                visibilityShare = View.VISIBLE;
                 drawablePrivacy = R.drawable.ic_public;
+                tvShare.setOnClickListener(this);
             } else if (post.getPrivacy().equalsIgnoreCase("followers")) {
-                privacy = post.getPrivacy();
                 drawablePrivacy = R.drawable.ic_followers;
-            } else {
+                visibilityShare = View.GONE;
                 privacy = post.getPrivacy();
+            } else {
+                visibilityShare = View.GONE;
                 drawablePrivacy = R.drawable.ic_direct_message;
+                privacy = post.getPrivacy();
             }
         }
+        tvShare.setVisibility(visibilityShare);
 
         if (!post.getImageProfile().isEmpty())
             Picasso.get()

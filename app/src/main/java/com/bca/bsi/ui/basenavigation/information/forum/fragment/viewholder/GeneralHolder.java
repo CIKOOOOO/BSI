@@ -60,7 +60,6 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         tvComment.setOnClickListener(this);
         tvLike.setOnClickListener(this);
         imgBtnMore.setOnClickListener(this);
-        tvShare.setOnClickListener(this);
 
         itemView.setOnClickListener(v -> onPostClick.onDetailPost(post.getPostID()));
     }
@@ -70,29 +69,35 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         this.profileID = profileID;
         int drawablePrivacy;
         String privacy;
+        int visibilityShare;
 
         if (isTrending) {
             privacy = "public";
             drawablePrivacy = R.drawable.ic_public;
+            visibilityShare = View.VISIBLE;
+
             tvType.setVisibility(View.VISIBLE);
             tvType.setText(post.getType());
+            tvShare.setOnClickListener(this);
         } else {
             Log.e("asd", post.getPostID() + " post ID");
             Log.e("asd", Utils.toJSON(post));
-            if (null == post.getPrivacy()) {
+             if (null == post.getPrivacy() || post.getPrivacy().equalsIgnoreCase("public")) {
                 privacy = "public";
-                drawablePrivacy = R.drawable.ic_public;
-            } else if (post.getPrivacy().equalsIgnoreCase("public")) {
-                drawablePrivacy = R.drawable.ic_public;
-                privacy = post.getPrivacy();
-            } else if (post.getPrivacy().equalsIgnoreCase("followers")) {
+                 visibilityShare = View.VISIBLE;
+                 drawablePrivacy = R.drawable.ic_public;
+                 tvShare.setOnClickListener(this);
+             } else if (post.getPrivacy().equalsIgnoreCase("followers")) {
                 drawablePrivacy = R.drawable.ic_followers;
-                privacy = post.getPrivacy();
+                 visibilityShare = View.GONE;
+                 privacy = post.getPrivacy();
             } else {
-                drawablePrivacy = R.drawable.ic_direct_message;
+                 visibilityShare = View.GONE;
+                 drawablePrivacy = R.drawable.ic_direct_message;
                 privacy = post.getPrivacy();
-            }
+             }
         }
+        tvShare.setVisibility(visibilityShare);
 
         if (!post.getImageProfile().isEmpty())
             Picasso.get()
