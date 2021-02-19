@@ -108,6 +108,7 @@ public class DirectShareViewModel extends AndroidViewModel {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         chosenUserList.addAll(outputSchema.getDirectUserList());
                         compareData();
+                        callback.onLoadChosenForumUser(chosenUserList);
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
