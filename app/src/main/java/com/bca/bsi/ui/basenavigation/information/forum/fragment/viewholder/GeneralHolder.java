@@ -1,5 +1,6 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -74,6 +75,8 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
             tvType.setVisibility(View.VISIBLE);
             tvType.setText(post.getType());
         }else{
+            Log.e("asd", post.getPostID()+" post ID");
+            Log.e("asd", Utils.toJSON(post));
             if(post.getPrivacy().equalsIgnoreCase("public")){
                 drawablePrivacy = R.drawable.ic_public;
             }else if(post.getPrivacy().equalsIgnoreCase("followers")){
