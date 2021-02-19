@@ -1,7 +1,6 @@
 package com.bca.bsi.ui.basenavigation.portfolio.produkmenu;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -10,7 +9,6 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Product;
-import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -118,7 +116,7 @@ public class ProdukChoiceViewModel extends AndroidViewModel {
                 Collections.sort(products, new Comparator<Product.ReksaDana>() {
                     @Override
                     public int compare(Product.ReksaDana reksaDana, Product.ReksaDana t1) {
-                        return Double.compare(Double.parseDouble(reksaDana.getNab()), Double.parseDouble(t1.getNab()));
+                        return Double.compare(Double.parseDouble(t1.getKinerja()), Double.parseDouble(reksaDana.getKinerja()));
                     }
                 });
                 break;
@@ -126,7 +124,7 @@ public class ProdukChoiceViewModel extends AndroidViewModel {
                 Collections.sort(products, new Comparator<Product.ReksaDana>() {
                     @Override
                     public int compare(Product.ReksaDana reksaDana, Product.ReksaDana t1) {
-                        return Double.compare(Double.parseDouble(t1.getNab()), Double.parseDouble(reksaDana.getNab()));
+                        return Double.compare(Double.parseDouble(reksaDana.getKinerja()), Double.parseDouble(t1.getKinerja()));
                     }
                 });
                 break;
