@@ -67,17 +67,22 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
         this.profileID = profileID;
 
         int drawablePrivacy;
+        String privacy;
 
         if (isTrending) {
+            privacy = "public";
             drawablePrivacy = R.drawable.ic_public;
             tvType.setVisibility(View.VISIBLE);
             tvType.setText(post.getType());
-        }else{
-            if(post.getPrivacy().equalsIgnoreCase("public")){
+        } else {
+            if (null == post.getPrivacy() || post.getPrivacy().equalsIgnoreCase("public")) {
+                privacy = post.getPrivacy();
                 drawablePrivacy = R.drawable.ic_public;
-            }else if(post.getPrivacy().equalsIgnoreCase("followers")){
+            } else if (post.getPrivacy().equalsIgnoreCase("followers")) {
+                privacy = post.getPrivacy();
                 drawablePrivacy = R.drawable.ic_followers;
-            }else{
+            } else {
+                privacy = post.getPrivacy();
                 drawablePrivacy = R.drawable.ic_direct_message;
             }
         }
@@ -102,7 +107,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
         tvLike.setText(post.getLike());
         tvComment.setText(post.getComment());
-        tvPrivacy.setText(post.getPrivacy());
+        tvPrivacy.setText(privacy);
 
         if (shareTrade != null) {
             String value;

@@ -69,20 +69,28 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         this.post = post;
         this.profileID = profileID;
         int drawablePrivacy;
+        String privacy;
 
         if (isTrending) {
+            privacy = "public";
             drawablePrivacy = R.drawable.ic_public;
             tvType.setVisibility(View.VISIBLE);
             tvType.setText(post.getType());
-        }else{
-            Log.e("asd", post.getPostID()+" post ID");
+        } else {
+            Log.e("asd", post.getPostID() + " post ID");
             Log.e("asd", Utils.toJSON(post));
-            if(post.getPrivacy().equalsIgnoreCase("public")){
+            if (null == post.getPrivacy()) {
+                privacy = "public";
                 drawablePrivacy = R.drawable.ic_public;
-            }else if(post.getPrivacy().equalsIgnoreCase("followers")){
+            } else if (post.getPrivacy().equalsIgnoreCase("public")) {
+                drawablePrivacy = R.drawable.ic_public;
+                privacy = post.getPrivacy();
+            } else if (post.getPrivacy().equalsIgnoreCase("followers")) {
                 drawablePrivacy = R.drawable.ic_followers;
-            }else{
+                privacy = post.getPrivacy();
+            } else {
                 drawablePrivacy = R.drawable.ic_direct_message;
+                privacy = post.getPrivacy();
             }
         }
 
@@ -103,7 +111,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         tvComment.setText(post.getComment());
         tvShare.setText(post.getShare());
         tvName.setText(post.getName());
-        tvPrivacy.setText(post.getPrivacy());
+        tvPrivacy.setText(privacy);
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
         tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
