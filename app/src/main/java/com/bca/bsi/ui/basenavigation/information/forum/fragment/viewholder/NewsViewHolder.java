@@ -62,9 +62,20 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         this.post = post;
         this.profileID = profileID;
 
+        int drawablePrivacy;
+
         if (isTrending) {
+            drawablePrivacy = R.drawable.ic_public;
             tvType.setVisibility(View.VISIBLE);
             tvType.setText(post.getType());
+        }else{
+            if(post.getPrivacy().equalsIgnoreCase("public")){
+                drawablePrivacy = R.drawable.ic_public;
+            }else if(post.getPrivacy().equalsIgnoreCase("followers")){
+                drawablePrivacy = R.drawable.ic_followers;
+            }else{
+                drawablePrivacy = R.drawable.ic_direct_message;
+            }
         }
 
         if (!post.getImageProfile().isEmpty())
@@ -75,15 +86,6 @@ public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
         int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;
 
-        int drawablePrivacy;
-
-        if(post.getPrivacy().equalsIgnoreCase("public")){
-            drawablePrivacy = R.drawable.ic_public;
-        }else if(post.getPrivacy().equalsIgnoreCase("followers")){
-            drawablePrivacy = R.drawable.ic_followers;
-        }else{
-            drawablePrivacy = R.drawable.ic_direct_message;
-        }
         imgPrivacy.setImageResource(drawablePrivacy);
 
         tvDate.setText(post.getDate());
