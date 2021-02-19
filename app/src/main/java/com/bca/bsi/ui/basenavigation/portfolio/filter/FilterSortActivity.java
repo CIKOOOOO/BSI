@@ -96,6 +96,7 @@ public class FilterSortActivity extends BaseActivity implements SortAdapter.onWh
                     filterJenisReksaList.set(i, filterJenisReksa);
                 }
             }
+            filterAdapter.setFilterJenisReksaList(filterJenisReksaList);
         } else {
             filterAdapter.setFilterJenisReksaList(DummyData.getFilterJenisReksaListDefault());
         }
