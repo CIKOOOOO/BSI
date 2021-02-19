@@ -16,15 +16,15 @@
 
         <ImageView
             android:id="@+id/recycler_img_privacy"
-            android:layout_width="@dimen/size_for_20dp"
-            android:layout_height="@dimen/size_for_20dp"
+            android:layout_width="@dimen/size_for_15dp"
+            android:layout_height="@dimen/size_for_15dp"
             android:layout_marginStart="@dimen/size_for_5dp"
             android:layout_marginEnd="@dimen/size_for_5dp"
-            tools:background="@drawable/ic_followers"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/recycler_tv_privacy"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/ic_followers" />
 
         <TextView
             android:id="@+id/recycler_tv_privacy"
@@ -32,11 +32,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_for_2dp"
             android:layout_marginBottom="@dimen/size_for_2dp"
-            tools:text="direct"
             android:textColor="@color/white_palette"
+            android:textSize="@dimen/size_for_12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="direct" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.makeramen.roundedimageview.RoundedImageView

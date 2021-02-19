@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/recycler_img_privacy"
-            android:layout_width="@dimen/size_for_20dp"
-            android:layout_height="@dimen/size_for_20dp"
+            android:layout_width="@dimen/size_for_15dp"
+            android:layout_height="@dimen/size_for_15dp"
             android:layout_marginStart="@dimen/size_for_5dp"
             android:layout_marginEnd="@dimen/size_for_5dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,6 +34,7 @@
             android:layout_marginTop="@dimen/size_for_2dp"
             android:layout_marginBottom="@dimen/size_for_2dp"
             android:textColor="@color/white_palette"
+            android:textSize="@dimen/size_for_12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
