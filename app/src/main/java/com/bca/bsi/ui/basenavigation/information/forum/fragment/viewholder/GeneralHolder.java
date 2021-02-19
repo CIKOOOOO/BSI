@@ -83,15 +83,15 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
 
         int drawablePrivacy;
 
-//        if(post.getPrivacy().equalsIgnoreCase("public")){
-//            drawablePrivacy = R.drawable.ic_public;
-//        }else if(post.getPrivacy().equalsIgnoreCase("followers")){
-//            drawablePrivacy = R.drawable.ic_followers;
-//        }else{
-//            drawablePrivacy = R.drawable.ic_direct_message;
-//        }
-//
-//        imgPrivacy.setImageResource(drawablePrivacy);
+        if(post.getPrivacy().equalsIgnoreCase("public")){
+            drawablePrivacy = R.drawable.ic_public;
+        }else if(post.getPrivacy().equalsIgnoreCase("followers")){
+            drawablePrivacy = R.drawable.ic_followers;
+        }else{
+            drawablePrivacy = R.drawable.ic_direct_message;
+        }
+
+        imgPrivacy.setImageResource(drawablePrivacy);
 
         tvDate.setText(post.getDate());
         if (null != post.getContent())
@@ -100,7 +100,7 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         tvComment.setText(post.getComment());
         tvShare.setText(post.getShare());
         tvName.setText(post.getName());
-//        tvPrivacy.setText(post.getPrivacy());
+        tvPrivacy.setText(post.getPrivacy());
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(drawableLike, 0, 0, 0);
         tvShare.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableShare, 0);
