@@ -469,7 +469,8 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
             case R.id.btn_share_post:
                 if (null != this.promoNews
                         || null != this.information
-                        || null != this.history) {
+                        || null != this.history
+                        || null != this.post.getShareTrade()) {
                     checkingDataBeforeSend();
                 } else {
                     if (type.equalsIgnoreCase(EDIT_POST)) {
