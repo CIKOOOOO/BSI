@@ -63,7 +63,7 @@ public class DirectShareViewModel extends AndroidViewModel {
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
-//                Log.e("aaaaa", "" + Utils.toJSON(response.body()) + " - " + response.raw().request().url().toString());
+                Log.e("asd", "11" + Utils.toJSON(response.body()));
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
@@ -107,7 +107,6 @@ public class DirectShareViewModel extends AndroidViewModel {
                     if (errorSchema.getErrorCode().equals("200")) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         chosenUserList.addAll(outputSchema.getDirectUserList());
-                        forumUserList = outputSchema.getDirectUserList();
                         compareData();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
@@ -119,7 +118,7 @@ public class DirectShareViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
-                Log.e("asd", t.getMessage()+" on fail");
+                Log.e("asd", t.getMessage() + " on fail");
                 callback.onFailed("");
             }
         });
