@@ -71,8 +71,7 @@ public class ReksadanaProductAdapter extends RecyclerView.Adapter<ReksadanaProdu
             String kinerjaString = kinerja > 0 ? "+" + kinerja + "%" : kinerja + "%";
 
             holder.tvKinerja.setText(kinerjaString);
-//            holder.tvNab.setText(Utils.formatUang3(Double.parseDouble(reksaDana.getNab())));
-            holder.tvNab.setText(reksaDana.getNab());
+            holder.tvNab.setText("Rp " + Utils.formatUang3(Double.parseDouble(reksaDana.getNab())));
             holder.tvBuy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

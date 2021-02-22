@@ -131,6 +131,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                             callback.onLoadData(postShareTrade);
                         } else if ("204".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             isLast = true;
+                            callback.onFailed("Anda sudah berada dihalaman akhir");
                         } else {
                             page -= 1;
                             callback.onFailed(errorSchema.getErrorMessage());

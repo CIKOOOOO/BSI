@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bca.bsi.R;
 import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,12 @@ public class PromoNewsAdapter extends RecyclerView.Adapter<PromoNewsAdapter.Hold
         final PromoNews promoNews = promoNewsList.get(position);
         holder.tvTitle.setText(promoNews.getTitle());
         holder.tvDesc.setText(promoNews.getDescription());
-        holder.tvDate.setText(promoNews.getDate());
+        try {
+            String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_2, promoNews.getDate());
+            holder.tvDate.setText(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         if (!promoNews.getImage().isEmpty()) {
             Picasso.get()
                     .load(Utils.imageURL(promoNews.getImage()))

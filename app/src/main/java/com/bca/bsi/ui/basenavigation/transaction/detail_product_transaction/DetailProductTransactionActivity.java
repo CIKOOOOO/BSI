@@ -145,7 +145,6 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
         btnNext.setOnClickListener(this);
     }
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -154,6 +153,9 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                 break;
             case R.id.btn_next_detail_transaction:
                 String nominal = etNominalPembelian.getText().toString().trim();
+                Intent intent2 = getIntent();
+                if (productType.equals(Type.PURCHASING_WITH_SMARTBOT) && null != intent2)
+                    nominal = intent2.getStringExtra(NOMINAL_PEMBELIAN);
                 if (nominal.isEmpty()) {
                     showSnackBar("Mohon isi nominal pembelian");
                 } else if (this.detailReksaDana == null) {
