@@ -47,6 +47,7 @@ public class DirectShareViewModel extends AndroidViewModel {
     public List<String> getChosenUserList() {
         List<String> stringList = new ArrayList<>();
         for (int i = 0; i < chosenUserList.size(); i++) {
+            Log.e("asd", chosenUserList.get(i).getProfileID());
             stringList.add(chosenUserList.get(i).getProfileID());
         }
         return stringList;
@@ -63,7 +64,7 @@ public class DirectShareViewModel extends AndroidViewModel {
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
-                Log.e("asd", "11" + Utils.toJSON(response.body()));
+//                Log.e("asd", "11" + Utils.toJSON(response.body()));
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
@@ -96,6 +97,7 @@ public class DirectShareViewModel extends AndroidViewModel {
     }
 
     public void loadExistingChosenUserList(String token, String postID) {
+        Log.e("asd", postID);
         Call<OutputResponse> call = apiInterface.getDirectChosenUserList(token, postID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
@@ -108,6 +110,7 @@ public class DirectShareViewModel extends AndroidViewModel {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         chosenUserList.addAll(outputSchema.getDirectUserList());
                         compareData();
+                        Log.e("asd", chosenUserList.size() + " size");
                         callback.onLoadChosenForumUser(chosenUserList);
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
@@ -246,8 +249,8 @@ public class DirectShareViewModel extends AndroidViewModel {
             }
 
             if (isChosen) {
-                if (null != this.visibleForumList.get(i + removeCounter)) {
-                    this.visibleForumList.remove(i + removeCounter);
+                if (null != this.visibleForumList.get(i - removeCounter)) {
+                    this.visibleForumList.remove(i - removeCounter);
                     removeCounter++;
                 }
             }

@@ -70,6 +70,7 @@
         android:id="@+id/frame_information_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fadeScrollbars="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frame_01" />
 
