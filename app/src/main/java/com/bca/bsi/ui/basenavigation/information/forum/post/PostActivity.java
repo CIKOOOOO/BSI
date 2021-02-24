@@ -201,13 +201,16 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                                 value = getString(R.string.stay);
                                 drawable = R.drawable.img_share_trade_stay;
                             }
+
+                            //TODO: check disini share trade
+                            double price = ((this.information.getCost() / this.information.getNab()) - 1) * 100;
+
                             tvTransactionType.setText(value);
                             tvNameShareTrade.setText(this.information.getName());
-                            tvNab.setText("Rp " + Utils.formatUang3(this.information.getNab()));
+
+                            String dataPrice = price > 0 ? "+" + price + "%" : price + "%";
+                            tvNab.setText(dataPrice);
                             imageShareTrade.setBackground(ContextCompat.getDrawable(this, drawable));
-//                            Glide.with(this)
-//                                    .load(drawable)
-//                                    .into(imageShareTrade);
                         } else {
                             onBackPressed();
                         }
@@ -231,9 +234,6 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                             tvNameShareTrade.setText(this.history.getReksadanaName());
                             tvNab.setText("Rp " + Utils.formatUang3(this.history.getNab()));
                             imageShareTrade.setBackground(ContextCompat.getDrawable(this, drawable));
-//                            Glide.with(this)
-//                                    .load(drawable)
-//                                    .into(imageShareTrade);
                         } else {
                             onBackPressed();
                         }
@@ -282,14 +282,15 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                                         value = Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
                                     } else if (shareTrade.getType().equalsIgnoreCase(getString(R.string.up))) {
                                         drawable = R.drawable.img_share_trade_up;
-                                        value = shareTrade.getValue();
+                                        value = Utils.formatUang2(Double.parseDouble(shareTrade.getValue()));
                                     } else if (shareTrade.getType().equalsIgnoreCase(getString(R.string.down))) {
                                         drawable = R.drawable.img_share_trade_down;
-                                        value = shareTrade.getValue();
+                                        value = Utils.formatUang2(Double.parseDouble(shareTrade.getValue()));
                                     } else {
                                         drawable = R.drawable.img_share_trade_stay;
-                                        value = shareTrade.getValue();
+                                        value = Utils.formatUang2(Double.parseDouble(shareTrade.getValue()));
                                     }
+                                    //TODO: check disini share trade
                                     tvNab.setText(value);
                                     imageShareTrade.setBackground(ContextCompat.getDrawable(this, drawable));
                                 }
