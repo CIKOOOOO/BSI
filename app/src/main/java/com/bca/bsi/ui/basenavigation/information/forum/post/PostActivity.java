@@ -591,6 +591,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                     switch (post.getType().toLowerCase()) {
                         case Type.SHARE_TRADE:
                             createPostMap.put("post_category_id", "3");
+                            //TODO: Check this part
 //                            if (shareTrade.getType().equalsIgnoreCase("beli")) {
 //                                drawable = R.drawable.img_share_trade_buy;
 //                                value = "Rp " + Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
