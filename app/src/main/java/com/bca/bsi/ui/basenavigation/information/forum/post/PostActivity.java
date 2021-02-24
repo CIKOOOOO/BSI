@@ -210,7 +210,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                             tvTransactionType.setText(value);
                             tvNameShareTrade.setText(this.information.getName());
 
-                            String dataPrice = price > 0 ? "+" + price + "%" : price + "%";
+                            String dataPrice = price > 0 ? "+" + Utils.formatUang2(price) + "%" : Utils.formatUang2(price) + "%";
                             tvNab.setText(dataPrice);
                             imageShareTrade.setBackground(ContextCompat.getDrawable(this, drawable));
                         } else {
