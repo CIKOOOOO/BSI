@@ -44,53 +44,10 @@ public class ForumProfileViewModel extends AndroidViewModel {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         Forum.User user = outputSchema.getForumProfileUser();
 
-                        List<Forum.Post> postShareTrade = outputSchema.getMyPostList();
-                        if (null != postShareTrade && postShareTrade.size() > 0) {
+                        List<Forum.Post> postShareTrade = getPostList(outputSchema.getMyPostList());
+                        List<Forum.Post> bookmarkList = getPostList(outputSchema.getMyBookmarkList());
 
-                            for (int i = 0; i < postShareTrade.size(); i++) {
-
-                                Forum.Post post = postShareTrade.get(i);
-                                String type;
-                                if (null == post) {
-                                    return;
-                                }
-
-                                if (null == post.getPost()) {
-                                    type = post.getType();
-                                } else if (null != post.getPost().getPromoNews()) {
-                                    type = Type.REPOST_NEWS;
-                                } else {
-                                    type = Type.REPOST;
-                                }
-
-                                switch (type.toLowerCase()) {
-                                    case Type.TRENDING:
-                                        break;
-                                    case Type.STRATEGY:
-                                        break;
-                                    case Type.SHARE_TRADE:
-                                        Forum.Post forum = postShareTrade.get(i);
-                                        Forum.ShareTrade shareTrade = forum.getShareTrade();
-                                        String title;
-                                        if (shareTrade.getType().equalsIgnoreCase("jual")) {
-                                            title = "Saya baru saja menjual";
-                                        } else if (shareTrade.getType().equalsIgnoreCase("beli")) {
-                                            title = "Saya baru saja membeli";
-                                        } else {
-                                            title = "Nilai Investasi Saya";
-                                        }
-                                        shareTrade.setTitle(title);
-                                        forum.setShareTrade(shareTrade);
-                                        postShareTrade.set(i, forum);
-                                        break;
-                                    case Type.NEWS:
-                                        break;
-                                    case Type.TIMELINE:
-                                        break;
-                                }
-                            }
-                        }
-                        callback.onLoadData(user, outputSchema.getMyPostList(), outputSchema.getMyBookmarkList());
+                        callback.onLoadData(user, postShareTrade, bookmarkList);
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -187,5 +144,55 @@ public class ForumProfileViewModel extends AndroidViewModel {
                 callback.onFailed("");
             }
         });
+    }
+
+    private List<Forum.Post> getPostList(List<Forum.Post> postShareTrade) {
+        if (null != postShareTrade && postShareTrade.size() > 0) {
+
+            for (int i = 0; i < postShareTrade.size(); i++) {
+
+                Forum.Post post = postShareTrade.get(i);
+                String type;
+                if (null == post) {
+                    return null;
+                }
+
+                if (null == post.getPost()) {
+                    type = post.getType();
+                } else if (null != post.getPost().getPromoNews()) {
+                    type = Type.REPOST_NEWS;
+                } else {
+                    type = Type.REPOST;
+                }
+
+                switch (type.toLowerCase()) {
+                    case Type.TRENDING:
+                        break;
+                    case Type.STRATEGY:
+                        break;
+                    case Type.SHARE_TRADE:
+                        Forum.Post forum = postShareTrade.get(i);
+                        Forum.ShareTrade shareTrade = forum.getShareTrade();
+                        String title;
+                        if (shareTrade.getType().equalsIgnoreCase("jual")) {
+                            title = "Saya baru saja menjual";
+                        } else if (shareTrade.getType().equalsIgnoreCase("beli")) {
+                            title = "Saya baru saja membeli";
+                        } else {
+                            title = "Nilai Investasi Saya";
+                        }
+                        shareTrade.setTitle(title);
+                        forum.setShareTrade(shareTrade);
+                        postShareTrade.set(i, forum);
+                        break;
+                    case Type.NEWS:
+                        break;
+                    case Type.TIMELINE:
+                        break;
+                }
+            }
+        }
+
+        return postShareTrade;
     }
 }

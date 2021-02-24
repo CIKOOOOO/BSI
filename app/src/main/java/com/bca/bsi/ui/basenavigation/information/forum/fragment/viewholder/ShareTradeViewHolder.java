@@ -15,8 +15,11 @@ import com.bca.bsi.R;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
+
+import java.text.ParseException;
 
 public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -131,7 +134,7 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
 
                 if (Double.parseDouble(shareTrade.getValue()) == 0) {
                     value = Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
-                    background = R.drawable.rectangle_rounded_stroke_fringy_flower;
+                    background = R.drawable.rectangle_rounded_stroke_ziggurat;
                 } else if (Double.parseDouble(shareTrade.getValue()) < 0) {
                     value = Utils.formatUang3(Double.parseDouble(shareTrade.getValue())) + "%";
                     tvValueShareTrade.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_black_down, 0, 0, 0);
@@ -139,10 +142,15 @@ public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements Vie
                 } else {
                     value = "+" + Utils.formatUang3(Double.parseDouble(shareTrade.getValue())) + "%";
                     tvValueShareTrade.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_black_up, 0, 0, 0);
-                    background = R.drawable.rectangle_rounded_stroke_ziggurat;
+                    background = R.drawable.rectangle_rounded_stroke_fringy_flower;
                 }
 
-                tvDateShareTrade.setText("pembelian pertama: " + shareTrade.getDate());
+                try {
+                    String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_7, Constant.DATE_FORMAT_1, shareTrade.getDate());
+                    tvDateShareTrade.setText("pembelian pertama: " + date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
             constraintLayout.setBackground(itemView.getResources().getDrawable(background));

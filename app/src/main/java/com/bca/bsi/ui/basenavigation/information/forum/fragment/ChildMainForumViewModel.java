@@ -12,7 +12,6 @@ import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Type;
-import com.bca.bsi.utils.dummydata.DummyData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,6 +131,7 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                             callback.onLoadData(postShareTrade);
                         } else if ("204".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             isLast = true;
+                            callback.onFailed("Anda sudah berada dihalaman akhir");
                         } else {
                             page -= 1;
                             callback.onFailed(errorSchema.getErrorMessage());
@@ -149,8 +149,8 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     callback.onFailed("");
                 }
             });
-        }else{
-            if(!type.equalsIgnoreCase(Type.TRENDING)){
+        } else {
+            if (!type.equalsIgnoreCase(Type.TRENDING) && isLast) {
                 callback.onFailed("Anda sudah mencapai halaman akhir");
             }
         }

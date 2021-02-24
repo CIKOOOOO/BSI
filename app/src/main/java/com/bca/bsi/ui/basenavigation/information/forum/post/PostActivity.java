@@ -471,7 +471,8 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 if (null != this.promoNews
                         || null != this.information
                         || null != this.history
-                        || null != this.post.getShareTrade()) {
+                        || (null != this.post
+                        && null != this.post.getShareTrade())) {
                     checkingDataBeforeSend();
                 } else {
                     if (type.equalsIgnoreCase(EDIT_POST)) {
@@ -571,7 +572,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                         value = getString(R.string.stay);
                     }
                     createPostMap.put("transaction_type", value);
-                    createPostMap.put("share_trade_type", "information");
+                    createPostMap.put("share_trade_type", "portfolio");
 
                     break;
                 case SHARE_TRADE_HISTORY:

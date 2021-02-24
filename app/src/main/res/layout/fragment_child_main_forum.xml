@@ -4,5 +4,8 @@
     android:id="@+id/recycler_child_main_forum"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:scrollbarSize="@dimen/size_for_5dp"
     android:background="@color/white_palette"
+    android:fadeScrollbars="false"
     tools:context=".ui.basenavigation.information.forum.fragment.ChildMainForumFragment" />
