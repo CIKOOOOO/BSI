@@ -205,8 +205,6 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                             //TODO: check disini share trade
                             double price = this.information.getRaise() / this.information.getCost();
 
-                            Log.e("asd", price + " : info");
-
                             tvTransactionType.setText(value);
                             tvNameShareTrade.setText(this.information.getName());
 
@@ -278,19 +276,19 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 
                                     if (shareTrade.getType().equalsIgnoreCase("beli")) {
                                         drawable = R.drawable.img_share_trade_buy;
-                                        value = Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
+                                        value = "Rp " + Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
                                     } else if (shareTrade.getType().equalsIgnoreCase("jual")) {
                                         drawable = R.drawable.img_share_trade_sell;
-                                        value = Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
+                                        value = "Rp " + Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
                                     } else if (shareTrade.getType().equalsIgnoreCase(getString(R.string.up))) {
                                         drawable = R.drawable.img_share_trade_up;
-                                        value = Utils.formatUang2(Double.parseDouble(shareTrade.getValue()));
+                                        value = "+" + Utils.formatUang2(Double.parseDouble(shareTrade.getValue())) + "%";
                                     } else if (shareTrade.getType().equalsIgnoreCase(getString(R.string.down))) {
                                         drawable = R.drawable.img_share_trade_down;
-                                        value = Utils.formatUang2(Double.parseDouble(shareTrade.getValue()));
+                                        value = "-" + Utils.formatUang2(Double.parseDouble(shareTrade.getValue())) + "%";
                                     } else {
                                         drawable = R.drawable.img_share_trade_stay;
-                                        value = Utils.formatUang2(Double.parseDouble(shareTrade.getValue()));
+                                        value = Utils.formatUang2(Double.parseDouble(shareTrade.getValue())) + "%";
                                     }
                                     //TODO: check disini share trade
                                     tvNab.setText(value);
@@ -590,6 +588,30 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                     break;
                 case EDIT_POST:
                     createPostMap.put("post_id", this.post.getPostID());
+                    switch (post.getType().toLowerCase()) {
+                        case Type.SHARE_TRADE:
+                            createPostMap.put("post_category_id", "3");
+//                            if (shareTrade.getType().equalsIgnoreCase("beli")) {
+//                                drawable = R.drawable.img_share_trade_buy;
+//                                value = "Rp " + Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
+//                            } else if (shareTrade.getType().equalsIgnoreCase("jual")) {
+//                                drawable = R.drawable.img_share_trade_sell;
+//                                value = "Rp " + Utils.formatUang3(Double.parseDouble(shareTrade.getValue()));
+//                            } else if (shareTrade.getType().equalsIgnoreCase(getString(R.string.up))) {
+//                                drawable = R.drawable.img_share_trade_up;
+//                                value = "+" + Utils.formatUang2(Double.parseDouble(shareTrade.getValue())) + "%";
+//                            } else if (shareTrade.getType().equalsIgnoreCase(getString(R.string.down))) {
+//                                drawable = R.drawable.img_share_trade_down;
+//                                value = "-" + Utils.formatUang2(Double.parseDouble(shareTrade.getValue())) + "%";
+//                            } else {
+//                                drawable = R.drawable.img_share_trade_stay;
+//                                value = Utils.formatUang2(Double.parseDouble(shareTrade.getValue())) + "%";
+//                            }
+                            break;
+                        case Type.NEWS:
+                            createPostMap.put("post_category_id", "4");
+                            break;
+                    }
                     break;
             }
 
@@ -619,6 +641,4 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 //                    viewModel.sendData(imagesEncodedList);
         }
     }
-
-
 }
