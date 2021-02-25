@@ -7,8 +7,9 @@
     android:background="@color/gray_filter_bg"
     tools:context=".ui.basenavigation.portfolio.information.InformasiHistoryActivity">
 
-    <include layout="@layout/toolbar_back"
-        android:id="@+id/toolbar_back_informasi_history"/>
+    <include
+        android:id="@+id/toolbar_back_informasi_history"
+        layout="@layout/toolbar_back" />
 
     <FrameLayout
         android:id="@+id/frame_01"
@@ -22,13 +23,13 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back_informasi_history">
 
         <LinearLayout
+            android:id="@+id/toolbar_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size_for_20dp"
             android:layout_marginEnd="@dimen/size_for_20dp"
             android:background="@drawable/rectangle_rounded_sherpa_blue"
             android:orientation="horizontal"
-            android:id="@+id/toolbar_mode"
             android:weightSum="2">
 
             <TextView
@@ -57,60 +58,42 @@
         </LinearLayout>
     </FrameLayout>
 
-    <include layout="@layout/search"
+    <include
         android:id="@+id/search_bar_informasi_history"
+        layout="@layout/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/frame_01"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/nested_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar_informasi_history"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-
-            <TextView
-                android:id="@+id/kategori_produk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_for_20dp"
-                android:layout_marginVertical="@dimen/size_for_10dp"
-                android:text="RUPIAH (IDR)"
-                android:textColor="@color/gray_filter_text"
-                android:textSize="@dimen/size_for_20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/recycler_informasi_history"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_informasi_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="@dimen/size_for_70dp"
-                android:layout_marginTop="@dimen/size_for_10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/kategori_produk" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-
-    <include layout="@layout/custom_notice"
-        android:id="@+id/pemberitahuan_informasi_history"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frame_01" />
+
+    <TextView
+        android:id="@+id/kategori_produk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/size_for_10dp"
+        android:layout_marginStart="@dimen/size_for_20dp"
+        android:text="RUPIAH (IDR)"
+        android:textColor="@color/gray_filter_text"
+        android:textSize="@dimen/size_for_20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_bar_informasi_history" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_informasi_history"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="@dimen/size_for_0dp"
+        android:layout_marginTop="@dimen/size_for_10dp"
+        app:layout_constraintBottom_toTopOf="@id/pemberitahuan_informasi_history"
+        app:layout_constraintTop_toBottomOf="@id/kategori_produk" />
 
-
+    <include
+        android:id="@+id/pemberitahuan_informasi_history"
+        layout="@layout/custom_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

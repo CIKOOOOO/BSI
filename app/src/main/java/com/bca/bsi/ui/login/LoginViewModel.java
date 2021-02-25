@@ -56,7 +56,7 @@ public class LoginViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("asd", response.code() + " - login");
+//                Log.e("asd", response.code() + " - login");
 //                try {
 //                    Log.e("asd", response.code() + " - " + response.errorBody().string());
 //                } catch (IOException e) {
@@ -67,7 +67,7 @@ public class LoginViewModel extends AndroidViewModel {
                     if (errorSchema.getErrorCode().equals("200")) {
                         User.ForumUser forumUser = response.body().getOutputSchema().getForumUser();
                         User.WelmaUser welmaUser = response.body().getOutputSchema().getWelmaUser();
-                        Log.e("asd", Utils.toJSON(response.body()));
+//                        Log.e("asd", Utils.toJSON(response.body()));
                         callback.onSuccess(forumUser, welmaUser);
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());

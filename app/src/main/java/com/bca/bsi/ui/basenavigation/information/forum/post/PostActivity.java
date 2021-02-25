@@ -467,6 +467,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
      * when btn_share_post:
      * we give a lot of condition to make sure news, share trade and edit
      * is not showing bottom sheet anymore
+     *
      * @param v
      */
     @Override
@@ -621,6 +622,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                             break;
                         case Type.NEWS:
                             createPostMap.put("post_category_id", "4");
+                            createPostMap.put("news_id", this.post.getPromoNews().getNewsID());
                             break;
                     }
                     break;

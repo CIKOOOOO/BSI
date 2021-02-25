@@ -41,28 +41,28 @@ public class PortfolioViewModel extends AndroidViewModel {
 //                    e.printStackTrace();
 //                }
                 if (response.body() != null) {
-                    Log.e("b", "tes2");
+//                    Log.e("b", "tes2");
                     OutputResponse outputResponse = response.body();
                     if (outputResponse.getErrorSchema().getErrorCode().equals("200")) {
-                        Log.e("c", "tes3");
+//                        Log.e("c", "tes3");
                         OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                         for (Portfolio p : outputSchema.getBundles()) {
-                            Log.e("x", p.getExpReturn());
+//                            Log.e("x", p.getExpReturn());
                         }
                         callback.onLoadData(outputSchema.getBundles());
                     } else {
-                        Log.e("d", "tes4");
+//                        Log.e("d", "tes4");
                         callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
                     }
                 } else {
-                    Log.e("e", "tes5");
-                    callback.onFail("Mohon periksa jaringan anda");
+//                    Log.e("e", "tes5");
+                    callback.onFail("");
                 }
             }
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
-                callback.onFail("Mohon periksa jaringan anda");
+                callback.onFail("");
             }
         });
     }
