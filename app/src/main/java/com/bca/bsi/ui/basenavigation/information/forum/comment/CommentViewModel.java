@@ -6,19 +6,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
-import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +20,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * purpose : to load data and process logical business
+ */
 public class CommentViewModel extends AndroidViewModel {
 
     private ApiInterface apiInterface;

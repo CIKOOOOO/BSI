@@ -236,6 +236,10 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * this function to refresh status of following
+     * @param user
+     */
     @Override
     public void onLoadData(Forum.User user) {
         int drawable, color;

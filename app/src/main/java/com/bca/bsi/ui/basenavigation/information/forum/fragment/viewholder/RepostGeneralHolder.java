@@ -22,7 +22,9 @@ import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
-
+/**
+ * Purpose : to show forum post with re-post general/strategy type only
+ */
 public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView tvName, tvDate, tvSourceName, tvSourceDate, tvContent, tvLike, tvComment, tvShare, tvLookMore;
     private RoundedImageView imgProfile, imgSourceProfile;

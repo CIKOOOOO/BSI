@@ -24,6 +24,9 @@ import com.google.gson.Gson;
 
 import java.text.ParseException;
 
+/**
+ * Activity to process selling, same like detail_product_transaction package
+ */
 public class DetailSellActivity extends BaseActivity implements View.OnClickListener, IDetailSellCallback {
 
     public static final String DATA = "data";

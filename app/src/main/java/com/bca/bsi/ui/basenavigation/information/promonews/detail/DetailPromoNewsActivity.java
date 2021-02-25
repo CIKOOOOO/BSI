@@ -14,7 +14,10 @@ import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.ui.basenavigation.information.forum.post.PostActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.squareup.picasso.Picasso;
+
+import java.text.ParseException;
 
 public class DetailPromoNewsActivity extends BaseActivity implements View.OnClickListener, IDetailNewsCallback {
 
@@ -89,7 +92,11 @@ public class DetailPromoNewsActivity extends BaseActivity implements View.OnClic
                 .into(imgNews);
 
         tvTitle.setText(this.promoNews.getTitle());
-        tvDate.setText("Dirilis pada " + this.promoNews.getDate());
+        try {
+            tvDate.setText("Dirilis pada " + Utils.formatDateFromDateString(Constant.DATE_FORMAT_3, Constant.DATE_FORMAT_5, this.promoNews.getDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         tvContent.setText(this.promoNews.getContent());
     }
 

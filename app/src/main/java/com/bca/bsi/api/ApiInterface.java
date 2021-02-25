@@ -3,7 +3,6 @@ package com.bca.bsi.api;
 
 import com.bca.bsi.model.OutputResponse;
 
-import java.util.List;
 import java.util.Map;
 
 import okhttp3.RequestBody;

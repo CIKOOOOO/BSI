@@ -1,6 +1,5 @@
 package com.bca.bsi.ui.basenavigation.information.forum.fragment.viewholder;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -23,6 +22,9 @@ import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
+/**
+ * Purpose : to show forum post with general/strategy type only
+ */
 public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private RoundedImageView roundedImageView;
     private TextView tvName, tvDate, tvContent, tvType, tvLike, tvComment, tvShare, tvLookMore, tvPrivacy;
@@ -82,20 +84,20 @@ public class GeneralHolder extends RecyclerView.ViewHolder implements View.OnCli
         } else {
 //            Log.e("asd", post.getPostID() + " post ID");
 //            Log.e("asd", Utils.toJSON(post));
-             if (null == post.getPrivacy() || post.getPrivacy().equalsIgnoreCase("public")) {
+            if (null == post.getPrivacy() || post.getPrivacy().equalsIgnoreCase("public")) {
                 privacy = "public";
-                 visibilityShare = View.VISIBLE;
-                 drawablePrivacy = R.drawable.ic_public;
-                 tvShare.setOnClickListener(this);
-             } else if (post.getPrivacy().equalsIgnoreCase("followers")) {
+                visibilityShare = View.VISIBLE;
+                drawablePrivacy = R.drawable.ic_public;
+                tvShare.setOnClickListener(this);
+            } else if (post.getPrivacy().equalsIgnoreCase("followers")) {
                 drawablePrivacy = R.drawable.ic_followers;
-                 visibilityShare = View.GONE;
-                 privacy = post.getPrivacy();
-            } else {
-                 visibilityShare = View.GONE;
-                 drawablePrivacy = R.drawable.ic_direct_message;
+                visibilityShare = View.GONE;
                 privacy = post.getPrivacy();
-             }
+            } else {
+                visibilityShare = View.GONE;
+                drawablePrivacy = R.drawable.ic_direct_message;
+                privacy = post.getPrivacy();
+            }
         }
         tvShare.setVisibility(visibilityShare);
 

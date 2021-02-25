@@ -2,7 +2,6 @@ package com.bca.bsi.ui.basenavigation.transaction.confirmation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,10 +23,11 @@ import com.bca.bsi.utils.constant.Type;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Activity to show confirmation transaction from purchase or selling
+ */
 public class ConfirmationTransactionActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String DATA_REKSA_DANA = "dana_reksa_data";

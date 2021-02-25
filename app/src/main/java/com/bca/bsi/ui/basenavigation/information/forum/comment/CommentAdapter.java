@@ -23,6 +23,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class to show list of comment
+ * and thing user can do with comment such as delete and report
+ */
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> {
 
     private List<Forum.Comment> commentList;

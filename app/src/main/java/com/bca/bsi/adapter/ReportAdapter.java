@@ -14,6 +14,10 @@ import com.bca.bsi.model.Forum;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ReportAdapter is a class to show a list of report
+ */
+
 public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.Holder> {
 
     private onReportClick onReportClick;

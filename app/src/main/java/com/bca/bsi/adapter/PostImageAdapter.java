@@ -17,6 +17,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class exist to show image with multiple form
+ */
+
 public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Holder> {
     private List<String> imageList;
 

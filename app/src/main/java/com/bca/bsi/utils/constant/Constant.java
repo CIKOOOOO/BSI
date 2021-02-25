@@ -14,7 +14,7 @@ public class Constant {
 
     public static final String EMPTY = "";
     //    public static final String BASE_URL = "http://192.168.0.8:8000/";
-    public static final String BASE_URL = "http://10.43.2.22:1401/";
+    public static final String BASE_URL = "http://10.43.2.22:1402/";
     public static final String DATE_FORMAT_1 = "dd MMMM yyyy";
     public static final String DATE_FORMAT_2 = "dd/MM/yyyy";
     public static final String DATE_FORMAT_3 = "yyyy-MM-dd HH:mm:ss";

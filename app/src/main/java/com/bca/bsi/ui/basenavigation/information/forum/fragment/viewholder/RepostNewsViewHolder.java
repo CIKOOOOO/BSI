@@ -17,7 +17,9 @@ import com.bca.bsi.ui.basenavigation.information.forum.fragment.OnPostClick;
 import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
-
+/**
+ * Purpose : to show forum post with re-post news type only
+ */
 public class RepostNewsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private TextView tvName, tvDate, tvSourceName, tvSourceDate, tvContent, tvNews, tvLike, tvComment, tvShare, tvLookMore;

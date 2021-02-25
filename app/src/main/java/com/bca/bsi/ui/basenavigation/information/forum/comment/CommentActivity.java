@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +50,14 @@ import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.util.List;
+
+/**
+ * Comment Activity is same as Detail Post Activity
+ * It will show detail of every post type and list of comment as well
+ * It can report / save post if post wasn't made by current user and
+ * It will show edit / delete post if post was made by current user
+ * It can post a new comment & delete comment
+ */
 
 public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onReport, ICommentCallback, CommentImageAdapter.onImageClick, ReportAdapter.onReportClick, ImageDialog.onDismissView, ReshareDialog.onReshare, DeleteDialog.onDelete {
 

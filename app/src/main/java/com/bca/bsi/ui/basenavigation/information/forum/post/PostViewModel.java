@@ -17,6 +17,7 @@ import com.bca.bsi.utils.constant.Type;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -174,7 +175,7 @@ public class PostViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-//                Log.e("asd", response.code() + " - " + Utils.toJSON(response.body()));
+                Log.e("asd", response.code() + " - " + Utils.toJSON(response.body()));
 //                try {
 //                    Log.e("asd", response.errorBody().string());
 //                } catch (IOException e) {
