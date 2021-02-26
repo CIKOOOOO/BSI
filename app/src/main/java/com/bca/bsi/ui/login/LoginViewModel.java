@@ -56,7 +56,7 @@ public class LoginViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-//                Log.e("asd", response.code() + " - login");
+                Log.e("asd", response.code() + " - login");
 //                try {
 //                    Log.e("asd", response.code() + " - " + response.errorBody().string());
 //                } catch (IOException e) {

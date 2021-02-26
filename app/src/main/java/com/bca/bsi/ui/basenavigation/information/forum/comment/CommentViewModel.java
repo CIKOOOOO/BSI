@@ -285,6 +285,7 @@ public class CommentViewModel extends AndroidViewModel {
     public void sendComment(String tokenUser, String profileID, String postID, String content) {
         Map<String, Object> objectMap = new HashMap<>();
         objectMap.put("comment", content);
+        Log.e("asd", tokenUser + " - " + profileID + " - " + postID + " - " + content);
         Call<OutputResponse> call = apiInterface.sendComment(tokenUser, profileID, postID, objectMap);
         call.enqueue(new Callback<OutputResponse>() {
             @Override

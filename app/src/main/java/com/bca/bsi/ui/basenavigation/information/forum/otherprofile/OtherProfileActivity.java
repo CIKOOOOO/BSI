@@ -68,8 +68,7 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initVar() {
-        ImageButton imgActionBtn = findViewById(R.id.img_btn_action_toolbar_back_with_image);
-        ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar_with_image);
+        ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
         RecyclerView recyclerView = findViewById(R.id.recycler_other_profile);
         LinearLayout llForumProfile = findViewById(R.id.ll_forum_profile);
         ConstraintLayout clBSReport = findViewById(R.id.cl_choose_image);
@@ -81,10 +80,12 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
         tvFollower = findViewById(R.id.tv_follower_other_forum_profile);
         tvFollowing = findViewById(R.id.tv_following_other_forum_profile);
         tvName = findViewById(R.id.tv_name_other_profile);
-        tvTitle = findViewById(R.id.tv_title_toolbar_back_with_image);
+        tvTitle = findViewById(R.id.tv_title_toolbar_back);
         imgBackground = findViewById(R.id.img_view_header_forum_profile);
         frameLayout = findViewById(R.id.frame_blur);
         btnReport = findViewById(R.id.bs_btn_update_choose_image);
+
+        findViewById(R.id.tv_child_toolbar_back).setVisibility(View.GONE);
 
         adapter = new ChildMainForumAdapter(Type.PROFILE, prefConfig.getProfileID(), this, true);
         reportAdapter = new ReportAdapter(this);
@@ -110,7 +111,6 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
         recyclerReport.setLayoutManager(new LinearLayoutManager(this));
         recyclerReport.setAdapter(reportAdapter);
 
-        imgActionBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_inbox_logo));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -128,7 +128,6 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
         }
 
         imgBack.setOnClickListener(this);
-        imgActionBtn.setOnClickListener(this);
         llForumProfile.setOnClickListener(this);
 
         frameLayout.setOnClickListener(this);
@@ -139,7 +138,7 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.img_btn_back_toolbar_with_image:
+            case R.id.img_btn_back_toolbar:
                 onBackPressed();
                 break;
             case R.id.img_btn_action_toolbar_back_with_image:
@@ -238,6 +237,7 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
 
     /**
      * this function to refresh status of following
+     *
      * @param user
      */
     @Override
@@ -249,15 +249,18 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
             drawable = R.drawable.rectangle_rounded_white_5dp;
             color = R.color.color_base_welma;
             followStatus = "Unfollow";
+            this.user.setFollowerCount(String.valueOf(Integer.parseInt(this.user.getFollowerCount()) + 1));
         } else {
             drawable = R.drawable.rectangle_rounded_welma_5dp;
             color = R.color.white_palette;
             followStatus = "Follow";
+            this.user.setFollowerCount(String.valueOf(Integer.parseInt(this.user.getFollowerCount()) - 1));
         }
 
         tvFollow.setBackground(ContextCompat.getDrawable(this, drawable));
         tvFollow.setTextColor(getResources().getColor(color));
         tvFollow.setText(followStatus);
+        tvFollower.setText(this.user.getFollowerCount());
     }
 
     @Override

@@ -74,9 +74,9 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
         tvDate.setText(data.getDate());
         tvLike.setText(data.getLike());
         tvComment.setText(data.getComment());
-        tvShare.setText(data.getShare());
+//        tvShare.setText(data.getShare());
 
-        Log.e("asd", Utils.toJSON(data));
+//        Log.e("asd", Utils.toJSON(data));
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
         int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;

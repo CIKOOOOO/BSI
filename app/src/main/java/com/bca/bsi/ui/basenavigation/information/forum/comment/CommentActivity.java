@@ -59,7 +59,7 @@ import java.util.List;
  * It can post a new comment & delete comment
  */
 
-public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onReport, ICommentCallback, CommentImageAdapter.onImageClick, ReportAdapter.onReportClick, ImageDialog.onDismissView, ReshareDialog.onReshare, DeleteDialog.onDelete {
+public class CommentActivity extends BaseActivity implements View.OnClickListener, CommentAdapter.onCommentClick, ICommentCallback, CommentImageAdapter.onImageClick, ReportAdapter.onReportClick, ImageDialog.onDismissView, ReshareDialog.onReshare, DeleteDialog.onDelete {
 
     public static final String DATA = "data";
     public static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5;
@@ -79,7 +79,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     private Forum.Report report;
     private ImageDialog imageDialog;
     private ImageButton imgBtnMore;
-    private TextView tvLike, tvShare;
+    private TextView tvLike, tvShare, tvComment;
     private String reportType, postID;
     private ReshareDialog reshareDialog;
     private DeleteDialog deleteDialog;
@@ -95,7 +95,6 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     private void initVar() {
         ImageButton imgBack = findViewById(R.id.img_btn_back_toolbar);
         TextView tvTitle = findViewById(R.id.tv_title_toolbar_back);
-        TextView tvComment = findViewById(R.id.tv_post_new_comment);
         RecyclerView recyclerComment = findViewById(R.id.recycler_comment);
         ConstraintLayout clBSReport = findViewById(R.id.cl_choose_image);
         RecyclerView recyclerReport = findViewById(R.id.bs_recycler_choose_image);
@@ -107,6 +106,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         tvTitleReport = findViewById(R.id.bs_tv_title_choose_image);
         tvLike = findViewById(R.id.recycler_tv_like_comment);
         tvShare = findViewById(R.id.recycler_tv_share_comment);
+        tvComment = findViewById(R.id.recycler_tv_comment_comment);
 
         reportAdapter = new ReportAdapter(this);
 
@@ -327,6 +327,18 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         deleteDialog.show(getSupportFragmentManager(), "comment-delete");
     }
 
+    @Override
+    public void onDetailProfile(String profileID) {
+        Intent intent;
+        if (profileID.equalsIgnoreCase(prefConfig.getProfileID())) {
+            intent = new Intent(this, ForumProfileActivity.class);
+        } else {
+            intent = new Intent(this, OtherProfileActivity.class);
+            intent.putExtra(OtherProfileActivity.DATA, profileID);
+        }
+        startActivity(intent);
+    }
+
     private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -355,7 +367,6 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         ConstraintLayout clComment = findViewById(R.id.cl_comment);
         ConstraintLayout clShareTrade = findViewById(R.id.cl_share_trade);
         FrameLayout frameComment = findViewById(R.id.frame_comment);
-        TextView tvComment = findViewById(R.id.recycler_tv_comment_comment);
 
         ConstraintLayout clRepost;
         RoundedImageView rivProfile, rivRepostProfile;
@@ -685,6 +696,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onDeleteCommentSuccess(String commentID) {
         commentAdapter.removeComment(commentID);
+        this.post.setComment(String.valueOf(Integer.parseInt(this.post.getComment()) - 1));
+        tvComment.setText(this.post.getComment());
         showSnackBar("Hapus Komentar berhasil");
     }
 
@@ -698,9 +711,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onSuccessSendComment(Forum.Comment comment) {
         etComment.setText("");
+        this.post.setComment(String.valueOf(Integer.parseInt(this.post.getComment()) + 1));
         comment.setImage(prefConfig.getImageProfile());
         comment.setName(prefConfig.getUsername());
         comment.setProfileID(prefConfig.getProfileID());
+        tvComment.setText(this.post.getComment());
 //        Log.e("asd", Utils.toJSON(comment));
 //        try {
 //            String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_7, Constant.DATE_FORMAT_5, comment.getDate());

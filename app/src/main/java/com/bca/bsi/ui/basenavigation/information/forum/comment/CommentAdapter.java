@@ -31,11 +31,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
 
     private List<Forum.Comment> commentList;
     private Context mContext;
-    private onReport onReport;
+    private onCommentClick onCommentClick;
     private String profileID;
 
-    public CommentAdapter(CommentAdapter.onReport onReport, String profileID) {
-        this.onReport = onReport;
+    public CommentAdapter(onCommentClick onCommentClick, String profileID) {
+        this.onCommentClick = onCommentClick;
         this.profileID = profileID;
         commentList = new ArrayList<>();
     }
@@ -44,13 +44,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
         this.commentList = commentList;
     }
 
-    public interface onReport {
+    public interface onCommentClick {
         void onReportClick(Forum.Comment comment);
 
         void onDeleteComment(Forum.Comment comment);
+
+        void onDetailProfile(String profileID);
     }
 
-    public void addComment(Forum.Comment comment){
+    public void addComment(Forum.Comment comment) {
         this.commentList.add(comment);
         notifyDataSetChanged();
     }
@@ -104,10 +106,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()) {
                                 case R.id.menu_delete:
-                                    onReport.onDeleteComment(comment);
+                                    onCommentClick.onDeleteComment(comment);
                                     break;
                                 case R.id.menu_report:
-                                    onReport.onReportClick(comment);
+                                    onCommentClick.onReportClick(comment);
                                     break;
                             }
                             return true;
@@ -115,6 +117,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
                     });
 
                     popup.show();
+                }
+            });
+
+            holder.roundedImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onCommentClick.onDetailProfile(comment.getProfileID());
+                }
+            });
+
+            holder.tvName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onCommentClick.onDetailProfile(comment.getProfileID());
                 }
             });
         }

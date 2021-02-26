@@ -558,6 +558,10 @@ public class Forum {
         public User() {
         }
 
+        public void setFollowerCount(String followerCount) {
+            this.followerCount = followerCount;
+        }
+
         public String getImgBackgroundUrl() {
             return imgBackgroundUrl;
         }
