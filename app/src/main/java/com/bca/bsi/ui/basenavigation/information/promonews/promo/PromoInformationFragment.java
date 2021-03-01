@@ -53,7 +53,7 @@ public class PromoInformationFragment extends BaseFragment implements IPromoInfo
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(promoNewsAdapter);
 
-        viewModel.getPromoList();
+//        viewModel.getPromoList();
     }
 
     @Override

@@ -20,7 +20,9 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
-
+/**
+ * Purpose : to show forum post with share trade type only
+ */
 public class ShareTradeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private RoundedImageView roundedImageView;

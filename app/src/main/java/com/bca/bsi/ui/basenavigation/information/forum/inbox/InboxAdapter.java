@@ -14,6 +14,9 @@ import com.bca.bsi.model.Forum;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.Holder> {
 
     private List<Forum.Inbox> inboxList;

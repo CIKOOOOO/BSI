@@ -37,6 +37,15 @@ public class ChildMainForumViewModel extends AndroidViewModel {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
     }
 
+    /**
+     * To load post list base on type and pages
+     * @param type
+     * @param pages
+     * @param tokenUser
+     * @param profileID
+     * @param profileRisiko
+     */
+
     public void loadForumPost(String type, int pages, String tokenUser, String profileID, String profileRisiko) {
         if (this.page != pages && !isLast) {
             this.page = pages;

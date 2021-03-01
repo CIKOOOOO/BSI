@@ -46,7 +46,7 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
         this.historyList = new ArrayList<>();
     }
 
-    public void clearData(){
+    public void clearData() {
         this.historyList.clear();
         this.informationList.clear();
         notifyDataSetChanged();
@@ -63,12 +63,12 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        int layout = viewType == 1 ? R.layout.recycler_history : R.layout.recycler_informasi;
-//        if (type.equals(HISTORY)) {
-//            layout = R.layout.recycler_history;
-//        } else {
-//            layout = R.layout.recycler_informasi;
-//        }
+        int layout;
+        if (viewType == 2) {
+            layout = R.layout.custom_loading_white;
+        } else {
+            layout = viewType == 1 ? R.layout.recycler_history : R.layout.recycler_informasi;
+        }
         View view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         return new Holder(view);
     }
@@ -95,7 +95,7 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
                     onClickShare.onShareNews(history);
                 }
             });
-        } else {
+        } else if (getItemViewType(position) == 0) {
             // Bind untuk information
             Portfolio.Information information = informationList.get(position);
             holder.tvReksaName_INF.setText(information.getName());
@@ -127,12 +127,40 @@ public class InformasiHistoryAdapter extends RecyclerView.Adapter<InformasiHisto
 
     @Override
     public int getItemCount() {
-        return type.equals(HISTORY) ? historyList.size() : informationList.size();
+        int types;
+        if (type.equals(HISTORY)) {
+            if (historyList.size() == 0) {
+                types = 1;
+            } else {
+                types = historyList.size();
+            }
+        } else {
+            if (informationList.size() == 0) {
+                types = 1;
+            } else {
+                types = informationList.size();
+            }
+        }
+        return types;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return type.equals(HISTORY) ? 1 : 0;
+        int types;
+        if (type.equals(HISTORY)) {
+            if (historyList.size() == 0) {
+                types = 2;
+            } else {
+                types = 1;
+            }
+        } else {
+            if (informationList.size() == 0) {
+                types = 2;
+            } else {
+                types = 0;
+            }
+        }
+        return types;
     }
 
     static class Holder extends RecyclerView.ViewHolder {

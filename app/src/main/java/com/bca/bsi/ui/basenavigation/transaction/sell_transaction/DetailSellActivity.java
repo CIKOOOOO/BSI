@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -24,6 +25,9 @@ import com.google.gson.Gson;
 
 import java.text.ParseException;
 
+/**
+ * Activity to process selling, same like detail_product_transaction package
+ */
 public class DetailSellActivity extends BaseActivity implements View.OnClickListener, IDetailSellCallback {
 
     public static final String DATA = "data";
@@ -79,8 +83,12 @@ public class DetailSellActivity extends BaseActivity implements View.OnClickList
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
         }
+
+        cbSellAll.setOnCheckedChangeListener((compoundButton, b) -> {
+            String price = b ? information.getNab() + "" : "0";
+            etNominal.setText(price);
+        });
 
         btnSell.setOnClickListener(this);
         imgBack.setOnClickListener(this);
@@ -94,13 +102,14 @@ public class DetailSellActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.btn_next_detail_sell:
                 String amount = etNominal.getText().toString().trim();
+                CheckBox checkBox = findViewById(R.id.cb_sell_all_detail_transaction);
                 if (amount.isEmpty()) {
                     showSnackBar("Mohon isi jumlah unit penjualan");
                 } else if (null == this.detailReksaDana) {
                     viewModel.loadData(prefConfig.getTokenUser(), reksadanaID);
                 } else if (this.information.getUnit() < Double.parseDouble(amount)) {
                     showSnackBar("Jumlah unit penjualan harus lebih kecil dari unit kepemilikan");
-                } else if (this.information.getUnit() - Double.parseDouble(amount) < 100) {
+                } else if (!checkBox.isChecked() && this.information.getUnit() - Double.parseDouble(amount) < 100) {
                     showSnackBar("Anda harus menyisihkan minimal 100 unit reksa dana");
                 } else {
                     double nominal = Double.parseDouble(amount) * Double.parseDouble(this.detailReksaDana.getNabPerUnit());

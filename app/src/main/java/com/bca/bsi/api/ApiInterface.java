@@ -3,7 +3,6 @@ package com.bca.bsi.api;
 
 import com.bca.bsi.model.OutputResponse;
 
-import java.util.List;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -198,7 +197,8 @@ public interface ApiInterface {
     @Headers({"hashcode: ", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @POST("forum/post/{postID}/comment")
     Call<OutputResponse> sendComment(@Header("token-user") String tokenUser
-            , @Header("profile-id") String profileID, @Path("postID") String postID, @Body Map<String, Object> stringObjectHashMap);
+            , @Header("profile-id") String profileID, @Path("postID") String postID
+            , @Body Map<String, Object> stringObjectHashMap);
 
     @Headers({"hashcode: ", "client-id: OV4B2FXHY1Y7W0WMSUUB"})
     @GET("products/robo")

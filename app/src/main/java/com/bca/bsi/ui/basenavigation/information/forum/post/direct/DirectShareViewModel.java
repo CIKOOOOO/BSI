@@ -10,7 +10,6 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.User;
-import com.bca.bsi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,13 +95,20 @@ public class DirectShareViewModel extends AndroidViewModel {
 //        callback.onLoadForumUser(DummyData.getForumUser());
     }
 
+    /**
+     * This condition appear when user edit the post with privacy direct
+     * so we need to get those list of direct user and show it
+     *
+     * @param token
+     * @param postID
+     */
     public void loadExistingChosenUserList(String token, String postID) {
-        Log.e("asd", postID);
+//        Log.e("asd", postID);
         Call<OutputResponse> call = apiInterface.getDirectChosenUserList(token, postID);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("asd", Utils.toJSON(response.body()));
+//                Log.e("asd", Utils.toJSON(response.body()));
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
@@ -110,7 +116,7 @@ public class DirectShareViewModel extends AndroidViewModel {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         chosenUserList.addAll(outputSchema.getDirectUserList());
                         compareData();
-                        Log.e("asd", chosenUserList.size() + " size");
+//                        Log.e("asd", chosenUserList.size() + " size");
                         callback.onLoadChosenForumUser(chosenUserList);
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
@@ -122,7 +128,7 @@ public class DirectShareViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
-                Log.e("asd", t.getMessage() + " on fail");
+//                Log.e("asd", t.getMessage() + " on fail");
                 callback.onFailed("");
             }
         });
@@ -153,7 +159,7 @@ public class DirectShareViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
-                Log.e("asd", "Onfailed " + t.getMessage());
+//                Log.e("asd", "Onfailed " + t.getMessage());
                 callback.onFailed("");
             }
         });
@@ -201,6 +207,13 @@ public class DirectShareViewModel extends AndroidViewModel {
         });
     }
 
+    /**
+     * condition when user add chosen user
+     * we should remove from visible data in UI
+     * then show it back
+     *
+     * @param forumUser
+     */
     public void addChosenUser(User.ForumUser forumUser) {
         this.chosenUserList.add(forumUser);
         for (int i = 0; i < this.visibleForumList.size(); i++) {
@@ -214,6 +227,13 @@ public class DirectShareViewModel extends AndroidViewModel {
         callback.onLoadChosenForumUser(this.chosenUserList);
     }
 
+    /**
+     * condition when user remove chosen user
+     * we should compare data, check if profile id is visible in UI
+     * if visible, then we add to visible forum list
+     *
+     * @param forumUser
+     */
     public void removeChosenUser(User.ForumUser forumUser) {
         for (int i = 0; i < this.chosenUserList.size(); i++) {
             User.ForumUser forumUser1 = this.chosenUserList.get(i);
@@ -233,6 +253,10 @@ public class DirectShareViewModel extends AndroidViewModel {
         callback.onLoadChosenForumUser(this.chosenUserList);
     }
 
+    /**
+     * condition when user search id
+     * we should remove the same id in visible forum list with chosen forum list
+     */
     private void compareData() {
         this.visibleForumList.clear();
         this.visibleForumList.addAll(this.forumUserList);

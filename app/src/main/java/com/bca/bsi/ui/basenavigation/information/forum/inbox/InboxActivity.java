@@ -17,6 +17,9 @@ import com.bca.bsi.utils.BaseActivity;
 
 import java.util.List;
 
+/**
+ * Show list of inbox
+ */
 public class InboxActivity extends BaseActivity implements View.OnClickListener, InboxAdapter.onInboxClick, IInboxCallback {
 
     private InboxAdapter inboxAdapter;

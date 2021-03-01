@@ -31,6 +31,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity to show detail of each product
+ */
 public class DetailProductTransactionActivity extends BaseActivity implements IDetailProductTransactionCallback, View.OnClickListener {
 
     public static final String PRODUCT_TYPE = "type";
@@ -105,7 +108,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
 //                productNameDetailTransactionAdapter.setProductTransactions(productTransactionList);
 //                productNameDetailTransactionAdapter.notifyDataSetChanged();
 
-                Log.e("asd", product);
+//                Log.e("asd", product);
 
                 viewModel.loadDetailTransaksi(prefConfig.getTokenUser(), prefConfig.getAccountNumber(), product);
             } else if (productType.equals(Type.PURCHASING_WITH_SMARTBOT)) {
@@ -228,7 +231,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
     public void loadSaldo(User.BCAUser.Rekening bcaUser, Product.DetailReksaDana detailReksaDana) {
         this.detailReksaDana = detailReksaDana;
         this.rekening = bcaUser;
-        Log.e("asd", detailReksaDana.getName() + " " + productType);
+//        Log.e("asd", detailReksaDana.getName() + " " + productType);
 
         if (!productType.equals(Type.PURCHASING_WITH_SMARTBOT)) {
             String updateDate = null;
@@ -238,7 +241,7 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
                 e.printStackTrace();
             }
 
-            Log.e("asd", updateDate);
+//            Log.e("asd", updateDate);
 
             List<Product.ProductTransaction> productTransactions = new ArrayList<>();
             productTransactions.add(new Product.ProductTransaction(detailReksaDana.getName(), updateDate, detailReksaDana.getNabPerUnit()));

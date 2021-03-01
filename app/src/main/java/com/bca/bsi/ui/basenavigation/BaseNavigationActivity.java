@@ -120,13 +120,15 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date(Utils.getTime(Constant.DATE_FORMAT_1)));
-        boolean monday = cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+        boolean monday = cal.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY;
+
+        Log.e("asd", monday + " - " + prefConfig.getTimeTipsOfTheWeek() + " - " + Utils.getTime(Constant.DATE_FORMAT_2));
 
         if (
-//                monday
-//                        &&
-                prefConfig.getTipsActivated()
-//                && !prefConfig.getTimeTipsOfTheWeek().equals(Utils.getTime(Constant.DATE_FORMAT_2))
+                monday
+                        &&
+                        prefConfig.getTipsActivated()
+                        && !prefConfig.getTimeTipsOfTheWeek().equals(Utils.getTime(Constant.DATE_FORMAT_2))
         ) { // Day-2 = Monday
             viewModel.getTipsOfTheWeek(prefConfig.getTokenUser());
         }
@@ -276,12 +278,13 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
 
     @Override
     public void dontAskTipsOfTheWeek(boolean isShow) {
-        prefConfig.setTipsOfTheWeek(isShow);
+        Log.e("asd", isShow + "");
+        prefConfig.setTipsOfTheWeek(!isShow);
     }
 
     @Override
     public void onLoadTipsOfTheWeek(TipsOfTheWeek tipsOfTheWeek) {
-//        prefConfig.setTimeOfTipsOfTheWeek(Utils.getTime(Constant.DATE_FORMAT_2));
+        prefConfig.setTimeOfTipsOfTheWeek(Utils.getTime(Constant.DATE_FORMAT_2));
         tipsOfTheWeekDialog.setTipsOfTheWeek(tipsOfTheWeek);
         tipsOfTheWeekDialog.show(getSupportFragmentManager(), "");
     }

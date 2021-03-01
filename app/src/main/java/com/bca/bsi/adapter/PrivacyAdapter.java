@@ -10,12 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.bsi.R;
-import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.Privacy;
 import com.bca.bsi.utils.constant.Constant;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+/**
+ * Privacy adapter to show type of forum privacy
+ * Such as Global, Followers or direct
+ */
 
 public class PrivacyAdapter extends RecyclerView.Adapter<PrivacyAdapter.Holder> {
 

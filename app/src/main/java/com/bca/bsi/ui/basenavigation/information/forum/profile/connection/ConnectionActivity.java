@@ -128,7 +128,7 @@ public class ConnectionActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onFollow(String profileID) {
-        Log.e("asd", "Self profile : " + prefConfig.getProfileID() + " - Other Profile : " + profileID);
+//        Log.e("asd", "Self profile : " + prefConfig.getProfileID() + " - Other Profile : " + profileID);
         viewModel.followUnFollowProfile(prefConfig.getTokenUser(), prefConfig.getProfileID(), profileID);
     }
 

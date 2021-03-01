@@ -67,7 +67,7 @@ public class LoginViewModel extends AndroidViewModel {
                     if (errorSchema.getErrorCode().equals("200")) {
                         User.ForumUser forumUser = response.body().getOutputSchema().getForumUser();
                         User.WelmaUser welmaUser = response.body().getOutputSchema().getWelmaUser();
-                        Log.e("asd", Utils.toJSON(response.body()));
+//                        Log.e("asd", Utils.toJSON(response.body()));
                         callback.onSuccess(forumUser, welmaUser);
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());

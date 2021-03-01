@@ -31,6 +31,9 @@ import com.bca.bsi.utils.dialog.ReshareDialog;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragment to show list of forum
+ */
 public class ChildMainForumFragment extends BaseFragment implements IChildMainForumCallback, OnPostClick, DeleteDialog.onDelete, ReshareDialog.onReshare {
     private static final String PARCEL_DATA = "parcel_data";
 
@@ -112,6 +115,12 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
 //        viewModel.loadForumPost(type, page, prefConfig.getTokenUser(), prefConfig.getProfileID(), prefConfig.getProfileRisiko());
     }
 
+    /**
+     *
+     * @param postList
+     * condition when data load postList
+     * then set page + 1 to get next data
+     */
     @Override
     public void onLoadData(List<Forum.Post> postList) {
         this.page++;
@@ -132,6 +141,9 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
         BaseNavigationActivity.loadReport(reportList, postID, type);
     }
 
+    /**
+     * Condition when data is run out
+     */
     @Override
     public void onOutOfData() {
         List<Forum.Post> postList = new ArrayList<>();

@@ -42,6 +42,7 @@ import com.bca.bsi.model.PromoNews;
 import com.bca.bsi.ui.basenavigation.information.forum.post.direct.DirectShareActivity;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.CustomLoading;
+import com.bca.bsi.utils.DecodeBitmap;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
@@ -423,7 +424,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 if (data.getData() != null) {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
 //                    Bitmap bitmap = DecodeBitmap.decodeSampleBitmapFromUri(data.getData(), 70, 70, this);
-                    imagesEncodedList.add(bitmap);
+                    imagesEncodedList.add(DecodeBitmap.compressBitmap(bitmap));
                 } else {
                     if (data.getClipData() != null) {
                         ClipData mClipData = data.getClipData();
@@ -446,7 +447,8 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 //                            Bitmap bitmap = DecodeBitmap.decodeSampleBitmapFromUri(uri, 70, 70, this);
 //                            Log.e("asd", "Bitmap before decode : " + bitmaps.getRowBytes() * bitmaps.getHeight());
 //                            Log.e("asd", "Bitmap after decode : " + bitmap.getRowBytes() * bitmap.getHeight());
-                            imagesEncodedList.add(bitmap);
+//                            imagesEncodedList.add(bitmap);
+                            imagesEncodedList.add(DecodeBitmap.compressBitmap(bitmap));
                         }
                     }
                 }
@@ -461,6 +463,13 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
         }
     }
 
+    /**
+     * when btn_share_post:
+     * we give a lot of condition to make sure news, share trade and edit
+     * is not showing bottom sheet anymore
+     *
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -472,7 +481,9 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                         || null != this.information
                         || null != this.history
                         || (null != this.post
-                        && null != this.post.getShareTrade())) {
+                        && null != this.post.getShareTrade())
+                        || (null != this.post
+                        && null != this.post.getPromoNews())) {
                     checkingDataBeforeSend();
                 } else {
                     if (type.equalsIgnoreCase(EDIT_POST)) {
@@ -611,6 +622,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                             break;
                         case Type.NEWS:
                             createPostMap.put("post_category_id", "4");
+                            createPostMap.put("news_id", this.post.getPromoNews().getNewsID());
                             break;
                     }
                     break;

@@ -20,6 +20,9 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity to show detail transaction after success purchasing or selling
+ */
 public class DetailTransactionActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String PARCEL_DATA = "parcel_data";

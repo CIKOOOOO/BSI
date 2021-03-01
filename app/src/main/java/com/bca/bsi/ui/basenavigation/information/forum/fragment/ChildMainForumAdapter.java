@@ -20,6 +20,9 @@ import com.bca.bsi.utils.constant.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Purpose : to process type of view holder, then send the data to chosen view holder
+ */
 public class ChildMainForumAdapter extends RecyclerView.Adapter {
 
     private static final int REPOST_NEWS = 1, STRATEGY = 2, SHARE_TRADE = 3, NEWS = 4, REPOST_GENERAL = 5, NO_DATA = 6, LOADING = 7;

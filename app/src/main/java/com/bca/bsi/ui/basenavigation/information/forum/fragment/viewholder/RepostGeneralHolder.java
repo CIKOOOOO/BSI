@@ -22,7 +22,9 @@ import com.bca.bsi.utils.SpacesItemDecoration;
 import com.bca.bsi.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
-
+/**
+ * Purpose : to show forum post with re-post general/strategy type only
+ */
 public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView tvName, tvDate, tvSourceName, tvSourceDate, tvContent, tvLike, tvComment, tvShare, tvLookMore;
     private RoundedImageView imgProfile, imgSourceProfile;
@@ -72,9 +74,9 @@ public class RepostGeneralHolder extends RecyclerView.ViewHolder implements View
         tvDate.setText(data.getDate());
         tvLike.setText(data.getLike());
         tvComment.setText(data.getComment());
-        tvShare.setText(data.getShare());
+//        tvShare.setText(data.getShare());
 
-        Log.e("asd", Utils.toJSON(data));
+//        Log.e("asd", Utils.toJSON(data));
 
         int drawableLike = post.getStatusLike().equalsIgnoreCase("true") ? R.drawable.ic_like : R.drawable.ic_no_like;
         int drawableShare = post.getStatusShare().equalsIgnoreCase("true") ? R.drawable.ic_share_yellow : R.drawable.ic_share;

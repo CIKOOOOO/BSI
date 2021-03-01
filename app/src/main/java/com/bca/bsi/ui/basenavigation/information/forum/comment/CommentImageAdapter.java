@@ -15,6 +15,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The purpose is to show list image inside of detail post
+ * When image is clicked, screen will show dialog with full screen of image
+ */
 public class CommentImageAdapter extends RecyclerView.Adapter<CommentImageAdapter.Holder> {
 
     private List<String> imageList;
