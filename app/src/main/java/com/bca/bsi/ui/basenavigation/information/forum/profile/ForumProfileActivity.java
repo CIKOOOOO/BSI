@@ -31,7 +31,6 @@ import com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.bookmark
 import com.bca.bsi.ui.basenavigation.information.forum.profile.fragment.posting.PostingFragment;
 import com.bca.bsi.utils.BaseActivity;
 import com.bca.bsi.utils.CustomLoading;
-import com.bca.bsi.utils.CustomViewPager;
 import com.bca.bsi.utils.GridSpacingItemDecoration;
 import com.bca.bsi.utils.Utils;
 import com.bca.bsi.utils.constant.Constant;
@@ -156,14 +155,19 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
                 int drawable;
                 String username = etName.getText().toString().trim();
                 if (etName.isEnabled()) {
-                    etName.setEnabled(false);
-                    drawable = R.drawable.ic_baseline_edit_24;
                     if (username.isEmpty()) {
+                        drawable = R.drawable.ic_baseline_check_gray;
                         showSnackBar("Username tidak boleh kosong");
                     } else if (username.length() < 3 || username.length() > 15) {
+                        drawable = R.drawable.ic_baseline_check_gray;
                         showSnackBar("Username harus terdiri dari 3 karakter dan kurang dari 15 karakter");
+                    } else if (username.contains(" ")) {
+                        drawable = R.drawable.ic_baseline_check_gray;
+                        showSnackBar("Username tidak boleh memiliki spasi");
                     } else {
-                        customLoading.show(getSupportFragmentManager(),"");
+                        etName.setEnabled(false);
+                        drawable = R.drawable.ic_baseline_edit_24;
+                        customLoading.show(getSupportFragmentManager(), "");
                         viewModel.editUsername(prefConfig.getTokenUser(), prefConfig.getProfileID(), username);
                     }
                 } else {
@@ -326,7 +330,7 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onFailed(String msg) {
-        if(null != customLoading && null != customLoading.getTag()){
+        if (null != customLoading && null != customLoading.getTag()) {
             customLoading.dismiss();
         }
         showSnackBar(msg);
