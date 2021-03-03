@@ -2,14 +2,17 @@ package com.bca.bsi.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bca.bsi.R;
+import com.bca.bsi.ui.splash.SplashActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 public class BaseFragment extends Fragment {
@@ -38,7 +41,7 @@ public class BaseFragment extends Fragment {
     }
 
     public void showSnackBar(String msg) {
-        if(msg.trim().isEmpty())
+        if (msg.trim().isEmpty())
             msg = "Mohon periksa jaringan Anda";
         View view = mActivity.findViewById(android.R.id.content);
         Snackbar snackbar = Snackbar
@@ -47,5 +50,12 @@ public class BaseFragment extends Fragment {
                 .setTextColor(view.getContext().getResources().getColor(R.color.white_palette))
                 .setDuration(3000);
         snackbar.show();
+    }
+
+    public void sessionExpired() {
+        mActivity.finishAffinity();
+        Intent intent = new Intent(mActivity, SplashActivity.class);
+        startActivity(intent);
+        Toast.makeText(mActivity, "Session Anda telah habis", Toast.LENGTH_SHORT).show();
     }
 }

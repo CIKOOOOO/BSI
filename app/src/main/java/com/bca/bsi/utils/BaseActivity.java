@@ -1,6 +1,7 @@
 package com.bca.bsi.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -8,11 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bca.bsi.R;
+import com.bca.bsi.ui.splash.SplashActivity;
 import com.bca.bsi.utils.dialog.CustomDialog;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -39,7 +42,7 @@ public class BaseActivity extends AppCompatActivity implements CustomDialog.onCl
     }
 
     public void showSnackBar(String msg) {
-        if(msg.trim().isEmpty())
+        if (msg.trim().isEmpty())
             msg = "Mohon periksa jaringan Anda";
         Snackbar snackbar = Snackbar
                 .make(view, msg, Snackbar.LENGTH_LONG)
@@ -71,5 +74,12 @@ public class BaseActivity extends AppCompatActivity implements CustomDialog.onCl
         if (customDialog != null && customDialog.getTag() != null) {
             customDialog.dismiss();
         }
+    }
+
+    public void sessionExpired() {
+        finishAffinity();
+        Intent intent = new Intent(this, SplashActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, "Session Anda telah habis", Toast.LENGTH_SHORT).show();
     }
 }
