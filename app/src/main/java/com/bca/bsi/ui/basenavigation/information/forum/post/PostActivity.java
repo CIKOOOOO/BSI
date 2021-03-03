@@ -204,7 +204,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                             }
 
                             //TODO: check disini share trade
-                            double price = this.information.getRaise() / this.information.getCost();
+                            double price = this.information.getRaise() / this.information.getCost() * 100;
 
                             tvTransactionType.setText(value);
                             tvNameShareTrade.setText(this.information.getName());
