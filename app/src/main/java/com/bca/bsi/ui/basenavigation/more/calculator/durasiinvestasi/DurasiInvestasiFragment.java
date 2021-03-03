@@ -362,4 +362,9 @@ public class DurasiInvestasiFragment extends BaseFragment implements View.OnClic
         selectedTanggalReksadanaTV.setText(detailReksaDana.getUpdateDate());
         productsPopUpDialog.dismiss();
     }
+
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
 }

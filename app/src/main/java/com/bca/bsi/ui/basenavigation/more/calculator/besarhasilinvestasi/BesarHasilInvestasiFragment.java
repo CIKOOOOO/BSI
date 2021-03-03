@@ -384,4 +384,9 @@ public class BesarHasilInvestasiFragment extends BaseFragment implements View.On
         selectedTanggalReksadanaTV.setText(detailReksaDana.getUpdateDate());
         productsPopUpDialog.dismiss();
     }
+
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
 }
