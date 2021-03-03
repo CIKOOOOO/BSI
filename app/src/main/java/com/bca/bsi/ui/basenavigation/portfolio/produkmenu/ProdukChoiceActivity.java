@@ -126,4 +126,9 @@ public class ProdukChoiceActivity extends BaseActivity implements IProductChoice
     public void onFail(String msg) {
         showSnackBar(msg);
     }
+
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface IProductChoiceCallback {
     void onLoadData(List<Product.ReksaDana> products);
     void onFail(String msg);
+    void onSessionExpired();
+
 }

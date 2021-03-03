@@ -11,6 +11,7 @@ import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 
 import java.util.HashMap;
@@ -77,6 +78,8 @@ public class CommentViewModel extends AndroidViewModel {
                             callback.onLoadComment(post, post.getCommentList(), type);
                         }
 
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -103,6 +106,8 @@ public class CommentViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLoadReport(outputSchema.getReportList(), comment);
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -130,6 +135,8 @@ public class CommentViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLoadReport(outputSchema.getReportList(), post);
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -159,6 +166,8 @@ public class CommentViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onSaveResult(outputSchema.getSavePost());
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed("Save post gagal, mohon cek jaringan Anda");
                     }
@@ -184,6 +193,8 @@ public class CommentViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         callback.onDeleteSuccess();
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -209,6 +220,8 @@ public class CommentViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         callback.onDeleteCommentSuccess(commentID);
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -237,6 +250,8 @@ public class CommentViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLikeResult(outputSchema.getLikePost());
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -264,6 +279,8 @@ public class CommentViewModel extends AndroidViewModel {
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             callback.onRepostSuccess();
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
                         } else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
@@ -297,6 +314,8 @@ public class CommentViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onSuccessSendComment(outputSchema.getComment());
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -328,6 +347,8 @@ public class CommentViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         callback.onSuccessReport();
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed("Mengirim report gagal. Mohon coba lagi kembali");
                     }

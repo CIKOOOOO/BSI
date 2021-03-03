@@ -10,4 +10,5 @@ public interface IDetailReksaDanaCallback {
 
     void onFailed(String msg);
 
+    void onSessionExpired();
 }

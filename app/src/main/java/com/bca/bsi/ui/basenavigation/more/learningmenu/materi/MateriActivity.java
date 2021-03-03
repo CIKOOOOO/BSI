@@ -177,4 +177,9 @@ public class MateriActivity extends BaseActivity implements View.OnClickListener
     public void onFailed(String msg) {
         System.out.println("ERROR: " + msg);
     }
+
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
 }

@@ -10,6 +10,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +30,7 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
     }
 
     public void loadBundle(String token, String no_rekening, String reksa_id, String proportion) {
-        Log.e("asd", reksa_id);
+//        Log.e("asd", reksa_id);
         Call<OutputResponse> call = apiInterface.getRoboHitungCustom(token, no_rekening, reksa_id, proportion);
         call.enqueue(new Callback<OutputResponse>() {
             @Override
@@ -40,26 +41,28 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
 //                    e.printStackTrace();
 //                }
                 if (response.body() != null && null != response.body().getErrorSchema()) {
-                    Log.e("asd", "tes2");
+//                    Log.e("asd", "tes2");
                     OutputResponse outputResponse = response.body();
                     if (outputResponse.getErrorSchema().getErrorCode().equals("200")) {
-                        Log.e("asd", "tes3");
+//                        Log.e("asd", "tes3");
                         OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                         callback.onLoadData(outputSchema.getBundles());
-                        Log.e("asd", Utils.toJSON(outputSchema));
+//                        Log.e("asd", Utils.toJSON(outputSchema));
+                    } else if (outputResponse.getErrorSchema().getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
-                        Log.e("asd", "tes4");
+//                        Log.e("asd", "tes4");
                         callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
                     }
                 } else {
-                    Log.e("asd", "tes5");
+//                    Log.e("asd", "tes5");
                     callback.onFail("Mohon periksa jaringan anda");
                 }
             }
 
             @Override
             public void onFailure(Call<OutputResponse> call, Throwable t) {
-                Log.e("asd", "tes6");
+//                Log.e("asd", "tes6");
                 callback.onFail("Mohon periksa jaringan anda");
             }
         });
@@ -78,18 +81,20 @@ public class PurchasingSmartbotViewModel extends AndroidViewModel {
 //                    e.printStackTrace();
 //                }
                 if (response.body() != null) {
-                    Log.e("asd", "tes2");
+//                    Log.e("asd", "tes2");
                     OutputResponse outputResponse = response.body();
                     if (outputResponse.getErrorSchema().getErrorCode().equals("200")) {
-                        Log.e("asd", "tes3");
+//                        Log.e("asd", "tes3");
                         OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                         callback.onLoadDataCustom(outputSchema.getBundles());
+                    } else if (outputResponse.getErrorSchema().getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
-                        Log.e("asd", "tes4");
+//                        Log.e("asd", "tes4");
                         callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
                     }
                 } else {
-                    Log.e("asd", "tes5");
+//                    Log.e("asd", "tes5");
                     callback.onFail("Mohon periksa jaringan anda");
                 }
             }

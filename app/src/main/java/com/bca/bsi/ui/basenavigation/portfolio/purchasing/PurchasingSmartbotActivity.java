@@ -184,6 +184,11 @@ public class PurchasingSmartbotActivity extends BaseActivity implements IPurchas
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_lanjut:

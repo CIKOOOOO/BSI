@@ -10,4 +10,6 @@ public interface IPostCallback {
     void onFailed(String msg);
 
     void onSuccessPost();
+
+    void onSessionExpired();
 }

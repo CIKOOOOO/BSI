@@ -164,6 +164,11 @@ public class PostingFragment extends BaseFragment implements OnPostClick, IPosti
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onSendDeletePost(String postID) {
         if (deleteDialog != null && deleteDialog.getTag() != null) {
             deleteDialog.dismiss();

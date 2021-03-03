@@ -21,4 +21,6 @@ public interface IOtherProfileCallback {
     void onLikeResult(Forum.LikePost likePost);
 
     void onFailed(String msg);
+
+    void onSessionExpired();
 }

@@ -535,6 +535,11 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
         finish();
     }
 
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
     private void checkingDataBeforeSend() {
         HashMap<String, Object> createPostMap = new HashMap<>();
         String content = etContent.getText().toString().trim();

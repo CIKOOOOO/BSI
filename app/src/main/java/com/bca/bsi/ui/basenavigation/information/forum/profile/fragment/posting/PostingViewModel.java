@@ -10,6 +10,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +40,9 @@ public class PostingViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         callback.onDeleteSuccess(postID);
-                    } else {
+                    }  else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
                 } else {
@@ -66,6 +69,8 @@ public class PostingViewModel extends AndroidViewModel {
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             callback.onReshareResult(true, postID);
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
                         } else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
@@ -96,6 +101,8 @@ public class PostingViewModel extends AndroidViewModel {
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             callback.onReshareResult(false, postID);
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
                         } else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
@@ -127,6 +134,8 @@ public class PostingViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLikeResult(outputSchema.getLikePost());
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

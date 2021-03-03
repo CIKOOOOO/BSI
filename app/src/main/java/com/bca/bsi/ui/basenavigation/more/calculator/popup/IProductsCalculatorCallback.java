@@ -6,7 +6,12 @@ import java.util.List;
 
 public interface IProductsCalculatorCallback {
     void onLoadData(List<Product.ReksaDana> products);
+
     void onFail(String msg);
+
     void onLoadReksaDanaDetail(Product.DetailReksaDana detailReksaDana, List<Product.Performance> performances);
+
     void onFailed(String msg);
+
+    void onSessionExpired();
 }

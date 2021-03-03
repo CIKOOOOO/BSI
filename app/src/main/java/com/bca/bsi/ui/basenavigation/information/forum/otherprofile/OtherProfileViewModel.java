@@ -50,14 +50,16 @@ public class OtherProfileViewModel extends AndroidViewModel {
                 if (null != response.body()) {
                     OutputResponse outputResponse = response.body();
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
-                    Log.e("asd", "Retrofit 2 : " + Utils.toJSON(outputResponse));
+//                    Log.e("asd", "Retrofit 2 : " + Utils.toJSON(outputResponse));
                     if (null == errorSchema) {
                         callback.onFailed("");
                     } else {
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                             callback.onLoadData(outputSchema.getForumProfileUser(), getListPost(outputSchema.getMyPostList()));
-                        } else {
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase("401")) {
+                            callback.onSessionExpired();
+                        }else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
                     }
@@ -87,7 +89,9 @@ public class OtherProfileViewModel extends AndroidViewModel {
                         if (errorSchema.getErrorCode().equals("200")) {
                             OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                             callback.onLoadData(outputSchema.getForumProfileUser());
-                        } else {
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase("401")) {
+                            callback.onSessionExpired();
+                        }else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
                     } else {
@@ -147,7 +151,9 @@ public class OtherProfileViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onSaveResult(outputSchema.getSavePost());
-                    } else {
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase("401")) {
+                        callback.onSessionExpired();
+                    }else {
                         callback.onFailed("Save post gagal, mohon cek jaringan Anda");
                     }
                 } else {
@@ -174,6 +180,8 @@ public class OtherProfileViewModel extends AndroidViewModel {
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             callback.onReshareResult(true, postID);
+                        }else if (errorSchema.getErrorCode().equalsIgnoreCase("401")) {
+                            callback.onSessionExpired();
                         } else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
@@ -204,7 +212,9 @@ public class OtherProfileViewModel extends AndroidViewModel {
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             callback.onReshareResult(false, postID);
-                        } else {
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
+                        }else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
                     } else {
@@ -233,6 +243,8 @@ public class OtherProfileViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLoadReportData(outputSchema.getReportList(), type, postID);
+                    }else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -261,7 +273,9 @@ public class OtherProfileViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         callback.onReportSuccess();
-                    } else {
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }else {
                         callback.onFailed("Mengirim report gagal. Mohon coba lagi kembali");
                     }
                 } else {
@@ -288,6 +302,8 @@ public class OtherProfileViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLikeResult(outputSchema.getLikePost());
+                    }else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

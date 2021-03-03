@@ -27,4 +27,6 @@ public interface ICommentCallback {
     void onSaveResult(Forum.SavePost savePost);
 
     void onSuccessSendComment(Forum.Comment comment);
+
+    void onSessionExpired();
 }

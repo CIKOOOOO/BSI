@@ -115,6 +115,11 @@ public class ProductsPopUpActivity extends BaseActivity implements IProductsCalc
 
     }
 
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
     /*
     @Override
     public void retrieveDetailReksaDana(Product.DetailReksaDana detailReksaDana) {

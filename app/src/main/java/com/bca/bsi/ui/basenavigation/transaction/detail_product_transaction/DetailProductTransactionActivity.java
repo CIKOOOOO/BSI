@@ -257,4 +257,9 @@ public class DetailProductTransactionActivity extends BaseActivity implements ID
     public void onFailed(String msg) {
         showSnackBar(msg);
     }
+
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
 }

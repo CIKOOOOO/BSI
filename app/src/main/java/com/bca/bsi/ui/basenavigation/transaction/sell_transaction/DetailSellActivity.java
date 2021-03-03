@@ -146,4 +146,9 @@ public class DetailSellActivity extends BaseActivity implements View.OnClickList
     public void onFailed(String msg) {
         showSnackBar(msg);
     }
+
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
 }

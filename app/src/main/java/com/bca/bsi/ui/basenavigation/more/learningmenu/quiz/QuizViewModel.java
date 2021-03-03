@@ -9,6 +9,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.KuisData;
 import com.bca.bsi.model.OutputResponse;
+import com.bca.bsi.utils.constant.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,7 +49,9 @@ public class QuizViewModel extends AndroidViewModel {
                         } else {
                             callback.onFailed("Data is null");
                         }
-                    } else {
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }  else {
                         System.out.println("ERROR SCHEMA NDA 200");
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -94,7 +97,9 @@ public class QuizViewModel extends AndroidViewModel {
                         } else {
                             callback.onFailedScoreGetUserScore("Data is null");
                         }
-                    } else {
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }  else {
                         System.out.println("GETUSERSCORE: ERROR SCHEMA NDA 200");
                         callback.onFailedScoreGetUserScore(errorSchema.getErrorMessage());
                     }
@@ -132,7 +137,9 @@ public class QuizViewModel extends AndroidViewModel {
                         } else {
                             callback.onFailedScoreGetUserScore("Data is null");
                         }
-                    } else {
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }  else {
                         System.out.println("PUTUSERSCORE: ERROR SCHEMA NDA 200");
                         callback.onFailedScoreGetUserScore(errorSchema.getErrorMessage());
                     }

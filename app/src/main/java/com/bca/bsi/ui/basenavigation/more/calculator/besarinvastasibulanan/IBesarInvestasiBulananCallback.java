@@ -10,4 +10,6 @@ public interface IBesarInvestasiBulananCallback {
     void resultOf(List<Product.ReksaDana> reksaDanaList);
 
     void onFailed(String msg);
+
+    void onSessionExpired();
 }

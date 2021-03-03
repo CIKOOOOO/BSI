@@ -9,6 +9,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.utils.constant.Constant;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +46,8 @@ public class ProdukChoiceViewModel extends AndroidViewModel {
                     if (outputResponse.getErrorSchema().getErrorCode().equals("200")) {
                         OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                         callback.onLoadData(outputSchema.getReksaDanaList());
+                    }else if (outputResponse.getErrorSchema().getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
                     }
@@ -78,6 +81,8 @@ public class ProdukChoiceViewModel extends AndroidViewModel {
                         if (outputResponse.getErrorSchema().getErrorCode().equals("200")) {
                             OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                             sortData(sortPosition, outputSchema.getReksaDanaList());
+                        }else if (outputResponse.getErrorSchema().getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
                         } else {
                             callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
                         }

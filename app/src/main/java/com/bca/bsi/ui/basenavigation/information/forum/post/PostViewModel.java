@@ -13,11 +13,11 @@ import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +55,8 @@ public class PostViewModel extends AndroidViewModel {
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                             callback.onLoadCategoryData(outputSchema.getCategoryList());
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
                         } else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
@@ -133,7 +135,7 @@ public class PostViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("asd", response.code() + " - ");
+//                Log.e("asd", response.code() + " - ");
 //                try {
 //                    Log.e("asd", response.errorBody().string());
 //                } catch (IOException e) {
@@ -143,6 +145,8 @@ public class PostViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                     if (errorSchema.getErrorCode().equals("200")) {
                         callback.onSuccessPost();
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -185,6 +189,8 @@ public class PostViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                     if (errorSchema.getErrorCode().equals("200")) {
                         callback.onSuccessPost();
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

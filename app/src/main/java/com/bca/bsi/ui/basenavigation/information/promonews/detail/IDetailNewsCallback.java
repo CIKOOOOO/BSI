@@ -7,4 +7,6 @@ public interface IDetailNewsCallback {
     void onLoadDetailNews(PromoNews promoNews);
 
     void onFailed(String msg);
+
+    void onSessionExpired();
 }

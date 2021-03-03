@@ -161,6 +161,11 @@ public class BookmarkFragment extends BaseFragment implements OnPostClick, IBook
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onResharePost(String postID) {
         if (reshareDialog != null && reshareDialog.getTag() != null) {
             reshareDialog.dismiss();

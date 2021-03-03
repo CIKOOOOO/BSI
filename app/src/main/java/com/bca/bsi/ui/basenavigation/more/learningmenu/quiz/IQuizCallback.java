@@ -10,4 +10,6 @@ public interface IQuizCallback {
     void onRetrieveDataGetUserScore(KuisData.UserScore userScore);
 
     void onFailedScoreGetUserScore(String msg);
+
+    void onSessionExpired();
 }

@@ -12,6 +12,7 @@ import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Product;
 import com.bca.bsi.ui.basenavigation.more.calculator.besarinvastasibulanan.IBesarInvestasiBulananCallback;
 import com.bca.bsi.ui.basenavigation.more.calculator.popup.IProductsCalculatorCallback;
+import com.bca.bsi.utils.constant.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +84,9 @@ public class ProductsCalculatorViewModel extends AndroidViewModel {
                     OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                     if (!errorSchema.getErrorCode().equals("200")) {
                         callback.onFailed(errorSchema.getErrorMessage());
-                    } else {
+                    }  else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }else {
                         if (outputSchema.getDetailReksaDana().getKinerja1Bulan() != null) {
                             performanceList.add(new Product.Performance("1 Bulan", Double.parseDouble(outputSchema.getDetailReksaDana().getKinerja1Bulan())));
                         }
@@ -141,7 +144,9 @@ public class ProductsCalculatorViewModel extends AndroidViewModel {
                         OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                         System.out.println("HASILNYA INIIII : "+outputSchema.getReksaDanaList().toString());
                         callback.onLoadData(outputSchema.getReksaDanaList());
-                    } else {
+                    }  else if (outputResponse.getErrorSchema().getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }else {
                         Log.e("d","tes4");
                         callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
                     }

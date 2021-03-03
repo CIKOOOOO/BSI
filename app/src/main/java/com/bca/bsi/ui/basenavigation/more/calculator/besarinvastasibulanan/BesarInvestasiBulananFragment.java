@@ -432,6 +432,11 @@ public class BesarInvestasiBulananFragment extends BaseFragment implements View.
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onDataArrived(Product.DetailReksaDana detailReksaDana, List<Product.Performance> performances) {
         selectedNamaReksadanaTV.setText(detailReksaDana.getName());
         selectedTipeReksadana.setText(detailReksaDana.getProductCategory());

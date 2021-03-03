@@ -10,6 +10,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 
 import retrofit2.Call;
@@ -47,7 +48,9 @@ public class ConnectionViewModel extends AndroidViewModel {
                         Log.e("asd", Utils.toJSON(response.body()));
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLoadData(outputSchema.getConnectionList());
-                    } else {
+                    }  else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
                 } else {
@@ -76,6 +79,8 @@ public class ConnectionViewModel extends AndroidViewModel {
                         if (errorSchema.getErrorCode().equals("200")) {
                             OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                             callback.onLoadData(outputSchema.getForumProfileUser());
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
                         } else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }

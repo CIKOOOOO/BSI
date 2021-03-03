@@ -160,4 +160,9 @@ public class DetailReksaDanaActivity extends BaseActivity implements View.OnClic
     public void onFailed(String msg) {
         showSnackBar(msg);
     }
+
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
 }

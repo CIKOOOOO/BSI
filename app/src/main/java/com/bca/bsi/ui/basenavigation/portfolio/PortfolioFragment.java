@@ -59,6 +59,11 @@ public class PortfolioFragment extends BaseFragment implements PortfolioAdapter.
         showSnackBar(msg);
     }
 
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
     public interface onBundleClick {
         void onItemClick(Portfolio portfolio);
 

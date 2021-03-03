@@ -182,4 +182,9 @@ public class QuizActivity extends BaseActivity implements View.OnClickListener, 
     public void onFailedScoreGetUserScore(String msg) {
         System.out.println("ERROR GETSCORE DARI QUIZVIEWMODEL: " + msg);
     }
+
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
 }

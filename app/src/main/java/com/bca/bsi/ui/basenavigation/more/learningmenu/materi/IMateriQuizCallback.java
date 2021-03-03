@@ -6,4 +6,6 @@ public interface IMateriQuizCallback {
     void onRetriveData(KuisData.UserScore userScore);
 
     void onFailed(String msg);
+
+    void onSessionExpired();
 }

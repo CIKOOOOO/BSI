@@ -10,6 +10,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 
 import java.util.List;
@@ -48,6 +49,8 @@ public class ForumProfileViewModel extends AndroidViewModel {
                         List<Forum.Post> bookmarkList = getPostList(outputSchema.getMyBookmarkList());
 
                         callback.onLoadData(user, postShareTrade, bookmarkList);
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -75,6 +78,8 @@ public class ForumProfileViewModel extends AndroidViewModel {
                     if (errorSchema.getErrorCode().equals("200")) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLoadProfilePicture(outputSchema.getProfilePictureList());
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -102,6 +107,8 @@ public class ForumProfileViewModel extends AndroidViewModel {
                     if (errorSchema.getErrorCode().equals("200")) {
                         loadProfile(tokenUser, profileID);
                         callback.onDismissBottomNavigation();
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -131,6 +138,8 @@ public class ForumProfileViewModel extends AndroidViewModel {
                     } else if ("409".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         callback.onDismissBottomNavigation();
                         callback.onFailed(errorSchema.getErrorMessage());
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

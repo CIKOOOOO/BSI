@@ -90,6 +90,11 @@ public class ReksadanaProductFragment extends BaseFragment implements IReksaDana
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onReksaDanaClick(Product.ReksaDana reksaDana) {
         Intent intent = new Intent(mActivity, DetailProductTransactionActivity.class);
         intent.putExtra(DetailProductTransactionActivity.PRODUCT_TYPE, Type.REKSA_DANA);

@@ -10,6 +10,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
+import com.bca.bsi.utils.constant.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,7 +41,9 @@ public class BaseNavigationViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         callback.onReportSuccess();
-                    } else {
+                    }else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }  else {
                         callback.onFailed("Mengirim report gagal. Mohon coba lagi kembali");
                     }
                 } else {
@@ -68,8 +71,10 @@ public class BaseNavigationViewModel extends AndroidViewModel {
                     if (errorSchema.getErrorCode().equals("200")) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLoadTipsOfTheWeek(outputSchema.getTipsOfTheWeek());
-                    } else {
-                        Log.e("asd", errorSchema.getErrorMessage());
+                    }else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }  else {
+//                        Log.e("asd", errorSchema.getErrorMessage());
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
                 } else {

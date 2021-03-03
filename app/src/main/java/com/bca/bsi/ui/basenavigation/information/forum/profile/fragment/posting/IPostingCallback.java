@@ -12,4 +12,5 @@ public interface IPostingCallback {
 
     void onLikeResult(Forum.LikePost likePost);
 
+    void onSessionExpired();
 }

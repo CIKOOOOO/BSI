@@ -6,5 +6,8 @@ import java.util.List;
 
 public interface IPortfolioCallback {
     void onLoadData(List<Portfolio> bundles);
+
     void onFail(String msg);
+
+    void onSessionExpired();
 }

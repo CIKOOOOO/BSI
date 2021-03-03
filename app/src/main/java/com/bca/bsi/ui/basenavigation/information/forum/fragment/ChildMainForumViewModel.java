@@ -11,6 +11,7 @@ import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.Forum;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 
 import java.util.ArrayList;
@@ -141,6 +142,8 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                         } else if ("204".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             isLast = true;
                             callback.onFailed("Anda sudah berada dihalaman akhir");
+                        }else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
                         } else {
                             page -= 1;
                             callback.onFailed(errorSchema.getErrorMessage());
@@ -178,7 +181,9 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLoadReportData(outputSchema.getReportList(), postID, type);
-                    } else {
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
                 } else {
@@ -205,6 +210,8 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         callback.onDeleteSuccess(postID);
+                    }else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -233,7 +240,9 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onSaveResult(outputSchema.getSavePost());
-                    } else {
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }else {
                         callback.onFailed("Save post gagal, mohon cek jaringan Anda");
                     }
                 } else {
@@ -260,6 +269,8 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLikeResult(outputSchema.getLikePost());
+                    }else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -287,7 +298,9 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             callback.onReshareResult(true, postID);
-                        } else {
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
+                        }else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
                     } else {
@@ -318,6 +331,8 @@ public class ChildMainForumViewModel extends AndroidViewModel {
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             callback.onReshareResult(false, postID);
+                        }else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
                         } else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }

@@ -119,6 +119,11 @@ public class PinActivity extends BaseActivity implements IPinCallback, View.OnCl
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_btn_back_toolbar:

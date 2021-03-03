@@ -11,6 +11,7 @@ import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Product;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,9 @@ public class BesarInvestasiBulananViewModel extends AndroidViewModel {
                     if (!errorSchema.getErrorCode().equals("200")) {
                         Log.e("asd", errorSchema.getErrorMessage());
                         callback.onFailed(errorSchema.getErrorMessage());
-                    } else {
+                    }  else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }else {
 //                        Log.e("asd", Utils.toJSON(outputSchema));
                         reksaDanaList = outputSchema.getReksaDanaList();
                         callback.resultOf(reksaDanaList);

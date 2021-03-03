@@ -8,4 +8,6 @@ public interface IReksaDanaProductCallback {
     void resultOf(List<Product.ReksaDana> reksaDanaList);
 
     void onFailed(String msg);
+
+    void onSessionExpired();
 }

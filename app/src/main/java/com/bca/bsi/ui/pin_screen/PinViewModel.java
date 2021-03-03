@@ -11,7 +11,7 @@ import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Transaction;
 import com.bca.bsi.ui.basenavigation.transaction.confirmation.ConfirmationTransactionActivity;
-import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.constant.Type;
 import com.google.gson.Gson;
 
@@ -62,12 +62,12 @@ public class PinViewModel extends AndroidViewModel {
                 stringObjectMap.put("reksa_dana_unit", purchasing.getReksaDanaUnit());
                 stringObjectMap.put("nab", purchasing.getNab());
 
-                call = apiInterface.sendTransactionData("pin-validation",token, bcaID, pin, stringObjectMap);
+                call = apiInterface.sendTransactionData("pin-validation", token, bcaID, pin, stringObjectMap);
 
                 call.enqueue(new Callback<OutputResponse>() {
                     @Override
                     public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                        Log.e("asd", "on response " + response.code());
+//                        Log.e("asd", "on response " + response.code());
 //                        try {
 //                            Log.e("asd", "on response " + response.errorBody().string());
 //                        } catch (IOException e) {
@@ -79,8 +79,10 @@ public class PinViewModel extends AndroidViewModel {
                                 OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                                 Transaction.TransactionResult transactionResult = outputSchema.getTransactionResult();
                                 callback.onSuccessPin(transactionResult);
+                            } else if (errorSchema.getErrorCode().equalsIgnoreCase("401")) {
+                                callback.onSessionExpired();
                             } else {
-                                Log.e("asd", Utils.toJSON(response.body()));
+//                                Log.e("asd", Utils.toJSON(response.body()));
                                 callback.onFailed(errorSchema.getErrorMessage());
                             }
                         } else {
@@ -90,7 +92,7 @@ public class PinViewModel extends AndroidViewModel {
 
                     @Override
                     public void onFailure(Call<OutputResponse> call, Throwable t) {
-                        Log.e("asd", "on failed " + t.getMessage());
+//                        Log.e("asd", "on failed " + t.getMessage());
                         callback.onFailed("Mohon cek kembali jaringan Anda");
                     }
                 });
@@ -119,7 +121,7 @@ public class PinViewModel extends AndroidViewModel {
                     Map<String, Object> objectMap = new HashMap<>();
                     objectMap.put("transaction", purchasingList);
 
-                    call = apiInterface.sendTransactionData("pin-validation/robo",token, bcaID, pin, objectMap);
+                    call = apiInterface.sendTransactionData("pin-validation/robo", token, bcaID, pin, objectMap);
 
                     call.enqueue(new Callback<OutputResponse>() {
                         @Override
@@ -132,9 +134,11 @@ public class PinViewModel extends AndroidViewModel {
                             if (response.body() != null) {
                                 OutputResponse.ErrorSchema errorSchema = response.body().getErrorSchema();
                                 if (errorSchema.getErrorCode().equals("200")) {
-                                    Log.e("asd", "200");
+//                                    Log.e("asd", "200");
                                     OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                                     callback.onSuccessPin(outputSchema.getTransactionResultList());
+                                } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                                    callback.onSessionExpired();
                                 } else {
 //                                    Log.e("asd", Utils.toJSON(response.body()));
 //                                    Log.e("asd", response.raw().request().url() + "");
@@ -146,14 +150,13 @@ public class PinViewModel extends AndroidViewModel {
                                     callback.onFailed(errorSchema.getErrorMessage());
                                 }
                             } else {
-
                                 callback.onFailed("Mohon cek kembali jaringan Anda");
                             }
                         }
 
                         @Override
                         public void onFailure(Call<OutputResponse> call, Throwable t) {
-                            Log.e("asd", "on failed " + t.getMessage());
+//                            Log.e("asd", "on failed " + t.getMessage());
                             callback.onFailed("Mohon cek kembali jaringan Anda");
                         }
                     });

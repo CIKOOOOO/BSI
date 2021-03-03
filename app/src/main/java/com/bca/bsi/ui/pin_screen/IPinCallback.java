@@ -12,4 +12,6 @@ public interface IPinCallback {
     void onWrongPin();
 
     void onFailed(String msg);
+
+    void onSessionExpired();
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
+import com.bca.bsi.utils.constant.Constant;
 import com.bca.bsi.utils.dummydata.DummyData;
 
 import retrofit2.Call;
@@ -41,6 +42,8 @@ public class NewsInformationViewModel extends AndroidViewModel {
                     if (errorSchema.getErrorCode().equals("200")) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.resultOf(outputSchema.getPromoNewsList());
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

@@ -40,6 +40,8 @@ public class ProductsPopUpDialog extends DialogFragment implements IProductsCalc
 
     public interface onDataRetrieved{
         void onDataArrived(Product.DetailReksaDana detailReksaDana, List<Product.Performance> performances);
+
+        void onSessionExpired();
     }
 
     public void setOnDataRetrieved(ProductsPopUpDialog.onDataRetrieved onDataRetrieved) {
@@ -135,6 +137,11 @@ public class ProductsPopUpDialog extends DialogFragment implements IProductsCalc
     @Override
     public void onFailed(String msg) {
 
+    }
+
+    @Override
+    public void onSessionExpired() {
+        onDataRetrieved.onSessionExpired();
     }
 
     @Override

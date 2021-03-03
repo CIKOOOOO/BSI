@@ -310,6 +310,11 @@ public class OtherProfileActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onDetailPost(String postID) {
         Intent intent = new Intent(this, CommentActivity.class);
         intent.putExtra(CommentActivity.DATA, postID);

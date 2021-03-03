@@ -121,6 +121,11 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onShareNews(Portfolio.Information information) {
         Intent intent = new Intent(this, PostActivity.class);
         intent.putExtra(PostActivity.DATA, Utils.toJSON(information));

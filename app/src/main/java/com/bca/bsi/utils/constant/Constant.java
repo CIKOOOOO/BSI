@@ -23,6 +23,7 @@ public class Constant {
     public static final String DATE_FORMAT_5 = "dd MMMM yyyy HH:mm";
     public static final String DATE_FORMAT_7 = "dd/MM/yyyy HH:mm:ss";
     public static final String DATE_FORMAT_FROM_DB = "dd-MMM-yy";
+    public static final String SESSION_EXPIRED = "401";
 
     public static final String[] PRODUCT_TITLE = {"Reksa Dana", "Obligasi", "Asuransi"};
     private static final String[] PRODUCT_DESCRIPTION = {"Investasi Dana Terjangkau", "Investasi Berpendapatan Tetap", "Perlindungan Jiwa, Kesehatan, dan Harta Benda"};

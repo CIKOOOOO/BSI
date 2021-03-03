@@ -9,6 +9,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.utils.constant.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,9 @@ public class DetailReksaDanaViewModel extends AndroidViewModel {
                     OutputResponse.OutputSchema outputSchema = response.body().getOutputSchema();
                     if (!errorSchema.getErrorCode().equals("200")) {
                         callback.onFailed(errorSchema.getErrorMessage());
-                    } else {
+                    }else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }  else {
                         if (outputSchema.getDetailReksaDana().getKinerja1Bulan() != null) {
                             performanceList.add(new Product.Performance("1 Bulan", Double.parseDouble(outputSchema.getDetailReksaDana().getKinerja1Bulan())));
                         }

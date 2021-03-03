@@ -21,4 +21,6 @@ public interface IChildMainForumCallback {
     void onLikeResult(Forum.LikePost likePost);
 
     void onDeleteSuccess(String postID);
+
+    void onSessionExpired();
 }

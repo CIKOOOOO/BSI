@@ -9,6 +9,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.KuisData;
 import com.bca.bsi.model.OutputResponse;
+import com.bca.bsi.utils.constant.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,7 +51,9 @@ public class MateriQuizViewModel extends AndroidViewModel {
                             callback.onFailed("Data is null");
                         }
 
-                    } else if (errorSchema.getErrorCode().equals("500")) {
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }  else if (errorSchema.getErrorCode().equals("500")) {
                         KuisData.UserScore userScore = null;
                         callback.onRetriveData(userScore);
                     } else {

@@ -10,6 +10,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Portfolio;
+import com.bca.bsi.utils.constant.Constant;
 
 import java.io.IOException;
 
@@ -50,7 +51,9 @@ public class PortfolioViewModel extends AndroidViewModel {
 //                            Log.e("x", p.getExpReturn());
                         }
                         callback.onLoadData(outputSchema.getBundles());
-                    } else {
+                    }else if (outputResponse.getErrorSchema().getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }  else {
 //                        Log.e("d", "tes4");
                         callback.onFail(outputResponse.getErrorSchema().getErrorMessage());
                     }

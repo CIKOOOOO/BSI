@@ -73,4 +73,9 @@ public class NewsInformationFragment extends BaseFragment implements PromoNewsAd
     public void onFailed(String msg) {
         showSnackBar(msg);
     }
+
+    @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
 }

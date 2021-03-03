@@ -12,5 +12,5 @@ public interface IConnectionCallback {
 
     void onFailed(String msg);
 
-
+    void onSessionExpired();
 }

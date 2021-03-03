@@ -302,6 +302,11 @@ public class BaseNavigationActivity extends BaseActivity implements PortfolioFra
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onCloseAboutRoboDialog() {
         if (aboutRoboDialog != null && aboutRoboDialog.getTag() != null) {
             aboutRoboDialog.dismiss();

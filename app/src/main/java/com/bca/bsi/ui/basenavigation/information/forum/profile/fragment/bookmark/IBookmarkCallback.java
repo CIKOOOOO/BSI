@@ -16,4 +16,5 @@ public interface IBookmarkCallback {
 
     void onLikeResult(Forum.LikePost likePost);
 
+    void onSessionExpired();
 }

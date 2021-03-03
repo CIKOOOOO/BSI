@@ -75,6 +75,11 @@ public class InboxActivity extends BaseActivity implements View.OnClickListener,
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onDetailInbox(Forum.Inbox inbox) {
         Intent intent = new Intent(this, CommentActivity.class);
         intent.putExtra(CommentActivity.DATA, inbox.getPostID());

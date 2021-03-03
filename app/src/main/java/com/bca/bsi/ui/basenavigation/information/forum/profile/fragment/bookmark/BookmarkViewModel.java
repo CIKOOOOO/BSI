@@ -10,6 +10,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.utils.Utils;
+import com.bca.bsi.utils.constant.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,7 +41,9 @@ public class BookmarkViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onSaveResult(outputSchema.getSavePost());
-                    } else {
+                    }  else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }else {
                         callback.onFailed("Save post gagal, mohon cek jaringan Anda");
                     }
                 } else {
@@ -67,6 +70,8 @@ public class BookmarkViewModel extends AndroidViewModel {
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             callback.onReshareResult(true, postID);
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
                         } else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
@@ -97,6 +102,8 @@ public class BookmarkViewModel extends AndroidViewModel {
                         OutputResponse.ErrorSchema errorSchema = outputResponse.getErrorSchema();
                         if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                             callback.onReshareResult(false, postID);
+                        } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                            callback.onSessionExpired();
                         } else {
                             callback.onFailed(errorSchema.getErrorMessage());
                         }
@@ -126,6 +133,8 @@ public class BookmarkViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLoadReportData(outputSchema.getReportList(), type, postID);
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }
@@ -155,6 +164,8 @@ public class BookmarkViewModel extends AndroidViewModel {
                     if ("200".equalsIgnoreCase(errorSchema.getErrorCode())) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLikeResult(outputSchema.getLikePost());
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

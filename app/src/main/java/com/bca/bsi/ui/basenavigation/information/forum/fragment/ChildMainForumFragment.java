@@ -179,6 +179,11 @@ public class ChildMainForumFragment extends BaseFragment implements IChildMainFo
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onDetailPost(String postID) {
         Intent intent = new Intent(mActivity, CommentActivity.class);
         intent.putExtra(CommentActivity.DATA, postID);

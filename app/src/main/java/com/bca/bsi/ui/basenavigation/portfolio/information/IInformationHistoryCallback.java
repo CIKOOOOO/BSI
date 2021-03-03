@@ -11,5 +11,6 @@ public interface IInformationHistoryCallback {
     void onLoadHistoryTransaction(List<Portfolio.History> historyList);
 
     void onFailed(String msg);
+    void onSessionExpired();
 
 }

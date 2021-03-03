@@ -9,6 +9,7 @@ import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
 import com.bca.bsi.model.Product;
+import com.bca.bsi.utils.constant.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,6 +41,8 @@ public class DetailSellViewModel extends AndroidViewModel {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         Product.DetailReksaDana detailReksaDana = outputSchema.getDetailReksaDana();
                         callback.onLoadData(detailReksaDana);
+                    } else if (errorSchema.getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(errorSchema.getErrorMessage());
                     }

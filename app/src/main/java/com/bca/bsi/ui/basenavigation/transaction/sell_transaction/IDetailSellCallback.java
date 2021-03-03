@@ -6,4 +6,6 @@ public interface IDetailSellCallback {
     void onLoadData(Product.DetailReksaDana detailReksaDana);
 
     void onFailed(String msg);
+
+    void onSessionExpired();
 }

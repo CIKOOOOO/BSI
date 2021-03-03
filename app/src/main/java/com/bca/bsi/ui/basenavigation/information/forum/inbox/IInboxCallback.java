@@ -8,4 +8,6 @@ public interface IInboxCallback {
     void onLoadInbox(List<Forum.Inbox> inboxes);
 
     void onFailed(String msg);
+
+    void onSessionExpired();
 }

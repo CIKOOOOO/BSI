@@ -8,4 +8,6 @@ public interface IBaseNavigatonCallback {
     void onReportSuccess();
 
     void onFailed(String msg);
+
+    void onSessionExpired();
 }

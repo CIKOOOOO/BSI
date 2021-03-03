@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 import com.bca.bsi.api.ApiClient;
 import com.bca.bsi.api.ApiInterface;
 import com.bca.bsi.model.OutputResponse;
+import com.bca.bsi.utils.constant.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,13 +42,15 @@ public class InformationHistoryViewModel extends AndroidViewModel {
         call.enqueue(new Callback<OutputResponse>() {
             @Override
             public void onResponse(Call<OutputResponse> call, Response<OutputResponse> response) {
-                Log.e("asd", response.code()+" ");
+//                Log.e("asd", response.code()+" ");
                 if (response.body() != null) {
                     OutputResponse outputResponse = response.body();
                     if (outputResponse.getErrorSchema().getErrorCode().equals("200")) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLoadPortfolioData(outputSchema.getInformationList());
-                    } else {
+                    }  else if (outputResponse.getErrorSchema().getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
+                    }else {
                         callback.onFailed(outputResponse.getErrorSchema().getErrorMessage());
                     }
                 } else {
@@ -72,6 +75,8 @@ public class InformationHistoryViewModel extends AndroidViewModel {
                     if (outputResponse.getErrorSchema().getErrorCode().equals("200")) {
                         OutputResponse.OutputSchema outputSchema = outputResponse.getOutputSchema();
                         callback.onLoadHistoryTransaction(outputSchema.getHistoryList());
+                    } else if (outputResponse.getErrorSchema().getErrorCode().equalsIgnoreCase(Constant.SESSION_EXPIRED)) {
+                        callback.onSessionExpired();
                     } else {
                         callback.onFailed(outputResponse.getErrorSchema().getErrorMessage());
                     }

@@ -730,6 +730,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
+    public void onSessionExpired() {
+        sessionExpired();
+    }
+
+    @Override
     public void onImageClickWith(String URl) {
         imageDialog = new ImageDialog(URl, this);
         imageDialog.show(getSupportFragmentManager(), "");

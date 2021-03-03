@@ -16,4 +16,6 @@ public interface IForumProfileCallback {
     void onLoadUsername(String username);
 
     void onUsernameNotUnique();
+
+    void onSessionExpired();
 }
