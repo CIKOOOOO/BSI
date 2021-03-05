@@ -30,7 +30,7 @@ public class Constant {
     private static final int[] PRODUCT_IMAGE = {R.drawable.img_asset_reksa_dana, R.drawable.img_asset_obligasi, R.drawable.img_asset_asuransi};
 
     public static final String[] FORUM_MENU = {"Trending", "Strategy", "Share Trade", "News", "Timeline"};
-    public static final String[] FORUM_PROFILE_MENU = {"Posting", "Bookmark"};
+    public static final String[] FORUM_PROFILE_MENU = {"Posting", "Saved Post"};
 
     private static final String[] SHARE_TO_NAME = {"Public", "Followers", "Direct"};
     private static final int[] SHARE_IMAGE = {R.drawable.img_public, R.drawable.img_followers, R.drawable.img_direct_message};

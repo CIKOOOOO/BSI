@@ -387,7 +387,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String counter = s.length() + "/1000";
+            String counter = s.length() + "/2000";
             tvCharacterCounter.setText(counter);
         }
 
@@ -457,7 +457,7 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
                 postImageAdapter.notifyDataSetChanged();
             }
         } catch (Exception e) {
-            Log.e("asd", e.getMessage());
+//            Log.e("asd", e.getMessage());
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
                     .show();
         }
@@ -546,7 +546,9 @@ public class PostActivity extends BaseActivity implements PrivacyAdapter.onPriva
         String value;
         if (content.isEmpty()) {
             showSnackBar("Mohon isi konten postingan");
-        } else if (null == this.privacy) {
+        } else if(content.length() > 2000){
+            showSnackBar("Maksimal karakter postingan adalah 2000");
+        }else if (null == this.privacy) {
             showSnackBar("Mohon pilih kepada siapa Anda akan membagikan postingan");
         } else if (null == this.category
                 && null != this.promoNews
