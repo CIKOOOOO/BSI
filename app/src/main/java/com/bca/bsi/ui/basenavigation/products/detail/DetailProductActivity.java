@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -71,8 +72,8 @@ public class DetailProductActivity extends BaseActivity implements View.OnClickL
 
         btnRight.setTextColor(this.getResources().getColor(R.color.white_palette));
         btnLeft.setTextColor(this.getResources().getColor(R.color.black_palette));
-        btnLeft.setBackground(getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
-        btnRight.setBackground(getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+        btnLeft.setBackground(ContextCompat.getDrawable(this, R.drawable.rectangle_rounded_orange_light_20dp));
+        btnRight.setBackground(ContextCompat.getDrawable(this, R.drawable.rectangle_rounded_sherpa_blue));
 
         imgBack.setOnClickListener(this);
 
@@ -89,8 +90,8 @@ public class DetailProductActivity extends BaseActivity implements View.OnClickL
             case R.id.btn_left_detail_product:
                 btnRight.setTextColor(this.getResources().getColor(R.color.white_palette));
                 btnLeft.setTextColor(this.getResources().getColor(R.color.black_palette));
-                btnLeft.setBackground(getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
-                btnRight.setBackground(getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+                btnLeft.setBackground(ContextCompat.getDrawable(this, R.drawable.rectangle_rounded_orange_light_20dp));
+                btnRight.setBackground(ContextCompat.getDrawable(this, R.drawable.rectangle_rounded_sherpa_blue));
                 if (type.equals(Type.REKSA_DANA)) {
                     changeFragment(new ReksadanaProductFragment());
                 }
@@ -98,8 +99,8 @@ public class DetailProductActivity extends BaseActivity implements View.OnClickL
             case R.id.btn_right_detail_product:
                 btnRight.setTextColor(this.getResources().getColor(R.color.black_palette));
                 btnLeft.setTextColor(this.getResources().getColor(R.color.white_palette));
-                btnLeft.setBackground(getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
-                btnRight.setBackground(getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
+                btnLeft.setBackground(ContextCompat.getDrawable(this, R.drawable.rectangle_rounded_sherpa_blue));
+                btnRight.setBackground(ContextCompat.getDrawable(this, R.drawable.rectangle_rounded_orange_light_20dp));
                 break;
         }
     }

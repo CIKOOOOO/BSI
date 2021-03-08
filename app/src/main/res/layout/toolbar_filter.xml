@@ -15,7 +15,7 @@
             android:id="@+id/img_btn_close_toolbar"
             android:layout_width="@dimen/size_for_30dp"
             android:layout_height="@dimen/size_for_30dp"
-            android:background="@drawable/ic_close2"
+            app:srcCompat="@drawable/ic_close2"
             android:padding="@dimen/size_for_20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

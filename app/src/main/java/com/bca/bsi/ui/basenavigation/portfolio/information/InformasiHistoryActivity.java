@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -73,16 +74,16 @@ public class InformasiHistoryActivity extends BaseActivity implements View.OnCli
             case 1:
                 tvInfromasi.setTextColor(context.getResources().getColor(R.color.black_palette));
                 tvHistory.setTextColor(context.getResources().getColor(R.color.white_palette));
-                tvInfromasi.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
-                tvHistory.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+                tvInfromasi.setBackground(ContextCompat.getDrawable(context,R.drawable.rectangle_rounded_orange_light_20dp));
+                tvHistory.setBackground(ContextCompat.getDrawable(context,R.drawable.rectangle_rounded_sherpa_blue));
                 viewModel.loadData(1, prefConfig.getTokenUser(), prefConfig.getAccountNumber());
                 informasiHistoryAdapter.setType(InformasiHistoryAdapter.INFORMATION);
                 break;
             case 2:
                 tvHistory.setTextColor(context.getResources().getColor(R.color.black_palette));
                 tvInfromasi.setTextColor(context.getResources().getColor(R.color.white_palette));
-                tvHistory.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
-                tvInfromasi.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+                tvInfromasi.setBackground(ContextCompat.getDrawable(context,R.drawable.rectangle_rounded_sherpa_blue));
+                tvHistory.setBackground(ContextCompat.getDrawable(context,R.drawable.rectangle_rounded_orange_light_20dp));
 //                informasiHistoryAdapter.setProducts(DummyData.getProductsHistory());
                 viewModel.loadData(2, prefConfig.getTokenUser(), prefConfig.getAccountNumber());
                 informasiHistoryAdapter.setType(InformasiHistoryAdapter.HISTORY);

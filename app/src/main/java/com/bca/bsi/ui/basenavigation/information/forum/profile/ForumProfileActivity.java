@@ -115,7 +115,7 @@ public class ForumProfileActivity extends BaseActivity implements View.OnClickLi
         tvTitle.setText(prefConfig.getUsername());
         etName.setText(prefConfig.getUsername());
 
-        imgActionBtn.setBackground(getDrawable(R.drawable.ic_inbox_logo));
+        imgActionBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_inbox_logo));
 
         bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallback);
 

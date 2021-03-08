@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -53,7 +54,8 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
         tvEnd = view.findViewById(R.id.tv_end_information_fragment);
 
         tvTitleToolbar.setText(view.getContext().getString(R.string.information));
-        imgToolbar.setBackground(view.getContext().getDrawable(R.drawable.ic_people_rounded_white));
+
+        imgToolbar.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_people_rounded_white));
 
         switchButton(1, view.getContext());
 
@@ -99,27 +101,27 @@ public class InformationFragment extends BaseFragment implements View.OnClickLis
                 tvStart.setTextColor(context.getResources().getColor(R.color.black_palette));
                 tvMid.setTextColor(context.getResources().getColor(R.color.white_palette));
                 tvEnd.setTextColor(context.getResources().getColor(R.color.white_palette));
-                tvStart.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
-                tvMid.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
-                tvEnd.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+                tvStart.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_rounded_orange_light_20dp));
+                tvMid.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_rounded_sherpa_blue));
+                tvEnd.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_rounded_sherpa_blue));
                 changeFragment(new PromoInformationFragment());
                 break;
             case 2:
                 tvMid.setTextColor(context.getResources().getColor(R.color.black_palette));
                 tvStart.setTextColor(context.getResources().getColor(R.color.white_palette));
                 tvEnd.setTextColor(context.getResources().getColor(R.color.white_palette));
-                tvMid.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
-                tvStart.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
-                tvEnd.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+                tvMid.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_rounded_orange_light_20dp));
+                tvStart.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_rounded_sherpa_blue));
+                tvEnd.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_rounded_sherpa_blue));
                 changeFragment(new NewsInformationFragment());
                 break;
             case 3:
                 tvEnd.setTextColor(context.getResources().getColor(R.color.black_palette));
                 tvMid.setTextColor(context.getResources().getColor(R.color.white_palette));
                 tvStart.setTextColor(context.getResources().getColor(R.color.white_palette));
-                tvEnd.setBackground(context.getDrawable(R.drawable.rectangle_rounded_orange_light_20dp));
-                tvMid.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
-                tvStart.setBackground(context.getDrawable(R.drawable.rectangle_rounded_sherpa_blue));
+                tvMid.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_rounded_sherpa_blue));
+                tvStart.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_rounded_sherpa_blue));
+                tvEnd.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_rounded_orange_light_20dp));
                 changeFragmentToForum();
                 break;
         }
