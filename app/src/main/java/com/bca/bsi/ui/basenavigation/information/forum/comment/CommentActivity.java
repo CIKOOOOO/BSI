@@ -426,7 +426,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
                 tvName.setText(post.getName());
                 try {
-                    String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, post.getDate());
+                    String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_7, Constant.DATE_FORMAT_5, post.getDate());
                     tvDatePost.setText(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -445,7 +445,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
                     tvRepostName.setText(post1.getName());
                     try {
-                        String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, post1.getDate());
+                        String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_7, Constant.DATE_FORMAT_5, post1.getDate());
                         tvDateRepost.setText(date);
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -526,7 +526,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
                 tvName.setText(post.getName());
                 try {
-                    String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_4, Constant.DATE_FORMAT_5, post.getDate());
+                    String date = Utils.formatDateFromDateString(Constant.DATE_FORMAT_7, Constant.DATE_FORMAT_5, post.getDate());
                     tvDatePost.setText(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
